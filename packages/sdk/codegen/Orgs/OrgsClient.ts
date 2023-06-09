@@ -1,14 +1,10 @@
-import { DfnsApiOptions } from '../../dfnsApiClient'
-import { Fetch, userActionFetch } from '../../utils/fetch'
+import { DfnsApiClientOptions } from '../../dfnsApiClient'
+import { simpleFetch } from '../../utils/fetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
 export class OrgsClient {
-  private fetch: Fetch
-
-  constructor(private apiOptions: DfnsApiOptions) {
-    this.fetch = userActionFetch
-  }
+  constructor(private apiOptions: DfnsApiClientOptions) {}
 
   async getEmployeeById(
     request: T.GetEmployeeByIdRequest
@@ -18,7 +14,7 @@ export class OrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -32,7 +28,7 @@ export class OrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -46,7 +42,7 @@ export class OrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       apiOptions: this.apiOptions,
     })
@@ -60,7 +56,7 @@ export class OrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -74,7 +70,7 @@ export class OrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })

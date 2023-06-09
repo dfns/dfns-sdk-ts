@@ -1,14 +1,10 @@
-import { DfnsApiOptions } from '../../dfnsApiClient'
-import { Fetch, userActionFetch } from '../../utils/fetch'
+import { DfnsApiClientOptions } from '../../dfnsApiClient'
+import { simpleFetch, userActionFetch } from '../../utils/fetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
 export class ApiKeysClient {
-  private fetch: Fetch
-
-  constructor(private apiOptions: DfnsApiOptions) {
-    this.fetch = userActionFetch
-  }
+  constructor(private apiOptions: DfnsApiClientOptions) {}
 
   async createApiKey(
     request: T.CreateApiKeyRequest
@@ -18,7 +14,7 @@ export class ApiKeysClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -33,7 +29,7 @@ export class ApiKeysClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -49,7 +45,7 @@ export class ApiKeysClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'DELETE',
       apiOptions: this.apiOptions,
     })
@@ -65,7 +61,7 @@ export class ApiKeysClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })

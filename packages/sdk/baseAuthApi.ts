@@ -1,7 +1,12 @@
-import { PartialBy } from 'utils/types'
-import { DfnsApiOptions } from './dfnsApiClient'
 import { AllowCredential, FirstFactorAssertion, SecondFactorAssertion } from './signer'
-import { Fetch, HttpMethod, preflightFetch } from './utils/fetch'
+import { HttpMethod, simpleFetch } from './utils/fetch'
+
+export type DfnsBaseApiOptions = {
+  appId: string
+  appSecret?: string
+  accessToken?: string
+  baseUrl: string
+}
 
 export type CreateUserActionChallengeRequest = {
   userActionPayload: string
@@ -53,47 +58,53 @@ export type UserLoginResponse = {
 }
 
 export class BaseAuthApi {
-  private fetch: Fetch
-
-  constructor(private apiOptions: PartialBy<DfnsApiOptions, 'signer'>) {
-    this.fetch = preflightFetch
-  }
-
-  async createUserActionChallenge(request: CreateUserActionChallengeRequest): Promise<UserActionChallengeResponse> {
-    const response = await this.fetch('/auth/action/init', {
+  static async createUserActionChallenge(
+    request: CreateUserActionChallengeRequest,
+    options: DfnsBaseApiOptions
+  ): Promise<UserActionChallengeResponse> {
+    const response = await simpleFetch('/auth/action/init', {
       method: 'POST',
       body: request,
-      apiOptions: this.apiOptions,
+      apiOptions: options,
     })
 
     return response.json()
   }
 
-  async signUserActionChallenge(request: SignUserActionChallengeRequest): Promise<UserActionResponse> {
-    const response = await this.fetch('/auth/action', {
+  static async signUserActionChallenge(
+    request: SignUserActionChallengeRequest,
+    options: DfnsBaseApiOptions
+  ): Promise<UserActionResponse> {
+    const response = await simpleFetch('/auth/action', {
       method: 'POST',
       body: request,
-      apiOptions: this.apiOptions,
+      apiOptions: options,
     })
 
     return response.json()
   }
 
-  async createUserLoginChallenge(request: CreateUserLoginChallengeRequest): Promise<UserLoginChallengeResponse> {
-    const response = await this.fetch('/auth/login/init', {
+  static async createUserLoginChallenge(
+    request: CreateUserLoginChallengeRequest,
+    options: DfnsBaseApiOptions
+  ): Promise<UserLoginChallengeResponse> {
+    const response = await simpleFetch('/auth/login/init', {
       method: 'POST',
       body: request,
-      apiOptions: this.apiOptions,
+      apiOptions: options,
     })
 
     return response.json()
   }
 
-  async signUserLoginChallenge(request: SignUserLoginChallengeRequest): Promise<UserLoginResponse> {
-    const response = await this.fetch('/auth/login', {
+  static async signUserLoginChallenge(
+    request: SignUserLoginChallengeRequest,
+    options: DfnsBaseApiOptions
+  ): Promise<UserLoginResponse> {
+    const response = await simpleFetch('/auth/login', {
       method: 'POST',
       body: request,
-      apiOptions: this.apiOptions,
+      apiOptions: options,
     })
 
     return response.json()

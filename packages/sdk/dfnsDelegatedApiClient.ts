@@ -1,3 +1,4 @@
+import { DfnsBaseApiOptions } from 'baseAuthApi'
 import { DelegatedApiKeysClient } from './codegen/ApiKeys'
 import { DelegatedAssetsClient } from './codegen/Assets'
 import { DelegatedCallbacksClient } from './codegen/Callbacks'
@@ -6,10 +7,10 @@ import { DelegatedPolicyExecutionClient } from './codegen/PolicyExecution'
 import { DelegatedPolicyManagementClient } from './codegen/PolicyManagement'
 import { DelegatedPublicKeysClient } from './codegen/PublicKeys'
 import { DelegatedWalletsClient } from './codegen/Wallets'
-import { DfnsApiOptions } from './dfnsApiClient'
 
-export type DfnsDelegatedApiClientOptions = Omit<DfnsApiOptions, 'signer'> &
-  Required<Pick<DfnsApiOptions, 'accessToken'>>
+export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions & {
+  accessToken: string
+}
 
 export class DfnsDelegatedApiClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}

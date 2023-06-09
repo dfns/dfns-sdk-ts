@@ -4,18 +4,12 @@ import {
   UserActionChallengeResponse,
 } from '../../baseAuthApi'
 import { DfnsDelegatedApiClientOptions } from '../../dfnsDelegatedApiClient'
-import { Fetch, preflightFetch } from '../../utils/fetch'
+import { simpleFetch } from '../../utils/fetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
 export class DelegatedPublicKeysClient {
-  private fetch: Fetch
-  private authApi: BaseAuthApi
-
-  constructor(private apiOptions: DfnsDelegatedApiClientOptions) {
-    this.fetch = preflightFetch
-    this.authApi = new BaseAuthApi(apiOptions)
-  }
+  constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
   async getPublicKeyById(
     request: T.GetPublicKeyByIdRequest
@@ -25,7 +19,7 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -41,12 +35,15 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const challenge = await this.authApi.createUserActionChallenge({
-      userActionHttpMethod: 'POST',
-      userActionHttpPath: path,
-      userActionPayload: JSON.stringify(request.body),
-      userActionServerKind: 'Api',
-    })
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
 
     return challenge
   }
@@ -60,11 +57,12 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const { userAction } = await this.authApi.signUserActionChallenge(
-      signedChallenge
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
     )
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
@@ -80,7 +78,7 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -96,7 +94,7 @@ export class DelegatedPublicKeysClient {
       query: request.query ?? {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -118,7 +116,7 @@ export class DelegatedPublicKeysClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -134,12 +132,15 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const challenge = await this.authApi.createUserActionChallenge({
-      userActionHttpMethod: 'POST',
-      userActionHttpPath: path,
-      userActionPayload: JSON.stringify(request.body),
-      userActionServerKind: 'Api',
-    })
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
 
     return challenge
   }
@@ -153,11 +154,12 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const { userAction } = await this.authApi.signUserActionChallenge(
-      signedChallenge
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
     )
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
@@ -178,12 +180,15 @@ export class DelegatedPublicKeysClient {
       }
     )
 
-    const challenge = await this.authApi.createUserActionChallenge({
-      userActionHttpMethod: 'POST',
-      userActionHttpPath: path,
-      userActionPayload: JSON.stringify(request.body),
-      userActionServerKind: 'Api',
-    })
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
 
     return challenge
   }
@@ -200,11 +205,12 @@ export class DelegatedPublicKeysClient {
       }
     )
 
-    const { userAction } = await this.authApi.signUserActionChallenge(
-      signedChallenge
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
     )
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
@@ -222,7 +228,7 @@ export class DelegatedPublicKeysClient {
       query: request.query ?? {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -238,12 +244,15 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const challenge = await this.authApi.createUserActionChallenge({
-      userActionHttpMethod: 'POST',
-      userActionHttpPath: path,
-      userActionPayload: JSON.stringify(request.body),
-      userActionServerKind: 'Api',
-    })
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
 
     return challenge
   }
@@ -257,11 +266,12 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const { userAction } = await this.authApi.signUserActionChallenge(
-      signedChallenge
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
     )
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
@@ -279,7 +289,7 @@ export class DelegatedPublicKeysClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })

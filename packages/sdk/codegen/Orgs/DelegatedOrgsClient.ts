@@ -1,17 +1,10 @@
-import { BaseAuthApi } from '../../baseAuthApi'
 import { DfnsDelegatedApiClientOptions } from '../../dfnsDelegatedApiClient'
-import { Fetch, preflightFetch } from '../../utils/fetch'
+import { simpleFetch } from '../../utils/fetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
 export class DelegatedOrgsClient {
-  private fetch: Fetch
-  private authApi: BaseAuthApi
-
-  constructor(private apiOptions: DfnsDelegatedApiClientOptions) {
-    this.fetch = preflightFetch
-    this.authApi = new BaseAuthApi(apiOptions)
-  }
+  constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
   async getEmployeeById(
     request: T.GetEmployeeByIdRequest
@@ -21,7 +14,7 @@ export class DelegatedOrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -35,7 +28,7 @@ export class DelegatedOrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -49,7 +42,7 @@ export class DelegatedOrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       apiOptions: this.apiOptions,
     })
@@ -63,7 +56,7 @@ export class DelegatedOrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -77,7 +70,7 @@ export class DelegatedOrgsClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })

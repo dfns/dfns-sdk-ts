@@ -1,3 +1,4 @@
+import { DfnsBaseApiOptions } from 'baseAuthApi'
 import { ApiKeysClient } from './codegen/ApiKeys'
 import { AssetsClient } from './codegen/Assets'
 import { AuthClient } from './codegen/Auth'
@@ -9,16 +10,12 @@ import { PublicKeysClient } from './codegen/PublicKeys'
 import { WalletsClient } from './codegen/Wallets'
 import { Signer } from './signer'
 
-export type DfnsApiOptions = {
-  appId: string
-  appSecret?: string
-  accessToken?: string
-  baseUrl: URL
+export type DfnsApiClientOptions = DfnsBaseApiOptions & {
   signer: Signer
 }
 
 export class DfnsApiClient {
-  constructor(private apiOptions: DfnsApiOptions) {}
+  constructor(private apiOptions: DfnsApiClientOptions) {}
 
   public get apiKeys() {
     return new ApiKeysClient(this.apiOptions)

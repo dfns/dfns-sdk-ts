@@ -1,23 +1,29 @@
 import { BaseAuthApi, CreateUserLoginChallengeRequest, UserLoginResponse } from './baseAuthApi'
-import { DfnsApiOptions } from './dfnsApiClient'
+import { DfnsApiClientOptions } from './dfnsApiClient'
 
 export type LoginRequest = CreateUserLoginChallengeRequest
 
 export type LoginResponse = UserLoginResponse
 
+export type DfnsAuthenticatorOptions = Omit<DfnsApiClientOptions, 'accessToken'>
+
 export class DfnsAuthenticator {
   private api: BaseAuthApi
 
-  constructor(private apiOptions: DfnsApiOptions) {
-    this.api = new BaseAuthApi(apiOptions)
-  }
+  constructor(private apiOptions: DfnsAuthenticatorOptions) {}
 
   async login(request: LoginRequest): Promise<LoginResponse> {
-    const { challenge, challengeIdentifier, allowCredentials } = await this.api.createUserLoginChallenge(request)
+    const { challenge, challengeIdentifier, allowCredentials } = await BaseAuthApi.createUserLoginChallenge(
+      request,
+      this.apiOptions
+    )
     const assertions = await this.apiOptions.signer.sign(challenge, allowCredentials)
-    return this.api.signUserLoginChallenge({
-      challengeIdentifier,
-      ...assertions,
-    })
+    return BaseAuthApi.signUserLoginChallenge(
+      {
+        challengeIdentifier,
+        ...assertions,
+      },
+      this.apiOptions
+    )
   }
 }

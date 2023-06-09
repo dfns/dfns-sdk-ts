@@ -1,24 +1,22 @@
 import { Response, fetch as _fetch } from 'cross-fetch'
 
 import { DfnsError } from '../dfnsError'
-import { DfnsApiOptions } from '../dfnsApiClient'
-import { BaseAuthApi } from '../baseAuthApi'
+import { BaseAuthApi, DfnsBaseApiOptions } from '../baseAuthApi'
 import { generateNonce } from './nonce'
-import { PartialBy } from './types'
+import { DfnsApiClientOptions } from 'dfnsApiClient'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
-export type Fetch = (
-  resource: string | URL,
-  options: {
-    method: HttpMethod
-    headers?: Record<string, string>
-    body?: unknown
-    apiOptions: PartialBy<DfnsApiOptions, 'signer'>
-  }
-) => Promise<Response>
+export type FetchOptions<T> = {
+  method: HttpMethod
+  headers?: Record<string, string>
+  body?: string | unknown
+  apiOptions: T
+}
 
-const fullUrl = (fetch: Fetch): Fetch => {
+export type Fetch<T> = (resource: string | URL, options: FetchOptions<T>) => Promise<Response>
+
+const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const { baseUrl } = options.apiOptions
     resource = new URL(resource, baseUrl)
@@ -26,7 +24,7 @@ const fullUrl = (fetch: Fetch): Fetch => {
   }
 }
 
-const jsonSerializer = (fetch: Fetch): Fetch => {
+const jsonSerializer = <T>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     if (options.body) {
       options.body = JSON.stringify(options.body)
@@ -41,7 +39,7 @@ const jsonSerializer = (fetch: Fetch): Fetch => {
   }
 }
 
-const errorHandler = (fetch: Fetch): Fetch => {
+const errorHandler = <T>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const response = await fetch(resource, options)
 
@@ -54,7 +52,7 @@ const errorHandler = (fetch: Fetch): Fetch => {
   }
 }
 
-const preflight = (fetch: Fetch): Fetch => {
+const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const { appId, appSecret, accessToken } = options.apiOptions
 
@@ -82,33 +80,30 @@ const preflight = (fetch: Fetch): Fetch => {
   }
 }
 
-const userAction = (fetch: Fetch): Fetch => {
+const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     if (options.method !== 'GET') {
-      const api = new BaseAuthApi(options.apiOptions)
-
-      const { challenge, challengeIdentifier, allowCredentials } =
-        await api.createUserActionChallenge({
+      const { challenge, challengeIdentifier, allowCredentials } = await BaseAuthApi.createUserActionChallenge(
+        {
           userActionPayload: <string>options.body ?? '',
           userActionHttpMethod: options.method,
           userActionHttpPath: (<URL>resource).pathname,
           userActionServerKind: 'Api',
-        })
+        },
+        options.apiOptions
+      )
 
       const { signer } = options.apiOptions
 
-      if (!signer) {
-        throw Error(
-          '[Dfns Sdk] A Signer is required in order to perform user Action signature, pass one in the client constructor.'
-        )
-      }
-
       const assertions = await signer.sign(challenge, allowCredentials)
 
-      const { userAction } = await api.signUserActionChallenge({
-        challengeIdentifier,
-        ...assertions,
-      })
+      const { userAction } = await BaseAuthApi.signUserActionChallenge(
+        {
+          challengeIdentifier,
+          ...assertions,
+        },
+        options.apiOptions
+      )
 
       options.headers = {
         'x-dfns-useraction': userAction,
@@ -120,10 +115,8 @@ const userAction = (fetch: Fetch): Fetch => {
   }
 }
 
-export const preflightFetch = fullUrl(
-  jsonSerializer(preflight(errorHandler(<Fetch>_fetch)))
-)
+export const simpleFetch = fullUrl(jsonSerializer(dfnsAuth(errorHandler(<Fetch<DfnsBaseApiOptions>>_fetch))))
 
 export const userActionFetch = fullUrl(
-  jsonSerializer(preflight(userAction(errorHandler(<Fetch>_fetch))))
+  jsonSerializer(dfnsAuth(userAction(errorHandler(<Fetch<DfnsApiClientOptions>>_fetch))))
 )

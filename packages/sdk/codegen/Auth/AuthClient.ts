@@ -1,14 +1,10 @@
-import { DfnsApiOptions } from '../../dfnsApiClient'
-import { Fetch, userActionFetch } from '../../utils/fetch'
+import { DfnsApiClientOptions } from '../../dfnsApiClient'
+import { simpleFetch, userActionFetch } from '../../utils/fetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
 export class AuthClient {
-  private fetch: Fetch
-
-  constructor(private apiOptions: DfnsApiOptions) {
-    this.fetch = userActionFetch
-  }
+  constructor(private apiOptions: DfnsApiClientOptions) {}
 
   async createDelegatedUserRegistration(
     request: T.CreateDelegatedUserRegistrationRequest
@@ -18,7 +14,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -35,7 +31,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -52,7 +48,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -69,7 +65,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -86,7 +82,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -103,7 +99,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -120,7 +116,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -137,7 +133,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -154,7 +150,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -169,7 +165,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -185,7 +181,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -202,7 +198,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -219,7 +215,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -234,7 +230,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -250,7 +246,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -267,7 +263,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -283,7 +279,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -300,7 +296,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'DELETE',
       apiOptions: this.apiOptions,
     })
@@ -316,7 +312,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -332,7 +328,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -346,7 +342,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -362,7 +358,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -379,7 +375,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -395,7 +391,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -412,7 +408,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'DELETE',
       apiOptions: this.apiOptions,
     })
@@ -431,7 +427,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -450,7 +446,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -469,7 +465,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -485,7 +481,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -508,7 +504,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -530,7 +526,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -553,7 +549,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'DELETE',
       apiOptions: this.apiOptions,
     })
@@ -575,7 +571,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -597,7 +593,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -611,7 +607,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -627,7 +623,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -642,7 +638,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -658,7 +654,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -675,7 +671,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'DELETE',
       apiOptions: this.apiOptions,
     })
@@ -691,7 +687,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -707,7 +703,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -721,7 +717,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -737,7 +733,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -754,7 +750,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -770,7 +766,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -787,7 +783,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'DELETE',
       apiOptions: this.apiOptions,
     })
@@ -803,7 +799,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -819,7 +815,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -835,7 +831,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -851,7 +847,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -868,7 +864,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -884,7 +880,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
@@ -901,7 +897,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'DELETE',
       apiOptions: this.apiOptions,
     })
@@ -920,7 +916,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -939,7 +935,7 @@ export class AuthClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       apiOptions: this.apiOptions,
     })
@@ -955,7 +951,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,

@@ -1,14 +1,10 @@
-import { DfnsApiOptions } from '../../dfnsApiClient'
-import { Fetch, userActionFetch } from '../../utils/fetch'
+import { DfnsApiClientOptions } from '../../dfnsApiClient'
+import { simpleFetch, userActionFetch } from '../../utils/fetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
 export class PolicyExecutionClient {
-  private fetch: Fetch
-
-  constructor(private apiOptions: DfnsApiOptions) {
-    this.fetch = userActionFetch
-  }
+  constructor(private apiOptions: DfnsApiClientOptions) {}
 
   async listPolicyControlExecutions(
     request: T.ListPolicyControlExecutionsRequest
@@ -18,7 +14,7 @@ export class PolicyExecutionClient {
       query: request.query ?? {},
     })
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -37,7 +33,7 @@ export class PolicyExecutionClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await simpleFetch(path, {
       method: 'GET',
       apiOptions: this.apiOptions,
     })
@@ -56,7 +52,7 @@ export class PolicyExecutionClient {
       }
     )
 
-    const response = await this.fetch(path, {
+    const response = await userActionFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
