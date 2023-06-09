@@ -4,12 +4,18 @@ import { DfnsError } from '../dfnsError'
 import { DfnsApiOptions } from '../dfnsApiClient'
 import { BaseAuthApi } from '../baseAuthApi'
 import { generateNonce } from './nonce'
+import { PartialBy } from './types'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 export type Fetch = (
   resource: string | URL,
-  options: { method: HttpMethod; headers?: Record<string, string>; body?: unknown; apiOptions: DfnsApiOptions }
+  options: {
+    method: HttpMethod
+    headers?: Record<string, string>
+    body?: unknown
+    apiOptions: PartialBy<DfnsApiOptions, 'signer'>
+  }
 ) => Promise<Response>
 
 const fullUrl = (fetch: Fetch): Fetch => {
@@ -81,14 +87,22 @@ const userAction = (fetch: Fetch): Fetch => {
     if (options.method !== 'GET') {
       const api = new BaseAuthApi(options.apiOptions)
 
-      const { challenge, challengeIdentifier, allowCredentials } = await api.createUserActionChallenge({
-        userActionPayload: <string>options.body ?? '',
-        userActionHttpMethod: options.method,
-        userActionHttpPath: (<URL>resource).pathname,
-        userActionServerKind: 'Api',
-      })
+      const { challenge, challengeIdentifier, allowCredentials } =
+        await api.createUserActionChallenge({
+          userActionPayload: <string>options.body ?? '',
+          userActionHttpMethod: options.method,
+          userActionHttpPath: (<URL>resource).pathname,
+          userActionServerKind: 'Api',
+        })
 
       const { signer } = options.apiOptions
+
+      if (!signer) {
+        throw Error(
+          '[Dfns Sdk] A Signer is required in order to perform user Action signature, pass one in the client constructor.'
+        )
+      }
+
       const assertions = await signer.sign(challenge, allowCredentials)
 
       const { userAction } = await api.signUserActionChallenge({
@@ -106,6 +120,10 @@ const userAction = (fetch: Fetch): Fetch => {
   }
 }
 
-export const preflightFetch = fullUrl(jsonSerializer(preflight(errorHandler(<Fetch>_fetch))))
+export const preflightFetch = fullUrl(
+  jsonSerializer(preflight(errorHandler(<Fetch>_fetch)))
+)
 
-export const userActionFetch = fullUrl(jsonSerializer(preflight(userAction(errorHandler(<Fetch>_fetch)))))
+export const userActionFetch = fullUrl(
+  jsonSerializer(preflight(userAction(errorHandler(<Fetch>_fetch))))
+)

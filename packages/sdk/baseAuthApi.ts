@@ -1,3 +1,4 @@
+import { PartialBy } from 'utils/types'
 import { DfnsApiOptions } from './dfnsApiClient'
 import { AllowCredential, FirstFactorAssertion, SecondFactorAssertion } from './signer'
 import { Fetch, HttpMethod, preflightFetch } from './utils/fetch'
@@ -54,7 +55,7 @@ export type UserLoginResponse = {
 export class BaseAuthApi {
   private fetch: Fetch
 
-  constructor(private apiOptions: DfnsApiOptions) {
+  constructor(private apiOptions: PartialBy<DfnsApiOptions, 'signer'>) {
     this.fetch = preflightFetch
   }
 
