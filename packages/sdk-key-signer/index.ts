@@ -7,7 +7,7 @@ export class AsymmetricKeySigner implements Signer {
       privateKey: string
       credId: string
       appOrigin: string
-      crossOrigin: boolean
+      crossOrigin?: boolean
     }
   ) {}
 
@@ -17,7 +17,7 @@ export class AsymmetricKeySigner implements Signer {
         type: 'key.get',
         challenge,
         origin: this.options.appOrigin,
-        crossOrigin: this.options.crossOrigin,
+        crossOrigin: this.options.crossOrigin ?? false,
       })
     )
 

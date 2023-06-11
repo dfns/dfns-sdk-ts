@@ -3,7 +3,7 @@ import { Response, fetch as _fetch } from 'cross-fetch'
 import { DfnsError } from '../dfnsError'
 import { BaseAuthApi, DfnsBaseApiOptions } from '../baseAuthApi'
 import { generateNonce } from './nonce'
-import { DfnsApiClientOptions } from 'dfnsApiClient'
+import { DfnsApiClientOptions } from '../dfnsApiClient'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 

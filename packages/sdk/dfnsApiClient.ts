@@ -1,4 +1,4 @@
-import { DfnsBaseApiOptions } from 'baseAuthApi'
+import { DfnsBaseApiOptions } from './baseAuthApi'
 import { ApiKeysClient } from './codegen/ApiKeys'
 import { AssetsClient } from './codegen/Assets'
 import { AuthClient } from './codegen/Auth'
