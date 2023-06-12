@@ -1,27 +1,30 @@
-# Dfns Typescript SDK
+# Dfns typescript SDK
 
-Welcome 👋 This repo holds the Typescript SDK wrapping [Dfns API](https://www.dfns.co/).
+Welcome, builders 👋
+
+This repo holds the Typescript SDK wrapping [Dfns API](https://www.dfns.co/). Useful links:
 
 * [Dfns Website](https://www.dfns.co/)
 * [Dfns API Docs](https://dfns.gitbook.io/dfns-docs/)
 
 
-## Usage Server-side (simple)
+## Server-side configuration (simple)
 
-The simplest configuration to use Dfns API, is using a Service Account from your server (follow [this documentation](TODO) to know more about Service Account creation).
+The simplest configuration uses a `Service Account` on a server ([check docs](TODO) to know more about Service Account creation).
 
-In this configuration, your server also needs to have access to the private key associated with the Service Account you created, since most requests made to Dfns will need to be signed by this key. The
+The server also needs to provide the private key associated with the Service Account (most requests made to Dfns will be signed by this key).
 
-Install Dfns SDK + Dfns Key Signer:
+Install `Dfns SDK` + `Dfns Key Signer`:
 ```sh
-// using npm
+// npm
 npm i @dfns/sdk @dfns/sdk-key-signer
 
-// using yarn
+// yarn
 yarn add @dfns/sdk @dfns/sdk-key-signer
 ```
 
-Then use it like
+
+Here's an example creating a wallet:
 
 ```ts
 import { DfnsApiClient } from '@dfns/sdk'
@@ -30,23 +33,23 @@ import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Foundations'
 
 const signer = new AsymmetricKeySigner({
   privateKey: process.env.DFNS_PRIVATE_KEY, // private key (credential) registered for your Service Account
-  credId: 'X2ktMzhxaTEtZTF1bTgtOXY1cG9yY2tkZDe1dG1jYg', // credential ID of your Service Account
-  appOrigin: 'https://app.mycompany.com', // origin added to the (Client-Side) application you are using
+  credId: 'X2ktMzhxaTEtZTF1bTgtOXY1cG9yY2tkZDe1dG1jYg', // Credential ID of the Service Account
+  appOrigin: 'https://app.mycompany.com', // origin added to the (Client-Side) Application you are using
 })
 
-const client = new DfnsApiClient({
-  accessToken: process.env.DFNS_ACCESS_TOKEN, // Service Account token
-  appId: 'ap-A3G2-H7-3c562njr9t9679qto6snl5ca8i', // application id
+const dfns = new DfnsApiClient({
   baseUrl: 'https://api.dfns.io',
-  signer,
+  appId: 'ap-A3G2-H7-3c562njr9t9679qto6snl5ca8i', // Application ID
+  accessToken: process.env.DFNS_ACCESS_TOKEN, // Service Account token
+  signer, // sdk needs this signer to sign subsequent requests
 })
 
-const wallet = await client.wallets.createWallet({ body: { network: BlockchainNetwork.ETH_GOERLI } })
+const wallet = await dfns.wallets.createWallet({ body: { network: BlockchainNetwork.ETH_GOERLI } })
 
-console.log(JSON.stringify(wallet))
+console.log(wallet) // 🎉
 ```
 
-This Sequence Diagram shows an example of what happens under the hood when using this SDK method `dfns.createWallet()`:
+These are requests happening under the hood, when using `dfns.wallets.createWallet()`:
 
 ![Sequence Diagram Dfns SDK Server Side Configuration](./images/Service_Account_Server_Side.png)
 
