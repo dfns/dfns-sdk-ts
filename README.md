@@ -1,5 +1,7 @@
 # Dfns typescript SDK
 
+> ⚠️ **This SDK is in alpha**. It may be unstable and have breaking evolutions.
+
 Welcome, builders 👋
 
 This repo holds the Typescript SDK wrapping [Dfns API](https://www.dfns.co/). Useful links:
