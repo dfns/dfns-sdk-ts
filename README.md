@@ -53,5 +53,5 @@ console.log(wallet) // 🎉
 
 These are requests happening under the hood, when using `dfns.wallets.createWallet()`:
 
-![Sequence Diagram Dfns SDK Server Side Configuration](./images/Service_Account_Server_Side.png)
+![Sequence Diagram Dfns SDK Server Side Configuration](./images/Dfns_Service_Account_Configuration.png)
 
