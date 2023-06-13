@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "lib": ["dom", "es2018", "esnext.asynciterable"],
+    "incremental": false,
+    "declaration": true,
+    "module": "commonjs",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules", "dist", "spec", "tests/**/*", "**/*.test.ts", "**/*.spec.ts"]
+}
