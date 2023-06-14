@@ -1,3 +1,4 @@
+import { CreateUserRegistrationInput, UserRegistrationChallenge } from 'codegen/datamodel/Auth'
 import { AllowCredential, FirstFactorAssertion, SecondFactorAssertion } from './signer'
 import { HttpMethod, simpleFetch } from './utils/fetch'
 
@@ -57,6 +58,25 @@ export type UserLoginResponse = {
   token: string
 }
 
+export type CreateUserRegistrationChallengeRequest = {
+  orgId: string
+  username: string
+  registrationCode: string
+}
+
+export type UserRegistrationResponse = {
+  credential: {
+    uuid: string
+    kind: CredentialKind
+    name: string
+  }
+  user: {
+    id: string
+    username: string
+    orgId: string
+  }
+}
+
 export class BaseAuthApi {
   static async createUserActionChallenge(
     request: CreateUserActionChallengeRequest,
@@ -102,6 +122,32 @@ export class BaseAuthApi {
     options: DfnsBaseApiOptions
   ): Promise<UserLoginResponse> {
     const response = await simpleFetch('/auth/login', {
+      method: 'POST',
+      body: request,
+      apiOptions: options,
+    })
+
+    return response.json()
+  }
+
+  static async createUserRegistrationChallenge(
+    request: CreateUserRegistrationChallengeRequest,
+    options: DfnsBaseApiOptions
+  ): Promise<UserRegistrationChallenge> {
+    const response = await simpleFetch('/auth/registration/init', {
+      method: 'POST',
+      body: request,
+      apiOptions: options,
+    })
+
+    return response.json()
+  }
+
+  static async createUserRegistration(
+    request: CreateUserRegistrationInput,
+    options: DfnsBaseApiOptions
+  ): Promise<UserRegistrationResponse> {
+    const response = await simpleFetch('/auth/registration', {
       method: 'POST',
       body: request,
       apiOptions: options,
