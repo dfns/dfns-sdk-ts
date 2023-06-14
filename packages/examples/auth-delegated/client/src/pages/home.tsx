@@ -1,29 +1,30 @@
-import React, { FormEvent, useEffect, useState } from 'react'
 import { PaginatedWalletList } from '@dfns/sdk/codegen/datamodel/Wallets'
-
-import useAuth from '../hooks/useAuth'
-import { dfnsApi } from '../api'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import '../globals.css'
+import { api } from '../api'
+import useAuth from '../hooks/useAuth'
 
 export default function Home(): JSX.Element {
   const { user, logout } = useAuth()
   const [wallets, setWallets] = useState<PaginatedWalletList | undefined>(undefined)
 
   useEffect(() => {
-    dfnsApi()
-      .wallets.listWallets({})
-      .then((wallets) => setWallets(wallets))
+    api.listWallets().then((wallets) => setWallets(wallets))
   }, [])
 
   return (
     <div>
-      <p>Hello {user}</p>
+      <div className="flex items-center gap-2">
+        <p className='text-2x'>Hello {user}</p>
 
-      <button type="button" onClick={logout}>
-        Logout
-      </button>
+        <button className="btn" type="button" onClick={logout}>
+          Logout
+        </button>
+      </div>
 
-      <table className="table table-striped table-bordered">
+      <table className="w-full">
         <thead>
           <tr>
             <th>ID</th>
@@ -44,7 +45,7 @@ export default function Home(): JSX.Element {
         <tfoot>
           <tr>
             <td colSpan={3}>
-              <Link to="/wallet/new">New Wallet</Link>
+              <Link className="btn" to="/wallets/new">New Wallet</Link>
             </td>
           </tr>
         </tfoot>

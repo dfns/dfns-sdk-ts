@@ -8,21 +8,21 @@ const main = async () => {
 
   const signer = new AsymmetricKeySigner({
     privateKey: process.env.DFNS_PRIVATE_KEY!,
-    credId: 'Y2ktMzgxaTEtZTF1bWgtOXY1cG9yY2tkZDd1dG1jYg',
-    appOrigin: 'https://app.dfns.wtf',
+    credId: process.env.DFNS_CRED_ID!,
+    appOrigin: process.env.DFNS_APP_ORIGIN!,
   })
 
-  const client = new DfnsApiClient({
-    appId: 'ap-C3H2-H7-3c762njr9t96l9qto6snl5ca4r',
+  const dfnsApi = new DfnsApiClient({
+    appId: process.env.DFNS_APP_ID!,
     accessToken: process.env.DFNS_ACCESS_TOKEN!,
-    baseUrl: 'https://api.dfns.wtf',
+    baseUrl: process.env.DFNS_API_URL!,
     signer,
   })
 
-  const wallet = await client.wallets.createWallet({ body: { network: BlockchainNetwork.ETH_GOERLI } })
+  const wallet = await dfnsApi.wallets.createWallet({ body: { network: BlockchainNetwork.ETH_GOERLI } })
   console.log(JSON.stringify(wallet))
 
-  const list = await client.wallets.listWallets({})
+  const list = await dfnsApi.wallets.listWallets({})
   console.log(JSON.stringify(list))
 }
 
