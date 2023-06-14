@@ -23,7 +23,7 @@ For this demo to work, you need to complete a few prerequisites:
   - type: Client Side
   - Relying Party: localhost
   - Origin: http://localhost:3000
-- On Dfns Dashboard, create a new Service Account (check [Dfns docs](https://dfns.gitbook.io/) to see how to generate a private key)
+- On Dfns Dashboard, create a new Service Account (check [Dfns docs](https://app.gitbook.com/o/puStYG2QYnebEAexXqmt/s/oMvt8zMQg1BzesvBRNB4/advanced-topics/authentication/credentials/access-token-credentials) to see how to generate a public/private keypair)
 - Copy/paste the .env.example into a .env.local, and replace all your env variable values
 `
 
