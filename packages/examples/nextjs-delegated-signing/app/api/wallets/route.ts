@@ -5,8 +5,6 @@ import { getDfnsDelegatedClient } from '../utils'
 export async function GET(request: NextRequest) {
   const endUserAuthToken = request.cookies.get(DFNS_END_USER_TOKEN_COOKIE)?.value
 
-  console.log('endUserAuthToken', endUserAuthToken)
-
   if (!endUserAuthToken) {
     return NextResponse.json({ message: 'end user token not found' }, { status: 401 })
   }
