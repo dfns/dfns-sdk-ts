@@ -3,6 +3,7 @@ import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Foundations'
 import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import '../globals.css'
 import { dfnsApi } from '../api'
 
 export default function WalletNew(): JSX.Element {
@@ -27,18 +28,19 @@ export default function WalletNew(): JSX.Element {
 
   return (
     <form onSubmit={handleCreate}>
-      <h1>Create Wallet</h1>
+      <div className="w-full">
+        <h1 className="text-2x">Create Wallet</h1>
 
-      <label htmlFor="network">
-        Network
-        <input id="network" name="network" />
-      </label>
+        <div className="flex items-center gap-2">
+          <input className="input" id="network" name="network" placeholder="network" />
 
-      <button disabled={submitting} type="submit">
-        Submit
-      </button>
+          <button className="btn" disabled={submitting} type="submit">
+            Submit
+          </button>
+        </div>
 
-      {error && <p>error.message</p>}
+        {!!error && <div className="text-red-700">{JSON.stringify(error.message)}</div>}
+      </div>
     </form>
   )
 }

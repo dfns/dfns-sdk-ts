@@ -47,7 +47,7 @@ const errorHandler = <T>(fetch: Fetch<T>): Fetch<T> => {
       return response
     } else {
       const body = await response.json()
-      throw new DfnsError(response.status, body.message, body)
+      throw new DfnsError(response.status, body.error.message, body.error)
     }
   }
 }

@@ -11,6 +11,7 @@ export interface AuthContextType {
   error?: DfnsError
   login: (username: string, orgId: string) => void
   logout: () => void
+  register: (username: string, orgId: string, registrationCode: string) => void
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -57,8 +58,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
     localStorage.removeItem('DFNS_ACCESS_TOKEN')
   }
 
+  const register = (username: string, orgId: string, registrationCode: string) => {
+    setLoading(true)
+
+    authApi()
+      .register({ username, orgId, registrationCode })
+      .then(() => {
+        navigate('/')
+      })
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false))
+  }
+
   return (
-    <AuthContext.Provider value={{ loading, user, error, login, logout }}>{!init && children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ loading, user, error, login, logout, register }}>
+      {!init && children}
+    </AuthContext.Provider>
   )
 }
 

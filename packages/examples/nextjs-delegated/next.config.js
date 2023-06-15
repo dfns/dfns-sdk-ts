@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@dfns/sdk-webauthn-signer'],
+  transpilePackages: ['@dfns/sdk-webauthn'],
 }
 
 module.exports = nextConfig

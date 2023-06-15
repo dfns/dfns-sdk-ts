@@ -1,3 +1,5 @@
+export type CredentialKind = 'Key' | 'Fido2' | 'Password' | 'Totp' | 'RecoveryKey'
+
 export type CredentialTransport = 'usb' | 'nfc' | 'ble' | 'internal'
 
 export type AllowCredential = {

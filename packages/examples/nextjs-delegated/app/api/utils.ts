@@ -1,6 +1,5 @@
-import { DfnsDelegatedApiClient } from '@/../../sdk/dfnsDelegatedApiClient'
-import { DfnsApiClient } from '@dfns/sdk'
-import { AsymmetricKeySigner } from '@dfns/sdk-key-signer'
+import { DfnsApiClient, DfnsDelegatedApiClient } from '@dfns/sdk'
+import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 
 export const signer = new AsymmetricKeySigner({
   appOrigin: process.env.DFNS_APPLICATION_ORIGIN!,

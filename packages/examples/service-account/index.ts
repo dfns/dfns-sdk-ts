@@ -1,6 +1,6 @@
 import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Foundations'
 import { DfnsApiClient } from '@dfns/sdk'
-import { AsymmetricKeySigner } from '@dfns/sdk-key-signer'
+import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import dotenv from 'dotenv'
 
 const main = async () => {

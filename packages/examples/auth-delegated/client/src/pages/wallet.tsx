@@ -38,7 +38,7 @@ export default function WalletNew(): JSX.Element {
           </button>
         </div>
 
-        {error && <p>error.message</p>}
+        {!!error && <div className="text-red-700">{JSON.stringify(error.message)}</div>}
       </div>
     </form>
   )

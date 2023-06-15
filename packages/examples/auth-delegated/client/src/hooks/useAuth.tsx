@@ -7,8 +7,9 @@ export interface AuthContextType {
   loading: boolean
   user?: string
   error?: any
-  login: (username: string, orgId: string) => void
+  login: (username: string, password: string) => void
   logout: () => void
+  register: (username: string, password: string) => void
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -32,11 +33,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
       .finally(() => setLoading(false))
   }
 
+  const register = (username: string, password: string) => {
+    setLoading(true)
+
+    api
+      .register(username, password)
+      .then(({ username }) => {
+        navigate('/login', { state: { username } })
+      })
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false))
+  }
+
   const logout = () => {
     setUser(undefined)
   }
 
-  return <AuthContext.Provider value={{ loading, user, error, login, logout }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ loading, user, error, login, logout, register }}>{children}</AuthContext.Provider>
+  )
 }
 
 export default function useAuth(): AuthContextType {
