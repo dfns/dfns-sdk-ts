@@ -19,12 +19,12 @@ export default function Register() {
       .then(async (challenge) => {
         console.log('register init challenge', challenge)
         const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
-        const signedChallenge = await webauthn.create(challenge)
+        const attestation = await webauthn.create(challenge)
         return fetch('./api/register/complete', {
           method: 'POST',
           body: JSON.stringify({
             tempAuthToken: challenge.temporaryAuthenticationToken,
-            signedChallenge,
+            signedChallenge: { firstFactorCredential: attestation },
           }),
         })
       })

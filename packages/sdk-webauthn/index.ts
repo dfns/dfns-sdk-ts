@@ -1,16 +1,11 @@
-import {
-  FirstFactorAttestation,
-  KeyStore,
-  SecondFactorAttestation,
-  UserRegistrationChallenge,
-} from '@dfns/sdk/keyStore'
-import { AllowCredential, FirstFactorAssertion, SecondFactorAssertion, Signer } from '@dfns/sdk/signer'
+import { CredentialStore, Fido2Attestation, UserRegistrationChallenge } from '@dfns/sdk/store'
+import { AllowCredential, CredentialSigner, Fido2Assertion } from '@dfns/sdk/signer'
 import { fromBase64Url, toBase64Url } from '@dfns/sdk/utils/base64'
 import { Buffer } from 'buffer'
 
 export const DEFAULT_WAIT_TIMEOUT = 60000
 
-export class WebAuthn implements Signer, KeyStore {
+export class WebAuthn implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
   constructor(
     private options: {
       rpId: string
@@ -21,7 +16,7 @@ export class WebAuthn implements Signer, KeyStore {
   async sign(
     challenge: string,
     allowCredentials: { key: AllowCredential[]; webauthn: AllowCredential[] }
-  ): Promise<{ firstFactor: FirstFactorAssertion; secondFactor?: SecondFactorAssertion | undefined }> {
+  ): Promise<Fido2Assertion> {
     const credential = (await navigator.credentials.get({
       mediation: 'required',
       publicKey: {
@@ -44,23 +39,18 @@ export class WebAuthn implements Signer, KeyStore {
     const assertion = <AuthenticatorAssertionResponse>credential.response
 
     return {
-      firstFactor: {
-        kind: 'Fido2',
-        credentialAssertion: {
-          credId: credential.id,
-          clientData: toBase64Url(Buffer.from(assertion.clientDataJSON)),
-          authenticatorData: toBase64Url(Buffer.from(assertion.authenticatorData)),
-          signature: toBase64Url(Buffer.from(assertion.signature)),
-          userHandle: assertion.userHandle ? toBase64Url(Buffer.from(assertion.userHandle)) : undefined,
-        },
+      kind: 'Fido2',
+      credentialAssertion: {
+        credId: credential.id,
+        clientData: toBase64Url(Buffer.from(assertion.clientDataJSON)),
+        authenticatorData: toBase64Url(Buffer.from(assertion.authenticatorData)),
+        signature: toBase64Url(Buffer.from(assertion.signature)),
+        userHandle: assertion.userHandle ? toBase64Url(Buffer.from(assertion.userHandle)) : undefined,
       },
     }
   }
 
-  async create(challenge: UserRegistrationChallenge): Promise<{
-    firstFactorCredential: FirstFactorAttestation
-    secondFactorCredential?: SecondFactorAttestation
-  }> {
+  async create(challenge: UserRegistrationChallenge): Promise<Fido2Attestation> {
     const options: CredentialCreationOptions = {
       publicKey: {
         challenge: Buffer.from(challenge.challenge),
@@ -92,13 +82,11 @@ export class WebAuthn implements Signer, KeyStore {
     const attestation = <AuthenticatorAttestationResponse>credential.response
 
     return {
-      firstFactorCredential: {
-        credentialKind: 'Fido2',
-        credentialInfo: {
-          credId: credential.id,
-          attestationData: toBase64Url(Buffer.from(attestation.attestationObject)),
-          clientData: toBase64Url(Buffer.from(attestation.clientDataJSON)),
-        },
+      credentialKind: 'Fido2',
+      credentialInfo: {
+        credId: credential.id,
+        attestationData: toBase64Url(Buffer.from(attestation.attestationObject)),
+        clientData: toBase64Url(Buffer.from(attestation.clientDataJSON)),
       },
     }
   }

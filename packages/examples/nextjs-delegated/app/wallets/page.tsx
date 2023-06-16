@@ -24,12 +24,12 @@ export default function Wallets() {
       .then(async (result) => {
         const { request, challenge } = await result.json()
         const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
-        const signedChallenge = await webauthn.sign(challenge.challenge, challenge.allowCredentials)
+        const assertion = await webauthn.sign(challenge.challenge, challenge.allowCredentials)
         return fetch('/api/wallets/create/complete', {
           method: 'POST',
           body: JSON.stringify({
             request,
-            signedChallenge: { challengeIdentifier: challenge.challengeIdentifier, ...signedChallenge },
+            signedChallenge: { challengeIdentifier: challenge.challengeIdentifier, firstFactor: assertion },
           }),
         })
       })

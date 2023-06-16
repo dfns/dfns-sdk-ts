@@ -1,5 +1,5 @@
-import { KeyStore } from './keyStore'
-import { Signer } from './signer'
+import { CredentialStore } from './store'
+import { CredentialSigner } from './signer'
 import {
   BaseAuthApi,
   CreateUserLoginChallengeRequest,
@@ -17,7 +17,9 @@ export type RegisterRequest = CreateUserRegistrationChallengeRequest
 
 export type RegisterResponse = UserRegistrationResponse
 
-export type DfnsAuthenticatorOptions = Omit<DfnsBaseApiOptions, 'accessToken'> & { signer: Signer & Partial<KeyStore> }
+export type DfnsAuthenticatorOptions = Omit<DfnsBaseApiOptions, 'accessToken'> & {
+  signer: CredentialSigner & Partial<CredentialStore>
+}
 
 export class DfnsAuthenticator {
   private api: BaseAuthApi
@@ -29,11 +31,11 @@ export class DfnsAuthenticator {
       request,
       this.apiOptions
     )
-    const assertions = await this.apiOptions.signer.sign(challenge, allowCredentials)
+    const assertion = await this.apiOptions.signer.sign(challenge, allowCredentials)
     return BaseAuthApi.createUserLogin(
       {
         challengeIdentifier,
-        ...assertions,
+        firstFactor: assertion,
       },
       this.apiOptions
     )
@@ -45,10 +47,13 @@ export class DfnsAuthenticator {
     }
 
     const challenge = await BaseAuthApi.createUserRegistrationChallenge(request, this.apiOptions)
-    const attestations = await this.apiOptions.signer.create(challenge)
-    return BaseAuthApi.createUserRegistration(attestations, {
-      ...this.apiOptions,
-      accessToken: challenge.temporaryAuthenticationToken,
-    })
+    const attestation = await this.apiOptions.signer.create(challenge)
+    return BaseAuthApi.createUserRegistration(
+      { firstFactorCredential: attestation },
+      {
+        ...this.apiOptions,
+        accessToken: challenge.temporaryAuthenticationToken,
+      }
+    )
   }
 }

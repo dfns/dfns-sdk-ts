@@ -95,12 +95,12 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
 
       const { signer } = options.apiOptions
 
-      const assertions = await signer.sign(challenge, allowCredentials)
+      const assertion = await signer.sign(challenge, allowCredentials)
 
       const { userAction } = await BaseAuthApi.signUserActionChallenge(
         {
           challengeIdentifier,
-          ...assertions,
+          firstFactor: assertion,
         },
         options.apiOptions
       )

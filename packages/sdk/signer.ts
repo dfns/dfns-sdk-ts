@@ -9,53 +9,41 @@ export type AllowCredential = {
 }
 
 export type KeyAssertion = {
-  credId: string
-  clientData: string
-  signature: string
+  kind: 'Key'
+  credentialAssertion: {
+    credId: string
+    clientData: string
+    signature: string
+  }
 }
 
 export type Fido2Assertion = {
-  credId: string
-  clientData: string
-  authenticatorData: string
-  signature: string
-  userHandle?: string
+  kind: 'Fido2'
+  credentialAssertion: {
+    credId: string
+    clientData: string
+    authenticatorData: string
+    signature: string
+    userHandle?: string
+  }
 }
 
-export type FirstFactorAssertion =
-  | {
-      kind: 'Key'
-      credentialAssertion: KeyAssertion
-    }
-  | {
-      kind: 'Fido2'
-      credentialAssertion: Fido2Assertion
-    }
-  | {
-      kind: 'Password'
-      password: string
-    }
+export type PasswordAssertion = {
+  kind: 'Password'
+  password: string
+}
 
-export type SecondFactorAssertion =
-  | {
-      kind: 'Key'
-      credentialAssertion: KeyAssertion
-    }
-  | {
-      kind: 'Fido2'
-      credentialAssertion: Fido2Assertion
-    }
-  | {
-      kind: 'Totp'
-      otpCode: string
-    }
+export type TotpAssertion = {
+  kind: 'Totp'
+  otpCode: string
+}
 
-export interface Signer {
-  sign(
-    challenge: string,
-    allowCredentials: { key: AllowCredential[]; webauthn: AllowCredential[] }
-  ): Promise<{
-    firstFactor: FirstFactorAssertion
-    secondFactor?: SecondFactorAssertion
-  }>
+export type FirstFactorAssertion = KeyAssertion | Fido2Assertion | PasswordAssertion
+
+export type SecondFactorAssertion = KeyAssertion | Fido2Assertion | TotpAssertion
+
+export type CredentialAssertion = KeyAssertion | Fido2Assertion | PasswordAssertion | TotpAssertion
+
+export interface CredentialSigner<T extends CredentialAssertion = FirstFactorAssertion> {
+  sign(challenge: string, allowCredentials: { key: AllowCredential[]; webauthn: AllowCredential[] }): Promise<T>
 }
