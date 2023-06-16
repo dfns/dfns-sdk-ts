@@ -1,15 +1,16 @@
-import { Buffer } from 'buffer'
+import {
+  FirstFactorAttestation,
+  KeyStore,
+  SecondFactorAttestation,
+  UserRegistrationChallenge,
+} from '@dfns/sdk/keyStore'
 import { AllowCredential, FirstFactorAssertion, SecondFactorAssertion, Signer } from '@dfns/sdk/signer'
 import { fromBase64Url, toBase64Url } from '@dfns/sdk/utils/base64'
-import {
-  UserRegistrationChallenge,
-  CreateUserRegistrationInput,
-  CredentialKind,
-} from '@dfns/sdk/codegen/datamodel/Auth'
+import { Buffer } from 'buffer'
 
 export const DEFAULT_WAIT_TIMEOUT = 60000
 
-export class WebauthnSigner implements Signer {
+export class WebAuthn implements Signer, KeyStore {
   constructor(
     private options: {
       rpId: string
@@ -37,71 +38,66 @@ export class WebauthnSigner implements Signer {
     })) as PublicKeyCredential | null
 
     if (!credential) {
-      throw new Error('failed webauthn')
+      throw new Error('Failed to sign with WebAuthn credential')
     }
 
-    const response = <AuthenticatorAssertionResponse>credential.response
+    const assertion = <AuthenticatorAssertionResponse>credential.response
 
     return {
       firstFactor: {
         kind: 'Fido2',
         credentialAssertion: {
           credId: credential.id,
-          clientData: toBase64Url(Buffer.from(response.clientDataJSON)),
-          authenticatorData: toBase64Url(Buffer.from(response.authenticatorData)),
-          signature: toBase64Url(Buffer.from(response.signature)),
-          userHandle: response.userHandle ? toBase64Url(Buffer.from(response.userHandle)) : undefined,
+          clientData: toBase64Url(Buffer.from(assertion.clientDataJSON)),
+          authenticatorData: toBase64Url(Buffer.from(assertion.authenticatorData)),
+          signature: toBase64Url(Buffer.from(assertion.signature)),
+          userHandle: assertion.userHandle ? toBase64Url(Buffer.from(assertion.userHandle)) : undefined,
         },
       },
     }
   }
 
-  async createCredAndSignRegistrationChallenge(
-    challenge: UserRegistrationChallenge
-  ): Promise<CreateUserRegistrationInput> {
+  async create(challenge: UserRegistrationChallenge): Promise<{
+    firstFactorCredential: FirstFactorAttestation
+    secondFactorCredential?: SecondFactorAttestation
+  }> {
     const options: CredentialCreationOptions = {
       publicKey: {
         challenge: Buffer.from(challenge.challenge),
-        pubKeyCredParams: challenge.pubKeyCredParams.map((cred) => ({
-          alg: cred.alg,
-          type: cred.type,
-        })) as PublicKeyCredentialParameters[],
-        rp: {
-          name: challenge.rp.name,
-          id: challenge.rp.id,
-        },
+        pubKeyCredParams: challenge.pubKeyCredParams,
+        rp: challenge.rp,
         user: {
           displayName: challenge.user.displayName,
           id: Buffer.from(challenge.user.id),
           name: challenge.user.name,
         },
-        attestation: 'direct',
+        attestation: challenge.attestation,
         excludeCredentials: challenge.excludeCredentials.map((cred) => ({
           id: fromBase64Url(cred.id),
           type: cred.type,
-          transports: [],
-        })) as PublicKeyCredentialDescriptor[],
-        authenticatorSelection: challenge.authenticatorSelection as AuthenticatorSelectionCriteria,
-        timeout: 60000,
+          transports: cred.transports ?? [],
+        })),
+        authenticatorSelection: challenge.authenticatorSelection,
+        timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
       },
     }
 
     const response = await navigator.credentials.create(options)
 
     if (response === null) {
-      throw Error(`Failed to get sign WebAuthn challenge.`)
+      throw Error(`Failed to create and sign with WebAuthn credential`)
     }
 
     const credential = response as PublicKeyCredential
-    const signedChallenge = <AuthenticatorAttestationResponse>credential.response
+    const attestation = <AuthenticatorAttestationResponse>credential.response
 
     return {
       firstFactorCredential: {
-        credentialKind: CredentialKind.Fido2,
+        credentialKind: 'Fido2',
         credentialInfo: {
           credId: credential.id,
-          attestationData: toBase64Url(Buffer.from(signedChallenge.attestationObject)),
-          clientData: toBase64Url(Buffer.from(signedChallenge.clientDataJSON)),
+          attestationData: toBase64Url(Buffer.from(attestation.attestationObject)),
+          clientData: toBase64Url(Buffer.from(attestation.clientDataJSON)),
         },
       },
     }

@@ -17,7 +17,7 @@ export default function Home(): JSX.Element {
   return (
     <div>
       <div className="flex items-center gap-2">
-        <p className='text-2x'>Hello {user}</p>
+        <p className="text-2x">Hello {user}</p>
 
         <button className="btn" type="button" onClick={logout}>
           Logout
@@ -45,7 +45,9 @@ export default function Home(): JSX.Element {
         <tfoot>
           <tr>
             <td colSpan={3}>
-              <Link className="btn" to="/wallets/new">New Wallet</Link>
+              <Link className="btn" to="/wallets/new">
+                New Wallet
+              </Link>
             </td>
           </tr>
         </tfoot>

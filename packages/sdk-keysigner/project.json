@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/sdk-keysigner",
+        "clean": true,
+        "main": "packages/sdk-keysigner/index.ts",
+        "tsConfig": "packages/sdk-keysigner/tsconfig.json"
+      }
+    }
+  }
+}

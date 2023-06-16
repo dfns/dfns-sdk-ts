@@ -1,5 +1,10 @@
-import { CreateUserRegistrationInput, UserRegistrationChallenge } from 'codegen/datamodel/Auth'
-import { AllowCredential, FirstFactorAssertion, SecondFactorAssertion } from './signer'
+import {
+  FirstFactorAttestation,
+  RecoveryFactorAttestation,
+  SecondFactorAttestation,
+  UserRegistrationChallenge,
+} from './keyStore'
+import { AllowCredential, CredentialKind, FirstFactorAssertion, SecondFactorAssertion } from './signer'
 import { HttpMethod, simpleFetch } from './utils/fetch'
 
 export type DfnsBaseApiOptions = {
@@ -15,8 +20,6 @@ export type CreateUserActionChallengeRequest = {
   userActionHttpPath: string
   userActionServerKind: 'Api'
 }
-
-export type CredentialKind = 'Key' | 'Fido2' | 'Password' | 'Totp'
 
 export type CredentialFactor = 'first' | 'second' | 'either'
 
@@ -52,7 +55,7 @@ export type CreateUserLoginChallengeRequest = {
 
 export type UserLoginChallengeResponse = UserActionChallengeResponse
 
-export type SignUserLoginChallengeRequest = SignUserActionChallengeRequest
+export type CreateUserLoginRequest = SignUserActionChallengeRequest
 
 export type UserLoginResponse = {
   token: string
@@ -62,6 +65,14 @@ export type CreateUserRegistrationChallengeRequest = {
   orgId: string
   username: string
   registrationCode: string
+}
+
+export type UserRegistrationChallengeResponse = UserRegistrationChallenge
+
+export type CreateUserRegistrationRequest = {
+  firstFactorCredential: FirstFactorAttestation
+  secondFactorCredential?: SecondFactorAttestation
+  recoveryCredential?: RecoveryFactorAttestation
 }
 
 export type UserRegistrationResponse = {
@@ -117,8 +128,8 @@ export class BaseAuthApi {
     return response.json()
   }
 
-  static async signUserLoginChallenge(
-    request: SignUserLoginChallengeRequest,
+  static async createUserLogin(
+    request: CreateUserLoginRequest,
     options: DfnsBaseApiOptions
   ): Promise<UserLoginResponse> {
     const response = await simpleFetch('/auth/login', {
@@ -133,7 +144,7 @@ export class BaseAuthApi {
   static async createUserRegistrationChallenge(
     request: CreateUserRegistrationChallengeRequest,
     options: DfnsBaseApiOptions
-  ): Promise<UserRegistrationChallenge> {
+  ): Promise<UserRegistrationChallengeResponse> {
     const response = await simpleFetch('/auth/registration/init', {
       method: 'POST',
       body: request,
@@ -144,7 +155,7 @@ export class BaseAuthApi {
   }
 
   static async createUserRegistration(
-    request: CreateUserRegistrationInput,
+    request: CreateUserRegistrationRequest,
     options: DfnsBaseApiOptions
   ): Promise<UserRegistrationResponse> {
     const response = await simpleFetch('/auth/registration', {

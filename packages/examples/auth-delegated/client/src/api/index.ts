@@ -1,4 +1,4 @@
-import { WebauthnSigner } from '@dfns/sdk-webauthn-signer'
+import { WebAuthn } from '@dfns/sdk-webauthn'
 
 const asUrl = (path: string): URL => new URL(path, process.env.REACT_APP_API_URL!)
 
@@ -19,12 +19,24 @@ const post = async (path: string, body: any): Promise<any> => {
     },
     credentials: 'include',
   })
-  return res.json()
+  return res.status !== 204 ? res.json() : undefined
 }
 
 export const api = {
   async login(username: string, password: string): Promise<{ username: string }> {
     return post('/login', { username, password })
+  },
+
+  async register(username: string, password: string): Promise<{ username: string }> {
+    const challenge = await post('/register/init', { username, password })
+
+    const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+    const attestations = await webauthn.create(challenge)
+
+    return post('/register/complete', {
+      signedChallenge: attestations,
+      temporaryAuthenticationToken: challenge.temporaryAuthenticationToken,
+    })
   },
 
   async listWallets() {
@@ -37,9 +49,8 @@ export const api = {
       challenge: { challenge, challengeIdentifier, allowCredentials },
     } = await post('/wallets/new/init', { network })
 
-    const signer = new WebauthnSigner({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
-
-    const assertions = await signer.sign(challenge, allowCredentials)
+    const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+    const assertions = await webauthn.sign(challenge, allowCredentials)
 
     await post('/wallets/new/complete', { requestBody, signedChallenge: { challengeIdentifier, ...assertions } })
   },

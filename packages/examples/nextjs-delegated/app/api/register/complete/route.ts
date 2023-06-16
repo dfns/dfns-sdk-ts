@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { BaseAuthApi } from '@dfns/sdk/baseAuthApi'
-import { CreateUserRegistrationInput } from '@dfns/sdk/codegen/datamodel/Auth'
+import { BaseAuthApi, CreateUserRegistrationRequest } from '@dfns/sdk/baseAuthApi'
 import { IdentityKindCustomerFacing } from '@dfns/sdk/codegen/datamodel/Permissions'
 import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'
 import { dfns } from '../../utils'
@@ -8,7 +7,7 @@ import { dfns } from '../../utils'
 export async function POST(request: NextRequest) {
   const body = (await request.json()) as {
     tempAuthToken: string
-    signedChallenge: CreateUserRegistrationInput
+    signedChallenge: CreateUserRegistrationRequest
   }
 
   // Complete end-user registration

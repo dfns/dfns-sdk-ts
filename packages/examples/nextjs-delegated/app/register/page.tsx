@@ -1,6 +1,6 @@
 'use client'
 
-import { WebauthnSigner } from '@/../../sdk-webauthn-signer'
+import { WebAuthn } from '@dfns/sdk-webauthn'
 import { FormEvent, useState } from 'react'
 
 export default function Register() {
@@ -18,8 +18,8 @@ export default function Register() {
       .then((result) => result.json())
       .then(async (challenge) => {
         console.log('register init challenge', challenge)
-        const webauthN = new WebauthnSigner({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
-        const signedChallenge = await webauthN.createCredAndSignRegistrationChallenge(challenge)
+        const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
+        const signedChallenge = await webauthn.create(challenge)
         return fetch('./api/register/complete', {
           method: 'POST',
           body: JSON.stringify({
