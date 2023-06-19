@@ -1,7 +1,7 @@
 import * as crypto from 'crypto'
-import { FirstFactorAssertion, SecondFactorAssertion, Signer } from '@dfns/sdk/signer'
+import { CredentialSigner, KeyAssertion } from '@dfns/sdk/signer'
 
-export class AsymmetricKeySigner implements Signer {
+export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
   constructor(
     private options: {
       privateKey: string
@@ -11,7 +11,7 @@ export class AsymmetricKeySigner implements Signer {
     }
   ) {}
 
-  async sign(challenge: string): Promise<{ firstFactor: FirstFactorAssertion; secondFactor?: SecondFactorAssertion }> {
+  async sign(challenge: string): Promise<KeyAssertion> {
     const clientData = Buffer.from(
       JSON.stringify({
         type: 'key.get',
@@ -22,13 +22,11 @@ export class AsymmetricKeySigner implements Signer {
     )
 
     return {
-      firstFactor: {
-        kind: 'Key',
-        credentialAssertion: {
-          credId: this.options.credId,
-          clientData: clientData.toString('base64url'),
-          signature: crypto.sign('SHA256', clientData, this.options.privateKey).toString('base64url'),
-        },
+      kind: 'Key',
+      credentialAssertion: {
+        credId: this.options.credId,
+        clientData: clientData.toString('base64url'),
+        signature: crypto.sign('SHA256', clientData, this.options.privateKey).toString('base64url'),
       },
     }
   }

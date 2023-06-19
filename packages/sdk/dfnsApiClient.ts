@@ -8,10 +8,10 @@ import { PolicyExecutionClient } from './codegen/PolicyExecution'
 import { PolicyManagementClient } from './codegen/PolicyManagement'
 import { PublicKeysClient } from './codegen/PublicKeys'
 import { WalletsClient } from './codegen/Wallets'
-import { Signer } from './signer'
+import { CredentialSigner } from './signer'
 
 export type DfnsApiClientOptions = DfnsBaseApiOptions & {
-  signer: Signer
+  signer: CredentialSigner
 }
 
 export class DfnsApiClient {

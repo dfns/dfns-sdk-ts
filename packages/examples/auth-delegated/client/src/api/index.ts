@@ -31,10 +31,10 @@ export const api = {
     const challenge = await post('/register/init', { username, password })
 
     const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
-    const attestations = await webauthn.create(challenge)
+    const attestation = await webauthn.create(challenge)
 
     return post('/register/complete', {
-      signedChallenge: attestations,
+      signedChallenge: { firstFactorCredential: attestation },
       temporaryAuthenticationToken: challenge.temporaryAuthenticationToken,
     })
   },
@@ -50,8 +50,11 @@ export const api = {
     } = await post('/wallets/new/init', { network })
 
     const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
-    const assertions = await webauthn.sign(challenge, allowCredentials)
+    const assertion = await webauthn.sign(challenge, allowCredentials)
 
-    await post('/wallets/new/complete', { requestBody, signedChallenge: { challengeIdentifier, ...assertions } })
+    await post('/wallets/new/complete', {
+      requestBody,
+      signedChallenge: { challengeIdentifier, firstFactor: assertion },
+    })
   },
 }

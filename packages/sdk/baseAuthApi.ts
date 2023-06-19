@@ -3,7 +3,7 @@ import {
   RecoveryFactorAttestation,
   SecondFactorAttestation,
   UserRegistrationChallenge,
-} from './keyStore'
+} from './store'
 import { AllowCredential, CredentialKind, FirstFactorAssertion, SecondFactorAssertion } from './signer'
 import { HttpMethod, simpleFetch } from './utils/fetch'
 
