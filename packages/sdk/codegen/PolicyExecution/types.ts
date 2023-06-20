@@ -4,8 +4,9 @@ export type ListPolicyControlExecutionsRequest = {
   query?: { activityId: string }
 }
 
-export type ListPolicyControlExecutionsResponse =
-  PolicyExecution.PolicyControlExecution
+export type ListPolicyControlExecutionsResponse = {
+  items: PolicyExecution.PolicyControlExecution[]
+}
 
 export type GetPolicyControlExecutionByIdRequest = {
   policyControlExecutionId: string

@@ -44,7 +44,9 @@ export type GetPaymentByIdResponse = GetPaymentByIdSuccess | GetPaymentByIdError
 
 // Response for ListPayments
 
-export type ListPaymentsSuccess = Payment
+export type ListPaymentsSuccess = {
+  items: Payment[]
+}
 
 export type ListPaymentsError = {
   error:

@@ -8,7 +8,9 @@ import { PolicyControlExecution } from './types'
 
 // Response for ListPolicyControlExecutions
 
-export type ListPolicyControlExecutionsSuccess = PolicyControlExecution
+export type ListPolicyControlExecutionsSuccess = {
+  items: PolicyControlExecution[]
+}
 
 export type ListPolicyControlExecutionsError = {
   error:

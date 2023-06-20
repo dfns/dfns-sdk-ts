@@ -18,7 +18,7 @@ export type ListPaymentsRequest = {
   assetAccountId: string
 }
 
-export type ListPaymentsResponse = Assets.Payment
+export type ListPaymentsResponse = { items: Assets.Payment[] }
 
 export type CreateAssetAccountRequest = {
   body: Assets.CreateAssetAccountInput
