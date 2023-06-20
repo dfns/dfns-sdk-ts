@@ -6,13 +6,6 @@ export type CreatePolicyRequest = {
 
 export type CreatePolicyResponse = PolicyManagement.Policy
 
-export type UpdatePolicyRequest = {
-  policyId: string
-  body: PolicyManagement.UpdatePolicyInput
-}
-
-export type UpdatePolicyResponse = PolicyManagement.Policy
-
 export type GetPolicyByIdRequest = {
   policyId: string
 }
@@ -43,13 +36,6 @@ export type CreatePolicyControlRequest = {
 }
 
 export type CreatePolicyControlResponse = PolicyManagement.PolicyControl
-
-export type UpdatePolicyControlRequest = {
-  policyControlId: string
-  body: PolicyManagement.UpdatePolicyControlInput
-}
-
-export type UpdatePolicyControlResponse = PolicyManagement.PolicyControl
 
 export type GetPolicyControlByIdRequest = {
   policyControlId: string
@@ -83,13 +69,6 @@ export type CreatePolicyRuleRequest = {
 }
 
 export type CreatePolicyRuleResponse = PolicyManagement.Policy
-
-export type UpdatePolicyRuleRequest = {
-  policyRuleId: string
-  body: PolicyManagement.UpdatePolicyInput
-}
-
-export type UpdatePolicyRuleResponse = PolicyManagement.Policy
 
 export type GetPolicyRuleByIdRequest = {
   policyRuleId: string

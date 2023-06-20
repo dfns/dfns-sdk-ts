@@ -220,20 +220,4 @@ export class PermissionsClient {
 
     return response.json()
   }
-
-  async listPermissionsHistorical(
-    request: T.ListPermissionsHistoricalRequest
-  ): Promise<T.ListPermissionsHistoricalResponse> {
-    const path = buildPathAndQuery('/audit/permissions', {
-      path: {},
-      query: request.query ?? {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'GET',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
 }

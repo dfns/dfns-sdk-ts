@@ -56,51 +56,6 @@ export class DelegatedPolicyManagementClient {
     return response.json()
   }
 
-  async updatePolicyInit(
-    request: T.UpdatePolicyRequest
-  ): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/policies/:policyId', {
-      path: { policyId: request.policyId },
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async updatePolicyComplete(
-    request: T.UpdatePolicyRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.UpdatePolicyResponse> {
-    const path = buildPathAndQuery('/policies/:policyId', {
-      path: { policyId: request.policyId },
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'PUT',
-      body: request.body,
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async getPolicyById(
     request: T.GetPolicyByIdRequest
   ): Promise<T.GetPolicyByIdResponse> {
@@ -215,57 +170,6 @@ export class DelegatedPolicyManagementClient {
 
     const response = await simpleFetch(path, {
       method: 'POST',
-      body: request.body,
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updatePolicyControlInit(
-    request: T.UpdatePolicyControlRequest
-  ): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery(
-      '/policies/policy-controls/:policyControlId',
-      {
-        path: { policyControlId: request.policyControlId },
-        query: {},
-      }
-    )
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async updatePolicyControlComplete(
-    request: T.UpdatePolicyControlRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.UpdatePolicyControlResponse> {
-    const path = buildPathAndQuery(
-      '/policies/policy-controls/:policyControlId',
-      {
-        path: { policyControlId: request.policyControlId },
-        query: {},
-      }
-    )
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'PUT',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
@@ -397,51 +301,6 @@ export class DelegatedPolicyManagementClient {
 
     const response = await simpleFetch(path, {
       method: 'POST',
-      body: request.body,
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updatePolicyRuleInit(
-    request: T.UpdatePolicyRuleRequest
-  ): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/policies/policy-rules/:policyRuleId', {
-      path: { policyRuleId: request.policyRuleId },
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async updatePolicyRuleComplete(
-    request: T.UpdatePolicyRuleRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.UpdatePolicyRuleResponse> {
-    const path = buildPathAndQuery('/policies/policy-rules/:policyRuleId', {
-      path: { policyRuleId: request.policyRuleId },
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'PUT',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,

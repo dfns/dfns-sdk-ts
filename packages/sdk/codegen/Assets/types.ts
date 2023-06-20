@@ -38,12 +38,6 @@ export type ListAssetAccountsRequest = {
 
 export type ListAssetAccountsResponse = { items: Assets.AssetAccount[] }
 
-export type ArchiveAssetAccountRequest = {
-  assetAccountId: string
-}
-
-export type ArchiveAssetAccountResponse = Assets.AssetAccount
-
 export type GetAssetAccountBalanceByIdRequest = {
   assetAccountId: string
 }

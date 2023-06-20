@@ -7,9 +7,3 @@ export type GetEmployeeByIdRequest = {
 export type GetEmployeeByIdResponse = Orgs.OrgEmployee
 
 export type ListEmployeesResponse = { items: Orgs.OrgEmployee[] }
-
-export type CreateOrgResponse = Orgs.Org
-
-export type ListOrgsResponse = { items: Orgs.Org[] }
-
-export type ListPackageVersionsResponse = { items: Orgs.Org[] }

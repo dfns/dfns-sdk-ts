@@ -180,51 +180,6 @@ export class DelegatedAssetsClient {
     return response.json()
   }
 
-  async archiveAssetAccountInit(
-    request: T.ArchiveAssetAccountRequest
-  ): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/assets/asset-accounts/:assetAccountId', {
-      path: { assetAccountId: request.assetAccountId },
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async archiveAssetAccountComplete(
-    request: T.ArchiveAssetAccountRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ArchiveAssetAccountResponse> {
-    const path = buildPathAndQuery('/assets/asset-accounts/:assetAccountId', {
-      path: { assetAccountId: request.assetAccountId },
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async getAssetAccountBalanceById(
     request: T.GetAssetAccountBalanceByIdRequest
   ): Promise<T.GetAssetAccountBalanceByIdResponse> {

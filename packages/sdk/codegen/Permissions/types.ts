@@ -84,11 +84,3 @@ export type ListPermissionAssignmentsRequest = {
 export type ListPermissionAssignmentsResponse = {
   items: Permissions.PermissionAssignment[]
 }
-
-export type ListPermissionsHistoricalRequest = {
-  query?: { permissionName?: string }
-}
-
-export type ListPermissionsHistoricalResponse = {
-  items: Permissions.Permission[]
-}

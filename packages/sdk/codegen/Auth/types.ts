@@ -164,62 +164,6 @@ export type DeactivateServiceAccountRequest = {
 
 export type DeactivateServiceAccountResponse = Auth.UserAccessTokenInformation
 
-export type ListServiceAccountTokensRequest = {
-  serviceAccountId: Foundations.EntityId
-}
-
-export type ListServiceAccountTokensResponse = {
-  items: Auth.AccessTokenInfoWithPublicKey[]
-}
-
-export type CreateServiceAccountTokenRequest = {
-  serviceAccountId: Foundations.EntityId
-  body: Auth.CreateAccessTokenInput
-}
-
-export type CreateServiceAccountTokenResponse =
-  Auth.AccessTokenInfoWithPublicKey
-
-export type GetServiceAccountTokenRequest = {
-  serviceAccountId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-}
-
-export type GetServiceAccountTokenResponse = Auth.AccessTokenInfoWithPublicKey
-
-export type UpdateServiceAccountTokenRequest = {
-  serviceAccountId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-  body: Auth.UpdateAccessTokenInput
-}
-
-export type UpdateServiceAccountTokenResponse =
-  Auth.AccessTokenInfoWithPublicKey
-
-export type ArchiveServiceAccountTokenRequest = {
-  serviceAccountId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-}
-
-export type ArchiveServiceAccountTokenResponse =
-  Auth.AccessTokenInfoWithPublicKey
-
-export type ActivateServiceAccountTokenRequest = {
-  serviceAccountId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-}
-
-export type ActivateServiceAccountTokenResponse =
-  Auth.AccessTokenInfoWithPublicKey
-
-export type DeactivateServiceAccountTokenRequest = {
-  serviceAccountId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-}
-
-export type DeactivateServiceAccountTokenResponse =
-  Auth.AccessTokenInfoWithPublicKey
-
 export type ListUsersResponse = { items: Auth.UserInfo[] }
 
 export type CreateUserRequest = {
@@ -297,58 +241,6 @@ export type DeactivateApplicationRequest = {
 }
 
 export type DeactivateApplicationResponse = Auth.AppInfoWithPublicKey
-
-export type ListApplicationTokensRequest = {
-  appId: Foundations.EntityId
-}
-
-export type ListApplicationTokensResponse = {
-  items: Auth.AccessTokenInfoWithPublicKey[]
-}
-
-export type CreateApplicationTokenRequest = {
-  appId: Foundations.EntityId
-  body: Auth.CreateAccessTokenInput
-}
-
-export type CreateApplicationTokenResponse = Auth.AccessTokenInfoWithPublicKey
-
-export type GetApplicationTokenRequest = {
-  appId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-}
-
-export type GetApplicationTokenResponse = Auth.AccessTokenInfoWithPublicKey
-
-export type UpdateApplicationTokenRequest = {
-  appId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-  body: Auth.UpdateAccessTokenInput
-}
-
-export type UpdateApplicationTokenResponse = Auth.AccessTokenInfoWithPublicKey
-
-export type ArchiveApplicationTokenRequest = {
-  appId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-}
-
-export type ArchiveApplicationTokenResponse = Auth.AccessTokenInfoWithPublicKey
-
-export type ActivateApplicationTokenRequest = {
-  appId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-}
-
-export type ActivateApplicationTokenResponse = Auth.AccessTokenInfoWithPublicKey
-
-export type DeactivateApplicationTokenRequest = {
-  appId: Foundations.EntityId
-  tokenId: Foundations.EntityId
-}
-
-export type DeactivateApplicationTokenResponse =
-  Auth.AccessTokenInfoWithPublicKey
 
 export type CreateUserRecoveryRequest = {
   body: Auth.CreateUserLoginChallengeInput

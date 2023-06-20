@@ -35,46 +35,4 @@ export class DelegatedOrgsClient {
 
     return response.json()
   }
-
-  async createOrg(): Promise<T.CreateOrgResponse> {
-    const path = buildPathAndQuery('/staff/orgs', {
-      path: {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async listOrgs(): Promise<T.ListOrgsResponse> {
-    const path = buildPathAndQuery('/staff/orgs', {
-      path: {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'GET',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async listPackageVersions(): Promise<T.ListPackageVersionsResponse> {
-    const path = buildPathAndQuery('/staff/orgs', {
-      path: {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'GET',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
 }

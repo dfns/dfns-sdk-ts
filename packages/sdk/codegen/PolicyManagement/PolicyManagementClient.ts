@@ -23,23 +23,6 @@ export class PolicyManagementClient {
     return response.json()
   }
 
-  async updatePolicy(
-    request: T.UpdatePolicyRequest
-  ): Promise<T.UpdatePolicyResponse> {
-    const path = buildPathAndQuery('/policies/:policyId', {
-      path: { policyId: request.policyId },
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'PUT',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async getPolicyById(
     request: T.GetPolicyByIdRequest
   ): Promise<T.GetPolicyByIdResponse> {
@@ -98,26 +81,6 @@ export class PolicyManagementClient {
 
     const response = await userActionFetch(path, {
       method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updatePolicyControl(
-    request: T.UpdatePolicyControlRequest
-  ): Promise<T.UpdatePolicyControlResponse> {
-    const path = buildPathAndQuery(
-      '/policies/policy-controls/:policyControlId',
-      {
-        path: { policyControlId: request.policyControlId },
-        query: {},
-      }
-    )
-
-    const response = await userActionFetch(path, {
-      method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
     })
@@ -189,23 +152,6 @@ export class PolicyManagementClient {
 
     const response = await userActionFetch(path, {
       method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updatePolicyRule(
-    request: T.UpdatePolicyRuleRequest
-  ): Promise<T.UpdatePolicyRuleResponse> {
-    const path = buildPathAndQuery('/policies/policy-rules/:policyRuleId', {
-      path: { policyRuleId: request.policyRuleId },
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
     })

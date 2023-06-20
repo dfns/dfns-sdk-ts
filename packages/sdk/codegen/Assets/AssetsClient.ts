@@ -116,22 +116,6 @@ export class AssetsClient {
     return response.json()
   }
 
-  async archiveAssetAccount(
-    request: T.ArchiveAssetAccountRequest
-  ): Promise<T.ArchiveAssetAccountResponse> {
-    const path = buildPathAndQuery('/assets/asset-accounts/:assetAccountId', {
-      path: { assetAccountId: request.assetAccountId },
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async getAssetAccountBalanceById(
     request: T.GetAssetAccountBalanceByIdRequest
   ): Promise<T.GetAssetAccountBalanceByIdResponse> {
