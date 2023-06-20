@@ -17,24 +17,29 @@ The end user will sign the action from the web-app, using his WebauthN credentia
 
 For this example to work, you need to complete a few prerequisites:
 
-- On Dfns Dashboard, create a new Dfns Application:
+1. On Dfns Dashboard, create a new Dfns Application:
   - type: Client Side
   - Relying Party: localhost
   - Origin: http://localhost:3000
-- On Dfns Dashboard, create a new Service Account (check [Dfns docs](https://app.gitbook.com/o/puStYG2QYnebEAexXqmt/s/oMvt8zMQg1BzesvBRNB4/advanced-topics/authentication/credentials/access-token-credentials) to see how to generate a public/private keypair)
-- Copy/paste the .env.example into a .env.local, and replace all your env variable values
+2. On Dfns Dashboard, create a new Service Account (check [Dfns docs](https://app.gitbook.com/o/puStYG2QYnebEAexXqmt/s/oMvt8zMQg1BzesvBRNB4/advanced-topics/authentication/credentials/access-token-credentials) to see how to generate a public/private keypair)
+3. Copy/paste the `.env.example` into a `.env.local`, and replace with your environment variables values
 
 ## Run Example
 
+At the root of the typescript-sdk repository (npm workspace), run:
+```bash
+npm i
+```
 
-Run the development server:
+Then go into this example and install as well:
+```bash
+cd packages/examples/nextjs-delegated
+npm i
+```
 
+Then run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result, and follow the tutorial.
@@ -42,3 +47,104 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Flow
 
 ![Sequence Diagram Dfns SDK Server Side Configuration](../../../images/Dfns_Delegated_Signing_Configuration.png)
+
+## Server side
+
+Build Dfns client:
+
+```ts
+// instanciate a key signer
+const signer = new AsymmetricKeySigner({
+  appOrigin: process.env.DFNS_APPLICATION_ORIGIN!,
+  credId: process.env.DFNS_SERVICE_ACCOUNT_CREDENTIAL_ID!,
+  privateKey: process.env.DFNS_SERVICE_ACCOUNT_PRIVATE_KEY!.replace(/\\n/g, '\n'),
+})
+
+// instanciate a dfns api client
+const dfns = new DfnsApiClient({
+  appId: process.env.DFNS_APPLICATION_ID!,
+  baseUrl: process.env.DFNS_API_BASE_URL!,
+  accessToken: process.env.DFNS_SERVICE_ACCOUNT_TOKEN!,
+  signer,
+})
+```
+
+Delegated Login:
+
+```ts
+// call delegated login to get the user auth token
+const { token: endUserAuthToken } = await dfns.auth.createDelegatedUserLogin({
+  body: { username: body.email },
+})
+```
+
+Wallet creation initiation (wallet owned by end user):
+
+```ts
+// instanciate a "delegated" dfns client
+const dfnsDelegated = new DfnsDelegatedApiClient({
+    appId: process.env.DFNS_APPLICATION_ID!,
+    baseUrl: process.env.DFNS_API_BASE_URL!,
+    accessToken: endUserAuthToken,
+  })
+
+// call wallet creation initiation
+const challenge = await dfnsDelegated.wallets.createWalletInit({
+  body: { network: BlockchainNetwork.ETH_GOERLI },
+})
+
+// send this challenge to be signed by the enduser (client-side).
+// ...
+```
+
+Complete Wallet creation:
+
+```ts
+const body = (await request.json()) as {
+  request: CreateWalletRequest
+  challenge: UserActionChallengeResponse
+  signedChallenge: SignUserActionChallengeRequest
+}
+
+// ...
+
+// complete wallet creation
+const wallet = await dfnsDelegated.wallets.createWalletComplete(body.request, body.signedChallenge)
+```
+
+
+Get end user wallets:
+
+```ts
+const { items: wallets } = await dfnsDelegated.wallets.listWallets({})
+```
+
+## Client side
+
+Here's the client-side code for the wallet creation:
+
+```ts
+import { WebAuthn } from '@dfns/sdk-webauthn'
+
+const createWallet = () =>
+  // 1. Call server-side wallet creation initiation,
+  fetch('/api/wallets/create/init', { method: 'POST' }).then(async (result) => {
+    const { request, challenge } = await result.json()
+
+    // 2. Then sign the returned challenge with WebauthN credentials
+    const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
+    const assertion = await webauthn.sign(challenge.challenge, challenge.allowCredentials)
+
+    // 3. Call server-side wallet creation completion with signed challenge
+    return fetch('/api/wallets/create/complete', {
+      method: 'POST',
+      body: JSON.stringify({
+        request,
+        signedChallenge: {
+          challengeIdentifier: challenge.challengeIdentifier,
+          firstFactor: assertion
+        },
+      }),
+    })
+  })
+```
