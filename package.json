@@ -1,13 +1,12 @@
 {
   "name": "package-based",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "license": "MIT",
   "scripts": {
     "cb:all": "rimraf dist && nx run-many -t=cb",
-    "version:all": "npm version --no-git-tag-version --workspace @dfns/sdk --workspace @dfns/sdk-key-signer --workspace @dfns/sdk-webauthn-signer --include-workspace-root",
-    "publish:all": "./bin/publish.sh"
+    "version:all": "npm version --no-git-tag-version --workspace @dfns/sdk --workspace @dfns/sdk-keysigner --workspace @dfns/sdk-webauthn --include-workspace-root",
+    "publish:all": "npm run cb:all && ./bin/publish.sh"
   },
-  "private": true,
   "dependencies": {
     "buffer": "^6.0.3",
     "cross-fetch": "^3.1.6",

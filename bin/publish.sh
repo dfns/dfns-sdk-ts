@@ -4,8 +4,8 @@ set -euo pipefail
 
 declare -a packages=(
     "@dfns/sdk"
-    "@dfns/sdk-key-signer"
-    "@dfns/sdk-webauthn-signer"
+    "@dfns/sdk-keysigner"
+    "@dfns/sdk-webauthn"
 )
 
 echo "Will deploy these built versions:"
