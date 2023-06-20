@@ -1417,6 +1417,8 @@ export enum AssetSymbol {
   ARB = 'ARB',
   //AirDAO native currency
   AMB = 'AMB',
+  //Caduceus native currency
+  CMP = 'CMP',
   //Lite Coin native currency
   LTC = 'LTC',
   //Kusama – Polkadot’s Canary network
@@ -20215,6 +20217,10 @@ export const ASSET_SYMBOL_DATA: Record<AssetSymbol, AssetSymbolMetadata> = {
   },
   [AssetSymbol['AMB']]: {
     label: `AirDAO`,
+    smallestUnitDecimal: 18,
+  },
+  [AssetSymbol['CMP']]: {
+    label: `CMP`,
     smallestUnitDecimal: 18,
   },
   [AssetSymbol['LTC']]: {
@@ -57753,6 +57759,8 @@ export enum BlockchainNetwork {
   EGLD = 'EGLD',
   //AirDAO
   AMB = 'AMB',
+  //Caduceus
+  CMP = 'CMP',
 }
 
 export type BlockchainNetworkMetadata = {
@@ -57902,6 +57910,10 @@ export const BLOCKCHAIN_NETWORK_DATA: Record<
   },
   [BlockchainNetwork['AMB']]: {
     label: `AirDAO`,
+    smallestUnitDecimal: 18,
+  },
+  [BlockchainNetwork['CMP']]: {
+    label: `Caduceus`,
     smallestUnitDecimal: 18,
   },
 }

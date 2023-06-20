@@ -1,4 +1,9 @@
-import { Amount, BlockchainAddress, IsoDatetime } from '../Foundations'
+import {
+  Amount,
+  BlockchainAddress,
+  IntegerPositiveStrict,
+  IsoDatetime,
+} from '../Foundations'
 
 // FIXME: Missing documentation for BtcBlock
 export type BtcBlock = {
@@ -205,6 +210,45 @@ export type EvmUntypedLog = {
 
   // FIXME: Missing documentation for data
   data: string
+}
+
+// FIXME: Missing documentation for EvmFeeEstimates
+export type EvmFeeEstimates = {
+  // FIXME: Missing documentation for safeLow
+  safeLow: Eip1559Fee
+
+  // FIXME: Missing documentation for standard
+  standard: Eip1559Fee
+
+  // FIXME: Missing documentation for fast
+  fast: Eip1559Fee
+
+  // FIXME: Missing documentation for estimatedBaseFee
+  estimatedBaseFee: string
+
+  // FIXME: Missing documentation for blockNumber
+  blockNumber: IntegerPositiveStrict
+
+  // FIXME: Missing documentation for kind
+  kind: FeeEstimationKind
+}
+
+// FIXME: Missing documentation for Eip1559Fee
+export type Eip1559Fee = {
+  // FIXME: Missing documentation for maxPriorityFee
+  maxPriorityFee: string
+
+  // FIXME: Missing documentation for maxFee
+  maxFee: string
+}
+
+// FIXME: Missing documentation for EvmCallReadFunction
+export type EvmCallReadFunction = {
+  // FIXME: Missing documentation for data
+  data: string
+
+  // FIXME: Missing documentation for contract
+  contract: string
 }
 
 // FIXME: Missing documentation for TrxBlock
@@ -631,4 +675,12 @@ export enum SolInstructionKind {
   SystemTransfer = 'SystemTransfer',
   // FIXME: Missing documentation for TokenTransfer
   TokenTransfer = 'TokenTransfer',
+}
+
+// FIXME: Missing documentation for FeeEstimationKind
+export enum FeeEstimationKind {
+  // FIXME: Missing documentation for Eip1559
+  Eip1559 = 'Eip1559',
+  // FIXME: Missing documentation for EthLegacy
+  EthLegacy = 'EthLegacy',
 }
