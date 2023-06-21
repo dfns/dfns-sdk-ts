@@ -56,7 +56,7 @@ export type ListTransactionsResponse = {
 }
 
 export type CreateTransactionRequest = {
-  body: PublicKeys.CreateWalletTxInput
+  body: PublicKeys.TransactionPayload
 }
 
 export type CreateTransactionResponse = PublicKeys.BroadcastedTransaction

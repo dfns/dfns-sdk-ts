@@ -496,12 +496,7 @@ export type StartWalletConnectSessionInput = {
 }
 
 // FIXME: Missing documentation for TransactionPayload
-export type TransactionPayload =
-  | EvmGenericTx
-  | CosmosIbcTransferTx
-  | SolanaTx
-  | TronTx
-  | TezosTx
+export type TransactionPayload = EvmGenericTx | SolanaTx
 
 // FIXME: Missing documentation for PublicKeyStatus
 export enum PublicKeyStatus {
