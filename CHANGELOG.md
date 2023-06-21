@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-alpha.6 (2023-06-21)
+
+* Expose Blockchains client methods
+* Fix input type of public key create transaction method
+
 ## 0.1.0-alpha.5 (2023-06-21)
 
 * Remove some deprecated endpoints
