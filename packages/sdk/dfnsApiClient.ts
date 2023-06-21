@@ -1,5 +1,4 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
-import { ApiKeysClient } from './codegen/ApiKeys'
 import { AssetsClient } from './codegen/Assets'
 import { AuthClient } from './codegen/Auth'
 import { CallbacksClient } from './codegen/Callbacks'
@@ -16,10 +15,6 @@ export type DfnsApiClientOptions = DfnsBaseApiOptions & {
 
 export class DfnsApiClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
-
-  public get apiKeys() {
-    return new ApiKeysClient(this.apiOptions)
-  }
 
   public get assets() {
     return new AssetsClient(this.apiOptions)

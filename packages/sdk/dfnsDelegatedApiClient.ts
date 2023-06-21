@@ -1,5 +1,4 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
-import { DelegatedApiKeysClient } from './codegen/ApiKeys'
 import { DelegatedAssetsClient } from './codegen/Assets'
 import { DelegatedCallbacksClient } from './codegen/Callbacks'
 import { DelegatedPermissionsClient } from './codegen/Permissions'
@@ -14,10 +13,6 @@ export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions & {
 
 export class DfnsDelegatedApiClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
-
-  public get apiKeys() {
-    return new DelegatedApiKeysClient(this.apiOptions)
-  }
 
   public get assets() {
     return new DelegatedAssetsClient(this.apiOptions)
