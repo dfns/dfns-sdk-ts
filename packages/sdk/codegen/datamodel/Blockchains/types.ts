@@ -242,13 +242,19 @@ export type Eip1559Fee = {
   maxFee: string
 }
 
-// FIXME: Missing documentation for EvmCallReadFunction
-export type EvmCallReadFunction = {
+// FIXME: Missing documentation for CallViewFunctionInput
+export type CallViewFunctionInput = {
   // FIXME: Missing documentation for data
   data: string
 
   // FIXME: Missing documentation for contract
   contract: string
+}
+
+// FIXME: Missing documentation for CallViewFunctionResult
+export type CallViewFunctionResult = {
+  // FIXME: Missing documentation for data
+  data: string
 }
 
 // FIXME: Missing documentation for TrxBlock

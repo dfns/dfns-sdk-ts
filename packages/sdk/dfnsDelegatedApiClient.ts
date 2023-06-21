@@ -1,5 +1,6 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { DelegatedAssetsClient } from './codegen/Assets'
+import { DelegatedBlockchainsClient } from './codegen/Blockchains'
 import { DelegatedCallbacksClient } from './codegen/Callbacks'
 import { DelegatedPermissionsClient } from './codegen/Permissions'
 import { DelegatedPolicyExecutionClient } from './codegen/PolicyExecution'
@@ -16,6 +17,10 @@ export class DfnsDelegatedApiClient {
 
   public get assets() {
     return new DelegatedAssetsClient(this.apiOptions)
+  }
+
+  public get blockchains() {
+    return new DelegatedBlockchainsClient(this.apiOptions)
   }
 
   public get callbacks() {

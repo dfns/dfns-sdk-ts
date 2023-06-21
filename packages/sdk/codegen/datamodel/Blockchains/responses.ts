@@ -4,8 +4,7 @@ import {
   ForbiddenError,
   UnauthorizedError,
 } from '../Foundations'
-import { BroadcastedTransaction } from '../PublicKeys'
-import { EvmFeeEstimates } from './types'
+import { CallViewFunctionResult, EvmFeeEstimates } from './types'
 
 // Response for EvmBlockchainFee
 
@@ -23,11 +22,11 @@ export type EvmBlockchainFeeResponse =
   | EvmBlockchainFeeSuccess
   | EvmBlockchainFeeError
 
-// Response for CallReadFunction
+// Response for CallViewFunction
 
-export type CallReadFunctionSuccess = BroadcastedTransaction
+export type CallViewFunctionSuccess = CallViewFunctionResult
 
-export type CallReadFunctionError = {
+export type CallViewFunctionError = {
   error:
     | EntityNotFoundError
     | BadRequestError
@@ -37,6 +36,6 @@ export type CallReadFunctionError = {
     | EntityNotFoundError
 }
 
-export type CallReadFunctionResponse =
-  | CallReadFunctionSuccess
-  | CallReadFunctionError
+export type CallViewFunctionResponse =
+  | CallViewFunctionSuccess
+  | CallViewFunctionError
