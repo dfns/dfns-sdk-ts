@@ -12,17 +12,6 @@ export type GetPolicyByIdRequest = {
 
 export type GetPolicyByIdResponse = PolicyManagement.Policy
 
-export type ListPoliciesRequest = {
-  query?: {
-    dateCreated?: string
-    dateUpdated?: string
-    activityKind?: PolicyManagement.PolicyActivityKind
-    isEnabled?: boolean
-    isDisabled?: boolean
-    isArchived?: boolean
-  }
-}
-
 export type ListPoliciesResponse = { items: PolicyManagement.Policy[] }
 
 export type ArchivePolicyRequest = {
@@ -43,17 +32,6 @@ export type GetPolicyControlByIdRequest = {
 
 export type GetPolicyControlByIdResponse = PolicyManagement.PolicyControl
 
-export type ListPolicyControlsRequest = {
-  query?: {
-    dateCreated?: string
-    dateUpdated?: string
-    policyControlKind?: PolicyManagement.PolicyControlKind
-    isEnabled?: boolean
-    isDisabled?: boolean
-    isArchived?: boolean
-  }
-}
-
 export type ListPolicyControlsResponse = {
   items: PolicyManagement.PolicyControl[]
 }
@@ -65,32 +43,25 @@ export type ArchivePolicyControlRequest = {
 export type ArchivePolicyControlResponse = PolicyManagement.PolicyControl
 
 export type CreatePolicyRuleRequest = {
-  body: PolicyManagement.CreatePolicyInput
+  body: PolicyManagement.CreatePolicyRuleInput
 }
 
-export type CreatePolicyRuleResponse = PolicyManagement.Policy
+export type CreatePolicyRuleResponse = PolicyManagement.PolicyRule
 
 export type GetPolicyRuleByIdRequest = {
   policyRuleId: string
 }
 
-export type GetPolicyRuleByIdResponse = PolicyManagement.Policy
+export type GetPolicyRuleByIdResponse = PolicyManagement.PolicyRule
 
 export type ListPolicyRulesRequest = {
-  query?: {
-    dateCreated?: string
-    dateUpdated?: string
-    activityKind?: PolicyManagement.PolicyActivityKind
-    isEnabled?: boolean
-    isDisabled?: boolean
-    isArchived?: boolean
-  }
+  query?: { author?: string }
 }
 
-export type ListPolicyRulesResponse = { items: PolicyManagement.Policy[] }
+export type ListPolicyRulesResponse = { items: PolicyManagement.PolicyRule[] }
 
 export type ArchivePolicyRuleRequest = {
   policyRuleId: string
 }
 
-export type ArchivePolicyRuleResponse = PolicyManagement.Policy
+export type ArchivePolicyRuleResponse = PolicyManagement.PolicyRule

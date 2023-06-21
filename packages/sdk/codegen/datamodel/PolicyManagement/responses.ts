@@ -4,7 +4,7 @@ import {
   ForbiddenError,
   UnauthorizedError,
 } from '../Foundations'
-import { Policy, PolicyControl } from './types'
+import { Policy, PolicyControl, PolicyRule } from './types'
 
 // Response for CreatePolicy
 
@@ -172,7 +172,7 @@ export type ArchivePolicyControlResponse =
 
 // Response for CreatePolicyRule
 
-export type CreatePolicyRuleSuccess = Policy
+export type CreatePolicyRuleSuccess = PolicyRule
 
 export type CreatePolicyRuleError = {
   error:
@@ -189,12 +189,10 @@ export type CreatePolicyRuleResponse =
 
 // Response for UpdatePolicyRule
 
-export type UpdatePolicyRuleSuccess = Policy
+export type UpdatePolicyRuleSuccess = PolicyRule
 
 export type UpdatePolicyRuleError = {
   error:
-    | BadRequestError
-    | EntityNotFoundError
     | UnauthorizedError
     | ForbiddenError
     | BadRequestError
@@ -207,11 +205,10 @@ export type UpdatePolicyRuleResponse =
 
 // Response for GetPolicyRuleById
 
-export type GetPolicyRuleByIdSuccess = Policy
+export type GetPolicyRuleByIdSuccess = PolicyRule
 
 export type GetPolicyRuleByIdError = {
   error:
-    | EntityNotFoundError
     | UnauthorizedError
     | ForbiddenError
     | BadRequestError
@@ -225,7 +222,7 @@ export type GetPolicyRuleByIdResponse =
 // Response for ListPolicyRules
 
 export type ListPolicyRulesSuccess = {
-  items: Policy[]
+  items: PolicyRule[]
 }
 
 export type ListPolicyRulesError = {
@@ -242,7 +239,7 @@ export type ListPolicyRulesResponse =
 
 // Response for ArchivePolicyRule
 
-export type ArchivePolicyRuleSuccess = Policy
+export type ArchivePolicyRuleSuccess = PolicyRule
 
 export type ArchivePolicyRuleError = {
   error:

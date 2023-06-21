@@ -72,12 +72,10 @@ export class DelegatedPolicyManagementClient {
     return response.json()
   }
 
-  async listPolicies(
-    request: T.ListPoliciesRequest
-  ): Promise<T.ListPoliciesResponse> {
+  async listPolicies(): Promise<T.ListPoliciesResponse> {
     const path = buildPathAndQuery('/policies', {
       path: {},
-      query: request.query ?? {},
+      query: {},
     })
 
     const response = await simpleFetch(path, {
@@ -197,12 +195,10 @@ export class DelegatedPolicyManagementClient {
     return response.json()
   }
 
-  async listPolicyControls(
-    request: T.ListPolicyControlsRequest
-  ): Promise<T.ListPolicyControlsResponse> {
+  async listPolicyControls(): Promise<T.ListPolicyControlsResponse> {
     const path = buildPathAndQuery('/policies/policy-controls', {
       path: {},
-      query: request.query ?? {},
+      query: {},
     })
 
     const response = await simpleFetch(path, {
