@@ -27,16 +27,10 @@ All state-changing requests made to Dfns API need to be cryptographically signed
 > **Note** 
 > To be more precise, it's not the request itself which needs to be signed, but actually it's the "User Action Challenge" issued by Dfns which needs to be signed. This signature as a cryptographic proof that you are making the request. So as a shortcut, you can see this as "signing the request"
 
-Credentials can be one of two kinds (*check our docs [Credential section](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details*):
-- WebauthN Credentials
-- Key credentials
+Credentials can be one of two kinds (*check our API docs [Credential section](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details*): WebauthN Credentials or Key Credentials. The two classes below bupport each types, their responsibility is to handle signing of a challenge:
 
-For those, the two helper classes below exist. Their responsibility is to handle the signing mentionned above:
-
-- `WebauthN`
-  - Exposed in `@dfns/sdk-webauthn` package
-  - Implements `CredentialSigner`
-  - Needs to be used client-side (on a browser, in a web-app)
+#### `WebauthN`
+It is exposed in `@dfns/sdk-webauthn` package, and implements `CredentialSigner`. It **needs to be used client-side** (on a browser, in a web-app)
 
 ```ts
 import { WebAuthn } from '@dfns/sdk-webauthn'
@@ -46,10 +40,8 @@ const webauthnSigner = new WebAuthn({
 })
 ```
 
-- `AsymmetricKeySigner`
-  - Exposed in `@dfns/sdk-keysigner` package
-  - Implements `CredentialSigner`
-  - Needs to be used server-side. It could be used client-side, but we don't recommend it. On a browser, any key-based crypto signing should be handled in a service worker. We are working to add other helper classes to help you support that.
+#### `AsymmetricKeySigner`
+It is exposed in `@dfns/sdk-keysigner` package, implements `CredentialSigner`. It **needs to be used server-side**. It could be used client-side, but we don't recommend it. On a browser, any key-based crypto signing should be handled in a service worker. We are working to add other helper classes to help you support that.
 
 
 ```ts
