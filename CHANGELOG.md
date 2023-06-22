@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0-alpha.7 (2023-06-22)
+
+* Remove the blockchain fees endpoint
+
 ## 0.1.0-alpha.6 (2023-06-21)
 
 * Expose Blockchains client methods
