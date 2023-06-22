@@ -89,6 +89,9 @@ export type UserRegistrationResponse = {
 }
 
 export class BaseAuthApi {
+  /**
+   * Creates a user action challenge
+   */
   static async createUserActionChallenge(
     request: CreateUserActionChallengeRequest,
     options: DfnsBaseApiOptions
@@ -102,6 +105,9 @@ export class BaseAuthApi {
     return response.json()
   }
 
+  /**
+   * Sign a user action challenge
+   */
   static async signUserActionChallenge(
     request: SignUserActionChallengeRequest,
     options: DfnsBaseApiOptions
@@ -115,6 +121,9 @@ export class BaseAuthApi {
     return response.json()
   }
 
+  /**
+   * Initiates user login, by creating a challenge that will need to be signed by the user Credentials.
+   */
   static async createUserLoginChallenge(
     request: CreateUserLoginChallengeRequest,
     options: DfnsBaseApiOptions
@@ -128,6 +137,9 @@ export class BaseAuthApi {
     return response.json()
   }
 
+  /**
+   * Completes user login by sending the signed login challenge.
+   */
   static async createUserLogin(
     request: CreateUserLoginRequest,
     options: DfnsBaseApiOptions
@@ -141,6 +153,9 @@ export class BaseAuthApi {
     return response.json()
   }
 
+  /**
+   * Initiates Registration by creating a challenge that will need to be signed by a new set of Credentials.
+   */
   static async createUserRegistrationChallenge(
     request: CreateUserRegistrationChallengeRequest,
     options: DfnsBaseApiOptions
@@ -154,6 +169,9 @@ export class BaseAuthApi {
     return response.json()
   }
 
+  /**
+   * Completes Registration by sending the signed registration challenge, containing the new Credential identity created.
+   */
   static async createUserRegistration(
     request: CreateUserRegistrationRequest,
     options: DfnsBaseApiOptions
