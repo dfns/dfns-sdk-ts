@@ -2,17 +2,12 @@
 
 > ⚠️ **This SDK is in alpha**. It may be unstable and have breaking evolutions.
 
-Welcome, builders 👋
-
-This repo holds the Typescript SDK for [Dfns API](https://www.dfns.co/). Useful links:
-
-* [Dfns Website](https://www.dfns.co/)
-* [Dfns API Docs](https://dfns.gitbook.io/dfns-docs/)
+Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Check [Dfns Website](https://www.dfns.co) or [Dfns API Docs](https://docs.dfns.co) for more info about Dfns (pronounced "Defense").
 
 
 ## Examples
 
-For examples containing code + some docs, check-out these:
+For examples containing code + some docs, these examples illustrate different setups of the SDK:
 
 * [Service account](./packages/examples/service-account/)
 * [Delegated registration and login with NextJS](./packages/examples/nextjs-delegated/)
@@ -25,9 +20,11 @@ For examples containing code + some docs, check-out these:
 All state-changing requests made to Dfns API need to be cryptographically signed by some Credentials registered with the User / Service Account.
 
 > **Note** 
-> To be more precise, it's not the request itself which needs to be signed, but actually it's the "User Action Challenge" issued by Dfns which needs to be signed. This signature as a cryptographic proof that you are making the request. So as a shortcut, you can see this as "signing the request"
+> To be more precise, it's not the request itself which needs to be signed, but it's actually a "User Action Challenge" issued by Dfns which needs to be signed. As a simplification, we speak of "request signing"
 
-Credentials can be one of two kinds (*check our API docs [Credential section](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details*): WebauthN Credentials or Key Credentials. The two classes below bupport each types, their responsibility is to handle signing of a challenge:
+This request signature is a cryptographic proof that you and only you are making the request. Without it, the request would raise an Unauthorized error.
+
+Credentials can be one of two kinds (*check our API docs [Credential section](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details*): WebauthN Credentials or Key Credentials. The two classes below support each one, their responsibility is to sign a challenge:
 
 #### `WebauthN`
 It is exposed in `@dfns/sdk-webauthn` package, and implements `CredentialSigner`. It **needs to be used client-side** (on a browser, in a web-app)
@@ -59,13 +56,13 @@ const keySigner = new AsymmetricKeySigner({
 
 `DfnsApiClient` is the main Dfns client, holding most supported functionalities of Dfns API.
 
-It needs to be authenticated, so `DfnsApiClient` needs to be passed a valid `authToken` during instanciation. This `authToken` can be:
+It needs to be authenticated, so `DfnsApiClient` needs to be passed a valid `authToken`. This `authToken` can be:
 
 - a Service Account token - *long-lived*
 - a User Personal Access Token (PAT) - *long-lived*
 - a User token issued after on User login - *expires*
 
-`DfnsApiClient` also needs to be passed a [CredentialSigner](#credentialsigner) during instanciation, in order to sign requests.
+`DfnsApiClient` also needs to be passed a [CredentialSigner](#credentialsigner), in order to sign requests.
 
 ```ts
 import { DfnsApiClient } from '@dfns/sdk'
@@ -91,25 +88,25 @@ const { assets } = await dfns.wallets.getWalletAssets({ walletId: wallet.id })
 
 ### `DfnsDelegatedApiClient`
 
-In some configurations, you might want your server to be the one talking to Dfns "on behalf of your user", but still have Users sign requests on a web-app, using the WebauthN Credentials they own. In this case, the `DfnsDelegatedApiClient` can be used on your server.
+In some configurations, you might want your server to be the one talking to Dfns "on behalf of the user", but till have the user sign all requests (on a web-app, using the WebauthN Credentials he owns). In this case, the `DfnsDelegatedApiClient` can be used on your server.
 
 The difference with the above `DfnsApiClient` is:
 
-- In `DfnsApiClient`, the steps taken to sign the request are done internally.
-- In `DfnsDelegatedApiClient`, the signing of the request (of the challenge, really) happens outside of it. So while the request can be made from the server, the signature can be done by a User on a web-app.
+- In `DfnsApiClient`, all steps to sign the request are done internally.
+- In `DfnsDelegatedApiClient`, the signing of the request (of the challenge, really) happens outside of it. So while the request can be conducted by the server, the signature of this request can be done by the User (on a web-app).
 
-In a way, this client "delegates" request signing outside. So using `DfnsDelegatedApiClient`:
+In a way, `DfnsDelegatedApiClient` "delegates" request signing outside of it. As a result:
 
-- The constructor does not need a `CredentialSigner` (since signing happens outside)
-- Every method which needs signing (eg `dfns.wallets.createWallet()`) will be splitted in two parts:
-  - `dfns.wallets.createWalletInit()`: takes in the request payload, and returns a challenge that anyone (any `CredentialSigner`) can sign.
+- Its constructor does not need a `CredentialSigner` (since signing happens outside)
+- Every method requiring signing (eg `dfns.wallets.createWallet()`) will be splitted in two methods:
+  - `dfns.wallets.createWalletInit()`: takes in the request payload, and returns a challenge that should be signed by a `CredentialSigner`.
   - `dfns.wallets.createWalletComplete()`: takes in the request payload + the signed challenge, and completes the wallet creation.
 
 An example flow would look like:
 
-1. The Server does `createWalletInit`, and then sends back the challenge to the web-app
-2. The User (living in the Web app) signs this challenge (using `WebauthN`), and sends the signed challenge to the server
-3. The server uses the User signed challenge to `createWalletComplete` on behalf of the user
+1. The Server executes `createWalletInit`, and sends back the returned challenge to the use on the web-app.
+2. In the web-app, the User signs the challenge (using `WebauthN` signer), and sends the signed challenge to the server.
+3. The server uses the User signed challenge to `createWalletComplete` on behalf of the user.
 
 
 ```ts
@@ -125,14 +122,15 @@ const challenge = await dfnsDelegated.wallets.createWalletInit(payload)
 
 // ... the server can now send this challenge to the user, so the User signs it with his credentials
 
-// ... Later, after user sends back the signed challenge, the server can complete the request
+// ... Later, after user sends back the signed challenge, the server can complete the request:
+
 const wallet = await dfnsDelegated.wallets.createWalletComplete(payload, signedChallenge)
 ```
 
 ### `DfnsAuthenticator`
 
 
-In a client-side app, if you want a Dfns User to be able to login with Dfns (and get a login token back), you might wanna use `DfnsAuthenticator`:
+In a client-side app, if you want a Dfns User to be able to login with Dfns (and get an auth token back), you might wanna use `DfnsAuthenticator`:
 
 ```ts
 import { DfnsAuthenticator } from '@dfns/sdk'
@@ -144,13 +142,14 @@ const dfnsAuth = new DfnsAuthenticator({
   signer: new WebAuthn({ rpId }),
 })
 
+// Since we are using a Webauthn Signer here, this will prompt the user for webauthn credentials (touch id / phone id / yubikey touch...)
 const { token } = await dfnsAuth.login({ orgId, username })
 ```
 
 
 ### `BaseAuthApi`
 
-This class holds some auth-related Dfns methods (some of them are un-authenticated API endpoints for login/registration) which might get handy (eg. for user registration). Here are some static methods there:
+`BaseAuthApi` is a Dfns client which holds some special auth-related Dfns methods (some of them are un-authenticated API endpoints for login/registration) which might get handy.
 
 ```ts
 import { BaseAuthApi } from '@dfns/sdk/baseAuthApi'
