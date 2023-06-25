@@ -1,0 +1,17 @@
+{
+  "name": "ethers-js",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@dfns/ethers": "*",
+    "@dfns/sdk-keysigner": "*",
+    "dotenv": "16.1.4",
+    "@uniswap/sdk-core": "3.2.2",
+    "@uniswap/v3-core": "1.0.1",
+    "@uniswap/v3-sdk": "3.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "uniswap": "ts-node src/uniswap.ts"
+  }
+}
