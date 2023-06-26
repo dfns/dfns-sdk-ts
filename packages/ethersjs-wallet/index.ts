@@ -12,6 +12,8 @@ import {
   TypedDataField,
   assertArgument,
   getAddress,
+  hashMessage,
+  hexlify,
   resolveAddress,
   resolveProperties,
 } from 'ethers'
@@ -48,13 +50,13 @@ export class DfnsWallet extends AbstractSigner {
       const { walletId, dfnsClient } = this.options
       const res = await dfnsClient.wallets.getWallet({ walletId })
       assertArgument(res.address, 'wallet does not have an address', 'walletId', walletId)
-      this.address = res.address
+      this.address = getAddress(res.address)
     }
 
     return this.address
   }
 
-  async refetch(signatureId: string): Promise<Signature> {
+  async waitForSignature(signatureId: string): Promise<Signature> {
     const { walletId, dfnsClient, retryInterval } = this.options
 
     let maxRetries = this.options.maxRetries
@@ -111,12 +113,18 @@ export class DfnsWallet extends AbstractSigner {
       body: { kind: SignatureKind.Hash, hash: btx.unsignedHash },
     })
 
-    btx.signature = await this.refetch(res.id)
+    btx.signature = await this.waitForSignature(res.id)
     return btx.serialized
   }
 
   async signMessage(message: string | Uint8Array): Promise<string> {
-    return ''
+    const { walletId, dfnsClient } = this.options
+    const res = await dfnsClient.wallets.generateSignature({
+      walletId,
+      body: { kind: SignatureKind.Hash, hash: hashMessage(message) },
+    })
+
+    return (await this.waitForSignature(res.id)).serialized
   }
 
   async signTypedData(
@@ -124,6 +132,23 @@ export class DfnsWallet extends AbstractSigner {
     types: Record<string, TypedDataField[]>,
     value: Record<string, any>
   ): Promise<string> {
-    return ''
+    const { walletId, dfnsClient } = this.options
+    const res = await dfnsClient.wallets.generateSignature({
+      walletId,
+      body: {
+        kind: SignatureKind.Eip712,
+        types,
+        domain: {
+          name: domain.name ?? undefined,
+          version: domain.version ?? undefined,
+          chainId: domain.chainId ? Number(domain.chainId) : undefined,
+          verifyingContract: domain.verifyingContract ?? undefined,
+          salt: domain.salt ? hexlify(domain.salt) : undefined,
+        },
+        message: value,
+      },
+    })
+
+    return (await this.waitForSignature(res.id)).serialized
   }
 }

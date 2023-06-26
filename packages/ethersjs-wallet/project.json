@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/ethersjs-wallet",
+        "clean": true,
+        "main": "packages/ethersjs-wallet/index.ts",
+        "tsConfig": "packages/ethersjs-wallet/tsconfig.json"
+      }
+    }
+  }
+}

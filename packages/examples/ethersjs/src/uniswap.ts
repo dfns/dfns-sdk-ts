@@ -1,4 +1,4 @@
-import { DfnsWallet } from '@dfns/ethers'
+import { DfnsWallet } from '@dfns/ethersjs-wallet'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import { CurrencyAmount, Percent, SupportedChainId, Token, TradeType } from '@uniswap/sdk-core'
@@ -106,7 +106,6 @@ const getOutputQuote = async (
 
 const createTrade = async (): Promise<Trade<Token, Token, TradeType.EXACT_INPUT>> => {
   const poolInfo = await getPoolInfo()
-  console.log(poolInfo)
 
   const pool = new Pool(
     WETH,
@@ -122,7 +121,6 @@ const createTrade = async (): Promise<Trade<Token, Token, TradeType.EXACT_INPUT>
   const tradeType = TradeType.EXACT_INPUT
 
   const outputAmount = await getOutputQuote(swapRoute, inputAmount, tradeType)
-  console.log(outputAmount)
 
   return Trade.createUncheckedTrade({
     route: swapRoute,
@@ -152,7 +150,6 @@ const main = async () => {
   }
 
   const params = SwapRouter.swapCallParameters([trade], options)
-  console.log(params)
 
   const tx = await wallet.populateTransaction({
     to: SWAP_ROUTER_CONTRACT_ADDRESS,

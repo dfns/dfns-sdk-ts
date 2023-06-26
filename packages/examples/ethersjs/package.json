@@ -1,14 +1,14 @@
 {
-  "name": "ethers-js",
+  "name": "ethersjs",
   "version": "1.0.0",
   "main": "dist/index.js",
   "dependencies": {
-    "@dfns/ethers": "*",
+    "@dfns/ethersjs-wallet": "*",
     "@dfns/sdk-keysigner": "*",
-    "dotenv": "16.1.4",
     "@uniswap/sdk-core": "3.2.2",
     "@uniswap/v3-core": "1.0.1",
-    "@uniswap/v3-sdk": "3.9.0"
+    "@uniswap/v3-sdk": "3.9.0",
+    "dotenv": "16.1.4"
   },
   "devDependencies": {},
   "scripts": {
