@@ -74,7 +74,7 @@ const signer = ... // a Credential Signer (webauthN or key signer from section a
 const apiClient = new DfnsApiClient({
   baseUrl: 'https://api.dfns.io', // base Url of DFNS API
   appId: 'ap-2ng9jv-80cfc-983pop0iauf2sv8r', // ID of the Application registered with DFNS
-  accessToken: '...', // an auth token
+  authToken: '...', // an auth token
   signer, 
 })
 
@@ -116,7 +116,7 @@ import { DfnsDelegatedApiClient } from '@dfns/sdk'
 const dfnsDelegated = new DfnsDelegatedApiClient({
   baseUrl: 'https://api.dfns.io', // base Url of DFNS API
   appId: 'ap-2ng9jv-80cfc-983pop0iauf2sv8r', // ID of the Application registered with DFNS
-  accessToken: userAuthToken, // Auth token of the User
+  authToken: userAuthToken, // Auth token of the User
 })
 
 const challenge = await dfnsDelegated.wallets.createWalletInit(payload)

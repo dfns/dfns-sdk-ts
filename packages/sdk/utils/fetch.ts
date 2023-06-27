@@ -54,11 +54,11 @@ const errorHandler = <T>(fetch: Fetch<T>): Fetch<T> => {
 
 const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
-    const { appId, appSecret, accessToken } = options.apiOptions
+    const { appId, appSecret, authToken } = options.apiOptions
 
-    const authorization: Record<string, string> = accessToken
+    const authorization: Record<string, string> = authToken
       ? {
-          authorization: `Bearer ${accessToken}`,
+          authorization: `Bearer ${authToken}`,
         }
       : {}
 

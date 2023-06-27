@@ -22,22 +22,22 @@ const apiClient = () => {
 
   return new DfnsApiClient({
     appId: process.env.DFNS_APP_ID!,
-    accessToken: process.env.DFNS_ACCESS_TOKEN!,
+    authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
   })
 }
 
-const delegatedClient = (token: string) => {
+const delegatedClient = (authToken: string) => {
   return new DfnsDelegatedApiClient({
     appId: process.env.DFNS_APP_ID!,
-    accessToken: token,
+    authToken,
     baseUrl: process.env.DFNS_API_URL!,
   })
 }
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
-  if (req.cookies.DFNS_ACCESS_TOKEN) {
+  if (req.cookies.DFNS_AUTH_TOKEN) {
     next()
   } else {
     res.status(401).json({
@@ -67,7 +67,7 @@ app.post(
     // cache the DFNS auth token, example uses a client-side cookie, but can be
     // cached in other ways, such as session storage or database
     res
-      .cookie('DFNS_ACCESS_TOKEN', login.token, { maxAge: 900000, httpOnly: true })
+      .cookie('DFNS_AUTH_TOKEN', login.token, { maxAge: 900000, httpOnly: true })
       .json({ username: req.body.username })
   })
 )
@@ -90,7 +90,7 @@ app.post(
     const registration = await BaseAuthApi.createUserRegistration(req.body.signedChallenge, {
       appId: process.env.DFNS_APP_ID!,
       baseUrl: process.env.DFNS_API_URL!,
-      accessToken: req.body.temporaryAuthenticationToken,
+      authToken: req.body.temporaryAuthenticationToken,
     })
 
     const client = apiClient()
@@ -119,7 +119,7 @@ app.use(auth)
 app.get(
   '/wallets/list',
   asyncHandler(async (req: Request, res: Response) => {
-    const wallets = await delegatedClient(req.cookies.DFNS_ACCESS_TOKEN).wallets.listWallets({})
+    const wallets = await delegatedClient(req.cookies.DFNS_AUTH_TOKEN).wallets.listWallets({})
     res.json(wallets)
   })
 )
@@ -133,7 +133,7 @@ app.post(
       externalId: randomUUID(),
     }
 
-    const challenge = await delegatedClient(req.cookies.DFNS_ACCESS_TOKEN).wallets.createWalletInit({ body })
+    const challenge = await delegatedClient(req.cookies.DFNS_AUTH_TOKEN).wallets.createWalletInit({ body })
 
     // the exact request body is needed to complete the action, to maintain the state, it's
     // round tripped to the client and back in the next request.
@@ -149,7 +149,7 @@ app.post(
   asyncHandler(async (req: Request, res: Response) => {
     // use the original request body and the signed challenge to complete the action
     const { requestBody, signedChallenge } = req.body
-    await delegatedClient(req.cookies.DFNS_ACCESS_TOKEN).wallets.createWalletComplete(
+    await delegatedClient(req.cookies.DFNS_AUTH_TOKEN).wallets.createWalletComplete(
       { body: requestBody },
       signedChallenge
     )

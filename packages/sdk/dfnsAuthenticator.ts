@@ -17,7 +17,7 @@ export type RegisterRequest = CreateUserRegistrationChallengeRequest
 
 export type RegisterResponse = UserRegistrationResponse
 
-export type DfnsAuthenticatorOptions = Omit<DfnsBaseApiOptions, 'accessToken'> & {
+export type DfnsAuthenticatorOptions = Omit<DfnsBaseApiOptions, 'authToken'> & {
   signer: CredentialSigner & Partial<CredentialStore>
 }
 
@@ -52,7 +52,7 @@ export class DfnsAuthenticator {
       { firstFactorCredential: attestation },
       {
         ...this.apiOptions,
-        accessToken: challenge.temporaryAuthenticationToken,
+        authToken: challenge.temporaryAuthenticationToken,
       }
     )
   }

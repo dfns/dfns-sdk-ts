@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   const result = await BaseAuthApi.createUserRegistration(body.signedChallenge, {
     appId: process.env.DFNS_APPLICATION_ID!,
     baseUrl: process.env.DFNS_API_BASE_URL!,
-    accessToken: body.tempAuthToken,
+    authToken: body.tempAuthToken,
   })
 
   // save Dfns EndUser ID in your system, eg:

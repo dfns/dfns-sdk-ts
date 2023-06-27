@@ -29,9 +29,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
   const navigate = useNavigate()
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('DFNS_ACCESS_TOKEN')
-    if (accessToken) {
-      setUser(extractUser(accessToken))
+    const authToken = localStorage.getItem('DFNS_AUTH_TOKEN')
+    if (authToken) {
+      setUser(extractUser(authToken))
     }
     setInit(false)
   }, [])
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
         orgId,
       })
       .then(({ token }) => {
-        localStorage.setItem('DFNS_ACCESS_TOKEN', token)
+        localStorage.setItem('DFNS_AUTH_TOKEN', token)
         setUser(extractUser(token))
         navigate('/')
       })
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
 
   const logout = () => {
     setUser(undefined)
-    localStorage.removeItem('DFNS_ACCESS_TOKEN')
+    localStorage.removeItem('DFNS_AUTH_TOKEN')
   }
 
   const register = (username: string, orgId: string, registrationCode: string) => {

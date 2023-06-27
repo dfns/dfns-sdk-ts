@@ -4,7 +4,7 @@ Interact with DFNS API using the Typescript SDK through a service account. This 
 
 ## Prerequisite
 
-Create a new service account access token using the DFNS dashboard. (need direction)
+Create a new service account token using the DFNS dashboard. (need direction)
 
 ## Explanation
 
@@ -38,7 +38,7 @@ import { DfnsApiClient } from '@dfns/sdk'
 const apiClient = new DfnsApiClient({
   baseUrl: 'https://api.dfns.io', // url to the DFNS API
   appId: 'ap-3n0jv-87cfc-953pop0iauf2sv5t', // application ID registered with DFNS
-  accessToken: process.env.DFNS_ACCESS_TOKEN, // the access token obtained when creating the service account
+  authToken: process.env.DFNS_AUTH_TOKEN, // the token obtained when creating the service account
   signer, // the signer from last step
 })
 ```

@@ -64,7 +64,7 @@ const signer = new AsymmetricKeySigner({
 const dfns = new DfnsApiClient({
   appId: process.env.DFNS_APPLICATION_ID!,
   baseUrl: process.env.DFNS_API_BASE_URL!,
-  accessToken: process.env.DFNS_SERVICE_ACCOUNT_TOKEN!,
+  authToken: process.env.DFNS_SERVICE_ACCOUNT_TOKEN!,
   signer,
 })
 ```
@@ -85,7 +85,7 @@ Wallet creation initiation (wallet owned by end user):
 const dfnsDelegated = new DfnsDelegatedApiClient({
     appId: process.env.DFNS_APPLICATION_ID!,
     baseUrl: process.env.DFNS_API_BASE_URL!,
-    accessToken: endUserAuthToken,
+    authToken: endUserAuthToken,
   })
 
 // call wallet creation initiation
