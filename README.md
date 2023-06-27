@@ -12,6 +12,7 @@ For examples containing code + some docs, these examples illustrate different se
 * [Service account](./packages/examples/service-account/)
 * [Delegated registration and login with NextJS](./packages/examples/nextjs-delegated/)
 * [Delegated registration and login with ReactJS + Express](./packages/examples/auth-delegated/)
+* [ethers.js Dapps](./packages/examples/ethersjs/)
 
 
 ## Concepts
@@ -162,3 +163,8 @@ BaseAuthApi.createUserRegistrationChallenge()
 BaseAuthApi.createUserRegistration()
 ```
 
+## Framework integrations
+
+Integrations with popular frameworks and libraries to make Dapp development frictionless. More to come...
+
+* [ethers.js](./packages/ethersjs-wallet/)
