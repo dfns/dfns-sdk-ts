@@ -2,7 +2,10 @@
 
 > ⚠️ **This SDK is in alpha**. It may be unstable and have breaking evolutions.
 
-Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Check [Dfns Website](https://www.dfns.co) or [Dfns API Docs](https://docs.dfns.co) for more info about Dfns (pronounced "Defense").
+Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
+- [Dfns Website](https://www.dfns.co)
+- [Dfns API Docs](https://docs.dfns.co)
+- [Dfns SDK Docs](https://dfnsext.github.io/typescript-sdk)
 
 
 ## Examples
