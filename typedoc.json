@@ -1,0 +1,8 @@
+{
+  "entryPoints": ["packages/sdk", "packages/sdk-keysigner", "packages/sdk-webauthn", "packages/ethersjs-wallet"],
+  "name": "Dfns SDK",
+  "entryPointStrategy": "packages",
+  "out": "docs-generated",
+  "includeVersion": true,
+  "logLevel": "Verbose"
+}
