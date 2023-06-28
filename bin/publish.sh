@@ -6,6 +6,7 @@ declare -a packages=(
     "@dfns/sdk"
     "@dfns/sdk-keysigner"
     "@dfns/sdk-webauthn"
+    "@dfns/ethersjs-wallet"
 )
 
 echo "Will deploy these built versions:"

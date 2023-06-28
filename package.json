@@ -1,10 +1,10 @@
 {
   "name": "package-based",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.8",
   "license": "MIT",
   "scripts": {
     "cb:all": "rimraf dist && nx run-many -t=cb",
-    "version:all": "npm version --no-git-tag-version --workspace @dfns/sdk --workspace @dfns/sdk-keysigner --workspace @dfns/sdk-webauthn --include-workspace-root",
+    "version:all": "npm version --no-git-tag-version --workspace @dfns/sdk --workspace @dfns/sdk-keysigner --workspace @dfns/sdk-webauthn --workspace @dfns/ethersjs-wallet --include-workspace-root",
     "publish:all": "npm run cb:all && ./bin/publish.sh",
     "docs": "typedoc"
   },

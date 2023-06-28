@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-alpha.8 (2023-06-28)
+
+* Added @dfns/ethers-js-wallet package
+* Added a uniswap example using Dfns Ethersjs wallet
+* Added typedoc generation
+
 ## 0.1.0-alpha.7 (2023-06-22)
 
 * Remove the blockchain fees endpoint
