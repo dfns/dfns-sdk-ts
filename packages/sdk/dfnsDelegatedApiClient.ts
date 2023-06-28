@@ -9,7 +9,7 @@ import { DelegatedPublicKeysClient } from './codegen/PublicKeys'
 import { DelegatedWalletsClient } from './codegen/Wallets'
 
 export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions & {
-  accessToken: string
+  authToken: string
 }
 
 export class DfnsDelegatedApiClient {

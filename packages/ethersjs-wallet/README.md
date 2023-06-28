@@ -22,7 +22,7 @@ const signer = new AsymmetricKeySigner({
 
 const dfnsClient = new DfnsApiClient({
   appId: process.env.DFNS_APP_ID!,
-  accessToken: process.env.DFNS_ACCESS_TOKEN!,
+  authToken: process.env.DFNS_AUTH_TOKEN!,
   baseUrl: process.env.DFNS_API_URL!,
   signer,
 })

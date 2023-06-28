@@ -10,7 +10,7 @@ import { HttpMethod, simpleFetch } from './utils/fetch'
 export type DfnsBaseApiOptions = {
   appId: string
   appSecret?: string
-  accessToken?: string
+  authToken?: string
   baseUrl: string
 }
 
