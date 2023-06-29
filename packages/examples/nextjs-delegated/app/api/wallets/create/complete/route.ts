@@ -1,13 +1,12 @@
 import { CreateWalletRequest } from '@dfns/sdk/codegen/Wallets'
 import { NextRequest, NextResponse } from 'next/server'
-import { SignUserActionChallengeRequest, UserActionChallengeResponse } from '@dfns/sdk/baseAuthApi'
+import { SignUserActionChallengeRequest } from '@dfns/sdk/baseAuthApi'
 import { getDfnsDelegatedClient } from '@/app/api/utils'
 import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'
 
 export async function POST(request: NextRequest) {
   const body = (await request.json()) as {
     request: CreateWalletRequest
-    challenge: UserActionChallengeResponse
     signedChallenge: SignUserActionChallengeRequest
   }
 
