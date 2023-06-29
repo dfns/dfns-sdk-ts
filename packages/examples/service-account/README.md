@@ -2,9 +2,20 @@
 
 Interact with DFNS API using the Typescript SDK through a service account. This approach is for clients who want to retain custody of wallet assets.
 
-## Prerequisite
+## Prerequisites
 
-Create a new service account token using the DFNS dashboard. (need direction)
+- On Dfns Dashboard, under `Settings` > `Applications`, use the existing default Application ID, or create a new Application. Eg
+  - type: Client Side
+  - Relying Party: localhost
+  - Origin: http://localhost:3000
+- On Dfns Dashboard, under `Settings` > `Service Account`, create a new Service Account (check [Dfns docs](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair) to see how to generate a public/private keypair)
+- Copy/paste the `.env.example` into a `.env`, and replace with your environment variables values
+  - `DFNS_API_URL` Dfns api URL (eg https://api.dfns.ninja or https://api.dfns.io depending which you are using)
+  - `DFNS_APP_ID` Application ID registered with Dfns above
+  - `DFNS_APP_ORIGIN` Origin of Dfns Application created in step above, eg `http://localhost:3000`
+  - `DFNS_AUTH_TOKEN` Service Account token created above.
+  - `DFNS_CRED_ID` Credential ID associated with the Service Account, when you created the service account. You can find this one in the `Dashboard` > `Settings` > `Service Account`
+  - `DFNS_PRIVATE_KEY` Private key of the credentials created for the service account. (the newlines in it should not be a problem)
 
 ## Explanation
 

@@ -17,12 +17,20 @@ The end user will sign the action from the web-app, using his WebauthN credentia
 
 For this example to work, you need to complete a few prerequisites:
 
-1. On Dfns Dashboard, create a new Dfns Application:
+- On Dfns Dashboard, under `Settings` > `Applications`, create a new Dfns Application:
   - type: Client Side
   - Relying Party: localhost
   - Origin: http://localhost:3000
-2. On Dfns Dashboard, create a new Service Account (check [Dfns docs](https://app.gitbook.com/o/puStYG2QYnebEAexXqmt/s/oMvt8zMQg1BzesvBRNB4/advanced-topics/authentication/credentials/access-token-credentials) to see how to generate a public/private keypair)
-3. Copy/paste the `.env.example` into a `.env.local`, and replace with your environment variables values
+- On Dfns Dashboard, under `Settings` > `Service Account`, create a new Service Account (check [Dfns docs](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair) to see how to generate a public/private keypair)
+- Copy/paste the `.env.example` into a `.env.local`, and replace with your environment variables values
+  - `DFNS_API_BASE_URL`: Dfns api URL (eg https://api.dfns.ninja or https://api.dfns.io depending which you are using)
+  - `DFNS_APPLICATION_ID` Application ID registered with Dfns above
+  - `DFNS_APPLICATION_ORIGIN` Origin of Dfns Application created in step above, eg `http://localhost:3000`
+  - `DFNS_SERVICE_ACCOUNT_TOKEN` Service Account token created above.
+  - `DFNS_SERVICE_ACCOUNT_CREDENTIAL_ID`: Credential ID associated with the Service Account, when you created the service account. You can find this one in the `Dashboard` > `Settings` > `Service Account`
+  - `DFNS_SERVICE_ACCOUNT_PRIVATE_KEY`: Private key of the credentials created for the service account. (the newlines in it should not be a problem)
+  - `NEXT_PUBLIC_DFNS_WEBAUTHN_RPID` Relying party registered on the Dfns Application you created (in Dashboard go to `Settings` > `Applications`) to find it. It should be `localhost`.
+
 
 ## Run Example
 

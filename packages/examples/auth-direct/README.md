@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prerequisites
+
+- In Dfns Dashboard `Settings` > `Org Settings` > `Applications` (or using our API) you need to create an new Application with oriin `http://localhost:PORT` and Relying party `localhost`.
+- Update the `.env.local` folder:
+    - `REACT_APP_DFNS_API_URL` Dfns api URL (eg https://api.dfns.ninja or https://api.dfns.io depending which you are using)
+    - `REACT_APP_DFNS_APP_ID` Application registered with Dfns on dashboard above
+    - `REACT_APP_DFNS_WEBAUTHN_RPID` Relying party registered on the Dfns Application you created (in Dashboard go to `Settings` > `Applications`) to find it. It should be `localhost`.
+    - `REACT_APP_DFNS_ORG_ID` Your Organisation ID (find it in Dfns Dashboard under `Settings` > `My Account`). Eg `or-yanke-mars-6ulofamogg84s87v`
+
+
 ## Available Scripts
 
 In the project directory, you can run:
