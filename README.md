@@ -13,9 +13,9 @@ Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
 For examples containing code + some docs, these examples illustrate different setups of the SDK:
 
 * [Service account](https://github.com/dfnsext/typescript-sdk/packages/examples/service-account)
-* [Delegated registration and login with NextJS](ttps://github.com/dfnsext/typescript-sdk/packages/examples/nextjs-delegated/)
-* [Delegated registration and login with ReactJS + Express](ttps://github.com/dfnsext/typescript-sdk/packages/examples/auth-delegated/)
-* [ethers.js Dapps](ttps://github.com/dfnsext/typescript-sdk/packages/examples/ethersjs/)
+* [Delegated registration and login with NextJS](ttps://github.com/dfnsext/typescript-sdk/packages/examples/nextjs-delegated)
+* [Delegated registration and login with ReactJS + Express](ttps://github.com/dfnsext/typescript-sdk/packages/examples/auth-delegated)
+* [ethers.js Dapps](ttps://github.com/dfnsext/typescript-sdk/packages/examples/ethersjs)
 
 
 ## Concepts
