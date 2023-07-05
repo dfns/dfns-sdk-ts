@@ -1,56 +1,97 @@
-# Getting Started with Create React App
+# SPA interacting with Dfns API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This example demonstrates a SPA interacting directly with the Dfns API through the Typescript SDK. This approach is for clients who want to delegate custody of wallet assets to their users, but don't want to host a middleware server.
+
+**NOTE** _This example is still work in progress. It doesn't have a working new user registration flow._
 
 ## Prerequisites
 
-- In Dfns Dashboard `Settings` > `Org Settings` > `Applications` (or using our API) you need to create an new Application with oriin `http://localhost:PORT` and Relying party `localhost`.
-- Update the `.env.local` folder:
-    - `REACT_APP_DFNS_API_URL` Dfns api URL (eg https://api.dfns.ninja or https://api.dfns.io depending which you are using)
-    - `REACT_APP_DFNS_APP_ID` Application registered with Dfns on dashboard above
-    - `REACT_APP_DFNS_WEBAUTHN_RPID` Relying party registered on the Dfns Application you created (in Dashboard go to `Settings` > `Applications`) to find it. It should be `localhost`.
-    - `REACT_APP_DFNS_ORG_ID` Your Organisation ID (find it in Dfns Dashboard under `Settings` > `My Account`). Eg `or-yanke-mars-6ulofamogg84s87v`
+To run the example, you must have an active `Application`. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
 
+* Name, choose any name
+* Type of User, `Client Side`
+* Relying Party = `localhost`
+* Origin = `http://localhost:3000`
 
-## Available Scripts
+After the `Application` is created, copy the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
 
-In the project directory, you can run:
+Copy `.env.example` to a new file `.env.local` and set the following values,
 
-### `npm start`
+* `REACT_APP_DFNS_API_URL` = `https://api.dfns.ninja`
+* `REACT_APP_DFNS_APP_ID` = the `App ID` from above
+* `REACT_APP_DFNS_WEBAUTHN_RPID` = `localhost`
+* `REACT_APP_DFNS_ORG_ID` = your organization ID
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+_you can find the organization ID under `Dfns Dashboard` > `Settings` > `My Account`, e.g. `or-0pgv1-bcu3v-87p9t621pbodjb8o`_
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Explanation
 
-### `npm test`
+### Authentication
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`useAuth` hook handles the authentication using an instance of `DfnsAuthenticator` with a `WebAuthn` signer.
 
-### `npm run build`
+```typescript
+import { WebAuthn } from '@dfns/sdk-webauthn'
+import { DfnsAuthenticator } from '@dfns/sdk/dfnsAuthenticator'
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export const authApi = (): DfnsAuthenticator => {
+  const signer = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+  return new DfnsAuthenticator({
+    appId: process.env.REACT_APP_DFNS_APP_ID!,
+    baseUrl: process.env.REACT_APP_DFNS_API_URL!,
+    signer,
+  })
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`login` with a username and the `Org ID` from the configuration. You will be prompted to sign the action with your WebAuthn credential associated with the username. After successful login, an `authToken` is returned and saved in the browser's local storage.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```typescript
+authApi()
+  .login({
+    username,
+    orgId,
+  })
+  .then(({ token }) => {
+    localStorage.setItem('DFNS_AUTH_TOKEN', token)
+    setUser(extractUser(token))
+    navigate('/')
+  })
+  .catch((err) => setError(err))
+  .finally(() => setLoading(false))
+```
 
-### `npm run eject`
+### User Action Signing
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To sign user actions, use a `DfnsApiClient` with a `WebAuthn` signer and the `authToken` obtained from the login.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```typescript
+import { WebAuthn } from '@dfns/sdk-webauthn'
+import { DfnsApiClient } from '@dfns/sdk'
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+export const dfnsApi = (): DfnsApiClient => {
+  const signer = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+  return new DfnsApiClient({
+    appId: process.env.REACT_APP_DFNS_APP_ID!,
+    authToken: localStorage.getItem('DFNS_AUTH_TOKEN') ?? undefined,
+    baseUrl: process.env.REACT_APP_DFNS_API_URL!,
+    signer,
+  })
+}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Use the `DfnsApiClient` to create a new wallet, and you will be prompted to sign the action with your WebAuthn credential.
 
-## Learn More
+```typescript
+const handleCreate = (event: FormEvent<HTMLFormElement>) => {
+  ...
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+  dfnsApi()
+    .wallets.createWallet({ body: { network: formData.get('network') as BlockchainNetwork } })
+    .then(() => navigate('/'))
+    .catch((err) => {
+      setError(err)
+      setSubmitting(false)
+    })
+  }
+```

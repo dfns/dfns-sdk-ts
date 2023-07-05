@@ -191,54 +191,6 @@ export type UpdateAmountLimitPrConf = {
   shouldIgnoreAssetsWithoutMarketValue?: boolean
 }
 
-// FIXME: Missing documentation for CreateOutgoingVelocityPrConf
-export type CreateOutgoingVelocityPrConf = {
-  // FIXME: Missing documentation for kind
-  kind: PolicyRuleKind.PaymentAmountOutgoingVelocity
-
-  // FIXME: Missing documentation for velocity
-  velocity: Amount
-
-  // FIXME: Missing documentation for assetSymbol
-  assetSymbol: AssetSymbol
-
-  // FIXME: Missing documentation for intervalInMinutes
-  intervalInMinutes: number
-
-  // FIXME: Missing documentation for shouldIgnoreAssetsWithoutMarketValue
-  shouldIgnoreAssetsWithoutMarketValue: boolean
-}
-
-// FIXME: Missing documentation for CreateSiphoningPrConf
-export type CreateSiphoningPrConf = {
-  // FIXME: Missing documentation for kind
-  kind: PolicyRuleKind.Siphoning
-
-  // FIXME: Missing documentation for maxTxCount
-  maxTxCount: number
-
-  // FIXME: Missing documentation for intervalInMinutes
-  intervalInMinutes: number
-}
-
-// FIXME: Missing documentation for SiphoningPrConf
-export type SiphoningPrConf = {
-  // FIXME: Missing documentation for maxTxCount
-  maxTxCount: number
-
-  // FIXME: Missing documentation for intervalInMinutes
-  intervalInMinutes: number
-}
-
-// FIXME: Missing documentation for UpdateSiphoningPrConf
-export type UpdateSiphoningPrConf = {
-  // FIXME: Missing documentation for maxTxCount
-  maxTxCount?: number
-
-  // FIXME: Missing documentation for intervalInMinutes
-  intervalInMinutes?: number
-}
-
 // FIXME: Missing documentation for AmountLimitPrConf
 export type AmountLimitPrConf = {
   // FIXME: Missing documentation for limit
@@ -246,36 +198,6 @@ export type AmountLimitPrConf = {
 
   // FIXME: Missing documentation for assetSymbol
   assetSymbol: AssetSymbol
-
-  // FIXME: Missing documentation for shouldIgnoreAssetsWithoutMarketValue
-  shouldIgnoreAssetsWithoutMarketValue: boolean
-}
-
-// FIXME: Missing documentation for UpdateOutgoingVelocityPrConf
-export type UpdateOutgoingVelocityPrConf = {
-  // FIXME: Missing documentation for velocity
-  velocity?: Amount
-
-  // FIXME: Missing documentation for assetSymbol
-  assetSymbol?: AssetSymbol
-
-  // FIXME: Missing documentation for intervalInMinutes
-  intervalInMinutes?: number
-
-  // FIXME: Missing documentation for shouldIgnoreAssetsWithoutMarketValue
-  shouldIgnoreAssetsWithoutMarketValue?: boolean
-}
-
-// FIXME: Missing documentation for OutgoingVelocityPrConf
-export type OutgoingVelocityPrConf = {
-  // FIXME: Missing documentation for velocity
-  velocity: Amount
-
-  // FIXME: Missing documentation for assetSymbol
-  assetSymbol: AssetSymbol
-
-  // FIXME: Missing documentation for intervalInMinutes
-  intervalInMinutes: number
 
   // FIXME: Missing documentation for shouldIgnoreAssetsWithoutMarketValue
   shouldIgnoreAssetsWithoutMarketValue: boolean
@@ -341,13 +263,6 @@ export type PolicyManagementPreferences = {
    * Sets default `AssetSymbol` for the policy rules that use it, such as Limit, Velocity, Siphoning, and others.
    */
   policyRuleAssetSymbol?: boolean
-
-  /**
-   * Sets default interval in minutes for policy rules that use intervals, such as Velocity and Siphoning.
-   *
-   * This setting does not update existing rules. This will only impact rules that are created  after this setting is set.
-   */
-  policyRuleVelocityIntervalInMinutes?: number
 }
 
 // FIXME: Missing documentation for Create
@@ -494,15 +409,11 @@ export type UpdatePolicyRuleInput = {
 // FIXME: Missing documentation for CreatePolicyRuleConfiguration
 export type CreatePolicyRuleConfiguration =
   | CreateAmountLimitPrConf
-  | CreateOutgoingVelocityPrConf
-  | CreateSiphoningPrConf
   | CreateAlwaysActivatedPrConf
 
 // FIXME: Missing documentation for UpdatePolicyRuleConfiguration
 export type UpdatePolicyRuleConfiguration =
   | UpdateAmountLimitPrConf
-  | UpdateSiphoningPrConf
-  | UpdateOutgoingVelocityPrConf
   | UpdateAlwaysActivatedPrConf
 
 // FIXME: Missing documentation for UpdatePolicyControlConfiguration
@@ -516,12 +427,7 @@ export type CreatePolicyControlConfiguration =
   | CreateNotifyAndAuditPcConf
 
 // FIXME: Missing documentation for PolicyRuleConfiguration
-export type PolicyRuleConfiguration =
-  | SiphoningPrConf
-  | AmountLimitPrConf
-  | OutgoingVelocityPrConf
-  | OutgoingVelocityPrConf
-  | EmptyConfiguration
+export type PolicyRuleConfiguration = AmountLimitPrConf | EmptyConfiguration
 
 // FIXME: Missing documentation for PolicyControlConfiguration
 export type PolicyControlConfiguration =
@@ -533,18 +439,18 @@ export type PolicyObjectFilter = AssetAccountFilter | PublicKeyFilter
 
 // FIXME: Missing documentation for PolicyActivityKind
 export enum PolicyActivityKind {
-  // FIXME: Missing documentation for PaymentInitiation
-  PaymentInitiation = 'PaymentInitiation',
-  // FIXME: Missing documentation for AddingEmployee
-  AddingEmployee = 'AddingEmployee',
-  // FIXME: Missing documentation for UpdatingEmployeeDetails
-  UpdatingEmployeeDetails = 'UpdatingEmployeeDetails',
-  // FIXME: Missing documentation for RemovingEmployee
-  RemovingEmployee = 'RemovingEmployee',
   // FIXME: Missing documentation for CreatingSignature
   CreatingSignature = 'CreatingSignature',
   // FIXME: Missing documentation for TransactionInitiation
   TransactionInitiation = 'TransactionInitiation',
+  // FIXME: Missing documentation for PaymentInitiation
+  PaymentInitiation = 'PaymentInitiation',
+  // FIXME: Missing documentation for WalletTransferAsset
+  WalletTransferAsset = 'WalletTransferAsset',
+  // FIXME: Missing documentation for WalletBroadcastTransaction
+  WalletBroadcastTransaction = 'WalletBroadcastTransaction',
+  // FIXME: Missing documentation for WalletGenerateSignature
+  WalletGenerateSignature = 'WalletGenerateSignature',
 }
 
 // FIXME: Missing documentation for PolicyStatus
@@ -571,18 +477,12 @@ export enum PolicyControlKind {
 
 // FIXME: Missing documentation for PolicyRuleKind
 export enum PolicyRuleKind {
-  // FIXME: Missing documentation for PaymentAmountLimit
-  PaymentAmountLimit = 'PaymentAmountLimit',
-  // FIXME: Missing documentation for EmployeeAdded
-  EmployeeAdded = 'EmployeeAdded',
-  // FIXME: Missing documentation for EmployeeDetailsUpdated
-  EmployeeDetailsUpdated = 'EmployeeDetailsUpdated',
-  // FIXME: Missing documentation for Siphoning
-  Siphoning = 'Siphoning',
   // FIXME: Missing documentation for AlwaysActivated
   AlwaysActivated = 'AlwaysActivated',
-  // FIXME: Missing documentation for PaymentAmountOutgoingVelocity
-  PaymentAmountOutgoingVelocity = 'PaymentAmountOutgoingVelocity',
+  // FIXME: Missing documentation for PaymentAmountLimit
+  PaymentAmountLimit = 'PaymentAmountLimit',
+  // FIXME: Missing documentation for TransferAmountLimit
+  TransferAmountLimit = 'TransferAmountLimit',
 }
 
 // FIXME: Missing documentation for PolicyControlStatus
@@ -607,4 +507,6 @@ export enum PolicyObjectFilterKind {
   AssetAccount = 'AssetAccount',
   // FIXME: Missing documentation for PublicKey
   PublicKey = 'PublicKey',
+  // FIXME: Missing documentation for Wallet
+  Wallet = 'Wallet',
 }

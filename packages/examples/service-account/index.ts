@@ -1,4 +1,4 @@
-import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Foundations'
+import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Wallets'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import dotenv from 'dotenv'
@@ -19,7 +19,7 @@ const main = async () => {
     signer,
   })
 
-  const wallet = await dfnsApi.wallets.createWallet({ body: { network: BlockchainNetwork.ETH_GOERLI } })
+  const wallet = await dfnsApi.wallets.createWallet({ body: { network: BlockchainNetwork.EthereumSepolia } })
   console.log(JSON.stringify(wallet))
 
   const list = await dfnsApi.wallets.listWallets({})

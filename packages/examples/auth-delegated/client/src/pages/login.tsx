@@ -27,7 +27,7 @@ export default function Login(): JSX.Element {
             id="username"
             name="username"
             placeholder="username"
-            value={location.state?.username}
+            defaultValue={location.state?.username}
           />
 
           <input className="input" id="password" name="password" type="password" placeholder="password" />

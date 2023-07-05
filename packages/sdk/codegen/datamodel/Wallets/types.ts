@@ -1,15 +1,13 @@
 import {
   Amount,
   BlockchainAddress,
-  BlockchainNetwork,
   EntityId,
   IsoDatetime,
   Tag,
 } from '../Foundations'
-import { IdentityKind } from '../Permissions'
 
-// FIXME: Missing documentation for TransferNativeRequest
-export type TransferNativeRequest = {
+// FIXME: Missing documentation for TransferNativeAsset
+export type TransferNativeAsset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Native
 
@@ -20,8 +18,8 @@ export type TransferNativeRequest = {
   amount: Amount
 }
 
-// FIXME: Missing documentation for TransferErc20Request
-export type TransferErc20Request = {
+// FIXME: Missing documentation for TransferErc20Asset
+export type TransferErc20Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Erc20
 
@@ -35,8 +33,8 @@ export type TransferErc20Request = {
   amount: Amount
 }
 
-// FIXME: Missing documentation for TransferErc721Request
-export type TransferErc721Request = {
+// FIXME: Missing documentation for TransferErc721Asset
+export type TransferErc721Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Erc721
 
@@ -50,8 +48,8 @@ export type TransferErc721Request = {
   tokenId: string
 }
 
-// FIXME: Missing documentation for BroadcastEvmTransactionRequest
-export type BroadcastEvmTransactionRequest = {
+// FIXME: Missing documentation for BroadcastEvmTransaction
+export type BroadcastEvmTransaction = {
   // FIXME: Missing documentation for kind
   kind: TransactionKind.Evm
 
@@ -80,8 +78,8 @@ export type BroadcastEvmTransactionRequest = {
   maxFeePerGas?: Amount
 }
 
-// FIXME: Missing documentation for SignHashRequest
-export type SignHashRequest = {
+// FIXME: Missing documentation for SignHash
+export type SignHash = {
   // FIXME: Missing documentation for kind
   kind: SignatureKind.Hash
 
@@ -107,8 +105,8 @@ export type Eip712Domain = {
   salt?: string
 }
 
-// FIXME: Missing documentation for SignEip712TypedDataRequest
-export type SignEip712TypedDataRequest = {
+// FIXME: Missing documentation for SignEip712TypedData
+export type SignEip712TypedData = {
   // FIXME: Missing documentation for kind
   kind: SignatureKind.Eip712
 
@@ -166,14 +164,14 @@ export type WalletAsset = {
   // FIXME: Missing documentation for contract
   contract?: string
 
-  // FIXME: Missing documentation for name
-  name?: string
-
   // FIXME: Missing documentation for symbol
   symbol?: string
 
   // FIXME: Missing documentation for decimals
   decimals: number
+
+  // FIXME: Missing documentation for verified
+  verified?: boolean
 
   // FIXME: Missing documentation for balance
   balance: Amount
@@ -196,11 +194,11 @@ export type WalletNft = {
   // FIXME: Missing documentation for contract
   contract: string
 
-  // FIXME: Missing documentation for name
-  name?: string
-
   // FIXME: Missing documentation for symbol
   symbol?: string
+
+  // FIXME: Missing documentation for verified
+  verified?: boolean
 
   // FIXME: Missing documentation for tokenIds
   tokenIds: string[]
@@ -253,6 +251,9 @@ export type NativeTransferEvent = {
   // FIXME: Missing documentation for decimals
   decimals: number
 
+  // FIXME: Missing documentation for verified
+  verified?: boolean
+
   // FIXME: Missing documentation for from
   from: BlockchainAddress
 
@@ -295,14 +296,14 @@ export type Erc20TransferEvent = {
   // FIXME: Missing documentation for contract
   contract: BlockchainAddress
 
-  // FIXME: Missing documentation for name
-  name?: string
-
   // FIXME: Missing documentation for symbol
   symbol?: string
 
   // FIXME: Missing documentation for decimals
   decimals: number
+
+  // FIXME: Missing documentation for verified
+  verified?: boolean
 
   // FIXME: Missing documentation for from
   from: BlockchainAddress
@@ -346,11 +347,11 @@ export type Erc721TransferEvent = {
   // FIXME: Missing documentation for contract
   contract: BlockchainAddress
 
-  // FIXME: Missing documentation for name
-  name?: string
-
   // FIXME: Missing documentation for symbol
   symbol?: string
+
+  // FIXME: Missing documentation for verified
+  verified?: boolean
 
   // FIXME: Missing documentation for from
   from: BlockchainAddress
@@ -395,7 +396,7 @@ export type TransferRequest = {
   requester: RequesterIdentity
 
   // FIXME: Missing documentation for requestBody
-  requestBody: TransferAssetRequest
+  requestBody: TransferAssetBody
 
   // FIXME: Missing documentation for status
   status: TransferStatus
@@ -446,7 +447,7 @@ export type TransactionRequest = {
   requester: RequesterIdentity
 
   // FIXME: Missing documentation for requestBody
-  requestBody: BroadcastTransactionRequest
+  requestBody: BroadcastTransactionBody
 
   // FIXME: Missing documentation for status
   status: TransactionStatus
@@ -503,7 +504,7 @@ export type SignatureRequest = {
   requester: RequesterIdentity
 
   // FIXME: Missing documentation for requestBody
-  requestBody: GenerateSignatureRequest
+  requestBody: GenerateSignatureBody
 
   // FIXME: Missing documentation for signature
   signature?: Signature
@@ -538,9 +539,6 @@ export type PaginatedSignatureList = {
 
 // FIXME: Missing documentation for RequesterIdentity
 export type RequesterIdentity = {
-  // FIXME: Missing documentation for kind
-  kind: IdentityKind
-
   // FIXME: Missing documentation for userId
   userId: EntityId
 
@@ -551,8 +549,8 @@ export type RequesterIdentity = {
   appId?: EntityId
 }
 
-// FIXME: Missing documentation for CreateWalletRequest
-export type CreateWalletRequest = {
+// FIXME: Missing documentation for CreateWalletBody
+export type CreateWalletBody = {
   // FIXME: Missing documentation for network
   network: BlockchainNetwork
 
@@ -566,19 +564,17 @@ export type CreateWalletRequest = {
   name?: string
 }
 
-// FIXME: Missing documentation for TransferAssetRequest
-export type TransferAssetRequest =
-  | TransferNativeRequest
-  | TransferErc20Request
-  | TransferErc721Request
+// FIXME: Missing documentation for TransferAssetBody
+export type TransferAssetBody =
+  | TransferNativeAsset
+  | TransferErc20Asset
+  | TransferErc721Asset
 
-// FIXME: Missing documentation for BroadcastTransactionRequest
-export type BroadcastTransactionRequest = BroadcastEvmTransactionRequest
+// FIXME: Missing documentation for BroadcastTransactionBody
+export type BroadcastTransactionBody = BroadcastEvmTransaction
 
-// FIXME: Missing documentation for GenerateSignatureRequest
-export type GenerateSignatureRequest =
-  | SignHashRequest
-  | SignEip712TypedDataRequest
+// FIXME: Missing documentation for GenerateSignatureBody
+export type GenerateSignatureBody = SignHash | SignEip712TypedData
 
 // FIXME: Missing documentation for BlockchainEvent
 export type BlockchainEvent =
@@ -670,4 +666,38 @@ export enum SignatureStatus {
   Signed = 'Signed',
   // FIXME: Missing documentation for Failed
   Failed = 'Failed',
+}
+
+// FIXME: Missing documentation for BlockchainNetwork
+export enum BlockchainNetwork {
+  // FIXME: Missing documentation for Bitcoin
+  Bitcoin = 'Bitcoin',
+  // FIXME: Missing documentation for BitcoinTestnet
+  BitcoinTestnet = 'BitcoinTestnet',
+  // FIXME: Missing documentation for Bsc
+  Bsc = 'Bsc',
+  // FIXME: Missing documentation for BscTestnet
+  BscTestnet = 'BscTestnet',
+  // FIXME: Missing documentation for Ethereum
+  Ethereum = 'Ethereum',
+  // FIXME: Missing documentation for EthereumGoerli
+  EthereumGoerli = 'EthereumGoerli',
+  // FIXME: Missing documentation for EthereumSepolia
+  EthereumSepolia = 'EthereumSepolia',
+  // FIXME: Missing documentation for Polygon
+  Polygon = 'Polygon',
+  // FIXME: Missing documentation for PolygonMumbai
+  PolygonMumbai = 'PolygonMumbai',
+  // FIXME: Missing documentation for Ripple
+  Ripple = 'Ripple',
+  // FIXME: Missing documentation for RippleTestnet
+  RippleTestnet = 'RippleTestnet',
+  // FIXME: Missing documentation for Solana
+  Solana = 'Solana',
+  // FIXME: Missing documentation for SolanaDevnet
+  SolanaDevnet = 'SolanaDevnet',
+  // FIXME: Missing documentation for Tron
+  Tron = 'Tron',
+  // FIXME: Missing documentation for TronShasta
+  TronShasta = 'TronShasta',
 }

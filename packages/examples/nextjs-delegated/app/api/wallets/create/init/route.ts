@@ -1,6 +1,6 @@
 import { CreateWalletRequest } from '@dfns/sdk/codegen/Wallets'
 import { NextRequest, NextResponse } from 'next/server'
-import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Foundations'
+import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Wallets'
 import { getDfnsDelegatedClient } from '@/app/api/utils'
 import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'
 
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   const dfnsDelegated = getDfnsDelegatedClient(endUserAuthToken)
 
   const createWalletRequest: CreateWalletRequest = {
-    body: { network: BlockchainNetwork.ETH_GOERLI },
+    body: { network: BlockchainNetwork.EthereumGoerli },
   }
 
   const challenge = await dfnsDelegated.wallets.createWalletInit(createWalletRequest)
