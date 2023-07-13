@@ -115,6 +115,9 @@ export type EvmTransaction = {
   // FIXME: Missing documentation for data
   data?: string
 
+  // FIXME: Missing documentation for signature
+  signature: string
+
   // FIXME: Missing documentation for gasLimit
   gasLimit: Amount
 

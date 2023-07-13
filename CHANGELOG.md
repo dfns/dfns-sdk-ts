@@ -4,6 +4,8 @@
 
 - Renamed `BlockchainNetwork` names for the wallets API [breaking]
 - Deprecated `IdentityKind` enum for the permissions API
+- Added EVM broadcast transaction kinds `Eip1559` and `EvmLegacy`
+- Added network specific encoding of signature to signed signature requests
 - Expanded README.md for all the examples with clearer directions and explanations
 
 ## 0.1.0-alpha.8 (2023-06-28)

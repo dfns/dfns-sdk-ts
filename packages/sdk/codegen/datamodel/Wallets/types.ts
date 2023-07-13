@@ -68,14 +68,62 @@ export type BroadcastEvmTransaction = {
   // FIXME: Missing documentation for gasLimit
   gasLimit?: Amount
 
-  // FIXME: Missing documentation for gasPrice
-  gasPrice?: Amount
+  // FIXME: Missing documentation for maxPriorityFeePerGas
+  maxPriorityFeePerGas?: Amount
+
+  // FIXME: Missing documentation for maxFeePerGas
+  maxFeePerGas?: Amount
+}
+
+// FIXME: Missing documentation for BroadcastEip1559Transaction
+export type BroadcastEip1559Transaction = {
+  // FIXME: Missing documentation for kind
+  kind: TransactionKind.Eip1559
+
+  // FIXME: Missing documentation for to
+  to?: BlockchainAddress
+
+  // FIXME: Missing documentation for value
+  value?: Amount
+
+  // FIXME: Missing documentation for data
+  data?: string
+
+  // FIXME: Missing documentation for nonce
+  nonce?: number
+
+  // FIXME: Missing documentation for gasLimit
+  gasLimit?: Amount
 
   // FIXME: Missing documentation for maxPriorityFeePerGas
   maxPriorityFeePerGas?: Amount
 
   // FIXME: Missing documentation for maxFeePerGas
   maxFeePerGas?: Amount
+}
+
+// FIXME: Missing documentation for BroadcastEvmLegacyTransaction
+export type BroadcastEvmLegacyTransaction = {
+  // FIXME: Missing documentation for kind
+  kind: TransactionKind.EvmLegacy
+
+  // FIXME: Missing documentation for to
+  to?: BlockchainAddress
+
+  // FIXME: Missing documentation for value
+  value?: Amount
+
+  // FIXME: Missing documentation for data
+  data?: string
+
+  // FIXME: Missing documentation for nonce
+  nonce?: number
+
+  // FIXME: Missing documentation for gasLimit
+  gasLimit?: Amount
+
+  // FIXME: Missing documentation for gasPrice
+  gasPrice?: Amount
 }
 
 // FIXME: Missing documentation for SignHash
@@ -490,6 +538,9 @@ export type Signature = {
 
   // FIXME: Missing documentation for recid
   recid?: number
+
+  // FIXME: Missing documentation for encoded
+  encoded?: string
 }
 
 // FIXME: Missing documentation for SignatureRequest
@@ -571,7 +622,10 @@ export type TransferAssetBody =
   | TransferErc721Asset
 
 // FIXME: Missing documentation for BroadcastTransactionBody
-export type BroadcastTransactionBody = BroadcastEvmTransaction
+export type BroadcastTransactionBody =
+  | BroadcastEvmTransaction
+  | BroadcastEip1559Transaction
+  | BroadcastEvmLegacyTransaction
 
 // FIXME: Missing documentation for GenerateSignatureBody
 export type GenerateSignatureBody = SignHash | SignEip712TypedData
@@ -596,6 +650,10 @@ export enum TransferKind {
 export enum TransactionKind {
   // FIXME: Missing documentation for Evm
   Evm = 'Evm',
+  // FIXME: Missing documentation for Eip1559
+  Eip1559 = 'Eip1559',
+  // FIXME: Missing documentation for EvmLegacy
+  EvmLegacy = 'EvmLegacy',
 }
 
 // FIXME: Missing documentation for SignatureKind
@@ -664,6 +722,8 @@ export enum SignatureStatus {
   Pending = 'Pending',
   // FIXME: Missing documentation for Signed
   Signed = 'Signed',
+  // FIXME: Missing documentation for Confirmed
+  Confirmed = 'Confirmed',
   // FIXME: Missing documentation for Failed
   Failed = 'Failed',
 }

@@ -3,7 +3,6 @@ import { SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wall
 import {
   AbstractSigner,
   Provider,
-  Signature,
   Signer,
   Transaction,
   TransactionLike,
@@ -56,7 +55,7 @@ export class DfnsWallet extends AbstractSigner {
     return this.address
   }
 
-  async waitForSignature(signatureId: string): Promise<Signature> {
+  async waitForSignature(signatureId: string): Promise<string> {
     const { walletId, dfnsClient, retryInterval } = this.options
 
     let maxRetries = this.options.maxRetries
@@ -65,11 +64,8 @@ export class DfnsWallet extends AbstractSigner {
 
       const res = await dfnsClient.wallets.getSignature({ walletId, signatureId })
       if (res.status === SignatureStatus.Signed) {
-        return Signature.from({
-          r: res.signature!.r,
-          s: res.signature!.s,
-          v: res.signature!.recid ? 0x1c : 0x1b,
-        })
+        if (!res.signature?.encoded) break
+        return res.signature.encoded
       } else if (res.status === SignatureStatus.Failed) {
         break
       }
@@ -124,7 +120,7 @@ export class DfnsWallet extends AbstractSigner {
       body: { kind: SignatureKind.Hash, hash: hashMessage(message) },
     })
 
-    return (await this.waitForSignature(res.id)).serialized
+    return this.waitForSignature(res.id)
   }
 
   async signTypedData(
@@ -149,6 +145,6 @@ export class DfnsWallet extends AbstractSigner {
       },
     })
 
-    return (await this.waitForSignature(res.id)).serialized
+    return this.waitForSignature(res.id)
   }
 }
