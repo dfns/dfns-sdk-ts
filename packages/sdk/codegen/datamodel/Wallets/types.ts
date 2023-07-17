@@ -64,15 +64,6 @@ export type BroadcastEvmTransaction = {
 
   // FIXME: Missing documentation for nonce
   nonce?: number
-
-  // FIXME: Missing documentation for gasLimit
-  gasLimit?: Amount
-
-  // FIXME: Missing documentation for maxPriorityFeePerGas
-  maxPriorityFeePerGas?: Amount
-
-  // FIXME: Missing documentation for maxFeePerGas
-  maxFeePerGas?: Amount
 }
 
 // FIXME: Missing documentation for BroadcastEip1559Transaction
