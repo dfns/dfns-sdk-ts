@@ -1,6 +1,6 @@
-# Dfns Wallet for [ethers.js](https://docs.ethers.org/v6/)
+# Dfns Wallet for [ethers.js v6](https://docs.ethers.org/v6/)
 
-Dfns wallet integration with the popular [ethers.js](https://docs.ethers.org/v6/) library, makes working with Ethereum and other EVM compatible ecosystems as simple and painless as possible.
+Dfns wallet integration with the popular __ethers.js__ library [version 6.x](https://docs.ethers.org/v6/), makes working with Ethereum and other EVM compatible ecosystems as simple and painless as possible.
 
 The `DfnsWallet` uses `generateSignature` to compute signatures using your Dfns managed wallets, for all the transactions created by your `ethers.js` program. Then you need to broadcast these transactions yourself to the corresponding node providers that are either self hosted or by a blockchain provider.
 
@@ -33,4 +33,4 @@ return new DfnsWallet({
 }).connect(rpcProvider)
 ```
 
-Go checkout the [examples](../examples/ethersjs/) we have that showcase how you can use ethers.js to start developing Dapps with Dfns wallets.
+Go checkout the [examples](../examples/ethersjs/v6) we have that showcase how you can use ethers.js to start developing Dapps with Dfns wallets.

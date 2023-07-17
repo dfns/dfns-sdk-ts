@@ -1,11 +1,11 @@
-import { DfnsWallet } from '@dfns/ethersjs-wallet'
+import { DfnsWallet } from '@dfns/ethersjs6-wallet'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import { CurrencyAmount, Percent, SupportedChainId, Token, TradeType } from '@uniswap/sdk-core'
 import { abi as UniswapV3PoolAbi } from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json'
 import { computePoolAddress, FeeAmount, Pool, Route, SwapOptions, SwapQuoter, SwapRouter, Trade } from '@uniswap/v3-sdk'
 import dotenv from 'dotenv'
-import { Contract, JsonRpcProvider, AbiCoder } from 'ethers'
+import { AbiCoder, Contract, JsonRpcProvider, TransactionResponse } from 'ethers'
 
 dotenv.config()
 
@@ -136,10 +136,14 @@ const main = async () => {
   const wethContract = new Contract(WETH.address, WethAbi, wallet)
 
   // convert some ETH to wrapped ETH
-  await wethContract.deposit({ value: AMOUNT_TO_TRADE })
+  const depositTx: TransactionResponse = await wethContract.deposit({ value: AMOUNT_TO_TRADE })
+  console.log(`Convert ETH to WETH: ${depositTx.hash}`)
+  await depositTx.wait()
 
   // approve uniswap access to WETH funds
-  await wethContract.approve(SWAP_ROUTER_CONTRACT_ADDRESS, AMOUNT_TO_TRADE)
+  const approveTx: TransactionResponse = await wethContract.approve(SWAP_ROUTER_CONTRACT_ADDRESS, AMOUNT_TO_TRADE)
+  console.log(`Approve Uniswap transfer privilege: ${approveTx.hash}`)
+  await approveTx.wait()
 
   // execute the trade swap for USDT
   const trade = await createTrade()
@@ -161,8 +165,9 @@ const main = async () => {
   })
   const signedTx = await wallet.signTransaction(tx)
 
-  const res = await rpcProvider.broadcastTransaction(signedTx)
-  console.log(res)
+  const tradeTx = await rpcProvider.broadcastTransaction(signedTx)
+  const tradeRec = await tradeTx.wait()
+  console.log(`Swapped WETH for USDT: ${tradeRec?.hash}`)
 }
 
 main()

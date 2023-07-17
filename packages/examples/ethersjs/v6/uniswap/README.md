@@ -1,4 +1,4 @@
-# ethers.js Examples
+# Uniswap
 
 Adapted from Uniswap's [trading example](https://github.com/Uniswap/examples/blob/main/v3-sdk/trading/src/libs/trading.ts).
 
@@ -31,11 +31,11 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
 - `DFNS_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID
-- `GOERLI_RPC_PROVIDER_URL` = an Ethereum Goerli RPC provider node you can access
+- `GOERLI_RPC_PROVIDER_URL` = an Ethereum Goerli RPC provider node you have access to
 
 **note** _the wallet must have Goerli testnet ETH to trade and pay for gas_
 
-## Uniswap
+## Explanation
 
 The program runs on Ethereum Goerli testnet. In order to run the code, you would need a [Goerli wallet](https://goerli.etherscan.io/address/0x1c19c099870c478f074b3b27e0d04b38d3379d27) that holds some GoerliETH. The program will convert `1000000` wei of GoerliETH to [Wrapped ETH](https://goerli.etherscan.io/address/0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6), and then swap them for [testnet USDT](https://goerli.etherscan.io/address/0xC2C527C0CACF457746Bd31B2a698Fe89de2b6d49).
 

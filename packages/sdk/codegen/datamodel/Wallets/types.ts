@@ -721,6 +721,14 @@ export enum SignatureStatus {
 
 // FIXME: Missing documentation for BlockchainNetwork
 export enum BlockchainNetwork {
+  // FIXME: Missing documentation for ArbitrumOne
+  ArbitrumOne = 'ArbitrumOne',
+  // FIXME: Missing documentation for ArbitrumGoerli
+  ArbitrumGoerli = 'ArbitrumGoerli',
+  // FIXME: Missing documentation for AvalancheC
+  AvalancheC = 'AvalancheC',
+  // FIXME: Missing documentation for AvalancheCFuji
+  AvalancheCFuji = 'AvalancheCFuji',
   // FIXME: Missing documentation for Bitcoin
   Bitcoin = 'Bitcoin',
   // FIXME: Missing documentation for BitcoinTestnet
@@ -735,6 +743,14 @@ export enum BlockchainNetwork {
   EthereumGoerli = 'EthereumGoerli',
   // FIXME: Missing documentation for EthereumSepolia
   EthereumSepolia = 'EthereumSepolia',
+  // FIXME: Missing documentation for FantomOpera
+  FantomOpera = 'FantomOpera',
+  // FIXME: Missing documentation for FantomTestnet
+  FantomTestnet = 'FantomTestnet',
+  // FIXME: Missing documentation for Optimism
+  Optimism = 'Optimism',
+  // FIXME: Missing documentation for OptimismGoerli
+  OptimismGoerli = 'OptimismGoerli',
   // FIXME: Missing documentation for Polygon
   Polygon = 'Polygon',
   // FIXME: Missing documentation for PolygonMumbai
