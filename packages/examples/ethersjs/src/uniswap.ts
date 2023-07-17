@@ -39,6 +39,7 @@ const initDfnsWallet = () => {
 
   return new DfnsWallet({
     walletId: process.env.DFNS_WALLET_ID!,
+    retryInterval: 2000,
     dfnsClient,
   }).connect(rpcProvider)
 }

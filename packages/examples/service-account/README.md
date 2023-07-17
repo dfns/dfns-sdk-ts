@@ -1,21 +1,35 @@
 # Typescript SDK via Service Account
 
-Interact with DFNS API using the Typescript SDK through a service account. This approach is for clients who want to retain custody of wallet assets.
+Interact with Dfns API using the Typescript SDK through a service account. This approach is for clients who want to retain custody of wallet assets.
 
 ## Prerequisites
 
-- On Dfns Dashboard, under `Settings` > `Applications`, use the existing default Application ID, or create a new Application. Eg
-  - type: Client Side
-  - Relying Party: localhost
-  - Origin: http://localhost:3000
-- On Dfns Dashboard, under `Settings` > `Service Account`, create a new Service Account (check [Dfns docs](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair) to see how to generate a public/private keypair)
-- Copy/paste the `.env.example` into a `.env`, and replace with your environment variables values
-  - `DFNS_API_URL` Dfns api URL (eg https://api.dfns.ninja or https://api.dfns.io depending which you are using)
-  - `DFNS_APP_ID` Application ID registered with Dfns above
-  - `DFNS_APP_ORIGIN` Origin of Dfns Application created in step above, eg `http://localhost:3000`
-  - `DFNS_AUTH_TOKEN` Service Account token created above.
-  - `DFNS_CRED_ID` Credential ID associated with the Service Account, when you created the service account. You can find this one in the `Dashboard` > `Settings` > `Service Account`
-  - `DFNS_PRIVATE_KEY` Private key of the credentials created for the service account. (the newlines in it should not be a problem)
+To run the example, you must have an active `Application`. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
+
+- Name, choose any name
+- Type of User, `Client Side`
+- Relying Party = `localhost`
+- Origin = `http://localhost:3000`
+
+After the `Application` is created, copy the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
+
+You also need a `Service Account`. To create a new `Service Account`, first [generate a keypair](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair), then go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Service Accounts` > `New Service Account`, and enter the following information,
+
+- Name, choose any name
+- Public Key, the public key from the step 'generate a keypair'
+
+After the `Service Account` is created, make sure you copy the account's `authToken`. You won't be able to access the token after you navigate away from the confirmation page.
+
+Go back to the service accounts listing, and the new `Service Account` should be listed there. copy the `Signing Key Cred ID`, e.g. `Y2ktM3E5Y2MtbXFoM20tODdiOW1jNDZqZ2gxYWJqbA`.
+
+Copy `.env.example` to a new file `.env` and set the following values,
+
+- `DFNS_API_URL` = `https://api.dfns.ninja`
+- `DFNS_APP_ID` = the `App ID` from above
+- `DFNS_APP_ORIGIN` = `http://localhost:3000`
+- `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
+- `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
+- `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
 
 ## Explanation
 
@@ -35,9 +49,9 @@ Create an asymmetric key signer with the private key
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 
 const signer = new AsymmetricKeySigner({
-  privateKey: process.env.DFNS_PRIVATE_KEY, // corresponding private key used in service account creation
-  credId: 'X2ktMzhxaTEtZTF1bTgtOXY1cG9yY2tkZDe1dG1jYg', // credential ID of the service account, get from dashboard
-  appOrigin: 'https://app.mycompany.com', // application's origin, should match the registered application
+  privateKey: process.env.DFNS_PRIVATE_KEY!,
+  credId: process.env.DFNS_CRED_ID!,
+  appOrigin: process.env.DFNS_APP_ORIGIN!,
 })
 ```
 
@@ -46,21 +60,21 @@ Create an API client
 ```ts
 import { DfnsApiClient } from '@dfns/sdk'
 
-const apiClient = new DfnsApiClient({
-  baseUrl: 'https://api.dfns.io', // url to the DFNS API
-  appId: 'ap-3n0jv-87cfc-953pop0iauf2sv5t', // application ID registered with DFNS
-  authToken: process.env.DFNS_AUTH_TOKEN, // the token obtained when creating the service account
-  signer, // the signer from last step
+const dfnsApi = new DfnsApiClient({
+  appId: process.env.DFNS_APP_ID!,
+  authToken: process.env.DFNS_AUTH_TOKEN!,
+  baseUrl: process.env.DFNS_API_URL!,
+  signer,
 })
 ```
 
 Use the API client
 
 ```ts
-const wallet = await apiClient.wallets.createWallet({ body: { network: BlockchainNetwork.ETH_GOERLI } })
+const wallet = await dfnsApi.wallets.createWallet({ body: { network: BlockchainNetwork.EthereumSepolia } })
 console.log(JSON.stringify(wallet))
 
-const list = await apiClient.wallets.listWallets({})
+const list = await dfnsApi.wallets.listWallets({})
 console.log(JSON.stringify(list))
 ```
 

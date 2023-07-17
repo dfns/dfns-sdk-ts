@@ -1,6 +1,5 @@
 import { WebAuthn } from '@dfns/sdk-webauthn'
-import { DfnsApiClient } from '@dfns/sdk/dfnsApiClient'
-import { DfnsAuthenticator } from '@dfns/sdk/dfnsAuthenticator'
+import { DfnsApiClient, DfnsAuthenticator } from '@dfns/sdk'
 
 export const authApi = (): DfnsAuthenticator => {
   const signer = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })

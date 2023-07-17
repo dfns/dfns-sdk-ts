@@ -77,9 +77,6 @@ export type PermissionAssignment = {
   // FIXME: Missing documentation for identityId
   identityId: EntityId
 
-  // FIXME: Missing documentation for identityKind
-  identityKind: IdentityKind
-
   // FIXME: Missing documentation for dateCreated
   dateCreated: IsoDatetime
 
@@ -181,9 +178,6 @@ export type CreatePermissionAssignmentInput = {
 
   // FIXME: Missing documentation for identityId
   identityId: string
-
-  // FIXME: Missing documentation for identityKind
-  identityKind: IdentityKindCustomerFacing
 }
 
 // FIXME: Missing documentation for FieldEvaluatorKind
@@ -208,28 +202,6 @@ export enum FieldEvaluatorKind {
 export enum PermissionStatus {
   // FIXME: Missing documentation for Active
   Active = 'Active',
-}
-
-// FIXME: Missing documentation for IdentityKind
-export enum IdentityKind {
-  // FIXME: Missing documentation for Application
-  Application = 'Application',
-  // FIXME: Missing documentation for CustomerEmployee
-  CustomerEmployee = 'CustomerEmployee',
-  // FIXME: Missing documentation for DfnsStaff
-  DfnsStaff = 'DfnsStaff',
-  // FIXME: Missing documentation for EndUser
-  EndUser = 'EndUser',
-}
-
-// FIXME: Missing documentation for IdentityKindCustomerFacing
-export enum IdentityKindCustomerFacing {
-  // FIXME: Missing documentation for Application
-  Application = 'Application',
-  // FIXME: Missing documentation for CustomerEmployee
-  CustomerEmployee = 'CustomerEmployee',
-  // FIXME: Missing documentation for EndUser
-  EndUser = 'EndUser',
 }
 
 // FIXME: Missing documentation for OwnerKind

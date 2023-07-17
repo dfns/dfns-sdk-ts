@@ -15,22 +15,51 @@ The end user will sign the action from the web-app, using his WebauthN credentia
 
 ## Prerequisites
 
-For this example to work, you need to complete a few prerequisites:
+To run the example, you must have an active `Application`. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
 
-- On Dfns Dashboard, under `Settings` > `Applications`, create a new Dfns Application:
-  - type: Client Side
-  - Relying Party: localhost
-  - Origin: http://localhost:3000
-- On Dfns Dashboard, under `Settings` > `Service Account`, create a new Service Account (check [Dfns docs](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair) to see how to generate a public/private keypair)
-- Copy/paste the `.env.example` into a `.env.local`, and replace with your environment variables values
-  - `DFNS_API_BASE_URL`: Dfns api URL (eg https://api.dfns.ninja or https://api.dfns.io depending which you are using)
-  - `DFNS_APPLICATION_ID` Application ID registered with Dfns above
-  - `DFNS_APPLICATION_ORIGIN` Origin of Dfns Application created in step above, eg `http://localhost:3000`
-  - `DFNS_SERVICE_ACCOUNT_TOKEN` Service Account token created above.
-  - `DFNS_SERVICE_ACCOUNT_CREDENTIAL_ID`: Credential ID associated with the Service Account, when you created the service account. You can find this one in the `Dashboard` > `Settings` > `Service Account`
-  - `DFNS_SERVICE_ACCOUNT_PRIVATE_KEY`: Private key of the credentials created for the service account. (the newlines in it should not be a problem)
-  - `NEXT_PUBLIC_DFNS_WEBAUTHN_RPID` Relying party registered on the Dfns Application you created (in Dashboard go to `Settings` > `Applications`) to find it. It should be `localhost`.
+* Name, choose any name
+* Type of User, `Client Side`
+* Relying Party = `localhost`
+* Origin = `http://localhost:3000`
 
+After the `Application` is created, copy the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
+
+You also need a `Service Account`. To create a new `Service Account`, first [generate a keypair](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair), then go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Service Accounts` > `New Service Account`, and enter the following information,
+
+* Name, choose any name
+* Public Key, the public key from the step 'generate a keypair'
+
+After the `Service Account` is created, make sure you copy the account's `authToken`. You won't be able to access the token after you navigate away from the confirmation page.
+
+Go back to the service accounts listing, and the new `Service Account` should be listed there. copy the `Signing Key Cred ID`, e.g. `Y2ktM3E5Y2MtbXFoM20tODdiOW1jNDZqZ2gxYWJqbA`.
+
+Copy `.env.example` to a new file `.env.local` and set the following values,
+
+* `DFNS_API_BASE_URL` = `https://api.dfns.ninja`
+* `DFNS_APPLICATION_ID` = the `App ID` from above
+* `DFNS_APPLICATION_ORIGIN` = `http://localhost:3000`
+* `DFNS_SERVICE_ACCOUNT_CREDENTIAL_ID` = the `Signing Key Cred ID` from above
+* `DFNS_SERVICE_ACCOUNT_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
+* `DFNS_SERVICE_ACCOUNT_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
+* `NEXT_PUBLIC_DFNS_WEBAUTHN_RPID` = 'localhost'
+
+## Next.js Configuration
+
+To setup your own `Next.js` project, make sure to include the following tweaks in `next.config.js`
+
+* Transpile the WebAuthn package `@dfns/sdk-webauthn`
+* Enable multiline environment variable with `dotenv`
+
+```javascript
+const result = require('dotenv').config({ path: '.env.local' })
+
+const nextConfig = {
+  env: result.parsed,
+  transpilePackages: ['@dfns/sdk-webauthn'],
+}
+
+module.exports = nextConfig
+```
 
 ## Run Example
 
@@ -89,7 +118,7 @@ const { token: endUserAuthToken } = await dfns.auth.createDelegatedUserLogin({
 Wallet creation initiation (wallet owned by end user):
 
 ```ts
-// instanciate a "delegated" dfns client
+// instanciate a "delegated" Dfns client
 const dfnsDelegated = new DfnsDelegatedApiClient({
     appId: process.env.DFNS_APPLICATION_ID!,
     baseUrl: process.env.DFNS_API_BASE_URL!,

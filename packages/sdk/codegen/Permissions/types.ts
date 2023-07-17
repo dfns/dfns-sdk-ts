@@ -74,11 +74,7 @@ export type RevokePermissionAssignmentResponse =
   Permissions.DeletionAcknowledgement
 
 export type ListPermissionAssignmentsRequest = {
-  query?: {
-    permissionId?: string
-    identityId?: string
-    identityKind?: Permissions.IdentityKind
-  }
+  query?: { permissionId?: string; identityId?: string }
 }
 
 export type ListPermissionAssignmentsResponse = {

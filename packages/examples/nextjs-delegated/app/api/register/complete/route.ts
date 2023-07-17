@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { BaseAuthApi, CreateUserRegistrationRequest } from '@dfns/sdk/baseAuthApi'
-import { IdentityKindCustomerFacing } from '@dfns/sdk/codegen/datamodel/Permissions'
 import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'
 import { dfns } from '../../utils'
 
@@ -32,7 +31,6 @@ export async function POST(request: NextRequest) {
   const permissionAssignment = await dfns.permissions.createPermissionAssignment({
     body: {
       permissionId: permission.id,
-      identityKind: IdentityKindCustomerFacing.EndUser,
       identityId: result.user.id,
     },
   })

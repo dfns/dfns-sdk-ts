@@ -1,9 +1,7 @@
-import { DfnsApiClient } from '@dfns/sdk'
+import { DfnsApiClient, DfnsDelegatedApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import { BaseAuthApi } from '@dfns/sdk/baseAuthApi'
 import { UserAuthKind } from '@dfns/sdk/codegen/datamodel/Auth'
-import { IdentityKindCustomerFacing } from '@dfns/sdk/codegen/datamodel/Permissions'
-import { DfnsDelegatedApiClient } from '@dfns/sdk/dfnsDelegatedApiClient'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { randomUUID } from 'crypto'
@@ -66,16 +64,14 @@ app.post(
 
     // cache the DFNS auth token, example uses a client-side cookie, but can be
     // cached in other ways, such as session storage or database
-    res
-      .cookie('DFNS_AUTH_TOKEN', login.token, { maxAge: 900000, httpOnly: true })
-      .json({ username: req.body.username })
+    res.cookie('DFNS_AUTH_TOKEN', login.token, { maxAge: 900000, httpOnly: true }).json({ username: req.body.username })
   })
 )
 
 app.post(
   '/register/init',
   asyncHandler(async (req: Request, res: Response) => {
-    // perform local system registration before initiating DFNS registration
+    // perform local system registration before initiating Dfns registration
 
     const challenge = await apiClient().auth.createDelegatedUserRegistration({
       body: { kind: UserAuthKind.EndUser, email: req.body.username },
@@ -105,7 +101,6 @@ app.post(
     await client.permissions.createPermissionAssignment({
       body: {
         permissionId: permission.id,
-        identityKind: IdentityKindCustomerFacing.EndUser,
         identityId: registration.user.id,
       },
     })
@@ -160,7 +155,7 @@ app.post(
   })
 )
 
-const port = process.env.PORT
+const port = process.env.EXPRESS_PORT
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
 })

@@ -1,5 +1,5 @@
 import { DfnsError } from '@dfns/sdk/dfnsError'
-import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Foundations'
+import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Wallets'
 import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

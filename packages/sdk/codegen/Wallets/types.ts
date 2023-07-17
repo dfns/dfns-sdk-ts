@@ -2,7 +2,7 @@ import * as Foundations from '../datamodel/Foundations'
 import * as Wallets from '../datamodel/Wallets'
 
 export type CreateWalletRequest = {
-  body: Wallets.CreateWalletRequest
+  body: Wallets.CreateWalletBody
 }
 
 export type CreateWalletResponse = Wallets.Wallet
@@ -46,7 +46,7 @@ export type GetWalletHistoryResponse = Wallets.PaginatedEventHistory
 
 export type TransferAssetRequest = {
   walletId: Foundations.EntityId
-  body: Wallets.TransferAssetRequest
+  body: Wallets.TransferAssetBody
 }
 
 export type TransferAssetResponse = Wallets.TransferRequest
@@ -70,7 +70,7 @@ export type ListTransfersResponse = Wallets.PaginatedTransferList
 
 export type BroadcastTransactionRequest = {
   walletId: Foundations.EntityId
-  body: Wallets.BroadcastTransactionRequest
+  body: Wallets.BroadcastTransactionBody
 }
 
 export type BroadcastTransactionResponse = Wallets.TransactionRequest
@@ -94,7 +94,7 @@ export type ListTransactionsResponse = Wallets.PaginatedTransactionList
 
 export type GenerateSignatureRequest = {
   walletId: Foundations.EntityId
-  body: Wallets.GenerateSignatureRequest
+  body: Wallets.GenerateSignatureBody
 }
 
 export type GenerateSignatureResponse = Wallets.SignatureRequest
