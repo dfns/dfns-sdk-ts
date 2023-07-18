@@ -8,6 +8,7 @@ export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
       credId: string
       appOrigin: string
       crossOrigin?: boolean
+      algorithm?: string
     }
   ) {}
 
@@ -26,7 +27,11 @@ export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
       credentialAssertion: {
         credId: this.options.credId,
         clientData: clientData.toString('base64url'),
-        signature: crypto.sign('SHA256', clientData, this.options.privateKey).toString('base64url'),
+        signature: crypto.sign(
+          this.options.algorithm || undefined,
+          clientData,
+          this.options.privateKey
+        ).toString('base64url'),
       },
     }
   }
