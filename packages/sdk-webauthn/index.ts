@@ -45,7 +45,7 @@ export class WebAuthn implements CredentialSigner<Fido2Assertion>, CredentialSto
         clientData: toBase64Url(Buffer.from(assertion.clientDataJSON)),
         authenticatorData: toBase64Url(Buffer.from(assertion.authenticatorData)),
         signature: toBase64Url(Buffer.from(assertion.signature)),
-        userHandle: assertion.userHandle ? toBase64Url(Buffer.from(assertion.userHandle)) : undefined,
+        userHandle: assertion.userHandle ? toBase64Url(Buffer.from(assertion.userHandle)) : '',
       },
     }
   }
