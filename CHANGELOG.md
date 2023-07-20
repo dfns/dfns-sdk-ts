@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-alpha.10 (2023-07-20)
+
+- Fixed Android webauthN bub where userHandle is empty
+- Fixed asymmetric key signer for EdDSA keys
+
 ## 0.1.0-alpha.9 (2023-07-13)
 
 - Renamed `BlockchainNetwork` names for the wallets API [breaking]
