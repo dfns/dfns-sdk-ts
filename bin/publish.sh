@@ -26,7 +26,7 @@ echo # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     for packageName in "${packages[@]}"; do
         cd dist/"${packageName}"
-        npm publish
+        npm publish --workspaces=false
         cd - >/dev/null
     done
 fi
