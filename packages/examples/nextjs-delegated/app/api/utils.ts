@@ -4,7 +4,7 @@ import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 export const signer = new AsymmetricKeySigner({
   appOrigin: process.env.DFNS_APPLICATION_ORIGIN!,
   credId: process.env.DFNS_SERVICE_ACCOUNT_CREDENTIAL_ID!,
-  privateKey: process.env.DFNS_SERVICE_ACCOUNT_PRIVATE_KEY!,
+  privateKey: process.env.DFNS_SERVICE_ACCOUNT_PRIVATE_KEY!.replace(/\\n/g, '\n'),
 })
 
 export const dfns = new DfnsApiClient({
