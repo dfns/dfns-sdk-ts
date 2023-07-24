@@ -1,17 +1,19 @@
 {
-  "name": "ethersjs",
+  "name": "uniswap",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "main.ts",
   "dependencies": {
-    "@dfns/ethersjs-wallet": "*",
+    "@dfns/ethersjs6-wallet": "*",
     "@dfns/sdk-keysigner": "*",
     "@uniswap/sdk-core": "3.2.2",
     "@uniswap/v3-core": "1.0.1",
     "@uniswap/v3-sdk": "3.9.0",
     "dotenv": "16.1.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ts-node": "10.9.1"
+  },
   "scripts": {
-    "uniswap": "ts-node src/uniswap.ts"
+    "exec": "ts-node main.ts"
   }
 }
