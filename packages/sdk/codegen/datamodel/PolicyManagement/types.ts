@@ -445,12 +445,12 @@ export enum PolicyActivityKind {
   TransactionInitiation = 'TransactionInitiation',
   // FIXME: Missing documentation for PaymentInitiation
   PaymentInitiation = 'PaymentInitiation',
-  // FIXME: Missing documentation for WalletTransferAsset
-  WalletTransferAsset = 'WalletTransferAsset',
-  // FIXME: Missing documentation for WalletBroadcastTransaction
-  WalletBroadcastTransaction = 'WalletBroadcastTransaction',
-  // FIXME: Missing documentation for WalletGenerateSignature
-  WalletGenerateSignature = 'WalletGenerateSignature',
+  // FIXME: Missing documentation for WalletsTransferAsset
+  WalletsTransferAsset = 'WalletsTransferAsset',
+  // FIXME: Missing documentation for WalletsBroadcastTransaction
+  WalletsBroadcastTransaction = 'WalletsBroadcastTransaction',
+  // FIXME: Missing documentation for WalletsGenerateSignature
+  WalletsGenerateSignature = 'WalletsGenerateSignature',
 }
 
 // FIXME: Missing documentation for PolicyStatus

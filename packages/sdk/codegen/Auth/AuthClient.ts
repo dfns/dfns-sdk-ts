@@ -692,4 +692,21 @@ export class AuthClient {
 
     return response.json()
   }
+
+  async restartDelegatedUserRegistration(
+    request: T.RestartDelegatedUserRegistrationRequest
+  ): Promise<T.RestartDelegatedUserRegistrationResponse> {
+    const path = buildPathAndQuery('/auth/registration/delegated/restart', {
+      path: {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
 }
