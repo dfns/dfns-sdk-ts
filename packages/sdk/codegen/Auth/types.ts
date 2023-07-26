@@ -247,3 +247,10 @@ export type CreateUserRecoveryRequest = {
 }
 
 export type CreateUserRecoveryResponse = Auth.UserRegistration
+
+export type RestartDelegatedUserRegistrationRequest = {
+  body: Auth.CreateUserInput
+}
+
+export type RestartDelegatedUserRegistrationResponse =
+  Auth.UserRegistrationChallenge

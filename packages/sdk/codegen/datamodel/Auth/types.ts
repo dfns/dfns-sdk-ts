@@ -526,6 +526,9 @@ export type KeyCredentialAssertion = {
 
   // FIXME: Missing documentation for signature
   signature: string
+
+  // FIXME: Missing documentation for algorithm
+  algorithm?: string
 }
 
 // FIXME: Missing documentation for AuthenticateUserKeyInput
