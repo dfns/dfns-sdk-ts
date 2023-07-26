@@ -170,6 +170,9 @@ export type Wallet = {
   // FIXME: Missing documentation for status
   status: WalletStatus
 
+  // FIXME: Missing documentation for signingKey
+  signingKey?: SigningKey
+
   // FIXME: Missing documentation for address
   address?: string
 
@@ -184,6 +187,18 @@ export type Wallet = {
 
   // FIXME: Missing documentation for dateCreated
   dateCreated: IsoDatetime
+}
+
+// FIXME: Missing documentation for SigningKey
+export type SigningKey = {
+  // FIXME: Missing documentation for scheme
+  scheme: KeyScheme
+
+  // FIXME: Missing documentation for curve
+  curve: KeyCurve
+
+  // FIXME: Missing documentation for publicKey
+  publicKey: string
 }
 
 // FIXME: Missing documentation for WalletAssets
@@ -665,6 +680,22 @@ export enum WalletStatus {
   Failed = 'Failed',
 }
 
+// FIXME: Missing documentation for KeyScheme
+export enum KeyScheme {
+  // FIXME: Missing documentation for ECDSA
+  ECDSA = 'ECDSA',
+  // FIXME: Missing documentation for EdDSA
+  EdDSA = 'EdDSA',
+}
+
+// FIXME: Missing documentation for KeyCurve
+export enum KeyCurve {
+  // FIXME: Missing documentation for ed25519
+  ed25519 = 'ed25519',
+  // FIXME: Missing documentation for secp256k1
+  secp256k1 = 'secp256k1',
+}
+
 // FIXME: Missing documentation for EventKind
 export enum EventKind {
   // FIXME: Missing documentation for NativeTransfer
@@ -767,4 +798,8 @@ export enum BlockchainNetwork {
   Tron = 'Tron',
   // FIXME: Missing documentation for TronShasta
   TronShasta = 'TronShasta',
+  // FIXME: Missing documentation for KeyECDSA
+  KeyECDSA = 'KeyECDSA',
+  // FIXME: Missing documentation for KeyEdDSA
+  KeyEdDSA = 'KeyEdDSA',
 }

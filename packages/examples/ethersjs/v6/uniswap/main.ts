@@ -19,7 +19,7 @@ const QUOTER_CONTRACT_ADDRESS = '0x61fFE014bA17989E743c5F6cB21bF9697530B21e'
 const SWAP_ROUTER_CONTRACT_ADDRESS = '0xE592427A0AEce92De3Edee1F18E0157C05861564'
 
 const WETH = new Token(SupportedChainId.GOERLI, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18)
-const USDT = new Token(SupportedChainId.GOERLI, '0xC2C527C0CACF457746Bd31B2a698Fe89de2b6d49', 18)
+const USDC = new Token(SupportedChainId.GOERLI, '0x07865c6e87b9f70255377e024ace6630c1eaa37f', 6)
 
 const rpcProvider = new JsonRpcProvider(process.env.GOERLI_RPC_PROVIDER_URL!)
 
@@ -39,8 +39,8 @@ const initDfnsWallet = () => {
 
   return new DfnsWallet({
     walletId: process.env.DFNS_WALLET_ID!,
-    retryInterval: 2000,
     dfnsClient,
+    maxRetries: 10,
   }).connect(rpcProvider)
 }
 
@@ -62,7 +62,7 @@ const getPoolInfo = async (): Promise<PoolInfo> => {
   const poolAddress = computePoolAddress({
     factoryAddress: POOL_FACTORY_CONTRACT_ADDRESS,
     tokenA: WETH,
-    tokenB: USDT,
+    tokenB: USDC,
     fee: FeeAmount.MEDIUM,
   })
 
@@ -110,14 +110,14 @@ const createTrade = async (): Promise<Trade<Token, Token, TradeType.EXACT_INPUT>
 
   const pool = new Pool(
     WETH,
-    USDT,
+    USDC,
     FeeAmount.MEDIUM,
     poolInfo.sqrtPriceX96.toString(),
     poolInfo.liquidity.toString(),
     Number(poolInfo.tick)
   )
 
-  const swapRoute = new Route([pool], WETH, USDT)
+  const swapRoute = new Route([pool], WETH, USDC)
   const inputAmount = CurrencyAmount.fromRawAmount(swapRoute.input, AMOUNT_TO_TRADE)
   const tradeType = TradeType.EXACT_INPUT
 
@@ -142,10 +142,10 @@ const main = async () => {
 
   // approve uniswap access to WETH funds
   const approveTx: TransactionResponse = await wethContract.approve(SWAP_ROUTER_CONTRACT_ADDRESS, AMOUNT_TO_TRADE)
-  console.log(`Approve Uniswap transfer privilege: ${approveTx.hash}`)
+  console.log(`Approve Uniswap contract allowance: ${approveTx.hash}`)
   await approveTx.wait()
 
-  // execute the trade swap for USDT
+  // execute the trade swap for USDC
   const trade = await createTrade()
 
   const options: SwapOptions = {
@@ -167,7 +167,7 @@ const main = async () => {
 
   const tradeTx = await rpcProvider.broadcastTransaction(signedTx)
   const tradeRec = await tradeTx.wait()
-  console.log(`Swapped WETH for USDT: ${tradeRec?.hash}`)
+  console.log(`Swapped WETH for USDC: ${tradeRec?.hash}`)
 }
 
 main()

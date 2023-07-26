@@ -1,18 +1,19 @@
 import { DfnsApiClient } from '@dfns/sdk'
-import { SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { KeyCurve, KeyScheme, SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
 import {
   AbstractSigner,
   Provider,
+  Signature,
   Signer,
   Transaction,
   TransactionLike,
   TransactionRequest,
   TypedDataDomain,
+  TypedDataEncoder,
   TypedDataField,
-  assertArgument,
+  computeAddress,
   getAddress,
   hashMessage,
-  hexlify,
   resolveAddress,
   resolveProperties,
 } from 'ethers'
@@ -48,8 +49,18 @@ export class DfnsWallet extends AbstractSigner {
     if (!this.address) {
       const { walletId, dfnsClient } = this.options
       const res = await dfnsClient.wallets.getWallet({ walletId })
-      assertArgument(res.address, 'wallet does not have an address', 'walletId', walletId)
-      this.address = getAddress(res.address)
+
+      if (!res.signingKey || res.signingKey.scheme !== KeyScheme.ECDSA || res.signingKey.curve !== KeyCurve.secp256k1) {
+        throw new Error(
+          `wallet ${walletId} has incompatible scheme (${res.signingKey?.scheme}) or curve (${res.signingKey?.curve})`
+        )
+      }
+
+      if (res.address) {
+        this.address = getAddress(res.address)
+      } else {
+        this.address = computeAddress('0x' + res.signingKey.publicKey)
+      }
     }
 
     return this.address
@@ -64,8 +75,12 @@ export class DfnsWallet extends AbstractSigner {
 
       const res = await dfnsClient.wallets.getSignature({ walletId, signatureId })
       if (res.status === SignatureStatus.Signed) {
-        if (!res.signature?.encoded) break
-        return res.signature.encoded
+        if (!res.signature) break
+        return Signature.from({
+          r: res.signature.r,
+          s: res.signature.s,
+          v: res.signature.recid ? 0x1c : 0x1b,
+        }).serialized
       } else if (res.status === SignatureStatus.Failed) {
         break
       }
@@ -91,16 +106,12 @@ export class DfnsWallet extends AbstractSigner {
     }
 
     if (tx.from != null) {
-      assertArgument(
-        getAddress(<string>tx.from) === (await this.getAddress()),
-        'transaction from address mismatch',
-        'tx.from',
-        tx.from
-      )
+      if (getAddress(<string>tx.from) !== (await this.getAddress())) {
+        throw new Error('transaction from address mismatch')
+      }
       delete tx.from
     }
 
-    // sign the digest and build the transaction
     const btx = Transaction.from(<TransactionLike<string>>tx)
 
     const { walletId, dfnsClient } = this.options
@@ -128,20 +139,23 @@ export class DfnsWallet extends AbstractSigner {
     types: Record<string, TypedDataField[]>,
     value: Record<string, any>
   ): Promise<string> {
+    // Populate any ENS names
+    const populated = await TypedDataEncoder.resolveNames(domain, types, value, async (name: string) => {
+      if (!this.provider) {
+        throw new Error('cannot resolve ENS names without a provider')
+      }
+      const address = await this.provider.resolveName(name)
+      if (!address) throw new Error(`unconfigured ENS name ${name}`)
+
+      return address
+    })
+
     const { walletId, dfnsClient } = this.options
     const res = await dfnsClient.wallets.generateSignature({
       walletId,
       body: {
-        kind: SignatureKind.Eip712,
-        types,
-        domain: {
-          name: domain.name ?? undefined,
-          version: domain.version ?? undefined,
-          chainId: domain.chainId ? Number(domain.chainId) : undefined,
-          verifyingContract: domain.verifyingContract ?? undefined,
-          salt: domain.salt ? hexlify(domain.salt) : undefined,
-        },
-        message: value,
+        kind: SignatureKind.Hash,
+        hash: TypedDataEncoder.hash(populated.domain, types, populated.value),
       },
     })
 
