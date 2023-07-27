@@ -50,4 +50,4 @@ L2 message successful: status: undefined
 ETH balance of the L2 wallet has been updated from 0 to 1000000
 ```
 
-Here's the Ethereum Goerli [L1 transaction](https://goerli.etherscan.io/tx/0xb7fa8ce95283df0f77981a53d365e4026dd240af3a7b4eec3049f0b453ca366d) that initiated the deposit, and this is the Arbitrum Goerli [L2 transaction](https://goerli.arbiscan.io/tx/0xf15ce52b6c824097fe92e2c507b8afecc14a1f57a0544d79e28b935c54915626) that completed the deposit.
+This is the Ethereum Goerli [L1 transaction](https://goerli.etherscan.io/tx/0xb7fa8ce95283df0f77981a53d365e4026dd240af3a7b4eec3049f0b453ca366d) that initiated the deposit, and this is the Arbitrum Goerli [L2 transaction](https://goerli.arbiscan.io/tx/0xf15ce52b6c824097fe92e2c507b8afecc14a1f57a0544d79e28b935c54915626) that completed the deposit.

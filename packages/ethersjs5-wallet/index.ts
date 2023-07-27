@@ -1,13 +1,13 @@
 import { DfnsApiClient } from '@dfns/sdk'
-import { SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { KeyCurve, KeyScheme, SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
 import { getAddress } from '@ethersproject/address'
 import { Provider, TransactionRequest } from '@ethersproject/abstract-provider'
 import { Signer, TypedDataDomain, TypedDataField, TypedDataSigner } from '@ethersproject/abstract-signer'
-import { hexlify } from '@ethersproject/bytes'
+import { joinSignature } from '@ethersproject/bytes'
 import { hashMessage, _TypedDataEncoder } from '@ethersproject/hash'
 import { keccak256 } from '@ethersproject/keccak256'
 import { defineReadOnly, resolveProperties } from '@ethersproject/properties'
-import { serialize, UnsignedTransaction } from '@ethersproject/transactions'
+import { computeAddress, serialize, UnsignedTransaction } from '@ethersproject/transactions'
 
 const sleep = (interval = 0) => new Promise((resolve) => setTimeout(resolve, interval))
 
@@ -42,10 +42,18 @@ export class DfnsWallet extends Signer implements TypedDataSigner {
     if (!this.address) {
       const { walletId, dfnsClient } = this.options
       const res = await dfnsClient.wallets.getWallet({ walletId })
-      if (!res.address) {
-        throw new Error(`wallet ${walletId} does not have an address`)
+
+      if (!res.signingKey || res.signingKey.scheme !== KeyScheme.ECDSA || res.signingKey.curve !== KeyCurve.secp256k1) {
+        throw new Error(
+          `wallet ${walletId} has incompatible scheme (${res.signingKey?.scheme}) or curve (${res.signingKey?.curve})`
+        )
       }
-      this.address = getAddress(res.address)
+
+      if (res.address) {
+        this.address = getAddress(res.address)
+      } else {
+        this.address = computeAddress('0x' + res.signingKey.publicKey)
+      }
     }
 
     return this.address
@@ -60,8 +68,12 @@ export class DfnsWallet extends Signer implements TypedDataSigner {
 
       const res = await dfnsClient.wallets.getSignature({ walletId, signatureId })
       if (res.status === SignatureStatus.Signed) {
-        if (!res.signature?.encoded) break
-        return res.signature.encoded
+        if (!res.signature) break
+        return joinSignature({
+          r: res.signature.r,
+          s: res.signature.s,
+          recoveryParam: res.signature.recid,
+        })
       } else if (res.status === SignatureStatus.Failed) {
         break
       }
@@ -94,7 +106,6 @@ export class DfnsWallet extends Signer implements TypedDataSigner {
 
   async signMessage(message: string | Uint8Array): Promise<string> {
     const { walletId, dfnsClient } = this.options
-
     const res = await dfnsClient.wallets.generateSignature({
       walletId,
       body: { kind: SignatureKind.Hash, hash: hashMessage(message) },
@@ -108,20 +119,22 @@ export class DfnsWallet extends Signer implements TypedDataSigner {
     types: Record<string, TypedDataField[]>,
     value: Record<string, any>
   ): Promise<string> {
+    // Populate any ENS names
+    const populated = await _TypedDataEncoder.resolveNames(domain, types, value, async (name: string) => {
+      if (!this.provider) {
+        throw new Error('cannot resolve ENS names without a provider')
+      }
+      const resolved = await this.provider.resolveName(name)
+      if (!resolved) throw new Error(`unconfigured ENS name ${name}`)
+      return resolved
+    })
+
     const { walletId, dfnsClient } = this.options
     const res = await dfnsClient.wallets.generateSignature({
       walletId,
       body: {
-        kind: SignatureKind.Eip712,
-        types,
-        domain: {
-          name: domain.name ?? undefined,
-          version: domain.version ?? undefined,
-          chainId: domain.chainId ? Number(domain.chainId) : undefined,
-          verifyingContract: domain.verifyingContract ?? undefined,
-          salt: domain.salt ? hexlify(domain.salt) : undefined,
-        },
-        message: value,
+        kind: SignatureKind.Hash,
+        hash: _TypedDataEncoder.hash(populated.domain, types, populated.value),
       },
     })
 

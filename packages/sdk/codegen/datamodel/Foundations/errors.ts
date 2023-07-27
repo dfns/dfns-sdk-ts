@@ -113,6 +113,29 @@ export class InternalServerError extends DfnsError {
   // FIXME: Missing documentation for errorName
   errorName: string = 'Internal Server Error'
 }
+export class UnprocessableContentError extends DfnsError {
+  name: string = 'UnprocessableContentError'
+  // FIXME: Missing documentation for serviceName
+  serviceName: string
+
+  // FIXME: Missing documentation for message
+  message: string
+
+  // FIXME: Missing documentation for causes
+  causes?: string[]
+
+  // FIXME: Missing documentation for shouldTriggerInvestigaton
+  shouldTriggerInvestigaton: boolean
+
+  // FIXME: Missing documentation for isDfnsError
+  isDfnsError: boolean = true
+
+  // FIXME: Missing documentation for httpStatus
+  httpStatus: number = 422
+
+  // FIXME: Missing documentation for errorName
+  errorName: string = 'Unprocessable Content'
+}
 export class EntityExpiredError extends DfnsError {
   name: string = 'EntityExpiredError'
   // FIXME: Missing documentation for serviceName

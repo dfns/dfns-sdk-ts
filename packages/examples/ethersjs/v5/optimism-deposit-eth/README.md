@@ -49,4 +49,4 @@ Waiting for status to change to RELAYED ⏳
 ETH balance of the L2 wallet has been updated from 0 to 1000000
 ```
 
-Here's the Ethereum Goerli [L1 transaction](https://goerli.etherscan.io/tx/0x8a4c476e2ee8a806fdc11ee316348db45e2fd98b25fef98d31eed4037b172f11) that initiated the deposit, and this is the Arbitrum Goerli [L2 transaction](https://goerli-optimism.etherscan.io/address/0x8c8b4cd23f0dcefd2d6b5c142931ad8f7a434481) that completed the deposit.
+This is the Ethereum Goerli [L1 transaction](https://goerli.etherscan.io/tx/0x8a4c476e2ee8a806fdc11ee316348db45e2fd98b25fef98d31eed4037b172f11) that initiated the deposit, and this is the Arbitrum Goerli [L2 transaction](https://goerli-optimism.etherscan.io/address/0x8c8b4cd23f0dcefd2d6b5c142931ad8f7a434481) that completed the deposit.

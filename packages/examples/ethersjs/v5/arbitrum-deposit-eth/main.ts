@@ -27,8 +27,8 @@ const initDfnsWallet = (walletId: string, provider: JsonRpcProvider) => {
 
   return new DfnsWallet({
     walletId,
-    retryInterval: 2000,
     dfnsClient,
+    maxRetries: 10,
   }).connect(provider)
 }
 
