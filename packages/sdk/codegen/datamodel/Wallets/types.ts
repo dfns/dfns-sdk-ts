@@ -443,9 +443,6 @@ export type TransferRequest = {
   // FIXME: Missing documentation for network
   network: BlockchainNetwork
 
-  // FIXME: Missing documentation for txHash
-  txHash?: string
-
   // FIXME: Missing documentation for requester
   requester: RequesterIdentity
 
@@ -455,20 +452,26 @@ export type TransferRequest = {
   // FIXME: Missing documentation for status
   status: TransferStatus
 
+  // FIXME: Missing documentation for txHash
+  txHash?: string
+
   // FIXME: Missing documentation for fee
   fee?: Amount
 
-  // FIXME: Missing documentation for error
-  error?: string
-
   // FIXME: Missing documentation for dateRequested
   dateRequested: IsoDatetime
+
+  // FIXME: Missing documentation for datePolicyEvaluated
+  datePolicyEvaluated?: IsoDatetime
 
   // FIXME: Missing documentation for dateBroadcasted
   dateBroadcasted?: IsoDatetime
 
   // FIXME: Missing documentation for dateConfirmed
   dateConfirmed?: IsoDatetime
+
+  // FIXME: Missing documentation for reason
+  reason?: string
 }
 
 // FIXME: Missing documentation for PaginatedTransferList
@@ -494,9 +497,6 @@ export type TransactionRequest = {
   // FIXME: Missing documentation for network
   network: BlockchainNetwork
 
-  // FIXME: Missing documentation for txHash
-  txHash?: string
-
   // FIXME: Missing documentation for requester
   requester: RequesterIdentity
 
@@ -506,8 +506,8 @@ export type TransactionRequest = {
   // FIXME: Missing documentation for status
   status: TransactionStatus
 
-  // FIXME: Missing documentation for error
-  error?: string
+  // FIXME: Missing documentation for txHash
+  txHash?: string
 
   // FIXME: Missing documentation for fee
   fee?: Amount
@@ -515,11 +515,17 @@ export type TransactionRequest = {
   // FIXME: Missing documentation for dateRequested
   dateRequested: IsoDatetime
 
+  // FIXME: Missing documentation for datePolicyEvaluated
+  datePolicyEvaluated?: IsoDatetime
+
   // FIXME: Missing documentation for dateBroadcasted
   dateBroadcasted?: IsoDatetime
 
   // FIXME: Missing documentation for dateConfirmed
   dateConfirmed?: IsoDatetime
+
+  // FIXME: Missing documentation for reason
+  reason?: string
 }
 
 // FIXME: Missing documentation for PaginatedTransactionList
@@ -569,17 +575,26 @@ export type SignatureRequest = {
   // FIXME: Missing documentation for status
   status: SignatureStatus
 
-  // FIXME: Missing documentation for error
-  error?: string
+  // FIXME: Missing documentation for txHash
+  txHash?: string
+
+  // FIXME: Missing documentation for fee
+  fee?: Amount
 
   // FIXME: Missing documentation for dateRequested
   dateRequested: IsoDatetime
 
-  // FIXME: Missing documentation for datePolicyResolved
-  datePolicyResolved?: IsoDatetime
+  // FIXME: Missing documentation for datePolicyEvaluated
+  datePolicyEvaluated?: IsoDatetime
 
   // FIXME: Missing documentation for dateSigned
   dateSigned?: IsoDatetime
+
+  // FIXME: Missing documentation for dateConfirmed
+  dateConfirmed?: IsoDatetime
+
+  // FIXME: Missing documentation for reason
+  reason?: string
 }
 
 // FIXME: Missing documentation for PaginatedSignatureList
@@ -724,6 +739,8 @@ export enum TransferStatus {
   Confirmed = 'Confirmed',
   // FIXME: Missing documentation for Failed
   Failed = 'Failed',
+  // FIXME: Missing documentation for Rejected
+  Rejected = 'Rejected',
 }
 
 // FIXME: Missing documentation for TransactionStatus
@@ -736,6 +753,8 @@ export enum TransactionStatus {
   Confirmed = 'Confirmed',
   // FIXME: Missing documentation for Failed
   Failed = 'Failed',
+  // FIXME: Missing documentation for Rejected
+  Rejected = 'Rejected',
 }
 
 // FIXME: Missing documentation for SignatureStatus
@@ -748,6 +767,8 @@ export enum SignatureStatus {
   Confirmed = 'Confirmed',
   // FIXME: Missing documentation for Failed
   Failed = 'Failed',
+  // FIXME: Missing documentation for Rejected
+  Rejected = 'Rejected',
 }
 
 // FIXME: Missing documentation for BlockchainNetwork

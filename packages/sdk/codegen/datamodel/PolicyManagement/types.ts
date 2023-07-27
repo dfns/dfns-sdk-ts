@@ -307,6 +307,15 @@ export type PublicKeyFilter = {
   tags?: string[]
 }
 
+// FIXME: Missing documentation for WalletFilter
+export type WalletFilter = {
+  // FIXME: Missing documentation for kind
+  kind: PolicyObjectFilterKind.Wallet
+
+  // FIXME: Missing documentation for walletIds
+  walletIds?: EntityId[]
+}
+
 // FIXME: Missing documentation for CreatePolicyInput
 export type CreatePolicyInput = {
   // FIXME: Missing documentation for activityKind
@@ -435,7 +444,10 @@ export type PolicyControlConfiguration =
   | RequestApprovalPcConf
 
 // FIXME: Missing documentation for PolicyObjectFilter
-export type PolicyObjectFilter = AssetAccountFilter | PublicKeyFilter
+export type PolicyObjectFilter =
+  | AssetAccountFilter
+  | PublicKeyFilter
+  | WalletFilter
 
 // FIXME: Missing documentation for PolicyActivityKind
 export enum PolicyActivityKind {
