@@ -1,14 +1,12 @@
 {
-  "name": "optimism-deposit-eth",
+  "name": "staking",
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@dfns/ethersjs5-wallet": "*",
     "@dfns/sdk": "*",
     "@dfns/sdk-keysigner": "*",
-    "@ethersproject/bignumber": "5.7.0",
-    "@ethersproject/providers": "5.7.0",
-    "@eth-optimism/sdk": "3.0.0",
+    "@dfns/solana-wallet": "*",
+    "@solana/web3.js": "1.78.0",
     "dotenv": "16.1.4"
   },
   "devDependencies": {

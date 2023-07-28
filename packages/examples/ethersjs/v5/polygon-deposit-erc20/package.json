@@ -4,6 +4,7 @@
   "main": "main.ts",
   "dependencies": {
     "@dfns/ethersjs5-wallet": "*",
+    "@dfns/sdk": "*",
     "@dfns/sdk-keysigner": "*",
     "@ethersproject/providers": "5.7.0",
     "@maticnetwork/maticjs": "3.6.1",

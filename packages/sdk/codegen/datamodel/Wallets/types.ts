@@ -126,6 +126,15 @@ export type SignHash = {
   hash: string
 }
 
+// FIXME: Missing documentation for SignMessage
+export type SignMessage = {
+  // FIXME: Missing documentation for kind
+  kind: SignatureKind.Message
+
+  // FIXME: Missing documentation for message
+  message: string
+}
+
 // FIXME: Missing documentation for Eip712Domain
 export type Eip712Domain = {
   // FIXME: Missing documentation for name
@@ -649,7 +658,7 @@ export type BroadcastTransactionBody =
   | BroadcastEvmLegacyTransaction
 
 // FIXME: Missing documentation for GenerateSignatureBody
-export type GenerateSignatureBody = SignHash | SignEip712TypedData
+export type GenerateSignatureBody = SignHash | SignMessage | SignEip712TypedData
 
 // FIXME: Missing documentation for BlockchainEvent
 export type BlockchainEvent =
@@ -681,6 +690,8 @@ export enum TransactionKind {
 export enum SignatureKind {
   // FIXME: Missing documentation for Hash
   Hash = 'Hash',
+  // FIXME: Missing documentation for Message
+  Message = 'Message',
   // FIXME: Missing documentation for Eip712
   Eip712 = 'Eip712',
 }

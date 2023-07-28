@@ -4,6 +4,7 @@
   "main": "main.ts",
   "dependencies": {
     "@dfns/ethersjs6-wallet": "*",
+    "@dfns/sdk": "*",
     "@dfns/sdk-keysigner": "*",
     "@uniswap/sdk-core": "3.2.2",
     "@uniswap/v3-core": "1.0.1",
