@@ -5,6 +5,7 @@
   "dependencies": {
     "@arbitrum/sdk": "v3.1.6",
     "@dfns/ethersjs5-wallet": "*",
+    "@dfns/sdk": "*",
     "@dfns/sdk-keysigner": "*",
     "@ethersproject/bignumber": "5.7.0",
     "@ethersproject/providers": "5.7.0",
