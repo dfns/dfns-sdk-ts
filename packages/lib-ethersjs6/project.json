@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-ethersjs6",
+        "clean": true,
+        "main": "packages/lib-ethersjs6/index.ts",
+        "tsConfig": "packages/lib-ethersjs6/tsconfig.json"
+      }
+    }
+  }
+}

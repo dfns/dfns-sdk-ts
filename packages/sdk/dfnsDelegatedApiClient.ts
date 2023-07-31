@@ -1,6 +1,6 @@
-import { DelegatedAuthClient } from 'codegen/Auth/DelegatedAuthClient'
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { DelegatedAssetsClient } from './codegen/Assets'
+import { DelegatedAuthClient } from './codegen/Auth'
 import { DelegatedBlockchainsClient } from './codegen/Blockchains'
 import { DelegatedCallbacksClient } from './codegen/Callbacks'
 import { DelegatedPermissionsClient } from './codegen/Permissions'
