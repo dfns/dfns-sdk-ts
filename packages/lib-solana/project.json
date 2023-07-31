@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-solana",
+        "clean": true,
+        "main": "packages/lib-solana/index.ts",
+        "tsConfig": "packages/lib-solana/tsconfig.json"
+      }
+    }
+  }
+}

@@ -12,10 +12,9 @@ Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
 
 For examples containing code + some docs, these examples illustrate different setups of the SDK:
 
-* [Service account](https://github.com/dfnsext/typescript-sdk/tree/m/packages/examples/service-account)
-* [Delegated registration and login with NextJS](https://github.com/dfnsext/typescript-sdk/tree/m/packages/examples/nextjs-delegated)
-* [Delegated registration and login with ReactJS + Express](https://github.com/dfnsext/typescript-sdk/tree/m/packages/examples/auth-delegated)
-* [ethers.js Dapps](https://github.com/dfnsext/typescript-sdk/tree/m/packages/examples/ethersjs)
+* [Service account](https://github.com/dfnsext/typescript-sdk/tree/m/examples/sdk/service-account)
+* [Delegated registration and login with NextJS](https://github.com/dfnsext/typescript-sdk/tree/m/examples/sdk/nextjs-delegated)
+* [Delegated registration and login with ReactJS + Express](https://github.com/dfnsext/typescript-sdk/tree/m/examples/sdk/auth-delegated)
 
 ## Concepts
 
@@ -165,8 +164,11 @@ BaseAuthApi.createUserRegistrationChallenge()
 BaseAuthApi.createUserRegistration()
 ```
 
-## Framework integrations
+## Platform Integrations
 
-Integrations with popular frameworks and libraries to make Dapp development frictionless. More to come...
+Integrations with other blockchain platforms to make Dapp development frictionless. More to come...
 
-* [ethers.js](./packages/ethersjs-wallet/)
+* [ethers.js v5](https://github.com/dfnsext/typescript-sdk/tree/m/packages/lib-ethersjs5/) and [examples](https://github.com/dfnsext/typescript-sdk/tree/m/examples/ethersjs/v5)
+* [ethers.js v6](https://github.com/dfnsext/typescript-sdk/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfnsext/typescript-sdk/tree/m/examples/ethersjs/v6)
+* [Solana web3.js](https://github.com/dfnsext/typescript-sdk/tree/m/packages/lib-solana/) and [examples](https://github.com/dfnsext/typescript-sdk/tree/m/examples/solana)
+* [Vechain Connex](https://github.com/dfnsext/typescript-sdk/tree/m/packages/lib-vechain/) and [examples](https://github.com/dfnsext/typescript-sdk/tree/m/examples/vechain)

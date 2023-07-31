@@ -1,0 +1,20 @@
+{
+  "name": "polygon-deposit-erc20",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "dependencies": {
+    "@dfns/lib-ethersjs5": "file:../../../../packages/lib-ethersjs5",
+    "@dfns/sdk": "file:../../../../packages/sdk",
+    "@dfns/sdk-keysigner": "file:../../../../packages/sdk-keysigner",
+    "@ethersproject/providers": "5.7.0",
+    "@maticnetwork/maticjs": "3.6.1",
+    "@maticnetwork/maticjs-ethers": "1.0.3",
+    "dotenv": "16.1.4"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.1"
+  },
+  "scripts": {
+    "exec": "ts-node main.ts"
+  }
+}
