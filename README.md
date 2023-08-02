@@ -1,6 +1,6 @@
 # Dfns typescript SDK
 
-> ⚠️ **This SDK is in alpha**. It may be unstable and have breaking evolutions.
+> ⚠️ **This SDK is in beta**. It may be unstable and have breaking evolutions.
 
 Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
 - [Dfns Website](https://www.dfns.co)
