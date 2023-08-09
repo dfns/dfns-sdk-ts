@@ -203,6 +203,36 @@ export type AmountLimitPrConf = {
   shouldIgnoreAssetsWithoutMarketValue: boolean
 }
 
+// FIXME: Missing documentation for CreateTransferLimitPrConf
+export type CreateTransferLimitPrConf = {
+  // FIXME: Missing documentation for kind
+  kind: PolicyRuleKind.TransferAmountLimit
+
+  // FIXME: Missing documentation for limit
+  limit: Amount
+
+  // FIXME: Missing documentation for currency
+  currency: Currency
+}
+
+// FIXME: Missing documentation for UpdateTransferLimitPrConf
+export type UpdateTransferLimitPrConf = {
+  // FIXME: Missing documentation for limit
+  limit?: Amount
+
+  // FIXME: Missing documentation for currency
+  currency?: Currency
+}
+
+// FIXME: Missing documentation for TransferLimitPrConf
+export type TransferLimitPrConf = {
+  // FIXME: Missing documentation for limit
+  limit: Amount
+
+  // FIXME: Missing documentation for currency
+  currency: Currency
+}
+
 // FIXME: Missing documentation for CreateRequestApprovalPcConf
 export type CreateRequestApprovalPcConf = {
   // FIXME: Missing documentation for kind
@@ -418,11 +448,13 @@ export type UpdatePolicyRuleInput = {
 // FIXME: Missing documentation for CreatePolicyRuleConfiguration
 export type CreatePolicyRuleConfiguration =
   | CreateAmountLimitPrConf
+  | CreateTransferLimitPrConf
   | CreateAlwaysActivatedPrConf
 
 // FIXME: Missing documentation for UpdatePolicyRuleConfiguration
 export type UpdatePolicyRuleConfiguration =
   | UpdateAmountLimitPrConf
+  | UpdateTransferLimitPrConf
   | UpdateAlwaysActivatedPrConf
 
 // FIXME: Missing documentation for UpdatePolicyControlConfiguration
@@ -436,7 +468,10 @@ export type CreatePolicyControlConfiguration =
   | CreateNotifyAndAuditPcConf
 
 // FIXME: Missing documentation for PolicyRuleConfiguration
-export type PolicyRuleConfiguration = AmountLimitPrConf | EmptyConfiguration
+export type PolicyRuleConfiguration =
+  | AmountLimitPrConf
+  | TransferLimitPrConf
+  | EmptyConfiguration
 
 // FIXME: Missing documentation for PolicyControlConfiguration
 export type PolicyControlConfiguration =
@@ -495,6 +530,14 @@ export enum PolicyRuleKind {
   PaymentAmountLimit = 'PaymentAmountLimit',
   // FIXME: Missing documentation for TransferAmountLimit
   TransferAmountLimit = 'TransferAmountLimit',
+}
+
+// FIXME: Missing documentation for Currency
+export enum Currency {
+  // FIXME: Missing documentation for EUR
+  EUR = 'EUR',
+  // FIXME: Missing documentation for USD
+  USD = 'USD',
 }
 
 // FIXME: Missing documentation for PolicyControlStatus
