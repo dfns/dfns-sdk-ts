@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-beta.2 (2023-08-09)
+
+- Added `TransferLimit` to policy rule configurations
+- Added `network` to `SignatureRequest` in the wallets API
+
 ## 0.1.0-beta.1 (2023-08-02)
 
 - Added `restartDelegatedUserRegistration` for resuming an interrupted delegated registration flow

@@ -572,6 +572,9 @@ export type SignatureRequest = {
   // FIXME: Missing documentation for walletId
   walletId: EntityId
 
+  // FIXME: Missing documentation for network
+  network: BlockchainNetwork
+
   // FIXME: Missing documentation for requester
   requester: RequesterIdentity
 
