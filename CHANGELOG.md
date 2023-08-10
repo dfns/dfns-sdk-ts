@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0-beta.2 (2023-08-10)
+
+- Added `PaymentAmountOutgoingVelocity` to policy rule configurations
+
 ## 0.1.0-beta.2 (2023-08-09)
 
 - Added `TransferLimit` to policy rule configurations

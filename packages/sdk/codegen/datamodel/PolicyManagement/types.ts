@@ -233,6 +233,54 @@ export type TransferLimitPrConf = {
   currency: Currency
 }
 
+// FIXME: Missing documentation for CreateOutgoingVelocityPrConf
+export type CreateOutgoingVelocityPrConf = {
+  // FIXME: Missing documentation for kind
+  kind: PolicyRuleKind.PaymentAmountOutgoingVelocity
+
+  // FIXME: Missing documentation for velocity
+  velocity: Amount
+
+  // FIXME: Missing documentation for assetSymbol
+  assetSymbol: AssetSymbol
+
+  // FIXME: Missing documentation for intervalInMinutes
+  intervalInMinutes: number
+
+  // FIXME: Missing documentation for shouldIgnoreAssetsWithoutMarketValue
+  shouldIgnoreAssetsWithoutMarketValue: boolean
+}
+
+// FIXME: Missing documentation for UpdateOutgoingVelocityPrConf
+export type UpdateOutgoingVelocityPrConf = {
+  // FIXME: Missing documentation for velocity
+  velocity?: Amount
+
+  // FIXME: Missing documentation for assetSymbol
+  assetSymbol?: AssetSymbol
+
+  // FIXME: Missing documentation for intervalInMinutes
+  intervalInMinutes: number
+
+  // FIXME: Missing documentation for shouldIgnoreAssetsWithoutMarketValue
+  shouldIgnoreAssetsWithoutMarketValue?: boolean
+}
+
+// FIXME: Missing documentation for OutgoingVelocityPrConf
+export type OutgoingVelocityPrConf = {
+  // FIXME: Missing documentation for velocity
+  velocity: Amount
+
+  // FIXME: Missing documentation for assetSymbol
+  assetSymbol: AssetSymbol
+
+  // FIXME: Missing documentation for intervalInMinutes
+  intervalInMinutes: number
+
+  // FIXME: Missing documentation for shouldIgnoreAssetsWithoutMarketValue
+  shouldIgnoreAssetsWithoutMarketValue: boolean
+}
+
 // FIXME: Missing documentation for CreateRequestApprovalPcConf
 export type CreateRequestApprovalPcConf = {
   // FIXME: Missing documentation for kind
@@ -293,6 +341,11 @@ export type PolicyManagementPreferences = {
    * Sets default `AssetSymbol` for the policy rules that use it, such as Limit, Velocity, Siphoning, and others.
    */
   policyRuleAssetSymbol?: boolean
+
+  /**
+   * Sets default interval in minutes for policy rules that use intervals, such as Velocity and Siphoning. \n\nThis setting does not update existing rules. This will only impact rules that are created after this setting is set.
+   */
+  policyRuleVelocityIntervalInMinutes: number
 }
 
 // FIXME: Missing documentation for Create
@@ -449,12 +502,14 @@ export type UpdatePolicyRuleInput = {
 export type CreatePolicyRuleConfiguration =
   | CreateAmountLimitPrConf
   | CreateTransferLimitPrConf
+  | CreateOutgoingVelocityPrConf
   | CreateAlwaysActivatedPrConf
 
 // FIXME: Missing documentation for UpdatePolicyRuleConfiguration
 export type UpdatePolicyRuleConfiguration =
   | UpdateAmountLimitPrConf
   | UpdateTransferLimitPrConf
+  | UpdateOutgoingVelocityPrConf
   | UpdateAlwaysActivatedPrConf
 
 // FIXME: Missing documentation for UpdatePolicyControlConfiguration
@@ -471,6 +526,7 @@ export type CreatePolicyControlConfiguration =
 export type PolicyRuleConfiguration =
   | AmountLimitPrConf
   | TransferLimitPrConf
+  | OutgoingVelocityPrConf
   | EmptyConfiguration
 
 // FIXME: Missing documentation for PolicyControlConfiguration
@@ -528,6 +584,8 @@ export enum PolicyRuleKind {
   AlwaysActivated = 'AlwaysActivated',
   // FIXME: Missing documentation for PaymentAmountLimit
   PaymentAmountLimit = 'PaymentAmountLimit',
+  // FIXME: Missing documentation for PaymentAmountOutgoingVelocity
+  PaymentAmountOutgoingVelocity = 'PaymentAmountOutgoingVelocity',
   // FIXME: Missing documentation for TransferAmountLimit
   TransferAmountLimit = 'TransferAmountLimit',
 }
