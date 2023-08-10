@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0-beta.2 (2023-08-10)
+## 0.1.0-beta.3 (2023-08-XX)
 
 - Added `PaymentAmountOutgoingVelocity` to policy rule configurations
 
