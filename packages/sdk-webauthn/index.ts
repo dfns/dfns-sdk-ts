@@ -65,7 +65,6 @@ export class WebAuthn implements CredentialSigner<Fido2Assertion>, CredentialSto
         excludeCredentials: challenge.excludeCredentials.map((cred) => ({
           id: fromBase64Url(cred.id),
           type: cred.type,
-          transports: cred.transports ?? [],
         })),
         authenticatorSelection: challenge.authenticatorSelection,
         timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
