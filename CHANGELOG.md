@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.1.0-beta.3 (2023-08-XX)
+## 0.1.0-beta.3 (2023-08-15)
 
 - Added `PaymentAmountOutgoingVelocity` to policy rule configurations
+- Fixed WebAuthn not detecting multiple credentials
 
 ## 0.1.0-beta.2 (2023-08-09)
 
