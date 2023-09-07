@@ -53,6 +53,10 @@ const keySigner = new AsymmetricKeySigner({
 })
 ```
 
+- `credId`: ID of the Credential registered with the auth token you’re using  (Personal Access Token, or Service Account Token). In Dfns dashboard, you can find it next to your token (in `Settings` > `My Access Tokens` or `Settings > Service Accounts`)
+- `privateKey`: private key (in .pem format) which only you have, associated with the public key you registered when you created your PAT / Service Account.
+- `appOrigin`: Origin of the client-side Application registered with Dfns. In Dfns dashboard, you can find Applications in `Settings > Application`
+
 
 ### `DfnsApiClient`
 
