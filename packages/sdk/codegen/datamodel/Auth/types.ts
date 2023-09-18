@@ -1219,6 +1219,15 @@ export type CreateUserRecoveryChallengeInput = {
   credentialId: string
 }
 
+// FIXME: Missing documentation for CreateDelegatedUserRecoveryInput
+export type CreateDelegatedUserRecoveryInput = {
+  // FIXME: Missing documentation for username
+  username: string
+
+  // FIXME: Missing documentation for credentialId
+  credentialId: string
+}
+
 // FIXME: Missing documentation for CreateUserCredentialInput
 export type CreateUserCredentialInput =
   | CreateUserCredentialTotpInput

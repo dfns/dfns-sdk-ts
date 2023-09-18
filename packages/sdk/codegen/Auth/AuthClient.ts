@@ -709,4 +709,21 @@ export class AuthClient {
 
     return response.json()
   }
+
+  async createDelegatedUserRecovery(
+    request: T.CreateDelegatedUserRecoveryRequest
+  ): Promise<T.CreateDelegatedUserRecoveryResponse> {
+    const path = buildPathAndQuery('/auth/recover/user/delegated', {
+      path: {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
 }
