@@ -76,3 +76,29 @@ export type ListPackageVersionsError = {
 export type ListPackageVersionsResponse =
   | ListPackageVersionsSuccess
   | ListPackageVersionsError
+
+// Response for CreateOrgSetting
+
+export type CreateOrgSettingSuccess = Org
+
+export type CreateOrgSettingError = {
+  error: ForbiddenError | BadRequestError | EntityNotFoundError
+}
+
+export type CreateOrgSettingResponse =
+  | CreateOrgSettingSuccess
+  | CreateOrgSettingError
+
+// Response for ListOrgSettings
+
+export type ListOrgSettingsSuccess = {
+  items: Org[]
+}
+
+export type ListOrgSettingsError = {
+  error: ForbiddenError | BadRequestError | EntityNotFoundError
+}
+
+export type ListOrgSettingsResponse =
+  | ListOrgSettingsSuccess
+  | ListOrgSettingsError

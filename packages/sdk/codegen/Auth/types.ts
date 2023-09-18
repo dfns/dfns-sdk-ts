@@ -254,3 +254,9 @@ export type RestartDelegatedUserRegistrationRequest = {
 
 export type RestartDelegatedUserRegistrationResponse =
   Auth.UserRegistrationChallenge
+
+export type CreateDelegatedUserRecoveryRequest = {
+  body: Auth.CreateDelegatedUserRecoveryInput
+}
+
+export type CreateDelegatedUserRecoveryResponse = Auth.UserRecoveryChallenge

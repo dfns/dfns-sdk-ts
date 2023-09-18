@@ -1092,3 +1092,19 @@ export type RestartDelegatedUserRegistrationError = {
 export type RestartDelegatedUserRegistrationResponse =
   | RestartDelegatedUserRegistrationSuccess
   | RestartDelegatedUserRegistrationError
+
+// Response for CreateDelegatedUserRecovery
+
+export type CreateDelegatedUserRecoverySuccess = UserRecoveryChallenge
+
+export type CreateDelegatedUserRecoveryError = {
+  error:
+    | UnauthorizedError
+    | ForbiddenError
+    | BadRequestError
+    | EntityNotFoundError
+}
+
+export type CreateDelegatedUserRecoveryResponse =
+  | CreateDelegatedUserRecoverySuccess
+  | CreateDelegatedUserRecoveryError

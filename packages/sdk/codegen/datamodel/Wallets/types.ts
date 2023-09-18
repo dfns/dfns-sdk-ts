@@ -747,6 +747,8 @@ export enum TransferDirection {
 export enum TransferStatus {
   // FIXME: Missing documentation for Pending
   Pending = 'Pending',
+  // FIXME: Missing documentation for Executing
+  Executing = 'Executing',
   // FIXME: Missing documentation for Broadcasted
   Broadcasted = 'Broadcasted',
   // FIXME: Missing documentation for Confirmed
@@ -761,6 +763,8 @@ export enum TransferStatus {
 export enum TransactionStatus {
   // FIXME: Missing documentation for Pending
   Pending = 'Pending',
+  // FIXME: Missing documentation for Executing
+  Executing = 'Executing',
   // FIXME: Missing documentation for Broadcasted
   Broadcasted = 'Broadcasted',
   // FIXME: Missing documentation for Confirmed
@@ -775,6 +779,8 @@ export enum TransactionStatus {
 export enum SignatureStatus {
   // FIXME: Missing documentation for Pending
   Pending = 'Pending',
+  // FIXME: Missing documentation for Executing
+  Executing = 'Executing',
   // FIXME: Missing documentation for Signed
   Signed = 'Signed',
   // FIXME: Missing documentation for Confirmed
