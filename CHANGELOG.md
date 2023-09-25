@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-beta.4 (2023-09-25)
+
+- Added `createDelegatedUserRecovery` for delegated user recovery flow
+- Added `Executing` to TransferStatus, TransactionStatus and SignatureStatus
+
 ## 0.1.0-beta.3 (2023-08-15)
 
 - Added `PaymentAmountOutgoingVelocity` to policy rule configurations
@@ -25,7 +30,7 @@
 
 ## 0.1.0-alpha.10 (2023-07-20)
 
-- Fixed Android WebAuthn bub where userHandle is empty
+- Fixed Android WebAuthn bug where userHandle is empty
 - Fixed asymmetric key signer for EdDSA keys
 
 ## 0.1.0-alpha.9 (2023-07-13)
