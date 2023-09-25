@@ -9,6 +9,7 @@ declare -a packages=(
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
     "@dfns/lib-solana"
+    "@dfns/lib-tron"
     "@dfns/lib-vechain"
 )
 
