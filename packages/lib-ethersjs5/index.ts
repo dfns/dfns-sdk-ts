@@ -81,7 +81,10 @@ export class DfnsWallet extends Signer implements TypedDataSigner {
       maxRetries -= 1
     }
 
-    throw new Error(`signature ${signatureId} not available`)
+    const waitedSeconds = Math.floor((this.options.maxRetries * retryInterval) / 1000)
+    throw new Error(
+      `Signature request ${signatureId} took more than ${waitedSeconds}s to complete, stopping polling. Please update options "maxRetries" or "retryIntervals" to wait longer.`
+    )
   }
 
   async signTransaction(transaction: TransactionRequest): Promise<string> {

@@ -59,7 +59,10 @@ export class DfnsWallet implements Wallet {
       maxRetries -= 1
     }
 
-    throw new Error(`signature ${signatureId} not available`)
+    const waitedSeconds = Math.floor((this.options.maxRetries * retryInterval) / 1000)
+    throw new Error(
+      `Signature request ${signatureId} took more than ${waitedSeconds}s to complete, stopping polling. Please update options "maxRetries" or "retryIntervals" to wait longer.`
+    )
   }
 
   private async sign(msgHash: Buffer): Promise<Buffer> {
