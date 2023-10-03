@@ -243,7 +243,7 @@ export type DeactivateApplicationRequest = {
 export type DeactivateApplicationResponse = Auth.AppInfoWithPublicKey
 
 export type CreateUserRecoveryRequest = {
-  body: Auth.CreateUserLoginChallengeInput
+  body: Auth.CreateUserRecoveryInput
 }
 
 export type CreateUserRecoveryResponse = Auth.UserRegistration
