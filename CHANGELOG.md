@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0-beta.5 (2023-10-03)
+
+- Fixed `createUserRecovery` wrong input type ([PR-33](https://github.com/dfnsext/typescript-sdk/pull/33))
+
 ## 0.1.0-beta.4 (2023-09-25)
 
 - Added `createDelegatedUserRecovery` for delegated user recovery flow
