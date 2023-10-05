@@ -3,6 +3,7 @@
     "packages/lib-ethersjs5",
     "packages/lib-ethersjs6",
     "packages/lib-solana",
+    "packages/lib-tron",
     "packages/lib-vechain",
     "packages/sdk",
     "packages/sdk-keysigner",

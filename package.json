@@ -9,21 +9,23 @@
     "docs": "typedoc"
   },
   "dependencies": {
-    "@ethersproject/address": "5.7.0",
     "@ethersproject/abstract-provider": "5.7.0",
     "@ethersproject/abstract-signer": "5.7.0",
+    "@ethersproject/address": "5.7.0",
     "@ethersproject/bytes": "5.7.0",
     "@ethersproject/hash": "5.7.0",
     "@ethersproject/keccak256": "5.7.0",
     "@ethersproject/properties": "5.7.0",
     "@ethersproject/transactions": "5.7.0",
     "@solana/web3.js": "1.78.0",
+    "@tronweb3/tronwallet-abstract-adapter": "^1.1.5",
     "@vechain/connex-driver": "2.0.12",
     "buffer": "6.0.3",
     "cross-fetch": "3.1.6",
     "elliptic": "6.5.4",
     "ethers": "6.6.1",
     "thor-devkit": "2.0.8",
+    "tronweb": "^5.3.0",
     "uuid": "9.0.0"
   },
   "devDependencies": {
