@@ -7,6 +7,11 @@ Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
 - [Dfns API Docs](https://docs.dfns.co)
 - [Dfns SDK Docs](https://dfnsext.github.io/typescript-sdk)
 
+## Installation
+
+```
+npm i @dfns/sdk
+```
 
 ## Examples
 
