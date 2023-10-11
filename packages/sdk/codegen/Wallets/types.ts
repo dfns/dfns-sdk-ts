@@ -115,3 +115,9 @@ export type ListSignaturesRequest = {
 }
 
 export type ListSignaturesResponse = Wallets.PaginatedSignatureList
+
+export type ImportWalletRequest = {
+  body: Wallets.ImportWalletBody
+}
+
+export type ImportWalletResponse = Wallets.Wallet

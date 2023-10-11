@@ -12,4 +12,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-ethersjs6 \
     --workspace @dfns/lib-solana \
     --workspace @dfns/lib-vechain \
+    --workspace @dfns/sdk-keyimport-utils \
     --include-workspace-root "$version"
+
+npm run cb:all

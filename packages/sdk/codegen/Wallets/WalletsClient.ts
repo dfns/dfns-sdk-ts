@@ -256,4 +256,21 @@ export class WalletsClient {
 
     return response.json()
   }
+
+  async importWallet(
+    request: T.ImportWalletRequest
+  ): Promise<T.ImportWalletResponse> {
+    const path = buildPathAndQuery('/wallets/import', {
+      path: {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
 }

@@ -266,3 +266,19 @@ export type ListSignaturesError = {
 }
 
 export type ListSignaturesResponse = ListSignaturesSuccess | ListSignaturesError
+
+// Response for ImportWallet
+
+export type ImportWalletSuccess = Wallet
+
+export type ImportWalletError = {
+  error:
+    | BadRequestError
+    | ForbiddenError
+    | UnauthorizedError
+    | ForbiddenError
+    | BadRequestError
+    | EntityNotFoundError
+}
+
+export type ImportWalletResponse = ImportWalletSuccess | ImportWalletError

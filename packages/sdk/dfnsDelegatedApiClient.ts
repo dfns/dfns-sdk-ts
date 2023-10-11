@@ -7,6 +7,7 @@ import { DelegatedPermissionsClient } from './codegen/Permissions'
 import { DelegatedPolicyExecutionClient } from './codegen/PolicyExecution'
 import { DelegatedPolicyManagementClient } from './codegen/PolicyManagement'
 import { DelegatedPublicKeysClient } from './codegen/PublicKeys'
+import { DelegatedSignersClient } from './codegen/Signers'
 import { DelegatedWalletsClient } from './codegen/Wallets'
 
 export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions & {
@@ -50,5 +51,9 @@ export class DfnsDelegatedApiClient {
 
   public get wallets() {
     return new DelegatedWalletsClient(this.apiOptions)
+  }
+
+  public get signers() {
+    return new DelegatedSignersClient(this.apiOptions)
   }
 }

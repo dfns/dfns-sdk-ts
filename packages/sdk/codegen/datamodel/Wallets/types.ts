@@ -2,6 +2,7 @@ import {
   Amount,
   BlockchainAddress,
   EntityId,
+  IntegerPositiveStrict,
   IsoDatetime,
   Tag,
 } from '../Foundations'
@@ -168,6 +169,15 @@ export type SignEip712TypedData = {
   message: Record<string, unknown>
 }
 
+// FIXME: Missing documentation for EncryptedKeyShare
+export type EncryptedKeyShare = {
+  // FIXME: Missing documentation for signerId
+  signerId: string
+
+  // FIXME: Missing documentation for encryptedKeyShare
+  encryptedKeyShare: string
+}
+
 // FIXME: Missing documentation for Wallet
 export type Wallet = {
   // FIXME: Missing documentation for id
@@ -196,6 +206,11 @@ export type Wallet = {
 
   // FIXME: Missing documentation for dateCreated
   dateCreated: IsoDatetime
+
+  /**
+   * Whether the wallet was imported, or if it was generated on Dfns side.
+   */
+  imported?: boolean
 }
 
 // FIXME: Missing documentation for SigningKey
@@ -648,6 +663,33 @@ export type CreateWalletBody = {
   name?: string
 }
 
+// FIXME: Missing documentation for ImportWalletBody
+export type ImportWalletBody = {
+  // FIXME: Missing documentation for network
+  network: BlockchainNetwork
+
+  // FIXME: Missing documentation for externalId
+  externalId?: string
+
+  // FIXME: Missing documentation for tags
+  tags?: Tag[]
+
+  // FIXME: Missing documentation for name
+  name?: string
+
+  // FIXME: Missing documentation for minSigners
+  minSigners: IntegerPositiveStrict
+
+  // FIXME: Missing documentation for protocol
+  protocol: KeyProtocol
+
+  // FIXME: Missing documentation for curve
+  curve: KeyCurve
+
+  // FIXME: Missing documentation for encryptedKeyShares
+  encryptedKeyShares: EncryptedKeyShare[]
+}
+
 // FIXME: Missing documentation for TransferAssetBody
 export type TransferAssetBody =
   | TransferNativeAsset
@@ -723,6 +765,14 @@ export enum KeyCurve {
   ed25519 = 'ed25519',
   // FIXME: Missing documentation for secp256k1
   secp256k1 = 'secp256k1',
+}
+
+// FIXME: Missing documentation for KeyProtocol
+export enum KeyProtocol {
+  // FIXME: Missing documentation for CGGMP21
+  CGGMP21 = 'CGGMP21',
+  // FIXME: Missing documentation for BINANCE_EDDSA
+  BINANCE_EDDSA = 'BINANCE_EDDSA',
 }
 
 // FIXME: Missing documentation for EventKind
