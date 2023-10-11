@@ -14,6 +14,7 @@ export type KeyAssertion = {
     credId: string
     clientData: string
     signature: string
+    algorithm?: string
   }
 }
 
@@ -36,6 +37,16 @@ export type PasswordAssertion = {
 export type TotpAssertion = {
   kind: 'Totp'
   otpCode: string
+}
+
+export type RecoveryKeyAssertion = {
+  kind: 'RecoveryKey'
+  credentialAssertion: {
+    credId: string
+    clientData: string
+    signature: string
+    algorithm?: string
+  }
 }
 
 export type FirstFactorAssertion = KeyAssertion | Fido2Assertion | PasswordAssertion

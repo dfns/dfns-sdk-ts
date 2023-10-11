@@ -1,0 +1,29 @@
+name: build
+on:
+  push:
+    branches:
+      - m
+  pull_request:
+    branches:
+      - m
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: 'actions/checkout@v3'
+        with:
+          fetch-depth: '0'
+
+      - name: install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: install packages
+        run: npm ci
+
+      - name: compile packages
+        run: npm run cb:all
