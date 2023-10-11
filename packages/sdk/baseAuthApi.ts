@@ -4,9 +4,14 @@ import {
   SecondFactorAttestation,
   UserRegistrationChallenge,
 } from './store'
-import { AllowCredential, CredentialKind, FirstFactorAssertion, SecondFactorAssertion } from './signer'
+import {
+  AllowCredential,
+  CredentialKind,
+  FirstFactorAssertion,
+  RecoveryKeyAssertion,
+  SecondFactorAssertion,
+} from './signer'
 import { HttpMethod, simpleFetch } from './utils/fetch'
-import { CreateUserRecoveryRequest, CreateUserRecoveryResponse } from 'codegen/Auth'
 
 export type DfnsBaseApiOptions = {
   appId: string
@@ -88,6 +93,17 @@ export type UserRegistrationResponse = {
     orgId: string
   }
 }
+
+export type CreateUserRecoveryRequest = {
+  recovery: RecoveryKeyAssertion
+  newCredentials: {
+    firstFactorCredential: FirstFactorAttestation
+    secondFactorCredential?: SecondFactorAttestation
+    recoveryCredential?: RecoveryFactorAttestation
+  }
+}
+
+export type UserRecoveryResponse = UserRegistrationResponse
 
 export class BaseAuthApi {
   /**
@@ -187,12 +203,12 @@ export class BaseAuthApi {
   }
 
   /**
-   * Completes Recovery by sending the signed registration challenge, containing the new Credential identity created.
+   * Completes Recovery by sending the signed recovery challenge, containing the new Credential identity created.
    */
   async createUserRecovery(
-    request: CreateUserRecoveryRequest['body'],
+    request: CreateUserRecoveryRequest,
     options: DfnsBaseApiOptions
-  ): Promise<CreateUserRecoveryResponse> {
+  ): Promise<UserRecoveryResponse> {
     const response = await simpleFetch('/auth/recover/user', {
       method: 'POST',
       body: request,
