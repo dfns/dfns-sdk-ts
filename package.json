@@ -22,6 +22,7 @@
     "@solana/web3.js": "1.87.6",
     "@tronweb3/tronwallet-abstract-adapter": "1.1.6",
     "@vechain/connex-driver": "2.0.12",
+    "bitcoinjs-lib": "6.1.5",
     "buffer": "6.0.3",
     "cross-fetch": "3.1.6",
     "elliptic": "6.5.4",

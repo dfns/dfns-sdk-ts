@@ -3,6 +3,7 @@
 set -euo pipefail
 
 declare -a packages=(
+    "@dfns/lib-bitcoinjs"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
     "@dfns/lib-solana"

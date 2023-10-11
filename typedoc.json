@@ -1,15 +1,19 @@
 {
   "entryPoints": [
+    "packages/lib-bitcoinjs",
     "packages/lib-ethersjs5",
     "packages/lib-ethersjs6",
     "packages/lib-solana",
     "packages/lib-tron",
     "packages/lib-vechain",
+    "packages/lib-viem",
     "packages/sdk",
+    "packages/sdk-keyexport-utils",
+    "packages/sdk-keyimport-utils",
     "packages/sdk-keysigner",
     "packages/sdk-webauthn"
   ],
-  "name": "Dfns SDK",
+  "name": "Dfns Typescript SDK",
   "entryPointStrategy": "packages",
   "out": "docs-generated",
   "includeVersion": true,
