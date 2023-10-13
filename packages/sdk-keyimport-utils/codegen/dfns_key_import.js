@@ -3,26 +3,6 @@ imports['__wbindgen_placeholder__'] = module.exports;
 let wasm;
 const { TextDecoder, TextEncoder } = require(`util`);
 
-const heap = new Array(128).fill(undefined);
-
-heap.push(undefined, null, true, false);
-
-function getObject(idx) { return heap[idx]; }
-
-let heap_next = heap.length;
-
-function dropObject(idx) {
-    if (idx < 132) return;
-    heap[idx] = heap_next;
-    heap_next = idx;
-}
-
-function takeObject(idx) {
-    const ret = getObject(idx);
-    dropObject(idx);
-    return ret;
-}
-
 let cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: true });
 
 cachedTextDecoder.decode();
@@ -41,6 +21,12 @@ function getStringFromWasm0(ptr, len) {
     return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
 }
 
+const heap = new Array(128).fill(undefined);
+
+heap.push(undefined, null, true, false);
+
+let heap_next = heap.length;
+
 function addHeapObject(obj) {
     if (heap_next === heap.length) heap.push(heap.length + 1);
     const idx = heap_next;
@@ -48,6 +34,20 @@ function addHeapObject(obj) {
 
     heap[idx] = obj;
     return idx;
+}
+
+function getObject(idx) { return heap[idx]; }
+
+function dropObject(idx) {
+    if (idx < 132) return;
+    heap[idx] = heap_next;
+    heap_next = idx;
+}
+
+function takeObject(idx) {
+    const ret = getObject(idx);
+    dropObject(idx);
+    return ret;
 }
 
 let WASM_VECTOR_LEN = 0;
@@ -206,10 +206,14 @@ function _assertClass(instance, klass) {
     return instance.ptr;
 }
 /**
-* Builds a request body that needs to be sent to Dfns API in order to import given key
+* Builds a request body that needs to be sent to Dfns API in order to import the given key.
 *
-* Takes a secret key to be imported, and signers info (needs to be retrieved from Dfns API). Returns
-* a body of the request that needs to be sent to Dfns API in order to import given key
+* Takes as input the `secret_key` to be imported, `signers_info` (contains information
+* about the _n_ key holders, needs to be retrieved from Dfns API)
+* `min_signers` (which will be the threshold and has to satisfy _2 ≤ min_signers ≤ n_),
+* and the `protocol` and `curve` for which the imported key will be used.
+*
+* Returns a body of the request that needs to be sent to Dfns API in order to import the given key.
 *
 * Requires a global secure randomness generator to be available, that can be either [Web Crypto API]
 * or [Node JS crypto module]. If neither of them is available, throws `Error`.
@@ -218,16 +222,19 @@ function _assertClass(instance, klass) {
 * [Node JS crypto module]: https://nodejs.org/api/crypto.html
 *
 * Throws `Error` in case of failure
-* @param {SignersInfo} signers_info
 * @param {SecretKey} secret_key
+* @param {SignersInfo} signers_info
+* @param {number} min_signers
+* @param {number} protocol
+* @param {number} curve
 * @returns {any}
 */
-module.exports.buildKeyImportRequest = function(signers_info, secret_key) {
+module.exports.buildKeyImportRequest = function(secret_key, signers_info, min_signers, protocol, curve) {
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        _assertClass(signers_info, SignersInfo);
         _assertClass(secret_key, SecretKey);
-        wasm.buildKeyImportRequest(retptr, signers_info.__wbg_ptr, secret_key.__wbg_ptr);
+        _assertClass(signers_info, SignersInfo);
+        wasm.buildKeyImportRequest(retptr, secret_key.__wbg_ptr, signers_info.__wbg_ptr, min_signers, protocol, curve);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
         var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -247,6 +254,34 @@ function handleError(f, args) {
         wasm.__wbindgen_exn_store(addHeapObject(e));
     }
 }
+/**
+* The protocol for which a key can be used.
+*/
+module.exports.KeyProtocol = Object.freeze({
+/**
+*GG18
+*/
+Gg18:0,"0":"Gg18",
+/**
+*Binance EDDSA
+*/
+BinanceEddsa:1,"1":"BinanceEddsa",
+/**
+*CGGMP21
+*/
+Cggmp21:2,"2":"Cggmp21", });
+/**
+* The curve for which a key can be used
+*/
+module.exports.KeyCurve = Object.freeze({
+/**
+* Secp256k1 curve
+*/
+Secp256k1:0,"0":"Secp256k1",
+/**
+* Ed25519 curve
+*/
+Ed25519:1,"1":"Ed25519", });
 /**
 * Secret key to be imported
 */
@@ -349,13 +384,13 @@ class SignersInfo {
 }
 module.exports.SignersInfo = SignersInfo;
 
-module.exports.__wbindgen_object_drop_ref = function(arg0) {
-    takeObject(arg0);
-};
-
 module.exports.__wbindgen_error_new = function(arg0, arg1) {
     const ret = new Error(getStringFromWasm0(arg0, arg1));
     return addHeapObject(ret);
+};
+
+module.exports.__wbindgen_object_drop_ref = function(arg0) {
+    takeObject(arg0);
 };
 
 module.exports.__wbindgen_string_get = function(arg0, arg1) {
