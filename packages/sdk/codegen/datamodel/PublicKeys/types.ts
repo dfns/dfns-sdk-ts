@@ -51,6 +51,9 @@ export type PublicKeyRecord = {
 
   // FIXME: Missing documentation for isEddsa
   isEddsa: boolean
+
+  // FIXME: Missing documentation for maxPresigs
+  maxPresigs?: number
 }
 
 // FIXME: Missing documentation for GetPublicKeyAddressResponse

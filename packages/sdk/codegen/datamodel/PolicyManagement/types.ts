@@ -399,6 +399,33 @@ export type WalletFilter = {
   walletIds?: EntityId[]
 }
 
+// FIXME: Missing documentation for PolicyFilter
+export type PolicyFilter = {
+  // FIXME: Missing documentation for kind
+  kind: PolicyObjectFilterKind.Policy
+
+  // FIXME: Missing documentation for policyIds
+  policyIds?: EntityId[]
+}
+
+// FIXME: Missing documentation for PolicyControlFilter
+export type PolicyControlFilter = {
+  // FIXME: Missing documentation for kind
+  kind: PolicyObjectFilterKind.PolicyControl
+
+  // FIXME: Missing documentation for policyControlIds
+  policyControlIds?: EntityId[]
+}
+
+// FIXME: Missing documentation for PolicyRuleFilter
+export type PolicyRuleFilter = {
+  // FIXME: Missing documentation for kind
+  kind: PolicyObjectFilterKind.PolicyRule
+
+  // FIXME: Missing documentation for policyRuleIds
+  policyRuleIds?: EntityId[]
+}
+
 // FIXME: Missing documentation for CreatePolicyInput
 export type CreatePolicyInput = {
   // FIXME: Missing documentation for activityKind
@@ -539,6 +566,9 @@ export type PolicyObjectFilter =
   | AssetAccountFilter
   | PublicKeyFilter
   | WalletFilter
+  | PolicyFilter
+  | PolicyControlFilter
+  | PolicyRuleFilter
 
 // FIXME: Missing documentation for PolicyActivityKind
 export enum PolicyActivityKind {
@@ -554,6 +584,12 @@ export enum PolicyActivityKind {
   WalletsBroadcastTransaction = 'WalletsBroadcastTransaction',
   // FIXME: Missing documentation for WalletsGenerateSignature
   WalletsGenerateSignature = 'WalletsGenerateSignature',
+  // FIXME: Missing documentation for PoliciesArchive
+  PoliciesArchive = 'PoliciesArchive',
+  // FIXME: Missing documentation for PolicyRulesArchive
+  PolicyRulesArchive = 'PolicyRulesArchive',
+  // FIXME: Missing documentation for PolicyControlsArchive
+  PolicyControlsArchive = 'PolicyControlsArchive',
 }
 
 // FIXME: Missing documentation for PolicyStatus
@@ -622,4 +658,10 @@ export enum PolicyObjectFilterKind {
   PublicKey = 'PublicKey',
   // FIXME: Missing documentation for Wallet
   Wallet = 'Wallet',
+  // FIXME: Missing documentation for Policy
+  Policy = 'Policy',
+  // FIXME: Missing documentation for PolicyControl
+  PolicyControl = 'PolicyControl',
+  // FIXME: Missing documentation for PolicyRule
+  PolicyRule = 'PolicyRule',
 }

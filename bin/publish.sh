@@ -11,6 +11,7 @@ declare -a packages=(
     "@dfns/lib-solana"
     "@dfns/lib-tron"
     "@dfns/lib-vechain"
+    "@dfns/sdk-keyimport-utils"
 )
 
 echo "Will deploy these built versions:"
