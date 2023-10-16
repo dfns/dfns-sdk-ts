@@ -26,7 +26,7 @@ const main = async () => {
   // Here, for the example, we are generating a random 32-bytes private key.
   const walletPrivateKey = crypto.randomBytes(32)
 
-  // The line commented below would be another example, taking the private key exported from a Metamask wallet (Metamask exports it as a hex-encoded string)
+  // The line below would be another example, taking the private key exported from a Metamask wallet (Metamask exports it as a hex-encoded string)
   // const walletPrivateKey = Buffer.from('e4fd52ad095af0291e9e3a228e55c4efd307ec7861cf22e3542f2330d981d534', 'hex')
 
   // API call to get the list of "signers" where your private key wallet will be imported into, with their corresponding encryption keys. If you are importing multiple wallets, you don't need to repeat this step, signers info just needs to be fetched once.

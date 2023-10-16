@@ -121,3 +121,10 @@ export type ImportWalletRequest = {
 }
 
 export type ImportWalletResponse = Wallets.Wallet
+
+export type ExportWalletRequest = {
+  walletId: Foundations.EntityId
+  body: Wallets.ExportWalletBody
+}
+
+export type ExportWalletResponse = Wallets.ExportedSigningKey
