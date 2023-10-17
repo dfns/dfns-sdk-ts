@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-beta.6 (2023-10-17)
+
+- Added wallet import feature and example (https://github.com/dfnsext/typescript-sdk/pull/34)
+- Github action to build on push and PR (https://github.com/dfnsext/typescript-sdk/pull/35)
+- Tron tier-3 integration: lib and example (https://github.com/dfnsext/typescript-sdk/pull/30)
+
 ## 0.1.0-beta.5 (2023-10-03)
 
 - Fixed `createUserRecovery` wrong input type ([PR-33](https://github.com/dfnsext/typescript-sdk/pull/33))

@@ -11,6 +11,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-ethersjs5 \
     --workspace @dfns/lib-ethersjs6 \
     --workspace @dfns/lib-solana \
+    --workspace @dfns/lib-tron \
     --workspace @dfns/lib-vechain \
     --workspace @dfns/sdk-keyimport-utils \
     --include-workspace-root "$version"
