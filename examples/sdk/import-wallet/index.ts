@@ -29,7 +29,7 @@ const main = async () => {
   // The line commented below would be another example, taking the private key exported from a Metamask wallet (Metamask exports it as a hex-encoded string)
   // const walletPrivateKey = Buffer.from('e4fd52ad095af0291e9e3a228e55c4efd307ec7861cf22e3542f2330d981d534', 'hex')
 
-  // API call to get the list of "signers" where your private key wallet will be imported into, with their corresponding encryption keys.
+  // API call to get the list of "signers" where your private key wallet will be imported into, with their corresponding encryption keys. If you are importing multiple wallets, you don't need to repeat this step, signers info just needs to be fetched once.
   const { clusters } = await dfnsApi.signers.listSigners()
 
   // This splits the private key into key-shares (one share per signer), and encrypt them with signers encryption keys (only signers at then end of the chain will be able to decrypt and use them)
