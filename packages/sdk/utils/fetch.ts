@@ -47,7 +47,8 @@ const errorHandler = <T>(fetch: Fetch<T>): Fetch<T> => {
       return response
     } else {
       const body = await response.json()
-      throw new DfnsError(response.status, body.error.message, body.error)
+      const errorMessage = body?.error?.message || body?.message || JSON.stringify(body)
+      throw new DfnsError(response.status, errorMessage, body.error)
     }
   }
 }
@@ -83,26 +84,29 @@ const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
 const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     if (options.method !== 'GET') {
+      const apiOptions = {
+        ...options.apiOptions,
+        baseUrl: (<any>options.apiOptions).baseAuthUrl || options.apiOptions.baseUrl,
+      }
+
       const { challenge, challengeIdentifier, allowCredentials } = await BaseAuthApi.createUserActionChallenge(
         {
           userActionPayload: <string>options.body ?? '',
           userActionHttpMethod: options.method,
           userActionHttpPath: (<URL>resource).pathname,
-          userActionServerKind: 'Api',
+          userActionServerKind: (<any>apiOptions)?.userActionServerKind || 'Api',
         },
-        options.apiOptions
+        apiOptions
       )
 
-      const { signer } = options.apiOptions
-
-      const assertion = await signer.sign(challenge, allowCredentials)
+      const assertion = await apiOptions.signer.sign(challenge, allowCredentials)
 
       const { userAction } = await BaseAuthApi.signUserActionChallenge(
         {
           challengeIdentifier,
           firstFactor: assertion,
         },
-        options.apiOptions
+        apiOptions
       )
 
       options.headers = {
