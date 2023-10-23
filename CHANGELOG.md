@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0-beta.7 (2023-10-23)
+
+- Allow custom base auth url (https://github.com/dfnsext/typescript-sdk/pull/37)
+
 ## 0.1.0-beta.6 (2023-10-17)
 
 - Added wallet import feature and example (https://github.com/dfnsext/typescript-sdk/pull/34)
