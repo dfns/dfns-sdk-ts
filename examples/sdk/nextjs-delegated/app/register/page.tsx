@@ -3,6 +3,9 @@
 import { WebAuthn } from '@dfns/sdk-webauthn'
 import { FormEvent, useState } from 'react'
 
+import { createRecoveryCredential, KeyClientData } from '@/common/recoveryKey'
+import { base64url } from '@/common/base64url'
+
 export default function Register() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(undefined)
@@ -20,11 +23,25 @@ export default function Register() {
         console.log('register init challenge', challenge)
         const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
         const attestation = await webauthn.create(challenge)
+        const clientData: KeyClientData = {
+          type: 'key.create',
+          challenge: base64url(challenge.challenge),
+          origin: window.location.origin,
+          crossOrigin: false,
+        }
+        const newRecoveryKey = await createRecoveryCredential(clientData, email)
+
+        // WARNING: In a production environment, it is *not* recommended that you store these values on the behalf of
+        // the user. We recommend just displaying the values to the user, and asking them to store the values in a
+        // secure physical or digital location.
+        window.localStorage.setItem('recoveryKeySecret', newRecoveryKey.recoveryKey.secret)
+        window.localStorage.setItem('recoveryKeyCredentialId', newRecoveryKey.recoveryKey.credentialId)
+
         return fetch('./api/register/complete', {
           method: 'POST',
           body: JSON.stringify({
             tempAuthToken: challenge.temporaryAuthenticationToken,
-            signedChallenge: { firstFactorCredential: attestation },
+            signedChallenge: { firstFactorCredential: attestation, recoveryCredential: newRecoveryKey.credential },
           }),
         })
       })
