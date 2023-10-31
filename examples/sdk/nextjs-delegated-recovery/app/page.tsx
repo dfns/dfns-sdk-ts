@@ -56,6 +56,25 @@ However, creating a new wallet will require the end user to sign a challenge in 
 - \`./app/wallets/page.tsx\` (Client registration page)
 `
 
+const step3 = `
+## Step 3 - Recover
+
+It is recommended that you ask the user to register multiple WebAuthn credentials in the system, to ensure they don't lose access to their account. However, since the credentials are all digital, over time it is possible that your user will lose access to all of their login credentials.
+
+To avoid this happening, we recommend adding a recovery credential for the user. This can be added during the registration process, or the user can add new recovery credentials at any time.
+
+Recovery credentials are just private keys in Dfns view, and you are free to implement them however you see fit. In this example, we're including one option for how to implement recovery, where the private key is generated in the user's browser, encrypted with a random secret, and then the unencrypted public key and the encrypted private key are provided to Dfns to store.
+
+When the user wants to recover they provide their username and the ID that identifies the recovery credential. They then download the encrypted private key from Dfns and decrypt the private key using their recovery secret.
+
+In this example, we store the recovery secret and credential ID in the user's browser local storage. This is convenient for this example, however, it is not recommended you do this in a production environment. Instead, we recommend that the values are displayed to the user, for a limited time, along with a message requesting that the user store the credentials in a secure physical or digital location.
+
+- \`./app/api/recover/create/init/route.ts\` (Server endpoint to init)
+- \`./app/api/recover/create/complete/route.ts\` (Server endpoint to complete)
+- \`./app/recover/page.tsx\` (Client recovery page)
+
+`
+
 export default function Home() {
   const { dfnsEndUserAuthToken, resetDfnsEndUser } = useAppContext()
 
@@ -93,6 +112,16 @@ export default function Home() {
         <p className="text-center">
           <Link href="/wallets" className="btn no-underline">
             Go to Wallets Page
+          </Link>
+        </p>
+      )}
+      <ReactMarkdown>{step3}</ReactMarkdown>
+      {!dfnsEndUserAuthToken ? (
+        <p className="text-center">⚠️ You need Complete Step 1 first</p>
+      ) : (
+        <p className="text-center">
+          <Link href="/recover" className="btn no-underline">
+            Go to Recovery Page
           </Link>
         </p>
       )}
