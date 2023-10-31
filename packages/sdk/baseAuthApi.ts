@@ -169,6 +169,22 @@ export class BaseAuthApi {
 
     return response.json()
   }
+  /**
+   * Completes user logout by sending the user auth token.
+   */
+  static async userLogout(
+    options: DfnsBaseApiOptions
+  ): Promise<void> {
+    if (!options.authToken) {
+      throw new Error('authToken is required')
+    }
+    const response = await simpleFetch('/auth/logout', {
+      method: 'PUT',
+      apiOptions: options,
+    })
+
+    return response.json()
+  }
 
   /**
    * Initiates Registration by creating a challenge that will need to be signed by a new set of Credentials.
