@@ -171,11 +171,28 @@ export type SignEip712TypedData = {
 
 // FIXME: Missing documentation for EncryptedKeyShare
 export type EncryptedKeyShare = {
-  // FIXME: Missing documentation for signerId
+  /**
+   * Base64-encoded ID of the signer where the encrypted key share comes from.
+   */
   signerId: string
 
-  // FIXME: Missing documentation for encryptedKeyShare
+  /**
+   * Base64-encoded key share.
+   */
   encryptedKeyShare: string
+}
+
+// FIXME: Missing documentation for SupportedExportScheme
+export type SupportedExportScheme = {
+  /**
+   * Base64-encoded ID of the signer where the encrypted key share comes from.
+   */
+  curve: KeyCurve
+
+  /**
+   * Base64-encoded key share.
+   */
+  protocol: KeyProtocol
 }
 
 // FIXME: Missing documentation for Wallet
@@ -208,9 +225,19 @@ export type Wallet = {
   dateCreated: IsoDatetime
 
   /**
+   * If present, represents the moment when the wallet was exported for the first time.
+   */
+  dateExported?: IsoDatetime
+
+  /**
    * Whether the wallet was imported, or if it was generated on Dfns side.
    */
   imported?: boolean
+
+  /**
+   * Whether the wallet was ever exported.
+   */
+  exported?: boolean
 }
 
 // FIXME: Missing documentation for SigningKey
@@ -648,6 +675,28 @@ export type RequesterIdentity = {
   appId?: EntityId
 }
 
+// FIXME: Missing documentation for ExportedSigningKey
+export type ExportedSigningKey = {
+  // FIXME: Missing documentation for publicKey
+  publicKey: string
+
+  /**
+   * The TSS threshold parameter of this wallet private signing key shares.
+   */
+  minSigners: IntegerPositiveStrict
+
+  // FIXME: Missing documentation for curve
+  curve: KeyCurve
+
+  // FIXME: Missing documentation for protocol
+  protocol: KeyProtocol
+
+  /**
+   * Key shares of the exported wallet. These key shares are encrypted with the provided encryption key. The wallet private key must then be re-constructed from them.
+   */
+  encryptedKeyShares: EncryptedKeyShare[]
+}
+
 // FIXME: Missing documentation for CreateWalletBody
 export type CreateWalletBody = {
   // FIXME: Missing documentation for network
@@ -688,6 +737,19 @@ export type ImportWalletBody = {
 
   // FIXME: Missing documentation for encryptedKeyShares
   encryptedKeyShares: EncryptedKeyShare[]
+}
+
+// FIXME: Missing documentation for ExportWalletBody
+export type ExportWalletBody = {
+  /**
+   * Encryption public key that will be used by signers to encrypt the exported wallet key shares. The purpose of encrypting key shares is to have them extra-safe and not usable in any place in the system until they are safely returned back to the client issuing the export command.
+   */
+  encryptionKey: string
+
+  /**
+   * The schemes supported by the client issuing the export request, for private key reconstruction.
+   */
+  supportedSchemes: SupportedExportScheme[]
 }
 
 // FIXME: Missing documentation for TransferAssetBody
@@ -749,6 +811,8 @@ export enum WalletStatus {
   Creating = 'Creating',
   // FIXME: Missing documentation for Failed
   Failed = 'Failed',
+  // FIXME: Missing documentation for Archived
+  Archived = 'Archived',
 }
 
 // FIXME: Missing documentation for KeyScheme

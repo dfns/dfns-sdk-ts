@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/sdk-keyexport-utils",
+        "clean": true,
+        "main": "packages/sdk-keyexport-utils/index.ts",
+        "tsConfig": "packages/sdk-keyexport-utils/tsconfig.json",
+        "assets": ["packages/sdk-keyexport-utils/codegen/*"]
+      }
+    }
+  }
+}

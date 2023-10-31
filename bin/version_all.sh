@@ -14,6 +14,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-tron \
     --workspace @dfns/lib-vechain \
     --workspace @dfns/sdk-keyimport-utils \
+    --workspace @dfns/sdk-keyexport-utils \
     --include-workspace-root "$version"
 
 npm run cb:all

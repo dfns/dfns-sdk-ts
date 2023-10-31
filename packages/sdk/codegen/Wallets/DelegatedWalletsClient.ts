@@ -418,4 +418,49 @@ export class DelegatedWalletsClient {
 
     return response.json()
   }
+
+  async exportWalletInit(
+    request: T.ExportWalletRequest
+  ): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/export', {
+      path: { walletId: request.walletId },
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async exportWalletComplete(
+    request: T.ExportWalletRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.ExportWalletResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/export', {
+      path: { walletId: request.walletId },
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
 }

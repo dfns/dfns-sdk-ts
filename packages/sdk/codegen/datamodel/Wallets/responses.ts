@@ -5,6 +5,7 @@ import {
   UnauthorizedError,
 } from '../Foundations'
 import {
+  ExportedSigningKey,
   PaginatedEventHistory,
   PaginatedSignatureList,
   PaginatedTransactionList,
@@ -282,3 +283,19 @@ export type ImportWalletError = {
 }
 
 export type ImportWalletResponse = ImportWalletSuccess | ImportWalletError
+
+// Response for ExportWallet
+
+export type ExportWalletSuccess = ExportedSigningKey
+
+export type ExportWalletError = {
+  error:
+    | BadRequestError
+    | ForbiddenError
+    | UnauthorizedError
+    | ForbiddenError
+    | BadRequestError
+    | EntityNotFoundError
+}
+
+export type ExportWalletResponse = ExportWalletSuccess | ExportWalletError
