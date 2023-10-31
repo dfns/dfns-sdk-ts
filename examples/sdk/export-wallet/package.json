@@ -5,7 +5,7 @@
   "dependencies": {
     "@dfns/sdk": "file:../../../packages/sdk",
     "@dfns/sdk-keysigner": "file:../../../packages/sdk-keysigner",
-    "@dfns/sdk-keyimport-utils": "file:../../../packages/sdk-keyexport-utils",
+    "@dfns/sdk-keyexport-utils": "file:../../../packages/sdk-keyexport-utils",
     "dotenv": "16.1.4"
   },
   "devDependencies": {},
