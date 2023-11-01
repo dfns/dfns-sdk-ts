@@ -49,6 +49,15 @@ export type TransferErc721Asset = {
   tokenId: string
 }
 
+// FIXME: Missing documentation for BroadcastTransaction
+export type BroadcastTransaction = {
+  // FIXME: Missing documentation for kind
+  kind: TransactionKind.Transaction
+
+  // FIXME: Missing documentation for transaction
+  transaction: string
+}
+
 // FIXME: Missing documentation for BroadcastEvmTransaction
 export type BroadcastEvmTransaction = {
   // FIXME: Missing documentation for kind
@@ -118,6 +127,15 @@ export type BroadcastEvmLegacyTransaction = {
   gasPrice?: Amount
 }
 
+// FIXME: Missing documentation for BroadcastPsbt
+export type BroadcastPsbt = {
+  // FIXME: Missing documentation for kind
+  kind: TransactionKind.Psbt
+
+  // FIXME: Missing documentation for psbt
+  psbt: string
+}
+
 // FIXME: Missing documentation for SignHash
 export type SignHash = {
   // FIXME: Missing documentation for kind
@@ -134,6 +152,15 @@ export type SignMessage = {
 
   // FIXME: Missing documentation for message
   message: string
+}
+
+// FIXME: Missing documentation for SignTransaction
+export type SignTransaction = {
+  // FIXME: Missing documentation for kind
+  kind: SignatureKind.Transaction
+
+  // FIXME: Missing documentation for transaction
+  transaction: string
 }
 
 // FIXME: Missing documentation for Eip712Domain
@@ -167,6 +194,15 @@ export type SignEip712TypedData = {
 
   // FIXME: Missing documentation for message
   message: Record<string, unknown>
+}
+
+// FIXME: Missing documentation for SignPsbt
+export type SignPsbt = {
+  // FIXME: Missing documentation for kind
+  kind: SignatureKind.Psbt
+
+  // FIXME: Missing documentation for psbt
+  psbt: string
 }
 
 // FIXME: Missing documentation for EncryptedKeyShare
@@ -523,6 +559,9 @@ export type TransferRequest = {
 
   // FIXME: Missing documentation for reason
   reason?: string
+
+  // FIXME: Missing documentation for metadata
+  metadata: TransferRequestMetadata
 }
 
 // FIXME: Missing documentation for PaginatedTransferList
@@ -626,6 +665,12 @@ export type SignatureRequest = {
   // FIXME: Missing documentation for signature
   signature?: Signature
 
+  // FIXME: Missing documentation for signatures
+  signatures?: Signature[]
+
+  // FIXME: Missing documentation for signedData
+  signedData?: string
+
   // FIXME: Missing documentation for status
   status: SignatureStatus
 
@@ -673,6 +718,24 @@ export type RequesterIdentity = {
 
   // FIXME: Missing documentation for appId
   appId?: EntityId
+}
+
+// FIXME: Missing documentation for TransferRequestMetadata
+export type TransferRequestMetadata = {
+  // FIXME: Missing documentation for asset
+  asset: AssetMetadata
+}
+
+// FIXME: Missing documentation for AssetMetadata
+export type AssetMetadata = {
+  // FIXME: Missing documentation for symbol
+  symbol?: string
+
+  // FIXME: Missing documentation for decimals
+  decimals?: number
+
+  // FIXME: Missing documentation for verified
+  verified?: boolean
 }
 
 // FIXME: Missing documentation for ExportedSigningKey
@@ -760,12 +823,19 @@ export type TransferAssetBody =
 
 // FIXME: Missing documentation for BroadcastTransactionBody
 export type BroadcastTransactionBody =
+  | BroadcastTransaction
   | BroadcastEvmTransaction
   | BroadcastEip1559Transaction
   | BroadcastEvmLegacyTransaction
+  | BroadcastPsbt
 
 // FIXME: Missing documentation for GenerateSignatureBody
-export type GenerateSignatureBody = SignHash | SignMessage | SignEip712TypedData
+export type GenerateSignatureBody =
+  | SignHash
+  | SignMessage
+  | SignTransaction
+  | SignEip712TypedData
+  | SignPsbt
 
 // FIXME: Missing documentation for BlockchainEvent
 export type BlockchainEvent =
@@ -785,12 +855,16 @@ export enum TransferKind {
 
 // FIXME: Missing documentation for TransactionKind
 export enum TransactionKind {
+  // FIXME: Missing documentation for Transaction
+  Transaction = 'Transaction',
   // FIXME: Missing documentation for Evm
   Evm = 'Evm',
   // FIXME: Missing documentation for Eip1559
   Eip1559 = 'Eip1559',
   // FIXME: Missing documentation for EvmLegacy
   EvmLegacy = 'EvmLegacy',
+  // FIXME: Missing documentation for Psbt
+  Psbt = 'Psbt',
 }
 
 // FIXME: Missing documentation for SignatureKind
@@ -799,8 +873,12 @@ export enum SignatureKind {
   Hash = 'Hash',
   // FIXME: Missing documentation for Message
   Message = 'Message',
+  // FIXME: Missing documentation for Transaction
+  Transaction = 'Transaction',
   // FIXME: Missing documentation for Eip712
   Eip712 = 'Eip712',
+  // FIXME: Missing documentation for Psbt
+  Psbt = 'Psbt',
 }
 
 // FIXME: Missing documentation for WalletStatus
@@ -917,8 +995,8 @@ export enum BlockchainNetwork {
   AvalancheCFuji = 'AvalancheCFuji',
   // FIXME: Missing documentation for Bitcoin
   Bitcoin = 'Bitcoin',
-  // FIXME: Missing documentation for BitcoinTestnet
-  BitcoinTestnet = 'BitcoinTestnet',
+  // FIXME: Missing documentation for BitcoinTestnet3
+  BitcoinTestnet3 = 'BitcoinTestnet3',
   // FIXME: Missing documentation for Bsc
   Bsc = 'Bsc',
   // FIXME: Missing documentation for BscTestnet
