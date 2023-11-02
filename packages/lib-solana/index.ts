@@ -1,6 +1,6 @@
 import { DfnsApiClient } from '@dfns/sdk'
 import { KeyCurve, KeyScheme, SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
-import { PublicKey, Transaction } from '@solana/web3.js'
+import { PublicKey, Transaction, VersionedTransaction } from '@solana/web3.js'
 
 const sleep = (interval = 0) => new Promise((resolve) => setTimeout(resolve, interval))
 
@@ -66,7 +66,20 @@ export class DfnsWallet {
 
   async signTransaction(transaction: Transaction): Promise<Transaction> {
     const message = transaction.serializeMessage()
-    console.log(message.length)
+
+    const { walletId, dfnsClient } = this.options
+    const res = await dfnsClient.wallets.generateSignature({
+      walletId,
+      body: { kind: SignatureKind.Message, message: `0x${message.toString('hex')}` },
+    })
+
+    const signature = await this.waitForSignature(res.id)
+    transaction.addSignature(this.publicKey, signature)
+    return transaction
+  }
+
+  async signVersionedTransaction(transaction: VersionedTransaction): Promise<VersionedTransaction> {
+    const message = transaction.message.serialize()
 
     const { walletId, dfnsClient } = this.options
     const res = await dfnsClient.wallets.generateSignature({
