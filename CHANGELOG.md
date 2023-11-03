@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0 (2023-11-03)
+
+- Release stable version
+
 ## 0.1.0-beta.8 (2023-11-03)
 
 - key export support + example (#38)
