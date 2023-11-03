@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-beta.8 (2023-11-03)
+
+- key export support + example (#38)
+- lib solana: sign versioned transaction (#57)
+- generate signatures: new signature types "Pbst" and "Transaction" (#56)
+- new example: nexjs delegated recovery flow (#55)
+- add user logout method to BaseAuthApi (#41)
+-  Various dependabot module bumps
+
 ## 0.1.0-beta.7 (2023-10-23)
 
 - Allow custom base auth url (https://github.com/dfnsext/typescript-sdk/pull/37)
