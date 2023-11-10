@@ -760,6 +760,15 @@ export type ExportedSigningKey = {
   encryptedKeyShares: EncryptedKeyShare[]
 }
 
+// FIXME: Missing documentation for DelegateWalletResult
+export type DelegateWalletResult = {
+  // FIXME: Missing documentation for walletId
+  walletId: EntityId
+
+  // FIXME: Missing documentation for status
+  status: string
+}
+
 // FIXME: Missing documentation for CreateWalletBody
 export type CreateWalletBody = {
   // FIXME: Missing documentation for network
@@ -813,6 +822,14 @@ export type ExportWalletBody = {
    * The schemes supported by the client issuing the export request, for private key reconstruction.
    */
   supportedSchemes: SupportedExportScheme[]
+}
+
+// FIXME: Missing documentation for DelegateWalletBody
+export type DelegateWalletBody = {
+  /**
+   * Encryption public key that will be used by signers to encrypt the exported wallet key shares. The purpose of encrypting key shares is to have them extra-safe and not usable in any place in the system until they are safely returned back to the client issuing the export command.
+   */
+  userId: EntityId
 }
 
 // FIXME: Missing documentation for TransferAssetBody
@@ -989,10 +1006,16 @@ export enum BlockchainNetwork {
   ArbitrumOne = 'ArbitrumOne',
   // FIXME: Missing documentation for ArbitrumGoerli
   ArbitrumGoerli = 'ArbitrumGoerli',
+  // FIXME: Missing documentation for ArbitrumSepolia
+  ArbitrumSepolia = 'ArbitrumSepolia',
   // FIXME: Missing documentation for AvalancheC
   AvalancheC = 'AvalancheC',
   // FIXME: Missing documentation for AvalancheCFuji
   AvalancheCFuji = 'AvalancheCFuji',
+  // FIXME: Missing documentation for Base
+  Base = 'Base',
+  // FIXME: Missing documentation for BaseGoerli
+  BaseGoerli = 'BaseGoerli',
   // FIXME: Missing documentation for Bitcoin
   Bitcoin = 'Bitcoin',
   // FIXME: Missing documentation for BitcoinTestnet3
