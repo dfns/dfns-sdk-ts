@@ -1,17 +1,23 @@
 # Changelog
 
+## 0.1.1 (2023-11-14)
+
+- Added `delegateWallet` to the wallets API
+- Added blockchain support for `Base`, `BaseGoerli` and `ArbitrumSepolia`
+- Added a Biconomy account abstraction example
+
 ## 0.1.0 (2023-11-03)
 
 - Release stable version
 
 ## 0.1.0-beta.8 (2023-11-03)
 
-- key export support + example (#38)
-- lib solana: sign versioned transaction (#57)
-- generate signatures: new signature types "Pbst" and "Transaction" (#56)
-- new example: nexjs delegated recovery flow (#55)
-- add user logout method to BaseAuthApi (#41)
--  Various dependabot module bumps
+- Added key export support and example (#38)
+- Added `signVersionedTransaction` support to `lib-solana` (#57)
+- Added new signature and broadcast type `Transaction` to wallets API (#56)
+- Added new nextjs delegated recovery flow example (#55)
+- Added user logout method to BaseAuthApi (#41)
+- Various dependabot module bumps
 
 ## 0.1.0-beta.7 (2023-10-23)
 
