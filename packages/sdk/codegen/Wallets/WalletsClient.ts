@@ -290,4 +290,21 @@ export class WalletsClient {
 
     return response.json()
   }
+
+  async delegateWallet(
+    request: T.DelegateWalletRequest
+  ): Promise<T.DelegateWalletResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/delegate', {
+      path: { walletId: request.walletId },
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
 }

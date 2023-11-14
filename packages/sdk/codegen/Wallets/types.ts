@@ -128,3 +128,10 @@ export type ExportWalletRequest = {
 }
 
 export type ExportWalletResponse = Wallets.ExportedSigningKey
+
+export type DelegateWalletRequest = {
+  walletId: Foundations.EntityId
+  body: Wallets.DelegateWalletBody
+}
+
+export type DelegateWalletResponse = Wallets.DelegateWalletResult
