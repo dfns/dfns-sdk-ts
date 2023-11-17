@@ -1,10 +1,5 @@
 import { DfnsApiClient } from '@dfns/sdk'
 import { KeyCurve, KeyScheme, SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
-
-import {
-  publicKeyToAddress,
-} from 'viem/accounts'
-
 import {
   getAddress,
   Address,
@@ -22,10 +17,9 @@ import {
   SerializeTransactionFn,
   TypedData,
 } from 'viem'
-
+import { publicKeyToAddress } from 'viem/accounts'
 
 const sleep = (interval = 0) => new Promise((resolve) => setTimeout(resolve, interval))
-
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -66,7 +60,7 @@ export class DfnsWallet {
     return new DfnsWallet(address, options)
   }
 
-  async waitForSignature(signatureId: string): Promise<Signature> {
+  private async waitForSignature(signatureId: string): Promise<Signature> {
     const { walletId, dfnsClient, retryInterval } = this.options
 
     let maxRetries = this.options.maxRetries
@@ -76,11 +70,11 @@ export class DfnsWallet {
       const res = await dfnsClient.wallets.getSignature({ walletId, signatureId })
       if (res.status === SignatureStatus.Signed) {
         if (!res.signature) break
-        return ({
-          r: toHex(res.signature.r),
-          s: toHex(res.signature.s),
-          v: res.signature.recid ? BigInt(28) : BigInt(27),
-        })
+        return {
+          r: <`0x${string}`>res.signature.r,
+          s: <`0x${string}`>res.signature.s,
+          v: res.signature.recid ? 28n : 27n,
+        }
       } else if (res.status === SignatureStatus.Failed) {
         break
       }
@@ -94,7 +88,7 @@ export class DfnsWallet {
     )
   }
 
-  async signHash(hash: Hash): Promise<Signature> {
+  private async signHash(hash: Hash): Promise<Signature> {
     const { walletId, dfnsClient } = this.options
     const res = await dfnsClient.wallets.generateSignature({
       walletId,
@@ -104,39 +98,38 @@ export class DfnsWallet {
     return this.waitForSignature(res.id)
   }
 
-  async signMessage({ message }: { message: SignableMessage }): Promise<Hash> {
+  // must use the arrow syntax to bind `this` to all public methods, otherwise, after
+  // viem's `toAccount`, the returned LocalAccount will not be able to resolve `this`
+  // on method calls to `signMessage` and `signTypedData`
+
+  signMessage = async ({ message }: { message: SignableMessage }): Promise<Hash> => {
     const signature = await this.signHash(hashMessage(message))
     return signatureToHex(signature)
   }
 
-  async signTransaction<TTransactionSerializable extends TransactionSerializable>(
+  signTransaction = async <TTransactionSerializable extends TransactionSerializable>(
     transaction: TTransactionSerializable,
     args?: {
       serializer?: SerializeTransactionFn<TTransactionSerializable>
-    },
-  ): Promise<Hash> {
+    }
+  ): Promise<Hash> => {
     let serializer = args?.serializer
     if (!serializer) {
       serializer = serializeTransaction
     }
     const hash = keccak256(serializer(transaction))
     const signature = await this.signHash(hash)
-    return serializer(
-      transaction,
-      signature,
-    )
+    return serializer(transaction, signature)
   }
 
-  async signTypedData<
+  signTypedData = async <
     const TTypedData extends TypedData | { [key: string]: unknown },
-    TPrimaryType extends string = string,
+    TPrimaryType extends string = string
   >(
-    typedData: TypedDataDefinition<TTypedData, TPrimaryType>,
-  ): Promise<Hash> {
+    typedData: TypedDataDefinition<TTypedData, TPrimaryType>
+  ): Promise<Hash> => {
     const hash = hashTypedData(typedData)
     const signature = await this.signHash(hash)
     return signatureToHex(signature)
   }
-
 }
-
