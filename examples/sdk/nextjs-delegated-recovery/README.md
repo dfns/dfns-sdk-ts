@@ -63,7 +63,7 @@ module.exports = nextConfig
 
 ## Run Example
 
-At the root of the typescript-sdk repository (npm workspace), run:
+At the root of the dfns-sdk-ts repository (npm workspace), run:
 ```bash
 npm i
 ```

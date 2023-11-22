@@ -5,7 +5,7 @@
 Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
 - [Dfns Website](https://www.dfns.co)
 - [Dfns API Docs](https://docs.dfns.co)
-- [Dfns SDK Docs](https://dfnsext.github.io/typescript-sdk)
+- [Dfns SDK Docs](https://dfns.github.io/dfns-sdk-ts)
 
 ## Installation
 
@@ -17,9 +17,9 @@ npm i @dfns/sdk
 
 For examples containing code + some docs, these examples illustrate different setups of the SDK:
 
-* [Service account](https://github.com/dfnsext/typescript-sdk/tree/m/examples/sdk/service-account)
-* [Delegated registration and login with NextJS](https://github.com/dfnsext/typescript-sdk/tree/m/examples/sdk/nextjs-delegated)
-* [Delegated registration and login with ReactJS + Express](https://github.com/dfnsext/typescript-sdk/tree/m/examples/sdk/auth-delegated)
+* [Service account](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/service-account)
+* [Delegated registration and login with NextJS](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/nextjs-delegated)
+* [Delegated registration and login with ReactJS + Express](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/auth-delegated)
 
 ## Concepts
 
@@ -177,7 +177,7 @@ BaseAuthApi.createUserRegistration()
 
 Integrations with other blockchain platforms to make Dapp development frictionless. More to come...
 
-* [ethers.js v5](https://github.com/dfnsext/typescript-sdk/tree/m/packages/lib-ethersjs5/) and [examples](https://github.com/dfnsext/typescript-sdk/tree/m/examples/ethersjs/v5)
-* [ethers.js v6](https://github.com/dfnsext/typescript-sdk/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfnsext/typescript-sdk/tree/m/examples/ethersjs/v6)
-* [Solana web3.js](https://github.com/dfnsext/typescript-sdk/tree/m/packages/lib-solana/) and [examples](https://github.com/dfnsext/typescript-sdk/tree/m/examples/solana)
-* [Vechain Connex](https://github.com/dfnsext/typescript-sdk/tree/m/packages/lib-vechain/) and [examples](https://github.com/dfnsext/typescript-sdk/tree/m/examples/vechain)
+* [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/ethersjs/v5)
+* [ethers.js v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/ethersjs/v6)
+* [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/solana)
+* [Vechain Connex](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-vechain/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/vechain)
