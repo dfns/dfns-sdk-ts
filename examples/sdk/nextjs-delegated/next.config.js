@@ -1,7 +1,10 @@
-const result = require('dotenv').config({ path: '.env.local' })
+const dotenv = require('dotenv')
 
 const nextConfig = {
-  env: result.parsed,
+  env: {
+    ...dotenv.config({ path: '.env' }).parsed,
+    ...dotenv.config({ path: '.env.local' }).parsed,
+  },
   transpilePackages: ['@dfns/sdk-webauthn'],
 }
 
