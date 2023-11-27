@@ -9,6 +9,7 @@ import { PolicyManagementClient } from './codegen/PolicyManagement'
 import { PublicKeysClient } from './codegen/PublicKeys'
 import { WalletsClient } from './codegen/Wallets'
 import { SignersClient } from './codegen/Signers'
+import { WebhooksClient } from './generated/webhooks'
 import { CredentialSigner } from './signer'
 
 export type DfnsApiClientOptions = DfnsBaseApiOptions & {
@@ -52,6 +53,10 @@ export class DfnsApiClient {
 
   public get wallets() {
     return new WalletsClient(this.apiOptions)
+  }
+
+  public get webhooks() {
+    return new WebhooksClient(this.apiOptions)
   }
 
   public get signers() {

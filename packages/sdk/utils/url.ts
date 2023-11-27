@@ -6,7 +6,7 @@ export const buildPathAndQuery = (
 
   const paramsToReplace = path.match(new RegExp(`:[a-zA-Z]+`, 'g')) || []
 
-  for (const key in paramsToReplace) {
+  for (const key of paramsToReplace) {
     path = path.replace(new RegExp(`:${key}`, 'g'), encodeURIComponent(params.path[key]))
   }
 
