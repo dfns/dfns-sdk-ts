@@ -6,7 +6,8 @@
         "outputPath": "dist/@dfns/lib-ethersjs5",
         "clean": true,
         "main": "packages/lib-ethersjs5/index.ts",
-        "tsConfig": "packages/lib-ethersjs5/tsconfig.json"
+        "tsConfig": "packages/lib-ethersjs5/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
       }
     }
   }

@@ -29,6 +29,7 @@ export class WebhooksClient {
 
     const response = await userActionFetch(path, {
       method: 'DELETE',
+      body: {},
       apiOptions: this.apiOptions,
     })
 
@@ -99,6 +100,7 @@ export class WebhooksClient {
 
     const response = await userActionFetch(path, {
       method: 'POST',
+      body: {},
       apiOptions: this.apiOptions,
     })
 

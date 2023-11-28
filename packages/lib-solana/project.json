@@ -6,7 +6,8 @@
         "outputPath": "dist/@dfns/lib-solana",
         "clean": true,
         "main": "packages/lib-solana/index.ts",
-        "tsConfig": "packages/lib-solana/tsconfig.json"
+        "tsConfig": "packages/lib-solana/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
       }
     }
   }

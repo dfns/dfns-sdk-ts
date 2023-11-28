@@ -4,10 +4,10 @@ export const buildPathAndQuery = (
 ): string => {
   let path = pattern
 
-  const paramsToReplace = path.match(new RegExp(`:[a-zA-Z]+`, 'g')) || []
+  const paramsToReplace = (path.match(new RegExp(`:[a-zA-Z]+`, 'g')) || []).map((v) => v.replace(/^:/, ''))
 
   for (const key of paramsToReplace) {
-    path = path.replace(new RegExp(`${key}`, 'g'), encodeURIComponent(params.path[key]))
+    path = path.replace(new RegExp(`:${key}`, 'g'), encodeURIComponent(params.path[key]))
   }
 
   const query = Object.entries(params.query)

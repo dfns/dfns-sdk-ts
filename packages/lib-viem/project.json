@@ -6,7 +6,8 @@
         "outputPath": "dist/@dfns/lib-viem",
         "clean": true,
         "main": "packages/lib-viem/index.ts",
-        "tsConfig": "packages/lib-viem/tsconfig.json"
+        "tsConfig": "packages/lib-viem/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
       }
     }
   }

@@ -6,7 +6,8 @@
         "outputPath": "dist/@dfns/lib-tron",
         "clean": true,
         "main": "packages/lib-tron/index.ts",
-        "tsConfig": "packages/lib-tron/tsconfig.json"
+        "tsConfig": "packages/lib-tron/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
       }
     }
   }
