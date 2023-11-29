@@ -8,6 +8,7 @@ declare -a packages=(
     "@dfns/sdk-webauthn"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
+    "@dfns/lib-viem"
     "@dfns/lib-solana"
     "@dfns/lib-tron"
     "@dfns/lib-vechain"

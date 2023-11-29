@@ -10,6 +10,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/sdk-webauthn \
     --workspace @dfns/lib-ethersjs5 \
     --workspace @dfns/lib-ethersjs6 \
+    --workspace @dfns/lib-viem \
     --workspace @dfns/lib-solana \
     --workspace @dfns/lib-tron \
     --workspace @dfns/lib-vechain \
