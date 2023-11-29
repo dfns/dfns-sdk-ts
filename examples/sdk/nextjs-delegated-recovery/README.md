@@ -35,12 +35,12 @@ Go back to the service accounts listing, and the new `Service Account` should be
 
 Copy `.env.example` to a new file `.env.local` and set the following values,
 
-* `DFNS_API_BASE_URL` = `https://api.dfns.ninja`
-* `DFNS_APPLICATION_ID` = the `App ID` from above
-* `DFNS_APPLICATION_ORIGIN` = `http://localhost:3000`
-* `DFNS_SERVICE_ACCOUNT_CREDENTIAL_ID` = the `Signing Key Cred ID` from above
-* `DFNS_SERVICE_ACCOUNT_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
-* `DFNS_SERVICE_ACCOUNT_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
+* `DFNS_API_URL` = `https://api.dfns.ninja`
+* `DFNS_APP_ID` = the `App ID` from above
+* `DFNS_APP_ORIGIN` = `http://localhost:3000`
+* `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
+* `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
+* `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
 * `NEXT_PUBLIC_DFNS_WEBAUTHN_RPID` = 'localhost'
 
 ## Next.js Configuration
@@ -92,16 +92,16 @@ Build Dfns client:
 ```ts
 // instanciate a key signer
 const signer = new AsymmetricKeySigner({
-  appOrigin: process.env.DFNS_APPLICATION_ORIGIN!,
-  credId: process.env.DFNS_SERVICE_ACCOUNT_CREDENTIAL_ID!,
-  privateKey: process.env.DFNS_SERVICE_ACCOUNT_PRIVATE_KEY!.replace(/\\n/g, '\n'),
+  appOrigin: process.env.DFNS_APP_ORIGIN!,
+  credId: process.env.DFNS_CRED_ID!,
+  privateKey: process.env.DFNS_PRIVATE_KEY!.replace(/\\n/g, '\n'),
 })
 
 // instanciate a dfns api client
 const dfns = new DfnsApiClient({
-  appId: process.env.DFNS_APPLICATION_ID!,
-  baseUrl: process.env.DFNS_API_BASE_URL!,
-  authToken: process.env.DFNS_SERVICE_ACCOUNT_TOKEN!,
+  appId: process.env.DFNS_APP_ID!,
+  baseUrl: process.env.DFNS_API_URL!,
+  authToken: process.env.DFNS_AUTH_TOKEN!,
   signer,
 })
 ```
@@ -120,8 +120,8 @@ Wallet creation initiation (wallet owned by end user):
 ```ts
 // instanciate a "delegated" Dfns client
 const dfnsDelegated = new DfnsDelegatedApiClient({
-    appId: process.env.DFNS_APPLICATION_ID!,
-    baseUrl: process.env.DFNS_API_BASE_URL!,
+    appId: process.env.DFNS_APP_ID!,
+    baseUrl: process.env.DFNS_API_URL!,
     authToken: endUserAuthToken,
   })
 
