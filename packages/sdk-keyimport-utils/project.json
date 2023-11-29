@@ -7,7 +7,8 @@
         "clean": true,
         "main": "packages/sdk-keyimport-utils/index.ts",
         "tsConfig": "packages/sdk-keyimport-utils/tsconfig.json",
-        "assets": ["packages/sdk-keyimport-utils/codegen/*"]
+        "assets": ["packages/sdk-keyimport-utils/codegen/*"],
+        "updateBuildableProjectDepsInPackageJson": true
       }
     }
   }

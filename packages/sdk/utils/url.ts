@@ -1,10 +1,12 @@
 export const buildPathAndQuery = (
   pattern: string,
-  params: { path: Record<string, string>; query: Record<string, string | number | boolean | undefined> }
+  params: { path: Record<string, any>; query: Record<string, string | number | boolean | undefined> }
 ): string => {
   let path = pattern
 
-  for (const key in params.path) {
+  const paramsToReplace = (path.match(new RegExp(`:[a-zA-Z]+`, 'g')) || []).map((v) => v.replace(/^:/, ''))
+
+  for (const key of paramsToReplace) {
     path = path.replace(new RegExp(`:${key}`, 'g'), encodeURIComponent(params.path[key]))
   }
 

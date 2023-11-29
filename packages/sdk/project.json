@@ -6,7 +6,8 @@
         "outputPath": "dist/@dfns/sdk",
         "clean": true,
         "main": "packages/sdk/index.ts",
-        "tsConfig": "packages/sdk/tsconfig.json"
+        "tsConfig": "packages/sdk/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
       }
     }
   }
