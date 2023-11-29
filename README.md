@@ -1,13 +1,12 @@
 # Dfns typescript SDK
 
-> ⚠️ **This SDK is in beta**. It may be unstable and have breaking evolutions.
-
 Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
 - [Dfns Website](https://www.dfns.co)
 - [Dfns API Docs](https://docs.dfns.co)
 - [Dfns SDK Docs](https://dfns.github.io/dfns-sdk-ts)
 
 ## Installation
+**Node version 18 or greater recommended**
 
 ```
 npm i @dfns/sdk

@@ -50,7 +50,7 @@ export default function Wallets() {
 
       {!!loading && <span>loading...</span>}
 
-      {!!error && <div className="text-red-700">{error}</div>}
+      {!!error && <div className="text-red-700">{JSON.stringify(error)}</div>}
 
       {wallets.map((wallet) => (
         <pre key={wallet.id} className="p-4 drop-shadow-lg mt-2 overflow-x-scroll">

@@ -44,7 +44,7 @@ export default function Login() {
 
         {!!loading && <span>loading...</span>}
 
-        {!!error && <div className="text-red-700">{error}</div>}
+        {!!error && <div className="text-red-700">{JSON.stringify(error)}</div>}
 
         {!!result && <pre className="p-4 drop-shadow-lg mt-2 overflow-x-scroll">{JSON.stringify(result, null, 2)}</pre>}
       </div>
