@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 (2023-11-29)
+
+- Added webhooks support in sdk
+- Added `@dfns/lib-viem` + an example of alchemy gasless integration
+
 ## 0.1.1 (2023-11-14)
 
 - Added `delegateWallet` to the wallets API
