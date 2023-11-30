@@ -231,6 +231,51 @@ export type SupportedExportScheme = {
   protocol: KeyProtocol
 }
 
+// FIXME: Missing documentation for TransferTrc10Asset
+export type TransferTrc10Asset = {
+  // FIXME: Missing documentation for kind
+  kind: TransferKind.Trc10
+
+  // FIXME: Missing documentation for tokenId
+  tokenId: string
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for amount
+  amount: Amount
+}
+
+// FIXME: Missing documentation for TransferTrc20Asset
+export type TransferTrc20Asset = {
+  // FIXME: Missing documentation for kind
+  kind: TransferKind.Trc20
+
+  // FIXME: Missing documentation for contract
+  contract: BlockchainAddress
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for amount
+  amount: Amount
+}
+
+// FIXME: Missing documentation for TransferTrc721Asset
+export type TransferTrc721Asset = {
+  // FIXME: Missing documentation for kind
+  kind: TransferKind.Trc721
+
+  // FIXME: Missing documentation for contract
+  contract: BlockchainAddress
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for tokenId
+  tokenId: string
+}
+
 // FIXME: Missing documentation for Wallet
 export type Wallet = {
   // FIXME: Missing documentation for id
@@ -848,6 +893,9 @@ export type TransferAssetBody =
   | TransferNativeAsset
   | TransferErc20Asset
   | TransferErc721Asset
+  | TransferTrc10Asset
+  | TransferTrc20Asset
+  | TransferTrc721Asset
 
 // FIXME: Missing documentation for BroadcastTransactionBody
 export type BroadcastTransactionBody =
@@ -879,6 +927,12 @@ export enum TransferKind {
   Erc20 = 'Erc20',
   // FIXME: Missing documentation for Erc721
   Erc721 = 'Erc721',
+  // FIXME: Missing documentation for Trc10
+  Trc10 = 'Trc10',
+  // FIXME: Missing documentation for Trc20
+  Trc20 = 'Trc20',
+  // FIXME: Missing documentation for Trc721
+  Trc721 = 'Trc721',
 }
 
 // FIXME: Missing documentation for TransactionKind
@@ -1069,10 +1123,14 @@ export enum BlockchainNetwork {
   Solana = 'Solana',
   // FIXME: Missing documentation for SolanaDevnet
   SolanaDevnet = 'SolanaDevnet',
+  // FIXME: Missing documentation for Tezos
+  Tezos = 'Tezos',
+  // FIXME: Missing documentation for TezosGhostnet
+  TezosGhostnet = 'TezosGhostnet',
   // FIXME: Missing documentation for Tron
   Tron = 'Tron',
-  // FIXME: Missing documentation for TronShasta
-  TronShasta = 'TronShasta',
+  // FIXME: Missing documentation for TronNile
+  TronNile = 'TronNile',
   // FIXME: Missing documentation for KeyECDSA
   KeyECDSA = 'KeyECDSA',
   // FIXME: Missing documentation for KeyEdDSA
