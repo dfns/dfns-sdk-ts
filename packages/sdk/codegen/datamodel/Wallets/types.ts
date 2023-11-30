@@ -243,7 +243,7 @@ export type Wallet = {
   status: WalletStatus
 
   // FIXME: Missing documentation for signingKey
-  signingKey?: SigningKey
+  signingKey: SigningKey
 
   // FIXME: Missing documentation for address
   address?: string
@@ -302,6 +302,9 @@ export type WalletAssets = {
 
 // FIXME: Missing documentation for WalletAsset
 export type WalletAsset = {
+  // FIXME: Missing documentation for kind
+  kind: BalanceKind
+
   // FIXME: Missing documentation for contract
   contract?: string
 
@@ -332,8 +335,11 @@ export type WalletNfts = {
 
 // FIXME: Missing documentation for WalletNft
 export type WalletNft = {
+  // FIXME: Missing documentation for kind
+  kind: BalanceKind
+
   // FIXME: Missing documentation for contract
-  contract: string
+  contract?: string
 
   // FIXME: Missing documentation for symbol
   symbol?: string
@@ -774,6 +780,11 @@ export type CreateWalletBody = {
   // FIXME: Missing documentation for network
   network: BlockchainNetwork
 
+  /**
+   * If delayDelegation is true, the wallet will be marked as "delegable". Meaning that later, you will be able to "delegate" (transfer) this wallet's ownership to an end-user, by calling the "Delegated Wallet" endpoint .
+   */
+  delayDelegation?: string
+
   // FIXME: Missing documentation for externalId
   externalId?: string
 
@@ -902,10 +913,6 @@ export enum SignatureKind {
 export enum WalletStatus {
   // FIXME: Missing documentation for Active
   Active = 'Active',
-  //Initial state of `AssetAccount` entity, indicating that it’s being created at the moment.
-  Creating = 'Creating',
-  // FIXME: Missing documentation for Failed
-  Failed = 'Failed',
   // FIXME: Missing documentation for Archived
   Archived = 'Archived',
 }
@@ -924,6 +931,8 @@ export enum KeyCurve {
   ed25519 = 'ed25519',
   // FIXME: Missing documentation for secp256k1
   secp256k1 = 'secp256k1',
+  // FIXME: Missing documentation for stark
+  stark = 'stark',
 }
 
 // FIXME: Missing documentation for KeyProtocol
@@ -932,6 +941,16 @@ export enum KeyProtocol {
   CGGMP21 = 'CGGMP21',
   // FIXME: Missing documentation for BINANCE_EDDSA
   BINANCE_EDDSA = 'BINANCE_EDDSA',
+}
+
+// FIXME: Missing documentation for BalanceKind
+export enum BalanceKind {
+  // FIXME: Missing documentation for Native
+  Native = 'Native',
+  // FIXME: Missing documentation for Erc20
+  Erc20 = 'Erc20',
+  // FIXME: Missing documentation for Erc721
+  Erc721 = 'Erc721',
 }
 
 // FIXME: Missing documentation for EventKind
@@ -1058,4 +1077,6 @@ export enum BlockchainNetwork {
   KeyECDSA = 'KeyECDSA',
   // FIXME: Missing documentation for KeyEdDSA
   KeyEdDSA = 'KeyEdDSA',
+  // FIXME: Missing documentation for KeyECDSAStark
+  KeyECDSAStark = 'KeyECDSAStark',
 }
