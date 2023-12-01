@@ -7,9 +7,9 @@ import { DelegatedPermissionsClient } from './codegen/Permissions'
 import { DelegatedPolicyExecutionClient } from './codegen/PolicyExecution'
 import { DelegatedPolicyManagementClient } from './codegen/PolicyManagement'
 import { DelegatedPublicKeysClient } from './codegen/PublicKeys'
-import { DelegatedSignersClient } from './codegen/Signers'
+import { DelegatedSignersClient } from './generated/signers'
+import { DelegatedWalletsClient } from './generated/wallets'
 import { DelegatedWebhooksClient } from './generated/webhooks'
-import { DelegatedWalletsClient } from './codegen/Wallets'
 
 export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions & {
   authToken: string

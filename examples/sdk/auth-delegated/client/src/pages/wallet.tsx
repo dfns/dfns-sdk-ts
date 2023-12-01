@@ -1,4 +1,4 @@
-import { DfnsError } from '@dfns/sdk/dfnsError'
+import { DfnsError } from '@dfns/sdk'
 import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

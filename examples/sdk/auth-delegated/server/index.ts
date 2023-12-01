@@ -1,6 +1,5 @@
-import { DfnsApiClient, DfnsDelegatedApiClient } from '@dfns/sdk'
+import { BaseAuthApi, DfnsApiClient, DfnsDelegatedApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { BaseAuthApi } from '@dfns/sdk/baseAuthApi'
 import { UserAuthKind } from '@dfns/sdk/codegen/datamodel/Auth'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'

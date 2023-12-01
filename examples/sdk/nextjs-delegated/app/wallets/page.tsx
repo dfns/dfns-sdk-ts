@@ -1,13 +1,13 @@
 'use client'
 
 import { WebAuthn } from '@dfns/sdk-webauthn'
-import { Wallet } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { GetWalletResponse as WalletDto } from '@dfns/sdk/types/Wallets'
 import { useCallback, useEffect, useState } from 'react'
 
 export default function Wallets() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(undefined)
-  const [wallets, setWallets] = useState<Wallet[]>([])
+  const [wallets, setWallets] = useState<WalletDto[]>([])
 
   useEffect(() => {
     setLoading(true)

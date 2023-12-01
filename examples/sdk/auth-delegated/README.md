@@ -30,13 +30,13 @@ Go back to the service accounts listing, and the new `Service Account` should be
 
 In the `server/` folder, copy `.env.example` to a new file `.env` and set the following values,
 
-* `EXPRESS_PORT` = 8000
 * `DFNS_API_URL` = `https://api.dfns.ninja`
 * `DFNS_APP_ID` = the `App ID` from above
 * `DFNS_APP_ORIGIN` = `http://localhost:3000`
 * `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 * `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 * `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
+* `EXPRESS_PORT` = 8000
 
 ### Client Configuration
 
