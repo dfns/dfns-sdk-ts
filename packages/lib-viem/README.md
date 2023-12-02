@@ -1,6 +1,6 @@
 # Dfns Wallet for [viem](hhttps://viem.sh/docs/introduction.html)
 
-Dfns wallet integration with the popular __viem__ library, makes working with Ethereum and other EVM compatible ecosystems as simple and painless as possible.
+Dfns wallet integration with the popular **viem** library, makes working with Ethereum and other EVM compatible ecosystems as simple and painless as possible.
 
 The `DfnsWallet` uses `generateSignature` to compute signatures using your Dfns managed wallets, for all the transactions created by your `viem` program. Then you need to broadcast these transactions yourself to the corresponding node providers that are either self hosted or by a blockchain provider.
 
@@ -10,6 +10,7 @@ A typical setup routine looks like this,
 import { DfnsWallet } from '@dfns/lib-viem'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
+import { createWalletClient } from 'viem'
 import { toAccount } from 'viem/accounts'
 
 const signer = new AsymmetricKeySigner({
@@ -31,12 +32,11 @@ const wallet = await DfnsWallet.init({
 })
 
 const account = toAccount(wallet)
-
 const client = createWalletClient({
   account,
   chain: mainnet,
-  transport: http()
+  transport: http(),
 })
-
 ```
 
+Go checkout the [examples](../../examples/libs/viem) we have that showcase how you can use viem to start developing Dapps with Dfns wallets.

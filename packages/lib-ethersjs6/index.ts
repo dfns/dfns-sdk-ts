@@ -1,5 +1,5 @@
-import { DfnsApiClient } from '@dfns/sdk'
-import { KeyCurve, KeyScheme, SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { DfnsApiClient, DfnsError } from '@dfns/sdk'
+import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 import {
   AbstractSigner,
   Provider,
@@ -13,88 +13,131 @@ import {
   TypedDataField,
   computeAddress,
   getAddress,
+  getNumber,
   hashMessage,
+  hexlify,
   resolveAddress,
   resolveProperties,
+  toUtf8Bytes,
 } from 'ethers'
-
-const sleep = (interval = 0) => new Promise((resolve) => setTimeout(resolve, interval))
 
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
+  /** @deprecated transaction signing is now synchronous. polling is deprecated. */
   maxRetries?: number
+  /** @deprecated transaction signing is now synchronous. polling is deprecated. */
   retryInterval?: number
+}
+
+type WalletMetadata = GetWalletResponse & { boundToEvmNetwork: boolean }
+
+const assertSigned = (res: GenerateSignatureResponse) => {
+  if (res.status === 'Failed') {
+    throw new DfnsError(-1, 'signing failed', res)
+  } else if (res.status !== 'Signed') {
+    throw new DfnsError(
+      -1,
+      'cannot complete signing synchronously because this wallet action requires policy approval',
+      res
+    )
+  }
+}
+
+const combineSignature = (res: GenerateSignatureResponse): string => {
+  if (!res.signature) {
+    throw new DfnsError(-1, 'signature missing', res)
+  }
+
+  const { r, s, recid } = res.signature
+  return Signature.from({
+    r,
+    s,
+    v: recid ? 0x1c : 0x1b,
+  }).serialized
+}
+
+const boundToEvmNetwork = (wallet: GetWalletResponse): boolean => {
+  // if the address is evm format, it's a wallet bound to evm network. prefer to
+  // sign the full transaction instead of the hash of the transaction
+  return wallet.address ? !!wallet.address.match(/^0x[0-9a-fA-F]{40}$/) : false
+}
+
+const fetchWalletMetadata = async (options: DfnsWalletOptions): Promise<WalletMetadata> => {
+  const { walletId, dfnsClient } = options
+  const wallet = await dfnsClient.wallets.getWallet({ walletId })
+
+  if (wallet.status !== 'Active') {
+    throw new DfnsError(-1, 'wallet not active', { walletId, status: wallet.status })
+  }
+
+  const { scheme, curve } = wallet.signingKey
+  if (scheme !== 'ECDSA') {
+    throw new DfnsError(-1, 'key scheme is not ECDSA', { walletId, scheme })
+  }
+  if (curve !== 'secp256k1') {
+    throw new DfnsError(-1, 'key curve is not secp256k1', { walletId, curve })
+  }
+
+  return {
+    boundToEvmNetwork: boundToEvmNetwork(wallet),
+    ...wallet,
+  }
 }
 
 export class DfnsWallet extends AbstractSigner {
   private address?: string
-  private options: Required<DfnsWalletOptions>
+  private metadata?: WalletMetadata
 
-  constructor(options: DfnsWalletOptions, provider?: Provider | null) {
+  /** @deprecated use DfnsWallet.init(options) instead */
+  constructor(private options: DfnsWalletOptions, provider?: Provider | null) {
     super(provider)
+  }
 
-    this.options = {
-      ...options,
-      maxRetries: options.maxRetries ?? 3,
-      retryInterval: options.retryInterval ?? 1000,
+  public static async init(options: DfnsWalletOptions): Promise<DfnsWallet> {
+    const metadata = await fetchWalletMetadata(options)
+    const wallet = new DfnsWallet(options)
+    wallet.metadata = metadata
+    return wallet
+  }
+
+  public connect(provider: Provider | null): Signer {
+    const copy = new DfnsWallet(this.options, provider)
+    copy.address = this.address
+    copy.metadata = this.metadata
+    return copy
+  }
+
+  private async getCachedMetadata(): Promise<WalletMetadata> {
+    if (!this.metadata) {
+      this.metadata = await fetchWalletMetadata(this.options)
     }
+    return this.metadata
   }
 
-  connect(provider: Provider | null): Signer {
-    return new DfnsWallet(this.options, provider)
-  }
-
-  async getAddress(): Promise<string> {
+  public async getAddress(): Promise<string> {
     if (!this.address) {
-      const { walletId, dfnsClient } = this.options
-      const res = await dfnsClient.wallets.getWallet({ walletId })
-
-      if (!res.signingKey || res.signingKey.scheme !== KeyScheme.ECDSA || res.signingKey.curve !== KeyCurve.secp256k1) {
-        throw new Error(
-          `wallet ${walletId} has incompatible scheme (${res.signingKey?.scheme}) or curve (${res.signingKey?.curve})`
-        )
-      }
-
-      if (res.address) {
-        this.address = getAddress(res.address)
-      } else {
-        this.address = computeAddress('0x' + res.signingKey.publicKey)
-      }
+      const metadata = await this.getCachedMetadata()
+      this.address = metadata.boundToEvmNetwork
+        ? getAddress(metadata.address!)
+        : computeAddress('0x' + metadata.signingKey.publicKey)
     }
 
     return this.address
   }
 
-  async waitForSignature(signatureId: string): Promise<string> {
-    const { walletId, dfnsClient, retryInterval } = this.options
+  private async signHash(hash: string): Promise<string> {
+    const { walletId, dfnsClient } = this.options
+    const res = await dfnsClient.wallets.generateSignature({
+      walletId,
+      body: { kind: 'Hash', hash },
+    })
 
-    let maxRetries = this.options.maxRetries
-    while (maxRetries > 0) {
-      await sleep(retryInterval)
-
-      const res = await dfnsClient.wallets.getSignature({ walletId, signatureId })
-      if (res.status === SignatureStatus.Signed) {
-        if (!res.signature) break
-        return Signature.from({
-          r: res.signature.r,
-          s: res.signature.s,
-          v: res.signature.recid ? 0x1c : 0x1b,
-        }).serialized
-      } else if (res.status === SignatureStatus.Failed) {
-        break
-      }
-
-      maxRetries -= 1
-    }
-
-    const waitedSeconds = Math.floor((this.options.maxRetries * retryInterval) / 1000)
-    throw new Error(
-      `Signature request ${signatureId} took more than ${waitedSeconds}s to complete, stopping polling. Please update options "maxRetries" or "retryIntervals" to wait longer.`
-    )
+    assertSigned(res)
+    return combineSignature(res)
   }
 
-  async signTransaction(tx: TransactionRequest): Promise<string> {
+  public async signTransaction(tx: TransactionRequest): Promise<string> {
     // replace any Addressable or ENS name with an address
     const { to, from } = await resolveProperties({
       to: tx.to ? resolveAddress(tx.to, this.provider) : undefined,
@@ -117,27 +160,43 @@ export class DfnsWallet extends AbstractSigner {
 
     const btx = Transaction.from(<TransactionLike<string>>tx)
 
-    const { walletId, dfnsClient } = this.options
-    const res = await dfnsClient.wallets.generateSignature({
-      walletId,
-      body: { kind: SignatureKind.Hash, hash: btx.unsignedHash },
-    })
+    const metadata = await this.getCachedMetadata()
+    if (metadata.boundToEvmNetwork) {
+      const res = await this.options.dfnsClient.wallets.generateSignature({
+        walletId: metadata.id,
+        body: { kind: 'Transaction', transaction: btx.unsignedSerialized },
+      })
 
-    btx.signature = await this.waitForSignature(res.id)
-    return btx.serialized
+      assertSigned(res)
+      if (!res.signedData) {
+        throw new DfnsError(-1, 'signedData missing', res)
+      }
+      return res.signedData
+    } else {
+      btx.signature = await this.signHash(btx.unsignedHash)
+      return btx.serialized
+    }
   }
 
-  async signMessage(message: string | Uint8Array): Promise<string> {
-    const { walletId, dfnsClient } = this.options
-    const res = await dfnsClient.wallets.generateSignature({
-      walletId,
-      body: { kind: SignatureKind.Hash, hash: hashMessage(message) },
-    })
+  public async signMessage(message: string | Uint8Array): Promise<string> {
+    const metadata = await this.getCachedMetadata()
+    if (metadata.boundToEvmNetwork) {
+      if (typeof message === 'string') {
+        message = toUtf8Bytes(message)
+      }
+      const res = await this.options.dfnsClient.wallets.generateSignature({
+        walletId: metadata.id,
+        body: { kind: 'Message', message: hexlify(message) },
+      })
 
-    return this.waitForSignature(res.id)
+      assertSigned(res)
+      return combineSignature(res)
+    } else {
+      return this.signHash(hashMessage(message))
+    }
   }
 
-  async signTypedData(
+  public async signTypedData(
     domain: TypedDataDomain,
     types: Record<string, TypedDataField[]>,
     value: Record<string, any>
@@ -153,15 +212,28 @@ export class DfnsWallet extends AbstractSigner {
       return address
     })
 
-    const { walletId, dfnsClient } = this.options
-    const res = await dfnsClient.wallets.generateSignature({
-      walletId,
-      body: {
-        kind: SignatureKind.Hash,
-        hash: TypedDataEncoder.hash(populated.domain, types, populated.value),
-      },
-    })
+    const metadata = await this.getCachedMetadata()
+    if (metadata.boundToEvmNetwork) {
+      const res = await this.options.dfnsClient.wallets.generateSignature({
+        walletId: metadata.id,
+        body: {
+          kind: 'Eip712',
+          types,
+          domain: {
+            name: populated.domain.name ?? undefined,
+            version: populated.domain.version ?? undefined,
+            chainId: populated.domain.chainId ? getNumber(populated.domain.chainId) : undefined,
+            verifyingContract: populated.domain.verifyingContract ?? undefined,
+            salt: populated.domain.salt ? hexlify(populated.domain.salt) : undefined,
+          },
+          message: populated.value,
+        },
+      })
 
-    return this.waitForSignature(res.id)
+      assertSigned(res)
+      return combineSignature(res)
+    } else {
+      return this.signHash(TypedDataEncoder.hash(populated.domain, types, populated.value))
+    }
   }
 }
