@@ -29,7 +29,6 @@ const dfnsClient = new DfnsApiClient({
 const wallet = DfnsWallet.init({
   walletId: process.env.DFNS_WALLET_ID!,
   dfnsClient,
-  maxRetries: 10,
 })
 
 const net = new SimpleNet('https://testnet.veblocks.net/')
@@ -37,4 +36,4 @@ const driver = await Driver.connect(net, wallet)
 const connex = new Framework(driver)
 ```
 
-Go checkout the [examples](../../examples/vechain) we have that showcase how you can start developing dapps with Dfns wallets.
+Go checkout the [examples](../../examples/libs/vechain) we have that showcase how you can start developing dapps with Dfns wallets.

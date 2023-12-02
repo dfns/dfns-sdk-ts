@@ -1,81 +1,82 @@
-import { DfnsApiClient } from '@dfns/sdk'
-import { BlockchainNetwork, SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { DfnsApiClient, DfnsError } from '@dfns/sdk'
+import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 import { Wallet } from '@vechain/connex-driver'
 import { ec } from 'elliptic'
 import { address } from 'thor-devkit'
 
-const sleep = (interval = 0) => new Promise((resolve) => setTimeout(resolve, interval))
-
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
+  /** @deprecated transaction signing is now synchronous. polling is deprecated. */
   maxRetries?: number
+  /** @deprecated transaction signing is now synchronous. polling is deprecated. */
   retryInterval?: number
 }
 
-export class DfnsWallet implements Wallet {
-  private options: Required<DfnsWalletOptions>
+type WalletMetadata = GetWalletResponse
 
-  private constructor(public readonly address: string, options: DfnsWalletOptions) {
-    this.options = {
-      ...options,
-      maxRetries: options.maxRetries ?? 3,
-      retryInterval: options.retryInterval ?? 1000,
-    }
+const assertSigned = (res: GenerateSignatureResponse) => {
+  if (res.status === 'Failed') {
+    throw new DfnsError(-1, 'signing failed', res)
+  } else if (res.status !== 'Signed') {
+    throw new DfnsError(
+      -1,
+      'cannot complete signing synchronously because this wallet action requires policy approval',
+      res
+    )
+  }
+}
+
+export class DfnsWallet implements Wallet {
+  public readonly address
+  private readonly dfnsClient
+
+  constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
+    this.dfnsClient = options.dfnsClient
+
+    const publicKey = new ec('secp256k1').keyFromPublic(metadata.signingKey.publicKey, 'hex')
+    this.address = address.fromPublicKey(Buffer.from(publicKey.getPublic(false, 'array')))
   }
 
   public static async init(options: DfnsWalletOptions): Promise<DfnsWallet> {
     const { walletId, dfnsClient } = options
     const res = await dfnsClient.wallets.getWallet({ walletId })
 
-    if (res.network !== BlockchainNetwork.KeyECDSA || !res.signingKey) {
-      throw new Error(`wallet ${walletId} is incompatible`)
+    if (res.status !== 'Active') {
+      throw new DfnsError(-1, 'wallet not active', { walletId, status: res.status })
     }
 
-    const publicKey = new ec('secp256k1').keyFromPublic(res.signingKey.publicKey, 'hex')
-    const addr = address.fromPublicKey(Buffer.from(publicKey.getPublic(false, 'array')))
-    return new DfnsWallet(addr, options)
-  }
-
-  async waitForSignature(signatureId: string): Promise<Buffer> {
-    const { walletId, dfnsClient, retryInterval } = this.options
-
-    let maxRetries = this.options.maxRetries
-    while (maxRetries > 0) {
-      await sleep(retryInterval)
-
-      const res = await dfnsClient.wallets.getSignature({ walletId, signatureId })
-      if (res.status === SignatureStatus.Signed) {
-        if (!res.signature) break
-        return Buffer.concat([
-          Buffer.from(res.signature.r.substring(2), 'hex'),
-          Buffer.from(res.signature.s.substring(2), 'hex'),
-          Buffer.from([res.signature.recid!]),
-        ])
-      } else if (res.status === SignatureStatus.Failed) {
-        break
-      }
-
-      maxRetries -= 1
+    const { scheme, curve } = res.signingKey
+    if (scheme !== 'ECDSA') {
+      throw new DfnsError(-1, 'key scheme is not ECDSA', { walletId, scheme })
+    }
+    if (curve !== 'secp256k1') {
+      throw new DfnsError(-1, 'key curve is not secp256k1', { walletId, curve })
     }
 
-    const waitedSeconds = Math.floor((this.options.maxRetries * retryInterval) / 1000)
-    throw new Error(
-      `Signature request ${signatureId} took more than ${waitedSeconds}s to complete, stopping polling. Please update options "maxRetries" or "retryIntervals" to wait longer.`
-    )
+    return new DfnsWallet(res, options)
   }
 
   private async sign(msgHash: Buffer): Promise<Buffer> {
-    const { walletId, dfnsClient } = this.options
-    const res = await dfnsClient.wallets.generateSignature({
-      walletId,
-      body: { kind: SignatureKind.Hash, hash: msgHash.toString('hex') },
+    const res = await this.dfnsClient.wallets.generateSignature({
+      walletId: this.metadata.id,
+      body: { kind: 'Hash', hash: msgHash.toString('hex') },
     })
 
-    return this.waitForSignature(res.id)
+    assertSigned(res)
+
+    if (!res.signature) {
+      throw new DfnsError(-1, 'signature missing', res)
+    }
+
+    return Buffer.concat([
+      Buffer.from(res.signature.r.replace(/^0x/, ''), 'hex'),
+      Buffer.from(res.signature.s.replace(/^0x/, ''), 'hex'),
+      Buffer.from([res.signature.recid!]),
+    ])
   }
 
-  get list(): Wallet.Key[] {
+  public get list(): Wallet.Key[] {
     return [
       {
         address: this.address,

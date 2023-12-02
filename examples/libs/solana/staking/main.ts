@@ -20,19 +20,15 @@ const initDfnsWallet = async (walletId: string) => {
     signer,
   })
 
-  return DfnsWallet.init({
-    walletId,
-    dfnsClient,
-    maxRetries: 10,
-  })
+  return DfnsWallet.init({ walletId, dfnsClient })
 }
 
 const main = async () => {
   const authority = await initDfnsWallet(process.env.AUTHORITY_WALLET_ID!)
-  console.log(`authority: ${authority.address}`)
+  console.log(`Authority: ${authority.address}`)
 
   const stakeAccount = await initDfnsWallet(process.env.STAKE_ACCOUNT_WALLET_ID!)
-  console.log(`stake account: ${stakeAccount.address}`)
+  console.log(`Stake account: ${stakeAccount.address}`)
 
   const connection = new Connection(clusterApiUrl('devnet'), 'confirmed')
 
@@ -56,19 +52,19 @@ const main = async () => {
 
   const createAccountTxId = await connection.sendRawTransaction(stakeAccountSigned.serialize())
   await connection.confirmTransaction({ signature: createAccountTxId, ...latestBlockhash })
-  console.log(`stake account created: ${createAccountTxId}`)
+  console.log(`Stake account created: ${createAccountTxId}`)
 
   const stakeBalance = await connection.getBalance(stakeAccount.publicKey)
-  console.log(`stake account balance: ${stakeBalance}`)
+  console.log(`Stake account balance: ${stakeBalance}`)
 
   const stakeStatus = await connection.getStakeActivation(stakeAccount.publicKey)
-  console.log(`stake account status: ${stakeStatus.state}`)
+  console.log(`Stake account status: ${stakeStatus.state}`)
 
   // to delegate the stake
   const validators = await connection.getVoteAccounts()
   const selectedValidator = validators.current[0]
   const selectedValidatorPubkey = new PublicKey(selectedValidator.votePubkey)
-  console.log(`selected validator: ${selectedValidatorPubkey.toBase58()}`)
+  console.log(`Selected validator: ${selectedValidatorPubkey.toBase58()}`)
 
   const delegateTx = StakeProgram.delegate({
     stakePubkey: stakeAccount.publicKey,
@@ -82,10 +78,10 @@ const main = async () => {
   const signedDelegatedTx = await authority.signTransaction(delegateTx)
   const delegateTxId = await connection.sendRawTransaction(signedDelegatedTx.serialize())
   await connection.confirmTransaction({ signature: delegateTxId, ...latestBlockhash })
-  console.log(`delegated stake to validator: ${delegateTxId}`)
+  console.log(`Delegated stake to validator: ${delegateTxId}`)
 
   const newStatus = await connection.getStakeActivation(stakeAccount.publicKey)
-  console.log(`stake account status: ${newStatus.state}`)
+  console.log(`Stake account status: ${newStatus.state}`)
 }
 
 main()

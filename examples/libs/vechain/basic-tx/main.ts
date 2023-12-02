@@ -22,23 +22,22 @@ const initDfnsWallet = async () => {
   })
 
   return DfnsWallet.init({
-    walletId: process.env.DFNS_WALLET_ID!,
+    walletId: process.env.VECHAIN_WALLET_ID!,
     dfnsClient,
-    maxRetries: 10,
   })
 }
 
 const main = async () => {
   const wallet = await initDfnsWallet()
-  console.log(`address: ${wallet.address}`)
+  console.log(`Vechain address: ${wallet.address}`)
 
-  const net = new SimpleNet('https://testnet.veblocks.net/')
+  const net = new SimpleNet(process.env.VECHAIN_NODE_URL!)
   const driver = await Driver.connect(net, wallet)
   const connex = new Framework(driver)
 
   const before = await connex.thor.account(wallet.address).get()
-  console.log(`pre balance: ${BigInt(before.balance)}`)
-  console.log(`pre energy: ${BigInt(before.energy)}`)
+  console.log(`Pre balance: ${BigInt(before.balance)}`)
+  console.log(`Pre energy: ${BigInt(before.energy)}`)
 
   // Converts 1 VET to VTHO
   // Solidity: function convertForEnergy(uint256 _minReturn) public payable
@@ -59,13 +58,13 @@ const main = async () => {
     .transact('10000000000000000') // minReturn in wei(1e16 wei)
     .request()
 
-  console.log(`signer: ${convertTx.signer}`)
-  console.log(`txid: ${convertTx.txid}`)
+  console.log(`Transaction signer: ${convertTx.signer}`)
+  console.log(`Transaction txid: ${convertTx.txid}`)
 
   await connex.thor.transaction(convertTx.txid).getReceipt()
   const after = await connex.thor.account(wallet.address).get()
-  console.log(`post balance: ${BigInt(after.balance)}`)
-  console.log(`post energy: ${BigInt(after.energy)}`)
+  console.log(`Post balance: ${BigInt(after.balance)}`)
+  console.log(`Post energy: ${BigInt(after.energy)}`)
 
   driver.close()
 }

@@ -10,7 +10,6 @@ A typical setup routine looks like this,
 import { DfnsWallet } from '@dfns/lib-tron'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-const TronWeb = require('tronweb')
 
 const signer = new AsymmetricKeySigner({
   privateKey: process.env.DFNS_PRIVATE_KEY!,
@@ -28,14 +27,7 @@ const dfnsClient = new DfnsApiClient({
 const wallet = DfnsWallet.init({
   walletId: process.env.DFNS_WALLET_ID!,
   dfnsClient,
-  maxRetries: 10,
 })
-
-const tronWeb = new TronWeb({
-  fullHost: 'https://shasta.trongrid.io/', // Replace with the TRON full node URL
-});
-
-[.....]
 ```
 
-Go checkout the [examples](../../examples/tron) we have that showcase how you can start developing dapps with Dfns wallets.
+Go checkout the [examples](../../examples/libs/tron) we have that showcase how you can start developing dapps with Dfns wallets.

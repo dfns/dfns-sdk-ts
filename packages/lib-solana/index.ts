@@ -1,94 +1,132 @@
-import { DfnsApiClient } from '@dfns/sdk'
-import { KeyCurve, KeyScheme, SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { DfnsApiClient, DfnsError } from '@dfns/sdk'
+import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 import { PublicKey, Transaction, VersionedTransaction } from '@solana/web3.js'
-
-const sleep = (interval = 0) => new Promise((resolve) => setTimeout(resolve, interval))
 
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
-  maxRetries?: number
-  retryInterval?: number
+}
+
+type WalletMetadata = GetWalletResponse & { boundToSolanaNetwork: boolean }
+
+const hexToBuffer = (hex: string): Buffer => {
+  return Buffer.from(hex.replace(/^0x/, ''), 'hex')
+}
+
+const assertSigned = (res: GenerateSignatureResponse) => {
+  if (res.status === 'Failed') {
+    throw new DfnsError(-1, 'signing failed', res)
+  } else if (res.status !== 'Signed') {
+    throw new DfnsError(
+      -1,
+      'cannot complete signing synchronously because this wallet action requires policy approval',
+      res
+    )
+  }
+}
+
+const combineSignature = (res: GenerateSignatureResponse): Buffer => {
+  if (!res.signature) {
+    throw new DfnsError(-1, 'signature missing', res)
+  }
+
+  const { r, s } = res.signature
+  return Buffer.concat([hexToBuffer(r), hexToBuffer(s)])
 }
 
 export class DfnsWallet {
-  private options: Required<DfnsWalletOptions>
+  public readonly publicKey: PublicKey
+  private readonly dfnsClient: DfnsApiClient
 
-  private constructor(public readonly publicKey: PublicKey, options: DfnsWalletOptions) {
-    this.options = {
-      ...options,
-      maxRetries: options.maxRetries ?? 3,
-      retryInterval: options.retryInterval ?? 1000,
-    }
+  private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
+    this.dfnsClient = options.dfnsClient
+    this.publicKey = new PublicKey(Buffer.from(metadata.signingKey.publicKey, 'hex'))
   }
 
   public static async init(options: DfnsWalletOptions) {
     const { walletId, dfnsClient } = options
     const res = await dfnsClient.wallets.getWallet({ walletId })
 
-    if (!res.signingKey || res.signingKey.scheme !== KeyScheme.EdDSA || res.signingKey.curve !== KeyCurve.ed25519) {
-      throw new Error(
-        `wallet ${walletId} has incompatible scheme (${res.signingKey?.scheme}) or curve (${res.signingKey?.curve})`
-      )
+    if (res.status !== 'Active') {
+      throw new DfnsError(-1, 'wallet not active', { walletId, status: res.status })
     }
 
-    const publicKey = new PublicKey(Buffer.from(res.signingKey.publicKey, 'hex'))
-    return new DfnsWallet(publicKey, options)
+    const { scheme, curve } = res.signingKey
+    if (scheme !== 'EdDSA') {
+      throw new DfnsError(-1, 'key scheme is not EdDSA', { walletId, scheme })
+    }
+    if (curve !== 'ed25519') {
+      throw new DfnsError(-1, 'key curve is not ed25519', { walletId, curve })
+    }
+
+    const metadata = {
+      boundToSolanaNetwork: res.network === 'Solana' || res.network === 'SolanaDevnet',
+      ...res,
+    }
+    return new DfnsWallet(metadata, options)
   }
 
   public get address(): string {
     return this.publicKey.toBase58()
   }
 
-  async waitForSignature(signatureId: string): Promise<Buffer> {
-    const { walletId, dfnsClient, retryInterval } = this.options
+  public async signTransaction(transaction: Transaction): Promise<Transaction> {
+    if (this.metadata.boundToSolanaNetwork) {
+      const res = await this.dfnsClient.wallets.generateSignature({
+        walletId: this.metadata.id,
+        body: {
+          kind: 'Transaction',
+          transaction: `0x${transaction.serialize({ verifySignatures: false }).toString('hex')}`,
+        },
+      })
 
-    let maxRetries = this.options.maxRetries
-    while (maxRetries > 0) {
-      await sleep(retryInterval)
-
-      const res = await dfnsClient.wallets.getSignature({ walletId, signatureId })
-      if (res.status === SignatureStatus.Signed) {
-        if (!res.signature) break
-        return Buffer.from(res.signature.r.substring(2).concat(res.signature.s.substring(2)), 'hex')
-      } else if (res.status === SignatureStatus.Failed) {
-        break
+      assertSigned(res)
+      if (!res.signedData) {
+        throw new DfnsError(-1, 'signedData missing', res)
       }
+      return Transaction.from(hexToBuffer(res.signedData))
+    } else {
+      const res = await this.dfnsClient.wallets.generateSignature({
+        walletId: this.metadata.id,
+        body: {
+          kind: 'Message',
+          message: `0x${transaction.serializeMessage().toString('hex')}`,
+        },
+      })
 
-      maxRetries -= 1
+      assertSigned(res)
+      transaction.addSignature(this.publicKey, combineSignature(res))
+      return transaction
     }
-
-    const waitedSeconds = Math.floor((this.options.maxRetries * retryInterval) / 1000)
-    throw new Error(
-      `Signature request ${signatureId} took more than ${waitedSeconds}s to complete, stopping polling. Please update options "maxRetries" or "retryIntervals" to wait longer.`
-    )
   }
 
-  async signTransaction(transaction: Transaction): Promise<Transaction> {
-    const message = transaction.serializeMessage()
+  public async signVersionedTransaction(transaction: VersionedTransaction): Promise<VersionedTransaction> {
+    if (this.metadata.boundToSolanaNetwork) {
+      const res = await this.dfnsClient.wallets.generateSignature({
+        walletId: this.metadata.id,
+        body: {
+          kind: 'Transaction',
+          transaction: `0x${Buffer.from(transaction.serialize()).toString('hex')}`,
+        },
+      })
 
-    const { walletId, dfnsClient } = this.options
-    const res = await dfnsClient.wallets.generateSignature({
-      walletId,
-      body: { kind: SignatureKind.Message, message: `0x${message.toString('hex')}` },
-    })
+      assertSigned(res)
+      if (!res.signedData) {
+        throw new DfnsError(-1, 'signedData missing', res)
+      }
+      return VersionedTransaction.deserialize(hexToBuffer(res.signedData))
+    } else {
+      const res = await this.dfnsClient.wallets.generateSignature({
+        walletId: this.metadata.id,
+        body: {
+          kind: 'Message',
+          message: `0x${Buffer.from(transaction.message.serialize()).toString('hex')}`,
+        },
+      })
 
-    const signature = await this.waitForSignature(res.id)
-    transaction.addSignature(this.publicKey, signature)
-    return transaction
-  }
-
-  async signVersionedTransaction(transaction: VersionedTransaction): Promise<VersionedTransaction> {
-    const message = transaction.message.serialize()
-
-    const { walletId, dfnsClient } = this.options
-    const res = await dfnsClient.wallets.generateSignature({
-      walletId,
-      body: { kind: SignatureKind.Message, message: `0x${message.toString('hex')}` },
-    })
-
-    const signature = await this.waitForSignature(res.id)
-    transaction.addSignature(this.publicKey, signature)
-    return transaction
+      assertSigned(res)
+      transaction.addSignature(this.publicKey, combineSignature(res))
+      return transaction
+    }
   }
 }
