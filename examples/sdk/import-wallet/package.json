@@ -1,16 +1,17 @@
 {
   "name": "import-wallet",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "index.ts",
   "dependencies": {
     "@dfns/sdk": "file:../../../packages/sdk",
     "@dfns/sdk-keysigner": "file:../../../packages/sdk-keysigner",
     "@dfns/sdk-keyimport-utils": "file:../../../packages/sdk-keyimport-utils",
     "dotenv": "16.1.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ts-node": "10.9.1"
+  },
   "scripts": {
-    "start": "node dist/index.js",
-    "build": "tsc --noEmit && esbuild index.ts --bundle --sourcemap --platform=node --target=es2020 --outfile=dist/index.js"
+    "exec": "ts-node index.ts"
   }
 }

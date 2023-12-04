@@ -3,17 +3,17 @@
 set -euo pipefail
 
 declare -a packages=(
-    "@dfns/sdk"
-    "@dfns/sdk-keysigner"
-    "@dfns/sdk-webauthn"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
-    "@dfns/lib-viem"
     "@dfns/lib-solana"
     "@dfns/lib-tron"
     "@dfns/lib-vechain"
-    "@dfns/sdk-keyimport-utils"
+    "@dfns/lib-viem"
+    "@dfns/sdk"
     "@dfns/sdk-keyexport-utils"
+    "@dfns/sdk-keyimport-utils"
+    "@dfns/sdk-keysigner"
+    "@dfns/sdk-webauthn"
 )
 
 echo "Will deploy these built versions:"

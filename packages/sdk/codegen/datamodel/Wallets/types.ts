@@ -7,7 +7,9 @@ import {
   Tag,
 } from '../Foundations'
 
-// FIXME: Missing documentation for TransferNativeAsset
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferNativeAsset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Native
@@ -19,7 +21,9 @@ export type TransferNativeAsset = {
   amount: Amount
 }
 
-// FIXME: Missing documentation for TransferErc20Asset
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferErc20Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Erc20
@@ -34,7 +38,9 @@ export type TransferErc20Asset = {
   amount: Amount
 }
 
-// FIXME: Missing documentation for TransferErc721Asset
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferErc721Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Erc721
@@ -49,7 +55,9 @@ export type TransferErc721Asset = {
   tokenId: string
 }
 
-// FIXME: Missing documentation for BroadcastTransaction
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type BroadcastTransaction = {
   // FIXME: Missing documentation for kind
   kind: TransactionKind.Transaction
@@ -58,7 +66,9 @@ export type BroadcastTransaction = {
   transaction: string
 }
 
-// FIXME: Missing documentation for BroadcastEvmTransaction
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type BroadcastEvmTransaction = {
   // FIXME: Missing documentation for kind
   kind: TransactionKind.Evm
@@ -76,7 +86,9 @@ export type BroadcastEvmTransaction = {
   nonce?: number
 }
 
-// FIXME: Missing documentation for BroadcastEip1559Transaction
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type BroadcastEip1559Transaction = {
   // FIXME: Missing documentation for kind
   kind: TransactionKind.Eip1559
@@ -103,7 +115,9 @@ export type BroadcastEip1559Transaction = {
   maxFeePerGas?: Amount
 }
 
-// FIXME: Missing documentation for BroadcastEvmLegacyTransaction
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type BroadcastEvmLegacyTransaction = {
   // FIXME: Missing documentation for kind
   kind: TransactionKind.EvmLegacy
@@ -127,7 +141,9 @@ export type BroadcastEvmLegacyTransaction = {
   gasPrice?: Amount
 }
 
-// FIXME: Missing documentation for BroadcastPsbt
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type BroadcastPsbt = {
   // FIXME: Missing documentation for kind
   kind: TransactionKind.Psbt
@@ -136,7 +152,9 @@ export type BroadcastPsbt = {
   psbt: string
 }
 
-// FIXME: Missing documentation for SignHash
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type SignHash = {
   // FIXME: Missing documentation for kind
   kind: SignatureKind.Hash
@@ -145,7 +163,9 @@ export type SignHash = {
   hash: string
 }
 
-// FIXME: Missing documentation for SignMessage
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type SignMessage = {
   // FIXME: Missing documentation for kind
   kind: SignatureKind.Message
@@ -154,7 +174,9 @@ export type SignMessage = {
   message: string
 }
 
-// FIXME: Missing documentation for SignTransaction
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type SignTransaction = {
   // FIXME: Missing documentation for kind
   kind: SignatureKind.Transaction
@@ -163,7 +185,9 @@ export type SignTransaction = {
   transaction: string
 }
 
-// FIXME: Missing documentation for Eip712Domain
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type Eip712Domain = {
   // FIXME: Missing documentation for name
   name?: string
@@ -181,7 +205,9 @@ export type Eip712Domain = {
   salt?: string
 }
 
-// FIXME: Missing documentation for SignEip712TypedData
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type SignEip712TypedData = {
   // FIXME: Missing documentation for kind
   kind: SignatureKind.Eip712
@@ -196,7 +222,9 @@ export type SignEip712TypedData = {
   message: Record<string, unknown>
 }
 
-// FIXME: Missing documentation for SignPsbt
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type SignPsbt = {
   // FIXME: Missing documentation for kind
   kind: SignatureKind.Psbt
@@ -205,7 +233,9 @@ export type SignPsbt = {
   psbt: string
 }
 
-// FIXME: Missing documentation for EncryptedKeyShare
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type EncryptedKeyShare = {
   /**
    * Base64-encoded ID of the signer where the encrypted key share comes from.
@@ -218,7 +248,9 @@ export type EncryptedKeyShare = {
   encryptedKeyShare: string
 }
 
-// FIXME: Missing documentation for SupportedExportScheme
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type SupportedExportScheme = {
   /**
    * Base64-encoded ID of the signer where the encrypted key share comes from.
@@ -231,7 +263,9 @@ export type SupportedExportScheme = {
   protocol: KeyProtocol
 }
 
-// FIXME: Missing documentation for TransferTrc10Asset
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferTrc10Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Trc10
@@ -246,7 +280,9 @@ export type TransferTrc10Asset = {
   amount: Amount
 }
 
-// FIXME: Missing documentation for TransferTrc20Asset
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferTrc20Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Trc20
@@ -261,7 +297,9 @@ export type TransferTrc20Asset = {
   amount: Amount
 }
 
-// FIXME: Missing documentation for TransferTrc721Asset
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferTrc721Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Trc721
@@ -276,7 +314,9 @@ export type TransferTrc721Asset = {
   tokenId: string
 }
 
-// FIXME: Missing documentation for Wallet
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type Wallet = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -321,7 +361,9 @@ export type Wallet = {
   exported?: boolean
 }
 
-// FIXME: Missing documentation for SigningKey
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type SigningKey = {
   // FIXME: Missing documentation for scheme
   scheme: KeyScheme
@@ -333,7 +375,9 @@ export type SigningKey = {
   publicKey: string
 }
 
-// FIXME: Missing documentation for WalletAssets
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type WalletAssets = {
   // FIXME: Missing documentation for walletId
   walletId: EntityId
@@ -345,7 +389,9 @@ export type WalletAssets = {
   assets: WalletAsset[]
 }
 
-// FIXME: Missing documentation for WalletAsset
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type WalletAsset = {
   // FIXME: Missing documentation for kind
   kind: BalanceKind
@@ -366,7 +412,9 @@ export type WalletAsset = {
   balance: Amount
 }
 
-// FIXME: Missing documentation for WalletNfts
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type WalletNfts = {
   // FIXME: Missing documentation for walletId
   walletId: EntityId
@@ -378,7 +426,9 @@ export type WalletNfts = {
   nfts: WalletNft[]
 }
 
-// FIXME: Missing documentation for WalletNft
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type WalletNft = {
   // FIXME: Missing documentation for kind
   kind: BalanceKind
@@ -399,7 +449,9 @@ export type WalletNft = {
   count: number
 }
 
-// FIXME: Missing documentation for PaginatedWalletList
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type PaginatedWalletList = {
   // FIXME: Missing documentation for items
   items: Wallet[]
@@ -408,7 +460,9 @@ export type PaginatedWalletList = {
   nextPageToken?: string
 }
 
-// FIXME: Missing documentation for NativeTransferEvent
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type NativeTransferEvent = {
   // FIXME: Missing documentation for kind
   kind: EventKind.NativeTransfer
@@ -456,7 +510,9 @@ export type NativeTransferEvent = {
   value: Amount
 }
 
-// FIXME: Missing documentation for Erc20TransferEvent
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type Erc20TransferEvent = {
   // FIXME: Missing documentation for kind
   kind: EventKind.Erc20Transfer
@@ -507,7 +563,9 @@ export type Erc20TransferEvent = {
   value: Amount
 }
 
-// FIXME: Missing documentation for Erc721TransferEvent
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type Erc721TransferEvent = {
   // FIXME: Missing documentation for kind
   kind: EventKind.Erc721Transfer
@@ -555,7 +613,9 @@ export type Erc721TransferEvent = {
   tokenId: string
 }
 
-// FIXME: Missing documentation for PaginatedEventHistory
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type PaginatedEventHistory = {
   // FIXME: Missing documentation for walletId
   walletId: EntityId
@@ -570,7 +630,9 @@ export type PaginatedEventHistory = {
   nextPageToken?: string
 }
 
-// FIXME: Missing documentation for TransferRequest
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferRequest = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -615,7 +677,9 @@ export type TransferRequest = {
   metadata: TransferRequestMetadata
 }
 
-// FIXME: Missing documentation for PaginatedTransferList
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type PaginatedTransferList = {
   // FIXME: Missing documentation for walletId
   walletId: EntityId
@@ -627,7 +691,9 @@ export type PaginatedTransferList = {
   nextPageToken?: string
 }
 
-// FIXME: Missing documentation for TransactionRequest
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransactionRequest = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -669,7 +735,9 @@ export type TransactionRequest = {
   reason?: string
 }
 
-// FIXME: Missing documentation for PaginatedTransactionList
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type PaginatedTransactionList = {
   // FIXME: Missing documentation for walletId
   walletId: EntityId
@@ -681,7 +749,9 @@ export type PaginatedTransactionList = {
   nextPageToken?: string
 }
 
-// FIXME: Missing documentation for Signature
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type Signature = {
   // FIXME: Missing documentation for r
   r: string
@@ -696,7 +766,9 @@ export type Signature = {
   encoded?: string
 }
 
-// FIXME: Missing documentation for SignatureRequest
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type SignatureRequest = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -747,7 +819,9 @@ export type SignatureRequest = {
   reason?: string
 }
 
-// FIXME: Missing documentation for PaginatedSignatureList
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type PaginatedSignatureList = {
   // FIXME: Missing documentation for walletId
   walletId: EntityId
@@ -759,7 +833,9 @@ export type PaginatedSignatureList = {
   nextPageToken?: string
 }
 
-// FIXME: Missing documentation for RequesterIdentity
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type RequesterIdentity = {
   // FIXME: Missing documentation for userId
   userId: EntityId
@@ -771,13 +847,17 @@ export type RequesterIdentity = {
   appId?: EntityId
 }
 
-// FIXME: Missing documentation for TransferRequestMetadata
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferRequestMetadata = {
   // FIXME: Missing documentation for asset
   asset: AssetMetadata
 }
 
-// FIXME: Missing documentation for AssetMetadata
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type AssetMetadata = {
   // FIXME: Missing documentation for symbol
   symbol?: string
@@ -789,7 +869,9 @@ export type AssetMetadata = {
   verified?: boolean
 }
 
-// FIXME: Missing documentation for ExportedSigningKey
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type ExportedSigningKey = {
   // FIXME: Missing documentation for publicKey
   publicKey: string
@@ -811,7 +893,9 @@ export type ExportedSigningKey = {
   encryptedKeyShares: EncryptedKeyShare[]
 }
 
-// FIXME: Missing documentation for DelegateWalletResult
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type DelegateWalletResult = {
   // FIXME: Missing documentation for walletId
   walletId: EntityId
@@ -820,7 +904,9 @@ export type DelegateWalletResult = {
   status: string
 }
 
-// FIXME: Missing documentation for CreateWalletBody
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type CreateWalletBody = {
   // FIXME: Missing documentation for network
   network: BlockchainNetwork
@@ -840,7 +926,9 @@ export type CreateWalletBody = {
   name?: string
 }
 
-// FIXME: Missing documentation for ImportWalletBody
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type ImportWalletBody = {
   // FIXME: Missing documentation for network
   network: BlockchainNetwork
@@ -867,7 +955,9 @@ export type ImportWalletBody = {
   encryptedKeyShares: EncryptedKeyShare[]
 }
 
-// FIXME: Missing documentation for ExportWalletBody
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type ExportWalletBody = {
   /**
    * Encryption public key that will be used by signers to encrypt the exported wallet key shares. The purpose of encrypting key shares is to have them extra-safe and not usable in any place in the system until they are safely returned back to the client issuing the export command.
@@ -880,7 +970,9 @@ export type ExportWalletBody = {
   supportedSchemes: SupportedExportScheme[]
 }
 
-// FIXME: Missing documentation for DelegateWalletBody
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type DelegateWalletBody = {
   /**
    * Encryption public key that will be used by signers to encrypt the exported wallet key shares. The purpose of encrypting key shares is to have them extra-safe and not usable in any place in the system until they are safely returned back to the client issuing the export command.
@@ -888,7 +980,9 @@ export type DelegateWalletBody = {
   userId: EntityId
 }
 
-// FIXME: Missing documentation for TransferAssetBody
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferAssetBody =
   | TransferNativeAsset
   | TransferErc20Asset
@@ -897,7 +991,9 @@ export type TransferAssetBody =
   | TransferTrc20Asset
   | TransferTrc721Asset
 
-// FIXME: Missing documentation for BroadcastTransactionBody
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type BroadcastTransactionBody =
   | BroadcastTransaction
   | BroadcastEvmTransaction
@@ -905,7 +1001,9 @@ export type BroadcastTransactionBody =
   | BroadcastEvmLegacyTransaction
   | BroadcastPsbt
 
-// FIXME: Missing documentation for GenerateSignatureBody
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type GenerateSignatureBody =
   | SignHash
   | SignMessage
@@ -913,13 +1011,17 @@ export type GenerateSignatureBody =
   | SignEip712TypedData
   | SignPsbt
 
-// FIXME: Missing documentation for BlockchainEvent
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type BlockchainEvent =
   | NativeTransferEvent
   | Erc20TransferEvent
   | Erc721TransferEvent
 
-// FIXME: Missing documentation for TransferKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum TransferKind {
   // FIXME: Missing documentation for Native
   Native = 'Native',
@@ -935,7 +1037,9 @@ export enum TransferKind {
   Trc721 = 'Trc721',
 }
 
-// FIXME: Missing documentation for TransactionKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum TransactionKind {
   // FIXME: Missing documentation for Transaction
   Transaction = 'Transaction',
@@ -949,7 +1053,9 @@ export enum TransactionKind {
   Psbt = 'Psbt',
 }
 
-// FIXME: Missing documentation for SignatureKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum SignatureKind {
   // FIXME: Missing documentation for Hash
   Hash = 'Hash',
@@ -963,7 +1069,9 @@ export enum SignatureKind {
   Psbt = 'Psbt',
 }
 
-// FIXME: Missing documentation for WalletStatus
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum WalletStatus {
   // FIXME: Missing documentation for Active
   Active = 'Active',
@@ -971,7 +1079,9 @@ export enum WalletStatus {
   Archived = 'Archived',
 }
 
-// FIXME: Missing documentation for KeyScheme
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum KeyScheme {
   // FIXME: Missing documentation for ECDSA
   ECDSA = 'ECDSA',
@@ -979,7 +1089,9 @@ export enum KeyScheme {
   EdDSA = 'EdDSA',
 }
 
-// FIXME: Missing documentation for KeyCurve
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum KeyCurve {
   // FIXME: Missing documentation for ed25519
   ed25519 = 'ed25519',
@@ -989,7 +1101,9 @@ export enum KeyCurve {
   stark = 'stark',
 }
 
-// FIXME: Missing documentation for KeyProtocol
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum KeyProtocol {
   // FIXME: Missing documentation for CGGMP21
   CGGMP21 = 'CGGMP21',
@@ -997,7 +1111,9 @@ export enum KeyProtocol {
   BINANCE_EDDSA = 'BINANCE_EDDSA',
 }
 
-// FIXME: Missing documentation for BalanceKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum BalanceKind {
   // FIXME: Missing documentation for Native
   Native = 'Native',
@@ -1007,7 +1123,9 @@ export enum BalanceKind {
   Erc721 = 'Erc721',
 }
 
-// FIXME: Missing documentation for EventKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum EventKind {
   // FIXME: Missing documentation for NativeTransfer
   NativeTransfer = 'NativeTransfer',
@@ -1017,7 +1135,9 @@ export enum EventKind {
   Erc721Transfer = 'Erc721Transfer',
 }
 
-// FIXME: Missing documentation for TransferDirection
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum TransferDirection {
   // FIXME: Missing documentation for In
   In = 'In',
@@ -1025,7 +1145,9 @@ export enum TransferDirection {
   Out = 'Out',
 }
 
-// FIXME: Missing documentation for TransferStatus
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum TransferStatus {
   // FIXME: Missing documentation for Pending
   Pending = 'Pending',
@@ -1041,7 +1163,9 @@ export enum TransferStatus {
   Rejected = 'Rejected',
 }
 
-// FIXME: Missing documentation for TransactionStatus
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum TransactionStatus {
   // FIXME: Missing documentation for Pending
   Pending = 'Pending',
@@ -1057,7 +1181,9 @@ export enum TransactionStatus {
   Rejected = 'Rejected',
 }
 
-// FIXME: Missing documentation for SignatureStatus
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum SignatureStatus {
   // FIXME: Missing documentation for Pending
   Pending = 'Pending',
@@ -1073,7 +1199,9 @@ export enum SignatureStatus {
   Rejected = 'Rejected',
 }
 
-// FIXME: Missing documentation for BlockchainNetwork
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export enum BlockchainNetwork {
   // FIXME: Missing documentation for ArbitrumOne
   ArbitrumOne = 'ArbitrumOne',

@@ -1,4 +1,4 @@
-# Dfns Wallet for [viem](hhttps://viem.sh/docs/introduction.html)
+# Dfns Wallet for [viem](https://viem.sh/docs/introduction.html)
 
 Dfns wallet integration with the popular **viem** library, makes working with Ethereum and other EVM compatible ecosystems as simple and painless as possible.
 

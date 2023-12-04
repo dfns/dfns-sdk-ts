@@ -57687,7 +57687,9 @@ export enum IdentityIssuer {
   Auth0 = 'Auth0',
 }
 
-// FIXME: Missing documentation for BlockchainNetwork
+/**
+ * @deprecated legacy network names
+ */
 export enum BlockchainNetwork {
   //Cardano native currency
   ADA = 'ADA',
