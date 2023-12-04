@@ -30,4 +30,4 @@ return DfnsWallet.init({
 })
 ```
 
-Go checkout the [examples](../../examples/solana/) we have that showcase how you can start developing dapps with Dfns wallets.
+Go checkout the [examples](../../examples/libs/solana) we have that showcase how you can start developing dapps with Dfns wallets.

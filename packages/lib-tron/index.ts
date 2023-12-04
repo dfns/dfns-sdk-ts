@@ -1,107 +1,96 @@
-import { DfnsApiClient } from '@dfns/sdk'
-import { KeyCurve, KeyScheme, SignatureKind, SignatureStatus } from '@dfns/sdk/codegen/datamodel/Wallets'
-import * as elliptic from 'elliptic';
-import {SignedTransaction, Transaction} from '@tronweb3/tronwallet-abstract-adapter';
-const TronWeb = require('tronweb')
+import { DfnsApiClient, DfnsError } from '@dfns/sdk'
+import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
+import { SignedTransaction, Transaction } from '@tronweb3/tronwallet-abstract-adapter'
 
-const sleep = (interval = 0) => new Promise((resolve) => setTimeout(resolve, interval))
+const TronWeb = require('tronweb')
+const bytes = TronWeb.utils.bytes
+const ethersUtils = TronWeb.utils.ethersUtils
+const txUtils = TronWeb.utils.transaction
 
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
-  maxRetries?: number
-  retryInterval?: number
+}
+
+type WalletMetadata = GetWalletResponse
+
+const bufferToHex = (buffer: unknown): string => {
+  return `0x${bytes.byteArray2hexStr(buffer).toLowerCase()}`
+}
+
+const assertSigned = (res: GenerateSignatureResponse) => {
+  if (res.status === 'Failed') {
+    throw new DfnsError(-1, 'signing failed', res)
+  } else if (res.status !== 'Signed') {
+    throw new DfnsError(
+      -1,
+      'cannot complete signing synchronously because this wallet action requires policy approval',
+      res
+    )
+  }
 }
 
 export class DfnsWallet {
-  private options: Required<DfnsWalletOptions>
-  private tronAddress: string
+  private readonly dfnsClient
 
-  private constructor(options: DfnsWalletOptions, tronAddress: string) {
-    this.options = {
-      ...options,
-      maxRetries: options.maxRetries ?? 3,
-      retryInterval: options.retryInterval ?? 1000,
-    }
-
-   this.tronAddress = tronAddress
+  private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
+    this.dfnsClient = options.dfnsClient
   }
 
   public static async init(options: DfnsWalletOptions) {
     const { walletId, dfnsClient } = options
     const res = await dfnsClient.wallets.getWallet({ walletId })
 
-    if (!res.signingKey || res.signingKey.scheme !== KeyScheme.ECDSA || res.signingKey.curve !== KeyCurve.secp256k1) {
-      throw new Error(
-        `wallet ${walletId} has incompatible scheme (${res.signingKey?.scheme}) or curve (${res.signingKey?.curve})`
-      )
+    if (res.status !== 'Active') {
+      throw new DfnsError(-1, 'wallet not active', { walletId, status: res.status })
     }
 
-    // Decompressed the key to derive the address
-    const ec = new elliptic.ec('secp256k1')
-    const keyAsArray = ec.keyFromPublic(res.signingKey.publicKey, 'hex').getPublic(false, 'array')
-    const tronAddress = TronWeb.utils.crypto.getBase58CheckAddress(TronWeb.utils.crypto.computeAddress(keyAsArray))
-
-    return new DfnsWallet(options, tronAddress)
-  }
-
-  public get address(): string { 
-    return this.tronAddress
-  }
-
-  async waitForSignature(signatureId: string): Promise<string> {
-    const { walletId, dfnsClient, retryInterval } = this.options
-
-    let maxRetries = this.options.maxRetries
-    while (maxRetries > 0) {
-      await sleep(retryInterval)
-
-      const res = await dfnsClient.wallets.getSignature({ walletId, signatureId })
-      if (res.status === SignatureStatus.Signed) {
-        if (!res.signature) break
-
-        const r = res.signature.r.substring(2)
-        const s =res.signature.s.substring(2);
-        const v = ( res.signature.recid ? 0x1c : 0x1b ).toString(16);
-
-        return r+s+v
-      } else if (res.status === SignatureStatus.Failed) {
-        console.log("signature failed: %s", res)
-        break
-      }
-
-      maxRetries -= 1
+    if (res.network !== 'Tron' && res.network !== 'TronNile') {
+      throw new DfnsError(-1, 'wallet is not bound to Tron or TronNile', { walletId, network: res.network })
     }
 
-    throw new Error(`signature ${signatureId} not available`)
+    return new DfnsWallet(res, options)
   }
 
-  async signTransaction(transaction: Transaction): Promise<SignedTransaction> {
-    const { walletId, dfnsClient } = this.options
-    const res = await dfnsClient.wallets.generateSignature({
-      walletId,
-      body: { kind: SignatureKind.Hash, hash: transaction.txID },
+  public get address(): string {
+    // Tron-bound wallets will have a tron address
+    return this.metadata.address!
+  }
+
+  public async signTransaction(transaction: Transaction): Promise<SignedTransaction> {
+    const res = await this.dfnsClient.wallets.generateSignature({
+      walletId: this.metadata.id,
+      body: {
+        kind: 'Transaction',
+        transaction: bufferToHex(txUtils.txJsonToPb(transaction).serializeBinary()),
+      },
     })
 
-    const signature = await this.waitForSignature(res.id)
+    assertSigned(res)
+    if (!res.signature?.encoded) {
+      throw new DfnsError(-1, 'encoded signature missing', res)
+    }
 
-    const signedTransaction: SignedTransaction = {
+    return {
       ...transaction,
-      signature: [ signature ],
-    };
-
-    return signedTransaction
+      signature: [res.signature.encoded.replace(/^0x/, '')],
+    }
   }
 
-  async signMessage(message: string): Promise<string> {
-    const { walletId, dfnsClient } = this.options
-
-    let messageHash = TronWeb.utils.message.hashMessage(message)
-    const res = await dfnsClient.wallets.generateSignature({
-      walletId,
-      body: { kind: SignatureKind.Hash, hash: messageHash },
+  public async signMessage(message: string): Promise<string> {
+    const res = await this.dfnsClient.wallets.generateSignature({
+      walletId: this.metadata.id,
+      body: {
+        kind: 'Message',
+        message: bufferToHex(ethersUtils.toUtf8Bytes(message)),
+      },
     })
 
-    return this.waitForSignature(res.id)
+    assertSigned(res)
+    if (!res.signature?.encoded) {
+      throw new DfnsError(-1, 'encoded signature missing', res)
+    }
+
+    return res.signature.encoded.replace(/^0x/, '')
   }
 }

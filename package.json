@@ -19,15 +19,15 @@
     "@ethersproject/properties": "5.7.0",
     "@ethersproject/strings": "5.7.0",
     "@ethersproject/transactions": "5.7.0",
-    "@solana/web3.js": "1.78.0",
-    "@tronweb3/tronwallet-abstract-adapter": "^1.1.5",
+    "@solana/web3.js": "1.87.6",
+    "@tronweb3/tronwallet-abstract-adapter": "1.1.6",
     "@vechain/connex-driver": "2.0.12",
     "buffer": "6.0.3",
     "cross-fetch": "3.1.6",
     "elliptic": "6.5.4",
     "ethers": "6.9.0",
     "thor-devkit": "2.0.8",
-    "tronweb": "^5.3.0",
+    "tronweb": "5.3.1",
     "uuid": "9.0.0",
     "viem": "1.19.11"
   },
@@ -47,7 +47,6 @@
     "typescript": "^5.0.4"
   },
   "workspaces": [
-    "packages/*",
-    "packages/examples/*"
+    "packages/*"
   ]
 }
