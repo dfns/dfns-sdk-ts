@@ -6,10 +6,10 @@
     "@dfns/sdk": "file:../../../packages/sdk",
     "@dfns/sdk-webauthn": "file:../../../packages/sdk-webauthn",
     "jwt-decode": "3.1.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router-dom": "6.12.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "2.1.4"
   },
   "devDependencies": {
     "@craco/craco": "7.1.0",

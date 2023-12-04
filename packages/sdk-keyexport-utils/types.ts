@@ -1,4 +1,7 @@
-import { KeyCurve, KeyProtocol } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { ExportWalletRequest } from '@dfns/sdk/types/wallets'
+
+type KeyProtocol = ExportWalletRequest['body']['supportedSchemes'][number]['protocol']
+type KeyCurve = ExportWalletRequest['body']['supportedSchemes'][number]['curve']
 
 export type WalletExportConfig = {
   encryptionKey: string

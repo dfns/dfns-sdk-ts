@@ -1,6 +1,6 @@
-import { CreateWalletRequest } from '@dfns/sdk/codegen/Wallets'
+import { SignUserActionChallengeRequest } from '@dfns/sdk'
+import { CreateWalletRequest } from '@dfns/sdk/types/Wallets'
 import { NextRequest, NextResponse } from 'next/server'
-import { SignUserActionChallengeRequest } from '@dfns/sdk/baseAuthApi'
 import { getDfnsDelegatedClient } from '@/app/api/utils'
 import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'
 

@@ -1,11 +1,14 @@
 import { buildKeyImportRequest, SecretKey, SignersInfo, KeyCurve, KeyProtocol } from './codegen/dfns_key_import'
-import { ImportWalletBody, KeyScheme } from '@dfns/sdk/codegen/datamodel/Wallets'
-import { Signer } from '@dfns/sdk/codegen/datamodel/Signers'
+import { ImportWalletBody, GetWalletResponse } from '@dfns/sdk/types/wallets'
+import { ListSignersResponse } from '@dfns/sdk/types/signers'
+
+type Signer = ListSignersResponse['clusters'][number]['signers'][number]
+type KeyScheme = GetWalletResponse['signingKey']['scheme']
 
 export const splitPrivateKeyForSigners = ({
   signers,
   privateKey,
-  keyScheme = KeyScheme.ECDSA,
+  keyScheme = 'ECDSA',
 }: {
   signers: Signer[]
   privateKey: Uint8Array | Buffer
@@ -14,7 +17,7 @@ export const splitPrivateKeyForSigners = ({
   let curve: KeyCurve
   let protocol: KeyProtocol
 
-  if (keyScheme === KeyScheme.ECDSA) {
+  if (keyScheme === 'ECDSA') {
     curve = KeyCurve.Secp256k1
     protocol = KeyProtocol.Cggmp21
   } else {

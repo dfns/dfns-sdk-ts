@@ -1,5 +1,5 @@
 import { DfnsError } from '@dfns/sdk/dfnsError'
-import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { CreateWalletBody } from '@dfns/sdk/types/wallets'
 import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,7 +18,7 @@ export default function WalletNew(): JSX.Element {
     setSubmitting(true)
 
     dfnsApi()
-      .wallets.createWallet({ body: { network: formData.get('network') as BlockchainNetwork } })
+      .wallets.createWallet({ body: { network: formData.get('network') as CreateWalletBody['network'] } })
       .then(() => navigate('/'))
       .catch((err) => {
         setError(err)

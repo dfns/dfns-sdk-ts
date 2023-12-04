@@ -1,9 +1,8 @@
 import { splitPrivateKeyForSigners } from '@dfns/sdk-keyimport-utils'
-import crypto from 'crypto'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
+import crypto from 'crypto'
 import dotenv from 'dotenv'
-import { BlockchainNetwork, KeyScheme } from '@dfns/sdk/codegen/datamodel/Wallets'
 
 dotenv.config()
 
@@ -36,14 +35,14 @@ const main = async () => {
   const splittedKeyInfo = splitPrivateKeyForSigners({
     privateKey: walletPrivateKey,
     signers: clusters[0].signers, // You should have only 1 signing cluster in the returned clusters.
-    keyScheme: KeyScheme.ECDSA,
+    keyScheme: 'ECDSA',
   })
 
   // API call to import encrypted key shares into signers, thus creating new Dfns wallet.
   const wallet = await dfnsApi.wallets.importWallet({
     body: {
       name: 'My imported wallet',
-      network: BlockchainNetwork.EthereumSepolia,
+      network: 'EthereumSepolia',
       ...splittedKeyInfo,
     },
   })

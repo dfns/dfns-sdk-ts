@@ -1,5 +1,6 @@
 **/dist
 **/node_modules
+**/.env
 /tmp
 .DS_Store
 docs-generated/

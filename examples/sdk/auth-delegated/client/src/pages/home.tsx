@@ -1,4 +1,4 @@
-import { PaginatedWalletList } from '@dfns/sdk/codegen/datamodel/Wallets'
+import { ListWalletsResponse } from '@dfns/sdk/types/wallets'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ import useAuth from '../hooks/useAuth'
 
 export default function Home(): JSX.Element {
   const { user, logout } = useAuth()
-  const [wallets, setWallets] = useState<PaginatedWalletList | undefined>(undefined)
+  const [wallets, setWallets] = useState<ListWalletsResponse | undefined>(undefined)
 
   useEffect(() => {
     api.listWallets().then((wallets) => setWallets(wallets))

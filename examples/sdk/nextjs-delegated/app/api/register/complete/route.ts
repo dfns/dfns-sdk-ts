@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { BaseAuthApi, CreateUserRegistrationRequest } from '@dfns/sdk/baseAuthApi'
+import { BaseAuthApi, CreateUserRegistrationRequest } from '@dfns/sdk'
 import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'
 import { dfns } from '../../utils'
 
