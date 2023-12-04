@@ -1,6 +1,6 @@
 # Dfns Wallet for [ethers.js v5](https://docs.ethers.org/v5/)
 
-Dfns wallet integration with the popular __ethers.js__ library [version 5.x](https://docs.ethers.org/v5/), makes working with Ethereum and other EVM compatible ecosystems as simple and painless as possible.
+Dfns wallet integration with the popular **ethers.js** library [version 5.x](https://docs.ethers.org/v5/), makes working with Ethereum and other EVM compatible ecosystems as simple and painless as possible.
 
 The `DfnsWallet` uses `generateSignature` to compute signatures using your Dfns managed wallets, for all the transactions created by your `ethers.js` program. Then you need to broadcast these transactions yourself to the corresponding node providers that are either self hosted or by a blockchain provider.
 
@@ -27,10 +27,12 @@ const dfnsClient = new DfnsApiClient({
   signer,
 })
 
-return new DfnsWallet({
-  walletId: process.env.DFNS_WALLET_ID!,
-  dfnsClient,
-}).connect(rpcProvider)
+return (
+  await DfnsWallet.init({
+    walletId: process.env.DFNS_WALLET_ID!,
+    dfnsClient,
+  })
+).connect(rpcProvider)
 ```
 
-Go checkout the [examples](../../examples/ethersjs/v5/) we have that showcase how you can use ethers.js to start developing dapps with Dfns wallets.
+Go checkout the [examples](../../examples/libs/ethersjs/v5/) we have that showcase how you can use ethers.js to start developing dapps with Dfns wallets.
