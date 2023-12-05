@@ -1,5 +1,5 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
-import { Prefix, b58cencode, buf2hex, getPkhfromPk, hex2buf, mergebuf, prefix } from '@taquito/utils';
+import { Prefix, b58cencode, buf2hex, hex2buf, mergebuf, prefix } from '@taquito/utils';
 import { Signer } from '@taquito/taquito'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 import { TxWatermark } from './constant'
