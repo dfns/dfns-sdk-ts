@@ -8,6 +8,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-bitcoinjs \
     --workspace @dfns/lib-ethersjs5 \
     --workspace @dfns/lib-ethersjs6 \
+    --workspace @dfns/lib-taquito \
     --workspace @dfns/lib-solana \
     --workspace @dfns/lib-tron \
     --workspace @dfns/lib-vechain \
