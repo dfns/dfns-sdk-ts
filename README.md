@@ -52,7 +52,7 @@ import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 
 const keySigner = new AsymmetricKeySigner({
   credId: 'X2ktMzhxaTEtZTF1bTgtOXY1cG9yY2tkZDe1dG1jYg', // Credential ID
-  privateKey: process.env.PRIVATE_KEY, // Credential private key
+  privateKey: process.env.DFNS_PRIVATE_KEY!, // Credential private key
   appOrigin: 'https://app.mycompany.com', // application's origin, should match the Application registered with Dfns
 })
 ```
@@ -76,7 +76,6 @@ It needs to be authenticated, so `DfnsApiClient` needs to be passed a valid `aut
 
 ```ts
 import { DfnsApiClient } from '@dfns/sdk'
-import { BlockchainNetwork } from '@dfns/sdk/codegen/datamodel/Foundations'
 
 const signer = ... // a Credential Signer (webauthN or key signer from section above)
 
@@ -89,7 +88,7 @@ const apiClient = new DfnsApiClient({
 
 // create a wallet
 const wallet = await dfns.wallets.createWallet({
-    body: { network: BlockchainNetwork.ETH_GOERLI }
+    body: { network: 'EthereumSepolia' }
 })
 
 // get assets in wallet
@@ -176,7 +175,9 @@ BaseAuthApi.createUserRegistration()
 
 Integrations with other blockchain platforms to make Dapp development frictionless. More to come...
 
-* [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/ethersjs/v5)
-* [ethers.js v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/ethersjs/v6)
-* [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/solana)
-* [Vechain Connex](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-vechain/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/vechain)
+* [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs/v5)
+* [ethers.js v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs/v6)
+* [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/solana)
+* [tronweb](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-tron/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/tron)
+* [Vechain Connex](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-vechain/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/vechain)
+* [viem](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-viem/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/viem)

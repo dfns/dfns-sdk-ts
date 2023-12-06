@@ -7,13 +7,7 @@
         "clean": true,
         "main": "packages/sdk/index.ts",
         "tsConfig": "packages/sdk/tsconfig.json",
-        "updateBuildableProjectDepsInPackageJson": true,
-        "generateExportsField": true,
-        "additionalEntryPoints": [
-          "packages/sdk/types/signers.ts",
-          "packages/sdk/types/wallets.ts",
-          "packages/sdk/types/webhooks.ts"
-        ]
+        "updateBuildableProjectDepsInPackageJson": true
       }
     }
   }

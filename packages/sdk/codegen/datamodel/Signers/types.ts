@@ -1,6 +1,8 @@
 import { EntityId } from '../Foundations'
 
-// FIXME: Missing documentation for Cluster
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/signers' instead
+ */
 export type Cluster = {
   // FIXME: Missing documentation for clusterId
   clusterId: EntityId
@@ -9,7 +11,9 @@ export type Cluster = {
   signers: Signer[]
 }
 
-// FIXME: Missing documentation for Signer
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/signers' instead
+ */
 export type Signer = {
   // FIXME: Missing documentation for signerId
   signerId: string
@@ -18,7 +22,9 @@ export type Signer = {
   encryptionKey: string
 }
 
-// FIXME: Missing documentation for ClusterList
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/signers' instead
+ */
 export type ClusterList = {
   // FIXME: Missing documentation for clusters
   clusters: Cluster[]

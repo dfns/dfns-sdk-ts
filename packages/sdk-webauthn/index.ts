@@ -1,6 +1,12 @@
-import { CredentialStore, Fido2Attestation, UserRegistrationChallenge } from '@dfns/sdk/store'
-import { AllowCredential, CredentialSigner, Fido2Assertion } from '@dfns/sdk/signer'
-import { fromBase64Url, toBase64Url } from '@dfns/sdk/utils/base64'
+import {
+  AllowCredential,
+  CredentialSigner,
+  CredentialStore,
+  Fido2Assertion,
+  Fido2Attestation,
+  UserRegistrationChallenge,
+} from '@dfns/sdk'
+import { fromBase64Url, toBase64Url } from '@dfns/sdk/utils'
 import { Buffer } from 'buffer'
 
 export const DEFAULT_WAIT_TIMEOUT = 60000

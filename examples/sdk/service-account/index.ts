@@ -19,10 +19,10 @@ const main = async () => {
   })
 
   const wallet = await dfnsApi.wallets.createWallet({ body: { network: 'EthereumSepolia' } })
-  console.log(JSON.stringify(wallet))
+  console.log('New wallet: ', wallet)
 
   const list = await dfnsApi.wallets.listWallets({})
-  console.log(JSON.stringify(list))
+  console.log(`You have ${list.items.length} wallets`)
 }
 
 main()

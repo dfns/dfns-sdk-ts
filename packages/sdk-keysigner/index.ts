@@ -1,6 +1,6 @@
 import * as crypto from 'crypto'
-import { CredentialSigner, KeyAssertion } from '@dfns/sdk/signer'
-import { toBase64Url } from '@dfns/sdk/utils/base64'
+import { CredentialSigner, KeyAssertion } from '@dfns/sdk'
+import { toBase64Url } from '@dfns/sdk/utils'
 
 export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
   constructor(
@@ -28,11 +28,7 @@ export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
       credentialAssertion: {
         credId: this.options.credId,
         clientData: toBase64Url(clientData),
-        signature: toBase64Url(crypto.sign(
-          this.options.algorithm || undefined,
-          clientData,
-          this.options.privateKey
-        )),
+        signature: toBase64Url(crypto.sign(this.options.algorithm || undefined, clientData, this.options.privateKey)),
       },
     }
   }

@@ -11,7 +11,7 @@ npm install
 
 cd examples/sdk/import-wallet
 npm install
-npx ts-node index.ts
+npm run exec
 ```
 
 For explanations, check the annotated code inside [index.ts](./index.ts)

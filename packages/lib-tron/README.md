@@ -1,6 +1,6 @@
-# Dfns Wallet for Tron
+# Dfns Wallet for [TronWeb]((https://tronweb.network/))
 
-Dfns wallet integration with [Tron](https://tronweb.network/).
+Dfns wallet integration with **TronWeb**.
 
 The `DfnsWallet` uses `generateSignature` to compute signatures using your Dfns managed wallets. Then you need to broadcast these transactions yourself to the corresponding node providers that are either self hosted or by a blockchain provider.
 
