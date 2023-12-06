@@ -1,9 +1,16 @@
 # Changelog
 
+## 0.2.0 (2023-12-06)
+
+- Added wallets signature support for ECDSA Stark curve with `KeyEDCSAStark`
+- Migrated `DfnsApiClient.wallets` and `DfnsApiClient.signers` to a new code generator [breaking]
+- Migrated all third-party library integrations to synchronous signing flow and deprecated polling
+- Updated all examples and READMEs to align with the core SDK changes
+
 ## 0.1.2 (2023-11-29)
 
-- Added webhooks support in sdk
-- Added `@dfns/lib-viem` + an example of alchemy gasless integration
+- Added `DfnsApiClient.webhooks` support
+- Added `@dfns/lib-viem` and an example of alchemy gasless integration
 
 ## 0.1.1 (2023-11-14)
 
@@ -13,7 +20,7 @@
 
 ## 0.1.0 (2023-11-03)
 
-- Release stable version
+- Released stable version
 
 ## 0.1.0-beta.8 (2023-11-03)
 
@@ -26,13 +33,12 @@
 
 ## 0.1.0-beta.7 (2023-10-23)
 
-- Allow custom base auth url (https://github.com/dfnsext/typescript-sdk/pull/37)
+- Added allowing custom base auth url (https://github.com/dfnsext/typescript-sdk/pull/37)
 
 ## 0.1.0-beta.6 (2023-10-17)
 
 - Added wallet import feature and example (https://github.com/dfnsext/typescript-sdk/pull/34)
-- Github action to build on push and PR (https://github.com/dfnsext/typescript-sdk/pull/35)
-- Tron tier-3 integration: lib and example (https://github.com/dfnsext/typescript-sdk/pull/30)
+- Added SDK integration with TronWeb, see `@dfns/lib-tron` (https://github.com/dfnsext/typescript-sdk/pull/30)
 
 ## 0.1.0-beta.5 (2023-10-03)
 
