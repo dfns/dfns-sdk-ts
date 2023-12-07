@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-bitcoinjs",
+        "clean": true,
+        "main": "packages/lib-bitcoinjs/index.ts",
+        "tsConfig": "packages/lib-bitcoinjs/tsconfig.json"
+      }
+    }
+  }
+}
