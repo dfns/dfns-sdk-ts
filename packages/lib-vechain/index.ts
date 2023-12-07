@@ -31,7 +31,7 @@ export class DfnsWallet implements Wallet {
   public readonly address
   private readonly dfnsClient
 
-  constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
+  private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
     this.dfnsClient = options.dfnsClient
 
     const publicKey = new ec('secp256k1').keyFromPublic(metadata.signingKey.publicKey, 'hex')

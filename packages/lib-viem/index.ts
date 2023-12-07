@@ -68,7 +68,7 @@ export class DfnsWallet {
   public readonly address: Address
   private readonly dfnsClient: DfnsApiClient
 
-  constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
+  private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
     this.address = this.metadata.boundToEvmNetwork
       ? getAddress(this.metadata.address!)
       : publicKeyToAddress(toHex(this.metadata.signingKey.publicKey))
