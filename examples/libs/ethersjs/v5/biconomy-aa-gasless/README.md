@@ -30,7 +30,7 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
-- `POLYGON_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet), this wallet will be used for Polygon
+- `POLYGON_WALLET_ID` = a Dfns Polygon [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet)
 
 ## Explanation
 

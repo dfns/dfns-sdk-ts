@@ -9,7 +9,7 @@ import { AbiCoder, Contract, JsonRpcProvider, TransactionResponse } from 'ethers
 
 dotenv.config()
 
-const WethAbi = [
+const WETH_ABI = [
   'function approve(address _spender, uint256 _value) returns (bool)',
   'function deposit() external payable',
 ]
@@ -128,7 +128,7 @@ const createTrade = async (): Promise<Trade<Token, Token, TradeType.EXACT_INPUT>
 const main = async () => {
   const wallet = (await initDfnsWallet(process.env.ETHEREUM_WALLET_ID!)).connect(ethereum)
   const address = await wallet.getAddress()
-  const wethContract = new Contract(WETH.address, WethAbi, wallet)
+  const wethContract = new Contract(WETH.address, WETH_ABI, wallet)
 
   // convert some ETH to wrapped ETH
   const depositTx: TransactionResponse = await wethContract.deposit({ value: AMOUNT_TO_TRADE })

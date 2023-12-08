@@ -30,23 +30,25 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
-- `ETHEREUM_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) on Ethereum Goerli (L1)
-- `BASE_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) on Base Goerli (L2)
-- `ETHEREUM_NODE_URL` = an Ethereum Goerli RPC provider node you have access to
+- `ETHEREUM_WALLET_ID` = a Dfns Ethereum mainnet or tesetnet [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet)
+- `BASE_WALLET_ID` = a Dfns Base mainnet or testnet [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet)
+- `ETHEREUM_NODE_URL` = an Ethereum mainnet or testnet RPC provider node you have access to
 
-**note** _the wallet must have Ethereum Goerli testnet ETH to deposit to Base and pay for gas_
+**note** _the wallet must have mainnet or testnet ETH to deposit to Base and pay for gas_
 
 ## Explanation
 
-The program runs on Ethereum Goerli testnet. In order to run the code, you would need a [Ethereum Goerli wallet](https://goerli.etherscan.io/address/0x1c19c099870c478f074b3b27e0d04b38d3379d27) that holds some GoerliETH. The program will deposit `0.1` GoerliETH to an separate [Base Goerli wallet](https://goerli.basescan.org/address/0x40cb695026961668d167d6b2fa16b423c6beaa8d) with a different address.
+The program runs on Ethereum and Base. To run the code on Sepolia testnet, you would need a [Ethereum Sepolia wallet](https://sepolia.etherscan.io/address/0xd964d741998edc275f3800eed113378a391951d9) that holds some SepoliaETH. The program will deposit 1 wei to a [Base Sepolia wallet](https://sepolia.basescan.org/address/0x416a2003ba6e8c2ee25816a8cbd09dca187049b3) with a different address.
 
 ```shell
 > ts-node main.ts
 
-Ethereum L1 sending address 0x1C19c099870C478F074b3b27e0D04b38D3379D27
-Base L2 receiving address 0x40cB695026961668d167D6B2fA16B423c6bEaa8d
-Depositing 100000000000000000 wei
-Deposit L1 receipt is: 0xa63555246615242294fc7de8b482eed12b6d5e50dad101fc3614a7d9a25cf85d
+Ethereum L1 sending address 0xD964D741998eDC275F3800eed113378a391951d9
+Base L2 receiving address 0x416A2003ba6e8c2Ee25816A8cbd09DcA187049B3
+Depositing 1 wei
+Deposit L1 receipt is: 0x38434e48fd290247e0b5303966644db6e624eabc8c9c7670db9c45e77cc59c49
 ```
 
-This is the Ethereum Goerli [L1 transaction](https://goerli.etherscan.io/tx/0xa63555246615242294fc7de8b482eed12b6d5e50dad101fc3614a7d9a25cf85d) that initiated the deposit, and this is the Base Goerli [L2 transaction](https://goerli.basescan.org/tx/0xcb82f69191b6771fd79984233e612b1dd05457ad3e95028954dbb8aede8fe8da) that completed the deposit.
+This is the Ethereum Sepolia [L1 transaction](https://sepolia.etherscan.io/tx/0x38434e48fd290247e0b5303966644db6e624eabc8c9c7670db9c45e77cc59c49) that initiated the deposit, and this is the Base Sepolia [L2 transaction](https://sepolia.basescan.org/tx/0x108b52b70ee9393d8082eaab13b08d124cb561a5c01ee52d9fde021de56c53d7) that completed the deposit.
+
+To run the example on mainnet, update the `L1_BRIDGE` contract address to [0x3154Cf16ccdb4C6d922629664174b904d80F2C35](https://docs.base.org/base-contracts/#l1-contract-addresses).
