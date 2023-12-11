@@ -1,0 +1,17 @@
+{
+  "name": "taquito-basic-tx",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "dependencies": {
+    "@dfns/lib-taquito": "file:../../packages/lib-taquito",
+    "@dfns/sdk": "file:../../packages/sdk",
+    "@dfns/sdk-keysigner": "file:../../packages/sdk-keysigner",
+    "dotenv": "16.1.4"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.1"
+  },
+  "scripts": {
+    "exec": "ts-node main.ts"
+  }
+}

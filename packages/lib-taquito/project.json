@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-taquito",
+        "clean": true,
+        "main": "packages/lib-taquito/index.ts",
+        "tsConfig": "packages/lib-taquito/tsconfig.json"
+      }
+    }
+  }
+}
