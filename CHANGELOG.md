@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 (2023-12-22)
+
+- Added `DfnsApiClient.policies` support
+- Added SDK integration with BitcoinJS, see `@dfns/lib-bitcoinjs`
+- Added SDK integration with Tezos Taquito, see `@dfns/lib-taquito`
+- Added SDK integration with Ripple xrpl.js, see `@dfns/lib-xrpl`
+
 ## 0.2.0 (2023-12-06)
 
 - Added wallets signature support for ECDSA Stark curve with `KeyEDCSAStark`
