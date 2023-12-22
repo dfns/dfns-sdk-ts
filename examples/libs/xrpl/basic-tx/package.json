@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@dfns/lib-xrpl": "file:../../packages/lib-xrpl",
-    "@dfns/sdk": "file:../../packages/sdk",
-    "@dfns/sdk-keysigner": "file:../../packages/sdk-keysigner",
+    "@dfns/lib-xrpl": "file:../../../packages/lib-xrpl",
+    "@dfns/sdk": "file:../../../packages/sdk",
+    "@dfns/sdk-keysigner": "file:../../../packages/sdk-keysigner",
     "dotenv": "16.1.4",
-    "xrpl": "^2.14.0"
+    "xrpl": "2.14.0"
   },
   "devDependencies": {
     "ts-node": "10.9.1"
