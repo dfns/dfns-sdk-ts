@@ -2,7 +2,6 @@ import { DfnsWallet } from '@dfns/lib-taquito'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import { RpcClient} from '@taquito/rpc'
-import { LocalForger } from '@taquito/local-forging';
 import { TezosToolkit } from '@taquito/taquito'
 
 import * as dotenv from 'dotenv';

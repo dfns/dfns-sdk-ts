@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-xrpl",
+        "clean": true,
+        "main": "packages/lib-xrpl/index.ts",
+        "tsConfig": "packages/lib-xrpl/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
