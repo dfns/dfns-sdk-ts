@@ -1,9 +1,9 @@
 import { DfnsWallet } from '@dfns/lib-xrpl'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
+import { Client, Transaction } from 'xrpl'
 
-import * as dotenv from 'dotenv';
-import { Client, Transaction, encode } from 'xrpl';
+import * as dotenv from 'dotenv'
 
 dotenv.config()
 
@@ -29,36 +29,30 @@ const initDfnsWallet = async (walletId: string) => {
 
 async function main() {
   const senderWallet = await initDfnsWallet(process.env.RIPPLE_WALLET_ID!)
-  console.log("ripple sender address: %s", senderWallet.address)
-  
+  console.log('ripple sender address: %s', senderWallet.address)
+
   let tx: Transaction = {
     TransactionType: 'Payment',
     Account: senderWallet.address,
     // Replace with your desired receiver
-    Destination: "rBYtCQKxGTfFuob3hxSc8pEYddetT9CdDZ",
+    Destination: 'rBYtCQKxGTfFuob3hxSc8pEYddetT9CdDZ',
     Amount: '100000',
   }
 
   // Choose the client you want.
-  const client = new Client('wss://testnet.xrpl-labs.com')
-  
-  // Connect the websocket client
+  const client = new Client(process.env.RIPPLE_NODE_URL!)
   await client.connect()
 
   tx = await client.autofill(tx)
-
-  console.log("prepared transaction: %s", tx);
+  console.log('prepared transaction: %s', tx)
 
   const signedTx = await senderWallet.signTransaction(tx)
-
   console.log(`transaction signed`)
 
   const res = await client.submitAndWait(signedTx.tx_blob)
-
-  console.log(`transaction submitted: ${ res.result.hash }`)
+  console.log(`transaction submitted: ${res.result.hash}`)
 
   await client.disconnect()
 }
 
-main();
-
+main()

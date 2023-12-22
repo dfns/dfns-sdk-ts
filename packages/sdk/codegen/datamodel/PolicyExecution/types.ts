@@ -6,7 +6,9 @@ import {
 } from '../Foundations'
 import { PolicyActivityKind, PolicyControlKind } from '../PolicyManagement'
 
-// FIXME: Missing documentation for PolicyExecution
+/**
+ * @deprecated use the new policy engine instead
+ */
 export type PolicyExecution = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -45,7 +47,9 @@ export type PolicyExecution = {
   policyId: EntityId
 }
 
-// FIXME: Missing documentation for PolicyControlExecution
+/**
+ * @deprecated use the new policy engine instead
+ */
 export type PolicyControlExecution = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -90,16 +94,22 @@ export type PolicyControlExecution = {
   activityId: string
 }
 
-// FIXME: Missing documentation for AppraisableActivity
+/**
+ * @deprecated use the new policy engine instead
+ */
 export type AppraisableActivity = {}
 
-// FIXME: Missing documentation for UpdatePolicyControlExecutionInput
+/**
+ * @deprecated use the new policy engine instead
+ */
 export type UpdatePolicyControlExecutionInput = {
   // FIXME: Missing documentation for status
   status: ExecutionStatus
 }
 
-// FIXME: Missing documentation for ExecutionStatus
+/**
+ * @deprecated use the new policy engine instead
+ */
 export enum ExecutionStatus {
   // FIXME: Missing documentation for Awaiting
   Awaiting = 'Awaiting',

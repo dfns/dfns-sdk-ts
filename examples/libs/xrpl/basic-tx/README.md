@@ -33,8 +33,7 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
 - `RIPPLE_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID
-
-
+- `RIPPLE_NODE_URL` = a Ripple WebSocket node to broadcast the signed transaction
 
 **note** _the wallet must have XRP to pay for fees_
 

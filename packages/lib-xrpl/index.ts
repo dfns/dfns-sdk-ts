@@ -26,7 +26,7 @@ export class DfnsWallet {
   private readonly signingPubKey: string
 
   private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
-     // ripple adds the prefix "ed" to eddsa pubKey/private key to have
+    // ripple adds the prefix "ed" to eddsa pubKey/private key to have
     // the same bytes number as ecdsa pubKey.
     const prefix = metadata.signingKey.scheme === 'EdDSA' ? 'ed' : ''
     this.signingPubKey = prefix + metadata.signingKey.publicKey
@@ -56,7 +56,7 @@ export class DfnsWallet {
   public async signTransaction(transaction: Transaction): Promise<{ tx_blob: string; hash: string }> {
     const signatureResponse = await this.dfnsClient.wallets.generateSignature({
       walletId: this.metadata.id,
-      body: { kind: 'Transaction', transaction: `0x${encode(transaction).toLowerCase()}`},
+      body: { kind: 'Transaction', transaction: `0x${encode(transaction).toLowerCase()}` },
     })
 
     assertSigned(signatureResponse)
@@ -73,4 +73,3 @@ export class DfnsWallet {
     }
   }
 }
-

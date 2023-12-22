@@ -36,21 +36,16 @@ async function main() {
   console.log("Tezos sender address: %s", senderWallet.address)
 
   const Tezos = new TezosToolkit(client)
-
   Tezos.setProvider({ signer: senderWallet })
 
   const receiverAddress = 'tz1ifJaJ46sqXxfFsQ5MWuVB96q3K1sFmoJA'
 
   const txOp = await Tezos.contract.transfer({ to: receiverAddress, amount: 1 })
-
   console.log(`Operations pushed: ${JSON.stringify(txOp.results, null, 2)}`)
 
   console.log(`Waiting for confirmations....`)
-
   await txOp.confirmation(1)
-
   console.log(`Operation ${txOp.hash} confirmed`)
 }
 
 main();
-

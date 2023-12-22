@@ -7,6 +7,7 @@ import { PermissionsClient } from './codegen/Permissions'
 import { PolicyExecutionClient } from './codegen/PolicyExecution'
 import { PolicyManagementClient } from './codegen/PolicyManagement'
 import { PublicKeysClient } from './codegen/PublicKeys'
+import { PoliciesClient } from './generated/policies'
 import { SignersClient } from './generated/signers'
 import { WalletsClient } from './generated/wallets'
 import { WebhooksClient } from './generated/webhooks'
@@ -39,10 +40,20 @@ export class DfnsApiClient {
     return new PermissionsClient(this.apiOptions)
   }
 
+  public get policies() {
+    return new PoliciesClient(this.apiOptions)
+  }
+
+  /**
+   * @deprecated use the new policy engine instead
+   */
   public get policyExecution() {
     return new PolicyExecutionClient(this.apiOptions)
   }
 
+  /**
+   * @deprecated use the new policy engine instead
+   */
   public get policyManagement() {
     return new PolicyManagementClient(this.apiOptions)
   }
