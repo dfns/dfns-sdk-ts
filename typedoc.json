@@ -10,6 +10,7 @@
     "packages/lib-viem",
     "packages/lib-xrpl",
     "packages/sdk",
+    "packages/sdk-awskmssigner",
     "packages/sdk-keyexport-utils",
     "packages/sdk-keyimport-utils",
     "packages/sdk-keysigner",

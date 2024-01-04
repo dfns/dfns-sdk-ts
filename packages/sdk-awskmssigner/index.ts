@@ -1,10 +1,8 @@
 import { CredentialSigner, KeyAssertion } from '@dfns/sdk'
 import { toBase64Url } from '@dfns/sdk/utils'
-import { KMSClient, KMSClientConfig, SignCommand, SigningAlgorithmSpec } from "@aws-sdk/client-kms";
-
+import { KMSClient, KMSClientConfig, SignCommand, SigningAlgorithmSpec } from '@aws-sdk/client-kms'
 
 export class AwsKmsKeySigner implements CredentialSigner<KeyAssertion> {
-
   private client = new KMSClient(this.options.kmsClientConfig)
 
   constructor(
@@ -18,7 +16,7 @@ export class AwsKmsKeySigner implements CredentialSigner<KeyAssertion> {
       appOrigin: string
       crossOrigin?: boolean
     }
-  ) { }
+  ) {}
 
   async sign(challenge: string): Promise<KeyAssertion> {
     const clientData = Buffer.from(
@@ -33,11 +31,11 @@ export class AwsKmsKeySigner implements CredentialSigner<KeyAssertion> {
     const command = new SignCommand({
       KeyId: this.options.kmsKeyConfig.id,
       Message: clientData,
-      MessageType: "RAW",
-      SigningAlgorithm: this.options.kmsKeyConfig.algorithm
+      MessageType: 'RAW',
+      SigningAlgorithm: this.options.kmsKeyConfig.algorithm,
     })
 
-    const response = await this.client.send(command);
+    const response = await this.client.send(command)
 
     return {
       kind: 'Key',

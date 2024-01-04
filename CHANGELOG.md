@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2 (2024-01-04)
+
+- Added AWS KMS signer, see `@dfns/sdk-awskmssigner`
+
 ## 0.2.1 (2023-12-22)
 
 - Added `DfnsApiClient.policies` support
