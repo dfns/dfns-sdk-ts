@@ -18,6 +18,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/sdk-keyexport-utils \
     --workspace @dfns/sdk-keyimport-utils \
     --workspace @dfns/sdk-keysigner \
+    --workspace @dfns/sdk-awskmssigner \
     --workspace @dfns/sdk-webauthn \
     --include-workspace-root "$version"
 

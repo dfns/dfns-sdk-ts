@@ -16,6 +16,7 @@ declare -a packages=(
     "@dfns/sdk-keyexport-utils"
     "@dfns/sdk-keyimport-utils"
     "@dfns/sdk-keysigner"
+    "@dfns/sdk-awskmssigner"
     "@dfns/sdk-webauthn"
 )
 
