@@ -17,14 +17,13 @@ export class WebAuthn implements CredentialSigner<Fido2Assertion>, CredentialSto
       rpId: string
       timeout?: number
     }
-  ) {}
+  ) { }
 
   async sign(
     challenge: string,
     allowCredentials: { key: AllowCredential[]; webauthn: AllowCredential[] }
   ): Promise<Fido2Assertion> {
     const credential = (await navigator.credentials.get({
-      mediation: 'required',
       publicKey: {
         challenge: Buffer.from(challenge),
         allowCredentials: allowCredentials.webauthn.map(({ id, type, transports }) => ({
