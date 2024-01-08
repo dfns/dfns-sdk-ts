@@ -1,4 +1,4 @@
-# Dfns typescript SDK
+# Dfns Typescript SDK
 
 Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
 - [Dfns Website](https://www.dfns.co)
@@ -14,11 +14,7 @@ npm i @dfns/sdk
 
 ## Examples
 
-For examples containing code + some docs, these examples illustrate different setups of the SDK:
-
-* [Service account](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/service-account)
-* [Delegated registration and login with NextJS](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/nextjs-delegated)
-* [Delegated registration and login with ReactJS + Express](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/auth-delegated)
+Check out the list of all examples in [/examples](./examples).
 
 ## Concepts
 
