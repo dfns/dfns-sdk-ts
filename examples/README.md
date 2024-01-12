@@ -16,6 +16,7 @@ Here's a list of examples illustrating how to use the Dfns Typescript sdk / libs
 * Ethersjs v6 integration (`@dfns/lib-ethersjs6`)
   * [base-deposit-eth](./libs/ethersjs/v6/base-deposit-eth)
   * [uniswap](./libs/ethersjs/v6/uniswap)
+  * [hardhat-deploy](./libs/ethersjs/v6/hardhat-deploy)
 * Ethersjs v5 integration  (`@dfns/lib-ethersjs5`)
   * [arbitrum-deposit-eth](./libs/ethersjs/v5/arbitrum-deposit-eth)
   * [polygon-deposit-erc20](./libs/ethersjs/v5/polygon-deposit-erc20)
