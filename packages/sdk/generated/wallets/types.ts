@@ -87,7 +87,7 @@ export type BroadcastTransactionResponse = {
 export type BroadcastTransactionRequest = BroadcastTransactionParams & { body: BroadcastTransactionBody }
 
 export type CreateWalletBody = {
-    network: "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismSepolia" | "Polygon" | "PolygonMumbai" | "ArbitrumGoerli" | "BaseGoerli" | "Bitcoin" | "BitcoinTestnet3" | "OptimismGoerli" | "Ripple" | "RippleTestnet" | "Solana" | "SolanaDevnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
+    network: "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismSepolia" | "Polygon" | "PolygonMumbai" | "ArbitrumGoerli" | "BaseGoerli" | "OptimismGoerli" | "Ripple" | "RippleTestnet" | "Solana" | "SolanaDevnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
     name?: string | undefined;
     externalId?: string | undefined;
     tags?: string[] | undefined;
@@ -506,7 +506,7 @@ export type GetWalletHistoryQuery = {
     limit?: string | undefined;
     paginationToken?: string | undefined;
     direction?: ("In" | "Out") | undefined;
-    kind?: ("NativeTransfer" | "Erc20Transfer" | "Erc721Transfer") | undefined;
+    kind?: ("NativeTransfer" | "Erc20Transfer" | "Erc721Transfer" | "UtxoTransfer") | undefined;
     contract?: string | undefined;
 };
 
@@ -624,6 +624,37 @@ export type GetWalletHistoryResponse = {
         symbol?: string | undefined;
         /** @deprecated use metadata.asset.verified instead */
         verified?: boolean | undefined;
+    } | {
+        walletId: string;
+        direction: "In" | "Out";
+        network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonMumbai" | "Ripple" | "RippleTestnet" | "Solana" | "SolanaDevnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+        blockNumber: number;
+        txHash: string;
+        index?: string | undefined;
+        timestamp: string;
+        metadata: {
+            asset: {
+                symbol?: string | undefined;
+                decimals?: number | undefined;
+                verified?: boolean | undefined;
+                quotes?: {
+                    [x: string]: number;
+                } | undefined;
+            };
+            fee?: {
+                symbol?: string | undefined;
+                decimals?: number | undefined;
+                verified?: boolean | undefined;
+                quotes?: {
+                    [x: string]: number;
+                } | undefined;
+            } | undefined;
+        };
+        kind: "UtxoTransfer";
+        froms: string[];
+        tos: string[];
+        value: string;
+        fee?: string | undefined;
     })[];
     nextPageToken?: string | undefined;
 };
@@ -650,7 +681,7 @@ export type GetWalletNftsResponse = {
 export type GetWalletNftsRequest = GetWalletNftsParams
 
 export type ImportWalletBody = {
-    network: "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismSepolia" | "Polygon" | "PolygonMumbai" | "ArbitrumGoerli" | "BaseGoerli" | "Bitcoin" | "BitcoinTestnet3" | "OptimismGoerli" | "Ripple" | "RippleTestnet" | "Solana" | "SolanaDevnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
+    network: "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismSepolia" | "Polygon" | "PolygonMumbai" | "ArbitrumGoerli" | "BaseGoerli" | "OptimismGoerli" | "Ripple" | "RippleTestnet" | "Solana" | "SolanaDevnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
     name?: string | undefined;
     externalId?: string | undefined;
     tags?: string[] | undefined;
