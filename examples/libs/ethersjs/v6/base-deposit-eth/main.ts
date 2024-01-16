@@ -2,11 +2,11 @@ import { DfnsWallet } from '@dfns/lib-ethersjs6'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import dotenv from 'dotenv'
-import { Contract, JsonRpcProvider, parseEther } from 'ethers'
+import { Contract, JsonRpcProvider } from 'ethers'
 
 dotenv.config()
 
-const L1_BRIDGE = '0xfa6d8ee5be770f84fc001d098c4bd604fe01284a'
+const L1_BRIDGE = '0xfd0Bf71F60660E2f608ed56e1659C450eB113120'
 
 const L1_BRIDGE_ABI = ['function bridgeETHTo(address _to, uint32 _minGasLimit, bytes _extraData) payable']
 
@@ -41,7 +41,7 @@ const main = async () => {
 
   const minGasLimit = '1000000'
   const bridgeContract = new Contract(L1_BRIDGE, L1_BRIDGE_ABI, ethWallet)
-  const amountToDeposit = parseEther('0.1')
+  const amountToDeposit = '1'
   console.log(`Depositing ${amountToDeposit} wei`)
 
   const depositTx = await bridgeContract.bridgeETHTo(l2Address, minGasLimit, '0x', { value: amountToDeposit })

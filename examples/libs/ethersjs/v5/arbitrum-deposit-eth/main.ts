@@ -28,7 +28,7 @@ const initDfnsWallet = (walletId: string) => {
   return DfnsWallet.init({ walletId, dfnsClient })
 }
 
-const AMOUNT_TO_DEPOSIT = BigNumber.from('1000000')
+const AMOUNT_TO_DEPOSIT = BigNumber.from('1')
 
 const main = async () => {
   const ethWallet = (await initDfnsWallet(process.env.ETHEREUM_WALLET_ID!)).connect(ethereum)

@@ -1,7 +1,6 @@
 import { DfnsWallet } from '@dfns/lib-ethersjs5'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { BigNumber } from '@ethersproject/bignumber'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { CrossChainMessenger, MessageStatus } from '@eth-optimism/sdk'
 import dotenv from 'dotenv'
@@ -28,15 +27,15 @@ const initDfnsWallet = (walletId: string) => {
   return DfnsWallet.init({ walletId, dfnsClient })
 }
 
-const AMOUNT_TO_DEPOSIT = BigNumber.from('1000000')
+const AMOUNT_TO_DEPOSIT = 1
 
 const main = async () => {
   const ethWallet = (await initDfnsWallet(process.env.ETHEREUM_WALLET_ID!)).connect(ethereum)
   const opWallet = (await initDfnsWallet(process.env.OPTIMISM_WALLET_ID!)).connect(optimism)
 
   const crossChainMessenger = new CrossChainMessenger({
-    l1ChainId: 5, // Goerli value, 1 for mainnet
-    l2ChainId: 420, // Goerli value, 10 for mainnet
+    l1ChainId: (await ethereum.getNetwork()).chainId,
+    l2ChainId: (await optimism.getNetwork()).chainId,
     l1SignerOrProvider: ethWallet,
     l2SignerOrProvider: opWallet,
   })

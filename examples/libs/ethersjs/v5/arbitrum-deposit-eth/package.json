@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@arbitrum/sdk": "v3.1.6",
+    "@arbitrum/sdk": "v3.1.12",
     "@dfns/lib-ethersjs5": "file:../../../../../packages/lib-ethersjs5",
     "@dfns/sdk": "file:../../../../../packages/sdk",
     "@dfns/sdk-keysigner": "file:../../../../../packages/sdk-keysigner",

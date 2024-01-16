@@ -30,26 +30,26 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
-- `ETHEREUM_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) on Ethereum Goerli (L1)
-- `ARBITRUM_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) on Arbitrum Goerli (L2)
-- `ETHEREUM_NODE_URL` = an Ethereum Goerli RPC provider node you have access to
-- `ARBITRUM_NODE_URL` = an Arbitrum Goerli RPC provider node you have access to
+- `ETHEREUM_WALLET_ID` = a Dfns Ethereum mainnet or testnet [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet)
+- `ARBITRUM_WALLET_ID` = a Dfns Arbitrum mainnet or testnet wallet
+- `ETHEREUM_NODE_URL` = an Ethereum mainnet or testnet RPC provider node you have access to
+- `ARBITRUM_NODE_URL` = an Arbitrum mainnet or testnet RPC provider node you have access to
 
-**note** _the wallet must have Ethereum Goerli testnet ETH to deposit to Arbitrum and pay for gas_
+**note** _the wallet must have mainnet or testnet ETH to deposit to Arbitrum and pay for gas_
 
 ## Explanation
 
-The program runs on Ethereum Goerli testnet. In order to run the code, you would need a [Ethereum Goerli wallet](https://goerli.etherscan.io/address/0x1c19c099870c478f074b3b27e0d04b38d3379d27) that holds some GoerliETH. The program will deposit `1000000` wei of GoerliETH to an separate [Arbitrum Goerli wallet](https://goerli.arbiscan.io/address/0x1d049343e9AF2f1a645ac2aE5199EEC86301Acf6) with a different address.
+The program runs on Ethereum and Arbitrum. To run the code on Sepolia testnets, you can create a [Ethereum Sepolia wallet](https://sepolia.etherscan.io/address/0xd964d741998edc275f3800eed113378a391951d9) that holds some SepoliaETH. The program will deposit `1` wei to an [Arbitrum Sepolia wallet](https://sepolia.arbiscan.io/address/0x8898b9c9c6323733643c14e10ab66cdb120f4491) with a different address.
 
 ```shell
 > ts-node main.ts
 
-Deposit L1 receipt is: 0xb7fa8ce95283df0f77981a53d365e4026dd240af3a7b4eec3049f0b453ca366d
+Deposit L1 receipt is: 0xe5e5d13c8a55b210f27d87c69df69dbeb5aa67c9e2ee2e4eed15e8232db60b47
 Now we wait for L2 side of the transaction to be executed ⏳
 L2 message successful: status: undefined
-ETH balance of the Arbitrum wallet has been updated from 0 to 1000000
+ETH balance of the Arbitrum wallet has been updated from 24997899999999999 to 24997900000000000
 ```
 
-This is the Ethereum Goerli [L1 transaction](https://goerli.etherscan.io/tx/0xb7fa8ce95283df0f77981a53d365e4026dd240af3a7b4eec3049f0b453ca366d) that initiated the deposit, and this is the Arbitrum Goerli [L2 transaction](https://goerli.arbiscan.io/tx/0xf15ce52b6c824097fe92e2c507b8afecc14a1f57a0544d79e28b935c54915626) that completed the deposit.
+This is the Ethereum Sepolia [L1 transaction](https://sepolia.etherscan.io/tx/0xe5e5d13c8a55b210f27d87c69df69dbeb5aa67c9e2ee2e4eed15e8232db60b47) that initiated the deposit, and this is the Arbitrum Sepolia [L2 transaction](https://sepolia.arbiscan.io/tx/0x5b76a208b07d8d131a9618f4780280b32188c3e0f567fb5d4176e46794ffb1d0) that completed the deposit.
 
 The Arbitrum L2 transaction can take between 10 to 20 minutes to confirm on chain. Be patient.
