@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3 (2024-01-16)
+
+- Updates to `@dfns/sdk-webauthn`
+
 ## 0.2.2 (2024-01-04)
 
 - Added AWS KMS signer, see `@dfns/sdk-awskmssigner`
