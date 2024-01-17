@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { BaseAuthApi, CreateUserRegistrationRequest } from '@dfns/sdk'
 import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'
+import { BaseAuthApi, CreateUserRegistrationRequest } from '@dfns/sdk'
+import { NextRequest, NextResponse } from 'next/server'
 import { dfns } from '../../utils'
 
 export async function POST(request: NextRequest) {
@@ -20,20 +20,24 @@ export async function POST(request: NextRequest) {
   // saveUserDfnsInfo(result.user.id)
 
   // Create a generic permission to get/create wallets (can skip if permission was already created once)
-  const permission = await dfns.permissions.createPermission({
-    body: {
-      name: `Allow Wallet Create/Read - ${Date.now()}`,
-      operations: ['Wallets:Create', 'Wallets:Read'],
-    },
-  })
+  const permission = (
+    await dfns.permissions.createPermission({
+      body: {
+        name: `Allow Wallet Create/Read - ${Date.now()}`,
+        operations: ['Wallets:Create', 'Wallets:Read'],
+      },
+    })
+  ).body
 
   // Grant (assign) the permission to the end-user
-  const permissionAssignment = await dfns.permissions.createPermissionAssignment({
-    body: {
+  const permissionAssignment = (
+    await dfns.permissions.createAssignment({
       permissionId: permission.id,
-      identityId: result.user.id,
-    },
-  })
+      body: {
+        identityId: result.user.id,
+      },
+    })
+  ).body
 
   // Perform delegated login to get the Dfns auth token of the end-user ("on his behalf")
   const { token: userAuthToken } = await dfns.auth.createDelegatedUserLogin({

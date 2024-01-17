@@ -42,8 +42,8 @@ export class DfnsWallet {
       throw new DfnsError(-1, 'wallet not active', { walletId, status: res.status })
     }
 
-    if (res.network !== 'Ripple' && res.network !== 'RippleTestnet') {
-      throw new DfnsError(-1, 'wallet is not bound to Ripple or RippleTestnet', { walletId, network: res.network })
+    if (res.network !== 'XrpLedger' && res.network !== 'XrpLedgerTestnet') {
+      throw new DfnsError(-1, 'wallet is not bound to XrpLedger or XrpLedgerTestnet', { walletId, network: res.network })
     }
 
     return new DfnsWallet(res, options)
