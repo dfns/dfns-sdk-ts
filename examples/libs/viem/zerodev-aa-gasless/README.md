@@ -1,6 +1,6 @@
-# Alchemy Account Abstraction Gasless Transaction
+# ZeroDev Account Abstraction Gasless Transaction
 
-Adapted from Alchemy's [sponsor gas example](https://accountkit.alchemy.com/guides/sponsoring-gas.html). Demonstrates that Dfns managed keys can integrate with [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) Account Abstraction standards seamlessly.
+Adapted from ZeroDev's [gasless transaction example](https://docs.zerodev.app/getting-started#send-gasless-transactions). Demonstrates that Dfns managed keys can integrate with [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) Account Abstraction standards seamlessly.
 
 ## Prerequisites
 
@@ -30,20 +30,21 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
-- `ETHEREUM_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet)
-- `ALCHEMY_API_KEY` = Alchemy API key for Sepolia, can be created in the [Alchemy dashboard](https://dashboard.alchemy.com/)
-- `ALCHEMY_GAS_POLICY_ID` = Gas manager policy ID, follow Alchemy's guide on [how to set one up](https://docs.alchemy.com/docs/setup-a-gas-manager-policy)
+- `POLYGON_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet)
+- `POLYGON_NODE_URL` = a Polygon Mumbai RPC provider node you have access to
+- `ZERODEV_PROJECT_ID` = ZeroDev project ID, follow ZeroDev's guide on [how to set one up](https://docs.zerodev.app/getting-started)
 
 ## Explanation
 
-In order to run the program, you would need a Dfns Sepolia wallet. The example will create an smart contract account using the Dfns managed key. This newly created [account](https://sepolia.etherscan.io/address/0x9ecC1C59E1F6C6e0671CcF7Daf76CB2ccEC3b72C) is not funded and cannot pay for gas. Instead it uses the gas manager to sponsor a gasless transaction to mint a token.
+In order to run the program, you would need a Dfns Polygon Mumbai wallet. The example will create an smart contract account using the Dfns managed key. This newly created [account](https://mumbai.polygonscan.com/address/0xf92361d3dce28e1a1594f91011a03f46c0388af8) is not funded and cannot pay for gas. Instead it uses the gas manager to sponsor a gasless transaction to mint a NFT.
 
 ```shell
 > ts-node main.ts
 
-Smart account address: 0x9ecC1C59E1F6C6e0671CcF7Daf76CB2ccEC3b72C
-User operation hash: 0xd747e34a340cddf8fa106424a5304adaa7af3ed52405a08bd083c3ff64edead7
-Transaction hash: 0x1d53703c069b65ebbec96a3b41d1e186377f8385545d581acc2352a447bc4837
+Smart account address: 0xF92361d3dcE28e1A1594f91011A03F46c0388af8
+User operation hash: 0x0d359bfa16889fb46bef997ff958585d44dfab6dcaa592bc42cb6fc73dce9b2f
+Transaction hash: 0x073b117895fe47fa028bfc01a32f5d924ebc731772209baece7fd2d1c0e7b6ff
+Smart account NFT balance: 1
 ```
 
-This is the Ethereum Sepolia [transaction](https://sepolia.etherscan.io/tx/0x1d53703c069b65ebbec96a3b41d1e186377f8385545d581acc2352a447bc4837) that minted the token.
+This is the Polygon Mumbai [transaction](https://mumbai.polygonscan.com/tx/0x073b117895fe47fa028bfc01a32f5d924ebc731772209baece7fd2d1c0e7b6ff) that minted the token.

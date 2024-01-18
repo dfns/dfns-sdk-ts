@@ -24,6 +24,7 @@ Here's a list of examples illustrating how to use the Dfns Typescript sdk / libs
   * [biconomy-aa-gasless](./libs/ethersjs/v5/biconomy-aa-gasless)
 * Viem integration (`@dfns/lib-viem`)
   * [alchemy-aa-gasless](./libs/viem/alchemy-aa-gasless)
+  * [zerodev-aa-gasless](./libs/viem/zerodev-aa-gasless)
 * Solana web3.js integration (`@dfns/lib-solana`)
   * [basic-tx](./libs/solana/basic-tx)
   * [staking](./libs/solana/staking)
@@ -36,6 +37,3 @@ Here's a list of examples illustrating how to use the Dfns Typescript sdk / libs
   * [basic-tx](./libs/xrpl/basic-tx)
 * Vechain integration (`@dfns/lib-vechain`)
   * [basic-tx](./libs/vechain/basic-tx)
-
-
-
