@@ -28,19 +28,17 @@ const initDfnsWallet = async (walletId: string) => {
 }
 
 async function main() {
-  const senderWallet = await initDfnsWallet(process.env.RIPPLE_WALLET_ID!)
-  console.log('ripple sender address: %s', senderWallet.address)
+  const senderWallet = await initDfnsWallet(process.env.XRPL_WALLET_ID!)
+  console.log('xrpl sender address: %s', senderWallet.address)
 
   let tx: Transaction = {
     TransactionType: 'Payment',
     Account: senderWallet.address,
-    // Replace with your desired receiver
     Destination: 'rBYtCQKxGTfFuob3hxSc8pEYddetT9CdDZ',
     Amount: '100000',
   }
 
-  // Choose the client you want.
-  const client = new Client(process.env.RIPPLE_NODE_URL!)
+  const client = new Client(process.env.XRPL_NODE_URL!)
   await client.connect()
 
   tx = await client.autofill(tx)
