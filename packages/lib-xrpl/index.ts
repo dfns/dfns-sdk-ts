@@ -1,6 +1,6 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
+import { GenerateSignatureResponse, GetWalletResponse } from '@dfns/sdk/types/wallets'
 import { Transaction, encode, hashes } from 'xrpl'
-import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -26,8 +26,7 @@ export class DfnsWallet {
   private readonly signingPubKey: string
 
   private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
-    // ripple adds the prefix "ed" to eddsa pubKey/private key to have
-    // the same bytes number as ecdsa pubKey.
+    // xrpl adds the prefix "ed" to EdDSA public key to have the same size as ECDSA key
     const prefix = metadata.signingKey.scheme === 'EdDSA' ? 'ed' : ''
     this.signingPubKey = prefix + metadata.signingKey.publicKey
 
@@ -43,7 +42,10 @@ export class DfnsWallet {
     }
 
     if (res.network !== 'XrpLedger' && res.network !== 'XrpLedgerTestnet') {
-      throw new DfnsError(-1, 'wallet is not bound to XrpLedger or XrpLedgerTestnet', { walletId, network: res.network })
+      throw new DfnsError(-1, 'wallet is not bound to XrpLedger or XrpLedgerTestnet', {
+        walletId,
+        network: res.network,
+      })
     }
 
     return new DfnsWallet(res, options)
