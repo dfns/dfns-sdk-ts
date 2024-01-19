@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.2.4 (2024-01-19)
+
+- Renamed BlockchainNetwork `Ripple` to `XrpLedger`
+- Migrated `DfnsApiClient.permissions` to a new code generator [breaking]
+
 ## 0.2.3 (2024-01-16)
 
-- Updates to `@dfns/sdk-webauthn`
+- Removed `mediation: required` from WebAuthn signer
 
 ## 0.2.2 (2024-01-04)
 
