@@ -1,5 +1,5 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
-import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
+import { GenerateSignatureResponse, GetWalletResponse } from '@dfns/sdk/types/wallets'
 import { Transaction, encode, hashes } from 'xrpl'
 
 export type DfnsWalletOptions = {

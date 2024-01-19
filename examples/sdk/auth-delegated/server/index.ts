@@ -90,16 +90,18 @@ app.post(
 
     const client = apiClient()
 
-    const permission = await client.permissions.createPermission({
-      body: {
-        name: `wallets permissions for ${registration.user.id}`,
-        operations: ['Wallets:Create', 'Wallets:Read'],
-      },
-    })
+    const permission = (
+      await client.permissions.createPermission({
+        body: {
+          name: `wallets permissions for ${registration.user.id}`,
+          operations: ['Wallets:Create', 'Wallets:Read'],
+        },
+      })
+    ).body
 
-    await client.permissions.createPermissionAssignment({
+    await client.permissions.createAssignment({
+      permissionId: permission.id,
       body: {
-        permissionId: permission.id,
         identityId: registration.user.id,
       },
     })

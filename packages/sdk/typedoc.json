@@ -4,6 +4,7 @@
   "readme": "./README.md",
   "entryPoints": [
     "./index.ts",
+    "./generated/permissions/index.ts",
     "./generated/signers/index.ts",
     "./generated/wallets/index.ts",
     "./generated/webhooks/index.ts",
@@ -12,7 +13,6 @@
     "./types/webhooks.ts",
     "./utils/index.ts",
     "./codegen/Auth/index.ts",
-    "./codegen/Permissions/index.ts",
     "./codegen/datamodel/Auth/index.ts",
     "./codegen/datamodel/Foundations/index.ts",
     "./codegen/datamodel/Orgs/index.ts",
