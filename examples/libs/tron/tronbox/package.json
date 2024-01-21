@@ -1,0 +1,15 @@
+{
+  "name": "tronbox",
+  "version": "1.0.0",
+  "dependencies": {
+    "@dfns/lib-tron": "0.2.3",
+    "@dfns/sdk": "0.2.3",
+    "@dfns/sdk-keysigner": "0.2.3",
+    "@openzeppelin/contracts-upgradeable": "5.0.1",
+    "tronweb": "5.3.1"
+  },
+  "devDependencies": {
+    "tronbox": "3.4.2"
+  },
+  "scripts": {}
+}
