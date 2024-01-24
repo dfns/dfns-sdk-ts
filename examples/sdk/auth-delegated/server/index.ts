@@ -91,7 +91,7 @@ app.post(
     const client = apiClient()
 
     const permission = (
-      await client.permissions.createPermission({
+      await client.permissionsV2.createPermission({
         body: {
           name: `wallets permissions for ${registration.user.id}`,
           operations: ['Wallets:Create', 'Wallets:Read'],
@@ -99,7 +99,7 @@ app.post(
       })
     ).body
 
-    await client.permissions.createAssignment({
+    await client.permissionsV2.createAssignment({
       permissionId: permission.id,
       body: {
         identityId: registration.user.id,

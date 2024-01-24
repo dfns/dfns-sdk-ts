@@ -1,3 +1,4 @@
+import { DelegatedPermissionsClient } from 'codegen/Permissions'
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { DelegatedAssetsClient } from './codegen/Assets'
 import { DelegatedAuthClient } from './codegen/Auth'
@@ -6,7 +7,7 @@ import { DelegatedCallbacksClient } from './codegen/Callbacks'
 import { DelegatedPolicyExecutionClient } from './codegen/PolicyExecution'
 import { DelegatedPolicyManagementClient } from './codegen/PolicyManagement'
 import { DelegatedPublicKeysClient } from './codegen/PublicKeys'
-import { DelegatedPermissionsClient } from './generated/permissions'
+import { DelegatedPermissionsClient as DelegatedPermissionsV2Client } from './generated/permissions'
 import { DelegatedPoliciesClient } from './generated/policies'
 import { DelegatedSignersClient } from './generated/signers'
 import { DelegatedWalletsClient } from './generated/wallets'
@@ -37,6 +38,10 @@ export class DfnsDelegatedApiClient {
 
   public get permissions() {
     return new DelegatedPermissionsClient(this.apiOptions)
+  }
+
+  public get permissionsV2() {
+    return new DelegatedPermissionsV2Client(this.apiOptions)
   }
 
   public get policies() {

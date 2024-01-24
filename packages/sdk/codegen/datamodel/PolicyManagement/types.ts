@@ -8,9 +8,7 @@ import {
   Username,
 } from '../Foundations'
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for Policy
 export type Policy = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -52,9 +50,7 @@ export type Policy = {
   filter?: PolicyObjectFilter
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for NotifyAndAuditPcConf
 export type NotifyAndAuditPcConf = {
   // FIXME: Missing documentation for kind
   kind: PolicyControlKind.NotifyAndAudit
@@ -66,9 +62,7 @@ export type NotifyAndAuditPcConf = {
   groups?: string[]
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for RequestApprovalPcConf
 export type RequestApprovalPcConf = {
   // FIXME: Missing documentation for kind
   kind: PolicyControlKind.RequestApproval
@@ -86,9 +80,7 @@ export type RequestApprovalPcConf = {
   timeoutInMinutes?: IntegerPositiveStrict
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyRule
 export type PolicyRule = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -124,9 +116,7 @@ export type PolicyRule = {
   status: PolicyRuleStatus
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyControl
 export type PolicyControl = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -174,9 +164,7 @@ export type PolicyControl = {
   status: PolicyControlStatus
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreateAmountLimitPrConf
 export type CreateAmountLimitPrConf = {
   // FIXME: Missing documentation for kind
   kind: PolicyRuleKind.PaymentAmountLimit
@@ -191,9 +179,7 @@ export type CreateAmountLimitPrConf = {
   shouldIgnoreAssetsWithoutMarketValue: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdateAmountLimitPrConf
 export type UpdateAmountLimitPrConf = {
   // FIXME: Missing documentation for limit
   limit?: Amount
@@ -205,9 +191,7 @@ export type UpdateAmountLimitPrConf = {
   shouldIgnoreAssetsWithoutMarketValue?: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for AmountLimitPrConf
 export type AmountLimitPrConf = {
   // FIXME: Missing documentation for limit
   limit: Amount
@@ -219,9 +203,7 @@ export type AmountLimitPrConf = {
   shouldIgnoreAssetsWithoutMarketValue: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreateTransferLimitPrConf
 export type CreateTransferLimitPrConf = {
   // FIXME: Missing documentation for kind
   kind: PolicyRuleKind.TransferAmountLimit
@@ -233,9 +215,7 @@ export type CreateTransferLimitPrConf = {
   currency: Currency
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdateTransferLimitPrConf
 export type UpdateTransferLimitPrConf = {
   // FIXME: Missing documentation for limit
   limit?: Amount
@@ -244,9 +224,7 @@ export type UpdateTransferLimitPrConf = {
   currency?: Currency
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for TransferLimitPrConf
 export type TransferLimitPrConf = {
   // FIXME: Missing documentation for limit
   limit: Amount
@@ -255,9 +233,7 @@ export type TransferLimitPrConf = {
   currency: Currency
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreateOutgoingVelocityPrConf
 export type CreateOutgoingVelocityPrConf = {
   // FIXME: Missing documentation for kind
   kind: PolicyRuleKind.PaymentAmountOutgoingVelocity
@@ -275,9 +251,7 @@ export type CreateOutgoingVelocityPrConf = {
   shouldIgnoreAssetsWithoutMarketValue: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdateOutgoingVelocityPrConf
 export type UpdateOutgoingVelocityPrConf = {
   // FIXME: Missing documentation for velocity
   velocity?: Amount
@@ -292,9 +266,7 @@ export type UpdateOutgoingVelocityPrConf = {
   shouldIgnoreAssetsWithoutMarketValue?: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for OutgoingVelocityPrConf
 export type OutgoingVelocityPrConf = {
   // FIXME: Missing documentation for velocity
   velocity: Amount
@@ -309,9 +281,7 @@ export type OutgoingVelocityPrConf = {
   shouldIgnoreAssetsWithoutMarketValue: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreateRequestApprovalPcConf
 export type CreateRequestApprovalPcConf = {
   // FIXME: Missing documentation for kind
   kind: PolicyControlKind.RequestApproval
@@ -329,9 +299,7 @@ export type CreateRequestApprovalPcConf = {
   numApprovals: number
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdateRequestApprovalPcConf
 export type UpdateRequestApprovalPcConf = {
   // FIXME: Missing documentation for approverUsernames
   approverUsernames?: string[]
@@ -346,9 +314,7 @@ export type UpdateRequestApprovalPcConf = {
   numApprovals?: number
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreateNotifyAndAuditPcConf
 export type CreateNotifyAndAuditPcConf = {
   // FIXME: Missing documentation for kind
   kind: PolicyControlKind.NotifyAndAudit
@@ -360,9 +326,7 @@ export type CreateNotifyAndAuditPcConf = {
   groups?: string[]
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdateNotifyAndAuditPcConf
 export type UpdateNotifyAndAuditPcConf = {
   // FIXME: Missing documentation for groups
   groups?: string[]
@@ -371,9 +335,7 @@ export type UpdateNotifyAndAuditPcConf = {
   usernames?: string[]
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyManagementPreferences
 export type PolicyManagementPreferences = {
   /**
    * Sets default `AssetSymbol` for the policy rules that use it, such as Limit, Velocity, Siphoning, and others.
@@ -386,32 +348,22 @@ export type PolicyManagementPreferences = {
   policyRuleVelocityIntervalInMinutes: number
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for Create
 export type Create = {}
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for EmptyConfiguration
 export type EmptyConfiguration = {}
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreateAlwaysActivatedPrConf
 export type CreateAlwaysActivatedPrConf = {
   // FIXME: Missing documentation for kind
   kind: PolicyRuleKind.AlwaysActivated
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdateAlwaysActivatedPrConf
 export type UpdateAlwaysActivatedPrConf = {}
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for AssetAccountFilter
 export type AssetAccountFilter = {
   // FIXME: Missing documentation for kind
   kind: PolicyObjectFilterKind.AssetAccount
@@ -426,9 +378,7 @@ export type AssetAccountFilter = {
   assetSymbols?: string[]
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PublicKeyFilter
 export type PublicKeyFilter = {
   // FIXME: Missing documentation for kind
   kind: PolicyObjectFilterKind.PublicKey
@@ -440,9 +390,7 @@ export type PublicKeyFilter = {
   tags?: string[]
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for WalletFilter
 export type WalletFilter = {
   // FIXME: Missing documentation for kind
   kind: PolicyObjectFilterKind.Wallet
@@ -451,9 +399,7 @@ export type WalletFilter = {
   walletIds?: EntityId[]
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreatePolicyInput
 export type CreatePolicyInput = {
   // FIXME: Missing documentation for activityKind
   activityKind: PolicyActivityKind
@@ -480,9 +426,7 @@ export type CreatePolicyInput = {
   isImmutable?: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdatePolicyInput
 export type UpdatePolicyInput = {
   // FIXME: Missing documentation for description
   description?: string
@@ -500,9 +444,7 @@ export type UpdatePolicyInput = {
   filter?: PolicyObjectFilter
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreatePolicyControlInput
 export type CreatePolicyControlInput = {
   // FIXME: Missing documentation for description
   description?: string
@@ -517,9 +459,7 @@ export type CreatePolicyControlInput = {
   isImmutable?: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdatePolicyControlInput
 export type UpdatePolicyControlInput = {
   // FIXME: Missing documentation for description
   description?: string
@@ -531,9 +471,7 @@ export type UpdatePolicyControlInput = {
   configuration?: UpdatePolicyControlConfiguration
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreatePolicyRuleInput
 export type CreatePolicyRuleInput = {
   // FIXME: Missing documentation for description
   description?: string
@@ -548,9 +486,7 @@ export type CreatePolicyRuleInput = {
   isImmutable?: boolean
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdatePolicyRuleInput
 export type UpdatePolicyRuleInput = {
   // FIXME: Missing documentation for description
   description?: string
@@ -562,65 +498,49 @@ export type UpdatePolicyRuleInput = {
   configuration: UpdatePolicyRuleConfiguration
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreatePolicyRuleConfiguration
 export type CreatePolicyRuleConfiguration =
   | CreateAmountLimitPrConf
   | CreateTransferLimitPrConf
   | CreateOutgoingVelocityPrConf
   | CreateAlwaysActivatedPrConf
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdatePolicyRuleConfiguration
 export type UpdatePolicyRuleConfiguration =
   | UpdateAmountLimitPrConf
   | UpdateTransferLimitPrConf
   | UpdateOutgoingVelocityPrConf
   | UpdateAlwaysActivatedPrConf
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for UpdatePolicyControlConfiguration
 export type UpdatePolicyControlConfiguration =
   | UpdateRequestApprovalPcConf
   | UpdateNotifyAndAuditPcConf
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for CreatePolicyControlConfiguration
 export type CreatePolicyControlConfiguration =
   | CreateRequestApprovalPcConf
   | CreateNotifyAndAuditPcConf
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyRuleConfiguration
 export type PolicyRuleConfiguration =
   | AmountLimitPrConf
   | TransferLimitPrConf
   | OutgoingVelocityPrConf
   | EmptyConfiguration
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyControlConfiguration
 export type PolicyControlConfiguration =
   | NotifyAndAuditPcConf
   | RequestApprovalPcConf
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyObjectFilter
 export type PolicyObjectFilter =
   | AssetAccountFilter
   | PublicKeyFilter
   | WalletFilter
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyActivityKind
 export enum PolicyActivityKind {
   // FIXME: Missing documentation for CreatingSignature
   CreatingSignature = 'CreatingSignature',
@@ -632,9 +552,7 @@ export enum PolicyActivityKind {
   WalletsTransferAsset = 'WalletsTransferAsset',
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyStatus
 export enum PolicyStatus {
   // FIXME: Missing documentation for Enabled
   Enabled = 'Enabled',
@@ -645,7 +563,9 @@ export enum PolicyStatus {
 }
 
 /**
- * @deprecated use the new policy engine instead
+ * enumm:
+ * * NotifyAndAudit
+ * * RequestApproval
  */
 export enum PolicyControlKind {
   // FIXME: Missing documentation for NotifyAndAudit
@@ -654,9 +574,7 @@ export enum PolicyControlKind {
   RequestApproval = 'RequestApproval',
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyRuleKind
 export enum PolicyRuleKind {
   // FIXME: Missing documentation for AlwaysActivated
   AlwaysActivated = 'AlwaysActivated',
@@ -668,9 +586,7 @@ export enum PolicyRuleKind {
   TransferAmountLimit = 'TransferAmountLimit',
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for Currency
 export enum Currency {
   // FIXME: Missing documentation for EUR
   EUR = 'EUR',
@@ -678,9 +594,7 @@ export enum Currency {
   USD = 'USD',
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyControlStatus
 export enum PolicyControlStatus {
   // FIXME: Missing documentation for Enabled
   Enabled = 'Enabled',
@@ -688,9 +602,7 @@ export enum PolicyControlStatus {
   Archived = 'Archived',
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyRuleStatus
 export enum PolicyRuleStatus {
   // FIXME: Missing documentation for Enabled
   Enabled = 'Enabled',
@@ -698,9 +610,7 @@ export enum PolicyRuleStatus {
   Archived = 'Archived',
 }
 
-/**
- * @deprecated use the new policy engine instead
- */
+// FIXME: Missing documentation for PolicyObjectFilterKind
 export enum PolicyObjectFilterKind {
   // FIXME: Missing documentation for AssetAccount
   AssetAccount = 'AssetAccount',

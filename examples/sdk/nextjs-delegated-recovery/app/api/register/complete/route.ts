@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
   // Create a generic permission to get/create wallets (can skip if permission was already created once)
   const permission = (
-    await dfns.permissions.createPermission({
+    await dfns.permissionsV2.createPermission({
       body: {
         name: `Allow Wallet Create/Read - ${Date.now()}`,
         operations: ['Wallets:Create', 'Wallets:Read'],
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
   // Grant (assign) the permission to the end-user
   const permissionAssignment = (
-    await dfns.permissions.createAssignment({
+    await dfns.permissionsV2.createAssignment({
       permissionId: permission.id,
       body: {
         identityId: result.user.id,
