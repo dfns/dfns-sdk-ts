@@ -37,6 +37,9 @@ export class DfnsApiClient {
     return new CallbacksClient(this.apiOptions)
   }
 
+  /**
+   * @deprecated use permissions v2 instead
+   */
   public get permissions() {
     return new PermissionsClient(this.apiOptions)
   }

@@ -8,6 +8,7 @@
     "./generated/signers/index.ts",
     "./generated/wallets/index.ts",
     "./generated/webhooks/index.ts",
+    "./types/permissions.ts",
     "./types/signers.ts",
     "./types/wallets.ts",
     "./types/webhooks.ts",
