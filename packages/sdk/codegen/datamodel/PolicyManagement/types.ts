@@ -1,12 +1,4 @@
-import {
-  Amount,
-  AssetSymbol,
-  EntityId,
-  IntegerPositiveStrict,
-  IsoDatetime,
-  Tag,
-  Username,
-} from '../Foundations'
+import { Amount, AssetSymbol, EntityId, IntegerPositiveStrict, IsoDatetime, Tag, Username } from '../Foundations'
 
 /**
  * @deprecated use the new policy engine instead
@@ -583,16 +575,12 @@ export type UpdatePolicyRuleConfiguration =
 /**
  * @deprecated use the new policy engine instead
  */
-export type UpdatePolicyControlConfiguration =
-  | UpdateRequestApprovalPcConf
-  | UpdateNotifyAndAuditPcConf
+export type UpdatePolicyControlConfiguration = UpdateRequestApprovalPcConf | UpdateNotifyAndAuditPcConf
 
 /**
  * @deprecated use the new policy engine instead
  */
-export type CreatePolicyControlConfiguration =
-  | CreateRequestApprovalPcConf
-  | CreateNotifyAndAuditPcConf
+export type CreatePolicyControlConfiguration = CreateRequestApprovalPcConf | CreateNotifyAndAuditPcConf
 
 /**
  * @deprecated use the new policy engine instead
@@ -606,17 +594,12 @@ export type PolicyRuleConfiguration =
 /**
  * @deprecated use the new policy engine instead
  */
-export type PolicyControlConfiguration =
-  | NotifyAndAuditPcConf
-  | RequestApprovalPcConf
+export type PolicyControlConfiguration = NotifyAndAuditPcConf | RequestApprovalPcConf
 
 /**
  * @deprecated use the new policy engine instead
  */
-export type PolicyObjectFilter =
-  | AssetAccountFilter
-  | PublicKeyFilter
-  | WalletFilter
+export type PolicyObjectFilter = AssetAccountFilter | PublicKeyFilter | WalletFilter
 
 /**
  * @deprecated use the new policy engine instead

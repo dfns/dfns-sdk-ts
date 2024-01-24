@@ -1,9 +1,4 @@
-import {
-  DocumentSnapshot,
-  EntityId,
-  InitiatorKind,
-  IsoDatetime,
-} from '../Foundations'
+import { DocumentSnapshot, EntityId, InitiatorKind, IsoDatetime } from '../Foundations'
 import { PolicyActivityKind, PolicyControlKind } from '../PolicyManagement'
 
 /**
