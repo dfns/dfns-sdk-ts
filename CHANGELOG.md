@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.5 (2024-01-24)
+
+- Reverted `DfnsApiClient.permissions` to old code generator
+- Added `DfnsApiClient.permissionsV2` to support Permissions V2
+- Bumped `viem` from `1.19.11` to `1.21.4`
+
 ## 0.2.4 (2024-01-19)
 
 - Renamed BlockchainNetwork `Ripple` to `XrpLedger`
