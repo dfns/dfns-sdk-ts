@@ -1,6 +1,6 @@
 import { Response, fetch as _fetch } from 'cross-fetch'
 
-import { DfnsError } from '../dfnsError'
+import { DfnsError, PolicyPendingError } from '../dfnsError'
 import { BaseAuthApi, DfnsBaseApiOptions } from '../baseAuthApi'
 import { generateNonce } from './nonce'
 import { DfnsApiClientOptions } from '../dfnsApiClient'
@@ -53,6 +53,19 @@ const errorHandler = <T>(fetch: Fetch<T>): Fetch<T> => {
         headers: response.headers,
         body,
       })
+    }
+  }
+}
+
+// raise a 202 response by policy execution as error
+const catchPolicyPending = <T>(fetch: Fetch<T>): Fetch<T> => {
+  return async (resource, options) => {
+    const response = await fetch(resource, options)
+
+    if (response.status === PolicyPendingError.HTTP_ACCEPTED) {
+      throw new PolicyPendingError(await response.json())
+    } else {
+      return response
     }
   }
 }
@@ -123,8 +136,10 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
   }
 }
 
-export const simpleFetch = fullUrl(jsonSerializer(dfnsAuth(errorHandler(<Fetch<DfnsBaseApiOptions>>_fetch))))
+export const simpleFetch = fullUrl(
+  jsonSerializer(dfnsAuth(catchPolicyPending(errorHandler(<Fetch<DfnsBaseApiOptions>>_fetch))))
+)
 
 export const userActionFetch = fullUrl(
-  jsonSerializer(dfnsAuth(userAction(errorHandler(<Fetch<DfnsApiClientOptions>>_fetch))))
+  jsonSerializer(dfnsAuth(userAction(catchPolicyPending(errorHandler(<Fetch<DfnsApiClientOptions>>_fetch)))))
 )
