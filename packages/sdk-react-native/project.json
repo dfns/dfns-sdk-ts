@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/sdk-react-native",
+        "clean": true,
+        "main": "packages/sdk-react-native/index.ts",
+        "tsConfig": "packages/sdk-react-native/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
