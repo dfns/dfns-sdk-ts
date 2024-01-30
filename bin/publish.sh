@@ -18,6 +18,7 @@ declare -a packages=(
     "@dfns/sdk-keysigner"
     "@dfns/sdk-awskmssigner"
     "@dfns/sdk-webauthn"
+    "@dfns/sdk-react-native"
 )
 
 echo "Will deploy these built versions:"
