@@ -112,20 +112,17 @@ export type ListPermissionsQuery = {
 };
 
 export type ListPermissionsResponse = {
-    items: {
-        id: string;
-        name: string;
-        operations: string[];
-        resourceId?: (string | undefined) | null;
-        status: "Active";
-        predicateIds?: string[] | undefined;
-        isImmutable: boolean;
-        dateCreated?: string | undefined;
-        dateUpdated?: string | undefined;
-        isArchived: boolean;
-    }[];
-    nextPageToken?: string | undefined;
-};
+    id: string;
+    name: string;
+    operations: string[];
+    resourceId?: (string | undefined) | null;
+    status: "Active";
+    predicateIds?: string[] | undefined;
+    isImmutable: boolean;
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    isArchived: boolean;
+}[];
 
 export type ListPermissionsRequest = { query?: ListPermissionsQuery }
 
