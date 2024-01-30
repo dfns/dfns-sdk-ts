@@ -7,7 +7,7 @@ export class PermissionsClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
   async archivePermission(request: T.ArchivePermissionRequest): Promise<T.ArchivePermissionResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/archive', {
+    const path = buildPathAndQuery('/permissions/:permissionId/archive', {
       path: request ?? {},
       query: {},
     })
@@ -22,7 +22,7 @@ export class PermissionsClient {
   }
 
   async createAssignment(request: T.CreateAssignmentRequest): Promise<T.CreateAssignmentResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/assignments', {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
       query: {},
     })
@@ -37,7 +37,7 @@ export class PermissionsClient {
   }
 
   async createPermission(request: T.CreatePermissionRequest): Promise<T.CreatePermissionResponse> {
-    const path = buildPathAndQuery('/v2/permissions', {
+    const path = buildPathAndQuery('/permissions', {
       path: request ?? {},
       query: {},
     })
@@ -52,7 +52,7 @@ export class PermissionsClient {
   }
 
   async deleteAssignment(request: T.DeleteAssignmentRequest): Promise<T.DeleteAssignmentResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/assignments/:assignmentId', {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
       query: {},
     })
@@ -67,7 +67,7 @@ export class PermissionsClient {
   }
 
   async getPermission(request: T.GetPermissionRequest): Promise<T.GetPermissionResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId', {
+    const path = buildPathAndQuery('/permissions/:permissionId', {
       path: request ?? {},
       query: {},
     })
@@ -81,7 +81,7 @@ export class PermissionsClient {
   }
 
   async listAssignments(request: T.ListAssignmentsRequest): Promise<T.ListAssignmentsResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/assignments', {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
       query: {},
     })
@@ -95,7 +95,7 @@ export class PermissionsClient {
   }
 
   async listPermissions(request?: T.ListPermissionsRequest): Promise<T.ListPermissionsResponse> {
-    const path = buildPathAndQuery('/v2/permissions', {
+    const path = buildPathAndQuery('/permissions', {
       path: request ?? {},
       query: request?.query ?? {},
     })
@@ -109,7 +109,7 @@ export class PermissionsClient {
   }
 
   async updatePermission(request: T.UpdatePermissionRequest): Promise<T.UpdatePermissionResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId', {
+    const path = buildPathAndQuery('/permissions/:permissionId', {
       path: request ?? {},
       query: {},
     })

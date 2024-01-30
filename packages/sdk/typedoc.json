@@ -17,6 +17,5 @@
     "./codegen/datamodel/Auth/index.ts",
     "./codegen/datamodel/Foundations/index.ts",
     "./codegen/datamodel/Orgs/index.ts",
-    "./codegen/datamodel/Permissions/index.ts"
   ]
 }
