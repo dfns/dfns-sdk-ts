@@ -1,9 +1,15 @@
 # Changelog
 
+## 0.3.0 (2024-02-01)
+
+- Migrated `DfnsApiClient.permissions` to permissions v2 [breaking]
+- Added React Native Passkey signer, see `@dfns/sdk-react-native`
+- Added browser compatible key signer, `BrowserKeySigner`
+
 ## 0.2.5 (2024-01-24)
 
 - Reverted `DfnsApiClient.permissions` to old code generator
-- Added `DfnsApiClient.permissionsV2` to support Permissions V2
+- Added `DfnsApiClient.permissionsV2` to support permissions v2
 - Bumped `viem` from `1.19.11` to `1.21.4`
 
 ## 0.2.4 (2024-01-19)
