@@ -8,7 +8,7 @@ export class DelegatedPermissionsClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
   async archivePermissionInit(request: T.ArchivePermissionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/archive', {
+    const path = buildPathAndQuery('/permissions/:permissionId/archive', {
       path: request ?? {},
       query: {},
     })
@@ -30,7 +30,7 @@ export class DelegatedPermissionsClient {
     request: T.ArchivePermissionRequest,
     signedChallenge: SignUserActionChallengeRequest
   ): Promise<T.ArchivePermissionResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/archive', {
+    const path = buildPathAndQuery('/permissions/:permissionId/archive', {
       path: request ?? {},
       query: {},
     })
@@ -51,7 +51,7 @@ export class DelegatedPermissionsClient {
   }
 
   async createAssignmentInit(request: T.CreateAssignmentRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/assignments', {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
       query: {},
     })
@@ -73,7 +73,7 @@ export class DelegatedPermissionsClient {
     request: T.CreateAssignmentRequest,
     signedChallenge: SignUserActionChallengeRequest
   ): Promise<T.CreateAssignmentResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/assignments', {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
       query: {},
     })
@@ -94,7 +94,7 @@ export class DelegatedPermissionsClient {
   }
 
   async createPermissionInit(request: T.CreatePermissionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/v2/permissions', {
+    const path = buildPathAndQuery('/permissions', {
       path: request ?? {},
       query: {},
     })
@@ -116,7 +116,7 @@ export class DelegatedPermissionsClient {
     request: T.CreatePermissionRequest,
     signedChallenge: SignUserActionChallengeRequest
   ): Promise<T.CreatePermissionResponse> {
-    const path = buildPathAndQuery('/v2/permissions', {
+    const path = buildPathAndQuery('/permissions', {
       path: request ?? {},
       query: {},
     })
@@ -137,7 +137,7 @@ export class DelegatedPermissionsClient {
   }
 
   async deleteAssignmentInit(request: T.DeleteAssignmentRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/assignments/:assignmentId', {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
       query: {},
     })
@@ -159,7 +159,7 @@ export class DelegatedPermissionsClient {
     request: T.DeleteAssignmentRequest,
     signedChallenge: SignUserActionChallengeRequest
   ): Promise<T.DeleteAssignmentResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/assignments/:assignmentId', {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
       query: {},
     })
@@ -180,7 +180,7 @@ export class DelegatedPermissionsClient {
   }
 
   async getPermission(request: T.GetPermissionRequest): Promise<T.GetPermissionResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId', {
+    const path = buildPathAndQuery('/permissions/:permissionId', {
       path: request ?? {},
       query: {},
     })
@@ -194,7 +194,7 @@ export class DelegatedPermissionsClient {
   }
 
   async listAssignments(request: T.ListAssignmentsRequest): Promise<T.ListAssignmentsResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId/assignments', {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
       query: {},
     })
@@ -208,7 +208,7 @@ export class DelegatedPermissionsClient {
   }
 
   async listPermissions(request?: T.ListPermissionsRequest): Promise<T.ListPermissionsResponse> {
-    const path = buildPathAndQuery('/v2/permissions', {
+    const path = buildPathAndQuery('/permissions', {
       path: request ?? {},
       query: request?.query ?? {},
     })
@@ -222,7 +222,7 @@ export class DelegatedPermissionsClient {
   }
 
   async updatePermissionInit(request: T.UpdatePermissionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId', {
+    const path = buildPathAndQuery('/permissions/:permissionId', {
       path: request ?? {},
       query: {},
     })
@@ -244,7 +244,7 @@ export class DelegatedPermissionsClient {
     request: T.UpdatePermissionRequest,
     signedChallenge: SignUserActionChallengeRequest
   ): Promise<T.UpdatePermissionResponse> {
-    const path = buildPathAndQuery('/v2/permissions/:permissionId', {
+    const path = buildPathAndQuery('/permissions/:permissionId', {
       path: request ?? {},
       query: {},
     })

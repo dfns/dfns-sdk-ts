@@ -20,24 +20,20 @@ export async function POST(request: NextRequest) {
   // saveUserDfnsInfo(result.user.id)
 
   // Create a generic permission to get/create wallets (can skip if permission was already created once)
-  const permission = (
-    await dfns.permissionsV2.createPermission({
-      body: {
-        name: `Allow Wallet Create/Read - ${Date.now()}`,
-        operations: ['Wallets:Create', 'Wallets:Read'],
-      },
-    })
-  ).body
+  const permission = await dfns.permissions.createPermission({
+    body: {
+      name: `Allow Wallet Create/Read - ${Date.now()}`,
+      operations: ['Wallets:Create', 'Wallets:Read'],
+    },
+  })
 
   // Grant (assign) the permission to the end-user
-  const permissionAssignment = (
-    await dfns.permissionsV2.createAssignment({
-      permissionId: permission.id,
-      body: {
-        identityId: result.user.id,
-      },
-    })
-  ).body
+  const permissionAssignment = await dfns.permissions.createAssignment({
+    permissionId: permission.id,
+    body: {
+      identityId: result.user.id,
+    },
+  })
 
   // Perform delegated login to get the Dfns auth token of the end-user ("on his behalf")
   const { token: userAuthToken } = await dfns.auth.createDelegatedUserLogin({

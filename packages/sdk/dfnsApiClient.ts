@@ -3,11 +3,11 @@ import { AssetsClient } from './codegen/Assets'
 import { AuthClient } from './codegen/Auth'
 import { BlockchainsClient } from './codegen/Blockchains'
 import { CallbacksClient } from './codegen/Callbacks'
-import { PermissionsClient } from './codegen/Permissions'
+
 import { PolicyExecutionClient } from './codegen/PolicyExecution'
 import { PolicyManagementClient } from './codegen/PolicyManagement'
 import { PublicKeysClient } from './codegen/PublicKeys'
-import { PermissionsClient as PermissionsV2Client } from './generated/permissions'
+import { PermissionsClient } from './generated/permissions'
 import { PoliciesClient } from './generated/policies'
 import { SignersClient } from './generated/signers'
 import { WalletsClient } from './generated/wallets'
@@ -37,15 +37,8 @@ export class DfnsApiClient {
     return new CallbacksClient(this.apiOptions)
   }
 
-  /**
-   * @deprecated use permissions v2 instead
-   */
   public get permissions() {
     return new PermissionsClient(this.apiOptions)
-  }
-
-  public get permissionsV2() {
-    return new PermissionsV2Client(this.apiOptions)
   }
 
   public get policies() {

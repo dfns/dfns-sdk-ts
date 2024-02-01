@@ -8,31 +8,15 @@ export type ArchivePermissionParams = {
 
 export type ArchivePermissionResponse = {
     id: string;
-    orgId: string;
-    requester: {
-        userId: string;
-        tokenId: string;
-        appId: string;
-    };
-    kind: "Assignment" | "Permission";
-    operationKind: "Create" | "Update" | "Delete";
-    status: "Applied" | "Failed" | "Pending" | "Rejected";
-    entityId: string;
-    dateCreated: Date;
-    dateResolved: Date;
-    body: {
-        id: string;
-        orgId: string;
-        name: string;
-        operations: string[];
-        resourceId?: (string | undefined) | null;
-        status: "Active";
-        predicateIds?: string[] | undefined;
-        isImmutable: boolean;
-        dateCreated?: string | undefined;
-        dateUpdated?: string | undefined;
-        isArchived: boolean;
-    };
+    name: string;
+    operations: string[];
+    resourceId?: (string | undefined) | null;
+    status: "Active";
+    predicateIds?: string[] | undefined;
+    isImmutable: boolean;
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    isArchived: boolean;
 };
 
 export type ArchivePermissionRequest = ArchivePermissionParams & { body: ArchivePermissionBody }
@@ -47,26 +31,11 @@ export type CreateAssignmentParams = {
 
 export type CreateAssignmentResponse = {
     id: string;
-    orgId: string;
-    requester: {
-        userId: string;
-        tokenId: string;
-        appId: string;
-    };
-    kind: "Assignment" | "Permission";
-    operationKind: "Create" | "Update" | "Delete";
-    status: "Applied" | "Failed" | "Pending" | "Rejected";
-    entityId: string;
-    dateCreated: Date;
-    dateResolved: Date;
-    body: {
-        id: string;
-        permissionId: string;
-        identityId: string;
-        isImmutable: boolean;
-        dateCreated?: string | undefined;
-        dateUpdated?: string | undefined;
-    };
+    permissionId: string;
+    identityId: string;
+    isImmutable: boolean;
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
 };
 
 export type CreateAssignmentRequest = CreateAssignmentParams & { body: CreateAssignmentBody }
@@ -78,31 +47,15 @@ export type CreatePermissionBody = {
 
 export type CreatePermissionResponse = {
     id: string;
-    orgId: string;
-    requester: {
-        userId: string;
-        tokenId: string;
-        appId: string;
-    };
-    kind: "Assignment" | "Permission";
-    operationKind: "Create" | "Update" | "Delete";
-    status: "Applied" | "Failed" | "Pending" | "Rejected";
-    entityId: string;
-    dateCreated: Date;
-    dateResolved: Date;
-    body: {
-        id: string;
-        orgId: string;
-        name: string;
-        operations: string[];
-        resourceId?: (string | undefined) | null;
-        status: "Active";
-        predicateIds?: string[] | undefined;
-        isImmutable: boolean;
-        dateCreated?: string | undefined;
-        dateUpdated?: string | undefined;
-        isArchived: boolean;
-    };
+    name: string;
+    operations: string[];
+    resourceId?: (string | undefined) | null;
+    status: "Active";
+    predicateIds?: string[] | undefined;
+    isImmutable: boolean;
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    isArchived: boolean;
 };
 
 export type CreatePermissionRequest = { body: CreatePermissionBody }
@@ -112,29 +65,7 @@ export type DeleteAssignmentParams = {
     assignmentId: string;
 };
 
-export type DeleteAssignmentResponse = {
-    id: string;
-    orgId: string;
-    requester: {
-        userId: string;
-        tokenId: string;
-        appId: string;
-    };
-    kind: "Assignment" | "Permission";
-    operationKind: "Create" | "Update" | "Delete";
-    status: "Applied" | "Failed" | "Pending" | "Rejected";
-    entityId: string;
-    dateCreated: Date;
-    dateResolved: Date;
-    body: {
-        id: string;
-        permissionId: string;
-        identityId: string;
-        isImmutable: boolean;
-        dateCreated?: string | undefined;
-        dateUpdated?: string | undefined;
-    };
-};
+export type DeleteAssignmentResponse = void | undefined;
 
 export type DeleteAssignmentRequest = DeleteAssignmentParams
 
@@ -144,7 +75,6 @@ export type GetPermissionParams = {
 
 export type GetPermissionResponse = {
     id: string;
-    orgId: string;
     name: string;
     operations: string[];
     resourceId?: (string | undefined) | null;
@@ -182,21 +112,17 @@ export type ListPermissionsQuery = {
 };
 
 export type ListPermissionsResponse = {
-    items: {
-        id: string;
-        orgId: string;
-        name: string;
-        operations: string[];
-        resourceId?: (string | undefined) | null;
-        status: "Active";
-        predicateIds?: string[] | undefined;
-        isImmutable: boolean;
-        dateCreated?: string | undefined;
-        dateUpdated?: string | undefined;
-        isArchived: boolean;
-    }[];
-    nextPageToken?: string | undefined;
-};
+    id: string;
+    name: string;
+    operations: string[];
+    resourceId?: (string | undefined) | null;
+    status: "Active";
+    predicateIds?: string[] | undefined;
+    isImmutable: boolean;
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    isArchived: boolean;
+}[];
 
 export type ListPermissionsRequest = { query?: ListPermissionsQuery }
 
@@ -211,31 +137,15 @@ export type UpdatePermissionParams = {
 
 export type UpdatePermissionResponse = {
     id: string;
-    orgId: string;
-    requester: {
-        userId: string;
-        tokenId: string;
-        appId: string;
-    };
-    kind: "Assignment" | "Permission";
-    operationKind: "Create" | "Update" | "Delete";
-    status: "Applied" | "Failed" | "Pending" | "Rejected";
-    entityId: string;
-    dateCreated: Date;
-    dateResolved: Date;
-    body: {
-        id: string;
-        orgId: string;
-        name: string;
-        operations: string[];
-        resourceId?: (string | undefined) | null;
-        status: "Active";
-        predicateIds?: string[] | undefined;
-        isImmutable: boolean;
-        dateCreated?: string | undefined;
-        dateUpdated?: string | undefined;
-        isArchived: boolean;
-    };
+    name: string;
+    operations: string[];
+    resourceId?: (string | undefined) | null;
+    status: "Active";
+    predicateIds?: string[] | undefined;
+    isImmutable: boolean;
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    isArchived: boolean;
 };
 
 export type UpdatePermissionRequest = UpdatePermissionParams & { body: UpdatePermissionBody }
