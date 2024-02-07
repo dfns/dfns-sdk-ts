@@ -13,7 +13,7 @@ export type ArchivePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -35,7 +35,7 @@ export type ArchivePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -57,7 +57,7 @@ export type ArchivePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -79,7 +79,7 @@ export type ArchivePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -162,7 +162,7 @@ export type CreatePolicyBody = {
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -184,7 +184,7 @@ export type CreatePolicyBody = {
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -206,7 +206,7 @@ export type CreatePolicyBody = {
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -228,7 +228,7 @@ export type CreatePolicyBody = {
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -271,7 +271,7 @@ export type CreatePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -293,7 +293,7 @@ export type CreatePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -315,7 +315,7 @@ export type CreatePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -337,7 +337,7 @@ export type CreatePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -391,7 +391,7 @@ export type GetPolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -413,7 +413,7 @@ export type GetPolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -435,7 +435,7 @@ export type GetPolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -457,7 +457,7 @@ export type GetPolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -553,7 +553,7 @@ export type ListPoliciesResponse = {
                 };
             };
         }[];
-        autoRejectTimeout?: number | undefined;
+        autoRejectTimeout?: (number | undefined) | null;
         activityKind: "Permissions:Assign";
         rule: {
             kind: "AlwaysRequireApproval";
@@ -575,7 +575,7 @@ export type ListPoliciesResponse = {
                 };
             };
         }[];
-        autoRejectTimeout?: number | undefined;
+        autoRejectTimeout?: (number | undefined) | null;
         activityKind: "Permissions:Modify";
         rule: {
             kind: "AlwaysRequireApproval";
@@ -597,7 +597,7 @@ export type ListPoliciesResponse = {
                 };
             };
         }[];
-        autoRejectTimeout?: number | undefined;
+        autoRejectTimeout?: (number | undefined) | null;
         activityKind: "Policies:Modify";
         rule: {
             kind: "AlwaysRequireApproval";
@@ -619,7 +619,7 @@ export type ListPoliciesResponse = {
                 };
             };
         }[];
-        autoRejectTimeout?: number | undefined;
+        autoRejectTimeout?: (number | undefined) | null;
         activityKind: "Wallets:Sign";
         rule: {
             kind: "AlwaysRequireApproval";
@@ -671,7 +671,7 @@ export type UpdatePolicyBody = {
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -693,7 +693,7 @@ export type UpdatePolicyBody = {
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -715,7 +715,7 @@ export type UpdatePolicyBody = {
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -737,7 +737,7 @@ export type UpdatePolicyBody = {
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -784,7 +784,7 @@ export type UpdatePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -806,7 +806,7 @@ export type UpdatePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -828,7 +828,7 @@ export type UpdatePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -850,7 +850,7 @@ export type UpdatePolicyResponse = ({
             };
         };
     }[];
-    autoRejectTimeout?: number | undefined;
+    autoRejectTimeout?: (number | undefined) | null;
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
