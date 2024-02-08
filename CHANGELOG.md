@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2024-02-08)
+
+- Added SDK integration with Algorand, see `@dfns/lib-algorand`
+
 ## 0.3.0 (2024-02-01)
 
 - Migrated `DfnsApiClient.permissions` to permissions v2 [breaking]
@@ -30,7 +34,7 @@
 - Added `DfnsApiClient.policies` support
 - Added SDK integration with BitcoinJS, see `@dfns/lib-bitcoinjs`
 - Added SDK integration with Tezos Taquito, see `@dfns/lib-taquito`
-- Added SDK integration with Ripple xrpl.js, see `@dfns/lib-xrpl`
+- Added SDK integration with XRP Ledger, see `@dfns/lib-xrpl`
 
 ## 0.2.0 (2023-12-06)
 

@@ -1,11 +1,13 @@
 # Dfns Typescript SDK
 
 Welcome, builders 👋🔑 This repo holds Dfns Typescript SDK. Useful links:
+
 - [Dfns Website](https://www.dfns.co)
 - [Dfns API Docs](https://docs.dfns.co)
 - [Dfns SDK Docs](https://dfns.github.io/dfns-sdk-ts)
 
 ## Installation
+
 **Node version 18 or greater recommended**
 
 ```
@@ -19,29 +21,31 @@ Check out the list of all examples in [/examples](./examples).
 ## Concepts
 
 ### `CredentialSigner`
+
 All state-changing requests made to Dfns API need to be cryptographically signed by some Credentials registered with the User / Service Account.
 
-> **Note** 
+> **Note**
 > To be more precise, it's not the request itself which needs to be signed, but it's actually a "User Action Challenge" issued by Dfns which needs to be signed. As a simplification, we speak of "request signing"
 
 This request signature is a cryptographic proof that you and only you are making the request. Without it, the request would raise an Unauthorized error.
 
-Credentials can be one of two kinds (*check our API docs [Credential section](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details*): WebauthN Credentials or Key Credentials. The two classes below support each one, their responsibility is to sign a challenge:
+Credentials can be one of two kinds (_check our API docs [Credential section](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details_): WebauthN Credentials or Key Credentials. The two classes below support each one, their responsibility is to sign a challenge:
 
 #### `WebauthN`
+
 It is exposed in `@dfns/sdk-webauthn` package, and implements `CredentialSigner`. It **needs to be used client-side** (on a browser, in a web-app)
 
 ```ts
 import { WebAuthn } from '@dfns/sdk-webauthn'
 
 const webauthnSigner = new WebAuthn({
-  rpId: 'app.mycompany.com' // WebauthN "Relying Party". It's the domain where your client app runs. It should match the domain of the Application registered with Dfns.
+  rpId: 'app.mycompany.com', // WebauthN "Relying Party". It's the domain where your client app runs. It should match the domain of the Application registered with Dfns.
 })
 ```
 
 #### `AsymmetricKeySigner`
-It is exposed in `@dfns/sdk-keysigner` package, implements `CredentialSigner`. It **needs to be used server-side**. It could be used client-side, but we don't recommend it. On a browser, any key-based crypto signing should be handled in a service worker. We are working to add other helper classes to help you support that.
 
+It is exposed in `@dfns/sdk-keysigner` package, implements `CredentialSigner`. It **needs to be used server-side**. It could be used client-side, but we don't recommend it. On a browser, any key-based crypto signing should be handled in a service worker. We are working to add other helper classes to help you support that.
 
 ```ts
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
@@ -53,10 +57,9 @@ const keySigner = new AsymmetricKeySigner({
 })
 ```
 
-- `credId`: ID of the Credential registered with the auth token you’re using  (Personal Access Token, or Service Account Token). In Dfns dashboard, you can find it next to your token (in `Settings` > `My Access Tokens` or `Settings > Service Accounts`)
+- `credId`: ID of the Credential registered with the auth token you’re using (Personal Access Token, or Service Account Token). In Dfns dashboard, you can find it next to your token (in `Settings` > `My Access Tokens` or `Settings > Service Accounts`)
 - `privateKey`: private key (in .pem format) which only you have, associated with the public key you registered when you created your PAT / Service Account.
 - `appOrigin`: Origin of the client-side Application registered with Dfns. In Dfns dashboard, you can find Applications in `Settings > Application`
-
 
 ### `DfnsApiClient`
 
@@ -64,9 +67,9 @@ const keySigner = new AsymmetricKeySigner({
 
 It needs to be authenticated, so `DfnsApiClient` needs to be passed a valid `authToken`. This `authToken` can be:
 
-- a Service Account token - *long-lived*
-- a User Personal Access Token (PAT) - *long-lived*
-- a User token issued after on User login - *expires*
+- a Service Account token - _long-lived_
+- a User Personal Access Token (PAT) - _long-lived_
+- a User token issued after on User login - _expires_
 
 `DfnsApiClient` also needs to be passed a [CredentialSigner](#credentialsigner), in order to sign requests.
 
@@ -79,7 +82,7 @@ const apiClient = new DfnsApiClient({
   baseUrl: 'https://api.dfns.io', // base Url of DFNS API
   appId: 'ap-2ng9jv-80cfc-983pop0iauf2sv8r', // ID of the Application registered with DFNS
   authToken: '...', // an auth token
-  signer, 
+  signer,
 })
 
 // create a wallet
@@ -113,7 +116,6 @@ An example flow would look like:
 2. In the web-app, the User signs the challenge (using `WebauthN` signer), and sends the signed challenge to the server.
 3. The server uses the User signed challenge to `createWalletComplete` on behalf of the user.
 
-
 ```ts
 import { DfnsDelegatedApiClient } from '@dfns/sdk'
 
@@ -134,7 +136,6 @@ const wallet = await dfnsDelegated.wallets.createWalletComplete(payload, signedC
 
 ### `DfnsAuthenticator`
 
-
 In a client-side app, if you want a Dfns User to be able to login with Dfns (and get an auth token back), you might wanna use `DfnsAuthenticator`:
 
 ```ts
@@ -150,7 +151,6 @@ const dfnsAuth = new DfnsAuthenticator({
 // Since we are using a Webauthn Signer here, this will prompt the user for webauthn credentials (touch id / phone id / yubikey touch...)
 const { token } = await dfnsAuth.login({ orgId, username })
 ```
-
 
 ### `BaseAuthApi`
 
@@ -171,11 +171,12 @@ BaseAuthApi.createUserRegistration()
 
 Integrations with other blockchain platforms to make Dapp development frictionless. More to come...
 
-* [BitcoinJS](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-bitcoinjs/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/bitcoinjs/)
-* [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/)/[v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs)
-* [Ripple xrpl.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-xrpl/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/xrpl)
-* [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/solana)
-* [Tezos taquito](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-taquito/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/taquito)
-* [TronWeb](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-tron/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/tron)
-* [Vechain Connex](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-vechain/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/vechain)
-* [viem](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-viem/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/viem)
+- [Algorand](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-algorand) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/algorand)
+- [BitcoinJS](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-bitcoinjs/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/bitcoinjs/)
+- [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/)/[v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs)
+- [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/solana)
+- [Tezos taquito](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-taquito/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/taquito)
+- [TronWeb](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-tron/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/tron)
+- [Vechain Connex](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-vechain/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/vechain)
+- [viem](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-viem/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/viem)
+- [XRP Ledger xrpl.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-xrpl/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/xrpl)
