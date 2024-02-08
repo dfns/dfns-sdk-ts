@@ -3,7 +3,7 @@ export type CreateWebhookBody = {
     /** Webhook status */
     status?: ("Enabled" | "Disabled") | undefined;
     description?: string | undefined;
-    events: ("*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected")[];
+    events: (("wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected") | "*")[];
 };
 
 export type CreateWebhookResponse = {
@@ -12,7 +12,7 @@ export type CreateWebhookResponse = {
     /** Webhook url */
     url: string;
     /** All events this webhook is subscribed to. */
-    events: ("*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected")[];
+    events: (("wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected") | "*")[];
     /** Webhook status */
     status: "Enabled" | "Disabled";
     /** Short description this webhook's purpose */
@@ -47,7 +47,7 @@ export type GetWebhookResponse = {
     /** Webhook url */
     url: string;
     /** All events this webhook is subscribed to. */
-    events: ("*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected")[];
+    events: (("wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected") | "*")[];
     /** Webhook status */
     status: "Enabled" | "Disabled";
     /** Short description this webhook's purpose */
@@ -71,7 +71,7 @@ export type GetWebhookEventResponse = {
     /** ISO date string when event was raised */
     date: string;
     /** Webhook event */
-    kind: "*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected";
+    kind: "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected";
     data: {
         [x: string]: any;
     };
@@ -90,7 +90,8 @@ export type ListWebhookEventsParams = {
 };
 
 export type ListWebhookEventsQuery = {
-    kind?: ("*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected") | undefined;
+    kind?: ("wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected") | undefined;
+    deliveryFailed?: ("true" | "false") | undefined;
     limit?: number | undefined;
     paginationToken?: string | undefined;
 };
@@ -102,7 +103,7 @@ export type ListWebhookEventsResponse = {
         /** ISO date string when event was raised */
         date: string;
         /** Webhook event */
-        kind: "*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected";
+        kind: "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected";
         data: {
             [x: string]: any;
         };
@@ -130,7 +131,7 @@ export type ListWebhooksResponse = {
         /** Webhook url */
         url: string;
         /** All events this webhook is subscribed to. */
-        events: ("*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected")[];
+        events: (("wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected") | "*")[];
         /** Webhook status */
         status: "Enabled" | "Disabled";
         /** Short description this webhook's purpose */
@@ -159,7 +160,7 @@ export type PingWebhookRequest = PingWebhookParams
 export type UpdateWebhookBody = {
     url?: string | undefined;
     description?: (string | undefined) | undefined;
-    events?: ("*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected")[] | undefined;
+    events?: (("wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected") | "*")[] | undefined;
     /** Webhook status */
     status?: (("Enabled" | "Disabled") | undefined) | undefined;
 };
@@ -174,7 +175,7 @@ export type UpdateWebhookResponse = {
     /** Webhook url */
     url: string;
     /** All events this webhook is subscribed to. */
-    events: ("*" | "wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected")[];
+    events: (("wallet.created" | "wallet.exported" | "wallet.delegated" | "wallet.signature.requested" | "wallet.signature.failed" | "wallet.signature.rejected" | "wallet.signature.signed" | "wallet.transaction.requested" | "wallet.transaction.failed" | "wallet.transaction.rejected" | "wallet.transaction.broadcasted" | "wallet.transaction.confirmed" | "wallet.transfer.requested" | "wallet.transfer.failed" | "wallet.transfer.rejected" | "wallet.transfer.broadcasted" | "wallet.transfer.confirmed" | "wallet.blockchainevent.detected") | "*")[];
     /** Webhook status */
     status: "Enabled" | "Disabled";
     /** Short description this webhook's purpose */
