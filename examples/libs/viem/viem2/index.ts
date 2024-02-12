@@ -2,6 +2,7 @@ import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 import {
   Address,
+  CustomSource,
   GetTransactionType,
   Hash,
   SerializeTransactionFn,
@@ -64,7 +65,7 @@ const boundToEvmNetwork = (wallet: GetWalletResponse): boolean => {
   return wallet.address ? !!wallet.address.match(/^0x[0-9a-fA-F]{40}$/) : false
 }
 
-export class DfnsWallet {
+export class DfnsWallet implements CustomSource {
   public readonly address: Address
   private readonly dfnsClient: DfnsApiClient
 
@@ -162,7 +163,7 @@ export class DfnsWallet {
 
   public async signTypedData<
     const TTypedData extends TypedData | { [key: string]: unknown },
-    TPrimaryType extends string = string
+    TPrimaryType extends keyof TTypedData | "EIP712Domain" = keyof TTypedData
   >(typedData: TypedDataDefinition<TTypedData, TPrimaryType>): Promise<Hash> {
     const hash = hashTypedData(typedData)
     const signature = await this.signHash(hash)
