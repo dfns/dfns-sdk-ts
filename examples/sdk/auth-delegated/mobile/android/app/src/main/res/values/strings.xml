@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Dfns Tutorial</string>
+    <string name="asset_statements" translatable="false">
+    [{
+        \"include\": \"https://destined-mudfish-inspired.ngrok-free.app/.well-known/assetlinks.json\"
+    }]
+    </string>
+</resources>
