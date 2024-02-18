@@ -1,11 +1,13 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
-import { Psbt, SignerAsync } from 'bitcoinjs-lib'
+import { Network, Psbt, SignerAsync } from 'bitcoinjs-lib'
 
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
 }
+
+const compatibleNetworks = ['Bitcoin', 'BitcoinTestnet3', 'Litecoin', 'LitecoinTestnet']
 
 type WalletMetadata = GetWalletResponse
 
@@ -38,8 +40,8 @@ export class DfnsWallet implements SignerAsync {
       throw new DfnsError(-1, 'wallet not active', { walletId, status: res.status })
     }
 
-    if (res.network !== 'Bitcoin' && res.network !== 'BitcoinTestnet3') {
-      throw new DfnsError(-1, 'wallet is not bound to Bitcoin or BitcoinTestnet3', { walletId, network: res.network })
+    if (!compatibleNetworks.includes(res.network)) {
+      throw new DfnsError(-1, 'wallet is not bound to a Bitcoin compatible network', { walletId, network: res.network })
     }
 
     return new DfnsWallet(res, options)
@@ -79,4 +81,30 @@ export class DfnsWallet implements SignerAsync {
 
     return Psbt.fromHex(res.signedData.replace(/^0x/, ''))
   }
+}
+
+/// Litecoin networks
+export const litecoin: { mainnet: Network; testnet: Network } = {
+  mainnet: {
+    messagePrefix: '\x19Litecoin Signed Message:\n',
+    bech32: 'ltc',
+    bip32: {
+      public: 0x019da462,
+      private: 0x019d9cfe,
+    },
+    pubKeyHash: 0x30,
+    scriptHash: 0x32,
+    wif: 0xb0,
+  },
+  testnet: {
+    messagePrefix: '\x19Litecoin Signed Message:\n',
+    bech32: 'tltc',
+    bip32: {
+      public: 0x043587cf,
+      private: 0x04358394,
+    },
+    pubKeyHash: 0x6f,
+    scriptHash: 0xc4,
+    wif: 0xef,
+  },
 }
