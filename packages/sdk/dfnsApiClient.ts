@@ -4,8 +4,6 @@ import { AuthClient } from './codegen/Auth'
 import { BlockchainsClient } from './codegen/Blockchains'
 import { CallbacksClient } from './codegen/Callbacks'
 
-import { PolicyExecutionClient } from './codegen/PolicyExecution'
-import { PolicyManagementClient } from './codegen/PolicyManagement'
 import { PublicKeysClient } from './codegen/PublicKeys'
 import { PermissionsClient } from './generated/permissions'
 import { PoliciesClient } from './generated/policies'
@@ -43,20 +41,6 @@ export class DfnsApiClient {
 
   public get policies() {
     return new PoliciesClient(this.apiOptions)
-  }
-
-  /**
-   * @deprecated use the new policy engine instead
-   */
-  public get policyExecution() {
-    return new PolicyExecutionClient(this.apiOptions)
-  }
-
-  /**
-   * @deprecated use the new policy engine instead
-   */
-  public get policyManagement() {
-    return new PolicyManagementClient(this.apiOptions)
   }
 
   public get publicKeys() {
