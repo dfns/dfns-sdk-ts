@@ -3,10 +3,8 @@ import { DelegatedAssetsClient } from './codegen/Assets'
 import { DelegatedAuthClient } from './codegen/Auth'
 import { DelegatedBlockchainsClient } from './codegen/Blockchains'
 import { DelegatedCallbacksClient } from './codegen/Callbacks'
-import { DelegatedPolicyExecutionClient } from './codegen/PolicyExecution'
-import { DelegatedPolicyManagementClient } from './codegen/PolicyManagement'
 import { DelegatedPublicKeysClient } from './codegen/PublicKeys'
-import { DelegatedPermissionsClient  } from './generated/permissions'
+import { DelegatedPermissionsClient } from './generated/permissions'
 import { DelegatedPoliciesClient } from './generated/policies'
 import { DelegatedSignersClient } from './generated/signers'
 import { DelegatedWalletsClient } from './generated/wallets'
@@ -41,20 +39,6 @@ export class DfnsDelegatedApiClient {
 
   public get policies() {
     return new DelegatedPoliciesClient(this.apiOptions)
-  }
-
-  /**
-   * @deprecated use the new policy engine instead
-   */
-  public get policyExecution() {
-    return new DelegatedPolicyExecutionClient(this.apiOptions)
-  }
-
-  /**
-   * @deprecated use the new policy engine instead
-   */
-  public get policyManagement() {
-    return new DelegatedPolicyManagementClient(this.apiOptions)
   }
 
   public get publicKeys() {
