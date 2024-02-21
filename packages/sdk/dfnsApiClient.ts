@@ -1,10 +1,9 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { AssetsClient } from './codegen/Assets'
 import { AuthClient } from './codegen/Auth'
-import { BlockchainsClient } from './codegen/Blockchains'
 import { CallbacksClient } from './codegen/Callbacks'
-
 import { PublicKeysClient } from './codegen/PublicKeys'
+import { NetworksClient } from './generated/networks'
 import { PermissionsClient } from './generated/permissions'
 import { PoliciesClient } from './generated/policies'
 import { SignersClient } from './generated/signers'
@@ -27,12 +26,12 @@ export class DfnsApiClient {
     return new AuthClient(this.apiOptions)
   }
 
-  public get blockchains() {
-    return new BlockchainsClient(this.apiOptions)
-  }
-
   public get callbacks() {
     return new CallbacksClient(this.apiOptions)
+  }
+
+  public get networks() {
+    return new NetworksClient(this.apiOptions)
   }
 
   public get permissions() {
