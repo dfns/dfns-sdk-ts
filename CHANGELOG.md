@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 (2024-02-21)
+
+- Added `DfnsApiClient.networks` support
+- Added BitcoinJS support for Litecoin
+- Deleted old policies, permissions, signers and blockchains clients and types
+
 ## 0.3.1 (2024-02-08)
 
 - Added SDK integration with Algorand, see `@dfns/lib-algorand`
