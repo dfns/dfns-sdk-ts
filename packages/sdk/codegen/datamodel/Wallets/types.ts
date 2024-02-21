@@ -24,6 +24,23 @@ export type TransferNativeAsset = {
 /**
  * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
  */
+export type TransferAsaAsset = {
+  // FIXME: Missing documentation for kind
+  kind: TransferKind.Asa
+
+  // FIXME: Missing documentation for assetId
+  assetId: string
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for amount
+  amount: Amount
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
 export type TransferErc20Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Erc20
@@ -44,6 +61,57 @@ export type TransferErc20Asset = {
 export type TransferErc721Asset = {
   // FIXME: Missing documentation for kind
   kind: TransferKind.Erc721
+
+  // FIXME: Missing documentation for contract
+  contract: BlockchainAddress
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for tokenId
+  tokenId: string
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type TransferTrc10Asset = {
+  // FIXME: Missing documentation for kind
+  kind: TransferKind.Trc10
+
+  // FIXME: Missing documentation for tokenId
+  tokenId: string
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for amount
+  amount: Amount
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type TransferTrc20Asset = {
+  // FIXME: Missing documentation for kind
+  kind: TransferKind.Trc20
+
+  // FIXME: Missing documentation for contract
+  contract: BlockchainAddress
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for amount
+  amount: Amount
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type TransferTrc721Asset = {
+  // FIXME: Missing documentation for kind
+  kind: TransferKind.Trc721
 
   // FIXME: Missing documentation for contract
   contract: BlockchainAddress
@@ -266,57 +334,6 @@ export type SupportedExportScheme = {
 /**
  * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
  */
-export type TransferTrc10Asset = {
-  // FIXME: Missing documentation for kind
-  kind: TransferKind.Trc10
-
-  // FIXME: Missing documentation for tokenId
-  tokenId: string
-
-  // FIXME: Missing documentation for to
-  to: BlockchainAddress
-
-  // FIXME: Missing documentation for amount
-  amount: Amount
-}
-
-/**
- * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
- */
-export type TransferTrc20Asset = {
-  // FIXME: Missing documentation for kind
-  kind: TransferKind.Trc20
-
-  // FIXME: Missing documentation for contract
-  contract: BlockchainAddress
-
-  // FIXME: Missing documentation for to
-  to: BlockchainAddress
-
-  // FIXME: Missing documentation for amount
-  amount: Amount
-}
-
-/**
- * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
- */
-export type TransferTrc721Asset = {
-  // FIXME: Missing documentation for kind
-  kind: TransferKind.Trc721
-
-  // FIXME: Missing documentation for contract
-  contract: BlockchainAddress
-
-  // FIXME: Missing documentation for to
-  to: BlockchainAddress
-
-  // FIXME: Missing documentation for tokenId
-  tokenId: string
-}
-
-/**
- * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
- */
 export type Wallet = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -396,8 +413,14 @@ export type WalletAsset = {
   // FIXME: Missing documentation for kind
   kind: BalanceKind
 
+  // FIXME: Missing documentation for assetId
+  assetId?: string
+
   // FIXME: Missing documentation for contract
   contract?: string
+
+  // FIXME: Missing documentation for tokenId
+  tokenId?: string
 
   // FIXME: Missing documentation for symbol
   symbol?: string
@@ -491,14 +514,52 @@ export type NativeTransferEvent = {
   // FIXME: Missing documentation for direction
   direction: TransferDirection
 
-  // FIXME: Missing documentation for symbol
-  symbol: string
+  // FIXME: Missing documentation for from
+  from: BlockchainAddress
 
-  // FIXME: Missing documentation for decimals
-  decimals: number
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
 
-  // FIXME: Missing documentation for verified
-  verified?: boolean
+  // FIXME: Missing documentation for value
+  value: Amount
+
+  // FIXME: Missing documentation for metadata
+  metadata: BlockchainEventMetadata
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type AsaTransferEvent = {
+  // FIXME: Missing documentation for kind
+  kind: EventKind.AsaTransfer
+
+  // FIXME: Missing documentation for walletId
+  walletId: EntityId
+
+  // FIXME: Missing documentation for network
+  network: BlockchainNetwork
+
+  // FIXME: Missing documentation for blockNumber
+  blockNumber: number
+
+  // FIXME: Missing documentation for txHash
+  txHash: string
+
+  // FIXME: Missing documentation for index
+  index?: string
+
+  // FIXME: Missing documentation for timestamp
+  timestamp: IsoDatetime
+
+  // FIXME: Missing documentation for fee
+  fee?: Amount
+
+  // FIXME: Missing documentation for direction
+  direction: TransferDirection
+
+  // FIXME: Missing documentation for assetId
+  assetId: string
 
   // FIXME: Missing documentation for from
   from: BlockchainAddress
@@ -508,6 +569,18 @@ export type NativeTransferEvent = {
 
   // FIXME: Missing documentation for value
   value: Amount
+
+  // FIXME: Missing documentation for metadata
+  metadata: BlockchainEventMetadata
+
+  // FIXME: Missing documentation for optIn
+  optIn?: boolean
+
+  // FIXME: Missing documentation for optOut
+  optOut?: boolean
+
+  // FIXME: Missing documentation for clawback
+  clawback?: boolean
 }
 
 /**
@@ -544,15 +617,6 @@ export type Erc20TransferEvent = {
   // FIXME: Missing documentation for contract
   contract: BlockchainAddress
 
-  // FIXME: Missing documentation for symbol
-  symbol?: string
-
-  // FIXME: Missing documentation for decimals
-  decimals: number
-
-  // FIXME: Missing documentation for verified
-  verified?: boolean
-
   // FIXME: Missing documentation for from
   from: BlockchainAddress
 
@@ -561,6 +625,9 @@ export type Erc20TransferEvent = {
 
   // FIXME: Missing documentation for value
   value: Amount
+
+  // FIXME: Missing documentation for metadata
+  metadata: BlockchainEventMetadata
 }
 
 /**
@@ -597,11 +664,146 @@ export type Erc721TransferEvent = {
   // FIXME: Missing documentation for contract
   contract: BlockchainAddress
 
-  // FIXME: Missing documentation for symbol
-  symbol?: string
+  // FIXME: Missing documentation for from
+  from: BlockchainAddress
 
-  // FIXME: Missing documentation for verified
-  verified?: boolean
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for tokenId
+  tokenId: string
+
+  // FIXME: Missing documentation for metadata
+  metadata: BlockchainEventMetadata
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type Trc10TransferEvent = {
+  // FIXME: Missing documentation for kind
+  kind: EventKind.Trc10Transfer
+
+  // FIXME: Missing documentation for walletId
+  walletId: EntityId
+
+  // FIXME: Missing documentation for network
+  network: BlockchainNetwork
+
+  // FIXME: Missing documentation for blockNumber
+  blockNumber: number
+
+  // FIXME: Missing documentation for txHash
+  txHash: string
+
+  // FIXME: Missing documentation for index
+  index?: string
+
+  // FIXME: Missing documentation for timestamp
+  timestamp: IsoDatetime
+
+  // FIXME: Missing documentation for fee
+  fee?: Amount
+
+  // FIXME: Missing documentation for direction
+  direction: TransferDirection
+
+  // FIXME: Missing documentation for tokenId
+  tokenId: string
+
+  // FIXME: Missing documentation for from
+  from: BlockchainAddress
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for value
+  value: Amount
+
+  // FIXME: Missing documentation for metadata
+  metadata: BlockchainEventMetadata
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type Trc20TransferEvent = {
+  // FIXME: Missing documentation for kind
+  kind: EventKind.Trc20Transfer
+
+  // FIXME: Missing documentation for walletId
+  walletId: EntityId
+
+  // FIXME: Missing documentation for network
+  network: BlockchainNetwork
+
+  // FIXME: Missing documentation for blockNumber
+  blockNumber: number
+
+  // FIXME: Missing documentation for txHash
+  txHash: string
+
+  // FIXME: Missing documentation for index
+  index?: string
+
+  // FIXME: Missing documentation for timestamp
+  timestamp: IsoDatetime
+
+  // FIXME: Missing documentation for fee
+  fee?: Amount
+
+  // FIXME: Missing documentation for direction
+  direction: TransferDirection
+
+  // FIXME: Missing documentation for contract
+  contract: BlockchainAddress
+
+  // FIXME: Missing documentation for from
+  from: BlockchainAddress
+
+  // FIXME: Missing documentation for to
+  to: BlockchainAddress
+
+  // FIXME: Missing documentation for value
+  value: Amount
+
+  // FIXME: Missing documentation for metadata
+  metadata: BlockchainEventMetadata
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type Trc721TransferEvent = {
+  // FIXME: Missing documentation for kind
+  kind: EventKind.Trc721Transfer
+
+  // FIXME: Missing documentation for walletId
+  walletId: EntityId
+
+  // FIXME: Missing documentation for network
+  network: BlockchainNetwork
+
+  // FIXME: Missing documentation for blockNumber
+  blockNumber: number
+
+  // FIXME: Missing documentation for txHash
+  txHash: string
+
+  // FIXME: Missing documentation for index
+  index?: string
+
+  // FIXME: Missing documentation for timestamp
+  timestamp: IsoDatetime
+
+  // FIXME: Missing documentation for fee
+  fee?: Amount
+
+  // FIXME: Missing documentation for direction
+  direction: TransferDirection
+
+  // FIXME: Missing documentation for contract
+  contract: BlockchainAddress
 
   // FIXME: Missing documentation for from
   from: BlockchainAddress
@@ -611,6 +813,9 @@ export type Erc721TransferEvent = {
 
   // FIXME: Missing documentation for tokenId
   tokenId: string
+
+  // FIXME: Missing documentation for metadata
+  metadata: BlockchainEventMetadata
 }
 
 /**
@@ -850,14 +1055,6 @@ export type RequesterIdentity = {
 /**
  * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
  */
-export type TransferRequestMetadata = {
-  // FIXME: Missing documentation for asset
-  asset: AssetMetadata
-}
-
-/**
- * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
- */
 export type AssetMetadata = {
   // FIXME: Missing documentation for symbol
   symbol?: string
@@ -867,6 +1064,25 @@ export type AssetMetadata = {
 
   // FIXME: Missing documentation for verified
   verified?: boolean
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type TransferRequestMetadata = {
+  // FIXME: Missing documentation for asset
+  asset: AssetMetadata
+}
+
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
+ */
+export type BlockchainEventMetadata = {
+  // FIXME: Missing documentation for asset
+  asset: AssetMetadata
+
+  // FIXME: Missing documentation for fee
+  fee?: AssetMetadata
 }
 
 /**
@@ -985,6 +1201,7 @@ export type DelegateWalletBody = {
  */
 export type TransferAssetBody =
   | TransferNativeAsset
+  | TransferAsaAsset
   | TransferErc20Asset
   | TransferErc721Asset
   | TransferTrc10Asset
@@ -1016,8 +1233,12 @@ export type GenerateSignatureBody =
  */
 export type BlockchainEvent =
   | NativeTransferEvent
+  | AsaTransferEvent
   | Erc20TransferEvent
   | Erc721TransferEvent
+  | Trc10TransferEvent
+  | Trc20TransferEvent
+  | Trc721TransferEvent
 
 /**
  * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
@@ -1025,6 +1246,8 @@ export type BlockchainEvent =
 export enum TransferKind {
   // FIXME: Missing documentation for Native
   Native = 'Native',
+  // FIXME: Missing documentation for Asa
+  Asa = 'Asa',
   // FIXME: Missing documentation for Erc20
   Erc20 = 'Erc20',
   // FIXME: Missing documentation for Erc721
@@ -1117,10 +1340,18 @@ export enum KeyProtocol {
 export enum BalanceKind {
   // FIXME: Missing documentation for Native
   Native = 'Native',
+  // FIXME: Missing documentation for Asa
+  Asa = 'Asa',
   // FIXME: Missing documentation for Erc20
   Erc20 = 'Erc20',
   // FIXME: Missing documentation for Erc721
   Erc721 = 'Erc721',
+  // FIXME: Missing documentation for Trc10
+  Trc10 = 'Trc10',
+  // FIXME: Missing documentation for Trc20
+  Trc20 = 'Trc20',
+  // FIXME: Missing documentation for Trc721
+  Trc721 = 'Trc721',
 }
 
 /**
@@ -1129,10 +1360,18 @@ export enum BalanceKind {
 export enum EventKind {
   // FIXME: Missing documentation for NativeTransfer
   NativeTransfer = 'NativeTransfer',
+  // FIXME: Missing documentation for AsaTransfer
+  AsaTransfer = 'AsaTransfer',
   // FIXME: Missing documentation for Erc20Transfer
   Erc20Transfer = 'Erc20Transfer',
   // FIXME: Missing documentation for Erc721Transfer
   Erc721Transfer = 'Erc721Transfer',
+  // FIXME: Missing documentation for Trc10Transfer
+  Trc10Transfer = 'Trc10Transfer',
+  // FIXME: Missing documentation for Trc20Transfer
+  Trc20Transfer = 'Trc20Transfer',
+  // FIXME: Missing documentation for Trc721Transfer
+  Trc721Transfer = 'Trc721Transfer',
 }
 
 /**
@@ -1203,6 +1442,10 @@ export enum SignatureStatus {
  * @deprecated import equivalent type from '@dfns/sdk/types/wallets' instead
  */
 export enum BlockchainNetwork {
+  // FIXME: Missing documentation for Algorand
+  Algorand = 'Algorand',
+  // FIXME: Missing documentation for AlgorandTestnet
+  AlgorandTestnet = 'AlgorandTestnet',
   // FIXME: Missing documentation for ArbitrumOne
   ArbitrumOne = 'ArbitrumOne',
   // FIXME: Missing documentation for ArbitrumGoerli
@@ -1217,6 +1460,8 @@ export enum BlockchainNetwork {
   Base = 'Base',
   // FIXME: Missing documentation for BaseGoerli
   BaseGoerli = 'BaseGoerli',
+  // FIXME: Missing documentation for BaseSepolia
+  BaseSepolia = 'BaseSepolia',
   // FIXME: Missing documentation for Bitcoin
   Bitcoin = 'Bitcoin',
   // FIXME: Missing documentation for BitcoinTestnet3
@@ -1235,18 +1480,20 @@ export enum BlockchainNetwork {
   FantomOpera = 'FantomOpera',
   // FIXME: Missing documentation for FantomTestnet
   FantomTestnet = 'FantomTestnet',
+  // FIXME: Missing documentation for Litecoin
+  Litecoin = 'Litecoin',
+  // FIXME: Missing documentation for LitecoinTestnet
+  LitecoinTestnet = 'LitecoinTestnet',
   // FIXME: Missing documentation for Optimism
   Optimism = 'Optimism',
   // FIXME: Missing documentation for OptimismGoerli
   OptimismGoerli = 'OptimismGoerli',
+  // FIXME: Missing documentation for OptimismSepolia
+  OptimismSepolia = 'OptimismSepolia',
   // FIXME: Missing documentation for Polygon
   Polygon = 'Polygon',
   // FIXME: Missing documentation for PolygonMumbai
   PolygonMumbai = 'PolygonMumbai',
-  // FIXME: Missing documentation for Ripple
-  Ripple = 'Ripple',
-  // FIXME: Missing documentation for RippleTestnet
-  RippleTestnet = 'RippleTestnet',
   // FIXME: Missing documentation for Solana
   Solana = 'Solana',
   // FIXME: Missing documentation for SolanaDevnet
@@ -1259,6 +1506,10 @@ export enum BlockchainNetwork {
   Tron = 'Tron',
   // FIXME: Missing documentation for TronNile
   TronNile = 'TronNile',
+  // FIXME: Missing documentation for XrpLedger
+  XrpLedger = 'XrpLedger',
+  // FIXME: Missing documentation for XrpLedgerTestnet
+  XrpLedgerTestnet = 'XrpLedgerTestnet',
   // FIXME: Missing documentation for KeyECDSA
   KeyECDSA = 'KeyECDSA',
   // FIXME: Missing documentation for KeyEdDSA

@@ -6,7 +6,6 @@ import {
   Initiator,
   IntegerPositiveStrict,
   IsoDatetime,
-  PublicKey,
   Tag,
 } from '../Foundations'
 
@@ -300,13 +299,6 @@ export type CreateAssetAccountInput = {
 
   // FIXME: Missing documentation for groupThreshold
   groupThreshold?: IntegerPositiveStrict
-
-  /**
-   * `PublicKey` which is used by `AssetAccount`. Usually this is used to derive addresses on a given blockchain network.
-   *
-   * Alternatively can be used to verify signatures produced by the platform.
-   */
-  publicKey?: PublicKey
 
   // FIXME: Missing documentation for externalId
   externalId?: string
