@@ -380,7 +380,7 @@ export type GetPolicyParams = {
     policyId: string;
 };
 
-export type GetPolicyResponse = ({
+export type GetPolicyResponse = (({
     name: string;
     approvalGroups: {
         name?: string | undefined;
@@ -492,6 +492,134 @@ export type GetPolicyResponse = ({
     status: "Active" | "Archived";
     dateCreated?: string | undefined;
     dateUpdated?: string | undefined;
+}) & {
+    pendingChangeRequest?: {
+        id: string;
+        requester: {
+            userId: string;
+            tokenId: string;
+            appId: string;
+        };
+        kind: "Policy";
+        operationKind: "Create" | "Update" | "Delete";
+        status: "Applied" | "Failed" | "Pending" | "Rejected";
+        entityId: string;
+        body: ({
+            name: string;
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
+                };
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+            activityKind: "Permissions:Assign";
+            rule: {
+                kind: "AlwaysRequireApproval";
+                configuration: {};
+            };
+            filters?: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
+            } | undefined;
+        } | {
+            name: string;
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
+                };
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+            activityKind: "Permissions:Modify";
+            rule: {
+                kind: "AlwaysRequireApproval";
+                configuration: {};
+            };
+            filters?: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
+            } | undefined;
+        } | {
+            name: string;
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
+                };
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+            activityKind: "Policies:Modify";
+            rule: {
+                kind: "AlwaysRequireApproval";
+                configuration: {};
+            };
+            filters?: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
+            } | undefined;
+        } | {
+            name: string;
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
+                };
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+            activityKind: "Wallets:Sign";
+            rule: {
+                kind: "AlwaysRequireApproval";
+                configuration: {};
+            } | {
+                kind: "TransactionAmountLimit";
+                configuration: {
+                    limit: number;
+                    currency: "EUR" | "USD";
+                };
+            } | {
+                kind: "TransactionAmountVelocity";
+                configuration: {
+                    limit: number;
+                    currency: "EUR" | "USD";
+                    timeframe: number;
+                };
+            } | {
+                kind: "TransactionCountVelocity";
+                configuration: {
+                    limit: number;
+                    timeframe: number;
+                };
+            };
+            filters?: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
+            } | undefined;
+        }) & {
+            id: string;
+            status: "Active" | "Archived";
+            dateCreated?: string | undefined;
+            dateUpdated?: string | undefined;
+        };
+        dateCreated: Date;
+        dateResolved?: (Date | null) | undefined;
+    } | undefined;
 };
 
 export type GetPolicyRequest = GetPolicyParams
@@ -542,7 +670,7 @@ export type ListPoliciesQuery = {
 };
 
 export type ListPoliciesResponse = {
-    items: (({
+    items: ((({
         name: string;
         approvalGroups: {
             name?: string | undefined;
@@ -654,6 +782,134 @@ export type ListPoliciesResponse = {
         status: "Active" | "Archived";
         dateCreated?: string | undefined;
         dateUpdated?: string | undefined;
+    }) & {
+        pendingChangeRequest?: {
+            id: string;
+            requester: {
+                userId: string;
+                tokenId: string;
+                appId: string;
+            };
+            kind: "Policy";
+            operationKind: "Create" | "Update" | "Delete";
+            status: "Applied" | "Failed" | "Pending" | "Rejected";
+            entityId: string;
+            body: ({
+                name: string;
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        [x: string]: {
+                            [x: string]: string[];
+                        };
+                    };
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+                activityKind: "Permissions:Assign";
+                rule: {
+                    kind: "AlwaysRequireApproval";
+                    configuration: {};
+                };
+                filters?: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
+                } | undefined;
+            } | {
+                name: string;
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        [x: string]: {
+                            [x: string]: string[];
+                        };
+                    };
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+                activityKind: "Permissions:Modify";
+                rule: {
+                    kind: "AlwaysRequireApproval";
+                    configuration: {};
+                };
+                filters?: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
+                } | undefined;
+            } | {
+                name: string;
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        [x: string]: {
+                            [x: string]: string[];
+                        };
+                    };
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+                activityKind: "Policies:Modify";
+                rule: {
+                    kind: "AlwaysRequireApproval";
+                    configuration: {};
+                };
+                filters?: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
+                } | undefined;
+            } | {
+                name: string;
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        [x: string]: {
+                            [x: string]: string[];
+                        };
+                    };
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+                activityKind: "Wallets:Sign";
+                rule: {
+                    kind: "AlwaysRequireApproval";
+                    configuration: {};
+                } | {
+                    kind: "TransactionAmountLimit";
+                    configuration: {
+                        limit: number;
+                        currency: "EUR" | "USD";
+                    };
+                } | {
+                    kind: "TransactionAmountVelocity";
+                    configuration: {
+                        limit: number;
+                        currency: "EUR" | "USD";
+                        timeframe: number;
+                    };
+                } | {
+                    kind: "TransactionCountVelocity";
+                    configuration: {
+                        limit: number;
+                        timeframe: number;
+                    };
+                };
+                filters?: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
+                } | undefined;
+            }) & {
+                id: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+            };
+            dateCreated: Date;
+            dateResolved?: (Date | null) | undefined;
+        } | undefined;
     })[];
     nextPageToken?: string | undefined;
 };

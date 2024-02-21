@@ -106,6 +106,7 @@ export type CreateWalletResponse = {
     status: "Active" | "Archived";
     dateCreated: string;
     name?: string | undefined;
+    custodial: boolean;
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;
@@ -475,6 +476,7 @@ export type GetWalletResponse = {
     status: "Active" | "Archived";
     dateCreated: string;
     name?: string | undefined;
+    custodial: boolean;
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;
@@ -844,6 +846,7 @@ export type ImportWalletResponse = {
     status: "Active" | "Archived";
     dateCreated: string;
     name?: string | undefined;
+    custodial: boolean;
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;
@@ -1094,6 +1097,7 @@ export type ListWalletsResponse = {
         status: "Active" | "Archived";
         dateCreated: string;
         name?: string | undefined;
+        custodial: boolean;
         imported?: boolean | undefined;
         exported?: boolean | undefined;
         dateExported?: string | undefined;
@@ -1233,6 +1237,7 @@ export type UpdateWalletResponse = {
     status: "Active" | "Archived";
     dateCreated: string;
     name?: string | undefined;
+    custodial: boolean;
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;

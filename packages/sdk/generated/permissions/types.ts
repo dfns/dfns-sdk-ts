@@ -84,6 +84,21 @@ export type GetPermissionResponse = {
     dateCreated?: string | undefined;
     dateUpdated?: string | undefined;
     isArchived: boolean;
+} & {
+    pendingChangeRequest?: {
+        id: string;
+        requester: {
+            userId: string;
+            tokenId: string;
+            appId: string;
+        };
+        kind: "Assignment" | "Permission";
+        operationKind: "Create" | "Update" | "Delete";
+        status: "Applied" | "Failed" | "Pending" | "Rejected";
+        entityId: string;
+        dateCreated: Date;
+        dateResolved?: (Date | null) | undefined;
+    } | undefined;
 };
 
 export type GetPermissionRequest = GetPermissionParams
@@ -93,14 +108,29 @@ export type ListAssignmentsParams = {
 };
 
 export type ListAssignmentsResponse = {
-    items: {
+    items: ({
         id: string;
         permissionId: string;
         identityId: string;
         isImmutable: boolean;
         dateCreated?: string | undefined;
         dateUpdated?: string | undefined;
-    }[];
+    } & {
+        pendingChangeRequest?: {
+            id: string;
+            requester: {
+                userId: string;
+                tokenId: string;
+                appId: string;
+            };
+            kind: "Assignment" | "Permission";
+            operationKind: "Create" | "Update" | "Delete";
+            status: "Applied" | "Failed" | "Pending" | "Rejected";
+            entityId: string;
+            dateCreated: Date;
+            dateResolved?: (Date | null) | undefined;
+        } | undefined;
+    })[];
     nextPageToken?: string | undefined;
 };
 
@@ -112,7 +142,7 @@ export type ListPermissionsQuery = {
 };
 
 export type ListPermissionsResponse = {
-    items: {
+    items: ({
         id: string;
         name: string;
         operations: string[];
@@ -123,7 +153,22 @@ export type ListPermissionsResponse = {
         dateCreated?: string | undefined;
         dateUpdated?: string | undefined;
         isArchived: boolean;
-    }[];
+    } & {
+        pendingChangeRequest?: {
+            id: string;
+            requester: {
+                userId: string;
+                tokenId: string;
+                appId: string;
+            };
+            kind: "Assignment" | "Permission";
+            operationKind: "Create" | "Update" | "Delete";
+            status: "Applied" | "Failed" | "Pending" | "Rejected";
+            entityId: string;
+            dateCreated: Date;
+            dateResolved?: (Date | null) | undefined;
+        } | undefined;
+    })[];
     nextPageToken?: string | undefined;
 };
 
