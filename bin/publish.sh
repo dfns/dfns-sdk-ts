@@ -7,6 +7,7 @@ declare -a packages=(
     "@dfns/lib-bitcoinjs"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
+    "@dfns/lib-polkadot"
     "@dfns/lib-solana"
     "@dfns/lib-taquito"
     "@dfns/lib-tron"

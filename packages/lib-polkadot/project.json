@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-polkadot",
+        "clean": true,
+        "main": "packages/lib-polkadot/index.ts",
+        "tsConfig": "packages/lib-polkadot/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
