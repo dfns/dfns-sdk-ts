@@ -2,7 +2,6 @@ import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import { ApiPromise, HttpProvider } from '@polkadot/api';
 import { DfnsWallet } from '@dfns/lib-polkadot'
-import { TypeRegistry } from '@polkadot/types/create';
 
 import * as dotenv from 'dotenv'
 
@@ -36,10 +35,7 @@ async function main() {
 
   // Polkadot api can be used in conjunction of a signer that will be called everytime
   // we need to provide a signature
-  const api = await ApiPromise.create({ provider: httpProvider, signer: senderWallet.signer, noInitWarn: true });
-
-  // We update the dfns wallet with the registry
-  senderWallet.setRegistry(api.registry as TypeRegistry)
+  const api = await ApiPromise.create({ provider: httpProvider, signer: senderWallet, noInitWarn: true });
 
   // In polkadot, an account must have at least 1 DOT, we need to make sure that
   // this address has funds or that we transfer at least 1 DOT.

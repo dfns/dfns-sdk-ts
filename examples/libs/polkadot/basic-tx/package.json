@@ -4,7 +4,8 @@
   "main": "main.ts",
   "dependencies": {
     "@polkadot/api": "10.11.3",
-    "@dfns/lib-polkadot": "file:../../../packages/lib-polkadot"
+    "@dfns/lib-polkadot": "file:../../../packages/lib-polkadot",
+    "dotenv": "16.1.4"
   },
   "devDependencies": {
     "ts-node": "10.9.1"
