@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3 (2024-03-12)
+
+- Added React Native Passkeys Signer, see `@dfns/sdk-react-native`
+
 ## 0.3.2 (2024-02-21)
 
 - Added `DfnsApiClient.networks` support
@@ -13,7 +17,6 @@
 ## 0.3.0 (2024-02-01)
 
 - Migrated `DfnsApiClient.permissions` to permissions v2 [breaking]
-- Added React Native Passkey signer, see `@dfns/sdk-react-native`
 - Added browser compatible key signer, `BrowserKeySigner`
 
 ## 0.2.5 (2024-01-24)
