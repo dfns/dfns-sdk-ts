@@ -105,6 +105,10 @@ The project uses `react-native-config` to manage the configuration settings. If 
 mobile %  rm node_modules/react-native-config/ios/ReactNativeConfig/GeneratedDotEnv.m
 ```
 
+#### Modify associated domain entitlement
+
+For iOS to download the correct `apple-app-site-association` file, you need to modify the associated domain entitlement configuration to point to the right location. Open the file `./mobile/ios/mobile/mobile.entitlements` and change the string value `webcredentials:panda-new-kit.ngrok-free.app?mode=developer` to match your domain.
+
 #### Install dependencies
 
 Install all the native iOS dependencies, run the following command in the `ios` directory
@@ -115,9 +119,9 @@ mobile/ios %  pod install
 
 #### Enable Passkeys
 
-Depending on the iOS version the simulator, you may need to enable Passkeys on the simulated device in the iOS settings. Go to `Settings` > `Developer` > `Authentication Service Testing` > `Syncing Platform Authenticator`.
+In the simulator's menu options, go to `Features` > `Touch ID` or `Face ID` > `Enroll`, and verify the feature is toggled on. Even if the option is shown as on, you may still get the error "Simulator requires enrolled biometrics to use passkeys" when attempting to create a new Passkeys credential. If you encounter this error, go the the menu option and un-enroll, then re-enroll either `Touch ID` or `Face ID`.
 
-In the simulator's menu options, go to `Features` > `Touch ID` or `Face ID` > `Enroll`, and verify the feature is toggled on.
+Depending on the iOS version the simulator, you may also need to enable Passkeys on the simulated device in the iOS settings. Go to `Settings` > `Developer` > `Authentication Service Testing` > `Syncing Platform Authenticator`.
 
 #### Run on iOS
 
@@ -143,7 +147,7 @@ To run the React Native application on an Android device, you must have an `Appl
 - Name, choose any name, for example `Dfns Tutorial Android`
 - Application Type, leave as the default `Default Application`
 - Relying Party, set to the domain you associated with the app, e.g. `panda-new-kit.ngrok-free.app`
-- Origin, the Android format is `android:apk-key-hash:<sha256_hash-of-apk-signing-cert>`. For the tutorial app, the signing cert is fixed, the value is `android:apk-key-hash:-sYXRdwJA3hvue3mKpYrOZ9zSPC7b4mbgzJmdZEDO5w`. For your own application, follow [Android's guide](https://developer.android.com/training/sign-in/passkeys#verify-origin) 
+- Origin, the Android format is `android:apk-key-hash:<sha256_hash-of-apk-signing-cert>`. For this tutorial app, the signing cert is fixed, the value is `android:apk-key-hash:-sYXRdwJA3hvue3mKpYrOZ9zSPC7b4mbgzJmdZEDO5w`. For your own application, follow [Android's guide](https://developer.android.com/training/sign-in/passkeys#verify-origin) to derive the correct origin.
 
 After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`, and the `Origin`.
 
@@ -158,7 +162,7 @@ In the `./mobile/` folder, copy `.env.example` to a new file `.env.android` and 
 
 #### Enable Passkeys
 
-To enable Passkeys on the Android simulator, you must sign into a Google account on the simulated device. Google Play service is required. Otherwise, attempts to create Passkeys credentials will fail.
+To enable Passkeys on the Android simulator, you must sign into a Google account on the simulated device. Google Play service is required. Otherwise, attempts to create Passkeys credentials will fail. If you are unable to create a Passkeys credential on simulated device, double check to make sure the system image you are using supports it.
 
 #### Run on Android
 
