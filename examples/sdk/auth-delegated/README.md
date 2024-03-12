@@ -44,7 +44,8 @@ In the `./server/` folder, copy `.env.example` to a new file `.env` and set the 
 
 ### Run the server
 
-```
+``` 
+server %  npm i
 server %  npm run start
 ```
 
@@ -54,7 +55,7 @@ TODO
 
 ## Mobile frontend
 
-Follow [the instructions](https://reactnative.dev/docs/environment-setup) to setup your React Native development environment. You will need React Native, and either XCode or Android Studio, or both, installed.
+Follow [the instructions](https://reactnative.dev/docs/environment-setup) ("React Native ClI quickstart") to setup your React Native development environment. You will need React Native, and either XCode or Android Studio, or both, installed.
 
 ### Domain association for mobile applications
 
@@ -121,13 +122,14 @@ In the simulator's menu options, go to `Features` > `Touch ID` or `Face ID` > `E
 
 #### Run on iOS
 
-First start the metro server
+In a new terminal, start the [metro server](https://reactnative.dev/docs/metro):
 
 ```
+mobile %  npm i
 mobile %  npm run start
 ```
 
-Pick and start an iOS simulator that supports Passkeys, then build and launch the application
+Build and launch the application:
 
 ```
 mobile %  npm run ios
@@ -151,24 +153,29 @@ After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5
 In the `./mobile/` folder, copy `.env.example` to a new file `.env.android` and set the following values,
 
 - `DFNS_APP_ID` = the `App ID` of the new `Application`
-- `DFNS_APP_ORIGIN` = `android:apk-key-hash:-sYXRdwJA3hvue3mKpYrOZ9zSPC7b4mbgzJmdZEDO5w`
+- `DFNS_APP_ORIGIN` = `android:apk-key-hash:-sYXRdwJA3hvue3mKpYrOZ9zSPC7b4mbgzJmdZEDO5w` (with your own setup, you'll need to check [here](https://developer.android.com/training/sign-in/passkeys#verify-origin) how to get this hash)
 - `DFNS_APP_RPID` = the associated domain, e.g. `panda-new-kit.ngrok-free.app`
 - `EXPRESS_API_URL` = either `http://localhost:8000` or if using ngrok, the public url `https://panda-new-kit.ngrok-free.app`
 
 #### Enable Passkeys
 
-To enable Passkeys on the Android simulator, you must sign into a Google account. Otherwise, attempts to create Passkeys credentials will fail.
+To enable Passkeys on the Android simulator, you must sign into a Google account on the emulated device. Make sure the emulated ARM image you are using has google play services enabled. Otherwise, attempts to create Passkeys credentials will fail (Passkeys require GooglePlay Services)
 
 #### Run on Android
 
-First start the metro server
+In a new terminal, start the [metro server](https://reactnative.dev/docs/metro):
 
 ```
+mobile %  npm i
 mobile %  npm run start
 ```
 
-Pick and start an Android simulator that supports Passkeys, then build and launch the application
+Launch your Android simulator (which supports Google Play and Passkeys). In another terminal, build and launch the application:
 
 ```
 mobile %  npm run android
 ```
+
+The application should start on your emulated Android device. From then on, follow the steps in this demo app. In the first step, a passkey will be created. The first time you'll see the Passkey creation prompt, you'll probably have some setup to do around setting up a screen lock / password / touch ID / face ID.
+
+*Note: In the emulator, to setup eg. a fingerprint touch ID, you can go in the emulator "Extended Controls" (three dots on the right of your emulator), and then the "Fingerprint" section to emulate a fingerprint touch id.*
