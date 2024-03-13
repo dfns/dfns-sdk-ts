@@ -1,6 +1,6 @@
 import * as crypto from 'crypto'
-import { CredentialSigner, KeyAssertion } from '@dfns/sdk'
-import { toBase64Url } from '@dfns/sdk/utils'
+import { CredentialSigner, KeyAssertion, UserRegistrationChallenge, KeyAttestation } from '@dfns/sdk'
+import { toBase64Url, toBase64 } from '@dfns/sdk/utils'
 
 export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
   constructor(
@@ -37,7 +37,7 @@ export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
 export class BrowserKeySigner implements CredentialSigner<KeyAssertion> {
   constructor(
     private options: {
-      privateKey: CryptoKey
+      keyPair: CryptoKeyPair
       credId: string
       appOrigin: string
       crossOrigin?: boolean
@@ -78,6 +78,62 @@ export class BrowserKeySigner implements CredentialSigner<KeyAssertion> {
     ])
   }
 
+  toHex = (buffer: ArrayBuffer): string => {
+    const view = new Uint8Array(buffer)
+    let hexString = ""
+    for (const byte of view) {
+      const hexByte = byte.toString(16)
+      hexString += hexByte.padStart(2, "0")
+    }
+    return hexString.toLowerCase()
+  }
+
+  exportPublicKeyInPemFormat = async (key: CryptoKeyPair): Promise<string> => {
+    const exported = await crypto.subtle.exportKey('spki', key.publicKey)
+    const pem = `-----BEGIN PUBLIC KEY-----\n${toBase64(exported)}\n-----END PUBLIC KEY-----`
+    return pem
+  }
+
+  async create(challenge: UserRegistrationChallenge): Promise<KeyAttestation> {
+    const publicKeyPem = await this.exportPublicKeyInPemFormat(this.options.keyPair)
+    const clientData = JSON.stringify({
+        type: 'key.create',
+        challenge: challenge.challenge,
+        origin: this.options.appOrigin,
+        crossOrigin: this.options.crossOrigin ?? false,
+      })
+    const clientDataHash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(clientData))
+    const clientDataHashHex = this.toHex(clientDataHash)
+    const credInfoFingerprint = JSON.stringify({
+      clientDataHash: clientDataHashHex,
+      publicKey: publicKeyPem,
+    })
+    let rawSignature: ArrayBuffer
+    const algorithm = this.options.keyPair.privateKey.algorithm.name
+    if (algorithm == 'ECDSA') {
+      rawSignature = await crypto.subtle.sign(
+        { name: 'ECDSA', hash: { name: 'SHA-256' } },
+        this.options.keyPair.privateKey,
+        new TextEncoder().encode(credInfoFingerprint)
+      )
+    } else {
+      throw new Error(`${algorithm} is not supported`)
+    }
+    const signature = this.rawSignatureToAns1(new Uint8Array(rawSignature))
+    const attestationData = JSON.stringify({
+      publicKey: publicKeyPem,
+      signature: this.toHex(signature) 
+    })
+
+    return {
+      credentialKind: 'Key',
+      credentialInfo: {
+        credId: this.options.credId,
+        clientData: toBase64Url(clientData),
+        attestationData: toBase64Url(attestationData),
+      },
+    }
+  }
 
   async sign(challenge: string): Promise<KeyAssertion> {
     const clientData = JSON.stringify({
@@ -89,11 +145,11 @@ export class BrowserKeySigner implements CredentialSigner<KeyAssertion> {
 
     let rawSignature: ArrayBuffer
 
-    const algorithm = this.options.privateKey.algorithm.name
+    const algorithm = this.options.keyPair.privateKey.algorithm.name
     if (algorithm == 'ECDSA') {
       rawSignature = await crypto.subtle.sign(
         { name: 'ECDSA', hash: { name: 'SHA-256' } },
-        this.options.privateKey,
+        this.options.keyPair.privateKey,
         new TextEncoder().encode(clientData)
       )
     } else {
