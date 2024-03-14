@@ -83,10 +83,13 @@ export function Home({ navigation }: NativeStackScreenProps<StackParamList, 'Hom
             <Button title="Go to Wallets" onPress={() => navigation.navigate('Wallets')} />
           ) : (
             <Text style={{ textAlign: 'center', fontSize: 15, color: 'red' }}>
-              ⚠ You need Complete Step 1 and 2 first
+              ⚠ You need to complete step 1 and 2 first
             </Text>
           )}
           <Markdown>{walletsCode}</Markdown>
+        </View>
+        <View style={{ marginTop: 16, marginBottom: 16, alignItems: 'center' }}>
+          <Text style={{ fontSize: 32, fontWeight: '700' }}>The end 🎉</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
