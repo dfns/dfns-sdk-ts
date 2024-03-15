@@ -1,0 +1,16 @@
+{
+  "name": "polkadot-basic-tx",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "dependencies": {
+    "@polkadot/api": "10.11.3",
+    "@dfns/lib-polkadot": "file:../../../packages/lib-polkadot",
+    "dotenv": "16.1.4"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.1"
+  },
+  "scripts": {
+    "exec": "ts-node main.ts"
+  }
+}

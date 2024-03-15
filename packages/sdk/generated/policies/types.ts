@@ -667,6 +667,7 @@ export type ListApprovalsRequest = { query?: ListApprovalsQuery }
 export type ListPoliciesQuery = {
     limit?: string | undefined;
     paginationToken?: string | undefined;
+    status?: ("Active" | "Archived") | undefined;
 };
 
 export type ListPoliciesResponse = {

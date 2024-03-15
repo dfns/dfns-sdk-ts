@@ -20,6 +20,7 @@
     "@ethersproject/properties": "5.7.0",
     "@ethersproject/strings": "5.7.0",
     "@ethersproject/transactions": "5.7.0",
+    "@polkadot/api": "^10.11.3",
     "@solana/web3.js": "1.87.6",
     "@stablelib/blake2b": "1.0.1",
     "@taquito/rpc": "17.4.0",
