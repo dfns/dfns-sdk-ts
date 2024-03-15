@@ -49,9 +49,34 @@ server %  npm install
 server %  npm run start
 ```
 
-## Browser Frontend
+## Browser frontend
 
-TODO
+### Prerequisites
+
+To run the web application, you must have an active `Application` for the ReactJS app. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
+
+- Name, choose any name, for example `Dfns Tutorial Web`
+- Application Type, leave as the default `Default Application`
+- Relying Party, set to `localhost`
+- Origin, set to `http://localhost:3000`, this is the port the React JS application is configured to run on by default
+
+After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`, and the `Origin`.
+
+### Configuration
+
+In the `./web/` folder, copy `.env.example` to a new file `.env.local` and set the following values,
+
+- `REACT_APP_DFNS_APP_ID` = the `App ID` of the new `Application`
+- `REACT_APP_DFNS_APP_ORIGIN` = `http://localhost:3000`, the origin set for the `Application`
+- `REACT_APP_DFNS_APP_RPID` = `localhost`, the domain application runs on
+- `REACT_APP_EXPRESS_API_URL` = `http://localhost:8000`, the backend server
+
+### Run the web frontend
+
+```
+web %  npm install
+web %  npm run start
+```
 
 ## Mobile frontend
 

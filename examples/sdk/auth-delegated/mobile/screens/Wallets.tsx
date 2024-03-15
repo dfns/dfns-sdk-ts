@@ -31,10 +31,10 @@ export function Wallets(): React.JSX.Element {
 
       setResponse(await res.json())
       setError(undefined)
-    } catch (err: any) {
+    } catch (error: any) {
       console.log(error)
       setResponse(undefined)
-      setError(err)
+      setError(error)
     } finally {
       setLoading(false)
     }
