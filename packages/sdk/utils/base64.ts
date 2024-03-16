@@ -18,7 +18,7 @@ export const fromBase64Url = (encoded: string): Buffer => {
   return Buffer.from(encoded, 'base64')
 }
 
-export const toBase64 = (buffer: ArrayBuffer): string => {
+export const toBase64Browser = (buffer: ArrayBuffer): string => {
   const view = new Uint8Array(buffer);
   return btoa(String.fromCharCode(...view));
 }
