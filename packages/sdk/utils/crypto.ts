@@ -1,4 +1,4 @@
-import { toBase64Browser } from "./base64"
+import { toBase64 } from "./base64"
 import { splitString } from "./string"
 import { minimizeBigInt } from "./bigint"
 
@@ -6,7 +6,7 @@ import { minimizeBigInt } from "./bigint"
 // Adding `Browser` in the function name to distinguish with native node crypto module usage
 export const exportPublicKeyInPemFormatBrowser = async (key: CryptoKeyPair): Promise<string> => {
     const exported = await crypto.subtle.exportKey('spki', key.publicKey)
-    const b64Exported = toBase64Browser(exported)
+    const b64Exported = toBase64(Buffer.from(exported))
     const pem = `-----BEGIN PUBLIC KEY-----\n${splitString(b64Exported).join("\n")}\n-----END PUBLIC KEY-----`
     return pem
 }
