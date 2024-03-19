@@ -5,6 +5,7 @@ set -euo pipefail
 declare -a packages=(
     "@dfns/lib-algorand"
     "@dfns/lib-bitcoinjs"
+    "@dfns/lib-meshsdk"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
     "@dfns/lib-polkadot"
