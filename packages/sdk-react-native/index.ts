@@ -1,14 +1,16 @@
 import {
-  AllowCredential,
   CredentialSigner,
   CredentialStore,
+  DfnsError,
   Fido2Assertion,
   Fido2Attestation,
+  UserActionChallenge,
   UserRegistrationChallenge,
 } from '@dfns/sdk'
 import { toBase64Url } from '@dfns/sdk/utils'
 import { Platform } from 'react-native'
 import { Passkey, PasskeyAuthenticationResult } from 'react-native-passkey'
+import { PasskeyAuthenticationRequest, PasskeyRegistrationRequest } from 'react-native-passkey/lib/typescript/Passkey'
 
 export const DEFAULT_WAIT_TIMEOUT = 60000
 
@@ -20,31 +22,25 @@ const b64UrlSafeToStandard = (urlSafe: string): string => {
   return (urlSafe + '==='.slice((urlSafe.length + 3) % 4)).replace(/-/g, '+').replace(/_/g, '/')
 }
 
-type PasskeysOptions = {
-  rpId: string
+export type PasskeysOptions = {
   timeout?: number
 }
 
-interface InnerSigner extends CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {}
-
 // react-native-passkey is incorrect encoding the credId with standard base64 for
 // some reason. we have to undo that.
-class AndroidPasskeys implements InnerSigner {
+class Android implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
   constructor(private options: PasskeysOptions) {}
 
-  async sign(
-    challenge: string,
-    allowCredentials: { key: AllowCredential[]; webauthn: AllowCredential[] }
-  ): Promise<Fido2Assertion> {
-    const request = {
-      challenge: challenge,
-      allowCredentials: allowCredentials.webauthn.map(({ id, type, transports }) => ({
+  async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
+    const request: PasskeyAuthenticationRequest = {
+      challenge: challenge.challenge,
+      allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type, transports }) => ({
         id: id,
         type,
         transports: transports ?? [],
       })),
-      rpId: this.options.rpId,
-      userVerification: 'required',
+      rpId: challenge.rp.id,
+      userVerification: 'preferred',
       timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
@@ -63,7 +59,7 @@ class AndroidPasskeys implements InnerSigner {
   }
 
   async create(challenge: UserRegistrationChallenge): Promise<Fido2Attestation> {
-    const options = {
+    const request: PasskeyRegistrationRequest = {
       challenge: challenge.challenge,
       pubKeyCredParams: challenge.pubKeyCredParams,
       rp: challenge.rp,
@@ -81,7 +77,7 @@ class AndroidPasskeys implements InnerSigner {
       timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
-    const result = await Passkey.register(options)
+    const result = await Passkey.register(request)
 
     return {
       credentialKind: 'Fido2',
@@ -97,22 +93,19 @@ class AndroidPasskeys implements InnerSigner {
 // react-native-passkey's iOS implementation is not WebAuthn spec compliant. all values
 // are standard base64 encoded instead of base64url encoded. we have to convert the
 // encoding in both directions.
-class iOsPasskeys implements InnerSigner {
+class iOS implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
   constructor(private options: PasskeysOptions) {}
 
-  async sign(
-    challenge: string,
-    allowCredentials: { key: AllowCredential[]; webauthn: AllowCredential[] }
-  ): Promise<Fido2Assertion> {
-    const request = {
-      challenge: b64UrlSafeToStandard(challenge),
-      allowCredentials: allowCredentials.webauthn.map(({ id, type, transports }) => ({
+  async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
+    const request: PasskeyAuthenticationRequest = {
+      challenge: b64UrlSafeToStandard(challenge.challenge),
+      allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type, transports }) => ({
         id: b64UrlSafeToStandard(id),
         type,
         transports: transports ?? [],
       })),
-      rpId: this.options.rpId,
-      userVerification: 'required',
+      rpId: challenge.rp.id,
+      userVerification: 'preferred',
       timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
@@ -131,7 +124,7 @@ class iOsPasskeys implements InnerSigner {
   }
 
   async create(challenge: UserRegistrationChallenge): Promise<Fido2Attestation> {
-    const options = {
+    const request: PasskeyRegistrationRequest = {
       challenge: b64UrlSafeToStandard(challenge.challenge),
       pubKeyCredParams: challenge.pubKeyCredParams,
       rp: challenge.rp,
@@ -149,7 +142,7 @@ class iOsPasskeys implements InnerSigner {
       timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
-    const result = await Passkey.register(options)
+    const result = await Passkey.register(request)
 
     return {
       credentialKind: 'Fido2',
@@ -163,29 +156,26 @@ class iOsPasskeys implements InnerSigner {
 }
 
 export class PasskeysSigner implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
-  private inner: InnerSigner
+  private platform: CredentialSigner<Fido2Assertion> & CredentialStore<Fido2Attestation>
 
   constructor(options: PasskeysOptions) {
     switch (Platform.OS) {
       case 'android':
-        this.inner = new AndroidPasskeys(options)
+        this.platform = new Android(options)
         break
       case 'ios':
-        this.inner = new iOsPasskeys(options)
+        this.platform = new iOS(options)
         break
       default:
-        throw Error(`${Platform.OS} not supported`)
+        throw new DfnsError(-1, `${Platform.OS} is not supported`)
     }
   }
 
-  async sign(
-    challenge: string,
-    allowCredentials: { key: AllowCredential[]; webauthn: AllowCredential[] }
-  ): Promise<Fido2Assertion> {
-    return this.inner.sign(challenge, allowCredentials)
+  async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
+    return this.platform.sign(challenge)
   }
 
   async create(challenge: UserRegistrationChallenge): Promise<Fido2Attestation> {
-    return this.inner.create(challenge)
+    return this.platform.create(challenge)
   }
 }

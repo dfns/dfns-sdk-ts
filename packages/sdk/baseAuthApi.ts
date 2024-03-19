@@ -5,11 +5,11 @@ import {
   UserRegistrationChallenge,
 } from './store'
 import {
-  AllowCredential,
   CredentialKind,
   FirstFactorAssertion,
   RecoveryKeyAssertion,
   SecondFactorAssertion,
+  UserActionChallenge,
 } from './signer'
 import { HttpMethod, simpleFetch } from './utils/fetch'
 
@@ -27,22 +27,7 @@ export type CreateUserActionChallengeRequest = {
   userActionServerKind: 'Api'
 }
 
-export type CredentialFactor = 'first' | 'second' | 'either'
-
-export type UserActionChallengeResponse = {
-  supportedCredentialKinds: {
-    kind: CredentialKind
-    factor: CredentialFactor
-    requiresSecondFactor: boolean
-  }[]
-  challenge: string
-  challengeIdentifier: string
-  externalAuthenticationUrl: string
-  allowCredentials: {
-    key: AllowCredential[]
-    webauthn: AllowCredential[]
-  }
-}
+export type UserActionChallengeResponse = UserActionChallenge
 
 export type SignUserActionChallengeRequest = {
   challengeIdentifier: string
@@ -172,9 +157,7 @@ export class BaseAuthApi {
   /**
    * Completes user logout by sending the user auth token.
    */
-  static async userLogout(
-    options: DfnsBaseApiOptions
-  ): Promise<void> {
+  static async userLogout(options: DfnsBaseApiOptions): Promise<void> {
     if (!options.authToken) {
       throw new Error('authToken is required')
     }

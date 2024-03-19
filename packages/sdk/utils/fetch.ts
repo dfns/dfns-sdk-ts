@@ -106,7 +106,7 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
         baseUrl: (<any>options.apiOptions).baseAuthUrl || options.apiOptions.baseUrl,
       }
 
-      const { challenge, challengeIdentifier, allowCredentials } = await BaseAuthApi.createUserActionChallenge(
+      const challenge = await BaseAuthApi.createUserActionChallenge(
         {
           userActionPayload: <string>options.body ?? '',
           userActionHttpMethod: options.method,
@@ -116,11 +116,11 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
         apiOptions
       )
 
-      const assertion = await apiOptions.signer.sign(challenge, allowCredentials)
+      const assertion = await apiOptions.signer.sign(challenge)
 
       const { userAction } = await BaseAuthApi.signUserActionChallenge(
         {
-          challengeIdentifier,
+          challengeIdentifier: challenge.challengeIdentifier,
           firstFactor: assertion,
         },
         apiOptions
