@@ -68,6 +68,9 @@ export type UserLoginChallenge = {
   // FIXME: Missing documentation for supportedCredentialKinds
   supportedCredentialKinds: SupportedCredentials[]
 
+  // FIXME: Missing documentation for rp
+  rp: RelyingParty
+
   // FIXME: Missing documentation for challenge
   challenge: string
 

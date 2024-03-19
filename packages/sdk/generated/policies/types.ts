@@ -123,6 +123,10 @@ export type CreateApprovalDecisionBody = {
     reason?: string | undefined;
 };
 
+export type CreateApprovalDecisionParams = {
+    approvalId: string;
+};
+
 export type CreateApprovalDecisionResponse = {
     id: string;
     initiatorId: string;
@@ -149,7 +153,7 @@ export type CreateApprovalDecisionResponse = {
     }[];
 };
 
-export type CreateApprovalDecisionRequest = { body: CreateApprovalDecisionBody }
+export type CreateApprovalDecisionRequest = CreateApprovalDecisionParams & { body: CreateApprovalDecisionBody }
 
 export type CreatePolicyBody = {
     name: string;
