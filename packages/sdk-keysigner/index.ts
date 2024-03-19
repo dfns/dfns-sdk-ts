@@ -1,6 +1,6 @@
 import * as crypto from 'crypto'
-import { CredentialSigner, KeyAssertion } from '@dfns/sdk'
-import { toBase64Url } from '@dfns/sdk/utils'
+import { CredentialSigner, KeyAssertion, UserRegistrationChallenge, KeyAttestation } from '@dfns/sdk'
+import { toBase64Url, toHex, exportPublicKeyInPemFormatBrowser, rawSignatureToAns1, generateRandom } from '@dfns/sdk/utils'
 
 export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
   constructor(
@@ -37,49 +37,64 @@ export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
 export class BrowserKeySigner implements CredentialSigner<KeyAssertion> {
   constructor(
     private options: {
-      privateKey: CryptoKey
-      credId: string
+      keyPair: CryptoKeyPair
+      credId?: string
       appOrigin: string
       crossOrigin?: boolean
     }
   ) { }
 
-
-  minimizeBigInt = (value: Uint8Array): Uint8Array => {
-    const minValue = [0, ...value]
-    for (let i = 0; i < minValue.length; ++i) {
-      if (minValue[i] === 0) {
-        continue
-      }
-      if (minValue[i] > 0x7f) {
-        return new Uint8Array(minValue.slice(i - 1))
-      }
-      return new Uint8Array(minValue.slice(i))
+  async create(challenge: UserRegistrationChallenge): Promise<KeyAttestation> {
+    let credId = this.options.credId
+    if (credId === undefined || credId === '') {
+      credId = toBase64Url(Buffer.from(generateRandom(32)))
+      this.options.credId = credId
     }
-    return new Uint8Array([0])
+    const publicKeyPem = await exportPublicKeyInPemFormatBrowser(this.options.keyPair)
+    const clientData = JSON.stringify({
+        type: 'key.create',
+        challenge: challenge.challenge,
+        origin: this.options.appOrigin,
+        crossOrigin: this.options.crossOrigin ?? false,
+      })
+    const clientDataHash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(clientData))
+    const clientDataHashHex = toHex(clientDataHash)
+    const credInfoFingerprint = JSON.stringify({
+      clientDataHash: clientDataHashHex,
+      publicKey: publicKeyPem,
+    })
+    let rawSignature: ArrayBuffer
+    const algorithm = this.options.keyPair.privateKey.algorithm.name
+    if (algorithm == 'ECDSA') {
+      rawSignature = await crypto.subtle.sign(
+        { name: 'ECDSA', hash: { name: 'SHA-256' } },
+        this.options.keyPair.privateKey,
+        new TextEncoder().encode(credInfoFingerprint)
+      )
+    } else {
+      throw new Error(`${algorithm} is not supported`)
+    }
+    const signature = rawSignatureToAns1(new Uint8Array(rawSignature))
+    const attestationData = JSON.stringify({
+      publicKey: publicKeyPem,
+      signature: toHex(signature) 
+    })
+
+    return {
+      credentialKind: 'Key',
+      credentialInfo: {
+        credId: credId,
+        clientData: toBase64Url(clientData),
+        attestationData: toBase64Url(attestationData),
+      },
+    }
   }
-
-  rawSignatureToAns1 = (rawSignature: Uint8Array): Uint8Array => {
-    const r = rawSignature.slice(0, 32)
-    const s = rawSignature.slice(32)
-
-    const minR = this.minimizeBigInt(r)
-    const minS = this.minimizeBigInt(s)
-
-    return new Uint8Array([
-      0x30,
-      minR.length + minS.length + 4,
-      0x02,
-      minR.length,
-      ...minR,
-      0x02,
-      minS.length,
-      ...minS
-    ])
-  }
-
 
   async sign(challenge: string): Promise<KeyAssertion> {
+    const credId = this.options.credId
+    if (credId === undefined || credId === '') {
+      throw new Error('credId is needed to sign')
+    }
     const clientData = JSON.stringify({
       type: 'key.get',
       challenge,
@@ -89,23 +104,23 @@ export class BrowserKeySigner implements CredentialSigner<KeyAssertion> {
 
     let rawSignature: ArrayBuffer
 
-    const algorithm = this.options.privateKey.algorithm.name
+    const algorithm = this.options.keyPair.privateKey.algorithm.name
     if (algorithm == 'ECDSA') {
       rawSignature = await crypto.subtle.sign(
         { name: 'ECDSA', hash: { name: 'SHA-256' } },
-        this.options.privateKey,
+        this.options.keyPair.privateKey,
         new TextEncoder().encode(clientData)
       )
     } else {
       throw new Error(`${algorithm} is not supported`)
     }
 
-    const signature = this.rawSignatureToAns1(new Uint8Array(rawSignature))
+    const signature = rawSignatureToAns1(new Uint8Array(rawSignature))
 
     return {
       kind: 'Key',
       credentialAssertion: {
-        credId: this.options.credId,
+        credId: this.options.credId ?? '',
         clientData: toBase64Url(clientData),
         signature: toBase64Url(Buffer.from(signature)),
       },
