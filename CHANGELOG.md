@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.4 (2024-03-21)
+
+- Added `BrowserKeySigner.create` to register a new key credential from browser signer
+- Added SDK integration with polkadot{.js}, see `@dfns/lib-polkadot`
+- Added SDK integration with Cardano Mesh, see `@dfns/lib-meshsdk`
+
 ## 0.3.3 (2024-03-12)
 
 - Added React Native Passkeys Signer, see `@dfns/sdk-react-native`
