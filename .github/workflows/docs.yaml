@@ -1,0 +1,35 @@
+name: release-docs
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Publish TypeDoc to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+
+      - name: install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: install packages
+        run: npm install
+
+      - name: generate docs
+        run: npm run docs
+
+      - name: publish docs
+        uses: s0/git-publish-subdir-action@v2.6.0
+        env:
+          REPO: self
+          BRANCH: github-pages-docs
+          FOLDER: docs
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
