@@ -1,4 +1,6 @@
 import { WebAuthn } from '@dfns/sdk-webauthn'
+import { BrowserKeySigner } from '@dfns/sdk-browsersigner'
+import { Fido2Assertion, KeyAssertion } from '@dfns/sdk'
 import React, { FormEvent, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -10,7 +12,7 @@ export default function Wallets(): JSX.Element {
   const [response, setResponse] = React.useState(undefined)
   const [error, setError] = React.useState(undefined)
 
-  const { authToken } = useAppContext()
+  const { authToken, keyPair } = useAppContext()
 
   const listWallets = async () => {
     try {
@@ -60,9 +62,27 @@ export default function Wallets(): JSX.Element {
 
       const { requestBody, challenge } = await initRes.json()
 
-      // Sign the challenge to authorize the create wallet action
-      const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
-      const assertion = await webauthn.sign(challenge.challenge, challenge.allowCredentials)
+      let assertion: Fido2Assertion | KeyAssertion
+
+      // If keypair is undefined then webauthn is used
+      if (keyPair === undefined) {
+        // Sign the challenge to authorize the create wallet action
+        const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+        assertion = await webauthn.sign(challenge.challenge, challenge.allowCredentials)
+      }
+      else {
+        // Here we retrieve the credId from the init call response
+        if (challenge.allowCredentials.key.length === 0) {
+          throw Error('The user does not have a key credential')
+        }
+        const credId = challenge.allowCredentials.key[0].id
+        const browserKey = new BrowserKeySigner({
+          keyPair: keyPair,
+          credId: credId,
+          appOrigin: process.env.REACT_APP_DFNS_APP_ORIGIN!,
+        })
+        assertion = await browserKey.sign(challenge.challenge, challenge.allowCredentials)
+      }
 
       await fetch(`${process.env.REACT_APP_EXPRESS_API_URL!}/wallets/new/complete`, {
         method: 'POST',

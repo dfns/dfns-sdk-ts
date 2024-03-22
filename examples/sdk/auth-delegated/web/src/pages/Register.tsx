@@ -1,13 +1,18 @@
 import { WebAuthn } from '@dfns/sdk-webauthn'
+import { BrowserKeySigner } from '@dfns/sdk-browsersigner'
 import React, { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 
 import '../globals.css'
+import { useAppContext } from '../hooks/useAppContext'
+import { Fido2Attestation, KeyAttestation } from '@dfns/sdk'
 
 export default function Register(): JSX.Element {
   const [loading, setLoading] = React.useState(false)
   const [response, setResponse] = React.useState(undefined)
   const [error, setError] = React.useState(undefined)
+
+  const { setKeyPair } = useAppContext()
 
   const register = async (event: FormEvent<HTMLFormElement>) => {
     try {
@@ -15,6 +20,11 @@ export default function Register(): JSX.Element {
       event.preventDefault()
 
       const formData = new FormData(event.currentTarget)
+      const credtype = formData.get('credtype') as string
+      let isWebAuthn = true
+      if (credtype === 'key') {
+        isWebAuthn = false
+      } 
 
       // Start delegated registration flow. Server needs to obtain the challenge with the appId
       // and appOrigin of the mobile application. For simplicity, they are included as part of
@@ -33,9 +43,32 @@ export default function Register(): JSX.Element {
       const challenge = await initRes.json()
       console.log(JSON.stringify(challenge, null, 2))
 
-      // Create the new credential using the challenge
-      const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
-      const attestation = await webauthn.create(challenge)
+      let attestation: Fido2Attestation | KeyAttestation
+      // Webauthn flow
+      if (isWebAuthn) {
+        // Create the new webauthn credential using the challenge
+        const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+        attestation = await webauthn.create(challenge)
+      }
+      // Key pair flow
+      else {
+        // Key is generated randomly here
+        // In a production environment they key should be protected 
+        // and loaded securely in the browser
+        const generatedKeyPair = await crypto.subtle.generateKey(
+          { name: 'ECDSA', namedCurve: 'P-256' },
+          true,
+          ['sign', 'verify']
+        )
+        // Here the private key is set as a session variable
+        // key will not exists upon logout
+        setKeyPair(generatedKeyPair)
+        const browserKey = new BrowserKeySigner({
+          keyPair: generatedKeyPair,
+          appOrigin: process.env.REACT_APP_DFNS_APP_ORIGIN!,
+        })
+        attestation = await browserKey.create(challenge)
+      }
       console.log(JSON.stringify(attestation, null, 2))
 
       // Finish delegated registration
@@ -72,6 +105,14 @@ export default function Register(): JSX.Element {
         <p>Enter the email as the username you are registering, and hit the "Register User" button.</p>
         <div className="flex items-center gap-2">
           <input type="email" name="username" placeholder="Choose a username" className="input" />
+          <div>
+            <input type="radio" id="webauthn" name="credtype" value="webauthn" defaultChecked />
+            <label htmlFor="webauthn">Webauthn</label><br />
+          </div>
+          <div>
+            <input type="radio" id="key" name="credtype" value="key" />
+            <label htmlFor="key">Key</label><br />
+          </div>
           <button className="btn" type="submit">
             Register User
           </button>

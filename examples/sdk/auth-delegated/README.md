@@ -3,7 +3,7 @@
 This tutorial demonstrates how to build a complete client/server solution integrating with Dfns API on the server side, and use WebAuthn authentication for browser based frontend and Passkeys authentication for mobile applications. This approach is recommended for clients who have multiple frontends for browser and mobile platforms. This tutorial consists of three separate projects,
 
 - An express.js [server backend](./server/)
-- A React [SPA browser frontend](./client/)
+- A React [SPA browser frontend](./web/)
 - A React Native [mobile frontend](./mobile/) for both Android and iOS
 
 A single backend acts as the orchestrator between the browser, Android and iOS applications and the Dfns API. If you only need a browser frontend, see the [NextJS tutorial](../nextjs-delegated/) for a less complicated setup where the client and server are combined into the same project.

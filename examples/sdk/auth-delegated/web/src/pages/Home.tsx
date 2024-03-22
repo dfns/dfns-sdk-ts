@@ -9,7 +9,7 @@ const introText = `
 This tutorial app demonstrates how to use Dfns SDK in the following configuration:
 - You have a server and a web single page application.
 - You are not a custodian, and your customers own their wallets.
-- Your customers will use WebAuthn credentials to authenticate with Dfns.
+- Your customers will use WebAuthn (preferred) or a key credential (discourage as it comes with security risks) credentials to authenticate with Dfns.
 - Your client applications communicates with your server, and does not call the Dfns API directly.
 - Your server communicates with the Dfns API using a service account.
 `
