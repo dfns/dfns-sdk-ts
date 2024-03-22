@@ -12,12 +12,11 @@ export const listWallets = async (req: Request, res: Response) => {
 }
 
 export const createWalletInit = async (req: Request, res: Response) => {
-  const body: CreateWalletBody = {
-    network: 'EthereumSepolia',
-  }
-
   // Challange signing must use the appId and appOrigin of the client application.
-  const { appId, authToken } = req.body
+  const { appId, authToken, network } = req.body
+  const body: CreateWalletBody = {
+    network: network ?? 'EthereumSepolia',
+  }
   const client = delegatedClient(appId, authToken)
 
   const challenge = await client.wallets.createWalletInit({

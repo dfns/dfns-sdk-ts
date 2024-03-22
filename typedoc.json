@@ -12,6 +12,7 @@
     "packages/lib-xrpl",
     "packages/sdk",
     "packages/sdk-awskmssigner",
+    "packages/sdk-browsersigner",
     "packages/sdk-keyexport-utils",
     "packages/sdk-keyimport-utils",
     "packages/sdk-keysigner",

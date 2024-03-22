@@ -43,6 +43,24 @@ const webauthnSigner = new WebAuthn({
 })
 ```
 
+#### `Browser Key Signer`
+
+It is exposed in `@dfns/sdk-browsersigner` package, and implements `CredentialSigner`. It **needs to be used client-side** (on a browser, in a web-app)
+
+```ts
+import { BrowserKeySigner } from '@dfns/sdk-browsersigner'
+
+const browserKey = new BrowserKeySigner({
+  keyPair: keyPair, // This is the keyPair object of type [CryptoKeyPair](https://developer.mozilla.org/en-US/docs/Web/API/CryptoKeyPair). This key should be protected and loaded securely in the browser.
+  appOrigin: 'mycompany.com', // This is the domain where your client app runs.
+})
+
+// Create the attestation object to register the credential
+const attestation = await browserKey.create(challenge)
+
+// 
+```
+
 #### `AsymmetricKeySigner`
 
 It is exposed in `@dfns/sdk-keysigner` package, implements `CredentialSigner`. It **needs to be used server-side**. It could be used client-side, but we don't recommend it. On a browser, any key-based crypto signing should be handled in a service worker. We are working to add other helper classes to help you support that.

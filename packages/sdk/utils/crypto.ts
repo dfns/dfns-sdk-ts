@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer'
 import { toBase64 } from "./base64"
 import { splitString } from "./string"
 import { minimizeBigInt } from "./bigint"
