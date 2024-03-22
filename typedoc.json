@@ -17,8 +17,8 @@
     "packages/sdk-keyexport-utils",
     "packages/sdk-keyimport-utils",
     "packages/sdk-keysigner",
-    "packages/sdk-webauthn",
-    "packages/sdk-react-native"
+    "packages/sdk-react-native",
+    "packages/sdk-webauthn"
   ],
   "name": "Dfns TypeScript SDK",
   "entryPointStrategy": "packages",
