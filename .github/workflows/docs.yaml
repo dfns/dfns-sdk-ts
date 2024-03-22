@@ -9,7 +9,7 @@ jobs:
     name: Publish TypeDoc to GitHub Pages
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -30,6 +30,7 @@ jobs:
         uses: s0/git-publish-subdir-action@v2.6.0
         env:
           REPO: self
-          BRANCH: github-pages-docs
-          FOLDER: docs
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FOLDER: docs
+          BRANCH: github-pages-docs
+          MESSAGE: '{msg}'
