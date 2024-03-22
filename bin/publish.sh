@@ -5,9 +5,9 @@ set -euo pipefail
 declare -a packages=(
     "@dfns/lib-algorand"
     "@dfns/lib-bitcoinjs"
-    "@dfns/lib-meshsdk"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
+    "@dfns/lib-meshsdk"
     "@dfns/lib-polkadot"
     "@dfns/lib-solana"
     "@dfns/lib-taquito"
@@ -16,10 +16,10 @@ declare -a packages=(
     "@dfns/lib-viem"
     "@dfns/lib-xrpl"
     "@dfns/sdk"
+    "@dfns/sdk-awskmssigner"
     "@dfns/sdk-keyexport-utils"
     "@dfns/sdk-keyimport-utils"
     "@dfns/sdk-keysigner"
-    "@dfns/sdk-awskmssigner"
     "@dfns/sdk-webauthn"
     "@dfns/sdk-react-native"
 )

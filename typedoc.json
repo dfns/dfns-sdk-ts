@@ -4,6 +4,8 @@
     "packages/lib-bitcoinjs",
     "packages/lib-ethersjs5",
     "packages/lib-ethersjs6",
+    "packages/lib-meshsdk",
+    "packages/lib-polkadot",
     "packages/lib-solana",
     "packages/lib-taquito",
     "packages/lib-tron",
@@ -15,11 +17,12 @@
     "packages/sdk-keyexport-utils",
     "packages/sdk-keyimport-utils",
     "packages/sdk-keysigner",
-    "packages/sdk-webauthn"
+    "packages/sdk-webauthn",
+    "packages/sdk-react-native"
   ],
   "name": "Dfns TypeScript SDK",
   "entryPointStrategy": "packages",
-  "out": "docs-generated",
+  "out": "docs",
   "includeVersion": true,
   "logLevel": "Verbose"
 }
