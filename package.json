@@ -20,8 +20,8 @@
     "@ethersproject/properties": "5.7.0",
     "@ethersproject/strings": "5.7.0",
     "@ethersproject/transactions": "5.7.0",
-    "@meshsdk/core": "^1.5.10",
     "@polkadot/api": "^10.11.3",
+    "@meshsdk/core": "1.5.10",
     "@solana/web3.js": "1.87.6",
     "@stablelib/blake2b": "1.0.1",
     "@taquito/rpc": "17.4.0",
@@ -36,7 +36,7 @@
     "ethers": "6.9.0",
     "react-native-passkey": "^2.1.1",
     "thor-devkit": "2.0.8",
-    "tronweb": "^5.3.2",
+    "tronweb": "5.3.1",
     "uuid": "9.0.0",
     "viem": "1.21.4",
     "xrpl": "2.14.0"
