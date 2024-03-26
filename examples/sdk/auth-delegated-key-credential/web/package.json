@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@dfns/sdk": "file:../../../../packages/sdk",
-    "@dfns/sdk-browsersigner": "file:../../../../packages/sdk-browsersigner",
+    "@dfns/sdk-browser": "file:../../../../packages/sdk-browser",
     "buffer": "^6.0.3",
     "jwt-decode": "3.1.2",
     "react": "18.2.0",

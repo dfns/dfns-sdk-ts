@@ -20,7 +20,7 @@
     "@ethersproject/properties": "5.7.0",
     "@ethersproject/strings": "5.7.0",
     "@ethersproject/transactions": "5.7.0",
-    "@meshsdk/core": "^1.5.11-beta.6",
+    "@meshsdk/core": "^1.5.10",
     "@polkadot/api": "^10.11.3",
     "@solana/web3.js": "1.87.6",
     "@stablelib/blake2b": "1.0.1",

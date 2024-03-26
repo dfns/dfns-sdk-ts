@@ -1,4 +1,4 @@
-import { BrowserKeySigner } from '@dfns/sdk-browsersigner'
+import { BrowserKeySigner } from '@dfns/sdk-browser'
 import React, { FormEvent, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 

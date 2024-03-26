@@ -34,7 +34,7 @@ The classes below support each one, their responsibility is to sign a challenge:
 
 #### `Browser Signer`
 
-The SDK exposed in `@dfns/sdk-browsersigner` implements two classes: `WebauthN` and `BrowserKeySigner`. 
+The SDK exposed in `@dfns/sdk-browser` implements two classes: `WebauthN` and `BrowserKeySigner`. 
 `WebauthN` is highly recommended as it is the most secure option. The private key never leaves the authenticator and is never available to the browser.
 `BrowserKeySigner` is disouraged as the private key lives in the browser memory. The developer needs to come up with a secure way to load and use the private key while still keeping it secure. 
 
@@ -55,7 +55,7 @@ const webauthnSigner = new WebAuthn({
 It is exposed as `BrowserKeySigner` class, and implements `CredentialSigner`. It **needs to be used client-side** (on a browser, in a web-app)
 
 ```ts
-import { BrowserKeySigner } from '@dfns/sdk-browsersigner'
+import { BrowserKeySigner } from '@dfns/sdk-browser'
 
 const browserKey = new BrowserKeySigner({
   keyPair: keyPair, // This is the keyPair object of type [CryptoKeyPair](https://developer.mozilla.org/en-US/docs/Web/API/CryptoKeyPair). This key should be protected and loaded securely in the browser.

@@ -1,4 +1,4 @@
-import { WebAuthn } from '@dfns/sdk-browsersigner'
+import { WebAuthn } from '@dfns/sdk-browser'
 import React, { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 
