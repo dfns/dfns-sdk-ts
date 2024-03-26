@@ -9,7 +9,7 @@ const introText = `
 This tutorial app demonstrates how to use Dfns SDK in the following configuration:
 - You have a server and a web single page application.
 - You are not a custodian, and your customers own their wallets.
-- Your customers will use WebAuthn (preferred) or a key credential (discourage as it comes with security risks) credentials to authenticate with Dfns.
+- Your customers will use a key credentials to authenticate with Dfns.
 - Your client applications communicates with your server, and does not call the Dfns API directly.
 - Your server communicates with the Dfns API using a service account.
 `
@@ -19,7 +19,7 @@ const registerText = `
 
 Your customers, either new or existing, must register with Dfns first and have credential(s) in our system in order to own and be able to interact with their blockchain wallets.
 
-The delegated registration flow allows you to initiate and and complete the registration process on your customers behalf, without them being aware that the wallets infrastructure is powered by Dfns, i.e. they will not receive an registration email from Dfns directly unlike the normal registration process for your employees. Their WebAuthn credentials are still completely under their control.
+The delegated registration flow allows you to initiate and and complete the registration process on your customers behalf, without them being aware that the wallets infrastructure is powered by Dfns, i.e. they will not receive an registration email from Dfns directly unlike the normal registration process for your employees. Their key credentials are still completely under their control.
 `
 
 const registerCode = `
@@ -31,7 +31,7 @@ Find relevant code in the following files
 const loginText = `
 ## Step 2 - Delegated Login
 
-The delegated signing flow does not need the end user sign with the WebAuthn credential. The login can be performed on the server side transparent to the end user and obtain a readonly auth token. For example, your server can choose to automatically login the end user upon the completion of delegated registration. In this tutorial, this step is shown as explicit in order to more clearly demonstrate how the interaction works.
+The delegated signing flow does not need the end user sign with the key credential. The login can be performed on the server side transparent to the end user and obtain a readonly auth token. For example, your server can choose to automatically login the end user upon the completion of delegated registration. In this tutorial, this step is shown as explicit in order to more clearly demonstrate how the interaction works.
 `
 
 const loginCode = `

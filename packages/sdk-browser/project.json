@@ -3,10 +3,10 @@
     "cb": {
       "executor": "@nx/js:tsc",
       "options": {
-        "outputPath": "dist/@dfns/sdk-webauthn",
+        "outputPath": "dist/@dfns/sdk-browser",
         "clean": true,
-        "main": "packages/sdk-webauthn/index.ts",
-        "tsConfig": "packages/sdk-webauthn/tsconfig.json",
+        "main": "packages/sdk-browser/index.ts",
+        "tsConfig": "packages/sdk-browser/tsconfig.json",
         "updateBuildableProjectDepsInPackageJson": true
       }
     }

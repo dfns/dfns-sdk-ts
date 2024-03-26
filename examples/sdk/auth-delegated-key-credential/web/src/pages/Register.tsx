@@ -1,13 +1,16 @@
-import { WebAuthn } from '@dfns/sdk-browser'
+import { BrowserKeySigner } from '@dfns/sdk-browser'
 import React, { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 
 import '../globals.css'
+import { useAppContext } from '../hooks/useAppContext'
 
 export default function Register(): JSX.Element {
   const [loading, setLoading] = React.useState(false)
   const [response, setResponse] = React.useState(undefined)
   const [error, setError] = React.useState(undefined)
+
+  const { setKeyPair } = useAppContext()
 
   const register = async (event: FormEvent<HTMLFormElement>) => {
     try {
@@ -33,10 +36,24 @@ export default function Register(): JSX.Element {
       const challenge = await initRes.json()
       console.log(JSON.stringify(challenge, null, 2))
 
-      // Webauthn flow
-      // Create the new webauthn credential using the challenge
-      const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
-      const attestation = await webauthn.create(challenge)
+      // Key pair flow
+      // Key is generated randomly here
+      // In a production environment they key should be protected 
+      // and loaded securely in the browser
+      const generatedKeyPair = await crypto.subtle.generateKey(
+        { name: 'ECDSA', namedCurve: 'P-256' },
+        true,
+        ['sign', 'verify']
+      )
+      // Here the private key is set as a session variable
+      // key will not exists upon referesh or logout
+      setKeyPair(generatedKeyPair)
+      const browserKey = new BrowserKeySigner({
+        keyPair: generatedKeyPair,
+        appOrigin: process.env.REACT_APP_DFNS_APP_ORIGIN!,
+      })
+      const attestation = await browserKey.create(challenge)
+
       console.log(JSON.stringify(attestation, null, 2))
 
       // Finish delegated registration
