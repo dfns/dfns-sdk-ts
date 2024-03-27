@@ -4,16 +4,21 @@ export type ArchivePolicyParams = {
 
 export type ArchivePolicyResponse = ({
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -26,16 +31,21 @@ export type ArchivePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -48,16 +58,21 @@ export type ArchivePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -70,20 +85,30 @@ export type ArchivePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
         configuration: {};
+    } | {
+        kind: "TransactionRecipientWhitelist";
+        configuration: {
+            addresses: string[];
+        };
     } | {
         kind: "TransactionAmountLimit";
         configuration: {
@@ -135,7 +160,7 @@ export type CreateApprovalDecisionResponse = {
     activity: {
         [x: string]: unknown;
     };
-    status: "Pending" | "Approved" | "Denied" | "AutoApproved" | "Expired";
+    status: "Pending" | "Approved" | "Denied" | "AutoApproved" | "AutoDenied" | "Expired";
     expirationDate?: string | undefined;
     dateCreated?: string | undefined;
     dateUpdated: string;
@@ -157,16 +182,21 @@ export type CreateApprovalDecisionRequest = CreateApprovalDecisionParams & { bod
 
 export type CreatePolicyBody = {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -179,16 +209,21 @@ export type CreatePolicyBody = {
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -201,16 +236,21 @@ export type CreatePolicyBody = {
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -223,20 +263,30 @@ export type CreatePolicyBody = {
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
         configuration: {};
+    } | {
+        kind: "TransactionRecipientWhitelist";
+        configuration: {
+            addresses: string[];
+        };
     } | {
         kind: "TransactionAmountLimit";
         configuration: {
@@ -266,16 +316,21 @@ export type CreatePolicyBody = {
 
 export type CreatePolicyResponse = ({
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -288,16 +343,21 @@ export type CreatePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -310,16 +370,21 @@ export type CreatePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -332,20 +397,30 @@ export type CreatePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
         configuration: {};
+    } | {
+        kind: "TransactionRecipientWhitelist";
+        configuration: {
+            addresses: string[];
+        };
     } | {
         kind: "TransactionAmountLimit";
         configuration: {
@@ -386,16 +461,21 @@ export type GetPolicyParams = {
 
 export type GetPolicyResponse = (({
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -408,16 +488,21 @@ export type GetPolicyResponse = (({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -430,16 +515,21 @@ export type GetPolicyResponse = (({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -452,20 +542,30 @@ export type GetPolicyResponse = (({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
         configuration: {};
+    } | {
+        kind: "TransactionRecipientWhitelist";
+        configuration: {
+            addresses: string[];
+        };
     } | {
         kind: "TransactionAmountLimit";
         configuration: {
@@ -510,16 +610,21 @@ export type GetPolicyResponse = (({
         entityId: string;
         body: ({
             name: string;
-            approvalGroups: {
-                name?: string | undefined;
-                quorum: number;
-                approvers: {
-                    [x: string]: {
-                        [x: string]: string[];
+            action: {
+                kind: "RequestApproval";
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        [x: string]: {
+                            [x: string]: string[];
+                        };
                     };
-                };
-            }[];
-            autoRejectTimeout?: (number | undefined) | null;
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+            } | {
+                kind: "Block";
+            };
             activityKind: "Permissions:Assign";
             rule: {
                 kind: "AlwaysRequireApproval";
@@ -532,16 +637,21 @@ export type GetPolicyResponse = (({
             } | undefined;
         } | {
             name: string;
-            approvalGroups: {
-                name?: string | undefined;
-                quorum: number;
-                approvers: {
-                    [x: string]: {
-                        [x: string]: string[];
+            action: {
+                kind: "RequestApproval";
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        [x: string]: {
+                            [x: string]: string[];
+                        };
                     };
-                };
-            }[];
-            autoRejectTimeout?: (number | undefined) | null;
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+            } | {
+                kind: "Block";
+            };
             activityKind: "Permissions:Modify";
             rule: {
                 kind: "AlwaysRequireApproval";
@@ -554,16 +664,21 @@ export type GetPolicyResponse = (({
             } | undefined;
         } | {
             name: string;
-            approvalGroups: {
-                name?: string | undefined;
-                quorum: number;
-                approvers: {
-                    [x: string]: {
-                        [x: string]: string[];
+            action: {
+                kind: "RequestApproval";
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        [x: string]: {
+                            [x: string]: string[];
+                        };
                     };
-                };
-            }[];
-            autoRejectTimeout?: (number | undefined) | null;
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+            } | {
+                kind: "Block";
+            };
             activityKind: "Policies:Modify";
             rule: {
                 kind: "AlwaysRequireApproval";
@@ -576,20 +691,30 @@ export type GetPolicyResponse = (({
             } | undefined;
         } | {
             name: string;
-            approvalGroups: {
-                name?: string | undefined;
-                quorum: number;
-                approvers: {
-                    [x: string]: {
-                        [x: string]: string[];
+            action: {
+                kind: "RequestApproval";
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        [x: string]: {
+                            [x: string]: string[];
+                        };
                     };
-                };
-            }[];
-            autoRejectTimeout?: (number | undefined) | null;
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+            } | {
+                kind: "Block";
+            };
             activityKind: "Wallets:Sign";
             rule: {
                 kind: "AlwaysRequireApproval";
                 configuration: {};
+            } | {
+                kind: "TransactionRecipientWhitelist";
+                configuration: {
+                    addresses: string[];
+                };
             } | {
                 kind: "TransactionAmountLimit";
                 configuration: {
@@ -631,7 +756,7 @@ export type GetPolicyRequest = GetPolicyParams
 export type ListApprovalsQuery = {
     limit?: string | undefined;
     paginationToken?: string | undefined;
-    status?: ("Pending" | "Approved" | "Denied" | "AutoApproved" | "Expired") | undefined;
+    status?: ("Pending" | "Approved" | "Denied" | "AutoApproved" | "AutoDenied" | "Expired") | undefined;
     triggerStatus?: ("Triggered" | "Skipped") | undefined;
     initiatorId?: string | undefined;
     approverId?: string | undefined;
@@ -646,7 +771,7 @@ export type ListApprovalsResponse = {
         activity: {
             [x: string]: unknown;
         };
-        status: "Pending" | "Approved" | "Denied" | "AutoApproved" | "Expired";
+        status: "Pending" | "Approved" | "Denied" | "AutoApproved" | "AutoDenied" | "Expired";
         expirationDate?: string | undefined;
         dateCreated?: string | undefined;
         dateUpdated: string;
@@ -677,16 +802,21 @@ export type ListPoliciesQuery = {
 export type ListPoliciesResponse = {
     items: ((({
         name: string;
-        approvalGroups: {
-            name?: string | undefined;
-            quorum: number;
-            approvers: {
-                [x: string]: {
-                    [x: string]: string[];
+        action: {
+            kind: "RequestApproval";
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
                 };
-            };
-        }[];
-        autoRejectTimeout?: (number | undefined) | null;
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+        } | {
+            kind: "Block";
+        };
         activityKind: "Permissions:Assign";
         rule: {
             kind: "AlwaysRequireApproval";
@@ -699,16 +829,21 @@ export type ListPoliciesResponse = {
         } | undefined;
     } | {
         name: string;
-        approvalGroups: {
-            name?: string | undefined;
-            quorum: number;
-            approvers: {
-                [x: string]: {
-                    [x: string]: string[];
+        action: {
+            kind: "RequestApproval";
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
                 };
-            };
-        }[];
-        autoRejectTimeout?: (number | undefined) | null;
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+        } | {
+            kind: "Block";
+        };
         activityKind: "Permissions:Modify";
         rule: {
             kind: "AlwaysRequireApproval";
@@ -721,16 +856,21 @@ export type ListPoliciesResponse = {
         } | undefined;
     } | {
         name: string;
-        approvalGroups: {
-            name?: string | undefined;
-            quorum: number;
-            approvers: {
-                [x: string]: {
-                    [x: string]: string[];
+        action: {
+            kind: "RequestApproval";
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
                 };
-            };
-        }[];
-        autoRejectTimeout?: (number | undefined) | null;
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+        } | {
+            kind: "Block";
+        };
         activityKind: "Policies:Modify";
         rule: {
             kind: "AlwaysRequireApproval";
@@ -743,20 +883,30 @@ export type ListPoliciesResponse = {
         } | undefined;
     } | {
         name: string;
-        approvalGroups: {
-            name?: string | undefined;
-            quorum: number;
-            approvers: {
-                [x: string]: {
-                    [x: string]: string[];
+        action: {
+            kind: "RequestApproval";
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    [x: string]: {
+                        [x: string]: string[];
+                    };
                 };
-            };
-        }[];
-        autoRejectTimeout?: (number | undefined) | null;
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+        } | {
+            kind: "Block";
+        };
         activityKind: "Wallets:Sign";
         rule: {
             kind: "AlwaysRequireApproval";
             configuration: {};
+        } | {
+            kind: "TransactionRecipientWhitelist";
+            configuration: {
+                addresses: string[];
+            };
         } | {
             kind: "TransactionAmountLimit";
             configuration: {
@@ -801,16 +951,21 @@ export type ListPoliciesResponse = {
             entityId: string;
             body: ({
                 name: string;
-                approvalGroups: {
-                    name?: string | undefined;
-                    quorum: number;
-                    approvers: {
-                        [x: string]: {
-                            [x: string]: string[];
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            [x: string]: {
+                                [x: string]: string[];
+                            };
                         };
-                    };
-                }[];
-                autoRejectTimeout?: (number | undefined) | null;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
                 activityKind: "Permissions:Assign";
                 rule: {
                     kind: "AlwaysRequireApproval";
@@ -823,16 +978,21 @@ export type ListPoliciesResponse = {
                 } | undefined;
             } | {
                 name: string;
-                approvalGroups: {
-                    name?: string | undefined;
-                    quorum: number;
-                    approvers: {
-                        [x: string]: {
-                            [x: string]: string[];
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            [x: string]: {
+                                [x: string]: string[];
+                            };
                         };
-                    };
-                }[];
-                autoRejectTimeout?: (number | undefined) | null;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
                 activityKind: "Permissions:Modify";
                 rule: {
                     kind: "AlwaysRequireApproval";
@@ -845,16 +1005,21 @@ export type ListPoliciesResponse = {
                 } | undefined;
             } | {
                 name: string;
-                approvalGroups: {
-                    name?: string | undefined;
-                    quorum: number;
-                    approvers: {
-                        [x: string]: {
-                            [x: string]: string[];
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            [x: string]: {
+                                [x: string]: string[];
+                            };
                         };
-                    };
-                }[];
-                autoRejectTimeout?: (number | undefined) | null;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
                 activityKind: "Policies:Modify";
                 rule: {
                     kind: "AlwaysRequireApproval";
@@ -867,20 +1032,30 @@ export type ListPoliciesResponse = {
                 } | undefined;
             } | {
                 name: string;
-                approvalGroups: {
-                    name?: string | undefined;
-                    quorum: number;
-                    approvers: {
-                        [x: string]: {
-                            [x: string]: string[];
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            [x: string]: {
+                                [x: string]: string[];
+                            };
                         };
-                    };
-                }[];
-                autoRejectTimeout?: (number | undefined) | null;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
                 activityKind: "Wallets:Sign";
                 rule: {
                     kind: "AlwaysRequireApproval";
                     configuration: {};
+                } | {
+                    kind: "TransactionRecipientWhitelist";
+                    configuration: {
+                        addresses: string[];
+                    };
                 } | {
                     kind: "TransactionAmountLimit";
                     configuration: {
@@ -923,16 +1098,21 @@ export type ListPoliciesRequest = { query?: ListPoliciesQuery }
 
 export type UpdatePolicyBody = {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -945,16 +1125,21 @@ export type UpdatePolicyBody = {
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -967,16 +1152,21 @@ export type UpdatePolicyBody = {
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -989,20 +1179,30 @@ export type UpdatePolicyBody = {
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
         configuration: {};
+    } | {
+        kind: "TransactionRecipientWhitelist";
+        configuration: {
+            addresses: string[];
+        };
     } | {
         kind: "TransactionAmountLimit";
         configuration: {
@@ -1036,16 +1236,21 @@ export type UpdatePolicyParams = {
 
 export type UpdatePolicyResponse = ({
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -1058,16 +1263,21 @@ export type UpdatePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Permissions:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -1080,16 +1290,21 @@ export type UpdatePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Policies:Modify";
     rule: {
         kind: "AlwaysRequireApproval";
@@ -1102,20 +1317,30 @@ export type UpdatePolicyResponse = ({
     } | undefined;
 } | {
     name: string;
-    approvalGroups: {
-        name?: string | undefined;
-        quorum: number;
-        approvers: {
-            [x: string]: {
-                [x: string]: string[];
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                [x: string]: {
+                    [x: string]: string[];
+                };
             };
-        };
-    }[];
-    autoRejectTimeout?: (number | undefined) | null;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
     activityKind: "Wallets:Sign";
     rule: {
         kind: "AlwaysRequireApproval";
         configuration: {};
+    } | {
+        kind: "TransactionRecipientWhitelist";
+        configuration: {
+            addresses: string[];
+        };
     } | {
         kind: "TransactionAmountLimit";
         configuration: {
