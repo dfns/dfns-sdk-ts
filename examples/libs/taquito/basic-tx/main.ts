@@ -1,18 +1,17 @@
 import { DfnsWallet } from '@dfns/lib-taquito'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { RpcClient} from '@taquito/rpc'
+import { RpcClient } from '@taquito/rpc'
 import { TezosToolkit } from '@taquito/taquito'
 
-import * as dotenv from 'dotenv';
+import * as dotenv from 'dotenv'
 
 dotenv.config()
 
 const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
-    privateKey: process.env.DFNS_PRIVATE_KEY!,
     credId: process.env.DFNS_CRED_ID!,
-    appOrigin: process.env.DFNS_APP_ORIGIN!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
   })
 
   const dfnsClient = new DfnsApiClient({
@@ -30,10 +29,10 @@ const initDfnsWallet = async (walletId: string) => {
 
 async function main() {
   // Replace with the RPC url/ chainId you want
-  const client = new RpcClient(process.env.TEZOS_NODE_URL!) 
+  const client = new RpcClient(process.env.TEZOS_NODE_URL!)
 
   const senderWallet = await initDfnsWallet(process.env.TEZOS_WALLET_ID!)
-  console.log("Tezos sender address: %s", senderWallet.address)
+  console.log('Tezos sender address: %s', senderWallet.address)
 
   const Tezos = new TezosToolkit(client)
   Tezos.setProvider({ signer: senderWallet })
@@ -48,4 +47,4 @@ async function main() {
   console.log(`Operation ${txOp.hash} confirmed`)
 }
 
-main();
+main()

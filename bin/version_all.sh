@@ -18,11 +18,11 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-viem \
     --workspace @dfns/lib-xrpl \
     --workspace @dfns/sdk \
+    --workspace @dfns/sdk-awskmssigner \
+    --workspace @dfns/sdk-browser \
     --workspace @dfns/sdk-keyexport-utils \
     --workspace @dfns/sdk-keyimport-utils \
     --workspace @dfns/sdk-keysigner \
-    --workspace @dfns/sdk-awskmssigner \
-    --workspace @dfns/sdk-webauthn \
     --workspace @dfns/sdk-react-native \
     --include-workspace-root "$version"
 

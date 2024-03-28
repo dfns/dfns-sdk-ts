@@ -3,15 +3,7 @@ import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 
 import * as CSL from '@emurgo/cardano-serialization-lib-nodejs'
-import {
-  BlockfrostProvider,
-  IFetcher,
-  IInitiator,
-  ISubmitter,
-  Transaction,
-  UTxO,
-} from '@meshsdk/core'
-
+import { BlockfrostProvider, IFetcher, IInitiator, ISubmitter, Transaction, UTxO } from '@meshsdk/core'
 
 import * as dotenv from 'dotenv'
 
@@ -19,9 +11,8 @@ dotenv.config()
 
 const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
-    privateKey: process.env.DFNS_PRIVATE_KEY!,
     credId: process.env.DFNS_CRED_ID!,
-    appOrigin: process.env.DFNS_APP_ORIGIN!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
   })
 
   const dfnsClient = new DfnsApiClient({
@@ -44,7 +35,7 @@ const hexToBuffer = (hex: string): Buffer => {
 interface IFetcherSubmitter extends IFetcher, ISubmitter {}
 
 export class meshWrapper implements IInitiator, ISubmitter {
-  constructor(private readonly wallet: DfnsWallet, private readonly fetcherSubmitter: IFetcherSubmitter){}
+  constructor(private readonly wallet: DfnsWallet, private readonly fetcherSubmitter: IFetcherSubmitter) {}
 
   submitTx(tx: string): Promise<string> {
     return this.fetcherSubmitter.submitTx(tx)
@@ -53,14 +44,16 @@ export class meshWrapper implements IInitiator, ISubmitter {
   getUsedAddress() {
     return CSL.Address.from_bech32(this.wallet.address)
   }
-  getUsedCollateral(limit?: number | undefined): CSL.TransactionUnspentOutput[] | Promise<CSL.TransactionUnspentOutput[]> {
+  getUsedCollateral(
+    limit?: number | undefined
+  ): CSL.TransactionUnspentOutput[] | Promise<CSL.TransactionUnspentOutput[]> {
     throw new DfnsError(-1, 'getUsedCollateral not implemented.')
   }
   async getUsedUTxOs(): Promise<CSL.TransactionUnspentOutput[]> {
-    const utxos = await this.fetcherSubmitter
-    .fetchAddressUTxOs(this.wallet.address)
+    const utxos = await this.fetcherSubmitter.fetchAddressUTxOs(this.wallet.address)
 
-  return utxos.map((utxo) => toTxUnspentOutput(utxo))  }
+    return utxos.map((utxo) => toTxUnspentOutput(utxo))
+  }
 }
 
 const toTxUnspentOutput = (utxo: UTxO) => {
@@ -99,11 +92,7 @@ async function main() {
 
   const mesh = new meshWrapper(senderWallet, provider)
 
-  const tx = await new Transaction({ initiator: mesh})
-  .sendLovelace(
-    senderWallet.address,
-    '1000000'
-  ).build()
+  const tx = await new Transaction({ initiator: mesh }).sendLovelace(senderWallet.address, '1000000').build()
   console.log(`native transaction created`)
 
   const signedTx = await senderWallet.signTx(tx)

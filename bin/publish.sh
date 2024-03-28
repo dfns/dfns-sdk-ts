@@ -17,10 +17,10 @@ declare -a packages=(
     "@dfns/lib-xrpl"
     "@dfns/sdk"
     "@dfns/sdk-awskmssigner"
+    "@dfns/sdk-browser"
     "@dfns/sdk-keyexport-utils"
     "@dfns/sdk-keyimport-utils"
     "@dfns/sdk-keysigner"
-    "@dfns/sdk-webauthn"
     "@dfns/sdk-react-native"
 )
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { WebAuthn } from '@dfns/sdk-webauthn'
+import { WebAuthnSigner } from '@dfns/sdk-browser'
 import { FormEvent, useState } from 'react'
 
 import { createRecoveryCredential, KeyClientData, signRecoveryCredentials, validateRecoveryKey } from '@/common/recoveryKey'
@@ -44,7 +44,7 @@ export default function Recover() {
         const newRecoveryKey = await createRecoveryCredential(clientData, username)
         console.log('New recovery key created', newRecoveryKey.credential.credentialInfo.credId)
 
-        const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
+        const webauthn = new WebAuthnSigner()
         const attestation = await webauthn.create(challenge)
         const newCredentials = {
           firstFactorCredential: attestation,

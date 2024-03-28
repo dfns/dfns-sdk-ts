@@ -7,9 +7,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const requestSigner = new AsymmetricKeySigner({
-  privateKey: process.env.DFNS_PRIVATE_KEY!,
   credId: process.env.DFNS_CRED_ID!,
-  appOrigin: process.env.DFNS_APP_ORIGIN!,
+  privateKey: process.env.DFNS_PRIVATE_KEY!,
 })
 
 const dfnsApi = new DfnsApiClient({

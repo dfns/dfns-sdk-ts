@@ -16,10 +16,10 @@ To run the backend server, you must have an active `Application` for the express
 
 - Name, choose any name, for example `Dfns Tutorial Server`
 - Application Type, leave as the default `Default Application`
-- Relying Party, set to `localhost`
-- Origin, set to `http://localhost:8000`, this is the port the express server is configured to run on by default
+- Relying Party, the value doesn't apply to a service account, you can set it to `localhost`
+- Origin, also doesn't apply to a service account, you can set it to `http://localhost:8000`
 
-After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`, and the `Origin`.
+After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
 
 You also need a `Service Account`. To create a new `Service Account`, first [generate a keypair](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair), then go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Service Accounts` > `New Service Account`, and enter the following information,
 
@@ -36,7 +36,6 @@ In the `./server/` folder, copy `.env.example` to a new file `.env` and set the 
 
 - `DFNS_API_URL` = `https://api.dfns.ninja`
 - `DFNS_APP_ID` = the `App ID` of the new `Application`
-- `DFNS_APP_ORIGIN` = `http://localhost:8000`, the origin set for the `Application`
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` of the new `Service Account`
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from the new `Service Account` confirmation page, the value should start with `eyJ0...`
@@ -60,15 +59,13 @@ To run the web application, you must have an active `Application` for the ReactJ
 - Relying Party, set to `localhost`
 - Origin, set to `http://localhost:3000`, this is the port the React JS application is configured to run on by default
 
-After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`, and the `Origin`.
+After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
 
 ### Configuration
 
 In the `./web/` folder, copy `.env.example` to a new file `.env.local` and set the following values,
 
 - `REACT_APP_DFNS_APP_ID` = the `App ID` of the new `Application`
-- `REACT_APP_DFNS_APP_ORIGIN` = `http://localhost:3000`, the origin set for the `Application`
-- `REACT_APP_DFNS_APP_RPID` = `localhost`, the domain application runs on
 - `REACT_APP_EXPRESS_API_URL` = `http://localhost:8000`, the backend server
 
 ### Run the web frontend
@@ -111,15 +108,13 @@ To run the React Native application on an iOS device, you must have an `Applicat
 - Relying Party, set to the domain you associated with the app, e.g. `panda-new-kit.ngrok-free.app`
 - Origin, set to the full url of the domain, e.g. `https://panda-new-kit.ngrok-free.app`
 
-After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`, and the `Origin`.
+After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
 
 #### Configuration
 
 In the `./mobile/` folder, copy `.env.example` to a new file `.env.ios` and set the following values,
 
 - `DFNS_APP_ID` = the `App ID` of the new `Application`
-- `DFNS_APP_ORIGIN` = the origin set for the `Application`
-- `DFNS_APP_RPID` = the associated domain, e.g. `panda-new-kit.ngrok-free.app`
 - `EXPRESS_API_URL` = either `http://localhost:8000` or if using ngrok, the public url `https://panda-new-kit.ngrok-free.app`
 
 **NOTE**
@@ -174,15 +169,13 @@ To run the React Native application on an Android device, you must have an `Appl
 - Relying Party, set to the domain you associated with the app, e.g. `panda-new-kit.ngrok-free.app`
 - Origin, the Android format is `android:apk-key-hash:<sha256_hash-of-apk-signing-cert>`. For this tutorial app, the signing cert is fixed, the value is `android:apk-key-hash:-sYXRdwJA3hvue3mKpYrOZ9zSPC7b4mbgzJmdZEDO5w`. For your own application, follow [Android's guide](https://developer.android.com/training/sign-in/passkeys#verify-origin) to derive the correct origin.
 
-After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`, and the `Origin`.
+After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
 
 #### Configuration
 
 In the `./mobile/` folder, copy `.env.example` to a new file `.env.android` and set the following values,
 
 - `DFNS_APP_ID` = the `App ID` of the new `Application`
-- `DFNS_APP_ORIGIN` = `android:apk-key-hash:-sYXRdwJA3hvue3mKpYrOZ9zSPC7b4mbgzJmdZEDO5w`
-- `DFNS_APP_RPID` = the associated domain, e.g. `panda-new-kit.ngrok-free.app`
 - `EXPRESS_API_URL` = either `http://localhost:8000` or if using ngrok, the public url `https://panda-new-kit.ngrok-free.app`
 
 #### Enable Passkeys

@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@dfns/sdk": "file:../../../packages/sdk",
+    "@dfns/sdk-browser": "file:../../../packages/sdk-browser",
     "@dfns/sdk-keysigner": "file:../../../packages/sdk-keysigner",
-    "@dfns/sdk-webauthn": "file:../../../packages/sdk-webauthn",
     "autoprefixer": "10.4.14",
     "dotenv": "16.3.1",
     "next": "13.5.6",

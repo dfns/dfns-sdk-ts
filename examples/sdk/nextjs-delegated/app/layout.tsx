@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <body>
           <nav className="py-5 mb-4 flex justify-center">
             <Link href="/">
-              <Image src="/dfns.png" alt="" width={50} height={50}></Image>
+              <Image src="/logo.png" alt="" width={50} height={50}></Image>
             </Link>
           </nav>
           <div className="prose mx-auto">

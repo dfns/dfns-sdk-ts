@@ -1,6 +1,6 @@
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { ApiPromise, HttpProvider } from '@polkadot/api';
+import { ApiPromise, HttpProvider } from '@polkadot/api'
 import { DfnsWallet } from '@dfns/lib-polkadot'
 
 import * as dotenv from 'dotenv'
@@ -9,9 +9,8 @@ dotenv.config()
 
 const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
-    privateKey: process.env.DFNS_PRIVATE_KEY!,
     credId: process.env.DFNS_CRED_ID!,
-    appOrigin: process.env.DFNS_APP_ORIGIN!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
   })
 
   const dfnsClient = new DfnsApiClient({
@@ -31,11 +30,11 @@ async function main() {
   const polkadotWalletId = process.env.POLKADOT_WALLET_ID!
   const senderWallet = await initDfnsWallet(polkadotWalletId)
 
-  const httpProvider = new HttpProvider(process.env.POLKADOT_NODE_URL!);
+  const httpProvider = new HttpProvider(process.env.POLKADOT_NODE_URL!)
 
   // Polkadot api can be used in conjunction of a signer that will be called everytime
   // we need to provide a signature
-  const api = await ApiPromise.create({ provider: httpProvider, signer: senderWallet, noInitWarn: true });
+  const api = await ApiPromise.create({ provider: httpProvider, signer: senderWallet, noInitWarn: true })
 
   // In polkadot, an account must have at least 1 DOT, we need to make sure that
   // this address has funds or that we transfer at least 1 DOT.
@@ -43,14 +42,14 @@ async function main() {
   const receiverAddress = '5DLJur1FsXezqiRvsq7nTJGDGszDW4xtNeENAYBMXPwPY9bZ'
 
   // 1 WND or DOT, precision of the asset is 12
-  const amount = 10 ** 12;
+  const amount = 10 ** 12
 
-  console.log(`Sending ${amount / (10 ** 12)} DOT/WND to the address ${receiverAddress}`);
+  console.log(`Sending ${amount / 10 ** 12} DOT/WND to the address ${receiverAddress}`)
 
   // `signAndSend` can accept a keyring or a string. If it is a key ring it will use it to sign,
   // if it is a string, the custom signer will be triggered. Here we are passing the `polkadotWalletId`
   // a string.
-  const txHash = await api.tx.balances.transferKeepAlive(receiverAddress, amount).signAndSend(senderWallet.address);
+  const txHash = await api.tx.balances.transferKeepAlive(receiverAddress, amount).signAndSend(senderWallet.address)
 
   console.log(`Transaction submitted with hash ${txHash}`)
 }

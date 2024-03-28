@@ -14,7 +14,7 @@ export const DEFAULT_WAIT_TIMEOUT = 60000
 
 export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
   constructor(
-    private options: {
+    private options?: {
       timeout?: number
     }
   ) {}
@@ -29,8 +29,8 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
           transports: transports ?? [],
         })),
         rpId: challenge.rp.id,
-        userVerification: 'preferred',
-        timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
+        userVerification: challenge.userVerification,
+        timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
       },
     })
 
@@ -70,7 +70,7 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
           type: cred.type,
         })),
         authenticatorSelection: challenge.authenticatorSelection,
-        timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
+        timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
       },
     }
 

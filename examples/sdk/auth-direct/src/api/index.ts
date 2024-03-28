@@ -1,8 +1,8 @@
-import { WebAuthn } from '@dfns/sdk-webauthn'
+import { WebAuthnSigner } from '@dfns/sdk-browser'
 import { DfnsApiClient, DfnsAuthenticator } from '@dfns/sdk'
 
 export const authApi = (): DfnsAuthenticator => {
-  const signer = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+  const signer = new WebAuthnSigner()
   return new DfnsAuthenticator({
     appId: process.env.REACT_APP_DFNS_APP_ID!,
     baseUrl: process.env.REACT_APP_DFNS_API_URL!,
@@ -11,7 +11,7 @@ export const authApi = (): DfnsAuthenticator => {
 }
 
 export const dfnsApi = (): DfnsApiClient => {
-  const signer = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+  const signer = new WebAuthnSigner()
   return new DfnsApiClient({
     appId: process.env.REACT_APP_DFNS_APP_ID!,
     authToken: localStorage.getItem('DFNS_AUTH_TOKEN') ?? undefined,

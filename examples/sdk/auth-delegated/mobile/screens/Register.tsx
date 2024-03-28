@@ -27,7 +27,6 @@ export function Register(): React.JSX.Element {
         },
         body: JSON.stringify({
           appId: Config.DFNS_APP_ID!,
-          appOrigin: Config.DFNS_APP_ORIGIN!,
           username,
         }),
       })
@@ -35,10 +34,8 @@ export function Register(): React.JSX.Element {
       console.log(JSON.stringify(challenge, null, 2))
 
       // Create the new passkey using the challenge
-      const passkey = new PasskeysSigner({
-        rpId: Config.DFNS_APP_RPID!,
-      })
-      const attestation = await passkey.create(challenge)
+      const passkeys = new PasskeysSigner()
+      const attestation = await passkeys.create(challenge)
       console.log(JSON.stringify(attestation, null, 2))
 
       // Finish delegated registration

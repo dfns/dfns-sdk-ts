@@ -28,8 +28,8 @@ export type PasskeysOptions = {
 
 // react-native-passkey is incorrect encoding the credId with standard base64 for
 // some reason. we have to undo that.
-class Android implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
-  constructor(private options: PasskeysOptions) {}
+class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
+  constructor(private options?: PasskeysOptions) {}
 
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyAuthenticationRequest = {
@@ -40,8 +40,8 @@ class Android implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2
         transports: transports ?? [],
       })),
       rpId: challenge.rp.id,
-      userVerification: 'preferred',
-      timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
+      userVerification: challenge.userVerification,
+      timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
     const credential: PasskeyAuthenticationResult = await Passkey.authenticate(request)
@@ -74,7 +74,7 @@ class Android implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2
         type: cred.type,
       })),
       authenticatorSelection: challenge.authenticatorSelection,
-      timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
+      timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
     const result = await Passkey.register(request)
@@ -93,8 +93,8 @@ class Android implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2
 // react-native-passkey's iOS implementation is not WebAuthn spec compliant. all values
 // are standard base64 encoded instead of base64url encoded. we have to convert the
 // encoding in both directions.
-class iOS implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
-  constructor(private options: PasskeysOptions) {}
+class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
+  constructor(private options?: PasskeysOptions) {}
 
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyAuthenticationRequest = {
@@ -106,7 +106,7 @@ class iOS implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Atte
       })),
       rpId: challenge.rp.id,
       userVerification: 'preferred',
-      timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
+      timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
     const credential: PasskeyAuthenticationResult = await Passkey.authenticate(request)
@@ -139,7 +139,7 @@ class iOS implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Atte
         type: cred.type,
       })),
       authenticatorSelection: challenge.authenticatorSelection,
-      timeout: this.options.timeout ?? DEFAULT_WAIT_TIMEOUT,
+      timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
     const result = await Passkey.register(request)
@@ -158,13 +158,13 @@ class iOS implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Atte
 export class PasskeysSigner implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
   private platform: CredentialSigner<Fido2Assertion> & CredentialStore<Fido2Attestation>
 
-  constructor(options: PasskeysOptions) {
+  constructor(options?: PasskeysOptions) {
     switch (Platform.OS) {
       case 'android':
-        this.platform = new Android(options)
+        this.platform = new AndroidPasskeys(options)
         break
       case 'ios':
-        this.platform = new iOS(options)
+        this.platform = new iOSPasskeys(options)
         break
       default:
         throw new DfnsError(-1, `${Platform.OS} is not supported`)

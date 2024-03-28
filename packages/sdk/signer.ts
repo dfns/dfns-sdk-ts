@@ -4,6 +4,8 @@ export type CredentialKind = 'Key' | 'Fido2' | 'Password' | 'Totp' | 'RecoveryKe
 
 export type CredentialTransport = 'usb' | 'nfc' | 'ble' | 'internal'
 
+export type UserVerificationRequirement = 'required' | 'preferred' | 'discouraged'
+
 export type AllowCredential = {
   type: 'public-key'
   id: string
@@ -29,6 +31,7 @@ export type UserActionChallenge = {
     key: AllowCredential[]
     webauthn: AllowCredential[]
   }
+  userVerification: UserVerificationRequirement
 }
 
 export type KeyAssertion = {
