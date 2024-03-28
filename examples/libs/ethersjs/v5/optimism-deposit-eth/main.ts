@@ -12,9 +12,8 @@ const optimism = new JsonRpcProvider(process.env.OPTIMISM_NODE_URL)
 
 const initDfnsWallet = (walletId: string) => {
   const signer = new AsymmetricKeySigner({
-    privateKey: process.env.DFNS_PRIVATE_KEY!,
     credId: process.env.DFNS_CRED_ID!,
-    appOrigin: process.env.DFNS_APP_ORIGIN!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
   })
 
   const dfnsClient = new DfnsApiClient({

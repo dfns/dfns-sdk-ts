@@ -1,6 +1,6 @@
 'use client'
 
-import { WebAuthn } from '@dfns/sdk-webauthn'
+import { WebAuthnSigner } from '@dfns/sdk-browser'
 import { FormEvent, useState } from 'react'
 
 import { createRecoveryCredential, KeyClientData } from '@/common/recoveryKey'
@@ -21,7 +21,7 @@ export default function Register() {
       .then((result) => result.json())
       .then(async (challenge) => {
         console.log('register init challenge', challenge)
-        const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
+        const webauthn = new WebAuthnSigner()
         const attestation = await webauthn.create(challenge)
         const clientData: KeyClientData = {
           type: 'key.create',

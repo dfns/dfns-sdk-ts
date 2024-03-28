@@ -1,4 +1,4 @@
-import { WebAuthn } from '@dfns/sdk-browser'
+import { WebAuthnSigner } from '@dfns/sdk-browser'
 import React, { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -26,7 +26,6 @@ export default function Register(): JSX.Element {
         },
         body: JSON.stringify({
           appId: process.env.REACT_APP_DFNS_APP_ID!,
-          appOrigin: process.env.REACT_APP_DFNS_APP_ORIGIN!,
           username: formData.get('username') as string,
         }),
       })
@@ -35,7 +34,7 @@ export default function Register(): JSX.Element {
 
       // Webauthn flow
       // Create the new webauthn credential using the challenge
-      const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
+      const webauthn = new WebAuthnSigner()
       const attestation = await webauthn.create(challenge)
       console.log(JSON.stringify(attestation, null, 2))
 

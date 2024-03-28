@@ -64,10 +64,8 @@ export function Wallets(): React.JSX.Element {
       console.log(JSON.stringify(challenge, null, 2))
 
       // Sign the challenge to authorize the create wallet action
-      const passkey = new PasskeysSigner({
-        rpId: Config.DFNS_APP_RPID!,
-      })
-      const assertion = await passkey.sign(challenge.challenge, challenge.allowCredentials)
+      const passkeys = new PasskeysSigner()
+      const assertion = await passkeys.sign(challenge)
       console.log(JSON.stringify(assertion, null, 2))
 
       await fetch(`${Config.EXPRESS_API_URL!}/wallets/new/complete`, {

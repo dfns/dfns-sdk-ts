@@ -1,7 +1,7 @@
 'use client'
 
-import { WebAuthn } from '@dfns/sdk-webauthn'
 import { GetWalletResponse as WalletDto } from '@dfns/sdk/types/Wallets'
+import { WebAuthnSigner } from '@dfns/sdk-browser'
 import { useCallback, useEffect, useState } from 'react'
 
 export default function Wallets() {
@@ -23,8 +23,8 @@ export default function Wallets() {
     fetch('/api/wallets/create/init', { method: 'POST' })
       .then(async (result) => {
         const { request, challenge } = await result.json()
-        const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
-        const assertion = await webauthn.sign(challenge.challenge, challenge.allowCredentials)
+        const webauthn = new WebAuthnSigner()
+        const assertion = await webauthn.sign(challenge)
         return fetch('/api/wallets/create/complete', {
           method: 'POST',
           body: JSON.stringify({

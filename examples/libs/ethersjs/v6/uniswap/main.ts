@@ -1,7 +1,7 @@
 import { DfnsWallet } from '@dfns/lib-ethersjs6'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { CurrencyAmount, Percent, SupportedChainId, Token, TradeType } from '@uniswap/sdk-core'
+import { ChainId, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core'
 import { abi as UniswapV3PoolAbi } from '@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json'
 import { computePoolAddress, FeeAmount, Pool, Route, SwapOptions, SwapQuoter, SwapRouter, Trade } from '@uniswap/v3-sdk'
 import dotenv from 'dotenv'
@@ -18,16 +18,15 @@ const POOL_FACTORY_CONTRACT_ADDRESS = '0x1F98431c8aD98523631AE4a59f267346ea31F98
 const QUOTER_CONTRACT_ADDRESS = '0x61fFE014bA17989E743c5F6cB21bF9697530B21e'
 const SWAP_ROUTER_CONTRACT_ADDRESS = '0xE592427A0AEce92De3Edee1F18E0157C05861564'
 
-const WETH = new Token(SupportedChainId.GOERLI, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18)
-const USDC = new Token(SupportedChainId.GOERLI, '0x07865c6e87b9f70255377e024ace6630c1eaa37f', 6)
+const WETH = new Token(ChainId.GOERLI, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18)
+const USDC = new Token(ChainId.GOERLI, '0x07865c6e87b9f70255377e024ace6630c1eaa37f', 6)
 
 const ethereum = new JsonRpcProvider(process.env.ETHEREUM_NODE_URL!)
 
 const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
-    privateKey: process.env.DFNS_PRIVATE_KEY!,
     credId: process.env.DFNS_CRED_ID!,
-    appOrigin: process.env.DFNS_APP_ORIGIN!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
   })
 
   const dfnsClient = new DfnsApiClient({

@@ -28,16 +28,6 @@ app.post('/wallets/list', asyncHandler(listWallets))
 app.post('/wallets/new/init', asyncHandler(createWalletInit))
 app.post('/wallets/new/complete', asyncHandler(createWalletComplete))
 
-// static files to associate the domain with Android and iOS apps
-app.use(
-  '/.well-known',
-  express.static('static', {
-    setHeaders: (res) => {
-      res.setHeader('content-type', 'application/json')
-    },
-  })
-)
-
 const port = process.env.EXPRESS_PORT
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`)

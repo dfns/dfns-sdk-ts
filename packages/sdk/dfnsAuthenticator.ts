@@ -27,14 +27,11 @@ export class DfnsAuthenticator {
   constructor(private apiOptions: DfnsAuthenticatorOptions) {}
 
   async login(request: LoginRequest): Promise<LoginResponse> {
-    const { challenge, challengeIdentifier, allowCredentials } = await BaseAuthApi.createUserLoginChallenge(
-      request,
-      this.apiOptions
-    )
-    const assertion = await this.apiOptions.signer.sign(challenge, allowCredentials)
+    const challenge = await BaseAuthApi.createUserLoginChallenge(request, this.apiOptions)
+    const assertion = await this.apiOptions.signer.sign(challenge)
     return BaseAuthApi.createUserLogin(
       {
-        challengeIdentifier,
+        challengeIdentifier: challenge.challengeIdentifier,
         firstFactor: assertion,
       },
       this.apiOptions

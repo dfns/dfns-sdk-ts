@@ -82,6 +82,12 @@ export type UserLoginChallenge = {
 
   // FIXME: Missing documentation for allowCredentials
   allowCredentials: AllowCredentials
+
+  // FIXME: Missing documentation for attestation
+  attestation: AuthenticatorAttestationOptions
+
+  // FIXME: Missing documentation for userVerification
+  userVerification: AuthenticatorRequirementOptions
 }
 
 // FIXME: Missing documentation for UserLogin

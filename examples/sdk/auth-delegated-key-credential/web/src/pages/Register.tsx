@@ -29,7 +29,6 @@ export default function Register(): JSX.Element {
         },
         body: JSON.stringify({
           appId: process.env.REACT_APP_DFNS_APP_ID!,
-          appOrigin: process.env.REACT_APP_DFNS_APP_ORIGIN!,
           username: formData.get('username') as string,
         }),
       })
@@ -38,19 +37,17 @@ export default function Register(): JSX.Element {
 
       // Key pair flow
       // Key is generated randomly here
-      // In a production environment they key should be protected 
+      // In a production environment they key should be protected
       // and loaded securely in the browser
-      const generatedKeyPair = await crypto.subtle.generateKey(
-        { name: 'ECDSA', namedCurve: 'P-256' },
-        true,
-        ['sign', 'verify']
-      )
+      const generatedKeyPair = await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, [
+        'sign',
+        'verify',
+      ])
       // Here the private key is set as a session variable
       // key will not exists upon referesh or logout
       setKeyPair(generatedKeyPair)
       const browserKey = new BrowserKeySigner({
         keyPair: generatedKeyPair,
-        appOrigin: process.env.REACT_APP_DFNS_APP_ORIGIN!,
       })
       const attestation = await browserKey.create(challenge)
 

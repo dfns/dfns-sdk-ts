@@ -8,12 +8,12 @@ export const registerInit = async (req: Request, res: Response) => {
   // You can perform the registration flow of your system before starting the
   // Dfns delegated registration.
 
-  const { appId, appOrigin, username } = req.body
+  const { appId, username } = req.body
 
   // Registration must use the appId and appOrigin of the client application,
   // otherwise the challenge returned does not have the appropriate relying
   // party and origin to create the WebAuthn or Passkeys credential
-  const client = apiClient(appId, appOrigin)
+  const client = apiClient(appId)
   const challenge = await client.auth.createDelegatedUserRegistration({
     body: { kind: UserAuthKind.EndUser, email: username },
   })
@@ -36,7 +36,7 @@ export const registerComplete = async (req: Request, res: Response) => {
   // For this example, we will also create the necessary full permission for
   // the newly registered end user. The permission can be created with the appId
   // and the appOrigin of the server.
-  const client = apiClient(process.env.DFNS_APP_ID!, process.env.DFNS_APP_ORIGIN!)
+  const client = apiClient(process.env.DFNS_APP_ID!)
   const permission = await client.permissions.createPermission({
     body: {
       name: `${registration.user.id}:wallets:*`,

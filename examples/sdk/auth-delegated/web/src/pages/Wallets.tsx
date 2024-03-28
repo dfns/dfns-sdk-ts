@@ -1,4 +1,4 @@
-import { WebAuthn } from '@dfns/sdk-browser'
+import { WebAuthnSigner } from '@dfns/sdk-browser'
 import React, { FormEvent, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -61,8 +61,8 @@ export default function Wallets(): JSX.Element {
       const { requestBody, challenge } = await initRes.json()
 
       // Sign the challenge to authorize the create wallet action
-      const webauthn = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
-      const assertion = await webauthn.sign(challenge.challenge, challenge.allowCredentials)
+      const webauthn = new WebAuthnSigner()
+      const assertion = await webauthn.sign(challenge)
 
       await fetch(`${process.env.REACT_APP_EXPRESS_API_URL!}/wallets/new/complete`, {
         method: 'POST',

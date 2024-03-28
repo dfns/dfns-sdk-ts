@@ -1,10 +1,8 @@
-import { AllowCredential, CredentialKind } from './signer'
+import { AllowCredential, CredentialKind, UserVerificationRequirement } from './signer'
 
 export type AuthenticatorAttachment = 'platform' | 'cross-platform'
 
 export type ResidentKeyRequirement = 'required' | 'preferred' | 'discouraged'
-
-export type UserVerificationRequirement = 'required' | 'preferred' | 'discouraged'
 
 export type AttestationConveyancePreference = 'none' | 'indirect' | 'direct' | 'enterprise'
 

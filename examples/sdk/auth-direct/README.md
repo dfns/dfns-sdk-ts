@@ -8,10 +8,10 @@ This example demonstrates a SPA interacting directly with the Dfns API through t
 
 To run the example, you must have an active `Application`. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
 
-* Name, choose any name
-* Type of User, `Client Side`
-* Relying Party = `localhost`
-* Origin = `http://localhost:3000`
+- Name, choose any name, for example `Dfns Tutorial`
+- Application Type, leave as the default `Default Application`
+- Relying Party, set it to `localhost`
+- Origin, set it to `http://localhost:3000`
 
 After the `Application` is created, copy the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
 

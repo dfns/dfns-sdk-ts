@@ -5,7 +5,7 @@ const nextConfig = {
     ...dotenv.config({ path: '.env' }).parsed,
     ...dotenv.config({ path: '.env.local' }).parsed,
   },
-  transpilePackages: ['@dfns/sdk-webauthn'],
+  transpilePackages: ['@dfns/sdk-browser'],
 }
 
 module.exports = nextConfig

@@ -1,11 +1,37 @@
+export type CredentialFactor = 'first' | 'second' | 'either'
+
 export type CredentialKind = 'Key' | 'Fido2' | 'Password' | 'Totp' | 'RecoveryKey'
 
 export type CredentialTransport = 'usb' | 'nfc' | 'ble' | 'internal'
+
+export type UserVerificationRequirement = 'required' | 'preferred' | 'discouraged'
 
 export type AllowCredential = {
   type: 'public-key'
   id: string
   transports: CredentialTransport[]
+}
+
+export type SupportedCredential = {
+  kind: CredentialKind
+  factor: CredentialFactor
+  requiresSecondFactor: boolean
+}
+
+export type UserActionChallenge = {
+  supportedCredentialKinds: SupportedCredential[]
+  rp: {
+    id: string
+    name: string
+  }
+  challenge: string
+  challengeIdentifier: string
+  externalAuthenticationUrl: string
+  allowCredentials: {
+    key: AllowCredential[]
+    webauthn: AllowCredential[]
+  }
+  userVerification: UserVerificationRequirement
 }
 
 export type KeyAssertion = {
@@ -56,5 +82,5 @@ export type SecondFactorAssertion = KeyAssertion | Fido2Assertion | TotpAssertio
 export type CredentialAssertion = KeyAssertion | Fido2Assertion | PasswordAssertion | TotpAssertion
 
 export interface CredentialSigner<T extends CredentialAssertion = FirstFactorAssertion> {
-  sign(challenge: string, allowCredentials: { key: AllowCredential[]; webauthn: AllowCredential[] }): Promise<T>
+  sign(challenge: UserActionChallenge): Promise<T>
 }

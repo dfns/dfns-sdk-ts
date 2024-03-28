@@ -1,7 +1,15 @@
 import { DfnsWallet } from '@dfns/lib-algorand'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { Algodv2, EncodedSignedTransaction, createMultisigTransaction, decodeObj, encodeObj, makePaymentTxnWithSuggestedParamsFromObject, multisigAddress } from 'algosdk'
+import {
+  Algodv2,
+  EncodedSignedTransaction,
+  createMultisigTransaction,
+  decodeObj,
+  encodeObj,
+  makePaymentTxnWithSuggestedParamsFromObject,
+  multisigAddress,
+} from 'algosdk'
 
 import * as dotenv from 'dotenv'
 
@@ -9,9 +17,8 @@ dotenv.config()
 
 const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
-    privateKey: process.env.DFNS_PRIVATE_KEY!,
     credId: process.env.DFNS_CRED_ID!,
-    appOrigin: process.env.DFNS_APP_ORIGIN!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
   })
 
   const dfnsClient = new DfnsApiClient({
@@ -39,11 +46,11 @@ async function main() {
   // multiSigParams is used when creating the address and when signing transactions
   const multiSigParams = {
     version: 1,
-    threshold: 2, 
+    threshold: 2,
     addrs: [wallet1.address, wallet2.address],
   }
-  const multisigAddr = multisigAddress(multiSigParams);
-  console.log('Created MultiSig Address: ', multisigAddr);
+  const multisigAddr = multisigAddress(multiSigParams)
+  console.log('Created MultiSig Address: ', multisigAddr)
 
   // Send 0.1 Algo
   const suggestedParams = await algod.getTransactionParams().do()

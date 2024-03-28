@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dfns/sdk-react-native": "0.3.3",
+    "@dfns/sdk-react-native": "0.4.0",
     "@react-navigation/native": "6.1.10",
     "@react-navigation/native-stack": "6.9.18",
     "react": "18.2.0",

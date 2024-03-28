@@ -17,10 +17,10 @@ The end user will sign the action from the web-app, using his WebauthN credentia
 
 To run the example, you must have an active `Application`. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
 
-* Name, choose any name
-* Type of User, `Client Side`
-* Relying Party = `localhost`
-* Origin = `http://localhost:3000`
+- Name, choose any name, for example `Dfns Tutorial Web`
+- Application Type, leave as the default `Default Application`
+- Relying Party, set to `localhost`
+- Origin, set to `http://localhost:3000`, this is the port the Next JS application is configured to run on by default
 
 After the `Application` is created, copy the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
 
@@ -37,17 +37,15 @@ Copy `.env.example` to a new file `.env.local` and set the following values,
 
 * `DFNS_API_URL` = `https://api.dfns.ninja`
 * `DFNS_APP_ID` = the `App ID` from above
-* `DFNS_APP_ORIGIN` = `http://localhost:3000`
 * `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 * `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 * `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
-* `NEXT_PUBLIC_DFNS_WEBAUTHN_RPID` = 'localhost'
 
 ## Next.js Configuration
 
 To setup your own `Next.js` project, make sure to include the following tweaks in `next.config.js`
 
-* Transpile the WebAuthn package `@dfns/sdk-webauthn`
+* Transpile the `WebAuthnSigner` package `@dfns/sdk-browser`
 * Enable multiline environment variable with `dotenv`
 
 ```javascript
@@ -55,7 +53,7 @@ const result = require('dotenv').config({ path: '.env.local' })
 
 const nextConfig = {
   env: result.parsed,
-  transpilePackages: ['@dfns/sdk-webauthn'],
+  transpilePackages: ['@dfns/sdk-browser'],
 }
 
 module.exports = nextConfig
@@ -92,7 +90,6 @@ Build Dfns client:
 ```ts
 // instanciate a key signer
 const signer = new AsymmetricKeySigner({
-  appOrigin: process.env.DFNS_APP_ORIGIN!,
   credId: process.env.DFNS_CRED_ID!,
   privateKey: process.env.DFNS_PRIVATE_KEY!.replace(/\\n/g, '\n'),
 })
@@ -161,16 +158,16 @@ const { items: wallets } = await dfnsDelegated.wallets.listWallets({})
 Here's the client-side code for the wallet creation:
 
 ```ts
-import { WebAuthn } from '@dfns/sdk-webauthn'
+import { WebAuthnSigner } from '@dfns/sdk-browser'
 
 const createWallet = () =>
   // 1. Call server-side wallet creation initiation,
   fetch('/api/wallets/create/init', { method: 'POST' }).then(async (result) => {
     const { request, challenge } = await result.json()
 
-    // 2. Then sign the returned challenge with WebauthN credentials
-    const webauthn = new WebAuthn({ rpId: process.env.NEXT_PUBLIC_DFNS_WEBAUTHN_RPID! })
-    const assertion = await webauthn.sign(challenge.challenge, challenge.allowCredentials)
+    // 2. Then sign the returned challenge with WebAuthn credentials
+    const webauthn = new WebAuthnSigner()
+    const assertion = await webauthn.sign(challenge)
 
     // 3. Call server-side wallet creation completion with signed challenge
     return fetch('/api/wallets/create/complete', {
