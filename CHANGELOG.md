@@ -1,8 +1,15 @@
 # Changelog
 
+## 0.4.0 (2024-03-28)
+
+- Moved `BrowserKeySigner` and `WebAuthnSigner` to `@dfns/lib-browser` [__BREAKING__]
+- Removed `rpid` from `WebAuthnSigner` and `PasskeysSigner` configuration [__BREAKING__]
+- Removed `origin` and `crossOrigin` from `AsymmetricKeySigner`, `BrowserKeySigner` and `AwsKmsKeySigner` configuration [__BREAKING__]
+- Changed type definition of `CredentialSigner.sign` to `sign(challenge: UserActionChallenge): Promise<Assertion>` [__BREAKING__]
+- Added `BrowserKeySigner.create` to register a new key credential with `BrowserKeySigner`
+
 ## 0.3.4 (2024-03-21)
 
-- Added `BrowserKeySigner.create` to register a new key credential from browser signer
 - Added SDK integration with polkadot{.js}, see `@dfns/lib-polkadot`
 - Added SDK integration with Cardano Mesh, see `@dfns/lib-meshsdk`
 
@@ -22,7 +29,7 @@
 
 ## 0.3.0 (2024-02-01)
 
-- Migrated `DfnsApiClient.permissions` to permissions v2 [breaking]
+- Migrated `DfnsApiClient.permissions` to permissions v2 [__BREAKING__]
 - Added browser compatible key signer, `BrowserKeySigner`
 
 ## 0.2.5 (2024-01-24)
@@ -34,7 +41,7 @@
 ## 0.2.4 (2024-01-19)
 
 - Renamed BlockchainNetwork `Ripple` to `XrpLedger`
-- Migrated `DfnsApiClient.permissions` to a new code generator [breaking]
+- Migrated `DfnsApiClient.permissions` to a new code generator [__BREAKING__]
 
 ## 0.2.3 (2024-01-16)
 
@@ -54,7 +61,7 @@
 ## 0.2.0 (2023-12-06)
 
 - Added wallets signature support for ECDSA Stark curve with `KeyEDCSAStark`
-- Migrated `DfnsApiClient.wallets` and `DfnsApiClient.signers` to a new code generator [breaking]
+- Migrated `DfnsApiClient.wallets` and `DfnsApiClient.signers` to a new code generator [__BREAKING__]
 - Migrated all third-party library integrations to synchronous signing flow and deprecated polling
 - Updated all examples and READMEs to align with the core SDK changes
 
@@ -84,16 +91,16 @@
 
 ## 0.1.0-beta.7 (2023-10-23)
 
-- Added allowing custom base auth url (https://github.com/dfnsext/typescript-sdk/pull/37)
+- Added allowing custom base auth url
 
 ## 0.1.0-beta.6 (2023-10-17)
 
-- Added wallet import feature and example (https://github.com/dfnsext/typescript-sdk/pull/34)
-- Added SDK integration with TronWeb, see `@dfns/lib-tron` (https://github.com/dfnsext/typescript-sdk/pull/30)
+- Added wallet import feature and example
+- Added SDK integration with TronWeb, see `@dfns/lib-tron`
 
 ## 0.1.0-beta.5 (2023-10-03)
 
-- Fixed `createUserRecovery` wrong input type ([PR-33](https://github.com/dfnsext/typescript-sdk/pull/33))
+- Fixed `createUserRecovery` wrong input type
 
 ## 0.1.0-beta.4 (2023-09-25)
 
@@ -116,7 +123,7 @@
 - Added new blockchain networks (Arbitrum, Avalanche, Fantom and Optimism) to wallets API
 - Added `KeyEDCSA` and `KeyEdDSA` to wallets API
 - Added `AlwaysActivated` policy for wallets tranfer asset, broadcast transaction and generate signature
-- Renamed package `@dfns/ethersjs-wallet` to `@dfns/lib-ethersjs6` [breaking]
+- Renamed package `@dfns/ethersjs-wallet` to `@dfns/lib-ethersjs6` [__BREAKING__]
 - Added SDK integration with ethers.js v5, see `@dfns/lib-ethersjs5`
 - Added SDK integration with Solana web3.js, see `@dfns/lib-solana`
 - Added SDK integration with Vechain Connex, see `@dfns/lib-vechain`
@@ -130,7 +137,7 @@
 
 ## 0.1.0-alpha.9 (2023-07-13)
 
-- Renamed `BlockchainNetwork` names for the wallets API [breaking]
+- Renamed `BlockchainNetwork` names for the wallets API [__BREAKING__]
 - Deprecated `IdentityKind` enum for the permissions API
 - Added EVM broadcast transaction kinds `Eip1559` and `EvmLegacy`
 - Added network specific encoding of signature to signed signature requests
