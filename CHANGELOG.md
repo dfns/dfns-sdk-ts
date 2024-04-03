@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 (2024-04-03)
+
+- Updated `DfnsApiClient.policies` to match the latest API changes
+
 ## 0.4.0 (2024-03-28)
 
 - Moved `BrowserKeySigner` and `WebAuthnSigner` to `@dfns/lib-browser` [__BREAKING__]
