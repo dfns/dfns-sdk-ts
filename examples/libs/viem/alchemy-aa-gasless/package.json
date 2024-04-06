@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@alchemy/aa-accounts": "2.3.0",
-    "@alchemy/aa-alchemy": "2.3.0",
-    "@alchemy/aa-core": "2.3.0",
+    "@alchemy/aa-alchemy": "3.7.3",
+    "@alchemy/aa-core": "3.6.1",
     "@dfns/lib-viem": "file:../../../../packages/lib-viem",
     "@dfns/sdk": "file:../../../../packages/sdk",
     "@dfns/sdk-keysigner": "file:../../../../packages/sdk-keysigner",
     "dotenv": "16.1.4",
-    "viem": "1.21.4"
+    "viem": "2.9.9"
   },
   "devDependencies": {
     "ts-node": "10.9.1"

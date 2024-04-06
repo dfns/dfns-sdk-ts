@@ -1,6 +1,7 @@
 **/.env
 **/dist
 **/node_modules
+/.nx
 /tmp
 /docs
 .DS_Store

@@ -21,6 +21,7 @@ import {
   stringToHex,
   toHex,
 } from 'viem'
+import { IsNarrowable } from 'viem/_types/types/utils'
 import { publicKeyToAddress } from 'viem/accounts'
 
 export type DfnsWalletOptions = {
@@ -137,12 +138,21 @@ export class DfnsWallet {
     }
   }
 
-  public async signTransaction<TTransactionSerializable extends TransactionSerializable>(
-    transaction: TTransactionSerializable,
-    args?: {
-      serializer?: SerializeTransactionFn<TTransactionSerializable>
-    }
-  ): Promise<TransactionSerialized<GetTransactionType<TTransactionSerializable>>> {
+  public async signTransaction<
+    serializer extends SerializeTransactionFn<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,
+    transaction extends Parameters<serializer>[0] = Parameters<serializer>[0]
+  >(
+    transaction: transaction,
+    args?:
+      | {
+          serializer?: serializer | undefined
+        }
+      | undefined
+  ): Promise<
+    IsNarrowable<TransactionSerialized<GetTransactionType<transaction>>, Hash> extends true
+      ? TransactionSerialized<GetTransactionType<transaction>>
+      : Hash
+  > {
     const serializer = args?.serializer ?? serializeTransaction
 
     if (this.metadata.boundToEvmNetwork) {
@@ -161,10 +171,10 @@ export class DfnsWallet {
   }
 
   public async signTypedData<
-    const TTypedData extends TypedData | { [key: string]: unknown },
-    TPrimaryType extends string = string
-  >(typedData: TypedDataDefinition<TTypedData, TPrimaryType>): Promise<Hash> {
-    const hash = hashTypedData(typedData)
+    const typedData extends TypedData | Record<string, unknown>,
+    primaryType extends keyof typedData | 'EIP712Domain' = keyof typedData
+  >(typedDataDefinition: TypedDataDefinition<typedData, primaryType>): Promise<Hash> {
+    const hash = hashTypedData(typedDataDefinition)
     const signature = await this.signHash(hash)
     return signatureToHex(signature)
   }

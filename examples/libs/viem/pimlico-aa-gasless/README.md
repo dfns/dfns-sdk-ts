@@ -1,6 +1,6 @@
-# Biconomy Account Abstraction Gasless Transaction
+# Pimlico Account Abstraction Gasless Transaction
 
-Adapted from Biconomy's [gasless NFT mint example](https://docs.biconomy.io/tutorials/nodejs/gaslessmint). Demonstrates that Dfns managed keys can integrate with [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) Account Abstraction standards seamlessly.
+Adapted from Pimlico's [how to create and use a SimpleAccount](https://docs.pimlico.io/permissionless/how-to/accounts/use-simple-account). Demonstrates that Dfns managed keys can integrate with [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) Account Abstraction standards seamlessly.
 
 ## Prerequisites
 
@@ -29,18 +29,19 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
-- `POLYGON_WALLET_ID` = a Dfns Polygon [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet)
+- `ETHEREUM_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet)
+- `ETHEREUM_NODE_URL` = an Ethereum mainnet or testnet RPC provider node you have access to
+- `PIMLICO_API_KEY` = Pimlico API key, can be created in the [Pimlico dashboard](https://dashboard.pimlico.io/)
 
 ## Explanation
 
-In order to run the program, you would need a Dfns wallet. The example will create an smart contract account using the Dfns managed key. This newly created [account](https://mumbai.polygonscan.com/address/0x172a1047876608e8Ceb6ABe9FD6458376Bb5F0E1) is not funded and cannot pay for gas. Instead it uses the [Biconomy paymaster](https://docs.biconomy.io/Paymaster/description#sponsorship-paymaster) to sponsor a gasless transaction to mint a NFT token.
+In order to run the program, you would need a Dfns Sepolia wallet. The example will create an smart contract account using the Dfns managed key. This newly created [account](https://sepolia.etherscan.io/address/0x6a607212473d262ed65bfd1b894b02b68548b338) is not funded and cannot pay for gas. Instead it uses the paymaster to sponsor a gasless transaction to mint new tokens.
 
 ```shell
 > ts-node main.ts
 
-Smart account address: 0x172a1047876608e8Ceb6ABe9FD6458376Bb5F0E1
-Transaction hash: 0x7d256aefb8c8942a05d372464bb4240b98040e4e6f80eddddafe609c5060fc0c
-Minted NFT: https://testnets.opensea.io/0x172a1047876608e8Ceb6ABe9FD6458376Bb5F0E1
+Smart account address: 0x6A607212473D262eD65BFd1B894b02B68548b338
+Transaction hash: 0x29369cfbce28fbead99a8740b9f75872334bb115735952ac1f6262ffd296f108
 ```
 
-This is the Polygon Mumbai [transaction](https://mumbai.polygonscan.com/tx/0xb4a7076ceb11f304baf017bf92848739e93349ed9e08d4f8c170ee7d22e3826c) that minted the NFT.
+This is the Ethereum Sepolia [user operation](https://jiffyscan.xyz/userOpHash/0x176274c5a5ae68c285e1b959a1fa20855c7ae524515ec4f32a60f156a670db07?network=sepolia) and the [transaction](https://sepolia.etherscan.io/tx/0x29369cfbce28fbead99a8740b9f75872334bb115735952ac1f6262ffd296f108) that minted the tokens.

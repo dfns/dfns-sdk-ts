@@ -38,7 +38,6 @@
     "thor-devkit": "2.0.8",
     "tronweb": "5.3.1",
     "uuid": "9.0.0",
-    "viem": "1.21.4",
     "xrpl": "2.14.0"
   },
   "devDependencies": {
@@ -55,6 +54,9 @@
     "rimraf": "^5.0.1",
     "typedoc": "^0.24.8",
     "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "viem": "^2.0.0"
   },
   "workspaces": [
     "packages/*"
