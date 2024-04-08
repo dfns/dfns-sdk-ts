@@ -8,9 +8,7 @@ export const login = async (req: Request, res: Response) => {
   // end user to use WebAuthn or Passkeys to login.
   const username = req.body.username
   const client = apiClient(process.env.DFNS_APP_ID!)
-  const login = await client.auth.createDelegatedUserLogin({
-    body: { username },
-  })
+  const login = await client.auth.delegatedLogin({ body: { username } })
 
   // The auth token returned by delegated login should be cached securely for the
   // duration of the login session. It can be stored either on the server or on the

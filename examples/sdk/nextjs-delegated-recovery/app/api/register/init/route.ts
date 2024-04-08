@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   const body = (await request.json()) as { email: string }
 
   // Initiate end-user delegated registration
-  const registrationChallenge = await dfns.auth.createDelegatedUserRegistration({
+  const registrationChallenge = await dfns.auth.createDelegatedRegistrationChallenge({
     body: { email: body.email, kind: UserAuthKind.EndUser },
   })
 

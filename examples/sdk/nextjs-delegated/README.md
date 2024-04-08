@@ -107,7 +107,7 @@ Delegated Login:
 
 ```ts
 // call delegated login to get the user auth token
-const { token: endUserAuthToken } = await dfns.auth.createDelegatedUserLogin({
+const { token: endUserAuthToken } = await dfns.auth.delegatedLogin({
   body: { username: body.email },
 })
 ```
