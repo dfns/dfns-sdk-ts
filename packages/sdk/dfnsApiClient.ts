@@ -1,6 +1,6 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { AssetsClient } from './codegen/Assets'
-import { AuthClient } from './codegen/Auth'
+import { AuthClient } from './generated/auth'
 import { CallbacksClient } from './codegen/Callbacks'
 import { PublicKeysClient } from './codegen/PublicKeys'
 import { NetworksClient } from './generated/networks'

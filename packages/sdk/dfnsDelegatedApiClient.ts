@@ -1,6 +1,6 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { DelegatedAssetsClient } from './codegen/Assets'
-import { DelegatedAuthClient } from './codegen/Auth'
+import { DelegatedAuthClient } from './generated/auth'
 import { DelegatedCallbacksClient } from './codegen/Callbacks'
 import { DelegatedPublicKeysClient } from './codegen/PublicKeys'
 import { DelegatedNetworksClient } from './generated/networks'

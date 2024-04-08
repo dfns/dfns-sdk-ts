@@ -7,16 +7,16 @@ export type GetFeesResponse = {
     network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai";
     blockNumber: number;
     slow: {
-        maxPriorityFee: number;
-        maxFee: number;
+        maxPriorityFeePerGas: string;
+        maxFeePerGas: string;
     };
     standard: {
-        maxPriorityFee: number;
-        maxFee: number;
+        maxPriorityFeePerGas: string;
+        maxFeePerGas: string;
     };
     fast: {
-        maxPriorityFee: number;
-        maxFee: number;
+        maxPriorityFeePerGas: string;
+        maxFeePerGas: string;
     };
     estimatedBaseFee: number;
 };
