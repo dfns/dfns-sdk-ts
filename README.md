@@ -34,9 +34,9 @@ The classes below support each one, their responsibility is to sign a challenge:
 
 #### Browser Signers
 
-The SDK exposed in `@dfns/sdk-browser` implements two classes: `WebAuthnSigner` and `BrowserKeySigner`. 
+The SDK exposed in `@dfns/sdk-browser` implements two classes: `WebAuthnSigner` and `BrowserKeySigner`.
 `WebAuthnSigner` is highly recommended as it is the most secure option. The private key never leaves the authenticator and is never available to the browser.
-`BrowserKeySigner` is disouraged as the private key lives in the browser memory. The developer needs to come up with a secure way to load and use the private key while still keeping it secure. 
+`BrowserKeySigner` is disouraged as the private key lives in the browser memory. The developer needs to come up with a secure way to load and use the private key while still keeping it secure.
 
 ##### `WebAuthnSigner`
 
@@ -63,7 +63,7 @@ const browserKey = new BrowserKeySigner({
 const attestation = await browserKey.create(challenge)
 
 // Create the assertion object to sign a request with the credential
-const assertion = await browserKey.sign(challenge) 
+const assertion = await browserKey.sign(challenge)
 ```
 
 #### React Native Signer
@@ -208,6 +208,7 @@ Integrations with other blockchain platforms to make Dapp development frictionle
 - [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/)/[v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs)
 - [polkadot{.js}](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polkadot/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polkadot)
 - [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/solana)
+- [Stellar sdk](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-stellar/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/stellar)
 - [Tezos Taquito](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-taquito/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/taquito)
 - [TronWeb](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-tron/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/tron)
 - [Vechain Connex](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-vechain/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/vechain)
