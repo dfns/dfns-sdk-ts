@@ -1,8 +1,9 @@
 'use client'
 
-import useAppContext from '@/hooks/useGlobalContext'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
+
+import { useAppContext } from '../hooks/useAppContext'
 
 const intro = `
 ## Introduction
@@ -30,64 +31,59 @@ For this demo to work, you need to complete a few prerequisites:
 const step1 = `
 ## Step 1 - Delegated Registration
 
-The end-user already exists in your system, and the identity/auth provider you use. So can already be authenticated with your server.
+Your customers, either new or existing, must register with Dfns first and have credential(s) in our system in order to own and be able to interact with their blockchain wallets.
 
-However, this end-user also needs to be registered with Dfns, so that Dfns can identify him, and let him create Wallets that he will own.
-
-You also may not want this end-user to go through a Dfns regsitration flow (receiving an email from Dfns, etc.), so you will use "Delegated Registration" to have your server register this end-user with Dfns (here, "delegated" means your server will register the user "on his behalf"). The end user is still involved in the process, to register and create a WebauthN credentials (from the client app).
+The delegated registration flow allows you to initiate and and complete the registration process on your customers behalf, without them being aware that the wallets infrastructure is powered by Dfns, i.e. they will not receive an registration email from Dfns directly unlike the normal registration process for your employees. Their WebAuthn credentials are still completely under their control.
 
 Find relevant code in:
-- \`./app/api/register/init/route.ts\` (Server endpoint - registration init)
-- \`./app/api/register/complete/route.ts\` (Server endpoint - registration complete)
 - \`./app/register/page.tsx\` (Client-side registration page)
+- \`./app/api/register/init/route.ts\` (Server registration init endpoint)
+- \`./app/api/register/complete/route.ts\` (Server registration complete endpoint)
 `
 
 const step2 = `
-## Step 2 - Wallets
+## Step 2 - Delegated Login
 
-After previous steps, your end user can check the list of wallets he owns, and create new ones.
+The delegated signing flow does not need the end user sign with the WebAuthn credential. The login can be performed on the server side transparent to the end users and obtain a readonly auth token. For example, your server can choose to automatically login the end users upon the completion of delegated registration. In this tutorial, this step is shown as explicit in order to more clearly demonstrate how the interaction works.
 
-Getting the list of wallets only involves a readonly call, which do not needs to be sined by the end user, so you won't see any prompt asking theuser to sign something.
+Find relevant code in:
+- \`./app/login/page.tsx\` (Client-side login page)
+- \`./app/api/login/route.ts\` (Server login endpoint)
+`
 
-However, creating a new wallet will require the end user to sign a challenge in order to complete the request. You will see the WebauthN prompt show up there, and you can check in the code that the Wallet creatin process is divided in two steps (init + complete). Check the code in:
+const step3 = `
+## Step 3 - Wallets
 
-- \`./app/api/wallets/create/init/route.ts\` (Server endpoint to init)
-- \`./app/api/wallets/create/complete/route.ts\` (Server endpoint to complete)
-- \`./app/wallets/page.tsx\` (Client registration page)
+Once logged in, the end users can use the wallets they own.
+
+- \`./app/wallets/page.tsx\` (Client-side wallets page)
+- \`./app/api/wallets/list/route.ts\` (Server list wallets endpoint)
+- \`./app/api/wallets/signatures/init/route.ts\` (Server generate wallet signature init endpoint)
+- \`./app/api/wallets/signatures/complete/route.ts\` (Server generate wallet signature complete endpoint)
 `
 
 export default function Home() {
-  const { dfnsEndUserAuthToken, resetDfnsEndUser } = useAppContext()
+  const { authToken } = useAppContext()
 
   return (
     <div>
       <ReactMarkdown>{intro}</ReactMarkdown>
       <ReactMarkdown>{prerequisites}</ReactMarkdown>
       <ReactMarkdown>{step1}</ReactMarkdown>
-      {!dfnsEndUserAuthToken ? (
-        <>
-          <p className="text-center">
-            <Link href="/register" className="btn no-underline">
-              Go to Delegated Registration
-            </Link>
-          </p>
-          <p className="text-center">OR, if you already registered a end user before:</p>
-          <p className="text-center">
-            <Link href="/login" className="btn no-underline">
-              Go to Login Page
-            </Link>
-          </p>
-        </>
-      ) : (
-        <p className="text-center">
-          ✅ End user is Logged in with Dfns ✅{' '}
-          <button className="hover:underline" onClick={resetDfnsEndUser}>
-            Logout
-          </button>
-        </p>
-      )}
+      <p className="text-center">
+        <Link href="/register" className="btn no-underline">
+          Go to Delegated Registration
+        </Link>
+      </p>
       <ReactMarkdown>{step2}</ReactMarkdown>
-      {!dfnsEndUserAuthToken ? (
+      <p className="text-center">
+        <Link href="/login" className="btn no-underline">
+          Go to Delegated Login
+        </Link>
+      </p>
+
+      <ReactMarkdown>{step3}</ReactMarkdown>
+      {!authToken ? (
         <p className="text-center">⚠️ You need Complete Step 1 first</p>
       ) : (
         <p className="text-center">

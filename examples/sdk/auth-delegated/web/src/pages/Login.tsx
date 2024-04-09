@@ -47,9 +47,9 @@ export default function Login(): JSX.Element {
       <div className="w-full">
         <h2>Delegated Login</h2>
         <p>
-          For this tutorial, the delegated login flow is started on the client side by pressing the "Login User" button.
+          For this tutorial, the delegated login flow is started on the client side by pressing the "Login EndUser" button.
           A request is sent to the server and a readonly auth token is returned in the response. This flow does not need
-          user to sign with the passkey crendetial.
+          users to sign with the WebAuthn credential.
         </p>
         <p>
           This auth token is readonly and needs to be cached and passed along with all requests interacting with the
@@ -60,7 +60,7 @@ export default function Login(): JSX.Element {
         <div className="flex items-center gap-2">
           <input type="email" name="username" placeholder="Enter the username" className="input" />
           <button className="btn" type="submit">
-            Login User
+            Login EndUser
           </button>
         </div>
 

@@ -1,4 +1,6 @@
-// FIXME: Missing documentation for AssetPairPrice
+/**
+ * @deprecated to be deleted
+ */
 export type AssetPairPrice = {
   // FIXME: Missing documentation for pair
   pair: string
@@ -21,7 +23,9 @@ export type AssetPairPrice = {
   id: EntityId
 }
 
-// FIXME: Missing documentation for EmployeeInitiator
+/**
+ * @deprecated to be deleted
+ */
 export type EmployeeInitiator = {
   // FIXME: Missing documentation for kind
   kind: InitiatorKind.Employee
@@ -33,7 +37,9 @@ export type EmployeeInitiator = {
   employeeId: EntityId
 }
 
-// FIXME: Missing documentation for DfnsStaffInitiator
+/**
+ * @deprecated to be deleted
+ */
 export type DfnsStaffInitiator = {
   // FIXME: Missing documentation for kind
   kind: InitiatorKind.DfnsStaff
@@ -45,7 +51,9 @@ export type DfnsStaffInitiator = {
   country: Countries
 }
 
-// FIXME: Missing documentation for DfnsCustomerServiceInitiator
+/**
+ * @deprecated to be deleted
+ */
 export type DfnsCustomerServiceInitiator = {
   // FIXME: Missing documentation for kind
   kind: InitiatorKind.DfnsCustomerService
@@ -57,7 +65,9 @@ export type DfnsCustomerServiceInitiator = {
   apiKeyId: EntityId
 }
 
-// FIXME: Missing documentation for ApiKeyInitiator
+/**
+ * @deprecated to be deleted
+ */
 export type ApiKeyInitiator = {
   // FIXME: Missing documentation for kind
   kind: InitiatorKind.ApiKey
@@ -69,7 +79,9 @@ export type ApiKeyInitiator = {
   apiKeyId: EntityId
 }
 
-// FIXME: Missing documentation for OrgBelongingEntity
+/**
+ * @deprecated to be deleted
+ */
 export type OrgBelongingEntity = {
   /**
    * Multiple tags can be attached to an entity to categorise or otherwise mark it. For example tags could indicate risk (High, Medium, Low), departments (Trading, Sales, IT), purpose (Treasury, Hot, Deposits), and jurisdictions (US, EU, DE).
@@ -89,7 +101,9 @@ export type OrgBelongingEntity = {
   orgId: EntityId
 }
 
-// FIXME: Missing documentation for BlockchainAddressInitiator
+/**
+ * @deprecated to be deleted
+ */
 export type BlockchainAddressInitiator = {
   // FIXME: Missing documentation for kind
   kind: InitiatorKind.BlockchainAddress
@@ -140,7 +154,9 @@ export type BlockchainAddress = string
 // FIXME: Missing documentation for IntegerPositiveStrict
 export type IntegerPositiveStrict = number
 
-// FIXME: Missing documentation for Initiator
+/**
+ * @deprecated to be deleted
+ */
 export type Initiator =
   | EmployeeInitiator
   | DfnsStaffInitiator
@@ -148,7 +164,9 @@ export type Initiator =
   | ApiKeyInitiator
   | BlockchainAddressInitiator
 
-// FIXME: Missing documentation for Countries
+/**
+ * @deprecated to be deleted
+ */
 export enum Countries {
   //Afghanistan
   AF = 'AF',
@@ -1379,7 +1397,9 @@ export const COUNTRIES_DATA: Record<Countries, CountriesMetadata> = {
   },
 }
 
-// FIXME: Missing documentation for AssetSymbol
+/**
+ * @deprecated to be deleted
+ */
 export enum AssetSymbol {
   //Cardano native currency
   ADA = 'ADA',
@@ -57665,7 +57685,9 @@ export const ASSET_SYMBOL_DATA: Record<AssetSymbol, AssetSymbolMetadata> = {
   },
 }
 
-// FIXME: Missing documentation for InitiatorKind
+/**
+ * @deprecated to be deleted
+ */
 export enum InitiatorKind {
   // FIXME: Missing documentation for Employee
   Employee = 'Employee',
@@ -57679,7 +57701,9 @@ export enum InitiatorKind {
   BlockchainAddress = 'BlockchainAddress',
 }
 
-// FIXME: Missing documentation for IdentityIssuer
+/**
+ * @deprecated to be deleted
+ */
 export enum IdentityIssuer {
   // FIXME: Missing documentation for Dfns
   Dfns = 'Dfns',

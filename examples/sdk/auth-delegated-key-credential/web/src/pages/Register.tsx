@@ -10,7 +10,7 @@ export default function Register(): JSX.Element {
   const [response, setResponse] = React.useState(undefined)
   const [error, setError] = React.useState(undefined)
 
-  const { setKeyPair } = useAppContext()
+  const { setKeyPair, setOrgId } = useAppContext()
 
   const register = async (event: FormEvent<HTMLFormElement>) => {
     try {
@@ -35,16 +35,14 @@ export default function Register(): JSX.Element {
       const challenge = await initRes.json()
       console.log(JSON.stringify(challenge, null, 2))
 
-      // Key pair flow
-      // Key is generated randomly here
-      // In a production environment they key should be protected
-      // and loaded securely in the browser
+      // Keypair is generated randomly here. In a production environment, you need to securely store
+      // and load the key from a persisted storage.
       const generatedKeyPair = await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, [
         'sign',
         'verify',
       ])
-      // Here the private key is set as a session variable
-      // key will not exists upon referesh or logout
+
+      // The private key is set as a session variable and will not exist upon refresh or logout
       setKeyPair(generatedKeyPair)
       const browserKey = new BrowserKeySigner({
         keyPair: generatedKeyPair,
@@ -66,7 +64,11 @@ export default function Register(): JSX.Element {
         }),
       })
 
-      setResponse(await completeRes.json())
+      // caches the orgId for the login flow
+      const response = await completeRes.json()
+      setOrgId(response.user.orgId)
+
+      setResponse(response)
       setError(undefined)
     } catch (error: any) {
       setResponse(undefined)
@@ -81,14 +83,15 @@ export default function Register(): JSX.Element {
       <div className="w-full">
         <h2>Delegated Registration</h2>
         <p>
-          For this tutorial, you need to register a Dfns EndUser, and this is where the registration flow starts.
-          However, in your final app, the flow may be different and the username might come from your internal system.
+          In this simple example, the key pair is generated randomly and stored as a session variable. It will be lost
+          if the page is reloaded. In a production environment, you need to securely store and load the key from a
+          persisted storage. That is out of the scope of this example.
         </p>
         <p>Enter the email as the username you are registering, and hit the "Register User" button.</p>
         <div className="flex items-center gap-2">
           <input type="email" name="username" placeholder="Choose a username" className="input" />
           <button className="btn" type="submit">
-            Register User
+            Register EndUser
           </button>
         </div>
 

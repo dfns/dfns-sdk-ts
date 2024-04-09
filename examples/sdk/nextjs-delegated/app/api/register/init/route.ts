@@ -1,14 +1,22 @@
 import { UserAuthKind } from '@dfns/sdk/codegen/datamodel/Auth'
 import { NextResponse } from 'next/server'
-import { dfns } from '../../utils'
 
-export async function POST(request: Request) {
-  const body = (await request.json()) as { email: string }
+import { apiClient } from '../../clients'
 
-  // Initiate end-user delegated registration
-  const registrationChallenge = await dfns.auth.createDelegatedRegistrationChallenge({
-    body: { email: body.email, kind: UserAuthKind.EndUser },
+export const POST = async (req: Request) => {
+  // You can perform the registration flow of your system before starting the
+  // Dfns delegated registration.
+  const { username } = await req.json()
+
+  // Registration must use the appId and appOrigin of the client application,
+  // otherwise the challenge returned does not have the appropriate relying
+  // party and origin to create the WebAuthn or Passkeys credential
+  const client = apiClient()
+  const challenge = await client.auth.createDelegatedRegistrationChallenge({
+    body: { kind: UserAuthKind.EndUser, email: username },
   })
 
-  return NextResponse.json(registrationChallenge)
+  console.debug(challenge)
+
+  return NextResponse.json(challenge)
 }

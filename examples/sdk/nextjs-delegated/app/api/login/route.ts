@@ -1,16 +1,19 @@
-import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'
 import { NextRequest, NextResponse } from 'next/server'
-import { dfns } from '../utils'
 
-export async function POST(request: NextRequest) {
-  const body = (await request.json()) as { email: string }
+import { apiClient } from '../clients'
 
-  const { token: userAuthToken } = await dfns.auth.delegatedLogin({ body: { username: body.email } })
+export const POST = async (request: NextRequest) => {
+  // You can perform the login flow of your system before login the user
+  // to Dfns with delegated login. Delegated login does not need the
+  // end user to use WebAuthn or Passkeys to login.
+  const { username } = await request.json()
+  const client = apiClient()
+  const login = await client.auth.delegatedLogin({ body: { username } })
 
-  const response = NextResponse.json({ ok: true })
-
-  // Here we chose to cache the end-user Dfns auth token in a cookie. You could choose to cache it in a store, or not cache it at all. If not cached though, you'll need to perform delegated login every time you want to do a Dfns action on behalf of your end-user.
-  response.cookies.set(DFNS_END_USER_TOKEN_COOKIE, userAuthToken)
-
-  return response
+  // The auth token returned by delegated login should be cached securely for the
+  // duration of the login session. It can be stored either on the server or on the
+  // client. The approach is up you. For example, you can use a cookie to maintain
+  // the state across requests. In this example, it's returned as the response body,
+  // and cached on the client.
+  return NextResponse.json({ username, token: login.token })
 }

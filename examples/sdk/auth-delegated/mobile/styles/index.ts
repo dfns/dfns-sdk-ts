@@ -15,4 +15,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  markdown: {
+    userSelect: 'auto',
+  },
 })
