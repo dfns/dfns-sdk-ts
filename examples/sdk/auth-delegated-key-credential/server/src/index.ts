@@ -4,9 +4,8 @@ import express, { Express, Request, Response } from 'express'
 import asyncHandler from 'express-async-handler'
 import morgan from 'morgan'
 
-import { login } from './handlers/login'
+import { loginComplete, loginInit } from './handlers/login'
 import { registerComplete, registerInit } from './handlers/register'
-import { createWalletComplete, createWalletInit, listWallets } from './handlers/wallets'
 
 dotenv.config()
 
@@ -19,14 +18,11 @@ app.get('/', (_: Request, res: Response) => {
   res.send('Dfns SDK Tutorial Server')
 })
 
-app.post('/login', asyncHandler(login))
+app.post('/login/init', asyncHandler(loginInit))
+app.post('/login/complete', asyncHandler(loginComplete))
 
 app.post('/register/init', asyncHandler(registerInit))
 app.post('/register/complete', asyncHandler(registerComplete))
-
-app.post('/wallets/list', asyncHandler(listWallets))
-app.post('/wallets/new/init', asyncHandler(createWalletInit))
-app.post('/wallets/new/complete', asyncHandler(createWalletComplete))
 
 const port = process.env.EXPRESS_PORT
 app.listen(port, () => {

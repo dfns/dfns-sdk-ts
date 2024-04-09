@@ -5,33 +5,57 @@ import { FormEvent, useState } from 'react'
 
 export default function Register() {
   const [loading, setLoading] = useState(false)
+  const [response, setResponse] = useState(undefined)
   const [error, setError] = useState(undefined)
 
-  const [result, setResult] = useState(undefined)
+  const register = async (event: FormEvent<HTMLFormElement>) => {
+    try {
+      setLoading(true)
+      event.preventDefault()
 
-  const register = (event: FormEvent<HTMLFormElement>) => {
-    setLoading(true)
-    event.preventDefault()
-    const email = new FormData(event.currentTarget).get('email') as string
+      const formData = new FormData(event.currentTarget)
 
-    fetch('/api/register/init', { method: 'POST', body: JSON.stringify({ email }) })
-      .then((result) => result.json())
-      .then(async (challenge) => {
-        console.log('register init challenge', challenge)
-        const webauthn = new WebAuthnSigner()
-        const attestation = await webauthn.create(challenge)
-        return fetch('./api/register/complete', {
-          method: 'POST',
-          body: JSON.stringify({
-            tempAuthToken: challenge.temporaryAuthenticationToken,
-            signedChallenge: { firstFactorCredential: attestation },
-          }),
-        })
+      // Start delegated registration flow. Server needs to obtain the challenge with the appId
+      // and appOrigin of the mobile application. For simplicity, they are included as part of
+      // the request body. Alternatively, they can be sent as headers or with other approaches.
+      const initRes = await fetch('/api/register/init', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.get('username') as string,
+        }),
       })
-      .then((result) => result.json())
-      .then((result) => setResult(result))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false))
+      const challenge = await initRes.json()
+      console.log(JSON.stringify(challenge, null, 2))
+
+      // Webauthn flow
+      // Create the new webauthn credential using the challenge
+      const webauthn = new WebAuthnSigner()
+      const attestation = await webauthn.create(challenge)
+      console.log(JSON.stringify(attestation, null, 2))
+
+      // Finish delegated registration
+      const completeRes = await fetch('/api/register/complete', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          signedChallenge: { firstFactorCredential: attestation },
+          temporaryAuthenticationToken: challenge.temporaryAuthenticationToken,
+        }),
+      })
+
+      setResponse(await completeRes.json())
+      setError(undefined)
+    } catch (error: any) {
+      setResponse(undefined)
+      setError(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -39,26 +63,28 @@ export default function Register() {
       <div className="w-full">
         <h2>Delegated Registration</h2>
         <p>
-          For the purpose of this demo, you need to register a Dfns EndUser, and this is where the registration flow
-          starts. However, in your final app, the flow may be different and the user email might come from your
-          database, your auth system, etc...
+          For this tutorial, you will register a Dfns EndUser, and this is where the registration flow starts. However,
+          in your final app, the flow may be different and the username might come from your internal system.
         </p>
         <p>
-          Here, this will instruct the server to start the delegated registration process for the user with the email
-          you pass in.
+          After registration, the new end user will have an Ethereum testnet wallet and assigned the system permission,
+          `DfnsDefaultEndUserAccess`, that grants the end user full access to their wallets.
         </p>
+        <p>Enter the email as the username you are registering, and hit the &quot;Register EndUser&quot; button.</p>
         <div className="flex items-center gap-2">
-          <input type="email" name="email" placeholder="email" className="input" />
+          <input type="email" name="username" placeholder="Choose a username" className="input" />
           <button className="btn" type="submit">
-            Register User with Dfns
+            Register EndUser
           </button>
         </div>
 
-        {!!loading && <span>loading...</span>}
+        {!!loading && <span>registering ...</span>}
+
+        {!!response && (
+          <pre className="p-4 drop-shadow-lg mt-2 overflow-x-scroll">{JSON.stringify(response, null, 2)}</pre>
+        )}
 
         {!!error && <div className="text-red-700">{JSON.stringify(error)}</div>}
-
-        {!!result && <pre className="p-4 drop-shadow-lg mt-2 overflow-x-scroll">{JSON.stringify(result, null, 2)}</pre>}
       </div>
     </form>
   )

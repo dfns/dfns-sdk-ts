@@ -289,10 +289,17 @@ export type CreateApplicationBody = {
     relyingPartyId: string;
     origin: string;
     permissionId?: string | undefined;
-    kind: "ServerSideApplication" | "ClientSideApplication";
-    daysValid?: number | undefined;
-    publicKey?: (string | undefined) | "";
     externalId?: string | undefined;
+    kind: "ClientSideApplication";
+} | {
+    name: string;
+    relyingPartyId: string;
+    origin: string;
+    permissionId?: string | undefined;
+    externalId?: string | undefined;
+    kind: "ServerSideApplication";
+    publicKey: string;
+    daysValid?: number | undefined;
 };
 
 export type CreateApplicationResponse = {
@@ -1441,8 +1448,6 @@ export type ListAvailableOrgsResponse = {
 
 export type ListAvailableOrgsRequest = { body: ListAvailableOrgsBody }
 
-export type ListCredentialsQuery = {};
-
 export type ListCredentialsResponse = {
     items: {
         kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
@@ -1456,8 +1461,6 @@ export type ListCredentialsResponse = {
         origin: string;
     }[];
 };
-
-export type ListCredentialsRequest = { query?: ListCredentialsQuery }
 
 export type ListPersonalAccessTokensResponse = {
     items: {
@@ -1796,6 +1799,96 @@ export type RegisterResponse = {
 };
 
 export type RegisterRequest = { body: RegisterBody }
+
+export type RegisterEndUserBody = {
+    firstFactorCredential: {
+        credentialKind: "Fido2";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+    } | {
+        credentialKind: "Key";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+    } | {
+        credentialKind: "Password";
+        credentialInfo: {
+            password: string;
+        };
+    };
+    secondFactorCredential?: ({
+        credentialKind: "Fido2";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+    } | {
+        credentialKind: "Key";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+    } | {
+        credentialKind: "Totp";
+        credentialInfo: {
+            otpCode: string;
+        };
+    }) | undefined;
+    recoveryCredential?: {
+        credentialKind: "RecoveryKey";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+        encryptedPrivateKey?: string | undefined;
+    } | undefined;
+    wallets: {
+        network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Solana" | "SolanaDevnet" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
+        name?: string | undefined;
+    }[];
+};
+
+export type RegisterEndUserResponse = {
+    credential: {
+        uuid: string;
+        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+        name: string;
+    };
+    user: {
+        id: string;
+        username: string;
+        orgId: string;
+    };
+    wallets: {
+        id: string;
+        network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+        address?: string | undefined;
+        signingKey: {
+            scheme: "ECDSA" | "EdDSA";
+            curve: "ed25519" | "secp256k1" | "stark";
+            publicKey: string;
+        };
+        status: "Active" | "Archived";
+        dateCreated: string;
+        name?: string | undefined;
+        custodial: boolean;
+        imported?: boolean | undefined;
+        exported?: boolean | undefined;
+        dateExported?: string | undefined;
+        externalId?: string | undefined;
+        tags?: string[] | undefined;
+    }[];
+};
+
+export type RegisterEndUserRequest = { body: RegisterEndUserBody }
 
 export type ResendRegistrationCodeBody = {
     username: string;

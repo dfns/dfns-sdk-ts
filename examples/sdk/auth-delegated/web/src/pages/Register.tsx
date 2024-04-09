@@ -66,14 +66,18 @@ export default function Register(): JSX.Element {
       <div className="w-full">
         <h2>Delegated Registration</h2>
         <p>
-          For this tutorial, you need to register a Dfns EndUser, and this is where the registration flow starts.
-          However, in your final app, the flow may be different and the username might come from your internal system.
+          For this tutorial, you will register a Dfns EndUser, and this is where the registration flow starts. However,
+          in your final app, the flow may be different and the username might come from your internal system.
         </p>
-        <p>Enter the email as the username you are registering, and hit the "Register User" button.</p>
+        <p>
+          After registration, the new end user will have an Ethereum testnet wallet and assigned the system permission,
+          `DfnsDefaultEndUserAccess`, that grants the end user full access to their wallets.
+        </p>
+        <p>Enter the email as the username you are registering, and hit the "Register EndUser" button.</p>
         <div className="flex items-center gap-2">
           <input type="email" name="username" placeholder="Choose a username" className="input" />
           <button className="btn" type="submit">
-            Register User
+            Register EndUser
           </button>
         </div>
 

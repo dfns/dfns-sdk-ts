@@ -5,7 +5,6 @@ import { AppContextProvider } from './hooks/useAppContext'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Wallets from './pages/Wallets'
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/wallets" element={<Wallets />} />
           </Routes>
         </BrowserRouter>
       </AppContextProvider>

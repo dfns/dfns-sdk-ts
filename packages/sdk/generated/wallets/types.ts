@@ -90,7 +90,7 @@ export type CreateWalletBody = {
     network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Solana" | "SolanaDevnet" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
     name?: string | undefined;
     externalId?: string | undefined;
-    tags?: string[] | undefined;
+    delegateTo?: string | undefined;
     delayDelegation?: boolean | undefined;
 };
 

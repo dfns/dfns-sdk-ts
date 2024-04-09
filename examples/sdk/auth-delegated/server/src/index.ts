@@ -6,7 +6,7 @@ import morgan from 'morgan'
 
 import { login } from './handlers/login'
 import { registerComplete, registerInit } from './handlers/register'
-import { createWalletComplete, createWalletInit, listWallets } from './handlers/wallets'
+import { generateSignatureComplete, generateSignatureInit, listWallets } from './handlers/wallets'
 
 dotenv.config()
 
@@ -25,8 +25,8 @@ app.post('/register/init', asyncHandler(registerInit))
 app.post('/register/complete', asyncHandler(registerComplete))
 
 app.post('/wallets/list', asyncHandler(listWallets))
-app.post('/wallets/new/init', asyncHandler(createWalletInit))
-app.post('/wallets/new/complete', asyncHandler(createWalletComplete))
+app.post('/wallets/signatures/init', asyncHandler(generateSignatureInit))
+app.post('/wallets/signatures/complete', asyncHandler(generateSignatureComplete))
 
 // static files to associate the domain with Android and iOS apps
 app.use(

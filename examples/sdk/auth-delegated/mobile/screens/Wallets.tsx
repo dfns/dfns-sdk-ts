@@ -1,6 +1,6 @@
 import { PasskeysSigner } from '@dfns/sdk-react-native'
 import React, { useEffect } from 'react'
-import { Button, GestureResponderEvent, SafeAreaView, ScrollView, Text, View } from 'react-native'
+import { Button, GestureResponderEvent, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native'
 import Config from 'react-native-config'
 import Markdown from 'react-native-markdown-display'
 
@@ -8,8 +8,10 @@ import { useAppContext } from '../hooks/useAppContext'
 import { styles } from '../styles'
 
 export function Wallets(): React.JSX.Element {
+  const [message, setMessage] = React.useState('')
   const [loading, setLoading] = React.useState(false)
-  const [response, setResponse] = React.useState(undefined)
+  const [wallets, setWallets] = React.useState<any>(undefined)
+  const [sighash, setSighash] = React.useState<any>(undefined)
   const [error, setError] = React.useState(undefined)
 
   const { authToken } = useAppContext()
@@ -29,11 +31,11 @@ export function Wallets(): React.JSX.Element {
         }),
       })
 
-      setResponse(await res.json())
+      setWallets(await res.json())
       setError(undefined)
     } catch (error: any) {
       console.log(error)
-      setResponse(undefined)
+      setWallets(undefined)
       setError(error)
     } finally {
       setLoading(false)
@@ -44,12 +46,14 @@ export function Wallets(): React.JSX.Element {
     listWallets()
   }, [])
 
-  const create = async (event: GestureResponderEvent) => {
+  const signMessage = async (event: GestureResponderEvent) => {
     try {
       setLoading(true)
       event.preventDefault()
 
-      const initRes = await fetch(`${Config.EXPRESS_API_URL!}/wallets/new/init`, {
+      const walletId = wallets.items[0].id
+
+      const initRes = await fetch(`${Config.EXPRESS_API_URL!}/wallets/signatures/init`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -57,6 +61,8 @@ export function Wallets(): React.JSX.Element {
         body: JSON.stringify({
           appId: Config.DFNS_APP_ID!,
           authToken,
+          walletId,
+          message,
         }),
       })
 
@@ -68,7 +74,7 @@ export function Wallets(): React.JSX.Element {
       const assertion = await passkeys.sign(challenge)
       console.log(JSON.stringify(assertion, null, 2))
 
-      await fetch(`${Config.EXPRESS_API_URL!}/wallets/new/complete`, {
+      const completeRes = await fetch(`${Config.EXPRESS_API_URL!}/wallets/signatures/complete`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -76,6 +82,7 @@ export function Wallets(): React.JSX.Element {
         body: JSON.stringify({
           appId: Config.DFNS_APP_ID!,
           authToken,
+          walletId,
           requestBody,
           signedChallenge: {
             challengeIdentifier: challenge.challengeIdentifier,
@@ -84,7 +91,8 @@ export function Wallets(): React.JSX.Element {
         }),
       })
 
-      await listWallets()
+      setSighash(await completeRes.json())
+      setError(undefined)
     } catch (error: any) {
       console.log(error)
       setError(error)
@@ -98,27 +106,44 @@ export function Wallets(): React.JSX.Element {
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.background}>
         <View style={styles.section}>
           <Text>
-            Listing the wallets only needs the readonly auth token and do not use Passkeys signing. You won't be prompted
-            to use the passkey on screen load.
+            The Ethereum testnet wallet created for the end user during registration is listed below. Listing wallets
+            only needs the readonly auth token. End users won't be prompted to use their Passkeys credentials.
           </Text>
         </View>
-        {!!response && (
+        {!!wallets && (
           <View style={styles.section}>
             <Markdown>{`\`\`\`
-${JSON.stringify(response, null, 2)}
+${JSON.stringify(wallets, null, 2)}
 \`\`\``}</Markdown>
           </View>
         )}
         <View style={styles.section}>
           <Text>
-            Creating a new wallet will require the end user to sign a challenge in order to complete the request. You
-            will see the Passkeys prompt show up after pressing the "Create New Wallet" button. After the action is
-            authorized, a new wallet is created for the logged in end user.
+            Use wallets to broadcast transactions will require the end users to sign a challenge each time to authorize
+            the action. For this tutorial, because new wallets do not have any native tokens to pay for gas fees, we
+            won't be able to broadcast any transactions to chain. Instead, we will sign an arbitrary message that can be
+            used as proof the end user is the owner of the private key secured by Dfns.
           </Text>
         </View>
         <View style={styles.section}>
-          <Button title="Create New Wallet" onPress={create} />
+          <Text>
+            Enter a message in the input box and press the "Sign Message" button. You will see a WebAuthn prompt asking
+            for authorization to perform the action. Once granted, the tutorial makes a request to Dfns MPC signers and
+            gets a signature hash. Optionally you can use etherscan to verify this signature hash matches the wallet
+            address.
+          </Text>
         </View>
+        <View style={styles.section}>
+          <TextInput style={styles.input} onChangeText={setMessage} value={message} placeholder="Enter your message" />
+          <Button title="Sign Message" onPress={signMessage} />
+        </View>
+        {!!sighash && (
+          <View style={styles.section}>
+            <Markdown>{`\`\`\`
+${JSON.stringify(sighash, null, 2)}
+\`\`\``}</Markdown>
+          </View>
+        )}
         {!!loading && (
           <View style={styles.section}>
             <Text>loading ...</Text>
