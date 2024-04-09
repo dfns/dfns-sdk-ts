@@ -1,13 +1,12 @@
 {
-  "name": "zerodev-aa-gasless",
+  "name": "biconomy-aa-gasless",
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
+    "@biconomy/account": "4.1.1",
     "@dfns/lib-viem": "file:../../../../packages/lib-viem",
     "@dfns/sdk": "file:../../../../packages/sdk",
     "@dfns/sdk-keysigner": "file:../../../../packages/sdk-keysigner",
-    "@zerodev/presets": "5.1.4",
-    "@zerodev/sdk": "5.1.18",
     "dotenv": "16.1.4",
     "viem": "2.9.9"
   },
