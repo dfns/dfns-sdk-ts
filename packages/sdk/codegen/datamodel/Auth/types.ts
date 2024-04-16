@@ -6,7 +6,9 @@ import {
   Username,
 } from '../Foundations'
 
-// FIXME: Missing documentation for Application
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type Application = {
   // FIXME: Missing documentation for appId
   appId: EntityId
@@ -15,13 +17,17 @@ export type Application = {
   apiToken?: Jwt
 }
 
-// FIXME: Missing documentation for GenericSuccessMessage
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type GenericSuccessMessage = {
   // FIXME: Missing documentation for message
   message: string
 }
 
-// FIXME: Missing documentation for UserRegistration
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserRegistration = {
   // FIXME: Missing documentation for credential
   credential: UserCredentialInformation
@@ -30,7 +36,9 @@ export type UserRegistration = {
   user: UserRegistrationInformation
 }
 
-// FIXME: Missing documentation for UserRegistrationChallenge
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserRegistrationChallenge = {
   // FIXME: Missing documentation for temporaryAuthenticationToken
   temporaryAuthenticationToken: Jwt
@@ -63,7 +71,9 @@ export type UserRegistrationChallenge = {
   excludeCredentials: AllowCredential[]
 }
 
-// FIXME: Missing documentation for UserLoginChallenge
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserLoginChallenge = {
   // FIXME: Missing documentation for supportedCredentialKinds
   supportedCredentialKinds: SupportedCredentials[]
@@ -90,19 +100,25 @@ export type UserLoginChallenge = {
   userVerification: AuthenticatorRequirementOptions
 }
 
-// FIXME: Missing documentation for UserLogin
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserLogin = {
   // FIXME: Missing documentation for token
   token: Jwt
 }
 
-// FIXME: Missing documentation for UserActionSignature
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserActionSignature = {
   // FIXME: Missing documentation for userAction
   userAction: string
 }
 
-// FIXME: Missing documentation for AccessTokenInfoWithPublicKey
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AccessTokenInfoWithPublicKey = {
   // FIXME: Missing documentation for accessToken
   accessToken?: Jwt
@@ -141,7 +157,9 @@ export type AccessTokenInfoWithPublicKey = {
   tokenId: EntityId
 }
 
-// FIXME: Missing documentation for UserInfo
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserInfo = {
   // FIXME: Missing documentation for username
   username: string
@@ -177,7 +195,9 @@ export type UserInfo = {
   permissionAssignments: PermissionAssignmentInfo[]
 }
 
-// FIXME: Missing documentation for UserAccessTokenInformation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserAccessTokenInformation = {
   // FIXME: Missing documentation for userInfo
   userInfo: UserInfo
@@ -186,7 +206,9 @@ export type UserAccessTokenInformation = {
   accessTokens: AccessTokenInfoWithPublicKey[]
 }
 
-// FIXME: Missing documentation for AppInfoWithPublicKey
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AppInfoWithPublicKey = {
   // FIXME: Missing documentation for appId
   appId: EntityId
@@ -216,7 +238,9 @@ export type AppInfoWithPublicKey = {
   accessTokens: AccessTokenInfoWithPublicKey[]
 }
 
-// FIXME: Missing documentation for CredentialInfo
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CredentialInfo = {
   // FIXME: Missing documentation for credentialId
   credentialId: string
@@ -246,7 +270,9 @@ export type CredentialInfo = {
   origin: string
 }
 
-// FIXME: Missing documentation for AvailableOrg
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AvailableOrg = {
   /**
    * The ID of the organization.
@@ -259,7 +285,9 @@ export type AvailableOrg = {
   appId: EntityId
 }
 
-// FIXME: Missing documentation for UserRecoveryChallenge
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserRecoveryChallenge = {
   // FIXME: Missing documentation for temporaryAuthenticationToken
   temporaryAuthenticationToken: Jwt
@@ -295,7 +323,9 @@ export type UserRecoveryChallenge = {
   allowedRecoveryCredentials: AllowRecoveryCredential[]
 }
 
-// FIXME: Missing documentation for UserRegistrationBase
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserRegistrationBase = {
   // FIXME: Missing documentation for temporaryAuthenticationToken
   temporaryAuthenticationToken: Jwt
@@ -307,7 +337,9 @@ export type UserRegistrationBase = {
   user: AuthenticationUserInformation
 }
 
-// FIXME: Missing documentation for Fido2Options
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type Fido2Options = {
   // FIXME: Missing documentation for temporaryAuthenticationToken
   temporaryAuthenticationToken: Jwt
@@ -347,7 +379,9 @@ export type Fido2Options = {
   pubKeyCredParams: PubKeyCredParams[]
 }
 
-// FIXME: Missing documentation for PublicKeyOptions
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type PublicKeyOptions = {
   // FIXME: Missing documentation for temporaryAuthenticationToken
   temporaryAuthenticationToken: Jwt
@@ -371,7 +405,9 @@ export type PublicKeyOptions = {
   attestation: AuthenticatorAttestationOptions
 }
 
-// FIXME: Missing documentation for AllowCredential
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AllowCredential = {
   /**
    * Must be 'public-key'
@@ -385,7 +421,9 @@ export type AllowCredential = {
   transports?: string
 }
 
-// FIXME: Missing documentation for RelyingParty
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RelyingParty = {
   // FIXME: Missing documentation for id
   id: string
@@ -394,7 +432,9 @@ export type RelyingParty = {
   name: string
 }
 
-// FIXME: Missing documentation for AuthenticationUserInformation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthenticationUserInformation = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -406,7 +446,9 @@ export type AuthenticationUserInformation = {
   name: string
 }
 
-// FIXME: Missing documentation for PubKeyCredParams
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type PubKeyCredParams = {
   /**
    * Must be 'public-key'
@@ -417,7 +459,9 @@ export type PubKeyCredParams = {
   alg: number
 }
 
-// FIXME: Missing documentation for AuthenticatorSelection
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthenticatorSelection = {
   /**
    * If not given, any authenticator type can be used.
@@ -451,7 +495,9 @@ export type AuthenticatorSelection = {
   userVerification: AuthenticatorRequirementOptions
 }
 
-// FIXME: Missing documentation for ExcludeCredentials
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type ExcludeCredentials = {
   /**
    * Must be 'public-key'
@@ -465,7 +511,9 @@ export type ExcludeCredentials = {
   transports: FidoCredentialsTransportKind
 }
 
-// FIXME: Missing documentation for UserCredentialInformation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserCredentialInformation = {
   // FIXME: Missing documentation for uuid
   uuid: EntityId
@@ -477,7 +525,9 @@ export type UserCredentialInformation = {
   name: string
 }
 
-// FIXME: Missing documentation for UserRegistrationInformation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserRegistrationInformation = {
   // FIXME: Missing documentation for id
   id: EntityId
@@ -489,7 +539,9 @@ export type UserRegistrationInformation = {
   orgId: EntityId
 }
 
-// FIXME: Missing documentation for AuthenticateUserPasswordInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthenticateUserPasswordInput = {
   // FIXME: Missing documentation for kind
   kind: CredentialKind.Password
@@ -498,7 +550,9 @@ export type AuthenticateUserPasswordInput = {
   password: string
 }
 
-// FIXME: Missing documentation for AuthenticateUserFido2Input
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthenticateUserFido2Input = {
   // FIXME: Missing documentation for kind
   kind: CredentialKind.Fido2
@@ -507,7 +561,9 @@ export type AuthenticateUserFido2Input = {
   credentialAssertion: Fido2CredentialAssertion
 }
 
-// FIXME: Missing documentation for Fido2CredentialAssertion
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type Fido2CredentialAssertion = {
   // FIXME: Missing documentation for credId
   credId: string
@@ -525,7 +581,9 @@ export type Fido2CredentialAssertion = {
   userHandle: string
 }
 
-// FIXME: Missing documentation for KeyCredentialAssertion
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type KeyCredentialAssertion = {
   // FIXME: Missing documentation for credId
   credId: string
@@ -540,7 +598,9 @@ export type KeyCredentialAssertion = {
   algorithm?: string
 }
 
-// FIXME: Missing documentation for AuthenticateUserKeyInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthenticateUserKeyInput = {
   // FIXME: Missing documentation for kind
   kind: CredentialKind.Key
@@ -549,7 +609,9 @@ export type AuthenticateUserKeyInput = {
   credentialAssertion: KeyCredentialAssertion
 }
 
-// FIXME: Missing documentation for SupportedCredentialKinds
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type SupportedCredentialKinds = {
   // FIXME: Missing documentation for firstFactor
   firstFactor: CredentialKind[]
@@ -558,7 +620,9 @@ export type SupportedCredentialKinds = {
   secondFactor: CredentialKind[]
 }
 
-// FIXME: Missing documentation for RegistrationConfirmationFido2
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RegistrationConfirmationFido2 = {
   // FIXME: Missing documentation for credentialKind
   credentialKind: CredentialKind.Fido2
@@ -567,7 +631,9 @@ export type RegistrationConfirmationFido2 = {
   credentialInfo: CredentialAssertion
 }
 
-// FIXME: Missing documentation for RegistrationConfirmationKey
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RegistrationConfirmationKey = {
   // FIXME: Missing documentation for credentialKind
   credentialKind: CredentialKind.Key
@@ -576,7 +642,9 @@ export type RegistrationConfirmationKey = {
   credentialInfo: CredentialAssertion
 }
 
-// FIXME: Missing documentation for RegistrationConfirmationRecoveryKey
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RegistrationConfirmationRecoveryKey = {
   // FIXME: Missing documentation for encryptedPrivateKey
   encryptedPrivateKey?: string
@@ -588,7 +656,9 @@ export type RegistrationConfirmationRecoveryKey = {
   credentialKind: CredentialKind.RecoveryKey
 }
 
-// FIXME: Missing documentation for CredentialAssertion
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CredentialAssertion = {
   // FIXME: Missing documentation for credId
   credId: string
@@ -600,7 +670,9 @@ export type CredentialAssertion = {
   attestationData: string
 }
 
-// FIXME: Missing documentation for RegistrationConfirmationPassword
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RegistrationConfirmationPassword = {
   // FIXME: Missing documentation for credentialKind
   credentialKind: CredentialKind.Password
@@ -609,13 +681,17 @@ export type RegistrationConfirmationPassword = {
   credentialInfo: PasswordCredentialInformation
 }
 
-// FIXME: Missing documentation for PasswordCredentialInformation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type PasswordCredentialInformation = {
   // FIXME: Missing documentation for password
   password: string
 }
 
-// FIXME: Missing documentation for RegistrationConfirmationTotp
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RegistrationConfirmationTotp = {
   // FIXME: Missing documentation for credentialKind
   credentialKind: CredentialKind.Totp
@@ -624,13 +700,17 @@ export type RegistrationConfirmationTotp = {
   credentialInfo: TotpCredentialInformation
 }
 
-// FIXME: Missing documentation for TotpCredentialInformation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type TotpCredentialInformation = {
   // FIXME: Missing documentation for otpCode
   otpCode: string
 }
 
-// FIXME: Missing documentation for AllowCredentials
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AllowCredentials = {
   // FIXME: Missing documentation for webauthn
   webauthn: AllowCredential[]
@@ -639,7 +719,9 @@ export type AllowCredentials = {
   key: AllowCredential[]
 }
 
-// FIXME: Missing documentation for SupportedCredentials
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type SupportedCredentials = {
   // FIXME: Missing documentation for kind
   kind: CredentialKind
@@ -651,7 +733,9 @@ export type SupportedCredentials = {
   requiresSecondFactor: boolean
 }
 
-// FIXME: Missing documentation for AuthenticateUserTotpInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthenticateUserTotpInput = {
   // FIXME: Missing documentation for kind
   kind: CredentialKind.Totp
@@ -660,7 +744,9 @@ export type AuthenticateUserTotpInput = {
   otpCode: string
 }
 
-// FIXME: Missing documentation for TotpCredential
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type TotpCredential = {
   // FIXME: Missing documentation for temporaryAuthenticationToken
   temporaryAuthenticationToken: Jwt
@@ -678,7 +764,9 @@ export type TotpCredential = {
   otpUrl: string
 }
 
-// FIXME: Missing documentation for PasswordCredential
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type PasswordCredential = {
   // FIXME: Missing documentation for temporaryAuthenticationToken
   temporaryAuthenticationToken: Jwt
@@ -693,7 +781,9 @@ export type PasswordCredential = {
   kind: CredentialKind.Password
 }
 
-// FIXME: Missing documentation for CreateUserCredentialInputBase
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserCredentialInputBase = {
   // FIXME: Missing documentation for challengeIdentifier
   challengeIdentifier: Jwt
@@ -702,7 +792,9 @@ export type CreateUserCredentialInputBase = {
   credentialName: string
 }
 
-// FIXME: Missing documentation for CreateUserCredentialTotpInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserCredentialTotpInput = {
   // FIXME: Missing documentation for challengeIdentifier
   challengeIdentifier: Jwt
@@ -717,7 +809,9 @@ export type CreateUserCredentialTotpInput = {
   credentialInfo: TotpCredentialInformation
 }
 
-// FIXME: Missing documentation for CreateUserCredentialPasswordInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserCredentialPasswordInput = {
   // FIXME: Missing documentation for credentialKind
   credentialKind: CredentialKind.Password
@@ -732,7 +826,9 @@ export type CreateUserCredentialPasswordInput = {
   credentialName: string
 }
 
-// FIXME: Missing documentation for CreateUserCredentialPublicKeyInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserCredentialPublicKeyInput = {
   // FIXME: Missing documentation for challengeIdentifier
   challengeIdentifier: Jwt
@@ -747,7 +843,9 @@ export type CreateUserCredentialPublicKeyInput = {
   credentialInfo: CredentialAssertion
 }
 
-// FIXME: Missing documentation for CreateUserCredentialFido2Input
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserCredentialFido2Input = {
   // FIXME: Missing documentation for credentialKind
   credentialKind: CredentialKind.Fido2
@@ -762,7 +860,9 @@ export type CreateUserCredentialFido2Input = {
   credentialName: string
 }
 
-// FIXME: Missing documentation for HttpRequestInformation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type HttpRequestInformation = {
   // FIXME: Missing documentation for method
   method: string
@@ -777,7 +877,9 @@ export type HttpRequestInformation = {
   path: string
 }
 
-// FIXME: Missing documentation for LegacyAuthAttestation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type LegacyAuthAttestation = {
   // FIXME: Missing documentation for token
   token: Jwt
@@ -789,7 +891,9 @@ export type LegacyAuthAttestation = {
   authIdentity: AuthIdentity
 }
 
-// FIXME: Missing documentation for OrgEmployeeIdentity
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type OrgEmployeeIdentity = {
   // FIXME: Missing documentation for kind
   kind: AuthIdentityKind.OrgEmployeeIdentity
@@ -810,7 +914,9 @@ export type OrgEmployeeIdentity = {
   permissions: string[]
 }
 
-// FIXME: Missing documentation for OrgApiKeyIdentity
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type OrgApiKeyIdentity = {
   // FIXME: Missing documentation for kind
   kind: AuthIdentityKind.OrgApiKeyIdentity
@@ -828,7 +934,9 @@ export type OrgApiKeyIdentity = {
   permissions: string[]
 }
 
-// FIXME: Missing documentation for DfnsStaffIdentity
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type DfnsStaffIdentity = {
   // FIXME: Missing documentation for kind
   kind: AuthIdentityKind.DfnsStaffIdentity
@@ -849,7 +957,9 @@ export type DfnsStaffIdentity = {
   permissions: string[]
 }
 
-// FIXME: Missing documentation for DfnsServiceIdentity
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type DfnsServiceIdentity = {
   // FIXME: Missing documentation for kind
   kind: AuthIdentityKind.DfnsService
@@ -858,13 +968,17 @@ export type DfnsServiceIdentity = {
   serviceName: string
 }
 
-// FIXME: Missing documentation for AuthV2SignedAuthAttestation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthV2SignedAuthAttestation = {
   // FIXME: Missing documentation for authBlock
   authBlock: AuthBlock
 }
 
-// FIXME: Missing documentation for JwtHeader
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type JwtHeader = {
   // FIXME: Missing documentation for alg
   alg?: string
@@ -879,7 +993,9 @@ export type JwtHeader = {
   typ?: string
 }
 
-// FIXME: Missing documentation for DecodedJwt
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type DecodedJwt = {
   // FIXME: Missing documentation for payload
   payload: JwtPayload
@@ -888,7 +1004,9 @@ export type DecodedJwt = {
   header: JwtHeader
 }
 
-// FIXME: Missing documentation for AuthBlock
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthBlock = {
   // FIXME: Missing documentation for request
   request: Jwt
@@ -897,7 +1015,9 @@ export type AuthBlock = {
   auth: Jwt
 }
 
-// FIXME: Missing documentation for CreateUserCredentialRecoveryKeyInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserCredentialRecoveryKeyInput = {
   // FIXME: Missing documentation for encryptedPrivateKey
   encryptedPrivateKey?: string
@@ -915,7 +1035,9 @@ export type CreateUserCredentialRecoveryKeyInput = {
   credentialName: string
 }
 
-// FIXME: Missing documentation for PermissionAssignmentInfo
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type PermissionAssignmentInfo = {
   // FIXME: Missing documentation for permissionName
   permissionName: string
@@ -930,7 +1052,9 @@ export type PermissionAssignmentInfo = {
   operations?: string[]
 }
 
-// FIXME: Missing documentation for AllowRecoveryCredential
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AllowRecoveryCredential = {
   // FIXME: Missing documentation for id
   id: string
@@ -939,7 +1063,9 @@ export type AllowRecoveryCredential = {
   encryptedRecoveryKey: string
 }
 
-// FIXME: Missing documentation for RecoverUserInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RecoverUserInput = {
   // FIXME: Missing documentation for kind
   kind: CredentialKind.RecoveryKey
@@ -948,7 +1074,9 @@ export type RecoverUserInput = {
   credentialAssertion: KeyCredentialAssertion
 }
 
-// FIXME: Missing documentation for UserRecoveryCredentials
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserRecoveryCredentials = {
   // FIXME: Missing documentation for firstFactorCredential
   firstFactorCredential: RegistrationFirstFactor
@@ -966,7 +1094,9 @@ export type Jwt = string
 // FIXME: Missing documentation for JwtPayload
 export type JwtPayload = Record<string, unknown>
 
-// FIXME: Missing documentation for CreateUserActionSignatureChallengeInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserActionSignatureChallengeInput = {
   /**
    * Human readable explanation of the activity, so that person can understand what is being signed.
@@ -983,13 +1113,17 @@ export type CreateUserActionSignatureChallengeInput = {
   userActionServerKind?: ServerKind
 }
 
-// FIXME: Missing documentation for CreateDelegatedUserLoginInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateDelegatedUserLoginInput = {
   // FIXME: Missing documentation for username
   username: string
 }
 
-// FIXME: Missing documentation for CreateUserInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserInput = {
   // FIXME: Missing documentation for email
   email: string
@@ -1004,7 +1138,9 @@ export type CreateUserInput = {
   externalId?: string
 }
 
-// FIXME: Missing documentation for CreateUserRegistrationChallengeInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserRegistrationChallengeInput = {
   // FIXME: Missing documentation for username
   username: string
@@ -1016,7 +1152,9 @@ export type CreateUserRegistrationChallengeInput = {
   orgId: EntityId
 }
 
-// FIXME: Missing documentation for CreateUserRegistrationInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserRegistrationInput = {
   // FIXME: Missing documentation for firstFactorCredential
   firstFactorCredential: RegistrationFirstFactor
@@ -1028,7 +1166,9 @@ export type CreateUserRegistrationInput = {
   recoveryCredential?: RegistrationConfirmationRecoveryKey
 }
 
-// FIXME: Missing documentation for CreateUserLoginChallengeInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserLoginChallengeInput = {
   // FIXME: Missing documentation for username
   username: string
@@ -1037,7 +1177,9 @@ export type CreateUserLoginChallengeInput = {
   orgId: EntityId
 }
 
-// FIXME: Missing documentation for CreateUserLoginInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserLoginInput = {
   // FIXME: Missing documentation for challengeIdentifier
   challengeIdentifier: Jwt
@@ -1049,19 +1191,25 @@ export type CreateUserLoginInput = {
   secondFactor?: AuthenticateUserSecondFactor
 }
 
-// FIXME: Missing documentation for CreateUserCredentialChallengeInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserCredentialChallengeInput = {
   // FIXME: Missing documentation for kind
   kind: CredentialKind
 }
 
-// FIXME: Missing documentation for ActivateCredentialInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type ActivateCredentialInput = {
   // FIXME: Missing documentation for credentialUuid
   credentialUuid: EntityId
 }
 
-// FIXME: Missing documentation for CreateSignedAuthAttestationInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateSignedAuthAttestationInput = {
   // FIXME: Missing documentation for body
   body?: string
@@ -1076,19 +1224,25 @@ export type CreateSignedAuthAttestationInput = {
   http: HttpRequestInformation
 }
 
-// FIXME: Missing documentation for CreateCodeLoginChallengeInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateCodeLoginChallengeInput = {
   // FIXME: Missing documentation for code
   code: string
 }
 
-// FIXME: Missing documentation for CreateUserLoginFromCodeInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserLoginFromCodeInput = {
   // FIXME: Missing documentation for challengeIdentifier
   challengeIdentifier: Jwt
 }
 
-// FIXME: Missing documentation for CreateOrgOwnerInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateOrgOwnerInput = {
   // FIXME: Missing documentation for email
   email: Email
@@ -1103,7 +1257,9 @@ export type CreateOrgOwnerInput = {
   authBlock: AuthBlock
 }
 
-// FIXME: Missing documentation for CreateAvailableOrgListInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateAvailableOrgListInput = {
   /**
    * The username of the user that is logging into the system.
@@ -1132,7 +1288,9 @@ export type CreateAvailableOrgListInput = {
   origin: string
 }
 
-// FIXME: Missing documentation for CreateAccessTokenInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateAccessTokenInput = {
   // FIXME: Missing documentation for daysValid
   daysValid?: IntegerPositiveStrict
@@ -1150,7 +1308,9 @@ export type CreateAccessTokenInput = {
   externalId?: string
 }
 
-// FIXME: Missing documentation for UpdateAccessTokenInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UpdateAccessTokenInput = {
   // FIXME: Missing documentation for name
   name?: string
@@ -1159,7 +1319,9 @@ export type UpdateAccessTokenInput = {
   externalId?: string
 }
 
-// FIXME: Missing documentation for UpdateUserInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UpdateUserInput = {
   // FIXME: Missing documentation for externalId
   externalId?: string
@@ -1168,7 +1330,9 @@ export type UpdateUserInput = {
   publicKey?: string
 }
 
-// FIXME: Missing documentation for UpdateApplicationInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UpdateApplicationInput = {
   // FIXME: Missing documentation for externalId
   externalId?: string
@@ -1177,7 +1341,9 @@ export type UpdateApplicationInput = {
   name?: string
 }
 
-// FIXME: Missing documentation for CreateApplicationInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateApplicationInput = {
   // FIXME: Missing documentation for name
   name: string
@@ -1204,7 +1370,9 @@ export type CreateApplicationInput = {
   externalId?: string
 }
 
-// FIXME: Missing documentation for CreateUserRecoveryInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserRecoveryInput = {
   // FIXME: Missing documentation for recovery
   recovery: RecoverUserInput
@@ -1213,7 +1381,9 @@ export type CreateUserRecoveryInput = {
   newCredentials: UserRecoveryCredentials
 }
 
-// FIXME: Missing documentation for CreateUserRecoveryChallengeInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserRecoveryChallengeInput = {
   // FIXME: Missing documentation for username
   username: string
@@ -1228,7 +1398,9 @@ export type CreateUserRecoveryChallengeInput = {
   credentialId: string
 }
 
-// FIXME: Missing documentation for CreateDelegatedUserRecoveryInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateDelegatedUserRecoveryInput = {
   // FIXME: Missing documentation for username
   username: string
@@ -1237,7 +1409,9 @@ export type CreateDelegatedUserRecoveryInput = {
   credentialId: string
 }
 
-// FIXME: Missing documentation for CreateUserCredentialInput
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type CreateUserCredentialInput =
   | CreateUserCredentialTotpInput
   | CreateUserCredentialPasswordInput
@@ -1245,50 +1419,66 @@ export type CreateUserCredentialInput =
   | CreateUserCredentialFido2Input
   | CreateUserCredentialRecoveryKeyInput
 
-// FIXME: Missing documentation for UserCredentialChallenge
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type UserCredentialChallenge =
   | Fido2Options
   | PublicKeyOptions
   | TotpCredential
   | PasswordCredential
 
-// FIXME: Missing documentation for SignedAuthAttestation
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type SignedAuthAttestation =
   | LegacyAuthAttestation
   | AuthV2SignedAuthAttestation
 
-// FIXME: Missing documentation for RegistrationFirstFactor
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RegistrationFirstFactor =
   | RegistrationConfirmationFido2
   | RegistrationConfirmationKey
   | RegistrationConfirmationPassword
 
-// FIXME: Missing documentation for RegistrationSecondFactor
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type RegistrationSecondFactor =
   | RegistrationConfirmationFido2
   | RegistrationConfirmationKey
   | RegistrationConfirmationTotp
 
-// FIXME: Missing documentation for AuthenticateUserFirstFactor
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthenticateUserFirstFactor =
   | AuthenticateUserPasswordInput
   | AuthenticateUserFido2Input
   | AuthenticateUserKeyInput
 
-// FIXME: Missing documentation for AuthenticateUserSecondFactor
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthenticateUserSecondFactor =
   | AuthenticateUserFido2Input
   | AuthenticateUserKeyInput
   | AuthenticateUserTotpInput
 
-// FIXME: Missing documentation for AuthIdentity
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export type AuthIdentity =
   | OrgEmployeeIdentity
   | OrgApiKeyIdentity
   | DfnsStaffIdentity
   | DfnsServiceIdentity
 
-// FIXME: Missing documentation for CredentialKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum CredentialKind {
   // FIXME: Missing documentation for Fido2
   Fido2 = 'Fido2',
@@ -1302,7 +1492,9 @@ export enum CredentialKind {
   RecoveryKey = 'RecoveryKey',
 }
 
-// FIXME: Missing documentation for UserKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum UserKind {
   // FIXME: Missing documentation for CustomerEmployee
   CustomerEmployee = 'CustomerEmployee',
@@ -1318,7 +1510,9 @@ export enum UserKind {
   ServiceAccount = 'ServiceAccount',
 }
 
-// FIXME: Missing documentation for AuthenticatorRequirementOptions
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum AuthenticatorRequirementOptions {
   // FIXME: Missing documentation for required
   required = 'required',
@@ -1328,7 +1522,9 @@ export enum AuthenticatorRequirementOptions {
   discouraged = 'discouraged',
 }
 
-// FIXME: Missing documentation for AuthenticatorAttestationOptions
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum AuthenticatorAttestationOptions {
   // FIXME: Missing documentation for none
   none = 'none',
@@ -1340,7 +1536,9 @@ export enum AuthenticatorAttestationOptions {
   enterprise = 'enterprise',
 }
 
-// FIXME: Missing documentation for ApplicationKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum ApplicationKind {
   // FIXME: Missing documentation for ServerSideApplication
   ServerSideApplication = 'ServerSideApplication',
@@ -1348,7 +1546,9 @@ export enum ApplicationKind {
   ClientSideApplication = 'ClientSideApplication',
 }
 
-// FIXME: Missing documentation for FidoCredentialsTransportKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum FidoCredentialsTransportKind {
   // FIXME: Missing documentation for usb
   usb = 'usb',
@@ -1362,7 +1562,9 @@ export enum FidoCredentialsTransportKind {
   hybrid = 'hybrid',
 }
 
-// FIXME: Missing documentation for CredentialFactor
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum CredentialFactor {
   // FIXME: Missing documentation for first
   first = 'first',
@@ -1372,7 +1574,9 @@ export enum CredentialFactor {
   either = 'either',
 }
 
-// FIXME: Missing documentation for ServerKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum ServerKind {
   // FIXME: Missing documentation for Api
   Api = 'Api',
@@ -1380,7 +1584,9 @@ export enum ServerKind {
   Staff = 'Staff',
 }
 
-// FIXME: Missing documentation for AccessTokenKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum AccessTokenKind {
   // FIXME: Missing documentation for ServiceAccount
   ServiceAccount = 'ServiceAccount',
@@ -1390,7 +1596,9 @@ export enum AccessTokenKind {
   Application = 'Application',
 }
 
-// FIXME: Missing documentation for UserAuthKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum UserAuthKind {
   // FIXME: Missing documentation for EndUser
   EndUser = 'EndUser',
@@ -1400,7 +1608,9 @@ export enum UserAuthKind {
   DfnsStaff = 'DfnsStaff',
 }
 
-// FIXME: Missing documentation for AuthIdentityKind
+/**
+ * @deprecated import equivalent type from '@dfns/sdk/types/auth' instead
+ */
 export enum AuthIdentityKind {
   // FIXME: Missing documentation for DfnsStaffIdentity
   DfnsStaffIdentity = 'DfnsStaffIdentity',
