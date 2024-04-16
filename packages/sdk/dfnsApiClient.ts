@@ -12,7 +12,8 @@ import { WebhooksClient } from './generated/webhooks'
 import { CredentialSigner } from './signer'
 
 export type DfnsApiClientOptions = DfnsBaseApiOptions & {
-  signer: CredentialSigner
+  /** Needs to be specified to use any endpoint that required User Action Signing flow */
+  signer?: CredentialSigner
 }
 
 export class DfnsApiClient {

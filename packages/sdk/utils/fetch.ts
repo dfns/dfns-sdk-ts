@@ -5,6 +5,8 @@ import { BaseAuthApi, DfnsBaseApiOptions } from '../baseAuthApi'
 import { generateNonce } from './nonce'
 import { DfnsApiClientOptions } from '../dfnsApiClient'
 
+const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
+
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 export type FetchOptions<T> = {
@@ -18,7 +20,7 @@ export type Fetch<T> = (resource: string | URL, options: FetchOptions<T>) => Pro
 
 const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
-    const { baseUrl } = options.apiOptions
+    const baseUrl = options.apiOptions.baseUrl || DEFAULT_DFNS_BASE_URL
     resource = new URL(resource, baseUrl)
     return fetch(resource, options)
   }
@@ -104,6 +106,15 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
       const apiOptions = {
         ...options.apiOptions,
         baseUrl: (<any>options.apiOptions).baseAuthUrl || options.apiOptions.baseUrl,
+      }
+
+      if (!apiOptions.signer) {
+        throw new DfnsError(-1, 'A "signer" needs to be passed to Dfns client.', {
+          detail:
+            `Most non-readonly endpoints require "User Action Signing" flow.` +
+            ` During that flow, the credential "signer" that you passed will handle signing` +
+            ` the user action challenge, using your credential.`,
+        })
       }
 
       const challenge = await BaseAuthApi.createUserActionChallenge(

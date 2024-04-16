@@ -10,9 +10,7 @@ import { DelegatedSignersClient } from './generated/signers'
 import { DelegatedWalletsClient } from './generated/wallets'
 import { DelegatedWebhooksClient } from './generated/webhooks'
 
-export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions & {
-  authToken: string
-}
+export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions
 
 export class DfnsDelegatedApiClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}

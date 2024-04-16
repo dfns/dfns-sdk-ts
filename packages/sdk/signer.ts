@@ -86,9 +86,3 @@ export type CredentialAssertion = KeyAssertion | Fido2Assertion | PasswordAssert
 export interface CredentialSigner<T extends CredentialAssertion = FirstFactorAssertion> {
   sign(challenge: UserActionChallenge): Promise<T>
 }
-
-export class EmptySigner implements CredentialSigner {
-  async sign(): Promise<never> {
-    throw new DfnsError(-1, 'A signature is required, but an EmptySigner cannot fulfill it.')
-  }
-}
