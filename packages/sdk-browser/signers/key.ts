@@ -7,14 +7,10 @@ import {
   UserActionChallenge,
   UserRegistrationChallenge,
 } from '@dfns/sdk'
-import {
-  exportPublicKeyInPemFormatBrowser,
-  generateRandom,
-  rawSignatureToAns1,
-  toBase64Url,
-  toHex,
-} from '@dfns/sdk/utils'
+import { generateRandom, rawSignatureToAns1, toBase64Url, toHex } from '@dfns/sdk/utils'
 import { Buffer } from 'buffer'
+
+import { exportPublicKeyAsPem } from '../utils/crypto'
 
 export class BrowserKeySigner implements CredentialSigner<KeyAssertion>, CredentialStore<KeyAttestation> {
   constructor(
@@ -30,7 +26,7 @@ export class BrowserKeySigner implements CredentialSigner<KeyAssertion>, Credent
       credId = toBase64Url(Buffer.from(generateRandom(32)))
       this.options.credId = credId
     }
-    const publicKeyPem = await exportPublicKeyInPemFormatBrowser(this.options.keyPair)
+    const publicKeyPem = await exportPublicKeyAsPem(this.options.keyPair)
     const clientData = JSON.stringify({
       type: 'key.create',
       challenge: challenge.challenge,

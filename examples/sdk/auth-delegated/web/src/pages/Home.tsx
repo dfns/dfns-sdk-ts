@@ -52,6 +52,18 @@ Find relevant code in the following files
 - \`./server/src/handlers/wallets.ts\`, server side
 `
 
+const recoverText = `
+## Step 4 - Recovery
+
+...
+`
+
+const recoverCode = `
+Find relevant code in the following files
+- \`./web/pages/Recover.tsx\`, client side
+- \`./server/src/handlers/recover.ts\`, server side
+`
+
 export default function Home(): JSX.Element {
   const { authToken } = useAppContext()
 
@@ -89,6 +101,17 @@ export default function Home(): JSX.Element {
         )}
       </p>
       <ReactMarkdown>{walletsCode}</ReactMarkdown>
+      <ReactMarkdown>{recoverText}</ReactMarkdown>
+      <p className="text-center">
+        {authToken ? (
+          <Link to="/recover" className="btn no-underline">
+            Go to Recovery
+          </Link>
+        ) : (
+          <p className="text-center">⚠️ You need to complete step 1 and 2 first</p>
+        )}
+      </p>
+      <ReactMarkdown>{recoverCode}</ReactMarkdown>
       <p className="text-center">
         <h2>The end 🎉</h2>
       </p>
