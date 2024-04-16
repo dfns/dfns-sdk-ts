@@ -5,6 +5,7 @@ import asyncHandler from 'express-async-handler'
 import morgan from 'morgan'
 
 import { login } from './handlers/login'
+import { createCredentialInit, createCredentialChallenge, createCredentialComplete } from './handlers/recover'
 import { registerComplete, registerInit } from './handlers/register'
 import { generateSignatureComplete, generateSignatureInit, listWallets } from './handlers/wallets'
 
@@ -27,6 +28,10 @@ app.post('/register/complete', asyncHandler(registerComplete))
 app.post('/wallets/list', asyncHandler(listWallets))
 app.post('/wallets/signatures/init', asyncHandler(generateSignatureInit))
 app.post('/wallets/signatures/complete', asyncHandler(generateSignatureComplete))
+
+app.post('/recover/credentials/challenge', asyncHandler(createCredentialChallenge))
+app.post('/recover/credentials/init', asyncHandler(createCredentialInit))
+app.post('/recover/credentials/complete', asyncHandler(createCredentialComplete))
 
 // static files to associate the domain with Android and iOS apps
 app.use(
