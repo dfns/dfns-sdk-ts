@@ -23,10 +23,9 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
     const response = await navigator.credentials.get({
       publicKey: {
         challenge: Buffer.from(challenge.challenge),
-        allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type, transports }) => ({
+        allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type }) => ({
           id: fromBase64Url(id),
           type,
-          transports: transports ?? [],
         })),
         rpId: challenge.rp.id,
         userVerification: challenge.userVerification,
@@ -65,9 +64,9 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
           name: challenge.user.name,
         },
         attestation: challenge.attestation,
-        excludeCredentials: challenge.excludeCredentials.map((cred) => ({
-          id: fromBase64Url(cred.id),
-          type: cred.type,
+        excludeCredentials: challenge.excludeCredentials.map(({ id, type }) => ({
+          id: fromBase64Url(id),
+          type,
         })),
         authenticatorSelection: challenge.authenticatorSelection,
         timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,

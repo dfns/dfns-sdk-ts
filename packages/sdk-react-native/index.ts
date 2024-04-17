@@ -34,11 +34,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyAuthenticationRequest = {
       challenge: challenge.challenge,
-      allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type, transports }) => ({
-        id: id,
-        type,
-        transports: transports ?? [],
-      })),
+      allowCredentials: challenge.allowCredentials.webauthn,
       rpId: challenge.rp.id,
       userVerification: challenge.userVerification,
       timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
@@ -69,10 +65,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
         name: challenge.user.name,
       },
       attestation: challenge.attestation,
-      excludeCredentials: challenge.excludeCredentials.map((cred) => ({
-        id: cred.id,
-        type: cred.type,
-      })),
+      excludeCredentials: challenge.excludeCredentials,
       authenticatorSelection: challenge.authenticatorSelection,
       timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
@@ -99,10 +92,9 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyAuthenticationRequest = {
       challenge: b64UrlSafeToStandard(challenge.challenge),
-      allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type, transports }) => ({
+      allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type }) => ({
         id: b64UrlSafeToStandard(id),
         type,
-        transports: transports ?? [],
       })),
       rpId: challenge.rp.id,
       userVerification: 'preferred',
@@ -134,9 +126,9 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
         name: challenge.user.name,
       },
       attestation: challenge.attestation,
-      excludeCredentials: challenge.excludeCredentials.map((cred) => ({
-        id: cred.id,
-        type: cred.type,
+      excludeCredentials: challenge.excludeCredentials.map(({ id, type }) => ({
+        id: b64UrlSafeToStandard(id),
+        type,
       })),
       authenticatorSelection: challenge.authenticatorSelection,
       timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
