@@ -5,7 +5,7 @@ import { dfns } from '../utils'
 export async function POST(request: NextRequest) {
   const body = (await request.json()) as { email: string }
 
-  const { token: userAuthToken } = await dfns.auth.createDelegatedUserLogin({
+  const { token: userAuthToken } = await dfns.auth.delegatedLogin({
     body: { username: body.email },
   })
 

@@ -14,7 +14,7 @@ export const registerInit = async (req: Request, res: Response) => {
   // otherwise the challenge returned does not have the appropriate relying
   // party and origin to create the WebAuthn or Passkeys credential
   const client = apiClient(appId)
-  const challenge = await client.auth.createDelegatedUserRegistration({
+  const challenge = await client.auth.createDelegatedRegistrationChallenge({
     body: { kind: UserAuthKind.EndUser, email: username },
   })
 

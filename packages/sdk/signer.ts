@@ -1,3 +1,5 @@
+import { DfnsError } from './dfnsError'
+
 export type CredentialFactor = 'first' | 'second' | 'either'
 
 export type CredentialKind = 'Key' | 'Fido2' | 'Password' | 'Totp' | 'RecoveryKey'

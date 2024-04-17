@@ -407,16 +407,19 @@ export type GetTransferResponse = {
         to: string | string | string | string | string | string | string | string | string | string;
         amount: string;
         memo?: string | undefined;
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
     } | {
         kind: "Erc20";
         contract: string;
         to: string;
         amount: string;
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
     } | {
         kind: "Erc721";
         contract: string;
         to: string;
         tokenId: string;
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
     } | {
         kind: "Trc10";
         tokenId: string;
@@ -1024,16 +1027,19 @@ export type ListTransfersResponse = {
             to: string | string | string | string | string | string | string | string | string | string;
             amount: string;
             memo?: string | undefined;
+            priority?: ("Slow" | "Standard" | "Fast") | undefined;
         } | {
             kind: "Erc20";
             contract: string;
             to: string;
             amount: string;
+            priority?: ("Slow" | "Standard" | "Fast") | undefined;
         } | {
             kind: "Erc721";
             contract: string;
             to: string;
             tokenId: string;
+            priority?: ("Slow" | "Standard" | "Fast") | undefined;
         } | {
             kind: "Trc10";
             tokenId: string;
@@ -1114,16 +1120,19 @@ export type TransferAssetBody = {
     to: string | string | string | string | string | string | string | string | string | string;
     amount: string;
     memo?: string | undefined;
+    priority?: ("Slow" | "Standard" | "Fast") | undefined;
 } | {
     kind: "Erc20";
     contract: string;
     to: string;
     amount: string;
+    priority?: ("Slow" | "Standard" | "Fast") | undefined;
 } | {
     kind: "Erc721";
     contract: string;
     to: string;
     tokenId: string;
+    priority?: ("Slow" | "Standard" | "Fast") | undefined;
 } | {
     kind: "Trc10";
     tokenId: string;
@@ -1164,16 +1173,19 @@ export type TransferAssetResponse = {
         to: string | string | string | string | string | string | string | string | string | string;
         amount: string;
         memo?: string | undefined;
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
     } | {
         kind: "Erc20";
         contract: string;
         to: string;
         amount: string;
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
     } | {
         kind: "Erc721";
         contract: string;
         to: string;
         tokenId: string;
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
     } | {
         kind: "Trc10";
         tokenId: string;

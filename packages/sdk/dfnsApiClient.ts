@@ -1,6 +1,6 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { AssetsClient } from './codegen/Assets'
-import { AuthClient } from './codegen/Auth'
+import { AuthClient } from './generated/auth'
 import { CallbacksClient } from './codegen/Callbacks'
 import { PublicKeysClient } from './codegen/PublicKeys'
 import { NetworksClient } from './generated/networks'
@@ -12,7 +12,8 @@ import { WebhooksClient } from './generated/webhooks'
 import { CredentialSigner } from './signer'
 
 export type DfnsApiClientOptions = DfnsBaseApiOptions & {
-  signer: CredentialSigner
+  /** Needs to be specified to use any endpoint that required User Action Signing flow */
+  signer?: CredentialSigner
 }
 
 export class DfnsApiClient {

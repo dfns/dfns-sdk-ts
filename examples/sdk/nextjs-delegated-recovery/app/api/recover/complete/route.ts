@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
 
   // Complete end-user recovery
   const delegatedClient = await getDfnsDelegatedClient(body.tempAuthToken)
-  const result = await delegatedClient.auth.createUserRecovery({
+  const result = await delegatedClient.auth.recover({
     body: {
       newCredentials: body.newCredentials,
       recovery: body.signedRecoveryPackage,

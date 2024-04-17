@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
   })
 
   // Perform delegated login to get the Dfns auth token of the end-user ("on his behalf")
-  const { token: userAuthToken } = await dfns.auth.createDelegatedUserLogin({
+  const { token: userAuthToken } = await dfns.auth.delegatedLogin({
     body: { username: result.user.username },
   })
 

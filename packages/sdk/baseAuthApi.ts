@@ -15,9 +15,11 @@ import { HttpMethod, simpleFetch } from './utils/fetch'
 
 export type DfnsBaseApiOptions = {
   appId: string
-  appSecret?: string
+  /** Needs to be specified to use any endpoint that requires authentication */
   authToken?: string
-  baseUrl: string
+  /** Only needs to be specified when using another API environment */
+  baseUrl?: string
+  appSecret?: string
 }
 
 export type CreateUserActionChallengeRequest = {
