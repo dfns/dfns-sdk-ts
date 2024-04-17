@@ -11,7 +11,6 @@ export type UserVerificationRequirement = 'required' | 'preferred' | 'discourage
 export type AllowCredential = {
   type: 'public-key'
   id: string
-  transports: CredentialTransport[]
 }
 
 export type SupportedCredential = {
