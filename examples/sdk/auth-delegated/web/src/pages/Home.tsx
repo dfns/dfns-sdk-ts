@@ -31,7 +31,7 @@ Find relevant code in the following files
 const loginText = `
 ## Step 2 - Delegated Login
 
-The delegated signing flow does not need the end user sign with the WebAuthn credential. The login can be performed on the server side transparent to the end user and obtain a readonly auth token. For example, your server can choose to automatically login the end user upon the completion of delegated registration. In this tutorial, this step is shown as explicit in order to more clearly demonstrate how the interaction works.
+The delegated signing flow does not need the end user sign with the WebAuthn credential. The login can be performed on the server side transparent to the end users and obtain a readonly auth token. For example, your server can choose to automatically login the end users upon the completion of delegated registration. In this tutorial, this step is shown as explicit in order to more clearly demonstrate how the interaction works.
 `
 
 const loginCode = `
@@ -43,7 +43,7 @@ Find relevant code in the following files
 const walletsText = `
 ## Step 3 - Wallets
 
-Once logged in, your end user can retrieve the list of wallets he owns, and create new ones.
+Once logged in, the end users can use the wallets they own.
 `
 
 const walletsCode = `

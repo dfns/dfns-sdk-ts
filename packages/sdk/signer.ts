@@ -52,7 +52,7 @@ export type Fido2Assertion = {
     clientData: string
     authenticatorData: string
     signature: string
-    userHandle: string
+    userHandle?: string
   }
 }
 

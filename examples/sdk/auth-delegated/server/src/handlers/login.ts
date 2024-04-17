@@ -6,7 +6,7 @@ export const login = async (req: Request, res: Response) => {
   // You can perform the login flow of your system before login the user
   // to Dfns with delegated login. Delegated login does not need the
   // end user to use WebAuthn or Passkeys to login.
-  const username = req.body.username
+  const { username } = req.body
   const client = apiClient(process.env.DFNS_APP_ID!)
   const login = await client.auth.delegatedLogin({ body: { username } })
 

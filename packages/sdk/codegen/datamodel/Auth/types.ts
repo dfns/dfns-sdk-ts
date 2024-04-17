@@ -578,7 +578,7 @@ export type Fido2CredentialAssertion = {
   signature: string
 
   // FIXME: Missing documentation for userHandle
-  userHandle: string
+  userHandle?: string
 }
 
 /**

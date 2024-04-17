@@ -64,39 +64,46 @@ export function Register(): React.JSX.Element {
 
   return (
     <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.background}></ScrollView>
-      <View style={styles.section}>
-        <Text>
-          For this tutorial, you need to register a Dfns EndUser, and this is where the registration flow starts.
-          However, in your final app, the flow may be different and the username might come from your internal system.
-        </Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Enter the email as the username you are registering, and hit the "Register User" button.</Text>
-      </View>
-      <View style={styles.section}>
-        <TextInput style={styles.input} onChangeText={setUsername} value={username} placeholder="Choose a username" />
-        <Button title="Register User" onPress={register} />
-      </View>
-      {!!loading && (
+      <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.background}>
         <View style={styles.section}>
-          <Text>registering ...</Text>
+          <Text>
+            For this tutorial, you will register a Dfns EndUser, and this is where the registration flow starts.
+            However, in your final app, the flow may be different and the username might come from your internal system.
+          </Text>
         </View>
-      )}
-      {!!response && (
         <View style={styles.section}>
-          <Markdown>{`\`\`\`
+          <Text>
+            After registration, the new end user will have an Ethereum testnet wallet and assigned the system
+            permission, `DfnsDefaultEndUserAccess`, that grants the end user full access to their wallets.
+          </Text>
+        </View>
+        <View style={styles.section}>
+          <Text>Enter the email as the username you are registering, and hit the "Register EndUser" button.</Text>
+        </View>
+        <View style={styles.section}>
+          <TextInput style={styles.input} onChangeText={setUsername} value={username} placeholder="Choose a username" />
+          <Button title="Register EndUser" onPress={register} />
+        </View>
+        {!!loading && (
+          <View style={styles.section}>
+            <Text>registering ...</Text>
+          </View>
+        )}
+        {!!response && (
+          <View style={styles.section}>
+            <Markdown>{`\`\`\`
 ${JSON.stringify(response, null, 2)}
 \`\`\``}</Markdown>
-        </View>
-      )}
-      {!!error && (
-        <View style={styles.section}>
-          <Markdown>{`\`\`\`
+          </View>
+        )}
+        {!!error && (
+          <View style={styles.section}>
+            <Markdown>{`\`\`\`
 ${JSON.stringify(error, null, 2)}
 \`\`\``}</Markdown>
-        </View>
-      )}
+          </View>
+        )}
+      </ScrollView>
     </SafeAreaView>
   )
 }

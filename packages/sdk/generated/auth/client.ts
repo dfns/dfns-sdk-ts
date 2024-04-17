@@ -586,10 +586,10 @@ export class AuthClient {
     return response.json()
   }
 
-  async listCredentials(request?: T.ListCredentialsRequest): Promise<T.ListCredentialsResponse> {
+  async listCredentials(): Promise<T.ListCredentialsResponse> {
     const path = buildPathAndQuery('/auth/credentials', {
-      path: request ?? {},
-      query: request?.query ?? {},
+      path: {},
+      query: {},
     })
 
     const response = await simpleFetch(path, {
@@ -601,8 +601,8 @@ export class AuthClient {
   }
   
   /** @deprecated, use listCredentials instead */
-  async listUserCredentials(request?: T.ListCredentialsRequest): Promise<T.ListCredentialsResponse> {
-    return this.listCredentials(request)
+  async listUserCredentials(): Promise<T.ListCredentialsResponse> {
+    return this.listCredentials()
   }
 
   async listPersonalAccessTokens(): Promise<T.ListPersonalAccessTokensResponse> {
@@ -734,6 +734,21 @@ export class AuthClient {
   /** @deprecated, use register instead */
   async createUserRegistration(request: T.RegisterRequest): Promise<T.RegisterResponse> {
     return this.register(request)
+  }
+
+  async registerEndUser(request: T.RegisterEndUserRequest): Promise<T.RegisterEndUserResponse> {
+    const path = buildPathAndQuery('/auth/registration/enduser', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
   }
 
   async resendRegistrationCode(request: T.ResendRegistrationCodeRequest): Promise<T.ResendRegistrationCodeResponse> {

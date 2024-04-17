@@ -1470,6 +1470,10 @@ export enum BlockchainNetwork {
   Bsc = 'Bsc',
   // FIXME: Missing documentation for BscTestnet
   BscTestnet = 'BscTestnet',
+  // FIXME: Missing documentation for Cardano
+  Cardano = 'Cardano',
+  // FIXME: Missing documentation for CardanoPreprod
+  CardanoPreprod = 'CardanoPreprod',
   // FIXME: Missing documentation for Ethereum
   Ethereum = 'Ethereum',
   // FIXME: Missing documentation for EthereumGoerli
@@ -1480,6 +1484,8 @@ export enum BlockchainNetwork {
   FantomOpera = 'FantomOpera',
   // FIXME: Missing documentation for FantomTestnet
   FantomTestnet = 'FantomTestnet',
+  // FIXME: Missing documentation for Kusama
+  Kusama = 'Kusama',
   // FIXME: Missing documentation for Litecoin
   Litecoin = 'Litecoin',
   // FIXME: Missing documentation for LitecoinTestnet
@@ -1490,8 +1496,12 @@ export enum BlockchainNetwork {
   OptimismGoerli = 'OptimismGoerli',
   // FIXME: Missing documentation for OptimismSepolia
   OptimismSepolia = 'OptimismSepolia',
+  // FIXME: Missing documentation for Polkadot
+  Polkadot = 'Polkadot',
   // FIXME: Missing documentation for Polygon
   Polygon = 'Polygon',
+  // FIXME: Missing documentation for PolygonAmoy
+  PolygonAmoy = 'PolygonAmoy',
   // FIXME: Missing documentation for PolygonMumbai
   PolygonMumbai = 'PolygonMumbai',
   // FIXME: Missing documentation for Solana
@@ -1506,6 +1516,8 @@ export enum BlockchainNetwork {
   Tron = 'Tron',
   // FIXME: Missing documentation for TronNile
   TronNile = 'TronNile',
+  // FIXME: Missing documentation for Westend
+  Westend = 'Westend',
   // FIXME: Missing documentation for XrpLedger
   XrpLedger = 'XrpLedger',
   // FIXME: Missing documentation for XrpLedgerTestnet

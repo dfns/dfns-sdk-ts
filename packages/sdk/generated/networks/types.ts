@@ -1,8 +1,21 @@
 export type GetFeesQuery = {
-    network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai";
+    network: ("Bitcoin" | "BitcoinTestnet3" | "Litecoin" | "LitecoinTestnet") | ("ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai") | ("Solana" | "SolanaDevnet");
 };
 
 export type GetFeesResponse = {
+    kind: "Bitcoin";
+    network: "Bitcoin" | "BitcoinTestnet3" | "Litecoin" | "LitecoinTestnet";
+    blockNumber: number;
+    slow: {
+        feeRate: string;
+    };
+    standard: {
+        feeRate: string;
+    };
+    fast: {
+        feeRate: string;
+    };
+} | {
     kind: "Eip1559";
     network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai";
     blockNumber: number;
@@ -19,6 +32,19 @@ export type GetFeesResponse = {
         maxFeePerGas: string;
     };
     estimatedBaseFee: number;
+} | {
+    kind: "Solana";
+    network: "Solana" | "SolanaDevnet";
+    blockNumber: number;
+    slow: {
+        computeUnitPrice: string;
+    };
+    standard: {
+        computeUnitPrice: string;
+    };
+    fast: {
+        computeUnitPrice: string;
+    };
 };
 
 export type GetFeesRequest = { query?: GetFeesQuery }

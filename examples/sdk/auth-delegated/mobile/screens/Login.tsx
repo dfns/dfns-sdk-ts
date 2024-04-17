@@ -49,9 +49,9 @@ export function Login(): React.JSX.Element {
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.background}>
         <View style={styles.section}>
           <Text>
-            For this tutorial, the delegated login flow is started on the client side by pressing the "Login User"
+            For this tutorial, the delegated login flow is started on the client side by pressing the "Login EndUser"
             button. A request is sent to the server and a readonly auth token is returned in the response. This flow
-            does not need user to sign with the passkey crendetial.
+            does not need users to sign with the Passkeys crendetial.
           </Text>
         </View>
         <View style={styles.section}>
@@ -69,7 +69,7 @@ export function Login(): React.JSX.Element {
             value={username}
             placeholder="Enter the username"
           />
-          <Button title="Login User" onPress={login} />
+          <Button title="Login EndUser" onPress={login} />
         </View>
         {!!loading && (
           <View style={styles.section}>
