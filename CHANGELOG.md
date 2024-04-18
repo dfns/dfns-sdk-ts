@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2 (2024-04-17)
+
+- Migrated `DfnsApiClient.auth` to new code generator
+- Updated `lib-viem` to viem 2.x [__BREAKING__]
+
 ## 0.4.1 (2024-04-03)
 
 - Updated `DfnsApiClient.policies` to match the latest API changes
