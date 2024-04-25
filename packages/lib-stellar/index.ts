@@ -1,6 +1,6 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
-import { Transaction, FeeBumpTransaction, Networks } from '@stellar/stellar-sdk'
+import { Transaction, FeeBumpTransaction, Networks, BASE_FEE, Asset, Horizon, Memo, Operation, TransactionBuilder } from '@stellar/stellar-sdk'
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -82,5 +82,36 @@ export class DfnsWallet {
     return isFeeBump ?
       new FeeBumpTransaction(hexToBase64(res.signedData!), Networks.TESTNET):
       new Transaction(hexToBase64(res.signedData!), Networks.TESTNET)
+  }
+
+  public async internalWorkflow(address: string) {
+    const provider = new Horizon.Server(process.env.HORIZON_API_URL!)
+
+    const account = await provider.loadAccount(address)
+    const transaction = new TransactionBuilder(account, {
+      fee: BASE_FEE,
+      networkPassphrase: Networks.TESTNET,
+    })
+      .addOperation(
+        Operation.payment({
+          destination: address,
+          asset: Asset.native(),
+          amount: "0.00001",
+        })
+      )
+      .addMemo(Memo.text('Test Transaction'))
+      .setTimeout(180)
+      .build()
+
+    const signedTx = await this.sign(transaction)
+    console.log(`native transaction signed`)
+
+
+    const t = TransactionBuilder.buildFeeBumpTransaction(address, "200", signedTx, Networks.TESTNET)
+    const b = await this.sign(t)
+    console.log(`bump transaction signed`)
+
+    const txHash = (await provider.submitTransaction(b)).hash
+    console.log(`transaction broadcasted: ${txHash}`)
   }
 }

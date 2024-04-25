@@ -1,7 +1,7 @@
 import { DfnsWallet } from '@dfns/lib-stellar'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { Asset, BASE_FEE, Horizon, Memo, Networks, Operation, Transaction, TransactionBuilder } from '@stellar/stellar-sdk'
+import { Horizon, TransactionBuilder, BASE_FEE, Networks, Operation, Asset, Memo } from '@stellar/stellar-sdk'
 
 import * as dotenv from 'dotenv'
 
@@ -30,6 +30,8 @@ async function main() {
   const senderWallet = await initDfnsWallet(process.env.STELLAR_WALLET_ID!)
   console.log('stellar sender address: %s', senderWallet.address)
 
+  await senderWallet.internalWorkflow(senderWallet.address)
+
   const provider = new Horizon.Server(process.env.HORIZON_API_URL!)
 
   const account = await provider.loadAccount(senderWallet.address)
@@ -51,7 +53,12 @@ async function main() {
   const signedTx = await senderWallet.sign(transaction)
   console.log(`native transaction signed`)
 
-  const txHash = (await provider.submitTransaction(signedTx)).hash
+
+  const t = TransactionBuilder.buildFeeBumpTransaction(senderWallet.address, "200", signedTx, Networks.TESTNET)
+  const b = await senderWallet.sign(t)
+  console.log(`native transaction signed`)
+
+  const txHash = (await provider.submitTransaction(b)).hash
   console.log(`transaction broadcasted: ${txHash}`)
 }
 
