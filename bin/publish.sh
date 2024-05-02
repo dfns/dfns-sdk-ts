@@ -10,6 +10,7 @@ declare -a packages=(
     "@dfns/lib-meshsdk"
     "@dfns/lib-polkadot"
     "@dfns/lib-solana"
+    "@dfns/lib-stellar"
     "@dfns/lib-taquito"
     "@dfns/lib-tron"
     "@dfns/lib-vechain"
