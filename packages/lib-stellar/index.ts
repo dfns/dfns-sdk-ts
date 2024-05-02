@@ -80,7 +80,7 @@ export class DfnsWallet {
     }
 
     return isFeeBump ?
-      new FeeBumpTransaction(hexToBase64(res.signedData!), Networks.TESTNET):
-      new Transaction(hexToBase64(res.signedData!), Networks.TESTNET)
+      new FeeBumpTransaction(hexToBase64(res.signedData!), this.network):
+      new Transaction(hexToBase64(res.signedData!), this.network)
   }
 }
