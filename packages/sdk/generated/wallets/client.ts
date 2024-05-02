@@ -250,6 +250,21 @@ export class WalletsClient {
     return response.json()
   }
 
+  async tagWallet(request: T.TagWalletRequest): Promise<T.TagWalletResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/tags', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'PUT',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async transferAsset(request: T.TransferAssetRequest): Promise<T.TransferAssetResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transfers', {
       path: request ?? {},
@@ -258,6 +273,21 @@ export class WalletsClient {
 
     const response = await userActionFetch(path, {
       method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async untagWallet(request: T.UntagWalletRequest): Promise<T.UntagWalletResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/tags', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
       body: request.body,
       apiOptions: this.apiOptions,
     })
