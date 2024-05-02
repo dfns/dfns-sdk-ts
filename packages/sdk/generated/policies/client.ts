@@ -51,6 +51,20 @@ export class PoliciesClient {
     return response.json()
   }
 
+  async getApproval(request: T.GetApprovalRequest): Promise<T.GetApprovalResponse> {
+    const path = buildPathAndQuery('/v2/policy-approvals/:approvalId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getPolicy(request: T.GetPolicyRequest): Promise<T.GetPolicyResponse> {
     const path = buildPathAndQuery('/v2/policies/:policyId', {
       path: request ?? {},
