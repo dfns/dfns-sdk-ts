@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-stellar",
+        "clean": true,
+        "main": "packages/lib-stellar/index.ts",
+        "tsConfig": "packages/lib-stellar/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
