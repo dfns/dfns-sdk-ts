@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3 (2024-05-08)
+
+- Added SDK integration with Stellar, see `@dfns/lib-stellar`
+
 ## 0.4.2 (2024-04-17)
 
 - Migrated `DfnsApiClient.auth` to new code generator

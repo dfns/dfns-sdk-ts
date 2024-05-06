@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-solana",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "peerDependencies": {
     "@solana/web3.js": "^1.0.0"
   }
