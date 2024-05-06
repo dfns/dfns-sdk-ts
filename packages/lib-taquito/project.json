@@ -6,7 +6,8 @@
         "outputPath": "dist/@dfns/lib-taquito",
         "clean": true,
         "main": "packages/lib-taquito/index.ts",
-        "tsConfig": "packages/lib-taquito/tsconfig.json"
+        "tsConfig": "packages/lib-taquito/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
       }
     }
   }

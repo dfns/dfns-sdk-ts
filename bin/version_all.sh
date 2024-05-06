@@ -12,6 +12,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-ethersjs6 \
     --workspace @dfns/lib-polkadot \
     --workspace @dfns/lib-solana \
+    --workspace @dfns/lib-stellar \
     --workspace @dfns/lib-taquito \
     --workspace @dfns/lib-tron \
     --workspace @dfns/lib-vechain \

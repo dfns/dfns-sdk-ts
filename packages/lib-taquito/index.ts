@@ -1,12 +1,12 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
-import { Prefix, b58cencode, buf2hex, hex2buf, mergebuf, prefix } from '@taquito/utils';
-import { Signer } from '@taquito/taquito'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
-import { TxWatermark } from './constant'
 import { hash } from '@stablelib/blake2b'
-import { uint8ArraysEqual } from './uint8ArraysEqual';
-import { addHexPrefix } from './addHexPrefix';
+import { Signer } from '@taquito/taquito'
+import { Prefix, b58cencode, buf2hex, hex2buf, mergebuf, prefix } from '@taquito/utils'
 
+import { TxWatermark } from './constant'
+import { uint8ArraysEqual } from './uint8ArraysEqual'
+import { addHexPrefix } from './addHexPrefix'
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -33,11 +33,11 @@ export class DfnsWallet implements Signer {
 
   private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
     this.dfnsClient = options.dfnsClient
-        
+
     // get the public key encoded with the right tezos prefix.
     this.tezosPubKey = b58cencode(
       metadata.signingKey.publicKey,
-      prefix[metadata.signingKey.scheme === 'EdDSA' ? Prefix.EDPK : Prefix.SPPK],
+      prefix[metadata.signingKey.scheme === 'EdDSA' ? Prefix.EDPK : Prefix.SPPK]
     )
   }
 
@@ -73,23 +73,26 @@ export class DfnsWallet implements Signer {
 
   // secretKey implements the Taquito Signer interface
   async secretKey(): Promise<string | undefined> {
-    return undefined;
+    return undefined
   }
 
   // sign implements the Taquito Signer interface
-  async sign(op: string, magicByte?: Uint8Array | undefined): Promise<{ bytes: string; sig: string; prefixSig: string; sbytes: string; }> {
+  async sign(
+    op: string,
+    magicByte?: Uint8Array | undefined
+  ): Promise<{ bytes: string; sig: string; prefixSig: string; sbytes: string }> {
     let res: GenerateSignatureResponse
     if (uint8ArraysEqual(magicByte, TxWatermark)) {
-      res = await this.generateSignatureForTransaction(op);
+      res = await this.generateSignatureForTransaction(op)
     } else {
-      res = await this.generateSignatureForHash(op, magicByte);
+      res = await this.generateSignatureForHash(op, magicByte)
     }
-      
+
     assertSigned(res)
 
     const signature = res.signature!.encoded!.replace(/^0x/, '')
-    
-    const sigPrefix = this.metadata.signingKey.scheme === 'ECDSA' ?  prefix.spsig : prefix.edsig
+
+    const sigPrefix = this.metadata.signingKey.scheme === 'ECDSA' ? prefix.spsig : prefix.edsig
     return {
       bytes: op,
       sig: b58cencode(signature, prefix.sig),
@@ -102,22 +105,24 @@ export class DfnsWallet implements Signer {
     return await this.dfnsClient.wallets.generateSignature({
       walletId: this.metadata.id,
       body: { kind: 'Transaction', transaction: addHexPrefix(transaction) },
-    });
+    })
   }
 
-  private async generateSignatureForHash(op: string, magicByte: Uint8Array | undefined): Promise<GenerateSignatureResponse> {
-    let data = hex2buf(op);
+  private async generateSignatureForHash(
+    op: string,
+    magicByte: Uint8Array | undefined
+  ): Promise<GenerateSignatureResponse> {
+    let data = hex2buf(op)
 
     if (magicByte) {
-      data = mergebuf(magicByte, data);
+      data = mergebuf(magicByte, data)
     }
 
-    const bytesHash = hash(data, 32);
+    const bytesHash = hash(data, 32)
 
     return await this.dfnsClient.wallets.generateSignature({
       walletId: this.metadata.id,
       body: { kind: 'Hash', hash: addHexPrefix(buf2hex(bytesHash)) },
-    });
+    })
   }
 }
-

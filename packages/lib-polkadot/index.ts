@@ -1,9 +1,8 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
-import { HexString } from '@polkadot/util/types'
-import { GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
-
 import { Signer, SignerResult } from '@polkadot/api/types'
 import { SignerPayloadRaw } from '@polkadot/types/types/extrinsic'
+import { HexString } from '@polkadot/util/types'
+import { GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -19,7 +18,7 @@ const assertSignResponseSuccessful = (response: GenerateSignatureResponse) => {
       'cannot complete signing synchronously because this wallet action requires policy approval',
       response
     )
-  } else if (!response.signature || !(response.signature!.encoded)) {
+  } else if (!response.signature || !response.signature!.encoded) {
     throw new DfnsError(-1, 'signature missing', response)
   }
 }
@@ -65,17 +64,17 @@ export class DfnsWallet implements Signer {
     if (this.address !== address) {
       throw new DfnsError(-1, 'address does not match the wallet used to initialize DfnsWallet', {
         expectedAddress: this.address,
-        givenAddress: address
+        givenAddress: address,
       })
     }
 
     const response = await this.dfnsClient.wallets.generateSignature({
       walletId: this.walletId,
-      body: { kind: 'Message', message: data, },
+      body: { kind: 'Message', message: data },
     })
 
     assertSignResponseSuccessful(response)
 
-    return (response.signature!.encoded!) as HexString
+    return response.signature!.encoded! as HexString
   }
 }
