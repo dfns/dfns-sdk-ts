@@ -1,7 +1,6 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
-
-import {ISigner} from '@meshsdk/core'
+import { ISigner } from '@meshsdk/core'
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -49,15 +48,13 @@ export class DfnsWallet implements ISigner {
 
   public get address(): string {
     return this.metadata.address!
-
   }
 
-  // Currently, we don't support signing arbitrary data
-  signData(address: string, payload: string) {
+  async signData() {
     throw new DfnsError(-1, 'Method not implemented.')
   }
 
-  async signTx(unsignedTx: string, _partialSign: boolean = false): Promise<string> {
+  async signTx(unsignedTx: string): Promise<string> {
     const res = await this.dfnsClient.wallets.generateSignature({
       walletId: this.metadata.id,
       body: {
@@ -72,5 +69,9 @@ export class DfnsWallet implements ISigner {
     }
 
     return res.signedData
+  }
+
+  async signTxs(): Promise<string[]> {
+    throw new DfnsError(-1, 'Method not implemented.')
   }
 }

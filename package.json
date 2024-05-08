@@ -20,26 +20,13 @@
     "@ethersproject/properties": "5.7.0",
     "@ethersproject/strings": "5.7.0",
     "@ethersproject/transactions": "5.7.0",
-    "@meshsdk/core": "1.5.10",
-    "@polkadot/api": "^10.11.3",
-    "@solana/web3.js": "1.87.6",
     "@stablelib/blake2b": "1.0.1",
-    "@stellar/stellar-sdk": "11.3.0",
-    "@taquito/rpc": "17.4.0",
-    "@taquito/taquito": "17.4.0",
     "@tronweb3/tronwallet-abstract-adapter": "1.1.6",
-    "@vechain/connex-driver": "2.0.12",
-    "algosdk": "2.7.0",
-    "bitcoinjs-lib": "6.1.5",
     "buffer": "6.0.3",
     "cross-fetch": "3.1.6",
     "elliptic": "6.5.4",
-    "ethers": "6.9.0",
     "react-native-passkey": "^2.1.1",
-    "thor-devkit": "2.0.8",
-    "tronweb": "5.3.1",
-    "uuid": "9.0.0",
-    "xrpl": "2.14.0"
+    "uuid": "9.0.0"
   },
   "devDependencies": {
     "@nx/js": "16.8.1",
@@ -57,7 +44,19 @@
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "viem": "^2.0.0"
+    "@meshsdk/core": "^1.0.0",
+    "@polkadot/api": "^10.0.0",
+    "@solana/web3.js": "^1.0.0",
+    "@stellar/stellar-sdk": "^11.0.0",
+    "@taquito/taquito": "^17.0.0",
+    "@vechain/connex-driver": "2.0.12",
+    "algosdk": "^2.0.0",
+    "bitcoinjs-lib": "^6.0.0",
+    "ethers": "^6.0.0",
+    "thor-devkit": "2.0.8",
+    "tronweb": "^5.0.0",
+    "viem": "^2.0.0",
+    "xrpl": "^2.0.0"
   },
   "workspaces": [
     "packages/*"
