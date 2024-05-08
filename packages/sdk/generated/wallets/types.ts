@@ -514,6 +514,8 @@ export type GetWalletAssetsResponse = {
         assetId?: string | undefined;
         contract?: string | undefined;
         tokenId?: string | undefined;
+        issuer?: string | undefined;
+        assetCode?: string | undefined;
         symbol?: string | undefined;
         decimals: number;
         verified?: boolean | undefined;
@@ -531,7 +533,7 @@ export type GetWalletHistoryQuery = {
     limit?: string | undefined;
     paginationToken?: string | undefined;
     direction?: ("In" | "Out") | undefined;
-    kind?: ("NativeTransfer" | "AsaTransfer" | "Erc20Transfer" | "Erc721Transfer" | "Trc10Transfer" | "Trc20Transfer" | "Trc721Transfer" | "UtxoTransfer") | undefined;
+    kind?: ("NativeTransfer" | "AsaTransfer" | "Erc20Transfer" | "Erc721Transfer" | "Trc10Transfer" | "Trc20Transfer" | "Trc721Transfer" | "Sep41Transfer" | "UtxoTransfer") | undefined;
     contract?: string | undefined;
 };
 
@@ -569,6 +571,9 @@ export type GetWalletHistoryResponse = {
         to: string;
         value: string;
         fee?: string | undefined;
+        memo?: string | undefined;
+        liquidityPool?: string | undefined;
+        balanceId?: string | undefined;
         /** @deprecated use metadata.asset.symbol instead */
         symbol: string;
         /** @deprecated use metadata.asset.decimals instead */
@@ -684,6 +689,42 @@ export type GetWalletHistoryResponse = {
         symbol?: string | undefined;
         /** @deprecated use metadata.asset.verified instead */
         verified?: boolean | undefined;
+    } | {
+        walletId: string;
+        direction: "In" | "Out";
+        network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+        blockNumber: number;
+        txHash: string;
+        index?: string | undefined;
+        timestamp: string;
+        metadata: {
+            asset: {
+                symbol?: string | undefined;
+                decimals?: number | undefined;
+                verified?: boolean | undefined;
+                quotes?: {
+                    [x: string]: number;
+                } | undefined;
+            };
+            fee?: {
+                symbol?: string | undefined;
+                decimals?: number | undefined;
+                verified?: boolean | undefined;
+                quotes?: {
+                    [x: string]: number;
+                } | undefined;
+            } | undefined;
+        };
+        kind: "Sep41Transfer";
+        issuer: string;
+        assetCode: string;
+        from: string;
+        to: string;
+        value: string;
+        fee?: string | undefined;
+        memo?: string | undefined;
+        liquidityPool?: string | undefined;
+        balanceId?: string | undefined;
     } | {
         walletId: string;
         direction: "In" | "Out";
@@ -1291,7 +1332,8 @@ export type UntagWalletResponse = {};
 export type UntagWalletRequest = UntagWalletParams & { body: UntagWalletBody }
 
 export type UpdateWalletBody = {
-    name: string;
+    name?: (string | null) | undefined;
+    externalId?: (string | null) | undefined;
 };
 
 export type UpdateWalletParams = {
