@@ -66,9 +66,8 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
       },
       attestation: challenge.attestation,
       excludeCredentials: challenge.excludeCredentials?.map((v) => ({
-        ...v,
-        // re-mapping "transports" from string to string[]
-        transports: v.transports && typeof v.transports === 'string' ? [v.transports] : v.transports,
+        id: v.id,
+        type: v.type,
       })),
       authenticatorSelection: challenge.authenticatorSelection,
       timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,

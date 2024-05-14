@@ -17,25 +17,24 @@ export default function Login(): JSX.Element {
 
   return (
     <form onSubmit={handleLogin}>
-      <div className="w-full">
+      <div className="w-full p-10">
         <h1 className="text-2x">Login</h1>
 
         <div className="flex items-center gap-2">
           <input className="input" id="username" name="username" placeholder="username" />
 
           <button className="btn" disabled={loading} type="submit">
-            Submit
+            Login
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
-          or{' '}
-          <Link className="btn" to="/register">
-            Register
-          </Link>
-        </div>
-
         {!!error && <div className="text-red-700">{error.message}</div>}
+
+        <p>
+          You can login if your Dfns user already has a WebauthN Credential registered on this Application (this
+          domain). If you don't, you first need to <a href="/credential">create a new Credential</a> for this
+          Application.
+        </p>
       </div>
     </form>
   )

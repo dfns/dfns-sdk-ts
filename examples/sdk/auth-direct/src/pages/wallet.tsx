@@ -28,7 +28,7 @@ export default function WalletNew(): JSX.Element {
 
   return (
     <form onSubmit={handleCreate}>
-      <div className="w-full">
+      <div className="w-full p-10">
         <h1 className="text-2x">Create Wallet</h1>
 
         <div className="flex items-center gap-2">
