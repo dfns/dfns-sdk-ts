@@ -773,6 +773,50 @@ export type CreateDelegatedRegistrationChallengeResponse = {
 
 export type CreateDelegatedRegistrationChallengeRequest = { body: CreateDelegatedRegistrationChallengeBody }
 
+export type CreateDelegatedRegistrationChallengeWithSocialLoginProvidersBody = {
+    socialLoginProviderKind: "Oidc";
+    idToken: string;
+};
+
+export type CreateDelegatedRegistrationChallengeWithSocialLoginProvidersResponse = {
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    temporaryAuthenticationToken: string;
+    challenge: string;
+    rp: {
+        id: string;
+        name: string;
+    };
+    supportedCredentialKinds: {
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+    };
+    authenticatorSelection: {
+        authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
+        residentKey: "required" | "preferred" | "discouraged";
+        requireResidentKey: boolean;
+        userVerification: "required" | "preferred" | "discouraged";
+    };
+    attestation: "none" | "indirect" | "direct" | "enterprise";
+    pubKeyCredParams: {
+        type: "public-key";
+        alg: number;
+    }[];
+    excludeCredentials: {
+        type: "public-key";
+        id: string;
+        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
+    }[];
+    otpUrl: string;
+};
+
+export type CreateDelegatedRegistrationChallengeWithSocialLoginProvidersRequest = {
+  body: CreateDelegatedRegistrationChallengeWithSocialLoginProvidersBody
+}
+
 export type CreateLoginChallengeBody = {
     username: string;
     orgId: string;
@@ -1462,6 +1506,21 @@ export type ListCredentialsResponse = {
     }[];
 };
 
+export type ListOrgSettingsResponse = {
+    items: {
+        kind: "SocialLogin";
+        value: {
+            enabled: boolean;
+            providers: {
+                kind: "Oidc";
+                provider: "Google";
+                acceptDfnsIdToken: boolean;
+                audience: string[];
+            }[];
+        };
+    }[];
+};
+
 export type ListPersonalAccessTokensResponse = {
     items: {
         accessToken?: string | undefined;
@@ -1867,6 +1926,9 @@ export type RegisterEndUserResponse = {
         username: string;
         orgId: string;
     };
+    authentication: {
+        token: string;
+    };
     wallets: {
         id: string;
         network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
@@ -1957,6 +2019,34 @@ export type UpdateApplicationResponse = {
 };
 
 export type UpdateApplicationRequest = UpdateApplicationParams & { body: UpdateApplicationBody }
+
+export type UpdateOrgSettingsBody = {
+    kind: "SocialLogin";
+    value: {
+        enabled: boolean;
+        providers: {
+            kind: "Oidc";
+            provider: "Google";
+            acceptDfnsIdToken: boolean;
+            audience: string[];
+        }[];
+    };
+};
+
+export type UpdateOrgSettingsResponse = {
+    kind: "SocialLogin";
+    value: {
+        enabled: boolean;
+        providers: {
+            kind: "Oidc";
+            provider: "Google";
+            acceptDfnsIdToken: boolean;
+            audience: string[];
+        }[];
+    };
+};
+
+export type UpdateOrgSettingsRequest = { body: UpdateOrgSettingsBody }
 
 export type UpdatePersonalAccessTokenBody = {
     name?: string | undefined;
