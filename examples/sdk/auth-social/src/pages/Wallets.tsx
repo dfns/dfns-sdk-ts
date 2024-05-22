@@ -5,7 +5,7 @@ import '../globals.css'
 import { dfnsApi } from '../api'
 import { Buffer } from 'buffer'
 
-export default function Wallets(): JSX.Element {
+export default function Wallets() {
   const [loading, setLoading] = React.useState(false)
   const [wallets, setWallets] = React.useState<any>(undefined)
   const [sighash, setSighash] = React.useState<any>(undefined)

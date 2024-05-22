@@ -773,50 +773,6 @@ export type CreateDelegatedRegistrationChallengeResponse = {
 
 export type CreateDelegatedRegistrationChallengeRequest = { body: CreateDelegatedRegistrationChallengeBody }
 
-export type CreateDelegatedRegistrationChallengeWithSocialLoginProvidersBody = {
-    socialLoginProviderKind: "Oidc";
-    idToken: string;
-};
-
-export type CreateDelegatedRegistrationChallengeWithSocialLoginProvidersResponse = {
-    user: {
-        id: string;
-        displayName: string;
-        name: string;
-    };
-    temporaryAuthenticationToken: string;
-    challenge: string;
-    rp: {
-        id: string;
-        name: string;
-    };
-    supportedCredentialKinds: {
-        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
-        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
-    };
-    authenticatorSelection: {
-        authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
-        residentKey: "required" | "preferred" | "discouraged";
-        requireResidentKey: boolean;
-        userVerification: "required" | "preferred" | "discouraged";
-    };
-    attestation: "none" | "indirect" | "direct" | "enterprise";
-    pubKeyCredParams: {
-        type: "public-key";
-        alg: number;
-    }[];
-    excludeCredentials: {
-        type: "public-key";
-        id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
-    }[];
-    otpUrl: string;
-};
-
-export type CreateDelegatedRegistrationChallengeWithSocialLoginProvidersRequest = {
-  body: CreateDelegatedRegistrationChallengeWithSocialLoginProvidersBody
-}
-
 export type CreateLoginChallengeBody = {
     username: string;
     orgId: string;
@@ -1024,6 +980,48 @@ export type CreateServiceAccountResponse = {
 };
 
 export type CreateServiceAccountRequest = { body: CreateServiceAccountBody }
+
+export type CreateSocialRegistrationChallengeBody = {
+    socialLoginProviderKind: "Oidc";
+    idToken: string;
+};
+
+export type CreateSocialRegistrationChallengeResponse = {
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    temporaryAuthenticationToken: string;
+    challenge: string;
+    rp: {
+        id: string;
+        name: string;
+    };
+    supportedCredentialKinds: {
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+    };
+    authenticatorSelection: {
+        authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
+        residentKey: "required" | "preferred" | "discouraged";
+        requireResidentKey: boolean;
+        userVerification: "required" | "preferred" | "discouraged";
+    };
+    attestation: "none" | "indirect" | "direct" | "enterprise";
+    pubKeyCredParams: {
+        type: "public-key";
+        alg: number;
+    }[];
+    excludeCredentials: {
+        type: "public-key";
+        id: string;
+        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
+    }[];
+    otpUrl: string;
+};
+
+export type CreateSocialRegistrationChallengeRequest = { body: CreateSocialRegistrationChallengeBody }
 
 export type CreateUserBody = {
     email: string;

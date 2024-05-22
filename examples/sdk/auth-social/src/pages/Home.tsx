@@ -40,7 +40,7 @@ Find relevant code in the following files
 - \`./web/pages/Wallets.tsx\`, 
 `
 
-export default function Home(): JSX.Element {
+export default function Home() {
 
   const { authToken } = useAppContext()
   return (

@@ -8,7 +8,7 @@ import '../globals.css'
 import { dfnsApi, setAuthToken } from '../api'
 import { useAppContext } from '../hooks/useAppContext';
 
-export default function Register(): JSX.Element {
+export default function Register() {
   const [loading, setLoading] = React.useState(false)
   const [response, setResponse] = React.useState(undefined)
   const [error, setError] = React.useState(undefined)
@@ -17,7 +17,7 @@ export default function Register(): JSX.Element {
   const registerUser = async (idToken: string) => {
     setLoading(true)
 
-    const challenge = await dfnsApi().auth.createDelegatedRegistrationChallengeWithSocialLoginProviders({
+    const challenge = await dfnsApi().auth.createSocialRegistrationChallenge({
       body: {
         socialLoginProviderKind: "Oidc",
         idToken

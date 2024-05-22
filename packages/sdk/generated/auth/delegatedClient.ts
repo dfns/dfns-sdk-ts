@@ -659,21 +659,6 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
-  async createDelegatedRegistrationChallengeWithSocialLoginProviders(request: T.CreateDelegatedRegistrationChallengeWithSocialLoginProvidersRequest): Promise<T.CreateDelegatedRegistrationChallengeWithSocialLoginProvidersResponse> {
-    const path = buildPathAndQuery('/auth/registration/social', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async createLoginChallenge(request: T.CreateLoginChallengeRequest): Promise<T.CreateLoginChallengeResponse> {
     const path = buildPathAndQuery('/auth/login/init', {
       path: request ?? {},
@@ -799,6 +784,21 @@ export class DelegatedAuthClient {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async createSocialRegistrationChallenge(request: T.CreateSocialRegistrationChallengeRequest): Promise<T.CreateSocialRegistrationChallengeResponse> {
+    const path = buildPathAndQuery('/auth/registration/social', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
       apiOptions: this.apiOptions,
     })
 
