@@ -7,6 +7,7 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import '../globals.css'
 import { dfnsApi, setAuthToken } from '../api'
 import { useAppContext } from '../hooks/useAppContext';
+import { DfnsError, UserRegistrationChallenge } from '@dfns/sdk';
 
 export default function Register() {
   const [loading, setLoading] = React.useState(false)
@@ -14,16 +15,26 @@ export default function Register() {
   const [error, setError] = React.useState(undefined)
   const { setAuthToken: setAuthTokenHook } = useAppContext()
 
-  const registerUser = async (idToken: string) => {
-    setLoading(true)
+  const initRegistration = async (idToken: string) => {
+    try {
+      const challenge = await dfnsApi().auth.createSocialRegistrationChallenge({
+        body: {
+          socialLoginProviderKind: "Oidc",
+          idToken
+        },
+      })
 
-    const challenge = await dfnsApi().auth.createSocialRegistrationChallenge({
-      body: {
-        socialLoginProviderKind: "Oidc",
-        idToken
-      },
-    })
+      return challenge
+    } catch (error: any) {
+      if (error instanceof DfnsError && error.httpStatus === 401) {
+        console.log("Already registered, using the logging route...")
+        return false
+      }
+      throw error
+    }
+  }
 
+  const finishRegistration = async (challenge: UserRegistrationChallenge) => {
     // Webauthn flow
     // Create the new webauthn credential using the challenge
     const webauthn = new WebAuthnSigner()
@@ -39,13 +50,45 @@ export default function Register() {
       },
     })
 
-    setAuthToken(result.authentication.token)
-    setAuthTokenHook(result.authentication.token)
+    return [result, result.authentication.token]
+  }
 
-    setResponse(result as any)
+  const socialLogin = async (idToken: string) => {
+    const result = await dfnsApi().auth.socialLogin({
+      body: {
+        socialLoginProviderKind: "Oidc",
+        idToken
+      },
+    })
+    return [result, result.token]
+  }
+
+  const registerUser = async (idToken: string) => {
+    setLoading(true)
+
+    const challenge = await initRegistration(idToken)
+
+    let result: any
+    let authToken: string
+
+    if (challenge === false) {
+      const [_result, _authToken] = await socialLogin(idToken)
+      result = _result
+      authToken = _authToken as string
+    } else {
+      const [_result, _authToken] = await finishRegistration(challenge)
+      result = _result
+      authToken = _authToken as string
+    }
+
+    setAuthToken(authToken)
+    setAuthTokenHook(authToken)
+
+    setResponse(result)
     setError(undefined)
     setLoading(false)
   }
+
 
   const googleLoginSuccessful = (response: CredentialResponse) => {
     if (response.credential !== undefined) {

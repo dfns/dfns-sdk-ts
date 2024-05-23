@@ -1972,6 +1972,17 @@ export type SendRecoveryCodeResponse = {
 
 export type SendRecoveryCodeRequest = { body: SendRecoveryCodeBody }
 
+export type SocialLoginBody = {
+    socialLoginProviderKind: "Oidc";
+    idToken: string;
+};
+
+export type SocialLoginResponse = {
+    token: string;
+};
+
+export type SocialLoginRequest = { body: SocialLoginBody }
+
 export type UpdateApplicationBody = {
     externalId?: string | undefined;
     name?: string | undefined;

@@ -810,6 +810,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async socialLogin(request: T.SocialLoginRequest): Promise<T.SocialLoginResponse> {
+    const path = buildPathAndQuery('/auth/login/social', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async updateApplication(request: T.UpdateApplicationRequest): Promise<T.UpdateApplicationResponse> {
     const path = buildPathAndQuery('/auth/apps/:appId', {
       path: request ?? {},
