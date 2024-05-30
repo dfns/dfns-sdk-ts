@@ -509,18 +509,42 @@ export type GetWalletAssetsParams = {
 export type GetWalletAssetsResponse = {
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
-    assets: {
-        kind: "Native" | "Asa" | "Erc20" | "Erc721" | "Sep41" | "Trc10" | "Trc20" | "Trc721";
-        assetId?: string | undefined;
-        contract?: string | undefined;
-        tokenId?: string | undefined;
-        issuer?: string | undefined;
-        assetCode?: string | undefined;
+    assets: ({
+        kind: "Native";
         symbol?: string | undefined;
         decimals: number;
         verified?: boolean | undefined;
         balance: string;
-    }[];
+    } | {
+        kind: "Asa";
+        assetId: string;
+        symbol?: string | undefined;
+        decimals: number;
+        verified?: boolean | undefined;
+        balance: string;
+    } | {
+        kind: "Erc20" | "Trc20";
+        contract: string;
+        symbol?: string | undefined;
+        decimals: number;
+        verified?: boolean | undefined;
+        balance: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        symbol?: string | undefined;
+        decimals: number;
+        verified?: boolean | undefined;
+        balance: string;
+    } | {
+        kind: "Trc10";
+        tokenId: string;
+        symbol?: string | undefined;
+        decimals: number;
+        verified?: boolean | undefined;
+        balance: string;
+    })[];
 };
 
 export type GetWalletAssetsRequest = GetWalletAssetsParams
@@ -865,14 +889,18 @@ export type GetWalletNftsParams = {
 export type GetWalletNftsResponse = {
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
-    nfts: {
-        kind: "Native" | "Asa" | "Erc20" | "Erc721" | "Sep41" | "Trc10" | "Trc20" | "Trc721";
-        contract?: string | undefined;
+    nfts: ({
+        kind: "Asa";
+        assetId: string;
         symbol?: string | undefined;
-        verified?: boolean | undefined;
-        tokenIds: string[];
-        count: number;
-    }[];
+        tokenUri?: string | undefined;
+    } | {
+        kind: "Erc721" | "Trc721";
+        contract: string;
+        tokenId: string;
+        symbol?: string | undefined;
+        tokenUri?: string | undefined;
+    })[];
 };
 
 export type GetWalletNftsRequest = GetWalletNftsParams
