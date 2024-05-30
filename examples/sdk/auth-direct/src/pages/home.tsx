@@ -12,26 +12,34 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     dfnsApi()
-      .wallets.listWallets({})
+      .wallets.listWallets({ query: { limit: '20' } })
       .then((wallets) => setWallets(wallets))
   }, [])
 
   return (
-    <div>
-      <div className="flex items-center gap-2">
-        <p className="text-2x">Hello {user}</p>
+    <div className="p-10">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2x m-0">Home</h1>
 
         <button className="btn" type="button" onClick={logout}>
           Logout
         </button>
       </div>
 
+      {user && <p className="text-2x">You're logged-in as {user}. Here's a - limited - list of your wallets:</p>}
+
+      {!user && (
+        <p className="text-2x">
+          You're not logged in, you need to <a href="/login">Log in</a>
+        </p>
+      )}
+
       <table className="w-full">
         <thead>
           <tr>
             <th>ID</th>
             <th>Network</th>
-            <th>Date</th>
+            <th>Date Created</th>
           </tr>
         </thead>
         <tbody>
@@ -44,16 +52,13 @@ export default function Home(): JSX.Element {
               </tr>
             ))}
         </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan={3}>
-              <Link className="btn" to="/wallets/new">
-                New Wallet
-              </Link>
-            </td>
-          </tr>
-        </tfoot>
       </table>
+
+      <div className="flex justify-end">
+        <Link className="btn" to="/wallets/new">
+          Create a new Wallet
+        </Link>
+      </div>
     </div>
   )
 }

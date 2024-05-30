@@ -3,13 +3,15 @@ import { Route, Routes, Navigate, Outlet } from 'react-router-dom'
 
 import useAuth from '../hooks/useAuth'
 import Login from '../pages/login'
+import Credential from '../pages/credential'
 import Home from '../pages/home'
-import Register from '../pages/register'
 import WalletNew from '../pages/wallet'
 
 function AuthenticatedRoute() {
   const { user } = useAuth()
-  if (!user) return <Navigate to="/login" replace={true} />
+  if (!user) {
+    return <Navigate to="/login" replace={true} />
+  }
   return <Outlet />
 }
 
@@ -23,7 +25,7 @@ export default function Router(): JSX.Element {
         <Route path="/wallets/new" element={<WalletNew />} />
       </Route>
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/credential" element={<Credential />} />
     </Routes>
   )
 }

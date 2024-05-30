@@ -451,7 +451,7 @@ export type CreateCredentialChallengeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     excludeCredentials: {
@@ -476,7 +476,7 @@ export type CreateCredentialChallengeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     /** @deprecated use challengeIdentifier instead */
@@ -496,7 +496,7 @@ export type CreateCredentialChallengeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     /** @deprecated use challengeIdentifier instead */
@@ -560,7 +560,7 @@ export type CreateCredentialChallengeWithCodeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     excludeCredentials: {
@@ -585,7 +585,7 @@ export type CreateCredentialChallengeWithCodeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     /** @deprecated use challengeIdentifier instead */
@@ -605,7 +605,7 @@ export type CreateCredentialChallengeWithCodeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     /** @deprecated use challengeIdentifier instead */
@@ -713,7 +713,7 @@ export type CreateDelegatedRecoveryChallengeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     excludeCredentials: {
@@ -760,7 +760,7 @@ export type CreateDelegatedRegistrationChallengeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     excludeCredentials: {
@@ -871,7 +871,7 @@ export type CreateRecoveryChallengeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     excludeCredentials: {
@@ -918,7 +918,7 @@ export type CreateRegistrationChallengeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     excludeCredentials: {
@@ -1720,7 +1720,7 @@ export type RecreateDelegatedRegistrationChallengeResponse = {
     };
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
-        type: string;
+        type: "public-key";
         alg: number;
     }[];
     excludeCredentials: {

@@ -1,4 +1,4 @@
-import { AllowCredential, CredentialKind, UserVerificationRequirement } from './signer'
+import { CreateCredentialChallengeResponse, CreateRegistrationChallengeResponse } from './generated/auth/types'
 
 export type AuthenticatorAttachment = 'platform' | 'cross-platform'
 
@@ -6,36 +6,7 @@ export type ResidentKeyRequirement = 'required' | 'preferred' | 'discouraged'
 
 export type AttestationConveyancePreference = 'none' | 'indirect' | 'direct' | 'enterprise'
 
-export type UserRegistrationChallenge = {
-  temporaryAuthenticationToken: string
-  rp: {
-    id: string
-    name: string
-  }
-  user: {
-    id: string
-    name: string
-    displayName: string
-  }
-  supportedCredentialKinds: {
-    firstFactor: CredentialKind[]
-    secondFactor: CredentialKind[]
-  }
-  otpUrl: string
-  challenge: string
-  authenticatorSelection: {
-    authenticatorAttachment?: AuthenticatorAttachment
-    requireResidentKey: boolean
-    residentKey: ResidentKeyRequirement
-    userVerification: UserVerificationRequirement
-  }
-  attestation: AttestationConveyancePreference
-  pubKeyCredParams: {
-    type: 'public-key'
-    alg: number
-  }[]
-  excludeCredentials: AllowCredential[]
-}
+export type UserRegistrationChallenge = CreateRegistrationChallengeResponse
 
 export type KeyAttestation = {
   credentialKind: 'Key'
@@ -93,5 +64,5 @@ export type CredentialAttestation =
   | RecoveryKeyAttestation
 
 export interface CredentialStore<T extends CredentialAttestation = FirstFactorAttestation> {
-  create(challenge: UserRegistrationChallenge): Promise<T>
+  create(challenge: CreateRegistrationChallengeResponse | CreateCredentialChallengeResponse): Promise<T>
 }

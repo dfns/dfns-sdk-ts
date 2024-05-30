@@ -5,8 +5,8 @@ import {
   Fido2Assertion,
   Fido2Attestation,
   UserActionChallenge,
-  UserRegistrationChallenge,
 } from '@dfns/sdk'
+import { CreateCredentialChallengeResponse, CreateRegistrationChallengeResponse } from '@dfns/sdk/generated/auth'
 import { fromBase64Url, toBase64Url } from '@dfns/sdk/utils'
 import { Buffer } from 'buffer'
 
@@ -52,7 +52,9 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
     }
   }
 
-  async create(challenge: UserRegistrationChallenge): Promise<Fido2Attestation> {
+  async create(
+    challenge: CreateRegistrationChallengeResponse | (CreateCredentialChallengeResponse & { kind: 'Fido2' })
+  ): Promise<Fido2Attestation> {
     const options: CredentialCreationOptions = {
       publicKey: {
         challenge: Buffer.from(challenge.challenge),
