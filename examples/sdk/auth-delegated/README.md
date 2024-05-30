@@ -143,6 +143,9 @@ In the simulator's menu options, go to `Features` > `Touch ID` or `Face ID` > `E
 
 Depending on the iOS version the simulator, you may also need to enable Passkeys on the simulated device in the iOS settings. Go to `Settings` > `Developer` > `Authentication Service Testing` > `Syncing Platform Authenticator`.
 
+*If you run this on a physical device instead of a simulator*, make sure that on the iOS device you enable "Associated Domains for development". This is found under Settings > Developer > Universal Links: Associated Domains Development
+
+
 #### Run on iOS
 
 First start the metro server
