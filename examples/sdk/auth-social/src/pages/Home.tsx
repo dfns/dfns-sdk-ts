@@ -55,7 +55,7 @@ export default function Home() {
       <ReactMarkdown>{registerText}</ReactMarkdown>
       <p className="text-center">
         <Link to="/register" className="btn no-underline">
-          Go to Social Registration
+          Go to Social Registration/Login
         </Link>
       </p>
       <ReactMarkdown>{registerCode}</ReactMarkdown>

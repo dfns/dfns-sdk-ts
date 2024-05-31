@@ -98,15 +98,18 @@ export default function Register() {
 
   return (
     <div className="w-full">
-      <h2>Social Registration</h2>
+      <h2>Social Registration/Login</h2>
       <p>
         For this tutorial, you will register a Dfns EndUser.
       </p>
       <p>
         After registration, the new end user will have an Ethereum testnet wallet and assigned the system permission,
-        `DfnsDefaultEndUserAccess`, that grants the end user full access to their wallets.
+        `DfnsDefaultEndUserAccess`, that grants the end user full access to their wallets. Below will appear the return payload
+        from the server containing the wallet information.
+        In this example, if the user is already registered, we will try to login the user an return the authentication
+        token instead.
       </p>
-      <GoogleLogin onSuccess={googleLoginSuccessful} />
+      <GoogleLogin shape="circle" size="medium" text="continue_with" onSuccess={googleLoginSuccessful} />
 
 
       {!!loading && <span>registering ...</span>}

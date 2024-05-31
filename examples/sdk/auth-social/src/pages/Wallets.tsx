@@ -74,7 +74,7 @@ export default function Wallets() {
           Enter a message in the input box and press the "Sign Message" button. You will see a WebAuthn prompt asking
           for authorization to perform the action. Once granted, the tutorial makes a request to Dfns MPC signers and
           gets a signature hash. Optionally you can use{' '}
-          <a href="https://etherscan.io/verifiedSignatures" target="_blank">
+          <a href="https://etherscan.io/verifiedSignatures" rel="noreferrer" target="_blank">
             etherscan
           </a>{' '}
           to verify this signature hash matches the wallet address.
