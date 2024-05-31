@@ -620,20 +620,6 @@ export class AuthClient {
     return this.listCredentials()
   }
 
-  async listOrgSettings(): Promise<T.ListOrgSettingsResponse> {
-    const path = buildPathAndQuery('/org/settings', {
-      path: {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'GET',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async listPersonalAccessTokens(): Promise<T.ListPersonalAccessTokensResponse> {
     const path = buildPathAndQuery('/auth/pats', {
       path: {},
@@ -833,21 +819,6 @@ export class AuthClient {
 
     const response = await userActionFetch(path, {
       method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updateOrgSettings(request: T.UpdateOrgSettingsRequest): Promise<T.UpdateOrgSettingsResponse> {
-    const path = buildPathAndQuery('/org/settings', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
     })

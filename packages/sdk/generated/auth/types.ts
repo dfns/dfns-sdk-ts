@@ -1504,21 +1504,6 @@ export type ListCredentialsResponse = {
     }[];
 };
 
-export type ListOrgSettingsResponse = {
-    items: {
-        kind: "SocialLogin";
-        value: {
-            enabled: boolean;
-            providers: {
-                kind: "Oidc";
-                provider: "Google";
-                acceptDfnsIdToken: boolean;
-                audience: string[];
-            }[];
-        };
-    }[];
-};
-
 export type ListPersonalAccessTokensResponse = {
     items: {
         accessToken?: string | undefined;
@@ -2028,34 +2013,6 @@ export type UpdateApplicationResponse = {
 };
 
 export type UpdateApplicationRequest = UpdateApplicationParams & { body: UpdateApplicationBody }
-
-export type UpdateOrgSettingsBody = {
-    kind: "SocialLogin";
-    value: {
-        enabled: boolean;
-        providers: {
-            kind: "Oidc";
-            provider: "Google";
-            acceptDfnsIdToken: boolean;
-            audience: string[];
-        }[];
-    };
-};
-
-export type UpdateOrgSettingsResponse = {
-    kind: "SocialLogin";
-    value: {
-        enabled: boolean;
-        providers: {
-            kind: "Oidc";
-            provider: "Google";
-            acceptDfnsIdToken: boolean;
-            audience: string[];
-        }[];
-    };
-};
-
-export type UpdateOrgSettingsRequest = { body: UpdateOrgSettingsBody }
 
 export type UpdatePersonalAccessTokenBody = {
     name?: string | undefined;
