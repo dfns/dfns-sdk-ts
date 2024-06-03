@@ -4,17 +4,19 @@ import { Link } from 'react-router-dom'
 import '../globals.css'
 import { dfnsApi } from '../api'
 import { Buffer } from 'buffer'
+import { useAppContext } from '../hooks/useAppContext';
 
 export default function Wallets() {
   const [loading, setLoading] = React.useState(false)
   const [wallets, setWallets] = React.useState<any>(undefined)
   const [sighash, setSighash] = React.useState<any>(undefined)
   const [error, setError] = React.useState<any>(undefined)
+  const { authToken } = useAppContext()
 
   const listWallets = async () => {
     try {
       setLoading(true)
-      const wallets = await dfnsApi().wallets.listWallets()
+      const wallets = await dfnsApi(authToken).wallets.listWallets()
       setWallets(wallets)
       setError(undefined)
     } catch (error: any) {
@@ -36,7 +38,7 @@ export default function Wallets() {
       const walletId = wallets.items[0].id
       const formData = new FormData(event.currentTarget)
 
-      const result = await dfnsApi().wallets.generateSignature({
+      const result = await dfnsApi(authToken).wallets.generateSignature({
         walletId,
         body: {
           kind: "Message",

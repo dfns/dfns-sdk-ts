@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
 import '../globals.css'
-import { dfnsApi, setAuthToken } from '../api'
+import { dfnsApi } from '../api'
 import { useAppContext } from '../hooks/useAppContext';
 import { DfnsError, UserRegistrationChallenge } from '@dfns/sdk';
 
@@ -13,25 +13,17 @@ export default function Register() {
   const [loading, setLoading] = React.useState(false)
   const [response, setResponse] = React.useState(undefined)
   const [error, setError] = React.useState(undefined)
-  const { setAuthToken: setAuthTokenHook } = useAppContext()
+  const { setAuthToken } = useAppContext()
 
   const initRegistration = async (idToken: string) => {
-    try {
-      const challenge = await dfnsApi().auth.createSocialRegistrationChallenge({
-        body: {
-          socialLoginProviderKind: "Oidc",
-          idToken
-        },
-      })
+    const challenge = await dfnsApi(undefined).auth.createSocialRegistrationChallenge({
+      body: {
+        socialLoginProviderKind: "Oidc",
+        idToken
+      },
+    })
 
-      return challenge
-    } catch (error: any) {
-      if (error instanceof DfnsError && error.httpStatus === 401) {
-        console.log("Already registered, using the logging route...")
-        return false
-      }
-      throw error
-    }
+    return challenge
   }
 
   const finishRegistration = async (challenge: UserRegistrationChallenge) => {
@@ -41,9 +33,7 @@ export default function Register() {
     const attestation = await webauthn.create(challenge)
 
     // We set the temporary authentication token to complete the registration
-    setAuthToken(challenge.temporaryAuthenticationToken)
-
-    const result = await dfnsApi().auth.registerEndUser({
+    const result = await dfnsApi(challenge.temporaryAuthenticationToken).auth.registerEndUser({
       body: {
         firstFactorCredential: attestation,
         wallets: [{ network: 'EthereumSepolia' }],
@@ -54,35 +44,45 @@ export default function Register() {
   }
 
   const socialLogin = async (idToken: string) => {
-    const result = await dfnsApi().auth.socialLogin({
-      body: {
-        socialLoginProviderKind: "Oidc",
-        idToken
-      },
-    })
-    return [result, result.token]
+    try {
+      const result = await dfnsApi(undefined).auth.socialLogin({
+        body: {
+          socialLoginProviderKind: "Oidc",
+          idToken
+        },
+      })
+      return [result, result.token]
+    } catch (error: any) {
+      if (error instanceof DfnsError && error.httpStatus === 401) {
+        console.log("User does not exist, using the registering route...")
+        return undefined
+      }
+      throw error
+    }
   }
 
   const registerUser = async (idToken: string) => {
     setLoading(true)
 
-    const challenge = await initRegistration(idToken)
+    const loginResult = await socialLogin(idToken)
 
     let result: any
     let authToken: string
 
-    if (challenge === false) {
-      const [_result, _authToken] = await socialLogin(idToken)
+    // If login was sucessful, we directly get the authToken, otherwise we
+    // register the user
+    if (loginResult) {
+      const [_result, _authToken] = loginResult
       result = _result
       authToken = _authToken as string
     } else {
+      const challenge = await initRegistration(idToken)
       const [_result, _authToken] = await finishRegistration(challenge)
       result = _result
       authToken = _authToken as string
     }
 
     setAuthToken(authToken)
-    setAuthTokenHook(authToken)
 
     setResponse(result)
     setError(undefined)
@@ -100,14 +100,16 @@ export default function Register() {
     <div className="w-full">
       <h2>Social Registration/Login</h2>
       <p>
-        For this tutorial, you will register a Dfns EndUser.
+        After clicking on the "Continue with Google" button, the browser will receive a JWT from Google. We will first try to login the user with it.
+        If it is unsuccesful, we will trigger the registration of the user.
       </p>
       <p>
         After registration, the new end user will have an Ethereum testnet wallet and assigned the system permission,
         `DfnsDefaultEndUserAccess`, that grants the end user full access to their wallets. Below will appear the return payload
         from the server containing the wallet information.
-        In this example, if the user is already registered, we will try to login the user an return the authentication
-        token instead.
+      </p>
+      <p>
+        If the user was already registered we will just return the authentication token.
       </p>
       <GoogleLogin shape="circle" size="medium" text="continue_with" onSuccess={googleLoginSuccessful} />
 
