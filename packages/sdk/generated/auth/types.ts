@@ -981,6 +981,48 @@ export type CreateServiceAccountResponse = {
 
 export type CreateServiceAccountRequest = { body: CreateServiceAccountBody }
 
+export type CreateSocialRegistrationChallengeBody = {
+    socialLoginProviderKind: "Oidc";
+    idToken: string;
+};
+
+export type CreateSocialRegistrationChallengeResponse = {
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    temporaryAuthenticationToken: string;
+    challenge: string;
+    rp: {
+        id: string;
+        name: string;
+    };
+    supportedCredentialKinds: {
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+    };
+    authenticatorSelection: {
+        authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
+        residentKey: "required" | "preferred" | "discouraged";
+        requireResidentKey: boolean;
+        userVerification: "required" | "preferred" | "discouraged";
+    };
+    attestation: "none" | "indirect" | "direct" | "enterprise";
+    pubKeyCredParams: {
+        type: "public-key";
+        alg: number;
+    }[];
+    excludeCredentials: {
+        type: "public-key";
+        id: string;
+        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
+    }[];
+    otpUrl: string;
+};
+
+export type CreateSocialRegistrationChallengeRequest = { body: CreateSocialRegistrationChallengeBody }
+
 export type CreateUserBody = {
     email: string;
     kind: "CustomerEmployee" | "DfnsStaff";
@@ -1867,6 +1909,9 @@ export type RegisterEndUserResponse = {
         username: string;
         orgId: string;
     };
+    authentication: {
+        token: string;
+    };
     wallets: {
         id: string;
         network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
@@ -1911,6 +1956,17 @@ export type SendRecoveryCodeResponse = {
 };
 
 export type SendRecoveryCodeRequest = { body: SendRecoveryCodeBody }
+
+export type SocialLoginBody = {
+    socialLoginProviderKind: "Oidc";
+    idToken: string;
+};
+
+export type SocialLoginResponse = {
+    token: string;
+};
+
+export type SocialLoginRequest = { body: SocialLoginBody }
 
 export type UpdateApplicationBody = {
     externalId?: string | undefined;

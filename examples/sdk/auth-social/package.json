@@ -1,0 +1,60 @@
+{
+  "name": "auth-social",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@dfns/sdk": "file:../../../packages/sdk",
+    "@dfns/sdk-browser": "file:../../../packages/sdk-browser",
+    "@react-oauth/google": "^0.12.1",
+    "buffer": "^6.0.3",
+    "jwt-decode": "3.1.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-markdown": "8.0.7",
+    "react-router-dom": "6.12.1",
+    "web-vitals": "2.1.4"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "@craco/craco": "^5.9.0",
+    "@tailwindcss/typography": "^0.5.9",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.35",
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
+    "@types/react-router-dom": "5.3.3",
+    "autoprefixer": "^10.4.14",
+    "craco-babel-loader": "^0.1.4",
+    "postcss": "^8.4.31",
+    "react-scripts": "^5.0.1",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -356,6 +356,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async createSocialRegistrationChallenge(request: T.CreateSocialRegistrationChallengeRequest): Promise<T.CreateSocialRegistrationChallengeResponse> {
+    const path = buildPathAndQuery('/auth/registration/social', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createUser(request: T.CreateUserRequest): Promise<T.CreateUserResponse> {
     const path = buildPathAndQuery('/auth/users', {
       path: request ?? {},
@@ -768,6 +783,21 @@ export class AuthClient {
 
   async sendRecoveryCode(request: T.SendRecoveryCodeRequest): Promise<T.SendRecoveryCodeResponse> {
     const path = buildPathAndQuery('/auth/recover/user/code', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async socialLogin(request: T.SocialLoginRequest): Promise<T.SocialLoginResponse> {
+    const path = buildPathAndQuery('/auth/login/social', {
       path: request ?? {},
       query: {},
     })
