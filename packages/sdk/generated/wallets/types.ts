@@ -136,8 +136,8 @@ export type DelegateWalletRequest = DelegateWalletParams & { body: DelegateWalle
 export type ExportWalletBody = {
     encryptionKey: string;
     supportedSchemes: {
-        protocol: "CGGMP21";
-        curve: "secp256k1";
+        protocol: "CGGMP21" | "BINANCE_EDDSA" | "FROST" | "FROST_BITCOIN";
+        curve: "ed25519" | "secp256k1" | "stark";
     }[];
 };
 
@@ -149,8 +149,8 @@ export type ExportWalletResponse = {
     publicKey: string;
     /** The TSS threshold of the wallet private signing key shares */
     minSigners: number;
-    protocol: "CGGMP21";
-    curve: "secp256k1";
+    protocol: "CGGMP21" | "BINANCE_EDDSA" | "FROST" | "FROST_BITCOIN";
+    curve: "ed25519" | "secp256k1" | "stark";
     /** Keyshares of the exported wallet. They are encrypted with the provided encryption key. The exported private key is re-constructed from these keyshares. */
     encryptedKeyShares: {
         /** Base64-encoded ID of the signer exported the encrypted keyshare */
@@ -953,8 +953,8 @@ export type ImportWalletBody = {
     network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
     name?: string | undefined;
     externalId?: string | undefined;
-    curve: "secp256k1";
-    protocol: "CGGMP21";
+    curve: "ed25519" | "secp256k1" | "stark";
+    protocol: "CGGMP21" | "BINANCE_EDDSA" | "FROST" | "FROST_BITCOIN";
     minSigners: number;
     encryptedKeyShares: {
         signerId: string;

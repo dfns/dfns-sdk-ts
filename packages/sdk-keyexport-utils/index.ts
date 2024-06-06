@@ -1,4 +1,4 @@
-import { KeyExportContext } from './codegen/dfns_key_export_client'
+import { KeyExportContext } from '@dfns/dfns-key-export'
 import { RecoverSecretKeyParams, WalletExportConfig } from './types'
 export * from './types'
 
