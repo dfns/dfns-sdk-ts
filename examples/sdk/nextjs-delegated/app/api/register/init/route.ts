@@ -1,4 +1,3 @@
-import { UserAuthKind } from '@dfns/sdk/codegen/datamodel/Auth'
 import { NextResponse } from 'next/server'
 
 import { apiClient } from '../../clients'
@@ -13,7 +12,7 @@ export const POST = async (req: Request) => {
   // party and origin to create the WebAuthn or Passkeys credential
   const client = apiClient()
   const challenge = await client.auth.createDelegatedRegistrationChallenge({
-    body: { kind: UserAuthKind.EndUser, email: username },
+    body: { kind: 'EndUser', email: username },
   })
 
   console.debug(challenge)
