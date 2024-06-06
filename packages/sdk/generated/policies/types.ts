@@ -224,6 +224,11 @@ export type CreateApprovalDecisionResponse = {
                 to: string;
                 amount: string;
                 memo?: string | undefined;
+            } | {
+                kind: "Spl" | "Spl2022";
+                to: string;
+                amount: string;
+                mint: string;
             };
             metadata: {
                 asset: {
@@ -948,6 +953,11 @@ export type GetApprovalResponse = {
                 to: string;
                 amount: string;
                 memo?: string | undefined;
+            } | {
+                kind: "Spl" | "Spl2022";
+                to: string;
+                amount: string;
+                mint: string;
             };
             metadata: {
                 asset: {
@@ -1713,6 +1723,11 @@ export type ListApprovalsResponse = {
                     to: string;
                     amount: string;
                     memo?: string | undefined;
+                } | {
+                    kind: "Spl" | "Spl2022";
+                    to: string;
+                    amount: string;
+                    mint: string;
                 };
                 metadata: {
                     asset: {
