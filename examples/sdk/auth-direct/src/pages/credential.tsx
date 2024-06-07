@@ -1,5 +1,4 @@
-import React, { FormEvent, useCallback, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { FormEvent, useState } from 'react'
 
 import '../globals.css'
 import useAuth from '../hooks/useAuth'

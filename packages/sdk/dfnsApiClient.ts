@@ -1,8 +1,5 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
-import { AssetsClient } from './codegen/Assets'
 import { AuthClient } from './generated/auth'
-import { CallbacksClient } from './codegen/Callbacks'
-import { PublicKeysClient } from './codegen/PublicKeys'
 import { NetworksClient } from './generated/networks'
 import { PermissionsClient } from './generated/permissions'
 import { PoliciesClient } from './generated/policies'
@@ -19,16 +16,8 @@ export type DfnsApiClientOptions = DfnsBaseApiOptions & {
 export class DfnsApiClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
-  public get assets() {
-    return new AssetsClient(this.apiOptions)
-  }
-
   public get auth() {
     return new AuthClient(this.apiOptions)
-  }
-
-  public get callbacks() {
-    return new CallbacksClient(this.apiOptions)
   }
 
   public get networks() {
@@ -41,10 +30,6 @@ export class DfnsApiClient {
 
   public get policies() {
     return new PoliciesClient(this.apiOptions)
-  }
-
-  public get publicKeys() {
-    return new PublicKeysClient(this.apiOptions)
   }
 
   public get wallets() {

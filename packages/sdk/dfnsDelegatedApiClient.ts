@@ -1,8 +1,5 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
-import { DelegatedAssetsClient } from './codegen/Assets'
 import { DelegatedAuthClient } from './generated/auth'
-import { DelegatedCallbacksClient } from './codegen/Callbacks'
-import { DelegatedPublicKeysClient } from './codegen/PublicKeys'
 import { DelegatedNetworksClient } from './generated/networks'
 import { DelegatedPermissionsClient } from './generated/permissions'
 import { DelegatedPoliciesClient } from './generated/policies'
@@ -15,16 +12,8 @@ export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions
 export class DfnsDelegatedApiClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
-  public get assets() {
-    return new DelegatedAssetsClient(this.apiOptions)
-  }
-
   public get auth() {
     return new DelegatedAuthClient(this.apiOptions)
-  }
-
-  public get callbacks() {
-    return new DelegatedCallbacksClient(this.apiOptions)
   }
 
   public get networks() {
@@ -37,10 +26,6 @@ export class DfnsDelegatedApiClient {
 
   public get policies() {
     return new DelegatedPoliciesClient(this.apiOptions)
-  }
-
-  public get publicKeys() {
-    return new DelegatedPublicKeysClient(this.apiOptions)
   }
 
   public get wallets() {
