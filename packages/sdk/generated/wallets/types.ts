@@ -569,7 +569,7 @@ export type GetWalletHistoryQuery = {
     limit?: string | undefined;
     paginationToken?: string | undefined;
     direction?: ("In" | "Out") | undefined;
-    kind?: ("NativeTransfer" | "AsaTransfer" | "Erc20Transfer" | "Erc721Transfer" | "Trc10Transfer" | "Trc20Transfer" | "Trc721Transfer" | "Sep41Transfer" | " SplTransfer" | " Spl2022Transfer" | "UtxoTransfer") | undefined;
+    kind?: ("NativeTransfer" | "AsaTransfer" | "Erc20Transfer" | "Erc721Transfer" | "Trc10Transfer" | "Trc20Transfer" | "Trc721Transfer" | "Sep41Transfer" | "SplTransfer" | "Spl2022Transfer" | "UtxoTransfer") | undefined;
     contract?: string | undefined;
 };
 
@@ -787,7 +787,7 @@ export type GetWalletHistoryResponse = {
                 } | undefined;
             } | undefined;
         };
-        kind: " SplTransfer" | " Spl2022Transfer";
+        kind: "SplTransfer" | "Spl2022Transfer";
         from?: string | undefined;
         to?: string | undefined;
         mint: string;
