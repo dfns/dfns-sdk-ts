@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 (2024-06-10)
+
+- Deprecated `DfnsApiClient.assets`
+- Deprecated `DfnsApiClient.publicKeys`
+- Deprecated `DfnsApiClient.callbacks`
+
 ## 0.4.3 (2024-05-08)
 
 - Added SDK integration with Stellar, see `@dfns/lib-stellar`
