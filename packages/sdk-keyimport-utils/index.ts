@@ -1,28 +1,39 @@
-import { buildKeyImportRequest, SecretKey, SignersInfo, KeyCurve, KeyProtocol } from './codegen/dfns_key_import'
+import {
+  buildKeyImportRequest,
+  SecretKey,
+  SignersInfo,
+  KeyCurve as KeyCurveInternal,
+  KeyProtocol,
+} from '@dfns/dfns-key-import'
 import { ImportWalletBody, GetWalletResponse } from '@dfns/sdk/types/wallets'
 import { ListSignersResponse } from '@dfns/sdk/types/signers'
 
 type Signer = ListSignersResponse['clusters'][number]['signers'][number]
-type KeyScheme = GetWalletResponse['signingKey']['scheme']
+type KeyCurve = GetWalletResponse['signingKey']['curve']
+
+const getCurveAndProtocol = (keyCurve: KeyCurve): { curve: KeyCurveInternal; protocol: KeyProtocol } => {
+  switch (keyCurve) {
+    case 'secp256k1':
+      return { curve: KeyCurveInternal.Secp256k1, protocol: KeyProtocol.Cggmp21 }
+    case 'stark':
+      return { curve: KeyCurveInternal.Stark, protocol: KeyProtocol.Cggmp21 }
+    case 'ed25519':
+      return { curve: KeyCurveInternal.Ed25519, protocol: KeyProtocol.Frost }
+    default:
+      throw Error(`Unsupported key curve for import: "${keyCurve}"`)
+  }
+}
 
 export const splitPrivateKeyForSigners = ({
   signers,
   privateKey,
-  keyScheme = 'ECDSA',
+  keyCurve,
 }: {
   signers: Signer[]
   privateKey: Uint8Array | Buffer
-  keyScheme?: KeyScheme
+  keyCurve: KeyCurve
 }): Pick<ImportWalletBody, 'protocol' | 'curve' | 'minSigners' | 'encryptedKeyShares'> => {
-  let curve: KeyCurve
-  let protocol: KeyProtocol
-
-  if (keyScheme === 'ECDSA') {
-    curve = KeyCurve.Secp256k1
-    protocol = KeyProtocol.Cggmp21
-  } else {
-    throw Error('Import only supports ECDSA keys for now')
-  }
+  const { curve, protocol } = getCurveAndProtocol(keyCurve)
 
   // We set this as constant do not expose it, because Dfns API will only accept minSigners = 3 for now.
   const minSigners = 3

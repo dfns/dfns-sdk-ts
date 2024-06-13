@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["*.ts", "codegen/**/*"],
+  "include": ["*.ts"],
   "compilerOptions": {
     "baseUrl": "./"
   }

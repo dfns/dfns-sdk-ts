@@ -18,22 +18,26 @@ const dfnsApi = new DfnsApiClient({
 })
 
 const main = async () => {
-  const walletId = process.env.WALLET_ID_TO_EXPORT!
+  // 1. Update the wallet ID you want to export
+  const WALLET_ID_TO_EXPORT = 'wa-xxx-xxx-xxxxxx'
 
-  // Creates an "export context". Under the hood, it creates an encryption key to start wallet export,
-  // so that the wallet private key shares are transmitted back to you securely.
+  // 2. This creates an "export context". Under the hood, it creates an encryption key to start wallet export, so that the wallet private key shares are transmitted back to you securely.
   const ctx = newWalletExportContext()
 
-  // API call to export wallet
-  const exportedSigningKey = await dfnsApi.wallets.exportWallet({
-    walletId,
-    body: ctx.getConf(),
-  })
+  // 3. This is the API call exporting all key shares (encrypted) of the wallet
+  try {
+    const exportedSigningKey = await dfnsApi.wallets.exportWallet({
+      walletId: WALLET_ID_TO_EXPORT,
+      body: ctx.getConf(),
+    })
 
-  // Decrypt and reconstruct wallet private key, from encrypted wallet key shares.
-  const exportedWalletPrivateKey = ctx.recoverSecretKey(exportedSigningKey)
+    // 4. This decrypts the keyshares and reconstruct wallet private key, from encrypted wallet key shares.
+    const exportedWalletPrivateKey = ctx.recoverSecretKey(exportedSigningKey)
 
-  console.log('🥳 Exported wallet private key:', Buffer.from(exportedWalletPrivateKey).toString('hex'))
+    console.log('🥳 Exported wallet private key:', Buffer.from(exportedWalletPrivateKey).toString('hex'))
+  } catch (error) {
+    console.log((error as any).toString())
+  }
 }
 
 main()
