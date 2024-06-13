@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-vechain",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "peerDependencies": {
     "@vechain/connex-driver": "2.0.12",
     "thor-devkit": "2.0.8"

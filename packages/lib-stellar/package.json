@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-stellar",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "peerDependencies": {
     "@stellar/stellar-sdk": "^11.0.0"
   }

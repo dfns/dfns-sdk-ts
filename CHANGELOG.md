@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1 (2024-06-13)
+
+- Added support for `ed25519` + `stark` key import/export.
+
 ## 0.5.0 (2024-06-10)
 
 - Deprecated `DfnsApiClient.assets`
