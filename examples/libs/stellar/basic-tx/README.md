@@ -31,8 +31,7 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
-- `CARDANO_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID
-- `BLOCKFROST_PROJECT_ID` = the blockfrost project id. It will be used to derive Blockfrost URL as well
+- `STELLAR_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID
 
 
 **note** _the wallet must have XLM to pay for fees_
