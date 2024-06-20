@@ -127,6 +127,28 @@ export type ArchivePolicyResponse = {
             limit: number;
             timeframe: number;
         };
+    } | {
+        kind: "ChainalysisTransactionPrescreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            addresses: {
+                categoryIds: number[];
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
     };
     action: {
         kind: "RequestApproval";
@@ -142,6 +164,47 @@ export type ArchivePolicyResponse = {
         autoRejectTimeout?: (number | undefined) | null;
     } | {
         kind: "Block";
+    } | {
+        kind: "NoAction";
+    };
+    filters?: {
+        walletId?: {
+            in: string[];
+        } | undefined;
+        walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Wallets:IncomingTransaction";
+    rule: {
+        kind: "ChainalysisTransactionScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
+    };
+    action: {
+        kind: "NoAction";
     };
     filters?: {
         walletId?: {
@@ -364,6 +427,353 @@ export type CreateApprovalDecisionResponse = {
             dateConfirmed?: string | undefined;
         } | undefined;
     } | {
+        kind: "Wallets:IncomingTransaction";
+        blockchainEvent: {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "NativeTransfer";
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+            memo?: string | undefined;
+            liquidityPool?: string | undefined;
+            balanceId?: string | undefined;
+            /** @deprecated use metadata.asset.symbol instead */
+            symbol: string;
+            /** @deprecated use metadata.asset.decimals instead */
+            decimals: number;
+            /** @deprecated use metadata.asset.verified instead */
+            verified?: boolean | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "AsaTransfer";
+            assetId: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+            optIn?: boolean | undefined;
+            optOut?: boolean | undefined;
+            clawback?: boolean | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Erc20Transfer";
+            contract: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+            /** @deprecated use metadata.asset.symbol instead */
+            symbol?: string | undefined;
+            /** @deprecated use metadata.asset.decimals instead */
+            decimals: number;
+            /** @deprecated use metadata.asset.verified instead */
+            verified?: boolean | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Erc721Transfer";
+            contract: string;
+            from: string;
+            to: string;
+            tokenId: string;
+            fee?: string | undefined;
+            /** @deprecated use metadata.asset.symbol instead */
+            symbol?: string | undefined;
+            /** @deprecated use metadata.asset.verified instead */
+            verified?: boolean | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Sep41Transfer";
+            issuer: string;
+            assetCode: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+            memo?: string | undefined;
+            liquidityPool?: string | undefined;
+            balanceId?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "SplTransfer" | "Spl2022Transfer";
+            from?: string | undefined;
+            to?: string | undefined;
+            mint: string;
+            value: string;
+            fee?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Trc10Transfer";
+            tokenId: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Trc20Transfer";
+            contract: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Trc721Transfer";
+            contract: string;
+            from: string;
+            to: string;
+            tokenId: string;
+            fee?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "UtxoTransfer";
+            froms: string[];
+            tos: string[];
+            value: string;
+            fee?: string | undefined;
+        };
+    } | {
         kind: "Policies:Modify";
         changeRequest: {
             id: string;
@@ -504,6 +914,28 @@ export type CreateApprovalDecisionResponse = {
                         limit: number;
                         timeframe: number;
                     };
+                } | {
+                    kind: "ChainalysisTransactionPrescreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                        addresses: {
+                            categoryIds: number[];
+                        };
+                        fallbackBehaviours: {
+                            skipUnscreenableTransaction: boolean;
+                            skipUnsupportedNetwork: boolean;
+                            skipUnsupportedAsset: boolean;
+                            skipChainalysisFailure: boolean;
+                        };
+                    };
                 };
                 action: {
                     kind: "RequestApproval";
@@ -519,6 +951,47 @@ export type CreateApprovalDecisionResponse = {
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
                     kind: "Block";
+                } | {
+                    kind: "NoAction";
+                };
+                filters?: {
+                    walletId?: {
+                        in: string[];
+                    } | undefined;
+                    walletTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Wallets:IncomingTransaction";
+                rule: {
+                    kind: "ChainalysisTransactionScreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                        fallbackBehaviours: {
+                            skipUnscreenableTransaction: boolean;
+                            skipUnsupportedNetwork: boolean;
+                            skipUnsupportedAsset: boolean;
+                            skipChainalysisFailure: boolean;
+                        };
+                    };
+                };
+                action: {
+                    kind: "NoAction";
                 };
                 filters?: {
                     walletId?: {
@@ -580,14 +1053,14 @@ export type CreateApprovalDecisionResponse = {
             };
         };
     };
-    status: "Pending" | "Approved" | "Denied" | "AutoApproved" | "AutoDenied" | "Expired";
+    status: "Pending" | "Approved" | "Denied" | "Expired";
     expirationDate?: string | undefined;
     dateCreated?: string | undefined;
     dateUpdated: string;
     dateResolved?: string | undefined;
-    evaluatedPolicies: {
+    policyEvaluations: {
         policyId: string;
-        triggerStatus: "Triggered" | "Skipped";
+        triggered: boolean;
         reason: string;
     }[];
     decisions: {
@@ -709,6 +1182,28 @@ export type CreatePolicyBody = {
             limit: number;
             timeframe: number;
         };
+    } | {
+        kind: "ChainalysisTransactionPrescreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            addresses: {
+                categoryIds: number[];
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
     };
     action: {
         kind: "RequestApproval";
@@ -724,6 +1219,43 @@ export type CreatePolicyBody = {
         autoRejectTimeout?: (number | undefined) | null;
     } | {
         kind: "Block";
+    } | {
+        kind: "NoAction";
+    };
+    filters?: {
+        walletId?: {
+            in: string[];
+        } | undefined;
+        walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    name: string;
+    activityKind: "Wallets:IncomingTransaction";
+    rule: {
+        kind: "ChainalysisTransactionScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
+    };
+    action: {
+        kind: "NoAction";
     };
     filters?: {
         walletId?: {
@@ -861,6 +1393,28 @@ export type CreatePolicyResponse = {
             limit: number;
             timeframe: number;
         };
+    } | {
+        kind: "ChainalysisTransactionPrescreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            addresses: {
+                categoryIds: number[];
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
     };
     action: {
         kind: "RequestApproval";
@@ -876,6 +1430,47 @@ export type CreatePolicyResponse = {
         autoRejectTimeout?: (number | undefined) | null;
     } | {
         kind: "Block";
+    } | {
+        kind: "NoAction";
+    };
+    filters?: {
+        walletId?: {
+            in: string[];
+        } | undefined;
+        walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Wallets:IncomingTransaction";
+    rule: {
+        kind: "ChainalysisTransactionScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
+    };
+    action: {
+        kind: "NoAction";
     };
     filters?: {
         walletId?: {
@@ -1093,6 +1688,353 @@ export type GetApprovalResponse = {
             dateConfirmed?: string | undefined;
         } | undefined;
     } | {
+        kind: "Wallets:IncomingTransaction";
+        blockchainEvent: {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "NativeTransfer";
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+            memo?: string | undefined;
+            liquidityPool?: string | undefined;
+            balanceId?: string | undefined;
+            /** @deprecated use metadata.asset.symbol instead */
+            symbol: string;
+            /** @deprecated use metadata.asset.decimals instead */
+            decimals: number;
+            /** @deprecated use metadata.asset.verified instead */
+            verified?: boolean | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "AsaTransfer";
+            assetId: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+            optIn?: boolean | undefined;
+            optOut?: boolean | undefined;
+            clawback?: boolean | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Erc20Transfer";
+            contract: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+            /** @deprecated use metadata.asset.symbol instead */
+            symbol?: string | undefined;
+            /** @deprecated use metadata.asset.decimals instead */
+            decimals: number;
+            /** @deprecated use metadata.asset.verified instead */
+            verified?: boolean | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Erc721Transfer";
+            contract: string;
+            from: string;
+            to: string;
+            tokenId: string;
+            fee?: string | undefined;
+            /** @deprecated use metadata.asset.symbol instead */
+            symbol?: string | undefined;
+            /** @deprecated use metadata.asset.verified instead */
+            verified?: boolean | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Sep41Transfer";
+            issuer: string;
+            assetCode: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+            memo?: string | undefined;
+            liquidityPool?: string | undefined;
+            balanceId?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "SplTransfer" | "Spl2022Transfer";
+            from?: string | undefined;
+            to?: string | undefined;
+            mint: string;
+            value: string;
+            fee?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Trc10Transfer";
+            tokenId: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Trc20Transfer";
+            contract: string;
+            from: string;
+            to: string;
+            value: string;
+            fee?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "Trc721Transfer";
+            contract: string;
+            from: string;
+            to: string;
+            tokenId: string;
+            fee?: string | undefined;
+        } | {
+            walletId: string;
+            direction: "In" | "Out";
+            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+            blockNumber: number;
+            txHash: string;
+            index?: string | undefined;
+            timestamp: string;
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+                fee?: {
+                    symbol?: string | undefined;
+                    decimals?: number | undefined;
+                    verified?: boolean | undefined;
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                } | undefined;
+            };
+            kind: "UtxoTransfer";
+            froms: string[];
+            tos: string[];
+            value: string;
+            fee?: string | undefined;
+        };
+    } | {
         kind: "Policies:Modify";
         changeRequest: {
             id: string;
@@ -1233,6 +2175,28 @@ export type GetApprovalResponse = {
                         limit: number;
                         timeframe: number;
                     };
+                } | {
+                    kind: "ChainalysisTransactionPrescreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                        addresses: {
+                            categoryIds: number[];
+                        };
+                        fallbackBehaviours: {
+                            skipUnscreenableTransaction: boolean;
+                            skipUnsupportedNetwork: boolean;
+                            skipUnsupportedAsset: boolean;
+                            skipChainalysisFailure: boolean;
+                        };
+                    };
                 };
                 action: {
                     kind: "RequestApproval";
@@ -1248,6 +2212,47 @@ export type GetApprovalResponse = {
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
                     kind: "Block";
+                } | {
+                    kind: "NoAction";
+                };
+                filters?: {
+                    walletId?: {
+                        in: string[];
+                    } | undefined;
+                    walletTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Wallets:IncomingTransaction";
+                rule: {
+                    kind: "ChainalysisTransactionScreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                        fallbackBehaviours: {
+                            skipUnscreenableTransaction: boolean;
+                            skipUnsupportedNetwork: boolean;
+                            skipUnsupportedAsset: boolean;
+                            skipChainalysisFailure: boolean;
+                        };
+                    };
+                };
+                action: {
+                    kind: "NoAction";
                 };
                 filters?: {
                     walletId?: {
@@ -1309,14 +2314,14 @@ export type GetApprovalResponse = {
             };
         };
     };
-    status: "Pending" | "Approved" | "Denied" | "AutoApproved" | "AutoDenied" | "Expired";
+    status: "Pending" | "Approved" | "Denied" | "Expired";
     expirationDate?: string | undefined;
     dateCreated?: string | undefined;
     dateUpdated: string;
     dateResolved?: string | undefined;
-    evaluatedPolicies: {
+    policyEvaluations: {
         policyId: string;
-        triggerStatus: "Triggered" | "Skipped";
+        triggered: boolean;
         reason: string;
     }[];
     decisions: {
@@ -1458,6 +2463,28 @@ export type GetPolicyResponse = ({
             limit: number;
             timeframe: number;
         };
+    } | {
+        kind: "ChainalysisTransactionPrescreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            addresses: {
+                categoryIds: number[];
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
     };
     action: {
         kind: "RequestApproval";
@@ -1473,6 +2500,47 @@ export type GetPolicyResponse = ({
         autoRejectTimeout?: (number | undefined) | null;
     } | {
         kind: "Block";
+    } | {
+        kind: "NoAction";
+    };
+    filters?: {
+        walletId?: {
+            in: string[];
+        } | undefined;
+        walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Wallets:IncomingTransaction";
+    rule: {
+        kind: "ChainalysisTransactionScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
+    };
+    action: {
+        kind: "NoAction";
     };
     filters?: {
         walletId?: {
@@ -1623,6 +2691,28 @@ export type GetPolicyResponse = ({
                     limit: number;
                     timeframe: number;
                 };
+            } | {
+                kind: "ChainalysisTransactionPrescreening";
+                configuration: {
+                    alerts: {
+                        alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                        categoryIds: number[];
+                    };
+                    exposures: {
+                        direct: {
+                            categoryIds: number[];
+                        };
+                    };
+                    addresses: {
+                        categoryIds: number[];
+                    };
+                    fallbackBehaviours: {
+                        skipUnscreenableTransaction: boolean;
+                        skipUnsupportedNetwork: boolean;
+                        skipUnsupportedAsset: boolean;
+                        skipChainalysisFailure: boolean;
+                    };
+                };
             };
             action: {
                 kind: "RequestApproval";
@@ -1638,6 +2728,47 @@ export type GetPolicyResponse = ({
                 autoRejectTimeout?: (number | undefined) | null;
             } | {
                 kind: "Block";
+            } | {
+                kind: "NoAction";
+            };
+            filters?: {
+                walletId?: {
+                    in: string[];
+                } | undefined;
+                walletTags?: {
+                    hasAny?: string[] | undefined;
+                    hasAll?: string[] | undefined;
+                } | undefined;
+            } | undefined;
+        } | {
+            id: string;
+            name: string;
+            status: "Active" | "Archived";
+            dateCreated?: string | undefined;
+            dateUpdated?: string | undefined;
+            activityKind: "Wallets:IncomingTransaction";
+            rule: {
+                kind: "ChainalysisTransactionScreening";
+                configuration: {
+                    alerts: {
+                        alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                        categoryIds: number[];
+                    };
+                    exposures: {
+                        direct: {
+                            categoryIds: number[];
+                        };
+                    };
+                    fallbackBehaviours: {
+                        skipUnscreenableTransaction: boolean;
+                        skipUnsupportedNetwork: boolean;
+                        skipUnsupportedAsset: boolean;
+                        skipChainalysisFailure: boolean;
+                    };
+                };
+            };
+            action: {
+                kind: "NoAction";
             };
             filters?: {
                 walletId?: {
@@ -1657,8 +2788,7 @@ export type GetPolicyRequest = GetPolicyParams
 export type ListApprovalsQuery = {
     limit?: string | undefined;
     paginationToken?: string | undefined;
-    status?: ("Pending" | "Approved" | "Denied" | "AutoApproved" | "AutoDenied" | "Expired") | undefined;
-    triggerStatus?: ("Triggered" | "Skipped") | undefined;
+    status?: ("Pending" | "Approved" | "Denied" | "Expired") | undefined;
     initiatorId?: string | undefined;
     approverId?: string | undefined;
 };
@@ -1863,6 +2993,353 @@ export type ListApprovalsResponse = {
                 dateConfirmed?: string | undefined;
             } | undefined;
         } | {
+            kind: "Wallets:IncomingTransaction";
+            blockchainEvent: {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "NativeTransfer";
+                from: string;
+                to: string;
+                value: string;
+                fee?: string | undefined;
+                memo?: string | undefined;
+                liquidityPool?: string | undefined;
+                balanceId?: string | undefined;
+                /** @deprecated use metadata.asset.symbol instead */
+                symbol: string;
+                /** @deprecated use metadata.asset.decimals instead */
+                decimals: number;
+                /** @deprecated use metadata.asset.verified instead */
+                verified?: boolean | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "AsaTransfer";
+                assetId: string;
+                from: string;
+                to: string;
+                value: string;
+                fee?: string | undefined;
+                optIn?: boolean | undefined;
+                optOut?: boolean | undefined;
+                clawback?: boolean | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "Erc20Transfer";
+                contract: string;
+                from: string;
+                to: string;
+                value: string;
+                fee?: string | undefined;
+                /** @deprecated use metadata.asset.symbol instead */
+                symbol?: string | undefined;
+                /** @deprecated use metadata.asset.decimals instead */
+                decimals: number;
+                /** @deprecated use metadata.asset.verified instead */
+                verified?: boolean | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "Erc721Transfer";
+                contract: string;
+                from: string;
+                to: string;
+                tokenId: string;
+                fee?: string | undefined;
+                /** @deprecated use metadata.asset.symbol instead */
+                symbol?: string | undefined;
+                /** @deprecated use metadata.asset.verified instead */
+                verified?: boolean | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "Sep41Transfer";
+                issuer: string;
+                assetCode: string;
+                from: string;
+                to: string;
+                value: string;
+                fee?: string | undefined;
+                memo?: string | undefined;
+                liquidityPool?: string | undefined;
+                balanceId?: string | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "SplTransfer" | "Spl2022Transfer";
+                from?: string | undefined;
+                to?: string | undefined;
+                mint: string;
+                value: string;
+                fee?: string | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "Trc10Transfer";
+                tokenId: string;
+                from: string;
+                to: string;
+                value: string;
+                fee?: string | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "Trc20Transfer";
+                contract: string;
+                from: string;
+                to: string;
+                value: string;
+                fee?: string | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "Trc721Transfer";
+                contract: string;
+                from: string;
+                to: string;
+                tokenId: string;
+                fee?: string | undefined;
+            } | {
+                walletId: string;
+                direction: "In" | "Out";
+                network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "FantomOpera" | "FantomTestnet" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
+                blockNumber: number;
+                txHash: string;
+                index?: string | undefined;
+                timestamp: string;
+                metadata: {
+                    asset: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    };
+                    fee?: {
+                        symbol?: string | undefined;
+                        decimals?: number | undefined;
+                        verified?: boolean | undefined;
+                        quotes?: {
+                            [x: string]: number;
+                        } | undefined;
+                    } | undefined;
+                };
+                kind: "UtxoTransfer";
+                froms: string[];
+                tos: string[];
+                value: string;
+                fee?: string | undefined;
+            };
+        } | {
             kind: "Policies:Modify";
             changeRequest: {
                 id: string;
@@ -2003,6 +3480,28 @@ export type ListApprovalsResponse = {
                             limit: number;
                             timeframe: number;
                         };
+                    } | {
+                        kind: "ChainalysisTransactionPrescreening";
+                        configuration: {
+                            alerts: {
+                                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                                categoryIds: number[];
+                            };
+                            exposures: {
+                                direct: {
+                                    categoryIds: number[];
+                                };
+                            };
+                            addresses: {
+                                categoryIds: number[];
+                            };
+                            fallbackBehaviours: {
+                                skipUnscreenableTransaction: boolean;
+                                skipUnsupportedNetwork: boolean;
+                                skipUnsupportedAsset: boolean;
+                                skipChainalysisFailure: boolean;
+                            };
+                        };
                     };
                     action: {
                         kind: "RequestApproval";
@@ -2018,6 +3517,47 @@ export type ListApprovalsResponse = {
                         autoRejectTimeout?: (number | undefined) | null;
                     } | {
                         kind: "Block";
+                    } | {
+                        kind: "NoAction";
+                    };
+                    filters?: {
+                        walletId?: {
+                            in: string[];
+                        } | undefined;
+                        walletTags?: {
+                            hasAny?: string[] | undefined;
+                            hasAll?: string[] | undefined;
+                        } | undefined;
+                    } | undefined;
+                } | {
+                    id: string;
+                    name: string;
+                    status: "Active" | "Archived";
+                    dateCreated?: string | undefined;
+                    dateUpdated?: string | undefined;
+                    activityKind: "Wallets:IncomingTransaction";
+                    rule: {
+                        kind: "ChainalysisTransactionScreening";
+                        configuration: {
+                            alerts: {
+                                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                                categoryIds: number[];
+                            };
+                            exposures: {
+                                direct: {
+                                    categoryIds: number[];
+                                };
+                            };
+                            fallbackBehaviours: {
+                                skipUnscreenableTransaction: boolean;
+                                skipUnsupportedNetwork: boolean;
+                                skipUnsupportedAsset: boolean;
+                                skipChainalysisFailure: boolean;
+                            };
+                        };
+                    };
+                    action: {
+                        kind: "NoAction";
                     };
                     filters?: {
                         walletId?: {
@@ -2079,14 +3619,14 @@ export type ListApprovalsResponse = {
                 };
             };
         };
-        status: "Pending" | "Approved" | "Denied" | "AutoApproved" | "AutoDenied" | "Expired";
+        status: "Pending" | "Approved" | "Denied" | "Expired";
         expirationDate?: string | undefined;
         dateCreated?: string | undefined;
         dateUpdated: string;
         dateResolved?: string | undefined;
-        evaluatedPolicies: {
+        policyEvaluations: {
             policyId: string;
-            triggerStatus: "Triggered" | "Skipped";
+            triggered: boolean;
             reason: string;
         }[];
         decisions: {
@@ -2233,6 +3773,28 @@ export type ListPoliciesResponse = {
                 limit: number;
                 timeframe: number;
             };
+        } | {
+            kind: "ChainalysisTransactionPrescreening";
+            configuration: {
+                alerts: {
+                    alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                    categoryIds: number[];
+                };
+                exposures: {
+                    direct: {
+                        categoryIds: number[];
+                    };
+                };
+                addresses: {
+                    categoryIds: number[];
+                };
+                fallbackBehaviours: {
+                    skipUnscreenableTransaction: boolean;
+                    skipUnsupportedNetwork: boolean;
+                    skipUnsupportedAsset: boolean;
+                    skipChainalysisFailure: boolean;
+                };
+            };
         };
         action: {
             kind: "RequestApproval";
@@ -2248,6 +3810,47 @@ export type ListPoliciesResponse = {
             autoRejectTimeout?: (number | undefined) | null;
         } | {
             kind: "Block";
+        } | {
+            kind: "NoAction";
+        };
+        filters?: {
+            walletId?: {
+                in: string[];
+            } | undefined;
+            walletTags?: {
+                hasAny?: string[] | undefined;
+                hasAll?: string[] | undefined;
+            } | undefined;
+        } | undefined;
+    } | {
+        id: string;
+        name: string;
+        status: "Active" | "Archived";
+        dateCreated?: string | undefined;
+        dateUpdated?: string | undefined;
+        activityKind: "Wallets:IncomingTransaction";
+        rule: {
+            kind: "ChainalysisTransactionScreening";
+            configuration: {
+                alerts: {
+                    alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                    categoryIds: number[];
+                };
+                exposures: {
+                    direct: {
+                        categoryIds: number[];
+                    };
+                };
+                fallbackBehaviours: {
+                    skipUnscreenableTransaction: boolean;
+                    skipUnsupportedNetwork: boolean;
+                    skipUnsupportedAsset: boolean;
+                    skipChainalysisFailure: boolean;
+                };
+            };
+        };
+        action: {
+            kind: "NoAction";
         };
         filters?: {
             walletId?: {
@@ -2398,6 +4001,28 @@ export type ListPoliciesResponse = {
                         limit: number;
                         timeframe: number;
                     };
+                } | {
+                    kind: "ChainalysisTransactionPrescreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                        addresses: {
+                            categoryIds: number[];
+                        };
+                        fallbackBehaviours: {
+                            skipUnscreenableTransaction: boolean;
+                            skipUnsupportedNetwork: boolean;
+                            skipUnsupportedAsset: boolean;
+                            skipChainalysisFailure: boolean;
+                        };
+                    };
                 };
                 action: {
                     kind: "RequestApproval";
@@ -2413,6 +4038,47 @@ export type ListPoliciesResponse = {
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
                     kind: "Block";
+                } | {
+                    kind: "NoAction";
+                };
+                filters?: {
+                    walletId?: {
+                        in: string[];
+                    } | undefined;
+                    walletTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Wallets:IncomingTransaction";
+                rule: {
+                    kind: "ChainalysisTransactionScreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                        fallbackBehaviours: {
+                            skipUnscreenableTransaction: boolean;
+                            skipUnsupportedNetwork: boolean;
+                            skipUnsupportedAsset: boolean;
+                            skipChainalysisFailure: boolean;
+                        };
+                    };
+                };
+                action: {
+                    kind: "NoAction";
                 };
                 filters?: {
                     walletId?: {
@@ -2540,6 +4206,28 @@ export type UpdatePolicyBody = {
             limit: number;
             timeframe: number;
         };
+    } | {
+        kind: "ChainalysisTransactionPrescreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            addresses: {
+                categoryIds: number[];
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
     };
     action: {
         kind: "RequestApproval";
@@ -2555,6 +4243,43 @@ export type UpdatePolicyBody = {
         autoRejectTimeout?: (number | undefined) | null;
     } | {
         kind: "Block";
+    } | {
+        kind: "NoAction";
+    };
+    filters?: {
+        walletId?: {
+            in: string[];
+        } | undefined;
+        walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    name: string;
+    activityKind: "Wallets:IncomingTransaction";
+    rule: {
+        kind: "ChainalysisTransactionScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
+    };
+    action: {
+        kind: "NoAction";
     };
     filters?: {
         walletId?: {
@@ -2696,6 +4421,28 @@ export type UpdatePolicyResponse = {
             limit: number;
             timeframe: number;
         };
+    } | {
+        kind: "ChainalysisTransactionPrescreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            addresses: {
+                categoryIds: number[];
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
     };
     action: {
         kind: "RequestApproval";
@@ -2711,6 +4458,47 @@ export type UpdatePolicyResponse = {
         autoRejectTimeout?: (number | undefined) | null;
     } | {
         kind: "Block";
+    } | {
+        kind: "NoAction";
+    };
+    filters?: {
+        walletId?: {
+            in: string[];
+        } | undefined;
+        walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Wallets:IncomingTransaction";
+    rule: {
+        kind: "ChainalysisTransactionScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+            fallbackBehaviours: {
+                skipUnscreenableTransaction: boolean;
+                skipUnsupportedNetwork: boolean;
+                skipUnsupportedAsset: boolean;
+                skipChainalysisFailure: boolean;
+            };
+        };
+    };
+    action: {
+        kind: "NoAction";
     };
     filters?: {
         walletId?: {
