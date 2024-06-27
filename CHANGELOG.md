@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2 (2024-06-27)
+
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.5.1 (2024-06-13)
 
 - Added support for `ed25519` + `stark` key import/export.
