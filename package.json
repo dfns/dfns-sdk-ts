@@ -52,6 +52,7 @@
     "@stellar/stellar-sdk": "^11.0.0",
     "@taquito/taquito": "^17.0.0",
     "@vechain/connex-driver": "2.0.12",
+    "@ton/ton": "13.11.2",
     "algosdk": "^2.0.0",
     "bitcoinjs-lib": "^6.0.0",
     "ethers": "^6.0.0",
