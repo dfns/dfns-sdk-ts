@@ -457,6 +457,7 @@ export type GetTransferResponse = {
         to: string;
         amount: string;
         mint: string;
+        createDestinationAccount?: boolean | undefined;
     };
     metadata: {
         asset: {
@@ -1199,6 +1200,7 @@ export type ListTransfersResponse = {
             to: string;
             amount: string;
             mint: string;
+            createDestinationAccount?: boolean | undefined;
         };
         metadata: {
             asset: {
@@ -1229,6 +1231,7 @@ export type ListWalletsQuery = {
     limit?: string | undefined;
     paginationToken?: string | undefined;
     ownerId?: string | undefined;
+    ownerUsername?: string | undefined;
 };
 
 export type ListWalletsResponse = {
@@ -1318,6 +1321,7 @@ export type TransferAssetBody = {
     to: string;
     amount: string;
     mint: string;
+    createDestinationAccount?: boolean | undefined;
 };
 
 export type TransferAssetParams = {
@@ -1383,6 +1387,7 @@ export type TransferAssetResponse = {
         to: string;
         amount: string;
         mint: string;
+        createDestinationAccount?: boolean | undefined;
     };
     metadata: {
         asset: {

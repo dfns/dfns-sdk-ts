@@ -781,6 +781,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async sendLoginCode(request: T.SendLoginCodeRequest): Promise<T.SendLoginCodeResponse> {
+    const path = buildPathAndQuery('/auth/login/code', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async sendRecoveryCode(request: T.SendRecoveryCodeRequest): Promise<T.SendRecoveryCodeResponse> {
     const path = buildPathAndQuery('/auth/recover/user/code', {
       path: request ?? {},
@@ -843,21 +858,6 @@ export class AuthClient {
 
   async updateServiceAccount(request: T.UpdateServiceAccountRequest): Promise<T.UpdateServiceAccountResponse> {
     const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'PUT',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updateUser(request: T.UpdateUserRequest): Promise<T.UpdateUserResponse> {
-    const path = buildPathAndQuery('/auth/users/:userId', {
       path: request ?? {},
       query: {},
     })

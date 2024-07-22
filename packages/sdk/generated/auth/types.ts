@@ -82,12 +82,12 @@ export type ActivateServiceAccountParams = {
 export type ActivateServiceAccountResponse = {
     userInfo: {
         username: string;
+        name: string;
         userId: string;
         kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
-        scopes?: string[] | undefined;
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
@@ -127,12 +127,12 @@ export type ActivateUserParams = {
 
 export type ActivateUserResponse = {
     username: string;
+    name: string;
     userId: string;
     kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
-    scopes?: string[] | undefined;
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
@@ -220,12 +220,12 @@ export type ArchiveServiceAccountParams = {
 export type ArchiveServiceAccountResponse = {
     userInfo: {
         username: string;
+        name: string;
         userId: string;
         kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
-        scopes?: string[] | undefined;
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
@@ -265,12 +265,12 @@ export type ArchiveUserParams = {
 
 export type ArchiveUserResponse = {
     username: string;
+    name: string;
     userId: string;
     kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
-    scopes?: string[] | undefined;
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
@@ -358,6 +358,16 @@ export type CreateCredentialBody = {
     credentialName: string;
     challengeIdentifier: string;
 } | {
+    credentialKind: "PasswordProtectedKey";
+    credentialInfo: {
+        credId: string;
+        clientData: string;
+        attestationData: string;
+    };
+    encryptedPrivateKey: string;
+    credentialName: string;
+    challengeIdentifier: string;
+} | {
     credentialKind: "Password";
     credentialInfo: {
         password: string;
@@ -384,7 +394,7 @@ export type CreateCredentialBody = {
 };
 
 export type CreateCredentialResponse = {
-    kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+    kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
     credentialId: string;
     credentialUuid: string;
     dateCreated: string;
@@ -398,7 +408,7 @@ export type CreateCredentialResponse = {
 export type CreateCredentialRequest = { body: CreateCredentialBody }
 
 export type CreateCredentialChallengeBody = {
-    kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+    kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
 };
 
 export type CreateCredentialChallengeResponse = {
@@ -482,6 +492,26 @@ export type CreateCredentialChallengeResponse = {
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
 } | {
+    kind: "PasswordProtectedKey";
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    challengeIdentifier: string;
+    challenge: string;
+    rp: {
+        id: string;
+        name: string;
+    };
+    attestation: "none" | "indirect" | "direct" | "enterprise";
+    pubKeyCredParams: {
+        type: "public-key";
+        alg: number;
+    }[];
+    /** @deprecated use challengeIdentifier instead */
+    temporaryAuthenticationToken: string;
+} | {
     kind: "RecoveryKey";
     user: {
         id: string;
@@ -506,7 +536,7 @@ export type CreateCredentialChallengeResponse = {
 export type CreateCredentialChallengeRequest = { body: CreateCredentialChallengeBody }
 
 export type CreateCredentialChallengeWithCodeBody = {
-    credentialKind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+    credentialKind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
     code: string;
 };
 
@@ -591,6 +621,26 @@ export type CreateCredentialChallengeWithCodeResponse = {
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
 } | {
+    kind: "PasswordProtectedKey";
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    challengeIdentifier: string;
+    challenge: string;
+    rp: {
+        id: string;
+        name: string;
+    };
+    attestation: "none" | "indirect" | "direct" | "enterprise";
+    pubKeyCredParams: {
+        type: "public-key";
+        alg: number;
+    }[];
+    /** @deprecated use challengeIdentifier instead */
+    temporaryAuthenticationToken: string;
+} | {
     kind: "RecoveryKey";
     user: {
         id: string;
@@ -645,6 +695,16 @@ export type CreateCredentialWithCodeBody = {
     credentialName: string;
     challengeIdentifier: string;
 } | {
+    credentialKind: "PasswordProtectedKey";
+    credentialInfo: {
+        credId: string;
+        clientData: string;
+        attestationData: string;
+    };
+    encryptedPrivateKey: string;
+    credentialName: string;
+    challengeIdentifier: string;
+} | {
     credentialKind: "Password";
     credentialInfo: {
         password: string;
@@ -671,7 +731,7 @@ export type CreateCredentialWithCodeBody = {
 };
 
 export type CreateCredentialWithCodeResponse = {
-    kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+    kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
     credentialId: string;
     credentialUuid: string;
     dateCreated: string;
@@ -702,8 +762,8 @@ export type CreateDelegatedRecoveryChallengeResponse = {
         name: string;
     };
     supportedCredentialKinds: {
-        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
-        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
     };
     authenticatorSelection: {
         authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
@@ -749,8 +809,8 @@ export type CreateDelegatedRegistrationChallengeResponse = {
         name: string;
     };
     supportedCredentialKinds: {
-        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
-        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
     };
     authenticatorSelection: {
         authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
@@ -776,6 +836,7 @@ export type CreateDelegatedRegistrationChallengeRequest = { body: CreateDelegate
 export type CreateLoginChallengeBody = {
     username: string;
     orgId: string;
+    loginCode?: string | undefined;
 };
 
 export type CreateLoginChallengeResponse = {
@@ -786,7 +847,7 @@ export type CreateLoginChallengeResponse = {
         name: string;
     };
     supportedCredentialKinds: {
-        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
         factor: "first" | "second" | "either";
         requiresSecondFactor: boolean;
     }[];
@@ -798,6 +859,11 @@ export type CreateLoginChallengeResponse = {
             id: string;
             transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
         }[];
+        passwordProtectedKey?: {
+            type: "public-key";
+            id: string;
+            encryptedPrivateKey: string;
+        }[] | undefined;
         webauthn: {
             type: "public-key";
             id: string;
@@ -860,8 +926,8 @@ export type CreateRecoveryChallengeResponse = {
         name: string;
     };
     supportedCredentialKinds: {
-        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
-        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
     };
     authenticatorSelection: {
         authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
@@ -907,8 +973,8 @@ export type CreateRegistrationChallengeResponse = {
         name: string;
     };
     supportedCredentialKinds: {
-        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
-        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
     };
     authenticatorSelection: {
         authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
@@ -942,12 +1008,12 @@ export type CreateServiceAccountBody = {
 export type CreateServiceAccountResponse = {
     userInfo: {
         username: string;
+        name: string;
         userId: string;
         kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
-        scopes?: string[] | undefined;
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
@@ -999,8 +1065,8 @@ export type CreateSocialRegistrationChallengeResponse = {
         name: string;
     };
     supportedCredentialKinds: {
-        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
-        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
     };
     authenticatorSelection: {
         authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
@@ -1032,12 +1098,12 @@ export type CreateUserBody = {
 
 export type CreateUserResponse = {
     username: string;
+    name: string;
     userId: string;
     kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
-    scopes?: string[] | undefined;
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
@@ -1066,7 +1132,7 @@ export type CreateUserActionChallengeResponse = {
         name: string;
     };
     supportedCredentialKinds: {
-        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
         factor: "first" | "second" | "either";
         requiresSecondFactor: boolean;
     }[];
@@ -1078,6 +1144,11 @@ export type CreateUserActionChallengeResponse = {
             id: string;
             transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
         }[];
+        passwordProtectedKey?: {
+            type: "public-key";
+            id: string;
+            encryptedPrivateKey: string;
+        }[] | undefined;
         webauthn: {
             type: "public-key";
             id: string;
@@ -1096,8 +1167,9 @@ export type CreateUserActionSignatureBody = {
         credentialAssertion: {
             credId: string;
             clientData: string;
-            authenticatorData: string;
             signature: string;
+            algorithm?: string | undefined;
+            authenticatorData: string;
             userHandle?: string | undefined;
         };
     } | {
@@ -1111,14 +1183,23 @@ export type CreateUserActionSignatureBody = {
     } | {
         kind: "Password";
         password: string;
+    } | {
+        kind: "PasswordProtectedKey";
+        credentialAssertion: {
+            credId: string;
+            clientData: string;
+            signature: string;
+            algorithm?: string | undefined;
+        };
     };
     secondFactor?: ({
         kind: "Fido2";
         credentialAssertion: {
             credId: string;
             clientData: string;
-            authenticatorData: string;
             signature: string;
+            algorithm?: string | undefined;
+            authenticatorData: string;
             userHandle?: string | undefined;
         };
     } | {
@@ -1132,6 +1213,14 @@ export type CreateUserActionSignatureBody = {
     } | {
         kind: "Totp";
         otpCode: string;
+    } | {
+        kind: "PasswordProtectedKey";
+        credentialAssertion: {
+            credId: string;
+            clientData: string;
+            signature: string;
+            algorithm?: string | undefined;
+        };
     }) | undefined;
 };
 
@@ -1225,12 +1314,12 @@ export type DeactivateServiceAccountParams = {
 export type DeactivateServiceAccountResponse = {
     userInfo: {
         username: string;
+        name: string;
         userId: string;
         kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
-        scopes?: string[] | undefined;
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
@@ -1270,12 +1359,12 @@ export type DeactivateUserParams = {
 
 export type DeactivateUserResponse = {
     username: string;
+    name: string;
     userId: string;
     kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
-    scopes?: string[] | undefined;
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
@@ -1373,12 +1462,12 @@ export type GetServiceAccountParams = {
 export type GetServiceAccountResponse = {
     userInfo: {
         username: string;
+        name: string;
         userId: string;
         kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
-        scopes?: string[] | undefined;
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
@@ -1418,12 +1507,12 @@ export type GetUserParams = {
 
 export type GetUserResponse = {
     username: string;
+    name: string;
     userId: string;
     kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
-    scopes?: string[] | undefined;
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
@@ -1492,7 +1581,7 @@ export type ListAvailableOrgsRequest = { body: ListAvailableOrgsBody }
 
 export type ListCredentialsResponse = {
     items: {
-        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
         credentialId: string;
         credentialUuid: string;
         dateCreated: string;
@@ -1530,12 +1619,12 @@ export type ListServiceAccountsResponse = {
     items: {
         userInfo: {
             username: string;
+            name: string;
             userId: string;
             kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
             credentialUuid: string;
             orgId: string;
             permissions?: string[] | undefined;
-            scopes?: string[] | undefined;
             isActive: boolean;
             isServiceAccount: boolean;
             isRegistered: boolean;
@@ -1577,12 +1666,12 @@ export type ListUsersQuery = {
 export type ListUsersResponse = {
     items: {
         username: string;
+        name: string;
         userId: string;
         kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
-        scopes?: string[] | undefined;
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
@@ -1605,8 +1694,9 @@ export type LoginBody = {
         credentialAssertion: {
             credId: string;
             clientData: string;
-            authenticatorData: string;
             signature: string;
+            algorithm?: string | undefined;
+            authenticatorData: string;
             userHandle?: string | undefined;
         };
     } | {
@@ -1620,14 +1710,23 @@ export type LoginBody = {
     } | {
         kind: "Password";
         password: string;
+    } | {
+        kind: "PasswordProtectedKey";
+        credentialAssertion: {
+            credId: string;
+            clientData: string;
+            signature: string;
+            algorithm?: string | undefined;
+        };
     };
     secondFactor?: ({
         kind: "Fido2";
         credentialAssertion: {
             credId: string;
             clientData: string;
-            authenticatorData: string;
             signature: string;
+            algorithm?: string | undefined;
+            authenticatorData: string;
             userHandle?: string | undefined;
         };
     } | {
@@ -1641,6 +1740,14 @@ export type LoginBody = {
     } | {
         kind: "Totp";
         otpCode: string;
+    } | {
+        kind: "PasswordProtectedKey";
+        credentialAssertion: {
+            credId: string;
+            clientData: string;
+            signature: string;
+            algorithm?: string | undefined;
+        };
     }) | undefined;
 };
 
@@ -1684,6 +1791,14 @@ export type RecoverBody = {
             credentialInfo: {
                 password: string;
             };
+        } | {
+            credentialKind: "PasswordProtectedKey";
+            credentialInfo: {
+                credId: string;
+                clientData: string;
+                attestationData: string;
+            };
+            encryptedPrivateKey: string;
         };
         secondFactorCredential?: ({
             credentialKind: "Fido2";
@@ -1704,6 +1819,14 @@ export type RecoverBody = {
             credentialInfo: {
                 otpCode: string;
             };
+        } | {
+            credentialKind: "PasswordProtectedKey";
+            credentialInfo: {
+                credId: string;
+                clientData: string;
+                attestationData: string;
+            };
+            encryptedPrivateKey: string;
         }) | undefined;
         recoveryCredential?: {
             credentialKind: "RecoveryKey";
@@ -1720,7 +1843,7 @@ export type RecoverBody = {
 export type RecoverResponse = {
     credential: {
         uuid: string;
-        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
         name: string;
     };
     user: {
@@ -1751,8 +1874,8 @@ export type RecreateDelegatedRegistrationChallengeResponse = {
         name: string;
     };
     supportedCredentialKinds: {
-        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
-        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey")[];
+        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
+        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
     };
     authenticatorSelection: {
         authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
@@ -1795,6 +1918,14 @@ export type RegisterBody = {
         credentialInfo: {
             password: string;
         };
+    } | {
+        credentialKind: "PasswordProtectedKey";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+        encryptedPrivateKey: string;
     };
     secondFactorCredential?: ({
         credentialKind: "Fido2";
@@ -1815,6 +1946,14 @@ export type RegisterBody = {
         credentialInfo: {
             otpCode: string;
         };
+    } | {
+        credentialKind: "PasswordProtectedKey";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+        encryptedPrivateKey: string;
     }) | undefined;
     recoveryCredential?: {
         credentialKind: "RecoveryKey";
@@ -1830,7 +1969,7 @@ export type RegisterBody = {
 export type RegisterResponse = {
     credential: {
         uuid: string;
-        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
         name: string;
     };
     user: {
@@ -1862,6 +2001,14 @@ export type RegisterEndUserBody = {
         credentialInfo: {
             password: string;
         };
+    } | {
+        credentialKind: "PasswordProtectedKey";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+        encryptedPrivateKey: string;
     };
     secondFactorCredential?: ({
         credentialKind: "Fido2";
@@ -1882,6 +2029,14 @@ export type RegisterEndUserBody = {
         credentialInfo: {
             otpCode: string;
         };
+    } | {
+        credentialKind: "PasswordProtectedKey";
+        credentialInfo: {
+            credId: string;
+            clientData: string;
+            attestationData: string;
+        };
+        encryptedPrivateKey: string;
     }) | undefined;
     recoveryCredential?: {
         credentialKind: "RecoveryKey";
@@ -1901,7 +2056,7 @@ export type RegisterEndUserBody = {
 export type RegisterEndUserResponse = {
     credential: {
         uuid: string;
-        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey";
+        kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
         name: string;
     };
     user: {
@@ -1945,6 +2100,17 @@ export type ResendRegistrationCodeResponse = {
 };
 
 export type ResendRegistrationCodeRequest = { body: ResendRegistrationCodeBody }
+
+export type SendLoginCodeBody = {
+    username: string;
+    orgId: string;
+};
+
+export type SendLoginCodeResponse = {
+    message: string;
+};
+
+export type SendLoginCodeRequest = { body: SendLoginCodeBody }
 
 export type SendRecoveryCodeBody = {
     username: string;
@@ -2057,12 +2223,12 @@ export type UpdateServiceAccountParams = {
 export type UpdateServiceAccountResponse = {
     userInfo: {
         username: string;
+        name: string;
         userId: string;
         kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
-        scopes?: string[] | undefined;
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
@@ -2095,34 +2261,4 @@ export type UpdateServiceAccountResponse = {
 };
 
 export type UpdateServiceAccountRequest = UpdateServiceAccountParams & { body: UpdateServiceAccountBody }
-
-export type UpdateUserBody = {
-    externalId?: string | undefined;
-    publicKey?: string | undefined;
-};
-
-export type UpdateUserParams = {
-    userId: string;
-};
-
-export type UpdateUserResponse = {
-    username: string;
-    userId: string;
-    kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
-    credentialUuid: string;
-    orgId: string;
-    permissions?: string[] | undefined;
-    scopes?: string[] | undefined;
-    isActive: boolean;
-    isServiceAccount: boolean;
-    isRegistered: boolean;
-    permissionAssignments: {
-        permissionName: string;
-        permissionId: string;
-        assignmentId: string;
-        operations?: string[] | undefined;
-    }[];
-};
-
-export type UpdateUserRequest = UpdateUserParams & { body: UpdateUserBody }
 
