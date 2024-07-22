@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-viem",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "peerDependencies": {
     "viem": "^2.0.0"
   }
