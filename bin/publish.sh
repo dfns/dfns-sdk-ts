@@ -19,8 +19,10 @@ declare -a packages=(
     "@dfns/sdk"
     "@dfns/sdk-awskmssigner"
     "@dfns/sdk-browser"
-    "@dfns/sdk-keyexport-utils"
-    "@dfns/sdk-keyimport-utils"
+    "@dfns/sdk-keyexport-utils-nodejs"
+    "@dfns/sdk-keyexport-utils-bundler"
+    "@dfns/sdk-keyimport-utils-nodejs"
+    "@dfns/sdk-keyimport-utils-bundler"
     "@dfns/sdk-keysigner"
     "@dfns/sdk-react-native"
 )

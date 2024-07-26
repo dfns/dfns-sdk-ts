@@ -1,4 +1,4 @@
-import { KeyExportContext } from '@dfns/dfns-key-export'
+import { KeyExportContext } from '@dfns/dfns-key-export-bundler'
 import { RecoverSecretKeyParams, WalletExportConfig } from './types'
 export * from './types'
 
@@ -16,7 +16,7 @@ export const newWalletExportContext = () => {
   const recoverSecretKey = (params: RecoverSecretKeyParams): Uint8Array => {
     const secretKey = ctx.recoverSecretKey({
       ...params,
-      encryptedShares: params.encryptedKeyShares, // re-mapping field name, sonce wasm module has wrong name
+      encryptedShares: params.encryptedKeyShares, // re-mapping field name, since wasm module has wrong name
     })
     return secretKey.toBytesBE()
   }

@@ -1,0 +1,15 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/sdk-keyimport-utils-nodejs",
+        "clean": true,
+        "main": "packages/sdk-keyimport-utils-nodejs/index.ts",
+        "tsConfig": "packages/sdk-keyimport-utils-nodejs/tsconfig.json",
+        "assets": ["packages/sdk-keyimport-utils-nodejs/codegen/*"],
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
