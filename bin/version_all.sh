@@ -21,8 +21,10 @@ npm version --no-git-tag-version \
     --workspace @dfns/sdk \
     --workspace @dfns/sdk-awskmssigner \
     --workspace @dfns/sdk-browser \
-    --workspace @dfns/sdk-keyexport-utils \
-    --workspace @dfns/sdk-keyimport-utils \
+    --workspace @dfns/sdk-keyexport-utils-nodejs \
+    --workspace @dfns/sdk-keyexport-utils-bundler \
+    --workspace @dfns/sdk-keyimport-utils-nodejs \
+    --workspace @dfns/sdk-keyimport-utils-bundler \
     --workspace @dfns/sdk-keysigner \
     --workspace @dfns/sdk-react-native \
     --include-workspace-root "$version"

@@ -11,6 +11,7 @@ Here's a list of examples illustrating how to use the Dfns Typescript sdk / libs
 - [auth-direct](./sdk/auth-direct/): React frontend application directly communicating with Dfns API with users having WebAuthn credentials
 - [export-wallet](./sdk/export-wallet): Example of how do export wallets from a Nodejs server.
 - [import-wallet](./sdk/import-wallet): Example of how to import wallets from a Nodejs server.
+- [import-export-wallet-react](./sdk/import-export-wallet-react): Example of how to import / export wallets from a frontend Rect app.
 
 ### Libs / Integrations
 

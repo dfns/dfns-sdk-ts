@@ -4,7 +4,7 @@ import {
   SignersInfo,
   KeyCurve as KeyCurveInternal,
   KeyProtocol,
-} from '@dfns/dfns-key-import'
+} from '@dfns/dfns-key-import-bundler'
 import { ImportWalletBody, GetWalletResponse } from '@dfns/sdk/types/wallets'
 import { ListSignersResponse } from '@dfns/sdk/types/signers'
 

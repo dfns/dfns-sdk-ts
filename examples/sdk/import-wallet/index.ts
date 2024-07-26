@@ -1,4 +1,4 @@
-import { splitPrivateKeyForSigners } from '@dfns/sdk-keyimport-utils'
+import { splitPrivateKeyForSigners } from '@dfns/sdk-keyimport-utils-nodejs'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import crypto from 'crypto'

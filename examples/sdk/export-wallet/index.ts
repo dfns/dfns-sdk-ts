@@ -1,5 +1,5 @@
 import { DfnsApiClient } from '@dfns/sdk'
-import { newWalletExportContext } from '@dfns/sdk-keyexport-utils'
+import { newWalletExportContext } from '@dfns/sdk-keyexport-utils-nodejs'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import dotenv from 'dotenv'
 
