@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.5.2 (2024-06-27)
+## 0.5.4 (2024-07-26)
+
+- Added SDK integration with Ton, see `@dfns/lib-ton`
+
+## 0.5.3 (2024-07-22)
 
 - Updated `DfnsApiClient` to types to match latest integrations
 
