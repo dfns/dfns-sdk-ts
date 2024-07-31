@@ -1563,22 +1563,6 @@ export type ListApplicationsResponse = {
     }[];
 };
 
-export type ListAvailableOrgsBody = {
-    username: string;
-    orgId?: string | undefined;
-    permissions?: string[] | undefined;
-    origin: string;
-};
-
-export type ListAvailableOrgsResponse = {
-    items: {
-        orgId: string;
-        appId: string;
-    }[];
-};
-
-export type ListAvailableOrgsRequest = { body: ListAvailableOrgsBody }
-
 export type ListCredentialsResponse = {
     items: {
         kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
