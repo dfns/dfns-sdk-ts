@@ -586,21 +586,6 @@ export class AuthClient {
     return response.json()
   }
 
-  async listAvailableOrgs(request: T.ListAvailableOrgsRequest): Promise<T.ListAvailableOrgsResponse> {
-    const path = buildPathAndQuery('/auth/login/orgs', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async listCredentials(): Promise<T.ListCredentialsResponse> {
     const path = buildPathAndQuery('/auth/credentials', {
       path: {},
