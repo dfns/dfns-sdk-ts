@@ -1,5 +1,6 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { DelegatedAuthClient } from './generated/auth'
+import { DelegatedExchangesClient } from './generated/exchanges'
 import { DelegatedNetworksClient } from './generated/networks'
 import { DelegatedPermissionsClient } from './generated/permissions'
 import { DelegatedPoliciesClient } from './generated/policies'
@@ -10,10 +11,14 @@ import { DelegatedWebhooksClient } from './generated/webhooks'
 export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions
 
 export class DfnsDelegatedApiClient {
-  constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
+  constructor(private apiOptions: DfnsDelegatedApiClientOptions) { }
 
   public get auth() {
     return new DelegatedAuthClient(this.apiOptions)
+  }
+
+  public get exchanges() {
+    return new DelegatedExchangesClient(this.apiOptions)
   }
 
   public get networks() {
