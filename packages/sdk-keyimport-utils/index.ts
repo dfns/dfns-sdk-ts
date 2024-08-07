@@ -1,10 +1,11 @@
 import {
   buildKeyImportRequest,
-  SecretKey,
+  SecretScalar,
   SignersInfo,
   KeyCurve as KeyCurveInternal,
   KeyProtocol,
-} from '@dfns/dfns-key-import'
+  convertEddsaSecretKeyToScalar,
+} from '@dfns/dfns-key-import-nodejs'
 import { ImportWalletBody, GetWalletResponse } from '@dfns/sdk/types/wallets'
 import { ListSignersResponse } from '@dfns/sdk/types/signers'
 
@@ -24,6 +25,14 @@ const getCurveAndProtocol = (keyCurve: KeyCurve): { curve: KeyCurveInternal; pro
   }
 }
 
+const getSecretScalar = (privateKey: Uint8Array | Buffer, keyCurve: KeyCurve): SecretScalar => {
+  if (keyCurve === 'ed25519') {
+    return convertEddsaSecretKeyToScalar(privateKey)
+  } else {
+    return SecretScalar.fromBytesBE(privateKey)
+  }
+}
+
 export const splitPrivateKeyForSigners = ({
   signers,
   privateKey,
@@ -38,8 +47,11 @@ export const splitPrivateKeyForSigners = ({
   // We set this as constant do not expose it, because Dfns API will only accept minSigners = 3 for now.
   const minSigners = 3
 
+
+  const secretScalar = getSecretScalar(privateKey, keyCurve)
+
   const result = buildKeyImportRequest(
-    SecretKey.fromBytesBE(privateKey),
+    secretScalar,
     SignersInfo.new(signers),
     minSigners,
     protocol,

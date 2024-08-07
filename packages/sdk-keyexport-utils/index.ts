@@ -1,4 +1,4 @@
-import { KeyExportContext } from '@dfns/dfns-key-export'
+import { KeyExportContext } from '@dfns/dfns-key-export-nodejs'
 import { RecoverSecretKeyParams, WalletExportConfig } from './types'
 export * from './types'
 
