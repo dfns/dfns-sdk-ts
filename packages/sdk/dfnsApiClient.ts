@@ -1,5 +1,6 @@
 import { DfnsBaseApiOptions } from './baseAuthApi'
 import { AuthClient } from './generated/auth'
+import { ExchangesClient } from './generated/exchanges'
 import { NetworksClient } from './generated/networks'
 import { PermissionsClient } from './generated/permissions'
 import { PoliciesClient } from './generated/policies'
@@ -14,10 +15,14 @@ export type DfnsApiClientOptions = DfnsBaseApiOptions & {
 }
 
 export class DfnsApiClient {
-  constructor(private apiOptions: DfnsApiClientOptions) {}
+  constructor(private apiOptions: DfnsApiClientOptions) { }
 
   public get auth() {
     return new AuthClient(this.apiOptions)
+  }
+
+  public get exchanges() {
+    return new ExchangesClient(this.apiOptions)
   }
 
   public get networks() {
