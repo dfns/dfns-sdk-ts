@@ -69,7 +69,9 @@ const dfnsApi = new DfnsApiClient({
 Use the API client
 
 ```ts
-const wallet = await dfnsApi.wallets.createWallet({ body: { network: BlockchainNetwork.EthereumSepolia } })
+const wallet = await dfnsApi.wallets.createWallet(
+  {body: { network: 'EthereumSepolia'}
+})
 console.log(JSON.stringify(wallet))
 
 const list = await dfnsApi.wallets.listWallets({})
