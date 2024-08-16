@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.5 (2024-07-26)
+
+- Added support for `ed25519` from scalar and private key
+- Added SDK support for ICP and OGY
+
 ## 0.5.4 (2024-07-26)
 
 - Added SDK integration with Ton, see `@dfns/lib-ton`
