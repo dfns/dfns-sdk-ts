@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-kaspa",
+        "clean": true,
+        "main": "packages/lib-kaspa/index.ts",
+        "tsConfig": "packages/lib-kaspa/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
