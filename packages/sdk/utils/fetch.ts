@@ -1,9 +1,8 @@
-import { Response, fetch as _fetch } from 'cross-fetch'
+import { fetch as _fetch } from 'cross-fetch'
 
-import { DfnsError, PolicyPendingError } from '../dfnsError'
-import { BaseAuthApi, DfnsBaseApiOptions } from '../baseAuthApi'
 import { generateNonce } from './nonce'
-import { DfnsApiClientOptions } from '../dfnsApiClient'
+import { DfnsError, PolicyPendingError } from '../dfnsError'
+import { DfnsBaseApiOptions } from '../types/generic'
 
 const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
 
@@ -18,7 +17,7 @@ export type FetchOptions<T> = {
 
 export type Fetch<T> = (resource: string | URL, options: FetchOptions<T>) => Promise<Response>
 
-const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
+export const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const baseUrl = options.apiOptions.baseUrl || DEFAULT_DFNS_BASE_URL
     resource = new URL(resource, baseUrl)
@@ -26,7 +25,7 @@ const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   }
 }
 
-const jsonSerializer = <T>(fetch: Fetch<T>): Fetch<T> => {
+export const jsonSerializer = <T>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     if (options.body) {
       options.body = JSON.stringify(options.body)
@@ -41,7 +40,7 @@ const jsonSerializer = <T>(fetch: Fetch<T>): Fetch<T> => {
   }
 }
 
-const errorHandler = <T>(fetch: Fetch<T>): Fetch<T> => {
+export const errorHandler = <T>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const response = await fetch(resource, options)
 
@@ -60,7 +59,7 @@ const errorHandler = <T>(fetch: Fetch<T>): Fetch<T> => {
 }
 
 // raise a 202 response by policy execution as error
-const catchPolicyPending = <T>(fetch: Fetch<T>): Fetch<T> => {
+export const catchPolicyPending = <T>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const response = await fetch(resource, options)
 
@@ -72,20 +71,20 @@ const catchPolicyPending = <T>(fetch: Fetch<T>): Fetch<T> => {
   }
 }
 
-const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
+export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const { appId, appSecret, authToken } = options.apiOptions
 
     const authorization: Record<string, string> = authToken
       ? {
-          authorization: `Bearer ${authToken}`,
-        }
+        authorization: `Bearer ${authToken}`,
+      }
       : {}
 
     const dfnsAppSecret: Record<string, string> = appSecret
       ? {
-          'x-dfns-appsecret': appSecret,
-        }
+        'x-dfns-appsecret': appSecret,
+      }
       : {}
 
     options.headers = {
@@ -100,57 +99,6 @@ const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   }
 }
 
-const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> => {
-  return async (resource, options) => {
-    if (options.method !== 'GET') {
-      const apiOptions = {
-        ...options.apiOptions,
-        baseUrl: (<any>options.apiOptions).baseAuthUrl || options.apiOptions.baseUrl,
-      }
-
-      if (!apiOptions.signer) {
-        throw new DfnsError(-1, 'A "signer" needs to be passed to Dfns client.', {
-          detail:
-            `Most non-readonly endpoints require "User Action Signing" flow.` +
-            ` During that flow, the credential "signer" that you passed will handle signing` +
-            ` the user action challenge, using your credential.`,
-        })
-      }
-
-      const challenge = await BaseAuthApi.createUserActionChallenge(
-        {
-          userActionPayload: <string>options.body ?? '',
-          userActionHttpMethod: options.method,
-          userActionHttpPath: (<URL>resource).pathname,
-          userActionServerKind: (<any>apiOptions)?.userActionServerKind || 'Api',
-        },
-        apiOptions
-      )
-
-      const assertion = await apiOptions.signer.sign(challenge)
-
-      const { userAction } = await BaseAuthApi.signUserActionChallenge(
-        {
-          challengeIdentifier: challenge.challengeIdentifier,
-          firstFactor: assertion,
-        },
-        apiOptions
-      )
-
-      options.headers = {
-        'x-dfns-useraction': userAction,
-        ...(options.headers ?? {}),
-      }
-    }
-
-    return fetch(resource, options)
-  }
-}
-
 export const simpleFetch = fullUrl(
   jsonSerializer(dfnsAuth(catchPolicyPending(errorHandler(<Fetch<DfnsBaseApiOptions>>_fetch))))
-)
-
-export const userActionFetch = fullUrl(
-  jsonSerializer(dfnsAuth(userAction(catchPolicyPending(errorHandler(<Fetch<DfnsApiClientOptions>>_fetch)))))
 )

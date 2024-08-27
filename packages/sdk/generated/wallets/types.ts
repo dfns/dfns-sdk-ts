@@ -521,51 +521,28 @@ export type GetWalletAssetsParams = {
 export type GetWalletAssetsResponse = {
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Polkadot" | "Westend" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Tezos" | "TezosGhostnet" | "Tron" | "TronNile" | "Ton" | "TonTestnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyECDSA" | "KeyECDSAStark" | "KeyEdDSA";
-    assets: ({
+    assets: (({
         kind: "Native";
-        symbol?: string | undefined;
-        decimals: number;
-        verified?: boolean | undefined;
-        balance: string;
     } | {
         kind: "Asa";
         assetId: string;
-        symbol?: string | undefined;
-        decimals: number;
-        verified?: boolean | undefined;
-        balance: string;
     } | {
         kind: "Erc20" | "Trc20";
         contract: string;
-        symbol?: string | undefined;
-        decimals: number;
-        verified?: boolean | undefined;
-        balance: string;
     } | {
         kind: "Sep41";
         issuer: string;
         assetCode: string;
-        symbol?: string | undefined;
-        decimals: number;
-        verified?: boolean | undefined;
-        balance: string;
     } | {
         kind: "Trc10";
         tokenId: string;
-        symbol?: string | undefined;
-        decimals: number;
-        verified?: boolean | undefined;
-        balance: string;
     } | {
         kind: "Spl" | "Spl2022";
         mint: string;
-        symbol?: string | undefined;
-        decimals: number;
-        verified?: boolean | undefined;
-        balance: string;
     } | {
         kind: "Tep74";
         master: string;
+    }) & {
         symbol?: string | undefined;
         decimals: number;
         verified?: boolean | undefined;

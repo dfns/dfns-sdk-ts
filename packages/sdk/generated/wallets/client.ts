@@ -1,5 +1,6 @@
-import { DfnsApiClientOptions } from '../../dfnsApiClient'
-import { simpleFetch, userActionFetch } from '../../utils/fetch'
+import { DfnsApiClientOptions } from '../../types/generic'
+import { simpleFetch } from '../../utils/fetch'
+import { userActionFetch } from '../../utils/userActionFetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
