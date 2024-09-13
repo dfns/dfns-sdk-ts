@@ -10,6 +10,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-meshsdk \
     --workspace @dfns/lib-ethersjs5 \
     --workspace @dfns/lib-ethersjs6 \
+    --workspace @dfns/lib-kaspa \
     --workspace @dfns/lib-polkadot \
     --workspace @dfns/lib-solana \
     --workspace @dfns/lib-stellar \
