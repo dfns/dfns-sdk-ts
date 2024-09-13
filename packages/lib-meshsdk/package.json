@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-meshsdk",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "peerDependencies": {
     "@meshsdk/core": "^1.0.0"
   }
