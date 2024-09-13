@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.6 (2024-09-13)
+
+- Added support for Kaspa and Race
+
 ## 0.5.5 (2024-07-26)
 
 - Added support for `ed25519` from scalar and private key
