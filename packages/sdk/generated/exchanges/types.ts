@@ -2,6 +2,7 @@ export type CreateDepositBody = {
     kind: "Native";
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
@@ -9,24 +10,28 @@ export type CreateDepositBody = {
     contract: string;
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
     kind: "Trc10";
     tokenId: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
     kind: "Trc20";
     contract: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
     kind: "Asa";
     assetId: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
@@ -34,6 +39,7 @@ export type CreateDepositBody = {
     issuer: string;
     assetCode: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
@@ -41,12 +47,14 @@ export type CreateDepositBody = {
     amount: string;
     mint: string;
     createDestinationAccount?: boolean | undefined;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
     kind: "Tep74";
     master: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 };
@@ -73,6 +81,7 @@ export type CreateDepositResponse = {
         kind: "Native";
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
@@ -80,24 +89,28 @@ export type CreateDepositResponse = {
         contract: string;
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
         kind: "Trc10";
         tokenId: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
         kind: "Trc20";
         contract: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
         kind: "Asa";
         assetId: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
@@ -105,6 +118,7 @@ export type CreateDepositResponse = {
         issuer: string;
         assetCode: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
@@ -112,12 +126,14 @@ export type CreateDepositResponse = {
         amount: string;
         mint: string;
         createDestinationAccount?: boolean | undefined;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
         kind: "Tep74";
         master: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     };
@@ -156,6 +172,7 @@ export type CreateWithdrawalBody = {
     kind: "Native";
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
@@ -163,24 +180,28 @@ export type CreateWithdrawalBody = {
     contract: string;
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
     kind: "Trc10";
     tokenId: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
     kind: "Trc20";
     contract: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
     kind: "Asa";
     assetId: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
@@ -188,6 +209,7 @@ export type CreateWithdrawalBody = {
     issuer: string;
     assetCode: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
@@ -195,12 +217,14 @@ export type CreateWithdrawalBody = {
     amount: string;
     mint: string;
     createDestinationAccount?: boolean | undefined;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 } | {
     kind: "Tep74";
     master: string;
     amount: string;
+    externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
 };
@@ -227,6 +251,7 @@ export type CreateWithdrawalResponse = {
         kind: "Native";
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
@@ -234,24 +259,28 @@ export type CreateWithdrawalResponse = {
         contract: string;
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
         kind: "Trc10";
         tokenId: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
         kind: "Trc20";
         contract: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
         kind: "Asa";
         assetId: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
@@ -259,6 +288,7 @@ export type CreateWithdrawalResponse = {
         issuer: string;
         assetCode: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
@@ -266,12 +296,14 @@ export type CreateWithdrawalResponse = {
         amount: string;
         mint: string;
         createDestinationAccount?: boolean | undefined;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     } | {
         kind: "Tep74";
         master: string;
         amount: string;
+        externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
     };

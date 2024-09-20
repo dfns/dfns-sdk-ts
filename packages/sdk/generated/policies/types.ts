@@ -248,38 +248,45 @@ export type CreateApprovalDecisionResponse = {
                 amount: string;
                 memo?: string | undefined;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Erc20";
                 contract: string;
                 to: string;
                 amount: string;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Erc721";
                 contract: string;
                 to: string;
                 tokenId: string;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Trc10";
                 tokenId: string;
                 to: string;
                 amount: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Trc20";
                 contract: string;
                 to: string;
                 amount: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Trc721";
                 contract: string;
                 to: string;
                 tokenId: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Asa";
                 assetId: string;
                 to: string;
                 amount: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Sep41";
                 issuer: string;
@@ -287,18 +294,21 @@ export type CreateApprovalDecisionResponse = {
                 to: string;
                 amount: string;
                 memo?: string | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Spl" | "Spl2022";
                 to: string;
                 amount: string;
                 mint: string;
                 createDestinationAccount?: boolean | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Tep74";
                 to: string;
                 master: string;
                 amount: string;
                 memo?: string | undefined;
+                externalId?: string | undefined;
             };
             metadata: {
                 asset: {
@@ -319,6 +329,7 @@ export type CreateApprovalDecisionResponse = {
             dateBroadcasted?: string | undefined;
             dateConfirmed?: string | undefined;
             approvalId?: string | undefined;
+            externalId?: string | undefined;
         } | undefined;
         transactionRequest?: {
             id: string;
@@ -332,6 +343,7 @@ export type CreateApprovalDecisionResponse = {
             requestBody: {
                 kind: "Transaction";
                 transaction: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Evm";
                 to?: string | undefined;
@@ -339,6 +351,7 @@ export type CreateApprovalDecisionResponse = {
                 data?: string | undefined;
                 nonce?: (number | string | string) | undefined;
                 gasLimit?: (string | string) | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Eip1559";
                 to?: string | undefined;
@@ -348,6 +361,7 @@ export type CreateApprovalDecisionResponse = {
                 gasLimit?: (string | string) | undefined;
                 maxFeePerGas?: (string | string) | undefined;
                 maxPriorityFeePerGas?: (string | string) | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "EvmLegacy";
                 to?: string | undefined;
@@ -356,9 +370,11 @@ export type CreateApprovalDecisionResponse = {
                 nonce?: (number | string | string) | undefined;
                 gasLimit?: (string | string) | undefined;
                 gasPrice?: (string | string) | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Psbt";
                 psbt: string;
+                externalId?: string | undefined;
             };
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
             reason?: string | undefined;
@@ -369,6 +385,7 @@ export type CreateApprovalDecisionResponse = {
             datePolicyResolved?: string | undefined;
             dateBroadcasted?: string | undefined;
             dateConfirmed?: string | undefined;
+            externalId?: string | undefined;
         } | undefined;
         signatureRequest?: {
             id: string;
@@ -382,12 +399,15 @@ export type CreateApprovalDecisionResponse = {
             requestBody: {
                 kind: "Hash";
                 hash: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Message";
                 message: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Transaction";
                 transaction: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Eip712";
                 types: {
@@ -406,9 +426,11 @@ export type CreateApprovalDecisionResponse = {
                 message: {
                     [x: string]: unknown;
                 };
+                externalId?: string | undefined;
             } | {
                 kind: "Psbt";
                 psbt: string;
+                externalId?: string | undefined;
             };
             status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
             reason?: string | undefined;
@@ -432,6 +454,7 @@ export type CreateApprovalDecisionResponse = {
             datePolicyResolved?: string | undefined;
             dateSigned?: string | undefined;
             dateConfirmed?: string | undefined;
+            externalId?: string | undefined;
         } | undefined;
     } | {
         kind: "Wallets:IncomingTransaction";
@@ -1548,38 +1571,45 @@ export type GetApprovalResponse = {
                 amount: string;
                 memo?: string | undefined;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Erc20";
                 contract: string;
                 to: string;
                 amount: string;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Erc721";
                 contract: string;
                 to: string;
                 tokenId: string;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Trc10";
                 tokenId: string;
                 to: string;
                 amount: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Trc20";
                 contract: string;
                 to: string;
                 amount: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Trc721";
                 contract: string;
                 to: string;
                 tokenId: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Asa";
                 assetId: string;
                 to: string;
                 amount: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Sep41";
                 issuer: string;
@@ -1587,18 +1617,21 @@ export type GetApprovalResponse = {
                 to: string;
                 amount: string;
                 memo?: string | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Spl" | "Spl2022";
                 to: string;
                 amount: string;
                 mint: string;
                 createDestinationAccount?: boolean | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Tep74";
                 to: string;
                 master: string;
                 amount: string;
                 memo?: string | undefined;
+                externalId?: string | undefined;
             };
             metadata: {
                 asset: {
@@ -1619,6 +1652,7 @@ export type GetApprovalResponse = {
             dateBroadcasted?: string | undefined;
             dateConfirmed?: string | undefined;
             approvalId?: string | undefined;
+            externalId?: string | undefined;
         } | undefined;
         transactionRequest?: {
             id: string;
@@ -1632,6 +1666,7 @@ export type GetApprovalResponse = {
             requestBody: {
                 kind: "Transaction";
                 transaction: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Evm";
                 to?: string | undefined;
@@ -1639,6 +1674,7 @@ export type GetApprovalResponse = {
                 data?: string | undefined;
                 nonce?: (number | string | string) | undefined;
                 gasLimit?: (string | string) | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Eip1559";
                 to?: string | undefined;
@@ -1648,6 +1684,7 @@ export type GetApprovalResponse = {
                 gasLimit?: (string | string) | undefined;
                 maxFeePerGas?: (string | string) | undefined;
                 maxPriorityFeePerGas?: (string | string) | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "EvmLegacy";
                 to?: string | undefined;
@@ -1656,9 +1693,11 @@ export type GetApprovalResponse = {
                 nonce?: (number | string | string) | undefined;
                 gasLimit?: (string | string) | undefined;
                 gasPrice?: (string | string) | undefined;
+                externalId?: string | undefined;
             } | {
                 kind: "Psbt";
                 psbt: string;
+                externalId?: string | undefined;
             };
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
             reason?: string | undefined;
@@ -1669,6 +1708,7 @@ export type GetApprovalResponse = {
             datePolicyResolved?: string | undefined;
             dateBroadcasted?: string | undefined;
             dateConfirmed?: string | undefined;
+            externalId?: string | undefined;
         } | undefined;
         signatureRequest?: {
             id: string;
@@ -1682,12 +1722,15 @@ export type GetApprovalResponse = {
             requestBody: {
                 kind: "Hash";
                 hash: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Message";
                 message: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Transaction";
                 transaction: string;
+                externalId?: string | undefined;
             } | {
                 kind: "Eip712";
                 types: {
@@ -1706,9 +1749,11 @@ export type GetApprovalResponse = {
                 message: {
                     [x: string]: unknown;
                 };
+                externalId?: string | undefined;
             } | {
                 kind: "Psbt";
                 psbt: string;
+                externalId?: string | undefined;
             };
             status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
             reason?: string | undefined;
@@ -1732,6 +1777,7 @@ export type GetApprovalResponse = {
             datePolicyResolved?: string | undefined;
             dateSigned?: string | undefined;
             dateConfirmed?: string | undefined;
+            externalId?: string | undefined;
         } | undefined;
     } | {
         kind: "Wallets:IncomingTransaction";
@@ -2892,38 +2938,45 @@ export type ListApprovalsResponse = {
                     amount: string;
                     memo?: string | undefined;
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Erc20";
                     contract: string;
                     to: string;
                     amount: string;
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Erc721";
                     contract: string;
                     to: string;
                     tokenId: string;
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Trc10";
                     tokenId: string;
                     to: string;
                     amount: string;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Trc20";
                     contract: string;
                     to: string;
                     amount: string;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Trc721";
                     contract: string;
                     to: string;
                     tokenId: string;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Asa";
                     assetId: string;
                     to: string;
                     amount: string;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Sep41";
                     issuer: string;
@@ -2931,18 +2984,21 @@ export type ListApprovalsResponse = {
                     to: string;
                     amount: string;
                     memo?: string | undefined;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Spl" | "Spl2022";
                     to: string;
                     amount: string;
                     mint: string;
                     createDestinationAccount?: boolean | undefined;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Tep74";
                     to: string;
                     master: string;
                     amount: string;
                     memo?: string | undefined;
+                    externalId?: string | undefined;
                 };
                 metadata: {
                     asset: {
@@ -2963,6 +3019,7 @@ export type ListApprovalsResponse = {
                 dateBroadcasted?: string | undefined;
                 dateConfirmed?: string | undefined;
                 approvalId?: string | undefined;
+                externalId?: string | undefined;
             } | undefined;
             transactionRequest?: {
                 id: string;
@@ -2976,6 +3033,7 @@ export type ListApprovalsResponse = {
                 requestBody: {
                     kind: "Transaction";
                     transaction: string;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Evm";
                     to?: string | undefined;
@@ -2983,6 +3041,7 @@ export type ListApprovalsResponse = {
                     data?: string | undefined;
                     nonce?: (number | string | string) | undefined;
                     gasLimit?: (string | string) | undefined;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Eip1559";
                     to?: string | undefined;
@@ -2992,6 +3051,7 @@ export type ListApprovalsResponse = {
                     gasLimit?: (string | string) | undefined;
                     maxFeePerGas?: (string | string) | undefined;
                     maxPriorityFeePerGas?: (string | string) | undefined;
+                    externalId?: string | undefined;
                 } | {
                     kind: "EvmLegacy";
                     to?: string | undefined;
@@ -3000,9 +3060,11 @@ export type ListApprovalsResponse = {
                     nonce?: (number | string | string) | undefined;
                     gasLimit?: (string | string) | undefined;
                     gasPrice?: (string | string) | undefined;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Psbt";
                     psbt: string;
+                    externalId?: string | undefined;
                 };
                 status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
                 reason?: string | undefined;
@@ -3013,6 +3075,7 @@ export type ListApprovalsResponse = {
                 datePolicyResolved?: string | undefined;
                 dateBroadcasted?: string | undefined;
                 dateConfirmed?: string | undefined;
+                externalId?: string | undefined;
             } | undefined;
             signatureRequest?: {
                 id: string;
@@ -3026,12 +3089,15 @@ export type ListApprovalsResponse = {
                 requestBody: {
                     kind: "Hash";
                     hash: string;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Message";
                     message: string;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Transaction";
                     transaction: string;
+                    externalId?: string | undefined;
                 } | {
                     kind: "Eip712";
                     types: {
@@ -3050,9 +3116,11 @@ export type ListApprovalsResponse = {
                     message: {
                         [x: string]: unknown;
                     };
+                    externalId?: string | undefined;
                 } | {
                     kind: "Psbt";
                     psbt: string;
+                    externalId?: string | undefined;
                 };
                 status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
                 reason?: string | undefined;
@@ -3076,6 +3144,7 @@ export type ListApprovalsResponse = {
                 datePolicyResolved?: string | undefined;
                 dateSigned?: string | undefined;
                 dateConfirmed?: string | undefined;
+                externalId?: string | undefined;
             } | undefined;
         } | {
             kind: "Wallets:IncomingTransaction";
