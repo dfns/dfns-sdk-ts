@@ -1,6 +1,7 @@
 export type BroadcastTransactionBody = {
     kind: "Transaction";
     transaction: string;
+    externalId?: string | undefined;
 } | {
     kind: "Evm";
     to?: string | undefined;
@@ -8,6 +9,7 @@ export type BroadcastTransactionBody = {
     data?: string | undefined;
     nonce?: (number | string | string) | undefined;
     gasLimit?: (string | string) | undefined;
+    externalId?: string | undefined;
 } | {
     kind: "Eip1559";
     to?: string | undefined;
@@ -17,6 +19,7 @@ export type BroadcastTransactionBody = {
     gasLimit?: (string | string) | undefined;
     maxFeePerGas?: (string | string) | undefined;
     maxPriorityFeePerGas?: (string | string) | undefined;
+    externalId?: string | undefined;
 } | {
     kind: "EvmLegacy";
     to?: string | undefined;
@@ -25,9 +28,11 @@ export type BroadcastTransactionBody = {
     nonce?: (number | string | string) | undefined;
     gasLimit?: (string | string) | undefined;
     gasPrice?: (string | string) | undefined;
+    externalId?: string | undefined;
 } | {
     kind: "Psbt";
     psbt: string;
+    externalId?: string | undefined;
 };
 
 export type BroadcastTransactionParams = {
@@ -46,6 +51,7 @@ export type BroadcastTransactionResponse = {
     requestBody: {
         kind: "Transaction";
         transaction: string;
+        externalId?: string | undefined;
     } | {
         kind: "Evm";
         to?: string | undefined;
@@ -53,6 +59,7 @@ export type BroadcastTransactionResponse = {
         data?: string | undefined;
         nonce?: (number | string | string) | undefined;
         gasLimit?: (string | string) | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Eip1559";
         to?: string | undefined;
@@ -62,6 +69,7 @@ export type BroadcastTransactionResponse = {
         gasLimit?: (string | string) | undefined;
         maxFeePerGas?: (string | string) | undefined;
         maxPriorityFeePerGas?: (string | string) | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "EvmLegacy";
         to?: string | undefined;
@@ -70,9 +78,11 @@ export type BroadcastTransactionResponse = {
         nonce?: (number | string | string) | undefined;
         gasLimit?: (string | string) | undefined;
         gasPrice?: (string | string) | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Psbt";
         psbt: string;
+        externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
     reason?: string | undefined;
@@ -83,6 +93,7 @@ export type BroadcastTransactionResponse = {
     datePolicyResolved?: string | undefined;
     dateBroadcasted?: string | undefined;
     dateConfirmed?: string | undefined;
+    externalId?: string | undefined;
 };
 
 export type BroadcastTransactionRequest = BroadcastTransactionParams & { body: BroadcastTransactionBody }
@@ -165,12 +176,15 @@ export type ExportWalletRequest = ExportWalletParams & { body: ExportWalletBody 
 export type GenerateSignatureBody = {
     kind: "Hash";
     hash: string;
+    externalId?: string | undefined;
 } | {
     kind: "Message";
     message: string;
+    externalId?: string | undefined;
 } | {
     kind: "Transaction";
     transaction: string;
+    externalId?: string | undefined;
 } | {
     kind: "Eip712";
     types: {
@@ -189,9 +203,11 @@ export type GenerateSignatureBody = {
     message: {
         [x: string]: unknown;
     };
+    externalId?: string | undefined;
 } | {
     kind: "Psbt";
     psbt: string;
+    externalId?: string | undefined;
 };
 
 export type GenerateSignatureParams = {
@@ -210,12 +226,15 @@ export type GenerateSignatureResponse = {
     requestBody: {
         kind: "Hash";
         hash: string;
+        externalId?: string | undefined;
     } | {
         kind: "Message";
         message: string;
+        externalId?: string | undefined;
     } | {
         kind: "Transaction";
         transaction: string;
+        externalId?: string | undefined;
     } | {
         kind: "Eip712";
         types: {
@@ -234,9 +253,11 @@ export type GenerateSignatureResponse = {
         message: {
             [x: string]: unknown;
         };
+        externalId?: string | undefined;
     } | {
         kind: "Psbt";
         psbt: string;
+        externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
     reason?: string | undefined;
@@ -260,6 +281,7 @@ export type GenerateSignatureResponse = {
     datePolicyResolved?: string | undefined;
     dateSigned?: string | undefined;
     dateConfirmed?: string | undefined;
+    externalId?: string | undefined;
 };
 
 export type GenerateSignatureRequest = GenerateSignatureParams & { body: GenerateSignatureBody }
@@ -281,12 +303,15 @@ export type GetSignatureResponse = {
     requestBody: {
         kind: "Hash";
         hash: string;
+        externalId?: string | undefined;
     } | {
         kind: "Message";
         message: string;
+        externalId?: string | undefined;
     } | {
         kind: "Transaction";
         transaction: string;
+        externalId?: string | undefined;
     } | {
         kind: "Eip712";
         types: {
@@ -305,9 +330,11 @@ export type GetSignatureResponse = {
         message: {
             [x: string]: unknown;
         };
+        externalId?: string | undefined;
     } | {
         kind: "Psbt";
         psbt: string;
+        externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
     reason?: string | undefined;
@@ -331,6 +358,7 @@ export type GetSignatureResponse = {
     datePolicyResolved?: string | undefined;
     dateSigned?: string | undefined;
     dateConfirmed?: string | undefined;
+    externalId?: string | undefined;
 };
 
 export type GetSignatureRequest = GetSignatureParams
@@ -352,6 +380,7 @@ export type GetTransactionResponse = {
     requestBody: {
         kind: "Transaction";
         transaction: string;
+        externalId?: string | undefined;
     } | {
         kind: "Evm";
         to?: string | undefined;
@@ -359,6 +388,7 @@ export type GetTransactionResponse = {
         data?: string | undefined;
         nonce?: (number | string | string) | undefined;
         gasLimit?: (string | string) | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Eip1559";
         to?: string | undefined;
@@ -368,6 +398,7 @@ export type GetTransactionResponse = {
         gasLimit?: (string | string) | undefined;
         maxFeePerGas?: (string | string) | undefined;
         maxPriorityFeePerGas?: (string | string) | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "EvmLegacy";
         to?: string | undefined;
@@ -376,9 +407,11 @@ export type GetTransactionResponse = {
         nonce?: (number | string | string) | undefined;
         gasLimit?: (string | string) | undefined;
         gasPrice?: (string | string) | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Psbt";
         psbt: string;
+        externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
     reason?: string | undefined;
@@ -389,6 +422,7 @@ export type GetTransactionResponse = {
     datePolicyResolved?: string | undefined;
     dateBroadcasted?: string | undefined;
     dateConfirmed?: string | undefined;
+    externalId?: string | undefined;
 };
 
 export type GetTransactionRequest = GetTransactionParams
@@ -413,38 +447,45 @@ export type GetTransferResponse = {
         amount: string;
         memo?: string | undefined;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Erc20";
         contract: string;
         to: string;
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Erc721";
         contract: string;
         to: string;
         tokenId: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Trc10";
         tokenId: string;
         to: string;
         amount: string;
+        externalId?: string | undefined;
     } | {
         kind: "Trc20";
         contract: string;
         to: string;
         amount: string;
+        externalId?: string | undefined;
     } | {
         kind: "Trc721";
         contract: string;
         to: string;
         tokenId: string;
+        externalId?: string | undefined;
     } | {
         kind: "Asa";
         assetId: string;
         to: string;
         amount: string;
+        externalId?: string | undefined;
     } | {
         kind: "Sep41";
         issuer: string;
@@ -452,18 +493,21 @@ export type GetTransferResponse = {
         to: string;
         amount: string;
         memo?: string | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Spl" | "Spl2022";
         to: string;
         amount: string;
         mint: string;
         createDestinationAccount?: boolean | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Tep74";
         to: string;
         master: string;
         amount: string;
         memo?: string | undefined;
+        externalId?: string | undefined;
     };
     metadata: {
         asset: {
@@ -484,6 +528,7 @@ export type GetTransferResponse = {
     dateBroadcasted?: string | undefined;
     dateConfirmed?: string | undefined;
     approvalId?: string | undefined;
+    externalId?: string | undefined;
 };
 
 export type GetTransferRequest = GetTransferParams
@@ -1030,12 +1075,15 @@ export type ListSignaturesResponse = {
         requestBody: {
             kind: "Hash";
             hash: string;
+            externalId?: string | undefined;
         } | {
             kind: "Message";
             message: string;
+            externalId?: string | undefined;
         } | {
             kind: "Transaction";
             transaction: string;
+            externalId?: string | undefined;
         } | {
             kind: "Eip712";
             types: {
@@ -1054,9 +1102,11 @@ export type ListSignaturesResponse = {
             message: {
                 [x: string]: unknown;
             };
+            externalId?: string | undefined;
         } | {
             kind: "Psbt";
             psbt: string;
+            externalId?: string | undefined;
         };
         status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
         reason?: string | undefined;
@@ -1080,6 +1130,7 @@ export type ListSignaturesResponse = {
         datePolicyResolved?: string | undefined;
         dateSigned?: string | undefined;
         dateConfirmed?: string | undefined;
+        externalId?: string | undefined;
     }[];
     nextPageToken?: string | undefined;
 };
@@ -1109,6 +1160,7 @@ export type ListTransactionsResponse = {
         requestBody: {
             kind: "Transaction";
             transaction: string;
+            externalId?: string | undefined;
         } | {
             kind: "Evm";
             to?: string | undefined;
@@ -1116,6 +1168,7 @@ export type ListTransactionsResponse = {
             data?: string | undefined;
             nonce?: (number | string | string) | undefined;
             gasLimit?: (string | string) | undefined;
+            externalId?: string | undefined;
         } | {
             kind: "Eip1559";
             to?: string | undefined;
@@ -1125,6 +1178,7 @@ export type ListTransactionsResponse = {
             gasLimit?: (string | string) | undefined;
             maxFeePerGas?: (string | string) | undefined;
             maxPriorityFeePerGas?: (string | string) | undefined;
+            externalId?: string | undefined;
         } | {
             kind: "EvmLegacy";
             to?: string | undefined;
@@ -1133,9 +1187,11 @@ export type ListTransactionsResponse = {
             nonce?: (number | string | string) | undefined;
             gasLimit?: (string | string) | undefined;
             gasPrice?: (string | string) | undefined;
+            externalId?: string | undefined;
         } | {
             kind: "Psbt";
             psbt: string;
+            externalId?: string | undefined;
         };
         status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
         reason?: string | undefined;
@@ -1146,6 +1202,7 @@ export type ListTransactionsResponse = {
         datePolicyResolved?: string | undefined;
         dateBroadcasted?: string | undefined;
         dateConfirmed?: string | undefined;
+        externalId?: string | undefined;
     }[];
     nextPageToken?: string | undefined;
 };
@@ -1178,38 +1235,45 @@ export type ListTransfersResponse = {
             amount: string;
             memo?: string | undefined;
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
+            externalId?: string | undefined;
         } | {
             kind: "Erc20";
             contract: string;
             to: string;
             amount: string;
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
+            externalId?: string | undefined;
         } | {
             kind: "Erc721";
             contract: string;
             to: string;
             tokenId: string;
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
+            externalId?: string | undefined;
         } | {
             kind: "Trc10";
             tokenId: string;
             to: string;
             amount: string;
+            externalId?: string | undefined;
         } | {
             kind: "Trc20";
             contract: string;
             to: string;
             amount: string;
+            externalId?: string | undefined;
         } | {
             kind: "Trc721";
             contract: string;
             to: string;
             tokenId: string;
+            externalId?: string | undefined;
         } | {
             kind: "Asa";
             assetId: string;
             to: string;
             amount: string;
+            externalId?: string | undefined;
         } | {
             kind: "Sep41";
             issuer: string;
@@ -1217,18 +1281,21 @@ export type ListTransfersResponse = {
             to: string;
             amount: string;
             memo?: string | undefined;
+            externalId?: string | undefined;
         } | {
             kind: "Spl" | "Spl2022";
             to: string;
             amount: string;
             mint: string;
             createDestinationAccount?: boolean | undefined;
+            externalId?: string | undefined;
         } | {
             kind: "Tep74";
             to: string;
             master: string;
             amount: string;
             memo?: string | undefined;
+            externalId?: string | undefined;
         };
         metadata: {
             asset: {
@@ -1249,6 +1316,7 @@ export type ListTransfersResponse = {
         dateBroadcasted?: string | undefined;
         dateConfirmed?: string | undefined;
         approvalId?: string | undefined;
+        externalId?: string | undefined;
     }[];
     nextPageToken?: string | undefined;
 };
@@ -1305,38 +1373,45 @@ export type TransferAssetBody = {
     amount: string;
     memo?: string | undefined;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    externalId?: string | undefined;
 } | {
     kind: "Erc20";
     contract: string;
     to: string;
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    externalId?: string | undefined;
 } | {
     kind: "Erc721";
     contract: string;
     to: string;
     tokenId: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    externalId?: string | undefined;
 } | {
     kind: "Trc10";
     tokenId: string;
     to: string;
     amount: string;
+    externalId?: string | undefined;
 } | {
     kind: "Trc20";
     contract: string;
     to: string;
     amount: string;
+    externalId?: string | undefined;
 } | {
     kind: "Trc721";
     contract: string;
     to: string;
     tokenId: string;
+    externalId?: string | undefined;
 } | {
     kind: "Asa";
     assetId: string;
     to: string;
     amount: string;
+    externalId?: string | undefined;
 } | {
     kind: "Sep41";
     issuer: string;
@@ -1344,18 +1419,21 @@ export type TransferAssetBody = {
     to: string;
     amount: string;
     memo?: string | undefined;
+    externalId?: string | undefined;
 } | {
     kind: "Spl" | "Spl2022";
     to: string;
     amount: string;
     mint: string;
     createDestinationAccount?: boolean | undefined;
+    externalId?: string | undefined;
 } | {
     kind: "Tep74";
     to: string;
     master: string;
     amount: string;
     memo?: string | undefined;
+    externalId?: string | undefined;
 };
 
 export type TransferAssetParams = {
@@ -1377,38 +1455,45 @@ export type TransferAssetResponse = {
         amount: string;
         memo?: string | undefined;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Erc20";
         contract: string;
         to: string;
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Erc721";
         contract: string;
         to: string;
         tokenId: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Trc10";
         tokenId: string;
         to: string;
         amount: string;
+        externalId?: string | undefined;
     } | {
         kind: "Trc20";
         contract: string;
         to: string;
         amount: string;
+        externalId?: string | undefined;
     } | {
         kind: "Trc721";
         contract: string;
         to: string;
         tokenId: string;
+        externalId?: string | undefined;
     } | {
         kind: "Asa";
         assetId: string;
         to: string;
         amount: string;
+        externalId?: string | undefined;
     } | {
         kind: "Sep41";
         issuer: string;
@@ -1416,18 +1501,21 @@ export type TransferAssetResponse = {
         to: string;
         amount: string;
         memo?: string | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Spl" | "Spl2022";
         to: string;
         amount: string;
         mint: string;
         createDestinationAccount?: boolean | undefined;
+        externalId?: string | undefined;
     } | {
         kind: "Tep74";
         to: string;
         master: string;
         amount: string;
         memo?: string | undefined;
+        externalId?: string | undefined;
     };
     metadata: {
         asset: {
@@ -1448,6 +1536,7 @@ export type TransferAssetResponse = {
     dateBroadcasted?: string | undefined;
     dateConfirmed?: string | undefined;
     approvalId?: string | undefined;
+    externalId?: string | undefined;
 };
 
 export type TransferAssetRequest = TransferAssetParams & { body: TransferAssetBody }
