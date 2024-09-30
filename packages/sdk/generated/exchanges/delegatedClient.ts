@@ -221,6 +221,20 @@ export class DelegatedExchangesClient {
     return response.json()
   }
 
+  async listAssetWithdrawalNetworks(request: T.ListAssetWithdrawalNetworksRequest): Promise<T.ListAssetWithdrawalNetworksResponse> {
+    const path = buildPathAndQuery('/exchanges/:exchangeId/accounts/:accountId/assets/:asset/withdrawal-networks', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listExchanges(request?: T.ListExchangesRequest): Promise<T.ListExchangesResponse> {
     const path = buildPathAndQuery('/exchanges', {
       path: request ?? {},

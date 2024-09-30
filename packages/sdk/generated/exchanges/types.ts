@@ -144,7 +144,7 @@ export type CreateDepositRequest = CreateDepositParams & { body: CreateDepositBo
 
 export type CreateExchangeBody = {
     name?: string | undefined;
-    kind: "Binance" | "Kraken" | "Coinbase" | "OKX" | "Bitstamp";
+    kind: "Binance" | "Kraken" | "CoinbaseApp";
     readConfiguration: {
         publicApiKey: string;
         privateApiKey: string;
@@ -162,7 +162,7 @@ export type CreateExchangeBody = {
 export type CreateExchangeResponse = {
     id: string;
     name?: string | undefined;
-    kind: "Binance" | "Kraken" | "Coinbase" | "OKX" | "Bitstamp";
+    kind: "Binance" | "Kraken" | "CoinbaseApp";
     dateCreated: string;
 };
 
@@ -329,7 +329,7 @@ export type GetExchangeParams = {
 export type GetExchangeResponse = {
     id: string;
     name?: string | undefined;
-    kind: "Binance" | "Kraken" | "Coinbase" | "OKX" | "Bitstamp";
+    kind: "Binance" | "Kraken" | "CoinbaseApp";
     dateCreated: string;
 };
 
@@ -349,31 +349,6 @@ export type ListAccountAssetsResponse = {
     items: {
         symbol: string;
         balance: string;
-        networks: (({
-            kind: "Native";
-        } | {
-            kind: "Asa";
-            assetId: string;
-        } | {
-            kind: "Erc20" | "Trc20";
-            contract: string;
-        } | {
-            kind: "Sep41";
-            issuer: string;
-            assetCode: string;
-        } | {
-            kind: "Trc10";
-            tokenId: string;
-        } | {
-            kind: "Spl" | "Spl2022";
-            mint: string;
-        } | {
-            kind: "Tep74";
-            master: string;
-        }) & {
-            network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Origyn" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
-            decimals: number;
-        })[];
     }[];
     nextPageToken?: string | undefined;
 };
@@ -401,6 +376,40 @@ export type ListAccountsResponse = {
 
 export type ListAccountsRequest = ListAccountsParams & { query?: ListAccountsQuery }
 
+export type ListAssetWithdrawalNetworksParams = {
+    exchangeId: string;
+    accountId: string;
+    asset: string;
+};
+
+export type ListAssetWithdrawalNetworksResponse = (({
+    kind: "Native";
+} | {
+    kind: "Asa";
+    assetId: string;
+} | {
+    kind: "Erc20" | "Trc20";
+    contract: string;
+} | {
+    kind: "Sep41";
+    issuer: string;
+    assetCode: string;
+} | {
+    kind: "Trc10";
+    tokenId: string;
+} | {
+    kind: "Spl" | "Spl2022";
+    mint: string;
+} | {
+    kind: "Tep74";
+    master: string;
+}) & {
+    network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Kaspa" | "KaspaTestnet11" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Origyn" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
+    decimals: number;
+})[];
+
+export type ListAssetWithdrawalNetworksRequest = ListAssetWithdrawalNetworksParams
+
 export type ListExchangesQuery = {
     limit?: number | undefined;
     paginationToken?: string | undefined;
@@ -410,7 +419,7 @@ export type ListExchangesResponse = {
     items: {
         id: string;
         name?: string | undefined;
-        kind: "Binance" | "Kraken" | "Coinbase" | "OKX" | "Bitstamp";
+        kind: "Binance" | "Kraken" | "CoinbaseApp";
         dateCreated: string;
     }[];
     nextPageToken?: string | undefined;
