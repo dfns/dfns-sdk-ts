@@ -1763,6 +1763,7 @@ export type RecoverBody = {
                 clientData: string;
                 attestationData: string;
             };
+            credentialName?: string | undefined;
         } | {
             credentialKind: "Key";
             credentialInfo: {
@@ -1770,11 +1771,13 @@ export type RecoverBody = {
                 clientData: string;
                 attestationData: string;
             };
+            credentialName?: string | undefined;
         } | {
             credentialKind: "Password";
             credentialInfo: {
                 password: string;
             };
+            credentialName?: string | undefined;
         } | {
             credentialKind: "PasswordProtectedKey";
             credentialInfo: {
@@ -1783,6 +1786,7 @@ export type RecoverBody = {
                 attestationData: string;
             };
             encryptedPrivateKey: string;
+            credentialName?: string | undefined;
         };
         secondFactorCredential?: ({
             credentialKind: "Fido2";
@@ -1791,6 +1795,7 @@ export type RecoverBody = {
                 clientData: string;
                 attestationData: string;
             };
+            credentialName?: string | undefined;
         } | {
             credentialKind: "Key";
             credentialInfo: {
@@ -1798,11 +1803,13 @@ export type RecoverBody = {
                 clientData: string;
                 attestationData: string;
             };
+            credentialName?: string | undefined;
         } | {
             credentialKind: "Totp";
             credentialInfo: {
                 otpCode: string;
             };
+            credentialName?: string | undefined;
         } | {
             credentialKind: "PasswordProtectedKey";
             credentialInfo: {
@@ -1811,6 +1818,7 @@ export type RecoverBody = {
                 attestationData: string;
             };
             encryptedPrivateKey: string;
+            credentialName?: string | undefined;
         }) | undefined;
         recoveryCredential?: {
             credentialKind: "RecoveryKey";
@@ -1820,6 +1828,7 @@ export type RecoverBody = {
                 attestationData: string;
             };
             encryptedPrivateKey?: string | undefined;
+            credentialName?: string | undefined;
         } | undefined;
     };
 };
@@ -1890,6 +1899,7 @@ export type RegisterBody = {
             clientData: string;
             attestationData: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "Key";
         credentialInfo: {
@@ -1897,11 +1907,13 @@ export type RegisterBody = {
             clientData: string;
             attestationData: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "Password";
         credentialInfo: {
             password: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "PasswordProtectedKey";
         credentialInfo: {
@@ -1910,6 +1922,7 @@ export type RegisterBody = {
             attestationData: string;
         };
         encryptedPrivateKey: string;
+        credentialName?: string | undefined;
     };
     secondFactorCredential?: ({
         credentialKind: "Fido2";
@@ -1918,6 +1931,7 @@ export type RegisterBody = {
             clientData: string;
             attestationData: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "Key";
         credentialInfo: {
@@ -1925,11 +1939,13 @@ export type RegisterBody = {
             clientData: string;
             attestationData: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "Totp";
         credentialInfo: {
             otpCode: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "PasswordProtectedKey";
         credentialInfo: {
@@ -1938,6 +1954,7 @@ export type RegisterBody = {
             attestationData: string;
         };
         encryptedPrivateKey: string;
+        credentialName?: string | undefined;
     }) | undefined;
     recoveryCredential?: {
         credentialKind: "RecoveryKey";
@@ -1947,6 +1964,7 @@ export type RegisterBody = {
             attestationData: string;
         };
         encryptedPrivateKey?: string | undefined;
+        credentialName?: string | undefined;
     } | undefined;
 };
 
@@ -1973,6 +1991,7 @@ export type RegisterEndUserBody = {
             clientData: string;
             attestationData: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "Key";
         credentialInfo: {
@@ -1980,11 +1999,13 @@ export type RegisterEndUserBody = {
             clientData: string;
             attestationData: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "Password";
         credentialInfo: {
             password: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "PasswordProtectedKey";
         credentialInfo: {
@@ -1993,6 +2014,7 @@ export type RegisterEndUserBody = {
             attestationData: string;
         };
         encryptedPrivateKey: string;
+        credentialName?: string | undefined;
     };
     secondFactorCredential?: ({
         credentialKind: "Fido2";
@@ -2001,6 +2023,7 @@ export type RegisterEndUserBody = {
             clientData: string;
             attestationData: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "Key";
         credentialInfo: {
@@ -2008,11 +2031,13 @@ export type RegisterEndUserBody = {
             clientData: string;
             attestationData: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "Totp";
         credentialInfo: {
             otpCode: string;
         };
+        credentialName?: string | undefined;
     } | {
         credentialKind: "PasswordProtectedKey";
         credentialInfo: {
@@ -2021,6 +2046,7 @@ export type RegisterEndUserBody = {
             attestationData: string;
         };
         encryptedPrivateKey: string;
+        credentialName?: string | undefined;
     }) | undefined;
     recoveryCredential?: {
         credentialKind: "RecoveryKey";
@@ -2030,9 +2056,10 @@ export type RegisterEndUserBody = {
             attestationData: string;
         };
         encryptedPrivateKey?: string | undefined;
+        credentialName?: string | undefined;
     } | undefined;
     wallets: {
-        network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Origyn" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
+        network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Kaspa" | "KaspaTestnet11" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Origyn" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
         name?: string | undefined;
     }[];
 };
