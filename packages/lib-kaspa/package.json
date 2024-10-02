@@ -1,0 +1,7 @@
+{
+  "name": "@dfns/lib-kaspa",
+  "version": "0.4.3",
+  "peerDependencies": {
+    "@dfns/kaspa-wasm": "0.14.1"
+  }
+}

@@ -206,6 +206,7 @@ Integrations with other blockchain platforms to make Dapp development frictionle
 - [BitcoinJS](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-bitcoinjs/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/bitcoinjs/)
 - [Cardano Mesh](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-meshsdk/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/meshsdk/)
 - [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/)/[v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs)
+- [kaspa](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-kaspa/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/kaspa)
 - [polkadot{.js}](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polkadot/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polkadot)
 - [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/solana)
 - [Stellar sdk](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-stellar/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/stellar)
