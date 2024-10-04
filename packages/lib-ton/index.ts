@@ -66,8 +66,8 @@ export class DfnsWallet {
     const res = await this.dfnsClient.wallets.generateSignature({
       walletId: this.metadata.id,
       body: {
-        kind: 'Message',
-        message: `0x${cell.toBoc().toString('hex')}`,
+        kind: 'Transaction',
+        transaction: `0x${cell.toBoc().toString('hex')}`,
       },
     })
 
