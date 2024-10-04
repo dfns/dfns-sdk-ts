@@ -2,7 +2,7 @@ import { DfnsWallet } from '@dfns/lib-ton'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import { getHttpEndpoint } from '@orbs-network/ton-access'
-import { Address, SendMode, TonClient, WalletContractV4, beginCell, internal, storeMessageRelaxed } from '@ton/ton'
+import { Address, SendMode, TonClient, WalletContractV4, beginCell, internal, external, storeMessageRelaxed, storeMessage, loadMessage } from '@ton/ton'
 
 
 import * as dotenv from 'dotenv'
@@ -71,17 +71,32 @@ async function main() {
       to: 'EQBfYLuQwjbBd-LAZ6eNC26XmVVxEl86MQPKG981hdTSicL_',
       body: 'Example transfer body',
     })
-    signingMessageBuilder.storeRef(beginCell().store(storeMessageRelaxed(message)))
 
-    const cell = signingMessageBuilder.endCell()
+    const body = signingMessageBuilder.storeRef(beginCell().store(storeMessageRelaxed(message))).endCell()
+
+    let init
+    if (opened.init && !(await client.isContractDeployed(Address.parse(senderWallet.address)))) {
+      init = opened.init
+    }
+
+    // Wrap into an external message
+    const externalInMessage = external({
+      to: senderWallet.address,
+      body,
+      init,
+    })
+
+    const cell = beginCell().store(storeMessage(externalInMessage)).endCell()
 
     const signedCell = await senderWallet.sign(cell)
     
-    await opened.send(signedCell)
+    client.sendFile(signedCell.toBoc())
     console.log('native transfer cell broadcasted')
-
+    
     // unfortunately, we can't have the txHash without pulling the chain
-    const txHash = await retry(() => tryGetTxByBoc(client, tonWallet.address, signedCell.hash().toString('hex'), 10), {
+    const msg = loadMessage(signedCell.beginParse())
+
+    const txHash = await retry(() => tryGetTxByBoc(client, tonWallet.address,  msg.body.hash().toString('hex'), 10), {
       retries: 30,
       delay: 1000,
     })
