@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.7 (2024-10-08)
+
+- Credential Name Update
+
 ## 0.5.6 (2024-09-13)
 
 - Added support for Kaspa and Race
