@@ -5,6 +5,7 @@ set -euo pipefail
 declare -a packages=(
     "@dfns/lib-algorand"
     "@dfns/lib-bitcoinjs"
+    "@dfns/lib-cosmjs"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
     "@dfns/lib-kaspa"
@@ -13,6 +14,7 @@ declare -a packages=(
     "@dfns/lib-solana"
     "@dfns/lib-stellar"
     "@dfns/lib-taquito"
+    "@dfns/lib-ton"
     "@dfns/lib-tron"
     "@dfns/lib-vechain"
     "@dfns/lib-viem"

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-cosmjs",
+        "clean": true,
+        "main": "packages/lib-cosmjs/index.ts",
+        "tsConfig": "packages/lib-cosmjs/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
