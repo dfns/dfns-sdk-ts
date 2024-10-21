@@ -2,6 +2,7 @@ export type CreateDepositBody = {
     kind: "Native";
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    createDestinationAccount?: boolean | undefined;
     externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
@@ -81,6 +82,7 @@ export type CreateDepositResponse = {
         kind: "Native";
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
@@ -172,6 +174,7 @@ export type CreateWithdrawalBody = {
     kind: "Native";
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+    createDestinationAccount?: boolean | undefined;
     externalId?: string | undefined;
     walletId: string;
     otp?: string | undefined;
@@ -251,6 +254,7 @@ export type CreateWithdrawalResponse = {
         kind: "Native";
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
         walletId: string;
         otp?: string | undefined;
@@ -404,7 +408,7 @@ export type ListAssetWithdrawalNetworksResponse = (({
     kind: "Tep74";
     master: string;
 }) & {
-    network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Kaspa" | "KaspaTestnet11" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Origyn" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
+    network: "Algorand" | "AlgorandTestnet" | "ArbitrumOne" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseSepolia" | "Bitcoin" | "BitcoinTestnet3" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Kaspa" | "KaspaTestnet11" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismSepolia" | "Origyn" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "ArbitrumGoerli" | "BaseGoerli" | "Cardano" | "CardanoPreprod" | "Kusama" | "OptimismGoerli" | "Polkadot" | "Westend" | "Tezos" | "TezosGhostnet" | "XrpLedger" | "XrpLedgerTestnet" | "KeyEdDSA" | "KeyECDSA" | "KeyECDSAStark";
     decimals: number;
 })[];
 

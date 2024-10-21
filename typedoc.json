@@ -2,6 +2,7 @@
   "entryPoints": [
     "packages/lib-algorand",
     "packages/lib-bitcoinjs",
+    "packages/lib-cosmjs",
     "packages/lib-ethersjs5",
     "packages/lib-ethersjs6",
     "packages/lib-meshsdk",
@@ -9,6 +10,7 @@
     "packages/lib-solana",
     "packages/lib-stellar",
     "packages/lib-taquito",
+    "packages/lib-ton",
     "packages/lib-tron",
     "packages/lib-vechain",
     "packages/lib-viem",
