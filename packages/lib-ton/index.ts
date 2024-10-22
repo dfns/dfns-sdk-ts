@@ -34,6 +34,8 @@ export class DfnsWallet {
 
   private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
     this.dfnsClient = options.dfnsClient
+
+    this.sign = this.sign.bind(this)
   }
 
   public static async init(options: DfnsWalletOptions) {
@@ -54,34 +56,24 @@ export class DfnsWallet {
     return new DfnsWallet(res, options)
   }
 
-  public get address(): string {
-    return this.metadata.address!
+  public get publicKey(): Buffer {
+    return Buffer.from(this.metadata.signingKey.publicKey, 'hex')
   }
 
-  public get publicKey(): string {
-    return this.metadata.signingKey.publicKey!
-  }
-
-  public async sign(cell: Cell): Promise<Cell> {
+  public async sign(message: Cell): Promise<Buffer> {
     const res = await this.dfnsClient.wallets.generateSignature({
       walletId: this.metadata.id,
       body: {
-        kind: 'Transaction',
-        transaction: `0x${cell.toBoc().toString('hex')}`,
+        kind: 'Message',
+        message: `0x${message.toBoc().toString('hex')}`,
       },
     })
 
     assertSigned(res)
-    if (!res.signedData) {
+    if (!res.signature?.encoded) {
       throw new DfnsError(-1, 'signature missing', res)
     }
 
-    const boc = Cell.fromBoc(hexToBuffer(res.signedData))
-    // This check is already present in the TON sign endpoint
-    if (boc.length != 1) {
-      throw new DfnsError(-1, 'multiple cells in signature', res)
-    }
-
-    return boc[0]
+    return hexToBuffer(res.signature?.encoded)
   }
 }

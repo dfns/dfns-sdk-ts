@@ -2,6 +2,6 @@
   "name": "@dfns/lib-ton",
   "version": "0.4.3",
   "peerDependencies": {
-    "@ton/ton": "13.11.2"
+    "@ton/ton": "^15.0.0"
   }
 }
