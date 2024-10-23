@@ -1,25 +1,30 @@
 # Changelog
 
+## 0.5.8 (2024-10-23)
+
+- Added SDK integration with Cosmos ecosystem, see `@dfns/lib-cosmjs`
+- Reworked `@dfns/lib-ton` message signing
+
 ## 0.5.7 (2024-10-08)
 
-- Credential Name Update
+- Updated `DfnsApiClient` to match the latest API changes
 
 ## 0.5.6 (2024-09-13)
 
-- Added support for Kaspa and Race
+- Added SDK integration with Kaspa, see `@dfns/lib-kaspa`
 
 ## 0.5.5 (2024-07-26)
 
 - Added support for `ed25519` from scalar and private key
-- Added SDK support for ICP and OGY
+- Updated `DfnsApiClient` to match the latest API changes
 
 ## 0.5.4 (2024-07-26)
 
-- Added SDK integration with Ton, see `@dfns/lib-ton`
+- Added SDK integration with TON, see `@dfns/lib-ton`
 
 ## 0.5.3 (2024-07-22)
 
-- Updated `DfnsApiClient` to types to match latest integrations
+- Updated `DfnsApiClient` to match latest integrations
 
 ## 0.5.2 (2024-06-27)
 
