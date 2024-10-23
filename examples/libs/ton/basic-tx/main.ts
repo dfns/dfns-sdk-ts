@@ -2,16 +2,11 @@ import { DfnsWallet } from '@dfns/lib-ton'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import { getHttpEndpoint } from '@orbs-network/ton-access'
-import { Address, SendMode, TonClient, WalletContractV4, beginCell, internal, external, storeMessageRelaxed, storeMessage, loadMessage } from '@ton/ton'
-
+import { internal, SendMode, TonClient, WalletContractV5R1 } from '@ton/ton'
 
 import * as dotenv from 'dotenv'
 
 dotenv.config()
-
-const hexToBuffer = (hex: string): Buffer => {
-  return Buffer.from(hex.replace(/^0x/, ''), 'hex')
-}
 
 const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
@@ -27,122 +22,47 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   return DfnsWallet.init({
-    walletId: walletId,
+    walletId,
     dfnsClient,
   })
 }
 
 async function main() {
-  const senderWallet = await initDfnsWallet(process.env.TON_WALLET_ID!)
-  console.log('ton sender address: %s', senderWallet.address)
+  const wallet = await initDfnsWallet(process.env.TON_WALLET_ID!)
 
   // use orbs to connect TON nodes
   const endpoint = await getHttpEndpoint({
-    network: 'testnet'
+    network: 'testnet',
   })
 
   const client = new TonClient({ endpoint })
+  const contract = client.open(
+    WalletContractV5R1.create({
+      workchain: 0,
+      publicKey: wallet.publicKey,
+    })
+  )
 
-  // instance of your wallet (replace with the right version)
-  const tonWallet = WalletContractV4.create({
-    workchain: 0,
-    publicKey: hexToBuffer(senderWallet.publicKey),
+  console.log('wallet address: ', contract.address.toString({ bounceable: false, testOnly: true }))
+  console.log('current balance: ', await contract.getBalance())
+
+  const seqno = await contract.getSeqno()
+  const message = await contract.createTransfer({
+    seqno,
+    messages: [
+      internal({
+        to: contract.address,
+        value: 1n,
+        bounce: false,
+      }),
+    ],
+    sendMode: SendMode.PAY_GAS_SEPARATELY + SendMode.IGNORE_ERRORS,
+    signer: wallet.sign,
   })
 
-    const opened = client.open(tonWallet)
-    const seqno = await opened.getSeqno()
+  await contract.send(message)
 
-    const signingMessageBuilder = beginCell().storeUint(tonWallet.walletId, 32)
-    if (seqno === 0) {
-      for (let i = 0; i < 32; i++) {
-        signingMessageBuilder.storeBit(1)
-      }
-    } else {
-      signingMessageBuilder.storeUint(Math.floor(Date.now() / 1e3) + 60, 32)
-    }
-
-    signingMessageBuilder.storeUint(seqno, 32)
-    signingMessageBuilder.storeUint(0, 8) // Simple order
-
-    signingMessageBuilder.storeUint(SendMode.PAY_GAS_SEPARATELY, 8)
-
-    const message = internal({
-      value: '1',
-      to: 'EQBfYLuQwjbBd-LAZ6eNC26XmVVxEl86MQPKG981hdTSicL_',
-      body: 'Example transfer body',
-    })
-
-    const body = signingMessageBuilder.storeRef(beginCell().store(storeMessageRelaxed(message))).endCell()
-
-    let init
-    if (opened.init && !(await client.isContractDeployed(Address.parse(senderWallet.address)))) {
-      init = opened.init
-    }
-
-    // Wrap into an external message
-    const externalInMessage = external({
-      to: senderWallet.address,
-      body,
-      init,
-    })
-
-    const cell = beginCell().store(storeMessage(externalInMessage)).endCell()
-
-    const signedCell = await senderWallet.sign(cell)
-    
-    client.sendFile(signedCell.toBoc())
-    console.log('native transfer cell broadcasted')
-    
-    // unfortunately, we can't have the txHash without pulling the chain
-    const msg = loadMessage(signedCell.beginParse())
-
-    const txHash = await retry(() => tryGetTxByBoc(client, tonWallet.address,  msg.body.hash().toString('hex'), 10), {
-      retries: 30,
-      delay: 1000,
-    })
-    
-    console.log(`transaction hash retrieved: ${txHash}`)
-}
-
-const tryGetTxByBoc = async (
-  client: TonClient,
-  address: Address,
-  bocHashHex: string,
-  lookback: number
-): Promise<string> => {
-  const transactions = await client.getTransactions(address, { limit: lookback })
-  for (const tx of transactions) {
-    const inMsg = tx.inMessage
-    if (inMsg?.info.type === 'external-in') {
-      const inBOC = inMsg?.body
-      if (typeof inBOC === 'undefined') {
-        continue
-      }
-
-      const inHash = inMsg.body.hash().toString('hex')
-      if (bocHashHex === inHash) {
-        return tx.hash().toString('hex')
-      }
-    }
-  }
-
-  throw new Error('Transaction not found')
-}
-
-const retry = async <T>(fn: () => Promise<T>, options: { retries: number, delay: number }): Promise<T> => {
-  let lastError: Error | undefined
-  for (let i = 0; i < options.retries; i++) {
-    try {
-      return await fn()
-    } catch (e) {
-      if (e instanceof Error) {
-        lastError = e
-      }
-      await new Promise(resolve => setTimeout(resolve, options.delay))
-    }
-  }
-
-  throw lastError
+  console.log('balance after transfer: ', await contract.getBalance())
 }
 
 main()

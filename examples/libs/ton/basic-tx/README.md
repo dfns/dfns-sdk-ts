@@ -37,14 +37,14 @@ Copy `.env.example` to a new file `.env` and set the following values,
 
 ## Explanation
 
-The program runs on the TON testnet network. To execute the code, you will need a testnet wallet containing some TON. The program is designed to send 1 TON from your wallet to a specific address.
+The program runs on the TON testnet. It uses the [wallet v5 contract](https://docs.ton.org/participate/wallets/contracts#wallet-v5), but you can use any TON wallet contract. To execute the code, you will need to fund the wallet with some testnet tokens.
 
 ```shell
 > ts-node main.ts
 
-ton sender address: EQCX6Es8MH_KGbsHJ7oTDEDqNgR3xnLCHU0H36UP0Ux7G4FM
-native transfer cell broadcasted
-transaction hash retrieved: 168de26e7fbca25cade6801f4b71c5a8e9566f4cef1ddb216df809adfca2c229
+wallet address:  0QAXh03SUULqKi-6875HYA3SPJB5APqX8R0tGynQUEXKKmGg
+current balance:  2000000000n
+balance after transfer:  1994129596n
 ```
 
-This is a [transaction](https://testnet.tonscan.org/address/EQCX6Es8MH_KGbsHJ7oTDEDqNgR3xnLCHU0H36UP0Ux7G4FM) for example.
+This is the transfer [transaction](https://testnet.tonscan.org/tx/jsySLCEPmZpWxyeXGSdGcWhkGKxfSbF-XP1n5omY4nI=).
