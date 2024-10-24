@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-cosmjs",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "peerDependencies": {
     "@cosmjs/crypto": "^0.32.0",
     "@cosmjs/encoding": "^0.32.0",
