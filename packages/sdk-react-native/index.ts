@@ -113,7 +113,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
         clientData: b64StandardToUrlSafe(credential.response.clientDataJSON),
         authenticatorData: b64StandardToUrlSafe(credential.response.authenticatorData),
         signature: b64StandardToUrlSafe(credential.response.signature),
-        userHandle: b64StandardToUrlSafe(credential.response.userHandle),
+        userHandle: toBase64Url(credential.response.userHandle),
       },
     }
   }
@@ -125,7 +125,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
       rp: challenge.rp,
       user: {
         displayName: challenge.user.displayName,
-        id: toBase64Url(challenge.user.id),
+        id: challenge.user.id,
         name: challenge.user.name,
       },
       attestation: challenge.attestation,
