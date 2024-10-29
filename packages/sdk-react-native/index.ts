@@ -9,8 +9,7 @@ import {
 } from '@dfns/sdk'
 import { toBase64Url } from '@dfns/sdk/utils'
 import { Platform } from 'react-native'
-import { Passkey, PasskeyAuthenticationResult } from 'react-native-passkey'
-import { PasskeyAuthenticationRequest, PasskeyRegistrationRequest } from 'react-native-passkey/lib/typescript/Passkey'
+import { Passkey, PasskeyCreateRequest, PasskeyGetRequest, PasskeyGetResult } from 'react-native-passkey'
 
 export const DEFAULT_WAIT_TIMEOUT = 60000
 
@@ -32,7 +31,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
   constructor(private options?: PasskeysOptions) {}
 
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
-    const request: PasskeyAuthenticationRequest = {
+    const request: PasskeyGetRequest = {
       challenge: challenge.challenge,
       allowCredentials: challenge.allowCredentials.webauthn,
       rpId: challenge.rp.id,
@@ -40,7 +39,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
       timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
-    const credential: PasskeyAuthenticationResult = await Passkey.authenticate(request)
+    const credential: PasskeyGetResult = await Passkey.get(request)
 
     return {
       kind: 'Fido2',
@@ -55,7 +54,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
   }
 
   async create(challenge: UserRegistrationChallenge): Promise<Fido2Attestation> {
-    const request: PasskeyRegistrationRequest = {
+    const request: PasskeyCreateRequest = {
       challenge: challenge.challenge,
       pubKeyCredParams: challenge.pubKeyCredParams,
       rp: challenge.rp,
@@ -73,7 +72,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
       timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
-    const result = await Passkey.register(request)
+    const result = await Passkey.create(request)
 
     return {
       credentialKind: 'Fido2',
@@ -93,7 +92,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
   constructor(private options?: PasskeysOptions) {}
 
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
-    const request: PasskeyAuthenticationRequest = {
+    const request: PasskeyGetRequest = {
       challenge: b64UrlSafeToStandard(challenge.challenge),
       allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type }) => ({
         id: b64UrlSafeToStandard(id),
@@ -104,7 +103,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
       timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
-    const credential: PasskeyAuthenticationResult = await Passkey.authenticate(request)
+    const credential: PasskeyGetResult = await Passkey.get(request)
 
     return {
       kind: 'Fido2',
@@ -119,7 +118,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
   }
 
   async create(challenge: UserRegistrationChallenge): Promise<Fido2Attestation> {
-    const request: PasskeyRegistrationRequest = {
+    const request: PasskeyCreateRequest = {
       challenge: b64UrlSafeToStandard(challenge.challenge),
       pubKeyCredParams: challenge.pubKeyCredParams,
       rp: challenge.rp,
@@ -137,7 +136,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
       timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
-    const result = await Passkey.register(request)
+    const result = await Passkey.create(request)
 
     return {
       credentialKind: 'Fido2',
