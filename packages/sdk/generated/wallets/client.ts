@@ -5,7 +5,7 @@ import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
 export class WalletsClient {
-  constructor(private apiOptions: DfnsApiClientOptions) {}
+  constructor(private apiOptions: DfnsApiClientOptions) { }
 
   async broadcastTransaction(request: T.BroadcastTransactionRequest): Promise<T.BroadcastTransactionResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transactions', {

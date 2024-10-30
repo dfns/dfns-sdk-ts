@@ -29,7 +29,8 @@
     "cross-fetch": "3.1.6",
     "elliptic": "6.5.4",
     "react-native-passkey": "^2.1.1",
-    "uuid": "9.0.0"
+    "uuid": "9.0.0",
+    "tiny-secp256k1": "^2.2.1"
   },
   "devDependencies": {
     "@nx/js": "16.8.1",
