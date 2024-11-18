@@ -2,6 +2,7 @@
   "name": "@dfns/lib-bitcoinjs",
   "version": "0.5.9",
   "peerDependencies": {
-    "bitcoinjs-lib": "^6.0.0"
+    "bitcoinjs-lib": "6.1.6",
+    "btc-staking-ts": "^0.2.10"
   }
 }
