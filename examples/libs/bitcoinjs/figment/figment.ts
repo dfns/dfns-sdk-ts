@@ -40,6 +40,12 @@ export class Figment {
 
     const parsedData = schema.safeParse(response.data)
 
+    console.log(response.data)
+
+    if (response.data.error) {
+      console.log(response.data.error.details[0])
+    }
+
     if (!parsedData.success) {
       throw Error('Response from figment could not be parsed')
     }
@@ -59,8 +65,8 @@ export class Figment {
     return this.query('GET', `/babylon/stakes/${stake_id}/unbond_tx?network=${network}`, {}, babylonUnbondTransactionResponseSchema)
   }
 
-  public async babylonBroadcastUnbondTransaction(stake_id: string, network: string, unbonding_tx_hex: string, signed_signature_hex: string): Promise<z.infer<typeof babylonBroadcastUnbondTransactionSchema>> {
-    return this.query('POST', `/babylon/stakes/${stake_id}/unbond_tx`, { network, unbonding_tx_hex, signed_signature_hex }, babylonBroadcastUnbondTransactionSchema)
+  public async babylonBroadcastUnbondTransaction(stake_id: string, network: string, signed_tx: string): Promise<z.infer<typeof babylonBroadcastUnbondTransactionSchema>> {
+    return this.query('POST', `/babylon/stakes/${stake_id}/unbond_tx`, { network, signed_tx }, babylonBroadcastUnbondTransactionSchema)
   }
 }
 
