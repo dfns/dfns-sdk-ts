@@ -3,8 +3,8 @@ export type CreateStakeBody = {
     amount: string;
     walletId: string;
     provider: "Figment";
-    protocol: "Babylon";
-    duration: number;
+    protocol: "Babylon" | "Ethereum";
+    duration?: number | undefined;
 };
 
 export type CreateStakeResponse = {
@@ -13,8 +13,8 @@ export type CreateStakeResponse = {
         provider: "Figment";
         providerStakeId: string;
         walletId: string;
-        protocol: "Babylon";
-        status: "Active" | "Withdrawn";
+        protocol: "Babylon" | "Ethereum";
+        status: "Creating" | "Active" | "Withdrawing" | "Withdrawn";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -25,8 +25,8 @@ export type CreateStakeResponse = {
             amount: string;
             walletId: string;
             provider: "Figment";
-            protocol: "Babylon";
-            duration: number;
+            protocol: "Babylon" | "Ethereum";
+            duration?: number | undefined;
         };
         dateCreated: string;
     };
@@ -45,12 +45,15 @@ export type CreateStakeResponse = {
             amount: string;
             walletId: string;
             provider: "Figment";
-            protocol: "Babylon";
-            duration: number;
-        }) | {
+            protocol: "Babylon" | "Ethereum";
+            duration?: number | undefined;
+        }) | ({
             protocol: "Babylon";
             kind: "StakeWithdrawal";
-        };
+        } | {
+            protocol: "Ethereum";
+            kind: "StakeWithdrawal";
+        });
         dateCreated: string;
     };
 };
@@ -60,6 +63,13 @@ export type CreateStakeRequest = { body: CreateStakeBody }
 export type CreateStakeActionBody = {
     protocol: "Babylon";
     kind: "StakeWithdrawal";
+} | {
+    protocol: "Ethereum";
+    kind: "StakeWithdrawal";
+};
+
+export type CreateStakeActionParams = {
+    stakeId: string;
 };
 
 export type CreateStakeActionResponse = {
@@ -68,8 +78,8 @@ export type CreateStakeActionResponse = {
         provider: "Figment";
         providerStakeId: string;
         walletId: string;
-        protocol: "Babylon";
-        status: "Active" | "Withdrawn";
+        protocol: "Babylon" | "Ethereum";
+        status: "Creating" | "Active" | "Withdrawing" | "Withdrawn";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -80,8 +90,8 @@ export type CreateStakeActionResponse = {
             amount: string;
             walletId: string;
             provider: "Figment";
-            protocol: "Babylon";
-            duration: number;
+            protocol: "Babylon" | "Ethereum";
+            duration?: number | undefined;
         };
         dateCreated: string;
     };
@@ -100,17 +110,31 @@ export type CreateStakeActionResponse = {
             amount: string;
             walletId: string;
             provider: "Figment";
-            protocol: "Babylon";
-            duration: number;
-        }) | {
+            protocol: "Babylon" | "Ethereum";
+            duration?: number | undefined;
+        }) | ({
             protocol: "Babylon";
             kind: "StakeWithdrawal";
-        };
+        } | {
+            protocol: "Ethereum";
+            kind: "StakeWithdrawal";
+        });
         dateCreated: string;
     };
 };
 
-export type CreateStakeActionRequest = { body: CreateStakeActionBody }
+export type CreateStakeActionRequest = CreateStakeActionParams & { body: CreateStakeActionBody }
+
+export type GetStakeRewardsParams = {
+    stakeId: string;
+};
+
+export type GetStakeRewardsResponse = {
+    symbol: string;
+    balance: string;
+} | undefined;
+
+export type GetStakeRewardsRequest = GetStakeRewardsParams
 
 export type ListStakeActionsQuery = {
     limit?: number | undefined;
@@ -133,12 +157,15 @@ export type ListStakeActionsResponse = {
             amount: string;
             walletId: string;
             provider: "Figment";
-            protocol: "Babylon";
-            duration: number;
-        }) | {
+            protocol: "Babylon" | "Ethereum";
+            duration?: number | undefined;
+        }) | ({
             protocol: "Babylon";
             kind: "StakeWithdrawal";
-        };
+        } | {
+            protocol: "Ethereum";
+            kind: "StakeWithdrawal";
+        });
         dateCreated: string;
     }[];
     nextPageToken?: string | undefined;
@@ -157,8 +184,8 @@ export type ListStakesResponse = {
         provider: "Figment";
         providerStakeId: string;
         walletId: string;
-        protocol: "Babylon";
-        status: "Active" | "Withdrawn";
+        protocol: "Babylon" | "Ethereum";
+        status: "Creating" | "Active" | "Withdrawing" | "Withdrawn";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -169,8 +196,8 @@ export type ListStakesResponse = {
             amount: string;
             walletId: string;
             provider: "Figment";
-            protocol: "Babylon";
-            duration: number;
+            protocol: "Babylon" | "Ethereum";
+            duration?: number | undefined;
         };
         dateCreated: string;
     }[];
