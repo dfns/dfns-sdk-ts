@@ -21,9 +21,12 @@ import {
   stringToHex,
   toHex,
 } from 'viem'
-import { IsNarrowable } from 'viem/_types/types/utils'
-import { publicKeyToAddress } from 'viem/accounts'
 
+import { IsNarrowable } from 'viem/_types/types/utils'
+import { publicKeyToAddress, SignAuthorizationParameters, SignAuthorizationReturnType } from 'viem/accounts'
+import { hashAuthorization } from 'viem/experimental'
+
+type To = 'object' | 'bytes' | 'hex'
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
@@ -81,6 +84,7 @@ export class DfnsWallet {
     this.signMessage = this.signMessage.bind(this)
     this.signTransaction = this.signTransaction.bind(this)
     this.signTypedData = this.signTypedData.bind(this)
+    this.experimental_signAuthorization = this.experimental_signAuthorization.bind(this)
   }
 
   public static async init(options: DfnsWalletOptions) {
@@ -123,8 +127,8 @@ export class DfnsWallet {
         typeof message === 'string'
           ? stringToHex(message)
           : message.raw instanceof Uint8Array
-          ? bytesToHex(message.raw)
-          : message.raw
+            ? bytesToHex(message.raw)
+            : message.raw
 
       const res = await this.dfnsClient.wallets.generateSignature({
         walletId: this.metadata.id,
@@ -145,13 +149,13 @@ export class DfnsWallet {
     transaction: transaction,
     args?:
       | {
-          serializer?: serializer | undefined
-        }
+        serializer?: serializer | undefined
+      }
       | undefined
   ): Promise<
     IsNarrowable<TransactionSerialized<GetTransactionType<transaction>>, Hash> extends true
-      ? TransactionSerialized<GetTransactionType<transaction>>
-      : Hash
+    ? TransactionSerialized<GetTransactionType<transaction>>
+    : Hash
   > {
     const serializer = args?.serializer ?? serializeTransaction
 
@@ -178,4 +182,27 @@ export class DfnsWallet {
     const signature = await this.signHash(hash)
     return signatureToHex(signature)
   }
+
+  public async experimental_signAuthorization<to extends To = 'object'>(
+    parameters: SignAuthorizationParameters<to>,
+  ): Promise<SignAuthorizationReturnType<to>> {
+    const {
+      contractAddress,
+      chainId,
+      nonce,
+      to = 'object',
+    } = parameters
+
+    const signature = await this.signHash(hashAuthorization({ contractAddress, chainId, nonce }))
+
+    if (to === 'object')
+      return {
+        contractAddress,
+        chainId,
+        nonce,
+        ...(signature as Signature),
+      } as any
+    return signature as any
+  }
+
 }
