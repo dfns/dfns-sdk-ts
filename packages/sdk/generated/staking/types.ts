@@ -34,7 +34,7 @@ export type CreateStakeResponse = {
         id: string;
         stakeId: string;
         transactionId?: string | undefined;
-        kind: "Stake" | "Unbond" | "StakeWithdrawal";
+        kind: "Stake" | "Unbond" | "Withdraw";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -49,10 +49,10 @@ export type CreateStakeResponse = {
             duration?: number | undefined;
         }) | ({
             protocol: "Babylon";
-            kind: "Unbond" | "StakeWithdrawal";
+            kind: "Unbond" | "Withdraw";
         } | {
             protocol: "Ethereum";
-            kind: "StakeWithdrawal";
+            kind: "Withdraw";
         });
         dateCreated: string;
     };
@@ -62,10 +62,10 @@ export type CreateStakeRequest = { body: CreateStakeBody }
 
 export type CreateStakeActionBody = {
     protocol: "Babylon";
-    kind: "Unbond" | "StakeWithdrawal";
+    kind: "Unbond" | "Withdraw";
 } | {
     protocol: "Ethereum";
-    kind: "StakeWithdrawal";
+    kind: "Withdraw";
 };
 
 export type CreateStakeActionParams = {
@@ -99,7 +99,7 @@ export type CreateStakeActionResponse = {
         id: string;
         stakeId: string;
         transactionId?: string | undefined;
-        kind: "Stake" | "Unbond" | "StakeWithdrawal";
+        kind: "Stake" | "Unbond" | "Withdraw";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -114,10 +114,10 @@ export type CreateStakeActionResponse = {
             duration?: number | undefined;
         }) | ({
             protocol: "Babylon";
-            kind: "Unbond" | "StakeWithdrawal";
+            kind: "Unbond" | "Withdraw";
         } | {
             protocol: "Ethereum";
-            kind: "StakeWithdrawal";
+            kind: "Withdraw";
         });
         dateCreated: string;
     };
@@ -146,7 +146,7 @@ export type ListStakeActionsResponse = {
         id: string;
         stakeId: string;
         transactionId?: string | undefined;
-        kind: "Stake" | "Unbond" | "StakeWithdrawal";
+        kind: "Stake" | "Unbond" | "Withdraw";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -161,10 +161,10 @@ export type ListStakeActionsResponse = {
             duration?: number | undefined;
         }) | ({
             protocol: "Babylon";
-            kind: "Unbond" | "StakeWithdrawal";
+            kind: "Unbond" | "Withdraw";
         } | {
             protocol: "Ethereum";
-            kind: "StakeWithdrawal";
+            kind: "Withdraw";
         });
         dateCreated: string;
     }[];

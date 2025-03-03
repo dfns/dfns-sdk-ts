@@ -759,7 +759,7 @@ export class AuthClient {
       query: {},
     })
 
-    const response = await userActionFetch(path, {
+    const response = await simpleFetch(path, {
       method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,

@@ -1400,43 +1400,15 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
-  async resendRegistrationCodeInit(request: T.ResendRegistrationCodeRequest): Promise<UserActionChallengeResponse> {
+  async resendRegistrationCode(request: T.ResendRegistrationCodeRequest): Promise<T.ResendRegistrationCodeResponse> {
     const path = buildPathAndQuery('/auth/registration/code', {
       path: request ?? {},
       query: {},
     })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async resendRegistrationCodeComplete(
-    request: T.ResendRegistrationCodeRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ResendRegistrationCodeResponse> {
-    const path = buildPathAndQuery('/auth/registration/code', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
 
     const response = await simpleFetch(path, {
       method: 'PUT',
       body: request.body,
-      headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
 
