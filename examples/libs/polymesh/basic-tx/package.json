@@ -1,0 +1,18 @@
+{
+  "name": "polymesh-basic-tx",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "dependencies": {
+    "@dfns/lib-polymesh": "file:../../../packages/lib-polymesh",
+    "@polymeshassociation/polymesh-sdk": "27.3.0",
+    "@polkadot/api": "11.2.1",
+    "@polymeshassociation/signing-manager-types": "3.4.0",
+    "dotenv": "16.1.4"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.1"
+  },
+  "scripts": {
+    "exec": "ts-node main.ts"
+  }
+}

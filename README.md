@@ -209,6 +209,7 @@ Integrations with other blockchain platforms to make Dapp development frictionle
 - [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/)/[v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs)
 - [kaspa](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-kaspa/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/kaspa)
 - [polkadot{.js}](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polkadot/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polkadot)
+- [polymesh](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polymesh/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polymesh)
 - [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/solana)
 - [Stellar sdk](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-stellar/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/stellar)
 - [Tezos Taquito](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-taquito/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/taquito)

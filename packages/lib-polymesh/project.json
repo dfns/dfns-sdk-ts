@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-polymesh",
+        "clean": true,
+        "main": "packages/lib-polymesh/index.ts",
+        "tsConfig": "packages/lib-polymesh/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
