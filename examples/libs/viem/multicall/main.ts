@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { createWalletClient, http, encodeFunctionData, parseEther, parseAbi } from 'viem'
+import { createWalletClient, http, encodeFunctionData, parseEther } from 'viem'
 import { holesky } from 'viem/chains'
 
 import { DfnsApiClient } from '@dfns/sdk'

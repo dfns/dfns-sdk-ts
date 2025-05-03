@@ -1,11 +1,13 @@
 import { DfnsWallet } from '@dfns/lib-viem'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { createEcdsaKernelAccountClient } from '@zerodev/presets/zerodev'
 import dotenv from 'dotenv'
 import { createPublicClient, getContract, http, parseAbi, parseEther } from 'viem'
 import { toAccount } from 'viem/accounts'
 import { sepolia } from 'viem/chains'
+import { signerToEcdsaValidator } from '@zerodev/ecdsa-validator'
+import { createKernelAccount, createKernelAccountClient, createZeroDevPaymasterClient } from '@zerodev/sdk'
+import { getEntryPoint, KERNEL_V3_1 } from '@zerodev/sdk/constants'
 
 dotenv.config()
 
@@ -28,19 +30,42 @@ const initDfnsWallet = (walletId: string) => {
 const main = async () => {
   const ethWallet = await initDfnsWallet(process.env.ETHEREUM_WALLET_ID!)
 
-  const kernelClient = await createEcdsaKernelAccountClient({
+  const entryPoint = getEntryPoint('0.7')
+  const rpcUrl = `https://rpc.zerodev.app/api/v3/${process.env.ZERODEV_PROJECT_ID!}/chain/${sepolia.id}`
+
+  const publicClient = createPublicClient({
+    transport: http(rpcUrl),
     chain: sepolia,
-    projectId: process.env.ZERODEV_PROJECT_ID!,
+  })
+
+  const ecdsaValidator = await signerToEcdsaValidator(publicClient, {
     signer: toAccount(ethWallet),
-    paymaster: 'SPONSOR',
+    entryPoint,
+    kernelVersion: KERNEL_V3_1,
+  })
+
+  const account = await createKernelAccount(publicClient, {
+    plugins: {
+      sudo: ecdsaValidator,
+    },
+    entryPoint,
+    kernelVersion: KERNEL_V3_1,
+  })
+
+  const zerodevPaymaster = createZeroDevPaymasterClient({
+    chain: sepolia,
+    transport: http(rpcUrl),
+  })
+
+  const kernelClient = createKernelAccountClient({
+    account,
+    chain: sepolia,
+    paymaster: zerodevPaymaster,
+    bundlerTransport: http(rpcUrl),
   })
 
   const address = await kernelClient.account.address
   console.log('Smart account address:', address)
-
-  const publicClient = createPublicClient({
-    transport: http(process.env.ETHEREUM_NODE_URL!),
-  })
 
   // an erc20 token on sepolia testnet that anyone can mint
   const token = getContract({

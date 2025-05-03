@@ -68,7 +68,7 @@
     "ethers": "^6.0.0",
     "thor-devkit": "2.0.8",
     "tronweb": "^5.0.0",
-    "viem": "^2.0.0",
+    "viem": "2.23.2",
     "xrpl": "^2.0.0"
   },
   "workspaces": [

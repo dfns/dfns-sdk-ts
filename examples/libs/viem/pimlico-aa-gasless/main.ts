@@ -1,12 +1,13 @@
-import { DfnsWallet } from '@dfns/lib-viem'
+import { DfnsWallet } from '@dfns/lib-viem';
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import dotenv from 'dotenv'
 import { createSmartAccountClient } from 'permissionless'
-import { signerToSimpleSmartAccount } from 'permissionless/accounts'
-import { createPimlicoPaymasterClient } from 'permissionless/clients/pimlico'
+import { toSimpleSmartAccount } from 'permissionless/accounts'
+import { createPimlicoClient } from 'permissionless/clients/pimlico'
 import { createPublicClient, getContract, http, parseAbi, parseEther } from 'viem'
 import { toAccount } from 'viem/accounts'
+import { entryPoint06Address } from "viem/account-abstraction"
 import { sepolia } from 'viem/chains'
 
 dotenv.config()
@@ -32,32 +33,39 @@ const main = async () => {
 
   const publicClient = createPublicClient({
     transport: http(process.env.ETHEREUM_NODE_URL!),
+    chain: sepolia
   })
 
   // global entry point
-  const entryPoint = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
+  const entryPoint = {
+    address: entryPoint06Address,
+    version: '0.6' as const,
+  }
 
   const pimlicoRpc = http(`https://api.pimlico.io/v2/${sepolia.id}/rpc?apikey=${process.env.PIMLICO_API_KEY!}`)
 
-  const simpleAccount = await signerToSimpleSmartAccount(publicClient, {
-    signer: toAccount(ethWallet),
+  const simpleAccount = await toSimpleSmartAccount({
+    client: publicClient,
+    owner: toAccount(ethWallet),
     factoryAddress: '0x9406Cc6185a346906296840746125a0E44976454',
-    entryPoint,
+    entryPoint: entryPoint,
   })
 
-  const paymasterClient = createPimlicoPaymasterClient({
-    entryPoint,
+  const paymasterClient = createPimlicoClient({
+    entryPoint: entryPoint,
     transport: pimlicoRpc,
   })
 
   const smartAccountClient = createSmartAccountClient({
     account: simpleAccount,
-    entryPoint,
     chain: sepolia,
     bundlerTransport: pimlicoRpc,
-    middleware: {
-      sponsorUserOperation: paymasterClient.sponsorUserOperation,
-    },
+    paymaster: paymasterClient,
+    userOperation: {
+      estimateFeesPerGas: async () => {
+        return (await paymasterClient.getUserOperationGasPrice()).fast
+      },
+    }
   })
 
   const address = smartAccountClient.account.address
