@@ -9,6 +9,7 @@ declare -a packages=(
     "@dfns/lib-cosmjs"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
+    "@dfns/lib-iota"
     "@dfns/lib-kaspa"
     "@dfns/lib-meshsdk"
     "@dfns/lib-polkadot"

@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-taquito",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "peerDependencies": {
     "@taquito/taquito": "^17.0.0"
   }

@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-bitcoinjs",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "peerDependencies": {
     "bitcoinjs-lib": "^6.0.0"
   }
