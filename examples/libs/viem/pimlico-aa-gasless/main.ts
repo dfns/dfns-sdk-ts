@@ -1,4 +1,4 @@
-import { DfnsWallet } from '@dfns/lib-viem';
+import { DfnsWallet } from '@dfns/lib-viem'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import dotenv from 'dotenv'
@@ -48,11 +48,11 @@ const main = async () => {
     client: publicClient,
     owner: toAccount(ethWallet),
     factoryAddress: '0x9406Cc6185a346906296840746125a0E44976454',
-    entryPoint: entryPoint,
+    entryPoint
   })
 
   const paymasterClient = createPimlicoClient({
-    entryPoint: entryPoint,
+    entryPoint,
     transport: pimlicoRpc,
   })
 
