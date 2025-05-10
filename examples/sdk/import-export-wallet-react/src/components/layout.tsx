@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation, useRoutes } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 
 export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {

@@ -2,7 +2,6 @@ import { FormEvent, useState } from 'react'
 import { CreateCredentialWithCodeResponse } from '@dfns/sdk/generated/auth'
 
 import useAuth from '../hooks/useAuth'
-import { Layout } from '../components/layout'
 
 export default function Credential(): JSX.Element {
   const { createCred, loading, error } = useAuth()

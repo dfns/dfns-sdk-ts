@@ -1,7 +1,7 @@
 import { DfnsWallet } from '@dfns/lib-stellar'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { Asset, BASE_FEE, Horizon, Memo, Networks, Operation, Transaction, TransactionBuilder } from '@stellar/stellar-sdk'
+import { Asset, BASE_FEE, Horizon, Memo, Networks, Operation, TransactionBuilder } from '@stellar/stellar-sdk'
 
 import * as dotenv from 'dotenv'
 

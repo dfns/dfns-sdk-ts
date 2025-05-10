@@ -1,4 +1,3 @@
-import { WebAuthnSigner } from '@dfns/sdk-browser'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
