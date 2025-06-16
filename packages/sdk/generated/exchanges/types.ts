@@ -4,6 +4,19 @@ export type CreateDepositBody = {
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     createDestinationAccount?: boolean | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -14,6 +27,19 @@ export type CreateDepositBody = {
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -23,6 +49,19 @@ export type CreateDepositBody = {
     tokenId: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -32,6 +71,19 @@ export type CreateDepositBody = {
     contract: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -41,6 +93,19 @@ export type CreateDepositBody = {
     assetId: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -51,6 +116,19 @@ export type CreateDepositBody = {
     assetCode: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -61,6 +139,19 @@ export type CreateDepositBody = {
     mint: string;
     createDestinationAccount?: boolean | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -70,6 +161,19 @@ export type CreateDepositBody = {
     master: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -99,6 +203,19 @@ export type CreateDepositResponse = {
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -109,6 +226,19 @@ export type CreateDepositResponse = {
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -118,6 +248,19 @@ export type CreateDepositResponse = {
         tokenId: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -127,6 +270,19 @@ export type CreateDepositResponse = {
         contract: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -136,6 +292,19 @@ export type CreateDepositResponse = {
         assetId: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -146,6 +315,19 @@ export type CreateDepositResponse = {
         assetCode: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -156,6 +338,19 @@ export type CreateDepositResponse = {
         mint: string;
         createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -165,6 +360,19 @@ export type CreateDepositResponse = {
         master: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -207,6 +415,19 @@ export type CreateWithdrawalBody = {
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     createDestinationAccount?: boolean | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -217,6 +438,19 @@ export type CreateWithdrawalBody = {
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -226,6 +460,19 @@ export type CreateWithdrawalBody = {
     tokenId: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -235,6 +482,19 @@ export type CreateWithdrawalBody = {
     contract: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -244,6 +504,19 @@ export type CreateWithdrawalBody = {
     assetId: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -254,6 +527,19 @@ export type CreateWithdrawalBody = {
     assetCode: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -264,6 +550,19 @@ export type CreateWithdrawalBody = {
     mint: string;
     createDestinationAccount?: boolean | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -273,6 +572,19 @@ export type CreateWithdrawalBody = {
     master: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
     walletId: string;
@@ -302,6 +614,19 @@ export type CreateWithdrawalResponse = {
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -312,6 +637,19 @@ export type CreateWithdrawalResponse = {
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -321,6 +659,19 @@ export type CreateWithdrawalResponse = {
         tokenId: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -330,6 +681,19 @@ export type CreateWithdrawalResponse = {
         contract: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -339,6 +703,19 @@ export type CreateWithdrawalResponse = {
         assetId: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -349,6 +726,19 @@ export type CreateWithdrawalResponse = {
         assetCode: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -359,6 +749,19 @@ export type CreateWithdrawalResponse = {
         mint: string;
         createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;
@@ -368,6 +771,19 @@ export type CreateWithdrawalResponse = {
         master: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
         walletId: string;

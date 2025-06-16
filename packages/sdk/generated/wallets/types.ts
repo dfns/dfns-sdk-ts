@@ -579,6 +579,19 @@ export type GetTransferResponse = {
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -587,6 +600,19 @@ export type GetTransferResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -595,6 +621,19 @@ export type GetTransferResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -603,6 +642,19 @@ export type GetTransferResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -612,6 +664,19 @@ export type GetTransferResponse = {
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -621,6 +686,19 @@ export type GetTransferResponse = {
         tokenId: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -631,6 +709,19 @@ export type GetTransferResponse = {
         amount: string;
         memo?: string | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -640,6 +731,19 @@ export type GetTransferResponse = {
         mint: string;
         createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -649,6 +753,19 @@ export type GetTransferResponse = {
         amount: string;
         memo?: string | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -657,6 +774,19 @@ export type GetTransferResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -665,6 +795,19 @@ export type GetTransferResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -673,6 +816,19 @@ export type GetTransferResponse = {
         to: string;
         tokenId: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     };
@@ -697,194 +853,6 @@ export type GetTransferResponse = {
     approvalId?: string | undefined;
     externalId?: string | undefined;
     feeSponsorId?: string | undefined;
-    travelRule?: ({
-        kind: "Notabene";
-        beneficiaryVASPdid?: string | undefined;
-        beneficiaryProof?: ({
-            type: string;
-            proof: string;
-            attestation: string;
-            address?: string | undefined;
-            status?: string | undefined;
-        } | {
-            type: "screenshot";
-            url: string;
-        } | {
-            type: "self-declaration";
-            did?: string | undefined;
-            address?: string | undefined;
-            attestation: string;
-            confirmed?: boolean | undefined;
-            status?: string | undefined;
-        } | {
-            type: "microtransfer";
-            did?: string | undefined;
-            address?: string | undefined;
-            proof: string;
-            chain?: string | undefined;
-            destination?: string | undefined;
-            amountSubunits?: string | undefined;
-            status?: string | undefined;
-        } | {
-            type: string;
-        }) | undefined;
-        originator: {
-            originatorPersons: {
-                naturalPerson?: {
-                    name: {
-                        nameIdentifier: {
-                            primaryIdentifier: string;
-                            secondaryIdentifier: string;
-                        }[];
-                    };
-                    geographicAddress?: {
-                        addressType?: string | undefined;
-                        department?: string | undefined;
-                        subDepartment?: string | undefined;
-                        streetName?: string | undefined;
-                        buildingNumber?: string | undefined;
-                        buildingName?: string | undefined;
-                        floor?: string | undefined;
-                        postBox?: string | undefined;
-                        room?: string | undefined;
-                        postCode?: string | undefined;
-                        townName?: string | undefined;
-                        townLocationName?: string | undefined;
-                        districtName?: string | undefined;
-                        countrySubDivision?: string | undefined;
-                        addressLine?: string[] | undefined;
-                        country?: string | undefined;
-                    }[] | undefined;
-                    customerIdentification?: string | undefined;
-                    nationalIdentification?: {
-                        nationalIdentifier: string;
-                        nationalIdentifierType: string;
-                        countryOfIssue?: string | undefined;
-                        registrationAuthority?: string | undefined;
-                    } | undefined;
-                    dateAndPlaceOfBirth?: {
-                        dateOfBirth: string;
-                        placeOfBirth: string;
-                    } | undefined;
-                    countryOfResidence?: string | undefined;
-                } | undefined;
-                legalPerson?: {
-                    name: {
-                        nameIdentifier: {
-                            legalPersonName: string;
-                            legalPersonNameIdentifierType: string;
-                        }[];
-                    };
-                    geographicAddress?: {
-                        addressType?: string | undefined;
-                        department?: string | undefined;
-                        subDepartment?: string | undefined;
-                        streetName?: string | undefined;
-                        buildingNumber?: string | undefined;
-                        buildingName?: string | undefined;
-                        floor?: string | undefined;
-                        postBox?: string | undefined;
-                        room?: string | undefined;
-                        postCode?: string | undefined;
-                        townName?: string | undefined;
-                        townLocationName?: string | undefined;
-                        districtName?: string | undefined;
-                        countrySubDivision?: string | undefined;
-                        addressLine?: string[] | undefined;
-                        country?: string | undefined;
-                    }[] | undefined;
-                    customerNumber?: string | undefined;
-                    nationalIdentification?: {
-                        nationalIdentifier: string;
-                        nationalIdentifierType: string;
-                        countryOfIssue?: string | undefined;
-                        registrationAuthority?: string | undefined;
-                    } | undefined;
-                    dateOfRegistration?: string | undefined;
-                    countryOfRegistration?: string | undefined;
-                } | undefined;
-            }[];
-            accountNumber?: string[] | undefined;
-        };
-        beneficiary: {
-            beneficiaryPersons: {
-                naturalPerson?: {
-                    name: {
-                        nameIdentifier: {
-                            primaryIdentifier: string;
-                            secondaryIdentifier: string;
-                        }[];
-                    };
-                    geographicAddress?: {
-                        addressType?: string | undefined;
-                        department?: string | undefined;
-                        subDepartment?: string | undefined;
-                        streetName?: string | undefined;
-                        buildingNumber?: string | undefined;
-                        buildingName?: string | undefined;
-                        floor?: string | undefined;
-                        postBox?: string | undefined;
-                        room?: string | undefined;
-                        postCode?: string | undefined;
-                        townName?: string | undefined;
-                        townLocationName?: string | undefined;
-                        districtName?: string | undefined;
-                        countrySubDivision?: string | undefined;
-                        addressLine?: string[] | undefined;
-                        country?: string | undefined;
-                    }[] | undefined;
-                    customerIdentification?: string | undefined;
-                    nationalIdentification?: {
-                        nationalIdentifier: string;
-                        nationalIdentifierType: string;
-                        countryOfIssue?: string | undefined;
-                        registrationAuthority?: string | undefined;
-                    } | undefined;
-                    dateAndPlaceOfBirth?: {
-                        dateOfBirth: string;
-                        placeOfBirth: string;
-                    } | undefined;
-                    countryOfResidence?: string | undefined;
-                } | undefined;
-                legalPerson?: {
-                    name: {
-                        nameIdentifier: {
-                            legalPersonName: string;
-                            legalPersonNameIdentifierType: string;
-                        }[];
-                    };
-                    geographicAddress?: {
-                        addressType?: string | undefined;
-                        department?: string | undefined;
-                        subDepartment?: string | undefined;
-                        streetName?: string | undefined;
-                        buildingNumber?: string | undefined;
-                        buildingName?: string | undefined;
-                        floor?: string | undefined;
-                        postBox?: string | undefined;
-                        room?: string | undefined;
-                        postCode?: string | undefined;
-                        townName?: string | undefined;
-                        townLocationName?: string | undefined;
-                        districtName?: string | undefined;
-                        countrySubDivision?: string | undefined;
-                        addressLine?: string[] | undefined;
-                        country?: string | undefined;
-                    }[] | undefined;
-                    customerNumber?: string | undefined;
-                    nationalIdentification?: {
-                        nationalIdentifier: string;
-                        nationalIdentifierType: string;
-                        countryOfIssue?: string | undefined;
-                        registrationAuthority?: string | undefined;
-                    } | undefined;
-                    dateOfRegistration?: string | undefined;
-                    countryOfRegistration?: string | undefined;
-                } | undefined;
-            }[];
-            accountNumber?: string[] | undefined;
-        };
-    }) | undefined;
 };
 
 export type GetTransferRequest = GetTransferParams
@@ -1748,6 +1716,19 @@ export type ListTransfersResponse = {
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
             createDestinationAccount?: boolean | undefined;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1756,6 +1737,19 @@ export type ListTransfersResponse = {
             to: string;
             amount: string;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1764,6 +1758,19 @@ export type ListTransfersResponse = {
             to: string;
             amount: string;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1772,6 +1779,19 @@ export type ListTransfersResponse = {
             to: string;
             amount: string;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1781,6 +1801,19 @@ export type ListTransfersResponse = {
             amount: string;
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1790,6 +1823,19 @@ export type ListTransfersResponse = {
             tokenId: string;
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1800,6 +1846,19 @@ export type ListTransfersResponse = {
             amount: string;
             memo?: string | undefined;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1809,6 +1868,19 @@ export type ListTransfersResponse = {
             mint: string;
             createDestinationAccount?: boolean | undefined;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1818,6 +1890,19 @@ export type ListTransfersResponse = {
             amount: string;
             memo?: string | undefined;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1826,6 +1911,19 @@ export type ListTransfersResponse = {
             to: string;
             amount: string;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1834,6 +1932,19 @@ export type ListTransfersResponse = {
             to: string;
             amount: string;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         } | {
@@ -1842,6 +1953,19 @@ export type ListTransfersResponse = {
             to: string;
             tokenId: string;
             externalId?: string | undefined;
+            travelRule?: ({
+                kind: "Notabene";
+                beneficiaryVASPdid: string;
+                beneficiaryProof?: {
+                    [x: string]: any;
+                } | undefined;
+                originator: {
+                    [x: string]: any;
+                };
+                beneficiary: {
+                    [x: string]: any;
+                };
+            }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
             feeSponsorId?: string | undefined;
         };
@@ -1866,194 +1990,6 @@ export type ListTransfersResponse = {
         approvalId?: string | undefined;
         externalId?: string | undefined;
         feeSponsorId?: string | undefined;
-        travelRule?: ({
-            kind: "Notabene";
-            beneficiaryVASPdid?: string | undefined;
-            beneficiaryProof?: ({
-                type: string;
-                proof: string;
-                attestation: string;
-                address?: string | undefined;
-                status?: string | undefined;
-            } | {
-                type: "screenshot";
-                url: string;
-            } | {
-                type: "self-declaration";
-                did?: string | undefined;
-                address?: string | undefined;
-                attestation: string;
-                confirmed?: boolean | undefined;
-                status?: string | undefined;
-            } | {
-                type: "microtransfer";
-                did?: string | undefined;
-                address?: string | undefined;
-                proof: string;
-                chain?: string | undefined;
-                destination?: string | undefined;
-                amountSubunits?: string | undefined;
-                status?: string | undefined;
-            } | {
-                type: string;
-            }) | undefined;
-            originator: {
-                originatorPersons: {
-                    naturalPerson?: {
-                        name: {
-                            nameIdentifier: {
-                                primaryIdentifier: string;
-                                secondaryIdentifier: string;
-                            }[];
-                        };
-                        geographicAddress?: {
-                            addressType?: string | undefined;
-                            department?: string | undefined;
-                            subDepartment?: string | undefined;
-                            streetName?: string | undefined;
-                            buildingNumber?: string | undefined;
-                            buildingName?: string | undefined;
-                            floor?: string | undefined;
-                            postBox?: string | undefined;
-                            room?: string | undefined;
-                            postCode?: string | undefined;
-                            townName?: string | undefined;
-                            townLocationName?: string | undefined;
-                            districtName?: string | undefined;
-                            countrySubDivision?: string | undefined;
-                            addressLine?: string[] | undefined;
-                            country?: string | undefined;
-                        }[] | undefined;
-                        customerIdentification?: string | undefined;
-                        nationalIdentification?: {
-                            nationalIdentifier: string;
-                            nationalIdentifierType: string;
-                            countryOfIssue?: string | undefined;
-                            registrationAuthority?: string | undefined;
-                        } | undefined;
-                        dateAndPlaceOfBirth?: {
-                            dateOfBirth: string;
-                            placeOfBirth: string;
-                        } | undefined;
-                        countryOfResidence?: string | undefined;
-                    } | undefined;
-                    legalPerson?: {
-                        name: {
-                            nameIdentifier: {
-                                legalPersonName: string;
-                                legalPersonNameIdentifierType: string;
-                            }[];
-                        };
-                        geographicAddress?: {
-                            addressType?: string | undefined;
-                            department?: string | undefined;
-                            subDepartment?: string | undefined;
-                            streetName?: string | undefined;
-                            buildingNumber?: string | undefined;
-                            buildingName?: string | undefined;
-                            floor?: string | undefined;
-                            postBox?: string | undefined;
-                            room?: string | undefined;
-                            postCode?: string | undefined;
-                            townName?: string | undefined;
-                            townLocationName?: string | undefined;
-                            districtName?: string | undefined;
-                            countrySubDivision?: string | undefined;
-                            addressLine?: string[] | undefined;
-                            country?: string | undefined;
-                        }[] | undefined;
-                        customerNumber?: string | undefined;
-                        nationalIdentification?: {
-                            nationalIdentifier: string;
-                            nationalIdentifierType: string;
-                            countryOfIssue?: string | undefined;
-                            registrationAuthority?: string | undefined;
-                        } | undefined;
-                        dateOfRegistration?: string | undefined;
-                        countryOfRegistration?: string | undefined;
-                    } | undefined;
-                }[];
-                accountNumber?: string[] | undefined;
-            };
-            beneficiary: {
-                beneficiaryPersons: {
-                    naturalPerson?: {
-                        name: {
-                            nameIdentifier: {
-                                primaryIdentifier: string;
-                                secondaryIdentifier: string;
-                            }[];
-                        };
-                        geographicAddress?: {
-                            addressType?: string | undefined;
-                            department?: string | undefined;
-                            subDepartment?: string | undefined;
-                            streetName?: string | undefined;
-                            buildingNumber?: string | undefined;
-                            buildingName?: string | undefined;
-                            floor?: string | undefined;
-                            postBox?: string | undefined;
-                            room?: string | undefined;
-                            postCode?: string | undefined;
-                            townName?: string | undefined;
-                            townLocationName?: string | undefined;
-                            districtName?: string | undefined;
-                            countrySubDivision?: string | undefined;
-                            addressLine?: string[] | undefined;
-                            country?: string | undefined;
-                        }[] | undefined;
-                        customerIdentification?: string | undefined;
-                        nationalIdentification?: {
-                            nationalIdentifier: string;
-                            nationalIdentifierType: string;
-                            countryOfIssue?: string | undefined;
-                            registrationAuthority?: string | undefined;
-                        } | undefined;
-                        dateAndPlaceOfBirth?: {
-                            dateOfBirth: string;
-                            placeOfBirth: string;
-                        } | undefined;
-                        countryOfResidence?: string | undefined;
-                    } | undefined;
-                    legalPerson?: {
-                        name: {
-                            nameIdentifier: {
-                                legalPersonName: string;
-                                legalPersonNameIdentifierType: string;
-                            }[];
-                        };
-                        geographicAddress?: {
-                            addressType?: string | undefined;
-                            department?: string | undefined;
-                            subDepartment?: string | undefined;
-                            streetName?: string | undefined;
-                            buildingNumber?: string | undefined;
-                            buildingName?: string | undefined;
-                            floor?: string | undefined;
-                            postBox?: string | undefined;
-                            room?: string | undefined;
-                            postCode?: string | undefined;
-                            townName?: string | undefined;
-                            townLocationName?: string | undefined;
-                            districtName?: string | undefined;
-                            countrySubDivision?: string | undefined;
-                            addressLine?: string[] | undefined;
-                            country?: string | undefined;
-                        }[] | undefined;
-                        customerNumber?: string | undefined;
-                        nationalIdentification?: {
-                            nationalIdentifier: string;
-                            nationalIdentifierType: string;
-                            countryOfIssue?: string | undefined;
-                            registrationAuthority?: string | undefined;
-                        } | undefined;
-                        dateOfRegistration?: string | undefined;
-                        countryOfRegistration?: string | undefined;
-                    } | undefined;
-                }[];
-                accountNumber?: string[] | undefined;
-            };
-        }) | undefined;
     }[];
     nextPageToken?: string | undefined;
 };
@@ -2116,6 +2052,19 @@ export type TransferAssetBody = {
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     createDestinationAccount?: boolean | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2124,6 +2073,19 @@ export type TransferAssetBody = {
     to: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2132,6 +2094,19 @@ export type TransferAssetBody = {
     to: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2140,6 +2115,19 @@ export type TransferAssetBody = {
     to: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2149,6 +2137,19 @@ export type TransferAssetBody = {
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2158,6 +2159,19 @@ export type TransferAssetBody = {
     tokenId: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2168,6 +2182,19 @@ export type TransferAssetBody = {
     amount: string;
     memo?: string | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2177,6 +2204,19 @@ export type TransferAssetBody = {
     mint: string;
     createDestinationAccount?: boolean | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2186,6 +2226,19 @@ export type TransferAssetBody = {
     amount: string;
     memo?: string | undefined;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2194,6 +2247,19 @@ export type TransferAssetBody = {
     to: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2202,6 +2268,19 @@ export type TransferAssetBody = {
     to: string;
     amount: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 } | {
@@ -2210,6 +2289,19 @@ export type TransferAssetBody = {
     to: string;
     tokenId: string;
     externalId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid: string;
+        beneficiaryProof?: {
+            [x: string]: any;
+        } | undefined;
+        originator: {
+            [x: string]: any;
+        };
+        beneficiary: {
+            [x: string]: any;
+        };
+    }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
     feeSponsorId?: string | undefined;
 };
@@ -2234,6 +2326,19 @@ export type TransferAssetResponse = {
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2242,6 +2347,19 @@ export type TransferAssetResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2250,6 +2368,19 @@ export type TransferAssetResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2258,6 +2389,19 @@ export type TransferAssetResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2267,6 +2411,19 @@ export type TransferAssetResponse = {
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2276,6 +2433,19 @@ export type TransferAssetResponse = {
         tokenId: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2286,6 +2456,19 @@ export type TransferAssetResponse = {
         amount: string;
         memo?: string | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2295,6 +2478,19 @@ export type TransferAssetResponse = {
         mint: string;
         createDestinationAccount?: boolean | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2304,6 +2500,19 @@ export type TransferAssetResponse = {
         amount: string;
         memo?: string | undefined;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2312,6 +2521,19 @@ export type TransferAssetResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2320,6 +2542,19 @@ export type TransferAssetResponse = {
         to: string;
         amount: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     } | {
@@ -2328,6 +2563,19 @@ export type TransferAssetResponse = {
         to: string;
         tokenId: string;
         externalId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid: string;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
         feeSponsorId?: string | undefined;
     };
@@ -2352,194 +2600,6 @@ export type TransferAssetResponse = {
     approvalId?: string | undefined;
     externalId?: string | undefined;
     feeSponsorId?: string | undefined;
-    travelRule?: ({
-        kind: "Notabene";
-        beneficiaryVASPdid?: string | undefined;
-        beneficiaryProof?: ({
-            type: string;
-            proof: string;
-            attestation: string;
-            address?: string | undefined;
-            status?: string | undefined;
-        } | {
-            type: "screenshot";
-            url: string;
-        } | {
-            type: "self-declaration";
-            did?: string | undefined;
-            address?: string | undefined;
-            attestation: string;
-            confirmed?: boolean | undefined;
-            status?: string | undefined;
-        } | {
-            type: "microtransfer";
-            did?: string | undefined;
-            address?: string | undefined;
-            proof: string;
-            chain?: string | undefined;
-            destination?: string | undefined;
-            amountSubunits?: string | undefined;
-            status?: string | undefined;
-        } | {
-            type: string;
-        }) | undefined;
-        originator: {
-            originatorPersons: {
-                naturalPerson?: {
-                    name: {
-                        nameIdentifier: {
-                            primaryIdentifier: string;
-                            secondaryIdentifier: string;
-                        }[];
-                    };
-                    geographicAddress?: {
-                        addressType?: string | undefined;
-                        department?: string | undefined;
-                        subDepartment?: string | undefined;
-                        streetName?: string | undefined;
-                        buildingNumber?: string | undefined;
-                        buildingName?: string | undefined;
-                        floor?: string | undefined;
-                        postBox?: string | undefined;
-                        room?: string | undefined;
-                        postCode?: string | undefined;
-                        townName?: string | undefined;
-                        townLocationName?: string | undefined;
-                        districtName?: string | undefined;
-                        countrySubDivision?: string | undefined;
-                        addressLine?: string[] | undefined;
-                        country?: string | undefined;
-                    }[] | undefined;
-                    customerIdentification?: string | undefined;
-                    nationalIdentification?: {
-                        nationalIdentifier: string;
-                        nationalIdentifierType: string;
-                        countryOfIssue?: string | undefined;
-                        registrationAuthority?: string | undefined;
-                    } | undefined;
-                    dateAndPlaceOfBirth?: {
-                        dateOfBirth: string;
-                        placeOfBirth: string;
-                    } | undefined;
-                    countryOfResidence?: string | undefined;
-                } | undefined;
-                legalPerson?: {
-                    name: {
-                        nameIdentifier: {
-                            legalPersonName: string;
-                            legalPersonNameIdentifierType: string;
-                        }[];
-                    };
-                    geographicAddress?: {
-                        addressType?: string | undefined;
-                        department?: string | undefined;
-                        subDepartment?: string | undefined;
-                        streetName?: string | undefined;
-                        buildingNumber?: string | undefined;
-                        buildingName?: string | undefined;
-                        floor?: string | undefined;
-                        postBox?: string | undefined;
-                        room?: string | undefined;
-                        postCode?: string | undefined;
-                        townName?: string | undefined;
-                        townLocationName?: string | undefined;
-                        districtName?: string | undefined;
-                        countrySubDivision?: string | undefined;
-                        addressLine?: string[] | undefined;
-                        country?: string | undefined;
-                    }[] | undefined;
-                    customerNumber?: string | undefined;
-                    nationalIdentification?: {
-                        nationalIdentifier: string;
-                        nationalIdentifierType: string;
-                        countryOfIssue?: string | undefined;
-                        registrationAuthority?: string | undefined;
-                    } | undefined;
-                    dateOfRegistration?: string | undefined;
-                    countryOfRegistration?: string | undefined;
-                } | undefined;
-            }[];
-            accountNumber?: string[] | undefined;
-        };
-        beneficiary: {
-            beneficiaryPersons: {
-                naturalPerson?: {
-                    name: {
-                        nameIdentifier: {
-                            primaryIdentifier: string;
-                            secondaryIdentifier: string;
-                        }[];
-                    };
-                    geographicAddress?: {
-                        addressType?: string | undefined;
-                        department?: string | undefined;
-                        subDepartment?: string | undefined;
-                        streetName?: string | undefined;
-                        buildingNumber?: string | undefined;
-                        buildingName?: string | undefined;
-                        floor?: string | undefined;
-                        postBox?: string | undefined;
-                        room?: string | undefined;
-                        postCode?: string | undefined;
-                        townName?: string | undefined;
-                        townLocationName?: string | undefined;
-                        districtName?: string | undefined;
-                        countrySubDivision?: string | undefined;
-                        addressLine?: string[] | undefined;
-                        country?: string | undefined;
-                    }[] | undefined;
-                    customerIdentification?: string | undefined;
-                    nationalIdentification?: {
-                        nationalIdentifier: string;
-                        nationalIdentifierType: string;
-                        countryOfIssue?: string | undefined;
-                        registrationAuthority?: string | undefined;
-                    } | undefined;
-                    dateAndPlaceOfBirth?: {
-                        dateOfBirth: string;
-                        placeOfBirth: string;
-                    } | undefined;
-                    countryOfResidence?: string | undefined;
-                } | undefined;
-                legalPerson?: {
-                    name: {
-                        nameIdentifier: {
-                            legalPersonName: string;
-                            legalPersonNameIdentifierType: string;
-                        }[];
-                    };
-                    geographicAddress?: {
-                        addressType?: string | undefined;
-                        department?: string | undefined;
-                        subDepartment?: string | undefined;
-                        streetName?: string | undefined;
-                        buildingNumber?: string | undefined;
-                        buildingName?: string | undefined;
-                        floor?: string | undefined;
-                        postBox?: string | undefined;
-                        room?: string | undefined;
-                        postCode?: string | undefined;
-                        townName?: string | undefined;
-                        townLocationName?: string | undefined;
-                        districtName?: string | undefined;
-                        countrySubDivision?: string | undefined;
-                        addressLine?: string[] | undefined;
-                        country?: string | undefined;
-                    }[] | undefined;
-                    customerNumber?: string | undefined;
-                    nationalIdentification?: {
-                        nationalIdentifier: string;
-                        nationalIdentifierType: string;
-                        countryOfIssue?: string | undefined;
-                        registrationAuthority?: string | undefined;
-                    } | undefined;
-                    dateOfRegistration?: string | undefined;
-                    countryOfRegistration?: string | undefined;
-                } | undefined;
-            }[];
-            accountNumber?: string[] | undefined;
-        };
-    }) | undefined;
 };
 
 export type TransferAssetRequest = TransferAssetParams & { body: TransferAssetBody }
