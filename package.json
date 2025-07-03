@@ -1,6 +1,6 @@
 {
   "name": "package-based",
-  "version": "0.7.2",
+  "version": "0.7.3-rc",
   "license": "MIT",
   "scripts": {
     "cb:all": "rimraf dist && nx run-many -t=cb",

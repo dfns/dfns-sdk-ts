@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-polkadot",
-  "version": "0.7.2",
+  "version": "0.7.3-rc",
   "peerDependencies": {
     "@polkadot/api": "^11.0.0"
   }
