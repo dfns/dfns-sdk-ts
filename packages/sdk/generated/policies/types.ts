@@ -701,7 +701,7 @@ export type CreateApprovalDecisionResponse = {
             quoteId: string;
             sourceWalletId: string;
             targetWalletId: string;
-            status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed";
+            status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
             quotedSourceAsset: {
                 kind: "Native";
                 amount: string;
@@ -2439,7 +2439,7 @@ export type GetApprovalResponse = {
             quoteId: string;
             sourceWalletId: string;
             targetWalletId: string;
-            status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed";
+            status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
             quotedSourceAsset: {
                 kind: "Native";
                 amount: string;
@@ -4221,7 +4221,7 @@ export type ListApprovalsResponse = {
                 quoteId: string;
                 sourceWalletId: string;
                 targetWalletId: string;
-                status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed";
+                status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
                 quotedSourceAsset: {
                     kind: "Native";
                     amount: string;
