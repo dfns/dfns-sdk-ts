@@ -8,6 +8,7 @@ import { PermissionsClient } from './generated/permissions'
 import { PoliciesClient } from './generated/policies'
 import { SignersClient } from './generated/signers'
 import { StakingClient } from './generated/staking'
+import { SwapsClient } from './generated/swaps'
 import { WalletsClient } from './generated/wallets'
 import { WebhooksClient } from './generated/webhooks'
 import { CredentialSigner } from './signer'
@@ -46,6 +47,10 @@ export class DfnsApiClient {
 
   public get policies() {
     return new PoliciesClient(this.apiOptions)
+  }
+
+  public get swaps() {
+    return new SwapsClient(this.apiOptions)
   }
 
   public get staking() {
