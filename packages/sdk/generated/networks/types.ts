@@ -4,13 +4,25 @@ export type CreateCantonValidatorBody = {
 } | {
     name?: string | undefined;
     kind: "Custom";
-    url: string;
-    oauth2: {
-        domain: string;
-        clientId: string;
-        clientSecret: string;
-        audience: string;
-        tokenPath?: string | undefined;
+    validator: {
+        url: string;
+        oauth2: {
+            domain: string;
+            clientId: string;
+            clientSecret: string;
+            audience: string;
+            tokenPath?: string | undefined;
+        };
+    };
+    ledger: {
+        url: string;
+        oauth2: {
+            domain: string;
+            clientId: string;
+            clientSecret: string;
+            audience: string;
+            tokenPath?: string | undefined;
+        };
     };
 };
 
@@ -46,7 +58,7 @@ export type DeleteCantonValidatorResponse = {
 export type DeleteCantonValidatorRequest = DeleteCantonValidatorParams
 
 export type GetFeesQuery = {
-    network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
 };
 
 export type GetFeesResponse = {
@@ -67,7 +79,7 @@ export type GetFeesResponse = {
     };
 } | {
     kind: "Eip1559";
-    network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
     blockNumber: number;
     slow: {
         maxPriorityFeePerGas: string;
@@ -111,7 +123,7 @@ export type ListCantonValidatorsRequest = ListCantonValidatorsParams & { query?:
 
 export type ReadContractBody = {
     kind: "Evm";
-    network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
     contract: string;
     data: string;
 };
@@ -125,13 +137,25 @@ export type ReadContractRequest = { body: ReadContractBody }
 
 export type UpdateCantonValidatorBody = {
     name?: string | undefined;
-    url?: string | undefined;
-    oauth2?: {
-        domain: string;
-        clientId: string;
-        clientSecret: string;
-        audience: string;
-        tokenPath?: string | undefined;
+    validator?: {
+        url: string;
+        oauth2: {
+            domain: string;
+            clientId: string;
+            clientSecret: string;
+            audience: string;
+            tokenPath?: string | undefined;
+        };
+    } | undefined;
+    ledger?: {
+        url: string;
+        oauth2: {
+            domain: string;
+            clientId: string;
+            clientSecret: string;
+            audience: string;
+            tokenPath?: string | undefined;
+        };
     } | undefined;
 };
 
