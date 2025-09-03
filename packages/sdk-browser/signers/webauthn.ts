@@ -30,84 +30,100 @@ interface WebAuthnSignerConf {
 }
 
 export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
+  private _signal?: AbortSignal
+
   constructor(private conf: WebAuthnSignerConf) {
     if (!this.conf?.relyingParty?.id || !this.conf?.relyingParty?.name) {
       throw new DfnsError(-1, `Relying party ID and name must be specified in the WebauthnSigner initializer`)
     }
   }
 
+  public set signal(signal: AbortSignal) {
+    this._signal = signal
+  }
+
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
-    const response = await navigator.credentials.get({
-      publicKey: {
-        challenge: Buffer.from(challenge.challenge),
-        allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type }) => ({
-          id: fromBase64Url(id),
-          type,
-        })),
-        rpId: this.conf.relyingParty.id,
-        userVerification: challenge.userVerification,
-        timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
-      },
-    })
+    try {
+      const response = await navigator.credentials.get({
+        publicKey: {
+          challenge: Buffer.from(challenge.challenge),
+          allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type }) => ({
+            id: fromBase64Url(id),
+            type,
+          })),
+          rpId: this.conf.relyingParty.id,
+          userVerification: challenge.userVerification,
+          timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
+        },
+        signal: this._signal,
+      })
 
-    if (response === null) {
-      throw new DfnsError(-1, 'Failed to sign with WebAuthn credential')
-    }
+      if (response === null) {
+        throw new DfnsError(-1, 'Failed to sign with WebAuthn credential')
+      }
 
-    const credential = response as PublicKeyCredential
-    const assertion = <AuthenticatorAssertionResponse>credential.response
+      const credential = response as PublicKeyCredential
+      const assertion = <AuthenticatorAssertionResponse>credential.response
 
-    return {
-      kind: 'Fido2',
-      credentialAssertion: {
-        credId: credential.id,
-        clientData: toBase64Url(Buffer.from(assertion.clientDataJSON)),
-        authenticatorData: toBase64Url(Buffer.from(assertion.authenticatorData)),
-        signature: toBase64Url(Buffer.from(assertion.signature)),
-        userHandle: assertion.userHandle ? toBase64Url(Buffer.from(assertion.userHandle)) : undefined,
-      },
+      return {
+        kind: 'Fido2',
+        credentialAssertion: {
+          credId: credential.id,
+          clientData: toBase64Url(Buffer.from(assertion.clientDataJSON)),
+          authenticatorData: toBase64Url(Buffer.from(assertion.authenticatorData)),
+          signature: toBase64Url(Buffer.from(assertion.signature)),
+          userHandle: assertion.userHandle ? toBase64Url(Buffer.from(assertion.userHandle)) : undefined,
+        },
+      }
+    } finally {
+      this._signal = undefined
     }
   }
 
   async create(
     challenge: CreateRegistrationChallengeResponse | (CreateCredentialChallengeResponse & { kind: 'Fido2' })
   ): Promise<Fido2Attestation> {
-    const options: CredentialCreationOptions = {
-      publicKey: {
-        challenge: Buffer.from(challenge.challenge),
-        pubKeyCredParams: challenge.pubKeyCredParams,
-        rp: this.conf.relyingParty,
-        user: {
-          displayName: challenge.user.displayName,
-          id: Buffer.from(challenge.user.id),
-          name: challenge.user.name,
+    try {
+      const options: CredentialCreationOptions = {
+        publicKey: {
+          challenge: Buffer.from(challenge.challenge),
+          pubKeyCredParams: challenge.pubKeyCredParams,
+          rp: this.conf.relyingParty,
+          user: {
+            displayName: challenge.user.displayName,
+            id: Buffer.from(challenge.user.id),
+            name: challenge.user.name,
+          },
+          attestation: challenge.attestation,
+          excludeCredentials: challenge.excludeCredentials.map(({ id, type }) => ({
+            id: fromBase64Url(id),
+            type,
+          })),
+          authenticatorSelection: challenge.authenticatorSelection,
+          timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
         },
-        attestation: challenge.attestation,
-        excludeCredentials: challenge.excludeCredentials.map(({ id, type }) => ({
-          id: fromBase64Url(id),
-          type,
-        })),
-        authenticatorSelection: challenge.authenticatorSelection,
-        timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
-      },
-    }
+        signal: this._signal,
+      }
 
-    const response = await navigator.credentials.create(options)
+      const response = await navigator.credentials.create(options)
 
-    if (response === null) {
-      throw new DfnsError(-1, `Failed to create and sign with WebAuthn credential`)
-    }
+      if (response === null) {
+        throw new DfnsError(-1, `Failed to create and sign with WebAuthn credential`)
+      }
 
-    const credential = response as PublicKeyCredential
-    const attestation = <AuthenticatorAttestationResponse>credential.response
+      const credential = response as PublicKeyCredential
+      const attestation = <AuthenticatorAttestationResponse>credential.response
 
-    return {
-      credentialKind: 'Fido2',
-      credentialInfo: {
-        credId: credential.id,
-        attestationData: toBase64Url(Buffer.from(attestation.attestationObject)),
-        clientData: toBase64Url(Buffer.from(attestation.clientDataJSON)),
-      },
+      return {
+        credentialKind: 'Fido2',
+        credentialInfo: {
+          credId: credential.id,
+          attestationData: toBase64Url(Buffer.from(attestation.attestationObject)),
+          clientData: toBase64Url(Buffer.from(attestation.clientDataJSON)),
+        },
+      }
+    } finally {
+      this._signal = undefined
     }
   }
 }

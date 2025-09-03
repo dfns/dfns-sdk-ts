@@ -20,6 +20,10 @@ export type DfnsApiClientOptions = DfnsBaseApiOptions & {
 export class DfnsApiClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
+  public get signer() {
+    return this.apiOptions.signer
+  }
+
   public get auth() {
     return new AuthClient(this.apiOptions)
   }
