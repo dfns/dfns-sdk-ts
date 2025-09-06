@@ -1,0 +1,37 @@
+{
+  "name": "external-signing-manager-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@dfns/lib-polymesh": "file:../../../../packages/lib-polymesh",
+    "@dfns/sdk": "file:../../../../packages/sdk",
+    "@dfns/sdk-browser": "file:../../../../packages/sdk-browser",
+    "@dfns/sdk-keysigner": "file:../../../../packages/sdk-keysigner",
+    "@polymeshassociation/polymesh-sdk": "^29.0.0",
+    "@polymeshassociation/polymesh-types": "^6.2.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/uuid": "^9",
+    "bignumber.js": "^9.1.2",
+    "encoding": "^0.1.13",
+    "next": "13.5.6",
+    "react": "^18",
+    "react-dom": "^18",
+    "typescript": "^5",
+    "uuid": "^9"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.6",
+    "postcss": "^8",
+    "tailwindcss": "^3"
+  }
+}
