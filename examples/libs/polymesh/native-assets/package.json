@@ -5,8 +5,8 @@
   "dependencies": {
     "@dfns/lib-polymesh": "file:../../../packages/lib-polymesh",
     "@polkadot/api": "11.2.1",
-    "@polymeshassociation/polymesh-sdk": "27.3.0",
-    "@polymeshassociation/signing-manager-types": "3.4.0",
+    "@polymeshassociation/polymesh-sdk": "29.0.0",
+    "@polymeshassociation/signing-manager-types": "3.4.2",
     "dotenv": "16.1.4"
   },
   "devDependencies": {
