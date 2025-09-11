@@ -56,7 +56,7 @@ export class DfnsWallet extends Signer {
     this.sign = this.sign.bind(this)
   }
 
-  async signTransaction(bytes: Uint8Array): Promise<SignatureWithBytes> {
+  override async signTransaction(bytes: Uint8Array): Promise<SignatureWithBytes> {
     const res = await this.dfnsClient.wallets.generateSignature({
       walletId: this.metadata.id,
       body: {

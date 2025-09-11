@@ -27,25 +27,38 @@ const initDfnsWallet = async (walletId: string) => {
 
   return DfnsWallet.init({ walletId, dfnsClient })
 }
-
 const main = async () => {
-  const ethWallet = (await initDfnsWallet(process.env.ETHEREUM_WALLET_ID!)).connect(ethereum)
-  const baseWallet = await initDfnsWallet(process.env.BASE_WALLET_ID!)
+  const signer = new AsymmetricKeySigner({
+    credId: process.env.DFNS_CRED_ID!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
+  })
 
-  const l1Address = await ethWallet.getAddress()
-  console.log(`Ethereum L1 sending address ${l1Address}`)
+  const dfnsClient = new DfnsApiClient({
+    orgId: process.env.DFNS_ORG_ID!,
+    authToken: process.env.DFNS_AUTH_TOKEN!,
+    baseUrl: process.env.DFNS_API_URL!,
+    signer,
+  })
+  const usdc = '0x036cbd53842c5426634e7929541ec2318f3dcf7e'
 
-  const l2Address = await baseWallet.getAddress()
-  console.log(`Base L2 receiving address ${l2Address}`)
+  const erc20 = new Interface(['function transfer(address to, uint amount)'])
+  const data = erc20.encodeFunctionData('transfer', ['0x416a2003ba6e8c2ee25816a8cbd09dca187049b3', 1])
 
-  const minGasLimit = '1000000'
-  const bridgeContract = new Contract(L1_BRIDGE, L1_BRIDGE_ABI, ethWallet)
-  const amountToDeposit = '1'
-  console.log(`Depositing ${amountToDeposit} wei`)
+  const nonce = 3
 
-  const depositTx = await bridgeContract.bridgeETHTo(l2Address, minGasLimit, '0x', { value: amountToDeposit })
-  const depositReceipt = await depositTx.wait()
-  console.log(`Deposit L1 receipt is: ${depositReceipt.hash}`)
+  await parallelize([...Array(1000).keys()], 20).forEach(async (n) => {
+    const res = await dfnsClient.wallets.broadcastTransaction({
+      walletId: process.env.BASE_WALLET_ID!,
+      body: {
+        kind: 'Transaction',
+        transaction: {
+          to: usdc,
+          data,
+          nonce: nonce + n,
+        },
+      },
+    })
+
+    console.log(`broadcasted ${res.id}, status: ${res.status}`)
+  })
 }
-
-main()

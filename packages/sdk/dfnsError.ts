@@ -1,11 +1,11 @@
 export class DfnsError extends Error {
-  name = 'DfnsError'
+  override name = 'DfnsError'
 
   constructor(public httpStatus: number, message: string, public context?: unknown) {
     super(message)
   }
 
-  toString() {
+  override toString() {
     return JSON.stringify(
       {
         httpStatus: this.httpStatus,
