@@ -1,6 +1,6 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
-import { ISigner } from '@meshsdk/core'
+import { DataSignature, ISigner } from '@meshsdk/core'
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -50,7 +50,7 @@ export class DfnsWallet implements ISigner {
     return this.metadata.address!
   }
 
-  async signData() {
+  async signData(payload: string, address?: string): Promise<DataSignature> {
     throw new DfnsError(-1, 'Method not implemented.')
   }
 
