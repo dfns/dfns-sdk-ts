@@ -58,7 +58,7 @@
     "@cosmjs/crypto": "^0.32.0",
     "@cosmjs/encoding": "^0.32.0",
     "@cosmjs/proto-signing": "^0.32.0",
-    "@meshsdk/core": "^1.0.0",
+    "@meshsdk/core": "^1.8.14",
     "@polkadot/api": "^11.0.0",
     "@polymeshassociation/signing-manager-types": "3.4.0",
     "@solana/web3.js": "^1.0.0",
