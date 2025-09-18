@@ -30,7 +30,7 @@ export class SwapsClient {
       query: {},
     })
 
-    const response = await simpleFetch(path, {
+    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,
