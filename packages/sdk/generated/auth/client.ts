@@ -763,6 +763,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async sSOLogin(request: T.SSOLoginRequest): Promise<T.SSOLoginResponse> {
+    const path = buildPathAndQuery('/auth/login/sso', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async updatePersonalAccessToken(request: T.UpdatePersonalAccessTokenRequest): Promise<T.UpdatePersonalAccessTokenResponse> {
     const path = buildPathAndQuery('/auth/pats/:tokenId', {
       path: request ?? {},
@@ -780,6 +795,21 @@ export class AuthClient {
 
   async updateServiceAccount(request: T.UpdateServiceAccountRequest): Promise<T.UpdateServiceAccountResponse> {
     const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'PUT',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async updateUser(request: T.UpdateUserRequest): Promise<T.UpdateUserResponse> {
+    const path = buildPathAndQuery('/auth/users/:userId', {
       path: request ?? {},
       query: {},
     })

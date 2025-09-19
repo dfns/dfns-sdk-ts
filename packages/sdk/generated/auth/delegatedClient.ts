@@ -1273,6 +1273,21 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async sSOLogin(request: T.SSOLoginRequest): Promise<T.SSOLoginResponse> {
+    const path = buildPathAndQuery('/auth/login/sso', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async updatePersonalAccessTokenInit(request: T.UpdatePersonalAccessTokenRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/pats/:tokenId', {
       path: request ?? {},
@@ -1340,6 +1355,49 @@ export class DelegatedAuthClient {
     signedChallenge: SignUserActionChallengeRequest
   ): Promise<T.UpdateServiceAccountResponse> {
     const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'PUT',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async updateUserInit(request: T.UpdateUserRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/users/:userId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'PUT',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async updateUserComplete(
+    request: T.UpdateUserRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.UpdateUserResponse> {
+    const path = buildPathAndQuery('/auth/users/:userId', {
       path: request ?? {},
       query: {},
     })

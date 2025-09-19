@@ -1,4 +1,4 @@
-export type CreateStakeBody = {
+export type CreateStakeBody = ({
     protocol: "Babylon";
     walletId: string;
     provider: "Figment";
@@ -15,6 +15,8 @@ export type CreateStakeBody = {
     validator: string;
     amount: string;
     lockedIotas?: string[] | undefined;
+}) & {
+    externalId?: string | undefined;
 };
 
 export type CreateStakeResponse = ({
@@ -26,7 +28,7 @@ export type CreateStakeResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -43,6 +45,8 @@ export type CreateStakeResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Babylon";
@@ -63,7 +67,7 @@ export type CreateStakeResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -80,6 +84,8 @@ export type CreateStakeResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Iota";
@@ -102,7 +108,7 @@ export type CreateStakeResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -119,6 +125,8 @@ export type CreateStakeResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Ethereum";
@@ -140,7 +148,7 @@ export type CreateStakeResponse = ({
             userId: string;
             tokenId?: string | undefined;
         };
-        requestBody: ({
+        requestBody: (({
             protocol: "Babylon";
             walletId: string;
             provider: "Figment";
@@ -157,7 +165,9 @@ export type CreateStakeResponse = ({
             validator: string;
             amount: string;
             lockedIotas?: string[] | undefined;
-        }) | (({
+        }) & {
+            externalId?: string | undefined;
+        }) | ((({
             protocol: "Iota";
             kind: "Withdraw";
             amount: string;
@@ -175,6 +185,8 @@ export type CreateStakeResponse = ({
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
+        }) & {
+            externalId?: string | undefined;
         });
         dateCreated: string;
     }[];
@@ -182,7 +194,7 @@ export type CreateStakeResponse = ({
 
 export type CreateStakeRequest = { body: CreateStakeBody }
 
-export type CreateStakeActionBody = ({
+export type CreateStakeActionBody = (({
     protocol: "Iota";
     kind: "Withdraw";
     amount: string;
@@ -200,6 +212,8 @@ export type CreateStakeActionBody = ({
 }) | {
     protocol: "Ethereum";
     kind: "Withdraw";
+}) & {
+    externalId?: string | undefined;
 };
 
 export type CreateStakeActionParams = {
@@ -215,7 +229,7 @@ export type CreateStakeActionResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -232,6 +246,8 @@ export type CreateStakeActionResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Babylon";
@@ -252,7 +268,7 @@ export type CreateStakeActionResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -269,6 +285,8 @@ export type CreateStakeActionResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Iota";
@@ -291,7 +309,7 @@ export type CreateStakeActionResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -308,6 +326,8 @@ export type CreateStakeActionResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Ethereum";
@@ -329,7 +349,7 @@ export type CreateStakeActionResponse = ({
             userId: string;
             tokenId?: string | undefined;
         };
-        requestBody: ({
+        requestBody: (({
             protocol: "Babylon";
             walletId: string;
             provider: "Figment";
@@ -346,7 +366,9 @@ export type CreateStakeActionResponse = ({
             validator: string;
             amount: string;
             lockedIotas?: string[] | undefined;
-        }) | (({
+        }) & {
+            externalId?: string | undefined;
+        }) | ((({
             protocol: "Iota";
             kind: "Withdraw";
             amount: string;
@@ -364,6 +386,8 @@ export type CreateStakeActionResponse = ({
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
+        }) & {
+            externalId?: string | undefined;
         });
         dateCreated: string;
     }[];
@@ -400,7 +424,7 @@ export type GetStakesResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -417,6 +441,8 @@ export type GetStakesResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Babylon";
@@ -437,7 +463,7 @@ export type GetStakesResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -454,6 +480,8 @@ export type GetStakesResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Iota";
@@ -476,7 +504,7 @@ export type GetStakesResponse = ({
         userId: string;
         tokenId?: string | undefined;
     };
-    requestBody: {
+    requestBody: ({
         protocol: "Babylon";
         walletId: string;
         provider: "Figment";
@@ -493,6 +521,8 @@ export type GetStakesResponse = ({
         validator: string;
         amount: string;
         lockedIotas?: string[] | undefined;
+    }) & {
+        externalId?: string | undefined;
     };
     dateCreated: string;
     protocol: "Ethereum";
@@ -514,7 +544,7 @@ export type GetStakesResponse = ({
             userId: string;
             tokenId?: string | undefined;
         };
-        requestBody: ({
+        requestBody: (({
             protocol: "Babylon";
             walletId: string;
             provider: "Figment";
@@ -531,7 +561,9 @@ export type GetStakesResponse = ({
             validator: string;
             amount: string;
             lockedIotas?: string[] | undefined;
-        }) | (({
+        }) & {
+            externalId?: string | undefined;
+        }) | ((({
             protocol: "Iota";
             kind: "Withdraw";
             amount: string;
@@ -549,6 +581,8 @@ export type GetStakesResponse = ({
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
+        }) & {
+            externalId?: string | undefined;
         });
         dateCreated: string;
     }[];
@@ -577,7 +611,7 @@ export type ListStakeActionsResponse = {
             userId: string;
             tokenId?: string | undefined;
         };
-        requestBody: ({
+        requestBody: (({
             protocol: "Babylon";
             walletId: string;
             provider: "Figment";
@@ -594,7 +628,9 @@ export type ListStakeActionsResponse = {
             validator: string;
             amount: string;
             lockedIotas?: string[] | undefined;
-        }) | (({
+        }) & {
+            externalId?: string | undefined;
+        }) | ((({
             protocol: "Iota";
             kind: "Withdraw";
             amount: string;
@@ -612,6 +648,8 @@ export type ListStakeActionsResponse = {
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
+        }) & {
+            externalId?: string | undefined;
         });
         dateCreated: string;
     }[];
@@ -635,7 +673,7 @@ export type ListStakesResponse = {
             userId: string;
             tokenId?: string | undefined;
         };
-        requestBody: {
+        requestBody: ({
             protocol: "Babylon";
             walletId: string;
             provider: "Figment";
@@ -652,6 +690,8 @@ export type ListStakesResponse = {
             validator: string;
             amount: string;
             lockedIotas?: string[] | undefined;
+        }) & {
+            externalId?: string | undefined;
         };
         dateCreated: string;
         protocol: "Babylon";
@@ -672,7 +712,7 @@ export type ListStakesResponse = {
             userId: string;
             tokenId?: string | undefined;
         };
-        requestBody: {
+        requestBody: ({
             protocol: "Babylon";
             walletId: string;
             provider: "Figment";
@@ -689,6 +729,8 @@ export type ListStakesResponse = {
             validator: string;
             amount: string;
             lockedIotas?: string[] | undefined;
+        }) & {
+            externalId?: string | undefined;
         };
         dateCreated: string;
         protocol: "Iota";
@@ -711,7 +753,7 @@ export type ListStakesResponse = {
             userId: string;
             tokenId?: string | undefined;
         };
-        requestBody: {
+        requestBody: ({
             protocol: "Babylon";
             walletId: string;
             provider: "Figment";
@@ -728,6 +770,8 @@ export type ListStakesResponse = {
             validator: string;
             amount: string;
             lockedIotas?: string[] | undefined;
+        }) & {
+            externalId?: string | undefined;
         };
         dateCreated: string;
         protocol: "Ethereum";
