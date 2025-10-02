@@ -97,6 +97,7 @@ export type ActivateUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -196,6 +197,7 @@ export type ArchiveUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -958,6 +960,8 @@ export type CreateUserBody = {
     publicKey?: string | undefined;
     /** Value that can be used to correlate the entity with an external system. */
     externalId?: string | undefined;
+    /** If set to true, the user will have to authenticate via SSO */
+    isSSORequired?: boolean;
 };
 
 export type CreateUserResponse = {
@@ -971,6 +975,7 @@ export type CreateUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -1194,6 +1199,7 @@ export type DeactivateUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -1370,6 +1376,7 @@ export type GetUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -1526,6 +1533,7 @@ export type ListUsersResponse = {
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
+        isSSORequired: boolean;
         permissionAssignments: {
             permissionName: string;
             permissionId: string;
@@ -1607,6 +1615,8 @@ export type LoginBody = {
 
 export type LoginResponse = {
     token: string;
+} | {
+    ssoClientId: string;
 };
 
 export type LoginRequest = { body: LoginBody }
@@ -1996,6 +2006,34 @@ export type SocialLoginResponse = {
 
 export type SocialLoginRequest = { body: SocialLoginBody }
 
+export type SSOLoginBody = {
+    /** Authorization code obtained from the IdP */
+    code: string;
+    /** State forwarded by the IdP */
+    state: string;
+};
+
+export type SSOLoginResponse = {
+    token: string;
+};
+
+export type SSOLoginRequest = { body: SSOLoginBody }
+
+export type SSOLoginInitBody = {
+    orgId: string;
+    /** Client Id obtained from the IdP */
+    clientId: string;
+    /** Redirect URI used for the authentication flow */
+    redirectUri: string;
+};
+
+export type SSOLoginInitResponse = {
+    /** The URL to redirect the user to authenticate with the IdP */
+    ssoRedirectUrl: string;
+};
+
+export type SSOLoginInitRequest = { body: SSOLoginInitBody }
+
 export type UpdatePersonalAccessTokenBody = {
     name?: string | undefined;
     externalId?: string | undefined;
@@ -2079,4 +2117,34 @@ export type UpdateServiceAccountResponse = {
 };
 
 export type UpdateServiceAccountRequest = UpdateServiceAccountParams & { body: UpdateServiceAccountBody }
+
+export type UpdateUserBody = {
+    isSSORequired: boolean;
+};
+
+export type UpdateUserParams = {
+    userId: string;
+};
+
+export type UpdateUserResponse = {
+    username: string;
+    name: string;
+    userId: string;
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    credentialUuid: string;
+    orgId: string;
+    permissions?: string[] | undefined;
+    isActive: boolean;
+    isServiceAccount: boolean;
+    isRegistered: boolean;
+    isSSORequired: boolean;
+    permissionAssignments: {
+        permissionName: string;
+        permissionId: string;
+        assignmentId: string;
+        operations?: string[] | undefined;
+    }[];
+};
+
+export type UpdateUserRequest = UpdateUserParams & { body: UpdateUserBody }
 
