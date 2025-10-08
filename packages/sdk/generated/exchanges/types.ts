@@ -995,15 +995,19 @@ export type ListAccountAssetsParams = {
 };
 
 export type ListAccountAssetsQuery = {
+    /** Maximum number of items to return. */
     limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListAccountAssetsResponse = {
+    /** Current page items. */
     items: {
         symbol: string;
         balance: string;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 
@@ -1014,17 +1018,21 @@ export type ListAccountsParams = {
 };
 
 export type ListAccountsQuery = {
+    /** Maximum number of items to return. */
     limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListAccountsResponse = {
+    /** Current page items. */
     items: {
         id: string;
         name?: string | undefined;
         exchangeId: string;
         exchangeName?: string | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 
@@ -1077,17 +1085,21 @@ export type ListAssetWithdrawalNetworksResponse = (({
 export type ListAssetWithdrawalNetworksRequest = ListAssetWithdrawalNetworksParams
 
 export type ListExchangesQuery = {
+    /** Maximum number of items to return. */
     limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListExchangesResponse = {
+    /** Current page items. */
     items: {
         id: string;
         name?: string | undefined;
         kind: "Binance" | "Kraken" | "CoinbaseApp" | "CoinbasePrime";
         dateCreated: string;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 

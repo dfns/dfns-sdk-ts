@@ -1010,13 +1010,21 @@ export type CreateApprovalDecisionResponse = {
             externalId?: string | undefined;
         } | undefined;
         swapRequest?: {
+            /** Swap id. */
             id: string;
+            /** Id of the quote this swap is based on. */
             quoteId: string;
+            /** Optional user-defined reference for this Swap. */
             reference: string | null;
+            /** Id of the Dfns wallet spending the sourceAsset. */
             walletId: string;
+            /** Id of the Dfns wallet receiving the target asset. Currently this value must be the same as the `walletId`. */
             targetWalletId: string;
+            /** Swap status. */
             status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+            /** Swap provider. */
             provider: "UniswapX" | "UniswapClassic";
+            /** The source asset for this swap transaction. */
             quotedSourceAsset: ({
                 kind: "Native";
                 amount: string;
@@ -1033,6 +1041,7 @@ export type CreateApprovalDecisionResponse = {
                     tid?: string | undefined;
                 };
             };
+            /** The target asset for this swap transaction. */
             quotedTargetAsset: ({
                 kind: "Native";
                 amount: string;
@@ -1049,15 +1058,25 @@ export type CreateApprovalDecisionResponse = {
                     tid?: string | undefined;
                 };
             };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you are willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date (must be UTC). When the swap was initiated. */
             dateCreated: string;
+            /** The full request used for initiating this swap. */
             requestBody: {
+                /** Quote to use for this swap. */
                 quoteId: string;
+                /** An optional reference for this Swap. */
                 reference?: string | undefined;
+                /** Provided for this swap. Used for attesting that the swap is being created with the same parameters as the quote. */
                 provider: "UniswapX" | "UniswapClassic";
+                /** Id of the Dfns wallet spending the sourceAsset. Used for attesting that the swap is being created with the same parameters as the quote. */
                 walletId: string;
+                /** Id of the Dfns wallet receiving the target asset. Currently this value must be the same as the `walletId`. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetWalletId?: string | undefined;
+                /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you are willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. Used for attesting that the swap is being created with the same parameters as the quote.  */
                 slippageBps: number;
+                /** The source asset that will be spent on the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 sourceAsset: {
                     kind: "Native";
                     amount: string;
@@ -1066,6 +1085,7 @@ export type CreateApprovalDecisionResponse = {
                     contract: string;
                     amount: string;
                 };
+                /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetAsset: {
                     kind: "Native";
                     amount: string;
@@ -1076,7 +1096,9 @@ export type CreateApprovalDecisionResponse = {
                 };
             } | {};
             requester: {
+                /** User (could be a service account) who requested the quote. */
                 userId: string;
+                /** Service Account token or Personal Access token used when requesting the quote. */
                 tokenId?: string | undefined;
             };
         } | undefined;
@@ -3331,13 +3353,21 @@ export type GetApprovalResponse = {
             externalId?: string | undefined;
         } | undefined;
         swapRequest?: {
+            /** Swap id. */
             id: string;
+            /** Id of the quote this swap is based on. */
             quoteId: string;
+            /** Optional user-defined reference for this Swap. */
             reference: string | null;
+            /** Id of the Dfns wallet spending the sourceAsset. */
             walletId: string;
+            /** Id of the Dfns wallet receiving the target asset. Currently this value must be the same as the `walletId`. */
             targetWalletId: string;
+            /** Swap status. */
             status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+            /** Swap provider. */
             provider: "UniswapX" | "UniswapClassic";
+            /** The source asset for this swap transaction. */
             quotedSourceAsset: ({
                 kind: "Native";
                 amount: string;
@@ -3354,6 +3384,7 @@ export type GetApprovalResponse = {
                     tid?: string | undefined;
                 };
             };
+            /** The target asset for this swap transaction. */
             quotedTargetAsset: ({
                 kind: "Native";
                 amount: string;
@@ -3370,15 +3401,25 @@ export type GetApprovalResponse = {
                     tid?: string | undefined;
                 };
             };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you are willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date (must be UTC). When the swap was initiated. */
             dateCreated: string;
+            /** The full request used for initiating this swap. */
             requestBody: {
+                /** Quote to use for this swap. */
                 quoteId: string;
+                /** An optional reference for this Swap. */
                 reference?: string | undefined;
+                /** Provided for this swap. Used for attesting that the swap is being created with the same parameters as the quote. */
                 provider: "UniswapX" | "UniswapClassic";
+                /** Id of the Dfns wallet spending the sourceAsset. Used for attesting that the swap is being created with the same parameters as the quote. */
                 walletId: string;
+                /** Id of the Dfns wallet receiving the target asset. Currently this value must be the same as the `walletId`. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetWalletId?: string | undefined;
+                /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you are willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. Used for attesting that the swap is being created with the same parameters as the quote.  */
                 slippageBps: number;
+                /** The source asset that will be spent on the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 sourceAsset: {
                     kind: "Native";
                     amount: string;
@@ -3387,6 +3428,7 @@ export type GetApprovalResponse = {
                     contract: string;
                     amount: string;
                 };
+                /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetAsset: {
                     kind: "Native";
                     amount: string;
@@ -3397,7 +3439,9 @@ export type GetApprovalResponse = {
                 };
             } | {};
             requester: {
+                /** User (could be a service account) who requested the quote. */
                 userId: string;
+                /** Service Account token or Personal Access token used when requesting the quote. */
                 tokenId?: string | undefined;
             };
         } | undefined;
@@ -5700,13 +5744,21 @@ export type ListApprovalsResponse = {
                 externalId?: string | undefined;
             } | undefined;
             swapRequest?: {
+                /** Swap id. */
                 id: string;
+                /** Id of the quote this swap is based on. */
                 quoteId: string;
+                /** Optional user-defined reference for this Swap. */
                 reference: string | null;
+                /** Id of the Dfns wallet spending the sourceAsset. */
                 walletId: string;
+                /** Id of the Dfns wallet receiving the target asset. Currently this value must be the same as the `walletId`. */
                 targetWalletId: string;
+                /** Swap status. */
                 status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+                /** Swap provider. */
                 provider: "UniswapX" | "UniswapClassic";
+                /** The source asset for this swap transaction. */
                 quotedSourceAsset: ({
                     kind: "Native";
                     amount: string;
@@ -5723,6 +5775,7 @@ export type ListApprovalsResponse = {
                         tid?: string | undefined;
                     };
                 };
+                /** The target asset for this swap transaction. */
                 quotedTargetAsset: ({
                     kind: "Native";
                     amount: string;
@@ -5739,15 +5792,25 @@ export type ListApprovalsResponse = {
                         tid?: string | undefined;
                     };
                 };
+                /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you are willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
                 slippageBps: number;
+                /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date (must be UTC). When the swap was initiated. */
                 dateCreated: string;
+                /** The full request used for initiating this swap. */
                 requestBody: {
+                    /** Quote to use for this swap. */
                     quoteId: string;
+                    /** An optional reference for this Swap. */
                     reference?: string | undefined;
+                    /** Provided for this swap. Used for attesting that the swap is being created with the same parameters as the quote. */
                     provider: "UniswapX" | "UniswapClassic";
+                    /** Id of the Dfns wallet spending the sourceAsset. Used for attesting that the swap is being created with the same parameters as the quote. */
                     walletId: string;
+                    /** Id of the Dfns wallet receiving the target asset. Currently this value must be the same as the `walletId`. Used for attesting that the swap is being created with the same parameters as the quote. */
                     targetWalletId?: string | undefined;
+                    /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you are willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. Used for attesting that the swap is being created with the same parameters as the quote.  */
                     slippageBps: number;
+                    /** The source asset that will be spent on the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                     sourceAsset: {
                         kind: "Native";
                         amount: string;
@@ -5756,6 +5819,7 @@ export type ListApprovalsResponse = {
                         contract: string;
                         amount: string;
                     };
+                    /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                     targetAsset: {
                         kind: "Native";
                         amount: string;
@@ -5766,7 +5830,9 @@ export type ListApprovalsResponse = {
                     };
                 } | {};
                 requester: {
+                    /** User (could be a service account) who requested the quote. */
                     userId: string;
+                    /** Service Account token or Personal Access token used when requesting the quote. */
                     tokenId?: string | undefined;
                 };
             } | undefined;

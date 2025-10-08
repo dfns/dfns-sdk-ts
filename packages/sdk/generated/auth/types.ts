@@ -17,7 +17,7 @@ export type ActivatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    /** Access token kind */
+    /** Access token kind. */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -43,7 +43,9 @@ export type ActivateServiceAccountResponse = {
     userInfo: {
         username: string;
         name: string;
+        /** User id. */
         userId: string;
+        /** User kind. */
         kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
@@ -63,7 +65,7 @@ export type ActivateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        /** Access token kind */
+        /** Access token kind. */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -89,7 +91,9 @@ export type ActivateUserParams = {
 export type ActivateUserResponse = {
     username: string;
     name: string;
+    /** User id. */
     userId: string;
+    /** User kind. */
     kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
@@ -97,6 +101,7 @@ export type ActivateUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -116,7 +121,7 @@ export type ArchivePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    /** Access token kind */
+    /** Access token kind. */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -142,7 +147,9 @@ export type ArchiveServiceAccountResponse = {
     userInfo: {
         username: string;
         name: string;
+        /** User id. */
         userId: string;
+        /** User kind. */
         kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
@@ -162,7 +169,7 @@ export type ArchiveServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        /** Access token kind */
+        /** Access token kind. */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -188,7 +195,9 @@ export type ArchiveUserParams = {
 export type ArchiveUserResponse = {
     username: string;
     name: string;
+    /** User id. */
     userId: string;
+    /** User kind. */
     kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
@@ -196,6 +205,7 @@ export type ArchiveUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -868,7 +878,9 @@ export type CreateServiceAccountResponse = {
     userInfo: {
         username: string;
         name: string;
+        /** User id. */
         userId: string;
+        /** User kind. */
         kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
@@ -888,7 +900,7 @@ export type CreateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        /** Access token kind */
+        /** Access token kind. */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -958,12 +970,16 @@ export type CreateUserBody = {
     publicKey?: string | undefined;
     /** Value that can be used to correlate the entity with an external system. */
     externalId?: string | undefined;
+    /** If set to true, the user will have to authenticate via SSO */
+    isSSORequired?: boolean;
 };
 
 export type CreateUserResponse = {
     username: string;
     name: string;
+    /** User id. */
     userId: string;
+    /** User kind. */
     kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
@@ -971,6 +987,7 @@ export type CreateUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -1114,7 +1131,7 @@ export type DeactivatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    /** Access token kind */
+    /** Access token kind. */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -1140,7 +1157,9 @@ export type DeactivateServiceAccountResponse = {
     userInfo: {
         username: string;
         name: string;
+        /** User id. */
         userId: string;
+        /** User kind. */
         kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
@@ -1160,7 +1179,7 @@ export type DeactivateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        /** Access token kind */
+        /** Access token kind. */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1186,7 +1205,9 @@ export type DeactivateUserParams = {
 export type DeactivateUserResponse = {
     username: string;
     name: string;
+    /** User id. */
     userId: string;
+    /** User kind. */
     kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
@@ -1194,6 +1215,7 @@ export type DeactivateUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -1237,7 +1259,7 @@ export type GetApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        /** Access token kind */
+        /** Access token kind. */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1290,7 +1312,7 @@ export type GetPersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    /** Access token kind */
+    /** Access token kind. */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -1316,7 +1338,9 @@ export type GetServiceAccountResponse = {
     userInfo: {
         username: string;
         name: string;
+        /** User id. */
         userId: string;
+        /** User kind. */
         kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
@@ -1336,7 +1360,7 @@ export type GetServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        /** Access token kind */
+        /** Access token kind. */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1362,7 +1386,9 @@ export type GetUserParams = {
 export type GetUserResponse = {
     username: string;
     name: string;
+    /** User id. */
     userId: string;
+    /** User kind. */
     kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
@@ -1370,6 +1396,7 @@ export type GetUserResponse = {
     isActive: boolean;
     isServiceAccount: boolean;
     isRegistered: boolean;
+    isSSORequired: boolean;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -1400,7 +1427,7 @@ export type ListApplicationsResponse = {
             dateCreated: string;
             credId: string;
             isActive: boolean;
-            /** Access token kind */
+            /** Access token kind. */
             kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
             linkedUserId: string;
             linkedAppId: string;
@@ -1448,7 +1475,7 @@ export type ListPersonalAccessTokensResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        /** Access token kind */
+        /** Access token kind. */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1470,7 +1497,9 @@ export type ListServiceAccountsResponse = {
         userInfo: {
             username: string;
             name: string;
+            /** User id. */
             userId: string;
+            /** User kind. */
             kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
             credentialUuid: string;
             orgId: string;
@@ -1490,7 +1519,7 @@ export type ListServiceAccountsResponse = {
             dateCreated: string;
             credId: string;
             isActive: boolean;
-            /** Access token kind */
+            /** Access token kind. */
             kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
             linkedUserId: string;
             linkedAppId: string;
@@ -1518,7 +1547,9 @@ export type ListUsersResponse = {
     items: {
         username: string;
         name: string;
+        /** User id. */
         userId: string;
+        /** User kind. */
         kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
@@ -1526,6 +1557,7 @@ export type ListUsersResponse = {
         isActive: boolean;
         isServiceAccount: boolean;
         isRegistered: boolean;
+        isSSORequired: boolean;
         permissionAssignments: {
             permissionName: string;
             permissionId: string;
@@ -1607,6 +1639,8 @@ export type LoginBody = {
 
 export type LoginResponse = {
     token: string;
+} | {
+    ssoClientId: string;
 };
 
 export type LoginRequest = { body: LoginBody }
@@ -1923,6 +1957,7 @@ export type RegisterEndUserResponse = {
         address?: string | undefined;
         /** Details about the key underlying the wallet. */
         signingKey: {
+            /** Key id. */
             id: string;
             /** Key scheme. */
             scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
@@ -1936,6 +1971,8 @@ export type RegisterEndUserResponse = {
         status: "Active" | "Archived";
         /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was created. */
         dateCreated: string;
+        /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was deleted. */
+        dateDeleted?: string | undefined;
         /** Wallet nickname. */
         name?: string | undefined;
         /** Whether the wallet is owned by an end user (non-custodial), or by your organization (custodial). */
@@ -1996,6 +2033,35 @@ export type SocialLoginResponse = {
 
 export type SocialLoginRequest = { body: SocialLoginBody }
 
+export type SSOLoginBody = {
+    /** Authorization code obtained from the IdP */
+    code: string;
+    /** State forwarded by the IdP */
+    state: string;
+};
+
+export type SSOLoginResponse = {
+    token: string;
+};
+
+export type SSOLoginRequest = { body: SSOLoginBody }
+
+export type SSOLoginInitBody = {
+    /** Organization id. */
+    orgId: string;
+    /** Client Id obtained from the IdP */
+    clientId: string;
+    /** Redirect URI used for the authentication flow */
+    redirectUri: string;
+};
+
+export type SSOLoginInitResponse = {
+    /** The URL to redirect the user to authenticate with the IdP */
+    ssoRedirectUrl: string;
+};
+
+export type SSOLoginInitRequest = { body: SSOLoginInitBody }
+
 export type UpdatePersonalAccessTokenBody = {
     name?: string | undefined;
     externalId?: string | undefined;
@@ -2010,7 +2076,7 @@ export type UpdatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    /** Access token kind */
+    /** Access token kind. */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -2041,7 +2107,9 @@ export type UpdateServiceAccountResponse = {
     userInfo: {
         username: string;
         name: string;
+        /** User id. */
         userId: string;
+        /** User kind. */
         kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
@@ -2061,7 +2129,7 @@ export type UpdateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        /** Access token kind */
+        /** Access token kind. */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -2079,4 +2147,36 @@ export type UpdateServiceAccountResponse = {
 };
 
 export type UpdateServiceAccountRequest = UpdateServiceAccountParams & { body: UpdateServiceAccountBody }
+
+export type UpdateUserBody = {
+    isSSORequired: boolean;
+};
+
+export type UpdateUserParams = {
+    userId: string;
+};
+
+export type UpdateUserResponse = {
+    username: string;
+    name: string;
+    /** User id. */
+    userId: string;
+    /** User kind. */
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    credentialUuid: string;
+    orgId: string;
+    permissions?: string[] | undefined;
+    isActive: boolean;
+    isServiceAccount: boolean;
+    isRegistered: boolean;
+    isSSORequired: boolean;
+    permissionAssignments: {
+        permissionName: string;
+        permissionId: string;
+        assignmentId: string;
+        operations?: string[] | undefined;
+    }[];
+};
+
+export type UpdateUserRequest = UpdateUserParams & { body: UpdateUserBody }
 
