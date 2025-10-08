@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-viem",
-  "version": "0.7.13",
+  "version": "0.7.14",
   "peerDependencies": {
     "@noble/curves": "^1.0.0",
     "viem": "^2.0.0"

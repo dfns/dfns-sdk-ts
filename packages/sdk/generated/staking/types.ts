@@ -483,7 +483,9 @@ export type GetStakesParams = {
 };
 
 export type GetStakesQuery = {
+    /** Maximum number of items to return. */
     limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
@@ -699,7 +701,9 @@ export type ListStakeActionsParams = {
 };
 
 export type ListStakeActionsQuery = {
+    /** Maximum number of items to return. */
     limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
@@ -771,7 +775,9 @@ export type ListStakeActionsResponse = {
 export type ListStakeActionsRequest = ListStakeActionsParams & { query?: ListStakeActionsQuery }
 
 export type ListStakesQuery = {
+    /** Maximum number of items to return. */
     limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 

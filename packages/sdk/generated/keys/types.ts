@@ -2,6 +2,7 @@ export type CreateKeyBody = {
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
     curve: "ed25519" | "secp256k1" | "stark";
     name?: string | undefined;
+    storeId?: string | undefined;
     delegateTo?: string | undefined;
     delayDelegation?: boolean | undefined;
 };
@@ -18,6 +19,7 @@ export type CreateKeyResponse = {
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;
+    dateDeleted?: string | undefined;
 };
 
 export type CreateKeyRequest = { body: CreateKeyBody }
@@ -53,6 +55,7 @@ export type DeleteKeyResponse = {
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;
+    dateDeleted?: string | undefined;
 };
 
 export type DeleteKeyRequest = DeleteKeyParams
@@ -483,11 +486,13 @@ export type GetKeyResponse = {
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;
+    dateDeleted?: string | undefined;
     wallets: {
         id: string;
         network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     }[];
     store: {
+        id: string;
         kind: "Hsm" | "Mpc";
         keyId: string;
     };
@@ -721,6 +726,7 @@ export type ImportKeyResponse = {
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;
+    dateDeleted?: string | undefined;
 };
 
 export type ImportKeyRequest = { body: ImportKeyBody }
@@ -744,6 +750,7 @@ export type ListKeysResponse = {
         imported?: boolean | undefined;
         exported?: boolean | undefined;
         dateExported?: string | undefined;
+        dateDeleted?: string | undefined;
     }[];
     nextPageToken?: string | undefined;
 };
@@ -981,6 +988,7 @@ export type UpdateKeyResponse = {
     imported?: boolean | undefined;
     exported?: boolean | undefined;
     dateExported?: string | undefined;
+    dateDeleted?: string | undefined;
 };
 
 export type UpdateKeyRequest = UpdateKeyParams & { body: UpdateKeyBody }

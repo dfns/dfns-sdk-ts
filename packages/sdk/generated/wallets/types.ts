@@ -1,11 +1,16 @@
 export type AcceptOfferParams = {
+    /** Wallet id. */
     walletId: string;
+    /** Offer id. */
     offerId: string;
 };
 
 export type AcceptOfferResponse = {
+    /** Offer id. */
     id: string;
+    /** Organization id. */
     orgId: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
     kind: "Native" | "Aip21" | "Asa" | "Coin" | "Erc20" | "Erc721" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Tep74" | "Trc10" | "Trc20" | "Trc721";
@@ -198,6 +203,8 @@ export type CreateWalletBody = {
         scheme?: ("DH" | "ECDSA" | "EdDSA" | "Schnorr") | undefined;
         /** Use this to specify the new key curve for networks that support multiple key formats. */
         curve?: ("ed25519" | "secp256k1" | "stark") | undefined;
+        /** Use this to specify the key store the key material is saved to. */
+        storeId?: string | undefined;
     } | undefined;
     /** ID of the end user to delegate this wallet to. The wallet will only be usable by the end user. More info [here](https://docs.dfns.co/advanced/delegated-signing). */
     delegateTo?: string | undefined;
@@ -220,6 +227,7 @@ export type CreateWalletResponse = {
     address?: string | undefined;
     /** Details about the key underlying the wallet. */
     signingKey: {
+        /** Key id. */
         id: string;
         /** Key scheme. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
@@ -233,6 +241,8 @@ export type CreateWalletResponse = {
     status: "Active" | "Archived";
     /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was created. */
     dateCreated: string;
+    /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was deleted. */
+    dateDeleted?: string | undefined;
     /** Wallet nickname. */
     name?: string | undefined;
     /** Whether the wallet is owned by an end user (non-custodial), or by your organization (custodial). */
@@ -659,13 +669,18 @@ export type GenerateSignatureResponse = {
 export type GenerateSignatureRequest = GenerateSignatureParams & { body: GenerateSignatureBody }
 
 export type GetOfferParams = {
+    /** Wallet id. */
     walletId: string;
+    /** Offer id. */
     offerId: string;
 };
 
 export type GetOfferResponse = {
+    /** Offer id. */
     id: string;
+    /** Organization id. */
     orgId: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
     kind: "Native" | "Aip21" | "Asa" | "Coin" | "Erc20" | "Erc721" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Tep74" | "Trc10" | "Trc20" | "Trc721";
@@ -1447,6 +1462,7 @@ export type GetWalletResponse = {
     address?: string | undefined;
     /** Details about the key underlying the wallet. */
     signingKey: {
+        /** Key id. */
         id: string;
         /** Key scheme. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
@@ -1460,6 +1476,8 @@ export type GetWalletResponse = {
     status: "Active" | "Archived";
     /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was created. */
     dateCreated: string;
+    /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was deleted. */
+    dateDeleted?: string | undefined;
     /** Wallet nickname. */
     name?: string | undefined;
     /** Whether the wallet is owned by an end user (non-custodial), or by your organization (custodial). */
@@ -2221,6 +2239,7 @@ export type ImportWalletResponse = {
     address?: string | undefined;
     /** Details about the key underlying the wallet. */
     signingKey: {
+        /** Key id. */
         id: string;
         /** Key scheme. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
@@ -2234,6 +2253,8 @@ export type ImportWalletResponse = {
     status: "Active" | "Archived";
     /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was created. */
     dateCreated: string;
+    /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was deleted. */
+    dateDeleted?: string | undefined;
     /** Wallet nickname. */
     name?: string | undefined;
     /** Whether the wallet is owned by an end user (non-custodial), or by your organization (custodial). */
@@ -2249,18 +2270,25 @@ export type ImportWalletResponse = {
 export type ImportWalletRequest = { body: ImportWalletBody }
 
 export type ListOffersParams = {
+    /** Wallet id. */
     walletId: string;
 };
 
 export type ListOffersQuery = {
+    /** Maximum number of items to return. */
     limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListOffersResponse = {
+    /** Current page items. */
     items: {
+        /** Offer id. */
         id: string;
+        /** Organization id. */
         orgId: string;
+        /** Wallet id. */
         walletId: string;
         network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
         kind: "Native" | "Aip21" | "Asa" | "Coin" | "Erc20" | "Erc721" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Tep74" | "Trc10" | "Trc20" | "Trc721";
@@ -2282,6 +2310,7 @@ export type ListOffersResponse = {
         timestamp: string;
         expiresAt?: string | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 
@@ -3106,6 +3135,7 @@ export type ListWalletsResponse = {
         address?: string | undefined;
         /** Details about the key underlying the wallet. */
         signingKey: {
+            /** Key id. */
             id: string;
             /** Key scheme. */
             scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
@@ -3119,6 +3149,8 @@ export type ListWalletsResponse = {
         status: "Active" | "Archived";
         /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was created. */
         dateCreated: string;
+        /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was deleted. */
+        dateDeleted?: string | undefined;
         /** Wallet nickname. */
         name?: string | undefined;
         /** Whether the wallet is owned by an end user (non-custodial), or by your organization (custodial). */
@@ -3136,13 +3168,18 @@ export type ListWalletsResponse = {
 export type ListWalletsRequest = { query?: ListWalletsQuery }
 
 export type RejectOfferParams = {
+    /** Wallet id. */
     walletId: string;
+    /** Offer id. */
     offerId: string;
 };
 
 export type RejectOfferResponse = {
+    /** Offer id. */
     id: string;
+    /** Organization id. */
     orgId: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
     kind: "Native" | "Aip21" | "Asa" | "Coin" | "Erc20" | "Erc721" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Tep74" | "Trc10" | "Trc20" | "Trc721";
@@ -4073,6 +4110,7 @@ export type UpdateWalletResponse = {
     address?: string | undefined;
     /** Details about the key underlying the wallet. */
     signingKey: {
+        /** Key id. */
         id: string;
         /** Key scheme. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
@@ -4086,6 +4124,8 @@ export type UpdateWalletResponse = {
     status: "Active" | "Archived";
     /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was created. */
     dateCreated: string;
+    /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was deleted. */
+    dateDeleted?: string | undefined;
     /** Wallet nickname. */
     name?: string | undefined;
     /** Whether the wallet is owned by an end user (non-custodial), or by your organization (custodial). */

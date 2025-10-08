@@ -50,6 +50,7 @@ export type CreateCantonValidatorParams = {
 
 export type CreateCantonValidatorResponse = {
     id: string;
+    /** Organization id. */
     orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
@@ -67,6 +68,7 @@ export type DeleteCantonValidatorParams = {
 
 export type DeleteCantonValidatorResponse = {
     id: string;
+    /** Organization id. */
     orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
@@ -84,6 +86,7 @@ export type GetCantonValidatorParams = {
 
 export type GetCantonValidatorResponse = {
     id: string;
+    /** Organization id. */
     orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
@@ -140,13 +143,17 @@ export type ListCantonValidatorsParams = {
 };
 
 export type ListCantonValidatorsQuery = {
+    /** Maximum number of items to return. */
     limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListCantonValidatorsResponse = {
+    /** Current page items. */
     items: {
         id: string;
+        /** Organization id. */
         orgId: string;
         network: "Canton" | "CantonDevnet" | "CantonTestnet";
         name?: string | undefined;
@@ -154,6 +161,7 @@ export type ListCantonValidatorsResponse = {
         dateCreated: string;
         partyHint: string;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 
@@ -222,6 +230,7 @@ export type UpdateCantonValidatorParams = {
 
 export type UpdateCantonValidatorResponse = {
     id: string;
+    /** Organization id. */
     orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
