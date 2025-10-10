@@ -1273,7 +1273,7 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
-  async sSOLogin(request: T.SSOLoginRequest): Promise<T.SSOLoginResponse> {
+  async ssoLogin(request: T.SsoLoginRequest): Promise<T.SsoLoginResponse> {
     const path = buildPathAndQuery('/auth/login/sso', {
       path: request ?? {},
       query: {},
@@ -1288,7 +1288,7 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
-  async sSOLoginInit(request: T.SSOLoginInitRequest): Promise<T.SSOLoginInitResponse> {
+  async ssoLoginInit(request: T.SsoLoginInitRequest): Promise<T.SsoLoginInitResponse> {
     const path = buildPathAndQuery('/auth/login/sso/init', {
       path: request ?? {},
       query: {},

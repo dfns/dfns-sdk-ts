@@ -1,0 +1,497 @@
+export type CreateYieldBody = {
+    /** Wallet id. */
+    walletId: string;
+    /** Ofns protocol */
+    protocol: "0fns";
+    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+    externalId?: string | undefined;
+    sourceAsset: {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    };
+    targetAsset: {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    };
+    /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+    slippageBps: number;
+};
+
+export type CreateYieldResponse = {
+    /** Unique identifier for the yield investment. */
+    id: string;
+    /** Wallet id. */
+    walletId: string;
+    /** The DeFi protocol used for yield generation. Currently supports OFNS protocol */
+    protocol: "0fns";
+    /** The total amount currently invested in this yield. */
+    amount: ({
+        kind: "Native";
+        amount: string;
+    } | {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    }) & {
+        metadata: {
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+            name?: string | undefined;
+            symbol?: string | undefined;
+            decimals: number;
+            tid?: string | undefined;
+        };
+    };
+    /** The total interest earned so far in this yield. */
+    rewards: ({
+        kind: "Native";
+        amount: string;
+    } | {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    }) & {
+        metadata: {
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+            name?: string | undefined;
+            symbol?: string | undefined;
+            decimals: number;
+            tid?: string | undefined;
+        };
+    };
+    dateCreated: string;
+} & {
+    actions: {
+        /** Unique identifier for the yield action. */
+        id: string;
+        /** Unique identifier for the yield investment. */
+        yieldId: string;
+        /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+        externalId?: string | undefined;
+        /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+        kind: "Deposit" | "Withdraw";
+        /** Status of the yield action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
+        status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        requester: {
+            /** User (could be a service account) who requested the resource. */
+            userId: string;
+            /** Service Account token or Personal Access token used when requesting the resource. */
+            tokenId?: string | undefined;
+        };
+        /** The full request used for initiating this yield action. */
+        requestBody: {
+            /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+            kind: "Deposit" | "Withdraw";
+            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+            externalId?: string | undefined;
+            sourceAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            targetAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+            slippageBps: number;
+        } | {
+            /** Wallet id. */
+            walletId: string;
+            /** Ofns protocol */
+            protocol: "0fns";
+            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+            externalId?: string | undefined;
+            sourceAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            targetAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+            slippageBps: number;
+        };
+        dateCreated: string;
+    }[];
+};
+
+export type CreateYieldRequest = { body: CreateYieldBody }
+
+export type CreateYieldActionBody = {
+    /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+    kind: "Deposit" | "Withdraw";
+    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+    externalId?: string | undefined;
+    sourceAsset: {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    };
+    targetAsset: {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    };
+    /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+    slippageBps: number;
+};
+
+export type CreateYieldActionParams = {
+    /** Unique identifier for the yield investment. */
+    yieldId: string;
+};
+
+export type CreateYieldActionResponse = {
+    /** Unique identifier for the yield investment. */
+    id: string;
+    /** Wallet id. */
+    walletId: string;
+    /** The DeFi protocol used for yield generation. Currently supports OFNS protocol */
+    protocol: "0fns";
+    /** The total amount currently invested in this yield. */
+    amount: ({
+        kind: "Native";
+        amount: string;
+    } | {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    }) & {
+        metadata: {
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+            name?: string | undefined;
+            symbol?: string | undefined;
+            decimals: number;
+            tid?: string | undefined;
+        };
+    };
+    /** The total interest earned so far in this yield. */
+    rewards: ({
+        kind: "Native";
+        amount: string;
+    } | {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    }) & {
+        metadata: {
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+            name?: string | undefined;
+            symbol?: string | undefined;
+            decimals: number;
+            tid?: string | undefined;
+        };
+    };
+    dateCreated: string;
+} & {
+    actions: {
+        /** Unique identifier for the yield action. */
+        id: string;
+        /** Unique identifier for the yield investment. */
+        yieldId: string;
+        /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+        externalId?: string | undefined;
+        /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+        kind: "Deposit" | "Withdraw";
+        /** Status of the yield action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
+        status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        requester: {
+            /** User (could be a service account) who requested the resource. */
+            userId: string;
+            /** Service Account token or Personal Access token used when requesting the resource. */
+            tokenId?: string | undefined;
+        };
+        /** The full request used for initiating this yield action. */
+        requestBody: {
+            /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+            kind: "Deposit" | "Withdraw";
+            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+            externalId?: string | undefined;
+            sourceAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            targetAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+            slippageBps: number;
+        } | {
+            /** Wallet id. */
+            walletId: string;
+            /** Ofns protocol */
+            protocol: "0fns";
+            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+            externalId?: string | undefined;
+            sourceAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            targetAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+            slippageBps: number;
+        };
+        dateCreated: string;
+    }[];
+};
+
+export type CreateYieldActionRequest = CreateYieldActionParams & { body: CreateYieldActionBody }
+
+export type GetYieldParams = {
+    /** Unique identifier for the yield investment. */
+    yieldId: string;
+};
+
+export type GetYieldResponse = {
+    /** Unique identifier for the yield investment. */
+    id: string;
+    /** Wallet id. */
+    walletId: string;
+    /** The DeFi protocol used for yield generation. Currently supports OFNS protocol */
+    protocol: "0fns";
+    /** The total amount currently invested in this yield. */
+    amount: ({
+        kind: "Native";
+        amount: string;
+    } | {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    }) & {
+        metadata: {
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+            name?: string | undefined;
+            symbol?: string | undefined;
+            decimals: number;
+            tid?: string | undefined;
+        };
+    };
+    /** The total interest earned so far in this yield. */
+    rewards: ({
+        kind: "Native";
+        amount: string;
+    } | {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    }) & {
+        metadata: {
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+            name?: string | undefined;
+            symbol?: string | undefined;
+            decimals: number;
+            tid?: string | undefined;
+        };
+    };
+    dateCreated: string;
+} & {
+    actions: {
+        /** Unique identifier for the yield action. */
+        id: string;
+        /** Unique identifier for the yield investment. */
+        yieldId: string;
+        /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+        externalId?: string | undefined;
+        /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+        kind: "Deposit" | "Withdraw";
+        /** Status of the yield action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
+        status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        requester: {
+            /** User (could be a service account) who requested the resource. */
+            userId: string;
+            /** Service Account token or Personal Access token used when requesting the resource. */
+            tokenId?: string | undefined;
+        };
+        /** The full request used for initiating this yield action. */
+        requestBody: {
+            /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+            kind: "Deposit" | "Withdraw";
+            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+            externalId?: string | undefined;
+            sourceAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            targetAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+            slippageBps: number;
+        } | {
+            /** Wallet id. */
+            walletId: string;
+            /** Ofns protocol */
+            protocol: "0fns";
+            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+            externalId?: string | undefined;
+            sourceAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            targetAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+            slippageBps: number;
+        };
+        dateCreated: string;
+    }[];
+};
+
+export type GetYieldRequest = GetYieldParams
+
+export type ListYieldActionsParams = {
+    /** Unique identifier for the yield investment. */
+    yieldId: string;
+};
+
+export type ListYieldActionsQuery = {
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
+    paginationToken?: string | undefined;
+};
+
+export type ListYieldActionsResponse = {
+    /** Current page items. */
+    items: {
+        /** Unique identifier for the yield action. */
+        id: string;
+        /** Unique identifier for the yield investment. */
+        yieldId: string;
+        /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+        externalId?: string | undefined;
+        /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+        kind: "Deposit" | "Withdraw";
+        /** Status of the yield action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
+        status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        requester: {
+            /** User (could be a service account) who requested the resource. */
+            userId: string;
+            /** Service Account token or Personal Access token used when requesting the resource. */
+            tokenId?: string | undefined;
+        };
+        /** The full request used for initiating this yield action. */
+        requestBody: {
+            /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+            kind: "Deposit" | "Withdraw";
+            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+            externalId?: string | undefined;
+            sourceAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            targetAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+            slippageBps: number;
+        } | {
+            /** Wallet id. */
+            walletId: string;
+            /** Ofns protocol */
+            protocol: "0fns";
+            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+            externalId?: string | undefined;
+            sourceAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            targetAsset: {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
+            slippageBps: number;
+        };
+        dateCreated: string;
+    }[];
+    /** token to use as `paginationToken` to request the next page. */
+    nextPageToken?: string | undefined;
+};
+
+export type ListYieldActionsRequest = ListYieldActionsParams & { query?: ListYieldActionsQuery }
+
+export type ListYieldsQuery = {
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
+    paginationToken?: string | undefined;
+};
+
+export type ListYieldsResponse = {
+    /** Current page items. */
+    items: {
+        /** Unique identifier for the yield investment. */
+        id: string;
+        /** Wallet id. */
+        walletId: string;
+        /** The DeFi protocol used for yield generation. Currently supports OFNS protocol */
+        protocol: "0fns";
+        /** The total amount currently invested in this yield. */
+        amount: ({
+            kind: "Native";
+            amount: string;
+        } | {
+            kind: "Erc20";
+            contract: string;
+            amount: string;
+        }) & {
+            metadata: {
+                network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                name?: string | undefined;
+                symbol?: string | undefined;
+                decimals: number;
+                tid?: string | undefined;
+            };
+        };
+        /** The total interest earned so far in this yield. */
+        rewards: ({
+            kind: "Native";
+            amount: string;
+        } | {
+            kind: "Erc20";
+            contract: string;
+            amount: string;
+        }) & {
+            metadata: {
+                network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                name?: string | undefined;
+                symbol?: string | undefined;
+                decimals: number;
+                tid?: string | undefined;
+            };
+        };
+        dateCreated: string;
+    }[];
+    /** token to use as `paginationToken` to request the next page. */
+    nextPageToken?: string | undefined;
+};
+
+export type ListYieldsRequest = { query?: ListYieldsQuery }
+
