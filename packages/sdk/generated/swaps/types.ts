@@ -118,9 +118,9 @@ export type CreateSwapResponse = {
         };
     } | {};
     requester: {
-        /** User (could be a service account) who requested the quote. */
+        /** User (could be a service account) who requested the resource. */
         userId: string;
-        /** Service Account token or Personal Access token used when requesting the quote. */
+        /** Service Account token or Personal Access token used when requesting the resource. */
         tokenId?: string | undefined;
     };
 };
@@ -330,9 +330,9 @@ export type GetSwapResponse = {
         };
     } | {};
     requester: {
-        /** User (could be a service account) who requested the quote. */
+        /** User (could be a service account) who requested the resource. */
         userId: string;
-        /** Service Account token or Personal Access token used when requesting the quote. */
+        /** Service Account token or Personal Access token used when requesting the resource. */
         tokenId?: string | undefined;
     };
 };
@@ -524,9 +524,9 @@ export type ListSwapsResponse = {
             };
         } | {};
         requester: {
-            /** User (could be a service account) who requested the quote. */
+            /** User (could be a service account) who requested the resource. */
             userId: string;
-            /** Service Account token or Personal Access token used when requesting the quote. */
+            /** Service Account token or Personal Access token used when requesting the resource. */
             tokenId?: string | undefined;
         };
     }[];

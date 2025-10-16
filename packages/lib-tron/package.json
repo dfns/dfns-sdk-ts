@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-tron",
-  "version": "0.7.14",
+  "version": "0.7.15",
   "peerDependencies": {
     "tronweb": "^5.0.0"
   }
