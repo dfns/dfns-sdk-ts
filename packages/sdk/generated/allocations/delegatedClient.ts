@@ -4,11 +4,11 @@ import { simpleFetch } from '../../utils/fetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
-export class DelegatedYieldsClient {
+export class DelegatedAllocationsClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
-  async createYieldInit(request: T.CreateYieldRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/yields', {
+  async createAllocationInit(request: T.CreateAllocationRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/allocations', {
       path: request ?? {},
       query: {},
     })
@@ -26,11 +26,11 @@ export class DelegatedYieldsClient {
     return challenge
   }
 
-  async createYieldComplete(
-    request: T.CreateYieldRequest,
+  async createAllocationComplete(
+    request: T.CreateAllocationRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.CreateYieldResponse> {
-    const path = buildPathAndQuery('/yields', {
+  ): Promise<T.CreateAllocationResponse> {
+    const path = buildPathAndQuery('/allocations', {
       path: request ?? {},
       query: {},
     })
@@ -50,8 +50,8 @@ export class DelegatedYieldsClient {
     return response.json()
   }
 
-  async createYieldActionInit(request: T.CreateYieldActionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/yields/:yieldId/actions', {
+  async createAllocationActionInit(request: T.CreateAllocationActionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/allocations/:allocationId/actions', {
       path: request ?? {},
       query: {},
     })
@@ -69,11 +69,11 @@ export class DelegatedYieldsClient {
     return challenge
   }
 
-  async createYieldActionComplete(
-    request: T.CreateYieldActionRequest,
+  async createAllocationActionComplete(
+    request: T.CreateAllocationActionRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.CreateYieldActionResponse> {
-    const path = buildPathAndQuery('/yields/:yieldId/actions', {
+  ): Promise<T.CreateAllocationActionResponse> {
+    const path = buildPathAndQuery('/allocations/:allocationId/actions', {
       path: request ?? {},
       query: {},
     })
@@ -93,8 +93,8 @@ export class DelegatedYieldsClient {
     return response.json()
   }
 
-  async getYield(request: T.GetYieldRequest): Promise<T.GetYieldResponse> {
-    const path = buildPathAndQuery('/yields/:yieldId', {
+  async getAllocation(request: T.GetAllocationRequest): Promise<T.GetAllocationResponse> {
+    const path = buildPathAndQuery('/allocations/:allocationId', {
       path: request ?? {},
       query: {},
     })
@@ -107,8 +107,8 @@ export class DelegatedYieldsClient {
     return response.json()
   }
 
-  async listYieldActions(request: T.ListYieldActionsRequest): Promise<T.ListYieldActionsResponse> {
-    const path = buildPathAndQuery('/yields/:yieldId/actions', {
+  async listAllocationActions(request: T.ListAllocationActionsRequest): Promise<T.ListAllocationActionsResponse> {
+    const path = buildPathAndQuery('/allocations/:allocationId/actions', {
       path: request ?? {},
       query: request.query ?? {},
     })
@@ -121,8 +121,8 @@ export class DelegatedYieldsClient {
     return response.json()
   }
 
-  async listYields(request?: T.ListYieldsRequest): Promise<T.ListYieldsResponse> {
-    const path = buildPathAndQuery('/yields', {
+  async listAllocations(request?: T.ListAllocationsRequest): Promise<T.ListAllocationsResponse> {
+    const path = buildPathAndQuery('/allocations', {
       path: request ?? {},
       query: request?.query ?? {},
     })

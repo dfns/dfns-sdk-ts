@@ -2,6 +2,7 @@ export type CreateKeyBody = {
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
     curve: "ed25519" | "secp256k1" | "stark";
     name?: string | undefined;
+    masterKey?: boolean | undefined;
     storeId?: string | undefined;
     delegateTo?: string | undefined;
     delayDelegation?: boolean | undefined;
@@ -12,6 +13,7 @@ export type CreateKeyResponse = {
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
     curve: "ed25519" | "secp256k1" | "stark";
     publicKey: string;
+    masterKey?: boolean | undefined;
     name?: string | undefined;
     status: "Active" | "Archived";
     custodial: boolean;
@@ -48,6 +50,7 @@ export type DeleteKeyResponse = {
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
     curve: "ed25519" | "secp256k1" | "stark";
     publicKey: string;
+    masterKey?: boolean | undefined;
     name?: string | undefined;
     status: "Active" | "Archived";
     custodial: boolean;
@@ -78,7 +81,7 @@ export type DeriveKeyRequest = DeriveKeyParams & { body: DeriveKeyBody }
 export type ExportKeyBody = {
     encryptionKey: string;
     supportedSchemes: {
-        protocol: "CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23";
+        protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
         curve: "ed25519" | "secp256k1" | "stark";
     }[];
 };
@@ -89,7 +92,7 @@ export type ExportKeyParams = {
 
 export type ExportKeyResponse = {
     publicKey: string;
-    protocol: "CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23";
+    protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
     curve: "ed25519" | "secp256k1" | "stark";
     /** The TSS threshold of the wallet private signing key shares */
     minSigners: number;
@@ -479,6 +482,7 @@ export type GetKeyResponse = {
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
     curve: "ed25519" | "secp256k1" | "stark";
     publicKey: string;
+    masterKey?: boolean | undefined;
     name?: string | undefined;
     status: "Active" | "Archived";
     custodial: boolean;
@@ -719,6 +723,7 @@ export type ImportKeyResponse = {
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
     curve: "ed25519" | "secp256k1" | "stark";
     publicKey: string;
+    masterKey?: boolean | undefined;
     name?: string | undefined;
     status: "Active" | "Archived";
     custodial: boolean;
@@ -743,6 +748,7 @@ export type ListKeysResponse = {
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
         curve: "ed25519" | "secp256k1" | "stark";
         publicKey: string;
+        masterKey?: boolean | undefined;
         name?: string | undefined;
         status: "Active" | "Archived";
         custodial: boolean;
@@ -981,6 +987,7 @@ export type UpdateKeyResponse = {
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
     curve: "ed25519" | "secp256k1" | "stark";
     publicKey: string;
+    masterKey?: boolean | undefined;
     name?: string | undefined;
     status: "Active" | "Archived";
     custodial: boolean;

@@ -797,13 +797,13 @@ export type CreateApprovalDecisionResponse = {
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
-                kind: "SettleOffer";
-                txHash: string;
-                decision: "Accept" | "Reject";
+                kind: "TransferPreapproval";
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
-                kind: "TransferPreapproval";
+                kind: "SettleOffer";
+                txHash: string;
+                decision: "Accept" | "Reject";
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             };
@@ -3144,13 +3144,13 @@ export type GetApprovalResponse = {
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
-                kind: "SettleOffer";
-                txHash: string;
-                decision: "Accept" | "Reject";
+                kind: "TransferPreapproval";
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
-                kind: "TransferPreapproval";
+                kind: "SettleOffer";
+                txHash: string;
+                decision: "Accept" | "Reject";
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             };
@@ -5539,13 +5539,13 @@ export type ListApprovalsResponse = {
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
                 } | {
-                    kind: "SettleOffer";
-                    txHash: string;
-                    decision: "Accept" | "Reject";
+                    kind: "TransferPreapproval";
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
                 } | {
-                    kind: "TransferPreapproval";
+                    kind: "SettleOffer";
+                    txHash: string;
+                    decision: "Accept" | "Reject";
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
                 };

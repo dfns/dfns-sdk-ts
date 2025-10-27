@@ -1,4 +1,4 @@
-export type CreateYieldBody = {
+export type CreateAllocationBody = {
     /** Wallet id. */
     walletId: string;
     /** Ofns protocol */
@@ -19,14 +19,14 @@ export type CreateYieldBody = {
     slippageBps: number;
 };
 
-export type CreateYieldResponse = {
-    /** Unique identifier for the yield investment. */
+export type CreateAllocationResponse = {
+    /** Unique identifier for the allocation investment. */
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for yield generation. Currently supports OFNS protocol */
+    /** The DeFi protocol used for allocation generation. Currently supports OFNS protocol */
     protocol: "0fns";
-    /** The total amount currently invested in this yield. */
+    /** The total amount currently invested in this allocation. */
     amount: ({
         kind: "Native";
         amount: string;
@@ -43,7 +43,7 @@ export type CreateYieldResponse = {
             tid?: string | undefined;
         };
     };
-    /** The total interest earned so far in this yield. */
+    /** The total rewards earned so far in this allocation. */
     rewards: ({
         kind: "Native";
         amount: string;
@@ -63,15 +63,15 @@ export type CreateYieldResponse = {
     dateCreated: string;
 } & {
     actions: {
-        /** Unique identifier for the yield action. */
+        /** Unique identifier for the allocation action. */
         id: string;
-        /** Unique identifier for the yield investment. */
-        yieldId: string;
+        /** Unique identifier for the allocation investment. */
+        allocationId: string;
         /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
         externalId?: string | undefined;
-        /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+        /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
         kind: "Deposit" | "Withdraw";
-        /** Status of the yield action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
+        /** Status of the allocation action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         requester: {
             /** User (could be a service account) who requested the resource. */
@@ -79,9 +79,9 @@ export type CreateYieldResponse = {
             /** Service Account token or Personal Access token used when requesting the resource. */
             tokenId?: string | undefined;
         };
-        /** The full request used for initiating this yield action. */
+        /** The full request used for initiating this allocation action. */
         requestBody: {
-            /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+            /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
@@ -121,10 +121,10 @@ export type CreateYieldResponse = {
     }[];
 };
 
-export type CreateYieldRequest = { body: CreateYieldBody }
+export type CreateAllocationRequest = { body: CreateAllocationBody }
 
-export type CreateYieldActionBody = {
-    /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+export type CreateAllocationActionBody = {
+    /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
     kind: "Deposit" | "Withdraw";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
@@ -142,19 +142,19 @@ export type CreateYieldActionBody = {
     slippageBps: number;
 };
 
-export type CreateYieldActionParams = {
-    /** Unique identifier for the yield investment. */
-    yieldId: string;
+export type CreateAllocationActionParams = {
+    /** Unique identifier for the allocation investment. */
+    allocationId: string;
 };
 
-export type CreateYieldActionResponse = {
-    /** Unique identifier for the yield investment. */
+export type CreateAllocationActionResponse = {
+    /** Unique identifier for the allocation investment. */
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for yield generation. Currently supports OFNS protocol */
+    /** The DeFi protocol used for allocation generation. Currently supports OFNS protocol */
     protocol: "0fns";
-    /** The total amount currently invested in this yield. */
+    /** The total amount currently invested in this allocation. */
     amount: ({
         kind: "Native";
         amount: string;
@@ -171,7 +171,7 @@ export type CreateYieldActionResponse = {
             tid?: string | undefined;
         };
     };
-    /** The total interest earned so far in this yield. */
+    /** The total rewards earned so far in this allocation. */
     rewards: ({
         kind: "Native";
         amount: string;
@@ -191,15 +191,15 @@ export type CreateYieldActionResponse = {
     dateCreated: string;
 } & {
     actions: {
-        /** Unique identifier for the yield action. */
+        /** Unique identifier for the allocation action. */
         id: string;
-        /** Unique identifier for the yield investment. */
-        yieldId: string;
+        /** Unique identifier for the allocation investment. */
+        allocationId: string;
         /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
         externalId?: string | undefined;
-        /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+        /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
         kind: "Deposit" | "Withdraw";
-        /** Status of the yield action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
+        /** Status of the allocation action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         requester: {
             /** User (could be a service account) who requested the resource. */
@@ -207,9 +207,9 @@ export type CreateYieldActionResponse = {
             /** Service Account token or Personal Access token used when requesting the resource. */
             tokenId?: string | undefined;
         };
-        /** The full request used for initiating this yield action. */
+        /** The full request used for initiating this allocation action. */
         requestBody: {
-            /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+            /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
@@ -249,21 +249,21 @@ export type CreateYieldActionResponse = {
     }[];
 };
 
-export type CreateYieldActionRequest = CreateYieldActionParams & { body: CreateYieldActionBody }
+export type CreateAllocationActionRequest = CreateAllocationActionParams & { body: CreateAllocationActionBody }
 
-export type GetYieldParams = {
-    /** Unique identifier for the yield investment. */
-    yieldId: string;
+export type GetAllocationParams = {
+    /** Unique identifier for the allocation investment. */
+    allocationId: string;
 };
 
-export type GetYieldResponse = {
-    /** Unique identifier for the yield investment. */
+export type GetAllocationResponse = {
+    /** Unique identifier for the allocation investment. */
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for yield generation. Currently supports OFNS protocol */
+    /** The DeFi protocol used for allocation generation. Currently supports OFNS protocol */
     protocol: "0fns";
-    /** The total amount currently invested in this yield. */
+    /** The total amount currently invested in this allocation. */
     amount: ({
         kind: "Native";
         amount: string;
@@ -280,7 +280,7 @@ export type GetYieldResponse = {
             tid?: string | undefined;
         };
     };
-    /** The total interest earned so far in this yield. */
+    /** The total rewards earned so far in this allocation. */
     rewards: ({
         kind: "Native";
         amount: string;
@@ -300,15 +300,15 @@ export type GetYieldResponse = {
     dateCreated: string;
 } & {
     actions: {
-        /** Unique identifier for the yield action. */
+        /** Unique identifier for the allocation action. */
         id: string;
-        /** Unique identifier for the yield investment. */
-        yieldId: string;
+        /** Unique identifier for the allocation investment. */
+        allocationId: string;
         /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
         externalId?: string | undefined;
-        /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+        /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
         kind: "Deposit" | "Withdraw";
-        /** Status of the yield action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
+        /** Status of the allocation action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         requester: {
             /** User (could be a service account) who requested the resource. */
@@ -316,9 +316,9 @@ export type GetYieldResponse = {
             /** Service Account token or Personal Access token used when requesting the resource. */
             tokenId?: string | undefined;
         };
-        /** The full request used for initiating this yield action. */
+        /** The full request used for initiating this allocation action. */
         requestBody: {
-            /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+            /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
@@ -358,32 +358,32 @@ export type GetYieldResponse = {
     }[];
 };
 
-export type GetYieldRequest = GetYieldParams
+export type GetAllocationRequest = GetAllocationParams
 
-export type ListYieldActionsParams = {
-    /** Unique identifier for the yield investment. */
-    yieldId: string;
+export type ListAllocationActionsParams = {
+    /** Unique identifier for the allocation investment. */
+    allocationId: string;
 };
 
-export type ListYieldActionsQuery = {
+export type ListAllocationActionsQuery = {
     /** Maximum number of items to return. */
     limit?: number | undefined;
     /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
-export type ListYieldActionsResponse = {
+export type ListAllocationActionsResponse = {
     /** Current page items. */
     items: {
-        /** Unique identifier for the yield action. */
+        /** Unique identifier for the allocation action. */
         id: string;
-        /** Unique identifier for the yield investment. */
-        yieldId: string;
+        /** Unique identifier for the allocation investment. */
+        allocationId: string;
         /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
         externalId?: string | undefined;
-        /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+        /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
         kind: "Deposit" | "Withdraw";
-        /** Status of the yield action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
+        /** Status of the allocation action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         requester: {
             /** User (could be a service account) who requested the resource. */
@@ -391,9 +391,9 @@ export type ListYieldActionsResponse = {
             /** Service Account token or Personal Access token used when requesting the resource. */
             tokenId?: string | undefined;
         };
-        /** The full request used for initiating this yield action. */
+        /** The full request used for initiating this allocation action. */
         requestBody: {
-            /** The type of action being performed on the yield investment: Deposit to add funds or Withdraw to remove funds. */
+            /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
@@ -435,25 +435,25 @@ export type ListYieldActionsResponse = {
     nextPageToken?: string | undefined;
 };
 
-export type ListYieldActionsRequest = ListYieldActionsParams & { query?: ListYieldActionsQuery }
+export type ListAllocationActionsRequest = ListAllocationActionsParams & { query?: ListAllocationActionsQuery }
 
-export type ListYieldsQuery = {
+export type ListAllocationsQuery = {
     /** Maximum number of items to return. */
     limit?: number | undefined;
     /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
-export type ListYieldsResponse = {
+export type ListAllocationsResponse = {
     /** Current page items. */
     items: {
-        /** Unique identifier for the yield investment. */
+        /** Unique identifier for the allocation investment. */
         id: string;
         /** Wallet id. */
         walletId: string;
-        /** The DeFi protocol used for yield generation. Currently supports OFNS protocol */
+        /** The DeFi protocol used for allocation generation. Currently supports OFNS protocol */
         protocol: "0fns";
-        /** The total amount currently invested in this yield. */
+        /** The total amount currently invested in this allocation. */
         amount: ({
             kind: "Native";
             amount: string;
@@ -470,7 +470,7 @@ export type ListYieldsResponse = {
                 tid?: string | undefined;
             };
         };
-        /** The total interest earned so far in this yield. */
+        /** The total rewards earned so far in this allocation. */
         rewards: ({
             kind: "Native";
             amount: string;
@@ -493,5 +493,5 @@ export type ListYieldsResponse = {
     nextPageToken?: string | undefined;
 };
 
-export type ListYieldsRequest = { query?: ListYieldsQuery }
+export type ListAllocationsRequest = { query?: ListAllocationsQuery }
 

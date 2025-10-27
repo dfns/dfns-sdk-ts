@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-algorand",
-  "version": "0.7.16",
+  "version": "0.7.17",
   "peerDependencies": {
     "algosdk": "^2.0.0"
   }
