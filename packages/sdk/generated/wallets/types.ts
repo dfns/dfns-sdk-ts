@@ -93,12 +93,6 @@ export type BroadcastTransactionBody = {
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
 } | {
-    kind: "SettleOffer";
-    txHash: string;
-    decision: "Accept" | "Reject";
-    /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
-    externalId?: string | undefined;
-} | {
     kind: "TransferPreapproval";
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -174,13 +168,13 @@ export type BroadcastTransactionResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
-        kind: "SettleOffer";
-        txHash: string;
-        decision: "Accept" | "Reject";
+        kind: "TransferPreapproval";
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
-        kind: "TransferPreapproval";
+        kind: "SettleOffer";
+        txHash: string;
+        decision: "Accept" | "Reject";
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     };
@@ -283,7 +277,7 @@ export type DelegateWalletRequest = DelegateWalletParams & { body: DelegateWalle
 export type ExportWalletBody = {
     encryptionKey: string;
     supportedSchemes: {
-        protocol: "CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23";
+        protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
         curve: "ed25519" | "secp256k1" | "stark";
     }[];
 };
@@ -294,7 +288,7 @@ export type ExportWalletParams = {
 
 export type ExportWalletResponse = {
     publicKey: string;
-    protocol: "CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23";
+    protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
     curve: "ed25519" | "secp256k1" | "stark";
     /** The TSS threshold of the wallet private signing key shares */
     minSigners: number;
@@ -987,13 +981,13 @@ export type GetTransactionResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
-        kind: "SettleOffer";
-        txHash: string;
-        decision: "Accept" | "Reject";
+        kind: "TransferPreapproval";
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
-        kind: "TransferPreapproval";
+        kind: "SettleOffer";
+        txHash: string;
+        decision: "Accept" | "Reject";
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     };
@@ -2647,13 +2641,13 @@ export type ListTransactionsResponse = {
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
         } | {
-            kind: "SettleOffer";
-            txHash: string;
-            decision: "Accept" | "Reject";
+            kind: "TransferPreapproval";
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
         } | {
-            kind: "TransferPreapproval";
+            kind: "SettleOffer";
+            txHash: string;
+            decision: "Accept" | "Reject";
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
         };
