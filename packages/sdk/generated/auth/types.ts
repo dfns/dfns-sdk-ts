@@ -1244,7 +1244,7 @@ export type CreateUserActionSignatureBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
             /** Base64url encoded authenticator data object returned by the user's WebAuthn client. */
             authenticatorData: string;
             /** Base64url encoded userHandle returned by the user's WebAuthn client. */
@@ -1260,7 +1260,7 @@ export type CreateUserActionSignatureBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     } | {
         kind: "PasswordProtectedKey";
@@ -1272,7 +1272,7 @@ export type CreateUserActionSignatureBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     } | {
         kind: "Password";
@@ -1289,7 +1289,7 @@ export type CreateUserActionSignatureBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
             /** Base64url encoded authenticator data object returned by the user's WebAuthn client. */
             authenticatorData: string;
             /** Base64url encoded userHandle returned by the user's WebAuthn client. */
@@ -1305,7 +1305,7 @@ export type CreateUserActionSignatureBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     } | {
         kind: "PasswordProtectedKey";
@@ -1317,7 +1317,7 @@ export type CreateUserActionSignatureBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     } | {
         kind: "Totp";
@@ -1817,7 +1817,7 @@ export type LoginBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
             /** Base64url encoded authenticator data object returned by the user's WebAuthn client. */
             authenticatorData: string;
             /** Base64url encoded userHandle returned by the user's WebAuthn client. */
@@ -1833,7 +1833,7 @@ export type LoginBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     } | {
         kind: "PasswordProtectedKey";
@@ -1845,7 +1845,7 @@ export type LoginBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     } | {
         kind: "Password";
@@ -1862,7 +1862,7 @@ export type LoginBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
             /** Base64url encoded authenticator data object returned by the user's WebAuthn client. */
             authenticatorData: string;
             /** Base64url encoded userHandle returned by the user's WebAuthn client. */
@@ -1878,7 +1878,7 @@ export type LoginBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     } | {
         kind: "PasswordProtectedKey";
@@ -1890,7 +1890,7 @@ export type LoginBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     } | {
         kind: "Totp";
@@ -1927,7 +1927,7 @@ export type RecoverBody = {
             /** Base64url-encoded signature returned by the user's WebAuthn client. */
             signature: string;
             /** The algorithm/digest that the credential will use to sign data. If the algoritm is not specified then the algorithm will be determined by the key. */
-            algorithm?: ("RSA-SHA256" | "SHA256" | "SHA512") | undefined;
+            algorithm?: string | undefined;
         };
     };
     newCredentials: {
