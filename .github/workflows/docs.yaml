@@ -18,10 +18,13 @@ jobs:
       - name: install node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
 
       - name: install packages
-        run: npm install
+        run: |
+          npm config set ignore-scripts true
+          npm ci --prefer-offline --no-audit --cache .npm
 
       - name: generate docs
         run: npm run docs
