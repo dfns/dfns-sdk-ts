@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-kadena",
-  "version": "0.7.17",
+  "version": "0.7.18",
   "peerDependencies": {
     "@kadena/client": "^1.0.0"
   }

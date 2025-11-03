@@ -24,6 +24,21 @@ export class WalletsClient {
     return response.json()
   }
 
+  async activateWallet(request: T.ActivateWalletRequest): Promise<T.ActivateWalletResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/activate', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async broadcastTransaction(request: T.BroadcastTransactionRequest): Promise<T.BroadcastTransactionResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transactions', {
       path: request ?? {},
