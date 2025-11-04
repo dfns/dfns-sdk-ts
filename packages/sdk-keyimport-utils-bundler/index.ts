@@ -1,27 +1,44 @@
 import {
   buildKeyImportRequest,
-  SecretScalar,
   convertEddsaSecretKeyToScalar,
-  SignersInfo,
   KeyCurve as KeyCurveInternal,
   KeyProtocol,
+  SecretScalar,
+  SignersInfo,
 } from '@dfns/dfns-key-import-bundler'
-import { ImportWalletBody, GetWalletResponse } from '@dfns/sdk/types/wallets'
+import { ImportKeyBody, GetKeyResponse } from '@dfns/sdk/types/keys'
 import { ListSignersResponse } from '@dfns/sdk/types/signers'
 
 type Signer = ListSignersResponse['clusters'][number]['signers'][number]
-type KeyCurve = GetWalletResponse['signingKey']['curve']
+type KeyScheme = Exclude<GetKeyResponse['scheme'], 'DH'>
+type KeyCurve = GetKeyResponse['curve']
 
-const getCurveAndProtocol = (keyCurve: KeyCurve): { curve: KeyCurveInternal; protocol: KeyProtocol } => {
-  switch (keyCurve) {
-    case 'secp256k1':
-      return { curve: KeyCurveInternal.Secp256k1, protocol: KeyProtocol.Cggmp21 }
-    case 'stark':
-      return { curve: KeyCurveInternal.Stark, protocol: KeyProtocol.Cggmp21 }
-    case 'ed25519':
-      return { curve: KeyCurveInternal.Ed25519, protocol: KeyProtocol.Frost }
-    default:
-      throw Error(`Unsupported key curve for import: "${keyCurve}"`)
+const getCurveAndProtocol = (
+  scheme: KeyScheme,
+  curve: KeyCurve
+): { protocol: KeyProtocol; internalCurve: KeyCurveInternal } => {
+  if (scheme === 'ECDSA' && curve === 'secp256k1') {
+    return {
+      internalCurve: KeyCurveInternal.Secp256k1,
+      protocol: KeyProtocol.Cggmp24,
+    }
+  } else if (scheme === 'ECDSA' && curve === 'stark') {
+    return {
+      internalCurve: KeyCurveInternal.Stark,
+      protocol: KeyProtocol.Cggmp24,
+    }
+  } else if (scheme === 'EdDSA' && curve === 'ed25519') {
+    return {
+      internalCurve: KeyCurveInternal.Ed25519,
+      protocol: KeyProtocol.Frost,
+    }
+  } else if (scheme === 'Schnorr' && curve === 'secp256k1') {
+    return {
+      internalCurve: KeyCurveInternal.Secp256k1,
+      protocol: KeyProtocol.FrostBitcoin,
+    }
+  } else {
+    throw Error(`Unsupported key scheme for import: "${scheme}, ${curve}"`)
   }
 }
 
@@ -35,14 +52,28 @@ const getSecretScalar = (privateKey: Uint8Array | Buffer, keyCurve: KeyCurve): S
 
 export const splitPrivateKeyForSigners = ({
   signers,
-  privateKey,
+  keyScheme,
   keyCurve,
+  privateKey,
+  chainCode,
+  masterKey,
 }: {
   signers: Signer[]
-  privateKey: Uint8Array | Buffer
   keyCurve: KeyCurve
-}): Pick<ImportWalletBody, 'protocol' | 'curve' | 'minSigners' | 'encryptedKeyShares'> => {
-  const { curve, protocol } = getCurveAndProtocol(keyCurve)
+  keyScheme: KeyScheme
+  privateKey: Uint8Array | Buffer
+  chainCode?: Uint8Array | Buffer
+  masterKey?: boolean
+}): Pick<ImportKeyBody, 'curve' | 'protocol' | 'minSigners' | 'encryptedKeyShares' | 'masterKey'> => {
+  if (masterKey && !chainCode) {
+    throw Error('master key must have a chain code')
+  }
+
+  if (chainCode && !masterKey) {
+    throw Error('cannot import chain code if not master key')
+  }
+
+  const { internalCurve, protocol } = getCurveAndProtocol(keyScheme, keyCurve)
 
   // We set this as constant do not expose it, because Dfns API will only accept minSigners = 3 for now.
   const minSigners = 3
@@ -51,16 +82,18 @@ export const splitPrivateKeyForSigners = ({
 
   const result = buildKeyImportRequest(
     secretScalar,
+    chainCode,
     SignersInfo.new(signers),
     minSigners,
     protocol,
-    curve
+    internalCurve
   )
 
   return {
-    curve: result.curve,
+    curve: keyCurve,
     protocol: result.protocol,
     minSigners: result.minSigners,
     encryptedKeyShares: result.encryptedKeyShares,
+    masterKey,
   }
 }

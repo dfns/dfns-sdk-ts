@@ -28,9 +28,10 @@ export default function ImportWallet(): JSX.Element {
     const privateKey = Buffer.from(privateKeyStr, 'hex')
 
     const splittedKeyInfo = splitPrivateKeyForSigners({
-      privateKey: privateKey,
       signers: clusters[0].signers, // There should only be 1 signing cluster in the returned clusters.
+      keyScheme: 'ECDSA',
       keyCurve: 'secp256k1',
+      privateKey: privateKey,
     })
 
     const wallet = await dfnsApi().wallets.importWallet({
