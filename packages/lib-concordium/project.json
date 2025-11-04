@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-concordium",
+        "clean": true,
+        "main": "packages/lib-concordium/index.ts",
+        "tsConfig": "packages/lib-concordium/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}

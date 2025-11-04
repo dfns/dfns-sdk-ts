@@ -1,0 +1,26 @@
+{
+  "name": "wallet-activation-id-app",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "dependencies": {
+    "@concordium/id-app-sdk": "^0.1.4",
+    "@dfns/lib-polymesh": "file:../../../packages/lib-polymesh",
+    "@polymeshassociation/polymesh-sdk": "27.6.0",
+    "@walletconnect/core": "2.20.0",
+    "@walletconnect/jsonrpc-utils": "1.0.8",
+    "@walletconnect/sign-client": "2.20.0",
+    "@walletconnect/utils": "2.20.0",
+    "jsdom": "27.0.0",
+    "node-localstorage": "3.0.5",
+    "qrcode-terminal": "0.12.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "27.0.0",
+    "@types/node-localstorage": "1.3.3",
+    "@types/qrcode-terminal": "0.12.2",
+    "ts-node": "10.9.1"
+  },
+  "scripts": {
+    "exec": "ts-node main.ts"
+  }
+}

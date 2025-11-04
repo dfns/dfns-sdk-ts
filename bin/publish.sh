@@ -6,6 +6,7 @@ declare -a packages=(
     "@dfns/lib-algorand"
     "@dfns/lib-aptos"
     "@dfns/lib-bitcoinjs"
+    "@dfns/lib-concordium"
     "@dfns/lib-cosmjs"
     "@dfns/lib-ethersjs5"
     "@dfns/lib-ethersjs6"
