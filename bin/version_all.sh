@@ -13,7 +13,6 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-ethersjs6 \
     --workspace @dfns/lib-hedera \
     --workspace @dfns/lib-iota \
-    --workspace @dfns/lib-kadena \
     --workspace @dfns/lib-kaspa \
     --workspace @dfns/lib-meshsdk \
     --workspace @dfns/lib-near \
