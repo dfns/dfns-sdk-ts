@@ -834,6 +834,7 @@ export type ImportKeyBody = {
         signerId: string;
         encryptedKeyShare: string;
     }[];
+    masterKey?: boolean | undefined;
 };
 
 export type ImportKeyResponse = {
