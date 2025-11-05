@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0 (2025-11-06)
+
+- Updated `DfnsApiClient` to match the latest API changes
+- Add HD master key support for the key import utility [__BREAKING__]
+- Removed Kadena integration
+
 ## 0.7.18 (2025-10-30)
 
 - Updated `DfnsApiClient` to match the latest API changes
