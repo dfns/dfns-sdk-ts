@@ -834,6 +834,7 @@ export type ImportKeyBody = {
         signerId: string;
         encryptedKeyShare: string;
     }[];
+    /** Specify to create an extended master key for HD derivation */
     masterKey?: boolean | undefined;
 };
 
