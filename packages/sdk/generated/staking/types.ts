@@ -228,6 +228,8 @@ export type CreateStakeResponse = ({
         }) & {
             externalId?: string | undefined;
         });
+        /** The failure reason, if any. Only present when status is Failed. */
+        failureReason?: string | undefined;
         dateCreated: string;
     }[];
 };
@@ -461,6 +463,8 @@ export type CreateStakeActionResponse = ({
         }) & {
             externalId?: string | undefined;
         });
+        /** The failure reason, if any. Only present when status is Failed. */
+        failureReason?: string | undefined;
         dateCreated: string;
     }[];
 };
@@ -690,6 +694,8 @@ export type GetStakesResponse = ({
         }) & {
             externalId?: string | undefined;
         });
+        /** The failure reason, if any. Only present when status is Failed. */
+        failureReason?: string | undefined;
         dateCreated: string;
     }[];
 };
@@ -767,6 +773,8 @@ export type ListStakeActionsResponse = {
         }) & {
             externalId?: string | undefined;
         });
+        /** The failure reason, if any. Only present when status is Failed. */
+        failureReason?: string | undefined;
         dateCreated: string;
     }[];
     nextPageToken?: string | undefined;
