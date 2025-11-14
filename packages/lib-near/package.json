@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-near",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "peerDependencies": {
     "near-api-js": "^6.0.0"
   }
