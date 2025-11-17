@@ -4,7 +4,7 @@
   "main": "main.ts",
   "dependencies": {
     "@dfns/lib-polymesh": "file:../../../packages/lib-polymesh",
-    "@polymeshassociation/polymesh-sdk": "27.6.0",
+    "@polymeshassociation/polymesh-sdk": "29.0.0",
     "@walletconnect/core": "2.20.0",
     "@walletconnect/jsonrpc-utils": "1.0.8",
     "@walletconnect/sign-client": "2.20.0",

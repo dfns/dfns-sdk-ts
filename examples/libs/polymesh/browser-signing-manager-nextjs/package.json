@@ -1,0 +1,34 @@
+{
+  "name": "browser-signing-manager-nextjs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@dfns/lib-polymesh": "file:../../../../packages/lib-polymesh",
+    "@dfns/sdk": "file:../../../../packages/sdk",
+    "@dfns/sdk-browser": "file:../../../../packages/sdk-browser",
+    "@polymeshassociation/polymesh-sdk": "^29.0.0",
+    "@polymeshassociation/polymesh-types": "^6.2.0",
+    "autoprefixer": "10.4.14",
+    "dotenv": "16.3.1",
+    "next": "13.5.6",
+    "postcss": "8.4.31",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.7",
+    "@types/react-dom": "18.2.4",
+    "encoding": "^0.1.13",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.4",
+    "typescript": "5.0.4"
+  }
+}
