@@ -83,8 +83,8 @@ export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T
 
     const authorization: Record<string, string> = authToken
       ? {
-          authorization: `Bearer ${authToken}`,
-        }
+        authorization: `Bearer ${authToken}`,
+      }
       : {}
 
     options.headers = {
