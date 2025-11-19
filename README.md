@@ -209,7 +209,6 @@ Integrations with other blockchain platforms to make Dapp development frictionle
 - [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/)/[v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs)
 - [Hedera](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-hedera/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/hedera)
 - [iota](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-iota/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/iota)
-- [Kadena](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-kadena/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/kadena)
 - [kaspa](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-kaspa/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/kaspa)
 - [near](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-near/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/near)
 - [polkadot{.js}](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polkadot/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polkadot)
