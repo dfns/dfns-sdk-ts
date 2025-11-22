@@ -8,7 +8,7 @@ See [WalletConnect](https://docs.reown.com/overview) documentation for additiona
 
 On wallet connect side, you'll need to create a project beforehand. See https://cloud.walletconnect.com/sign-in
 
-You need a `Service Account`. To create a new `Service Account`, first [generate a keypair](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair), then go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Service Accounts` > `New Service Account`, and enter the following information,
+You need a `Service Account`. To create a new `Service Account`, first [generate a keypair](https://docs.dfns.co/developers/guides/generate-a-key-pair), then go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Service Accounts` > `New Service Account`, and enter the following information,
 
 - Name, choose any name
 - Public Key, the public key from the step 'generate a keypair'
