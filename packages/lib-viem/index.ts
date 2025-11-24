@@ -162,13 +162,13 @@ export class DfnsWallet {
     if (this.metadata.boundToEvmNetwork) {
       const res = await this.dfnsClient.wallets.generateSignature({
         walletId: this.metadata.id,
-        body: { kind: 'Transaction', transaction: serializer(transaction) },
+        body: { kind: 'Transaction', transaction: await serializer(transaction) },
       })
 
       assertSigned(res)
       return serializer(transaction, extractSignature(res))
     } else {
-      const hash = keccak256(serializer(transaction))
+      const hash = keccak256(await serializer(transaction))
       const signature = await this.signHash(hash)
       return serializer(transaction, signature)
     }
