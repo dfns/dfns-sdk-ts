@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-ethersjs6",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "peerDependencies": {
     "ethers": "^6.0.0"
   }
