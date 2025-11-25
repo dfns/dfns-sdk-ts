@@ -31,7 +31,7 @@ async function main() {
   })
 
   let account = await tronWeb.trx.getAccount(wallet.address)
-  console.log(`Amount staked for bandwith: ${account.frozenV2[0].amount ?? 0}`)
+  console.log(`Amount staked for bandwidth: ${account.frozenV2[0].amount ?? 0}`)
   console.log(`Amount staked for energy: ${account.frozenV2[1].amount ?? 0}`)
 
   const bandwidthUnsigned = await tronWeb.transactionBuilder.freezeBalanceV2(1_000_000, 'BANDWIDTH', wallet.address)
@@ -50,7 +50,7 @@ async function main() {
   await new Promise((f) => setTimeout(f, 60000))
 
   account = await tronWeb.trx.getAccount(wallet.address)
-  console.log(`Amount staked for bandwith: ${account.frozenV2[0].amount ?? 0}`)
+  console.log(`Amount staked for bandwidth: ${account.frozenV2[0].amount ?? 0}`)
   console.log(`Amount staked for energy: ${account.frozenV2[1].amount ?? 0}`)
 }
 

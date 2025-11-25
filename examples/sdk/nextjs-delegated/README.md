@@ -81,13 +81,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Build Dfns client:
 
 ```ts
-// instanciate a key signer
+// instantiate a key signer
 const signer = new AsymmetricKeySigner({
   credId: process.env.DFNS_CRED_ID!,
   privateKey: process.env.DFNS_PRIVATE_KEY!.replace(/\\n/g, '\n'),
 })
 
-// instanciate a dfns api client
+// instantiate a dfns api client
 const dfns = new DfnsApiClient({
   orgId: process.env.DFNS_ORG_ID!,
   baseUrl: process.env.DFNS_API_URL!,
@@ -108,7 +108,7 @@ const { token: endUserAuthToken } = await dfns.auth.delegatedLogin({
 Wallet creation initiation (wallet owned by end user):
 
 ```ts
-// instanciate a "delegated" Dfns client
+// instantiate a "delegated" Dfns client
 const dfnsDelegated = new DfnsDelegatedApiClient({
     orgId: process.env.DFNS_ORG_ID!,
     baseUrl: process.env.DFNS_API_URL!,

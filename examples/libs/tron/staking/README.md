@@ -33,14 +33,14 @@ The program runs on Tron Nile testnet. In order to run the code, you would need 
 > ts-node main.ts
 
 Tron wallet address: TQJNezrbfJ3akrGgR7eM2fWyFpsKeM8wzN
-Amount staked for bandwith: 0
+Amount staked for bandwidth: 0
 Amount staked for energy: 0
 Freeze bandwidth txID: 25e8e26fe492776f61ec1096d057cb20783773a11d9e2fdbfcb3075b8d18a2f1
 Freeze bandwidth broadcasted: true
 Freeze energy txID: 9a812a03b037c5f69098a9d8a9788d5eb307fb9e12ced1cc42d777ad99e44f86
 Freeze energy broadcasted: true
 waiting for transactions to finalize ...
-Amount staked for bandwith: 1000000
+Amount staked for bandwidth: 1000000
 Amount staked for energy: 1000000
 ```
 

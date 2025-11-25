@@ -118,7 +118,7 @@ async function main() {
      - Create Instruction
      - Parties affirm instruction 
   */
-  console.log(`Transfering some tokens to receiver`)
+  console.log(`Transferring some tokens to receiver`)
   const senderSigningIdentity = await senderClient.getSigningIdentity()
   const senderPortfolio = await senderSigningIdentity!.portfolios.getPortfolio()
 

@@ -94,7 +94,7 @@ const main = async (): Promise<void> => {
 
   // We need to be sure that the object made it on chain. Unfortunately,
   // signAndExecuteTransaction can return before the tx makes it onchain.
-  // The execution is made localy
+  // The execution is made locally
   await client.waitForTransaction({ digest: txRes.digest })
 
   tx = new Transaction()

@@ -88,7 +88,7 @@ const main = async () => {
   console.log(`mint creation confirmed: ${mintInitId}`)
 
   // Close account
-  const closeMintAccounTx = new Transaction().add(
+  const closeMintAccountTx = new Transaction().add(
     createCloseAccountInstruction(
       mint.publicKey,
       authority.publicKey,
@@ -99,11 +99,11 @@ const main = async () => {
   )
 
   latestBlockhash = await connection.getLatestBlockhash()
-  closeMintAccounTx.feePayer = authority.publicKey
-  closeMintAccounTx.recentBlockhash = latestBlockhash.blockhash
-  closeMintAccounTx.lastValidBlockHeight = latestBlockhash.lastValidBlockHeight
+  closeMintAccountTx.feePayer = authority.publicKey
+  closeMintAccountTx.recentBlockhash = latestBlockhash.blockhash
+  closeMintAccountTx.lastValidBlockHeight = latestBlockhash.lastValidBlockHeight
 
-  const closeAuthoritySigned = await authority.signTransaction(closeMintAccounTx)
+  const closeAuthoritySigned = await authority.signTransaction(closeMintAccountTx)
   const closeMintId = await connection.sendRawTransaction(closeAuthoritySigned.serialize())
   await connection.confirmTransaction({ signature: closeMintId, ...latestBlockhash })
   console.log(`mint account closure confirmed: ${closeMintId}`)

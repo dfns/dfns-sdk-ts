@@ -333,7 +333,7 @@
 - Added `restartDelegatedUserRegistration` for resuming an interrupted delegated registration flow
 - Added new blockchain networks (Arbitrum, Avalanche, Fantom and Optimism) to wallets API
 - Added `KeyEDCSA` and `KeyEdDSA` to wallets API
-- Added `AlwaysActivated` policy for wallets tranfer asset, broadcast transaction and generate signature
+- Added `AlwaysActivated` policy for wallets transfer asset, broadcast transaction and generate signature
 - Renamed package `@dfns/ethersjs-wallet` to `@dfns/lib-ethersjs6` [__BREAKING__]
 - Added SDK integration with ethers.js v5, see `@dfns/lib-ethersjs5`
 - Added SDK integration with Solana web3.js, see `@dfns/lib-solana`
