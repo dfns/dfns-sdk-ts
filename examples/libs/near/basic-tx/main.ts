@@ -40,12 +40,12 @@ async function main() {
 
   console.log(`Sending ${amount / 10n ** 24n} NEAR to the address ${receiverId}`)
 
-  const finalOuput = await account.transfer({
+  const finalOutput = await account.transfer({
     receiverId,
     amount,
   })
 
-  console.log(`Transaction submitted with hash ${finalOuput.transaction.hash}`)
+  console.log(`Transaction submitted with hash ${finalOutput.transaction.hash}`)
 }
 
 main()

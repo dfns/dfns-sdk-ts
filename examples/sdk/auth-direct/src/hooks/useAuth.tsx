@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
       })
 
       if (challenge.kind !== 'Fido2') {
-        throw Error('Not a Fido2 challenge') // this check is meant for proper typescript type inferrence
+        throw Error('Not a Fido2 challenge') // this check is meant for proper typescript type inference
       }
 
       const attestation = await getWebauthnSigner().create(challenge)

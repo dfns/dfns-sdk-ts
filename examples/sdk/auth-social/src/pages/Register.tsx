@@ -69,7 +69,7 @@ export default function Register() {
     let result: any
     let authToken: string
 
-    // If login was sucessful, we directly get the authToken, otherwise we
+    // If login was successful, we directly get the authToken, otherwise we
     // register the user
     if (loginResult) {
       const [_result, _authToken] = loginResult
@@ -100,7 +100,7 @@ export default function Register() {
       <h2>Social Registration/Login</h2>
       <p>
         After clicking on the "Continue with Google" button, the browser will receive a JWT from Google. We will first
-        try to login the user with it. If it is unsuccesful, we will trigger the registration of the user.
+        try to login the user with it. If it is unsuccessful, we will trigger the registration of the user.
       </p>
       <p>
         After registration, the new end user will have an Ethereum testnet wallet and assigned the system permission,

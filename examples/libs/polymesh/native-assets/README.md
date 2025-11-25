@@ -24,7 +24,7 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
 - `POLYMESH_SENDER_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID
 - `POLYMESH_RECEIVER_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID
-- `POLYMESH_NODE_URL` = a polymesh node url to initalise the polymesh SDK
+- `POLYMESH_NODE_URL` = a polymesh node url to initialise the polymesh SDK
 - `POLYMESH_ASSET_TICKER` = the ticker of the asset you want to transfer
 
 **note** _the wallet must have POLYX to pay for fees and enough assets to transfer_
@@ -51,7 +51,7 @@ Creating asset
 Asset created
 Issuing Tokens for this asset
 Tokens issued
-Transfering some tokens to receiver
+Transferring some tokens to receiver
 creating venue
 venue created
 create instruction

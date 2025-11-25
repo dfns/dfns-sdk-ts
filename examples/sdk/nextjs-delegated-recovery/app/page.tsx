@@ -27,7 +27,7 @@ The end-user already exists in your system, and the identity/auth provider you u
 
 However, this end-user also needs to be registered with Dfns, so that Dfns can identify him, and let him create Wallets that he will own.
 
-You also may not want this end-user to go through a Dfns regsitration flow (receiving an email from Dfns, etc.), so you will use "Delegated Registration" to have your server register this end-user with Dfns (here, "delegated" means your server will register the user "on his behalf"). The end user is still involved in the process, to register and create a WebauthN credentials (from the client app).
+You also may not want this end-user to go through a Dfns registration flow (receiving an email from Dfns, etc.), so you will use "Delegated Registration" to have your server register this end-user with Dfns (here, "delegated" means your server will register the user "on his behalf"). The end user is still involved in the process, to register and create a WebauthN credentials (from the client app).
 
 Find relevant code in:
 - \`./app/api/register/init/route.ts\` (Server endpoint - registration init)
@@ -42,7 +42,7 @@ After previous steps, your end user can check the list of wallets he owns, and c
 
 Getting the list of wallets only involves a readonly call, which do not needs to be sined by the end user, so you won't see any prompt asking theuser to sign something.
 
-However, creating a new wallet will require the end user to sign a challenge in order to complete the request. You will see the WebauthN prompt show up there, and you can check in the code that the Wallet creatin process is divided in two steps (init + complete). Check the code in:
+However, creating a new wallet will require the end user to sign a challenge in order to complete the request. You will see the WebauthN prompt show up there, and you can check in the code that the Wallet creation process is divided in two steps (init + complete). Check the code in:
 
 - \`./app/api/wallets/create/init/route.ts\` (Server endpoint to init)
 - \`./app/api/wallets/create/complete/route.ts\` (Server endpoint to complete)

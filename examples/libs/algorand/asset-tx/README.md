@@ -43,7 +43,7 @@ The program will send 1 USDC from one of your wallets to another one.
 
 algorand receiver address: EWACQVBHSDU2IRTIHJIHOTAI3OT4R2AF4IWHUPLL3BKK42ROLS46WLNQQY
 algorand sender address: MZR5RZ3YNFUVXIWP77DUVRX4N75UU2NTGQMGV2ITDUZI46YE5RS5IXRBDQ
-receiver didn't optin for the asset... creating optin transction
+receiver didn't optin for the asset... creating optin transaction
 transaction signed
 optin transaction broadcasted: RX7OMCWOMHDZI64DP42DAPX3KPKSNPWEDZALERIRD6P3TCM5TNSQ
 optin transaction confirmed

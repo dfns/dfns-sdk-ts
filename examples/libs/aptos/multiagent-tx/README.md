@@ -44,7 +44,7 @@ sender signed
 receiver signed
 transaction broadcasted: 0x8a8c6d88677c3eb92ad00a12a48119ae83fc80ce05ec96cd352208d43c9e7a1b
 checking if the object has a new owner
-ownership transfered: true
+ownership transferred: true
 ```
 
 This is the transfer [transaction](https://explorer.aptoslabs.com/txn/6525224700?network=testnet).

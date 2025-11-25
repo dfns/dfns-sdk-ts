@@ -126,7 +126,7 @@ async function main() {
     minimumLedgerVersion: BigInt(response.version),
   })
 
-  console.log(`ownership transfered: ${receiverObjects[0].owner_address === receiver.address}`)
+  console.log(`ownership transferred: ${receiverObjects[0].owner_address === receiver.address}`)
 }
 
 main()

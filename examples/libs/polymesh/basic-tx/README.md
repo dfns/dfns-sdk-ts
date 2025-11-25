@@ -23,7 +23,7 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
 - `POLYMESH_WALLET_ID` = a Dfns [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID
-- `POLYMESH_NODE_URL` = a polymesh node url to initalise the polymesh SDK
+- `POLYMESH_NODE_URL` = a polymesh node url to initialise the polymesh SDK
 
 **note** _the wallet must have POLYX to pay for fees and transfer_
 

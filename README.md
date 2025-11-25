@@ -137,7 +137,7 @@ The difference with the above `DfnsApiClient` is:
 In a way, `DfnsDelegatedApiClient` "delegates" request signing outside of it. As a result:
 
 - Its constructor does not need a `CredentialSigner` (since signing happens outside)
-- Every method requiring signing (eg `dfns.wallets.createWallet()`) will be splitted in two methods:
+- Every method requiring signing (eg `dfns.wallets.createWallet()`) will be split in two methods:
   - `dfns.wallets.createWalletInit()`: takes in the request payload, and returns a challenge that should be signed by a `CredentialSigner`.
   - `dfns.wallets.createWalletComplete()`: takes in the request payload + the signed challenge, and completes the wallet creation.
 

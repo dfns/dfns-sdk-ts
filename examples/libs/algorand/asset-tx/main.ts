@@ -40,7 +40,7 @@ async function main() {
   // check that our receiver wallet has opted in for the asset
   // otherwise, we need to opt in. (The receiver wallet needs at least 0.1 ALGO)
   if (!(await optInForAsset(receiverWallet))) {
-    console.log("receiver didn't optin for the asset... creating optin transction")
+    console.log("receiver didn't optin for the asset... creating optin transaction")
     const txHash = await sendUsdcTransferTxn(receiverWallet, receiverWallet.address, 0)
     console.log(`optin transaction broadcasted: ${txHash}`)
     await waitForConfirmation(algod, txHash, 4)
