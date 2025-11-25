@@ -73,7 +73,7 @@
     "ethers": "^6.0.0",
     "tronweb": "^5.0.0",
     "viem": "^2.0.0",
-    "xrpl": "^2.0.0"
+    "xrpl": "4.4.3"
   },
   "workspaces": [
     "packages/*"
