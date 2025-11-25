@@ -54,6 +54,36 @@ export class WalletsClient {
     return response.json()
   }
 
+  async cancelTransaction(request: T.CancelTransactionRequest): Promise<T.CancelTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async cancelTransfer(request: T.CancelTransferRequest): Promise<T.CancelTransferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createWallet(request: T.CreateWalletRequest): Promise<T.CreateWalletResponse> {
     const path = buildPathAndQuery('/wallets', {
       path: request ?? {},
