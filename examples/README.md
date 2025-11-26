@@ -5,7 +5,7 @@ Here's a list of examples illustrating how to use the Dfns Typescript sdk / libs
 ### Core SDK
 
 - [service-account](./sdk/service-account): Most basic example of the SDK. Uses a Service Account (aka "machine user").
-- [nextjs-delegated](./sdk/nextjs-delegated): Delegated registration + login + signing with NextJS. This example illustrates a setup where your end-users living in your client app, create their [Delegated Signing](https://docs.dfns.co/dfns-docs/advanced-topics/delegated-signing) wallets (aka "end-user custody").
+- [nextjs-delegated](./sdk/nextjs-delegated): Delegated registration + login + signing with NextJS. This example illustrates a setup where your end-users living in your client app, create their [Delegated Signing](https://docs.dfns.co/advanced/delegated-signing) wallets (aka "end-user custody").
 - [auth-delegated](./sdk/auth-delegated): Delegated registration + login + signing with ReactJS + React Native + Express. Same setup as [nextjs-delegated](./sdk/nextjs-delegated) example, but using different frameworks (express backend + ReactJS or React Native frontends)
 - [auth-delegated-key-credential](./sdk/auth-delegated-key-credential/): Browser key signer example.
 - [auth-direct](./sdk/auth-direct/): React frontend application directly communicating with Dfns API with users having WebAuthn credentials
