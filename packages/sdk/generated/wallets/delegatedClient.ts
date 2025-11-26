@@ -136,6 +136,92 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async cancelTransactionInit(request: T.CancelTransactionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async cancelTransactionComplete(
+    request: T.CancelTransactionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.CancelTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async cancelTransferInit(request: T.CancelTransferRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async cancelTransferComplete(
+    request: T.CancelTransferRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.CancelTransferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createWalletInit(request: T.CreateWalletRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets', {
       path: request ?? {},

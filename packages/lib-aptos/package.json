@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-aptos",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "peerDependencies": {
     "@aptos-labs/ts-sdk": "5.0.0"
   }
