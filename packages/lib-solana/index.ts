@@ -1,5 +1,5 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
-import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
+import { GetWalletResponse } from '@dfns/sdk/types/wallets'
 import { PublicKey, Transaction, VersionedTransaction } from '@solana/web3.js'
 
 export type DfnsWalletOptions = {
@@ -11,27 +11,6 @@ type WalletMetadata = GetWalletResponse & { boundToSolanaNetwork: boolean }
 
 const hexToBuffer = (hex: string): Buffer => {
   return Buffer.from(hex.replace(/^0x/, ''), 'hex')
-}
-
-const assertSigned = (res: GenerateSignatureResponse) => {
-  if (res.status === 'Failed') {
-    throw new DfnsError(-1, 'signing failed', res)
-  } else if (res.status !== 'Signed') {
-    throw new DfnsError(
-      -1,
-      'cannot complete signing synchronously because this wallet action requires policy approval',
-      res
-    )
-  }
-}
-
-const combineSignature = (res: GenerateSignatureResponse): Buffer => {
-  if (!res.signature) {
-    throw new DfnsError(-1, 'signature missing', res)
-  }
-
-  const { r, s } = res.signature
-  return Buffer.concat([hexToBuffer(r), hexToBuffer(s)])
 }
 
 export class DfnsWallet {
@@ -80,11 +59,26 @@ export class DfnsWallet {
         },
       })
 
-      assertSigned(res)
-      if (!res.signedData) {
+      let responseStatus = res.status
+      let signedData = res.signedData
+      while (!signedData && responseStatus != 'Failed') {
+
+        // Wait 10s before polling again
+        await new Promise((resolve) => setTimeout(resolve, 10000))
+
+        // Poll for signature if not immediately available
+        const getSig = await this.dfnsClient.wallets.getSignature({
+          walletId: this.metadata.id,
+          signatureId: res.id
+        })
+        responseStatus = getSig.status
+        signedData = getSig.signedData
+      }
+
+      if (!signedData) {
         throw new DfnsError(-1, 'signedData missing', res)
       }
-      return Transaction.from(hexToBuffer(res.signedData))
+      return Transaction.from(hexToBuffer(signedData))
     } else {
       const res = await this.dfnsClient.wallets.generateSignature({
         walletId: this.metadata.id,
@@ -94,8 +88,28 @@ export class DfnsWallet {
         },
       })
 
-      assertSigned(res)
-      transaction.addSignature(this.publicKey, combineSignature(res))
+
+      let responseStatus = res.status
+      let signature = res.signature
+      while (!signature && responseStatus != 'Failed') {
+
+        // Wait 10s before polling again
+        await new Promise((resolve) => setTimeout(resolve, 10000))
+
+        // Poll for signature if not immediately available
+        const getSig = await this.dfnsClient.wallets.getSignature({
+          walletId: this.metadata.id,
+          signatureId: res.id
+        })
+        responseStatus = getSig.status
+        signature = getSig.signature
+      }
+
+      if (!signature) {
+        throw new DfnsError(-1, 'signature missing', res)
+      }
+      const { r, s } = signature
+      transaction.addSignature(this.publicKey, Buffer.concat([hexToBuffer(r), hexToBuffer(s)]))
       return transaction
     }
   }
@@ -110,11 +124,26 @@ export class DfnsWallet {
         },
       })
 
-      assertSigned(res)
-      if (!res.signedData) {
+      let responseStatus = res.status
+      let signedData = res.signedData
+      while (!signedData && responseStatus != 'Failed') {
+
+        // Wait 10s before polling again
+        await new Promise((resolve) => setTimeout(resolve, 10000))
+
+        // Poll for signature if not immediately available
+        const getSig = await this.dfnsClient.wallets.getSignature({
+          walletId: this.metadata.id,
+          signatureId: res.id
+        })
+        responseStatus = getSig.status
+        signedData = getSig.signedData
+      }
+
+      if (!signedData) {
         throw new DfnsError(-1, 'signedData missing', res)
       }
-      return VersionedTransaction.deserialize(hexToBuffer(res.signedData))
+      return VersionedTransaction.deserialize(hexToBuffer(signedData))
     } else {
       const res = await this.dfnsClient.wallets.generateSignature({
         walletId: this.metadata.id,
@@ -124,8 +153,27 @@ export class DfnsWallet {
         },
       })
 
-      assertSigned(res)
-      transaction.addSignature(this.publicKey, combineSignature(res))
+      let responseStatus = res.status
+      let signature = res.signature
+      while (!signature && responseStatus != 'Failed') {
+
+        // Wait 10s before polling again
+        await new Promise((resolve) => setTimeout(resolve, 10000))
+
+        // Poll for signature if not immediately available
+        const getSig = await this.dfnsClient.wallets.getSignature({
+          walletId: this.metadata.id,
+          signatureId: res.id
+        })
+        responseStatus = getSig.status
+        signature = getSig.signature
+      }
+
+      if (!signature) {
+        throw new DfnsError(-1, 'signature missing', res)
+      }
+      const { r, s } = signature
+      transaction.addSignature(this.publicKey, Buffer.concat([hexToBuffer(r), hexToBuffer(s)]))
       return transaction
     }
   }

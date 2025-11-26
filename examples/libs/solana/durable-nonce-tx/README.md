@@ -14,6 +14,8 @@ After the `Service Account` is created, make sure you copy the account's `authTo
 
 Go back to the service accounts listing, and the new `Service Account` should be listed there. copy the `Signing Key Cred ID`, e.g. `Y2ktM3E5Y2MtbXFoM20tODdiOW1jNDZqZ2gxYWJqbA`.
 
+Do this again for the hot Organisation for Nonce Account creation.
+
 Copy `.env.example` to a new file `.env` and set the following values,
 
 - `DFNS_API_URL` = `https://api.dfns.ninja`
@@ -22,6 +24,16 @@ Copy `.env.example` to a new file `.env` and set the following values,
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
 - `SOLANA_WALLET_ID` = a Dfns Solana [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID
+
+- `DFNS_ORG_ID_HOT` = Dfns HOT Organisation ID (grab it in Dfns Dashboard: `Profile` > `Account`)
+- `DFNS_CRED_ID_HOT` = the `Signing Key Cred ID` from above
+- `DFNS_PRIVATE_KEY_HOT` = the private key from the step 'generate a keypair', the newlines should not be a problem
+- `DFNS_AUTH_TOKEN_HOT` = the `authToken` from above, the value should start with `eyJ0...`
+- `SOLANA_HOT_NONCE_CREATOR_WALLET_ID` = a Dfns Solana [wallet](https://docs.dfns.co/dfns-docs/api-docs/beta-wallets-api-and-nfts/create-wallet) ID used to create the nonce account
+
+
+- `SOLANA_TRANSFER_DESTINATION` = Solana Address to transfer funds too
+- `SOLANA_TRANSFER_AMOUNT` = Transfer amount in lamports
 
 **note** _The Solana wallet must have devnet SOL to transfer and pay for gas._
 
