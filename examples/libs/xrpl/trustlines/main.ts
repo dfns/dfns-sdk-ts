@@ -1,0 +1,66 @@
+import { DfnsWallet } from '@dfns/lib-xrpl'
+import { DfnsApiClient } from '@dfns/sdk'
+import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
+import { Client, Transaction } from 'xrpl'
+
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
+const initDfnsWallet = async (walletId: string) => {
+  const signer = new AsymmetricKeySigner({
+    credId: process.env.DFNS_CRED_ID!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
+  })
+
+  const dfnsClient = new DfnsApiClient({
+    orgId: process.env.DFNS_ORG_ID!,
+    authToken: process.env.DFNS_AUTH_TOKEN!,
+    baseUrl: process.env.DFNS_API_URL!,
+    signer,
+  })
+
+  return DfnsWallet.init({
+    walletId: walletId,
+    dfnsClient,
+  })
+}
+
+async function main() {
+  const senderWallet = await initDfnsWallet(process.env.XRPL_WALLET_ID!)
+  console.log('xrpl sender address: %s', senderWallet.address)
+
+  // For IOU
+  let tx: Transaction = {
+    TransactionType: 'TrustSet',
+    LimitAmount: {
+      issuer: 'rHuGNhqTG32mfmAvWA8hUyWRLV3tCSwKQt',
+      currency: '5553444300000000000000000000000000000000', // USDC
+      value: '10000000',
+    },
+    Account: senderWallet.address,
+  }
+
+  // For Mpt
+  // let tx: Transaction = {
+  //   TransactionType: 'MPTokenAuthorize',
+  //   MPTokenIssuanceID: '00BDC91E1E196C2A685768FD64E8D6E78C823F71A9080D72',
+  //   Account: senderWallet.address,
+  // }
+
+  const client = new Client(process.env.XRPL_NODE_URL!)
+  await client.connect()
+
+  tx = await client.autofill(tx)
+  console.log(`prepared transaction: ${JSON.stringify(tx, null, 2)}`)
+
+  const signedTx = await senderWallet.signTransaction(tx)
+  console.log(`transaction signed`)
+
+  const res = await client.submitAndWait(signedTx.tx_blob)
+  console.log(`transaction submitted: ${res.result.hash}`)
+
+  await client.disconnect()
+}
+
+main()
