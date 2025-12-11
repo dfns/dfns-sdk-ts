@@ -46,7 +46,7 @@ export type ActivateServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -94,7 +94,7 @@ export type ActivateUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -150,7 +150,7 @@ export type ArchiveServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -198,7 +198,7 @@ export type ArchiveUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -1025,7 +1025,7 @@ export type CreateServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -1137,7 +1137,7 @@ export type CreateUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -1379,7 +1379,7 @@ export type DeactivateServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -1427,7 +1427,7 @@ export type DeactivateUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -1573,7 +1573,7 @@ export type GetServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -1621,7 +1621,7 @@ export type GetUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -1733,7 +1733,7 @@ export type ListServiceAccountsResponse = {
             /** User id. */
             userId: string;
             /** User kind. */
-            kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+            kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
             credentialUuid: string;
             orgId: string;
             permissions?: string[] | undefined;
@@ -1783,7 +1783,7 @@ export type ListUsersResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -2194,7 +2194,7 @@ export type RegisterEndUserBody = {
         credentialName?: string | undefined;
     } | undefined;
     wallets: {
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet nickname. */
         name?: string | undefined;
     }[];
@@ -2218,7 +2218,7 @@ export type RegisterEndUserResponse = {
         /** ID of the wallet. */
         id: string;
         /** Network this wallet is bound to. */
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet address on its corresponding network. */
         address?: string | undefined;
         /** Details about the key underlying the wallet. */
@@ -2376,7 +2376,7 @@ export type UpdateServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -2428,7 +2428,7 @@ export type UpdateUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
