@@ -676,6 +676,92 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async speedUpTransactionInit(request: T.SpeedUpTransactionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/speed-up', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async speedUpTransactionComplete(
+    request: T.SpeedUpTransactionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.SpeedUpTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/speed-up', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async speedUpTransferInit(request: T.SpeedUpTransferRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/speed-up', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async speedUpTransferComplete(
+    request: T.SpeedUpTransferRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.SpeedUpTransferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/speed-up', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async tagWalletInit(request: T.TagWalletRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/tags', {
       path: request ?? {},

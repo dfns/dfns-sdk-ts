@@ -370,6 +370,36 @@ export class WalletsClient {
     return response.json()
   }
 
+  async speedUpTransaction(request: T.SpeedUpTransactionRequest): Promise<T.SpeedUpTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/speed-up', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async speedUpTransfer(request: T.SpeedUpTransferRequest): Promise<T.SpeedUpTransferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/speed-up', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async tagWallet(request: T.TagWalletRequest): Promise<T.TagWalletResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/tags', {
       path: request ?? {},
