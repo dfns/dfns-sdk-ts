@@ -1,7 +1,7 @@
 import { splitPrivateKeyForSigners } from '@dfns/sdk-keyimport-utils-nodejs'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import crypto from 'crypto'
+import bs58check from 'bs58check'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -19,14 +19,17 @@ const dfnsApi = new DfnsApiClient({
 const main = async () => {
   // Step 1
   //
-  // Get the private key you want to import into Dfns as a wallet. It needs to be as raw bytes array (Buffer here).
-  // As an example, we are generating a random 32-bytes private key (like a key on curve secp256k1 would be)
-  const privateKey = crypto.randomBytes(32)
+  // Get the extended private key you want to import into Dfns as a wallet in xprv format. The key will be parsed
+  // and the private key and chain code extracted.
 
-  // Instead of a randomly generated one, you can also use an existing key. Uncomment the line below to import a
-  // private key you already have, for example, one exported from Metamask as a hex-encoded string
+  const xprv = 'xprv9s21ZrQH143K31xY...'
+  const extendedKey = bs58check.decode(xprv)
+  if (extendedKey.length !== 78) {
+    throw Error('invalid xprv')
+  }
 
-  // const privateKey = Buffer.from('6233d8f92a4c434c243418e45a4b671b8d685d86643f5b84c2cf9d34fc9c426a', 'hex')
+  const chainCode = Buffer.from(extendedKey.subarray(13, 45))
+  const privateKey = Buffer.from(extendedKey.subarray(46))
 
   // Step 2
   //
@@ -40,25 +43,45 @@ const main = async () => {
   // Split the private key locally into key shares, one per signer, and encrypt them with each signer's encryption key.
   // Only the signers will be able to decrypt the key shares during signing. Your complete private key will not leave
   // your machine.
-  const keyInfo = splitPrivateKeyForSigners({
-    signers: clusters[0].signers, // only 1 signing cluster in the response
+
+  const masterKeyInfo = splitPrivateKeyForSigners({
+    signers: clusters[0].signers,
     keyScheme: 'ECDSA',
     keyCurve: 'secp256k1',
     privateKey,
+    chainCode,
+    masterKey: true, // must set the master key indicator to true
+    secretScalar: false, // for EdDSA, you may have a secret scalar instead of the private key
   })
 
   // Step 4.
   //
-  // Import and create a wallet with your private key as the signing key.
-  const wallet = await dfnsApi.wallets.importWallet({
+  // Import your private key as the master key.
+
+  const masterKey = await dfnsApi.keys.importKey({
+    body: masterKeyInfo,
+  })
+
+  console.log('🥳 Newly imported master key:', masterKey)
+
+  // Step 5.
+  //
+  // Create derived wallets using the master key from the previous step
+
+  const wallet = await dfnsApi.wallets.createWallet({
     body: {
       name: 'My imported wallet',
       network: 'EthereumSepolia',
-      ...keyInfo,
+      signingKey: {
+        deriveFrom: {
+          keyId: masterKey.id,
+          path: 'm/44/1/0/0/0',
+        },
+      },
     },
   })
 
-  console.log('🥳 Newly imported wallet:', wallet)
+  console.log('🥳 Newly imported derived wallet:', wallet)
 }
 
 main()

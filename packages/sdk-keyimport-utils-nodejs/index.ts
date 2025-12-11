@@ -42,11 +42,15 @@ const getCurveAndProtocol = (
   }
 }
 
-const getSecretScalar = (privateKey: Uint8Array | Buffer, keyCurve: KeyCurve): SecretScalar => {
-  if (keyCurve === 'ed25519') {
-    return convertEddsaSecretKeyToScalar(privateKey)
+const getSecretScalar = (
+  keyOrScalar: Uint8Array | Buffer,
+  keyCurve: KeyCurve,
+  secretScalar?: boolean
+): SecretScalar => {
+  if (keyCurve === 'ed25519' && !secretScalar) {
+    return convertEddsaSecretKeyToScalar(keyOrScalar)
   } else {
-    return SecretScalar.fromBytesBE(privateKey)
+    return SecretScalar.fromBytesBE(keyOrScalar)
   }
 }
 
@@ -57,6 +61,7 @@ export const splitPrivateKeyForSigners = ({
   privateKey,
   chainCode,
   masterKey,
+  secretScalar,
 }: {
   signers: Signer[]
   keyCurve: KeyCurve
@@ -64,6 +69,7 @@ export const splitPrivateKeyForSigners = ({
   privateKey: Uint8Array | Buffer
   chainCode?: Uint8Array | Buffer
   masterKey?: boolean
+  secretScalar?: boolean
 }): Pick<ImportKeyBody, 'curve' | 'protocol' | 'minSigners' | 'encryptedKeyShares' | 'masterKey'> => {
   if (masterKey && !chainCode) {
     throw Error('master key must have a chain code')
@@ -78,10 +84,8 @@ export const splitPrivateKeyForSigners = ({
   // We set this as constant do not expose it, because Dfns API will only accept minSigners = 3 for now.
   const minSigners = 3
 
-  const secretScalar = getSecretScalar(privateKey, keyCurve)
-
   const result = buildKeyImportRequest(
-    secretScalar,
+    getSecretScalar(privateKey, keyCurve, secretScalar),
     chainCode,
     SignersInfo.new(signers),
     minSigners,

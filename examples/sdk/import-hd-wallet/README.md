@@ -1,6 +1,6 @@
 # Import Wallet
 
-This simple example demonstrates how to import a wallet into Dfns, from a private ECDSA key, inside a Nodejs app.
+This simple example demonstrates how to import a HD wallet into Dfns, from a private ECDSA key, inside a Nodejs app.
 
 
 ## Run Example
@@ -9,7 +9,7 @@ This simple example demonstrates how to import a wallet into Dfns, from a privat
 # inside repo root
 npm install
 
-cd examples/sdk/import-wallet
+cd examples/sdk/import-hd-wallet
 npm install
 npm run exec
 ```
