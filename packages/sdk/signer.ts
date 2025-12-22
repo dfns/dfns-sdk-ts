@@ -11,6 +11,10 @@ export type AllowCredential = {
   id: string
 }
 
+export type AllowCredentialWithEncryptedKey = AllowCredential & {
+  encryptedPrivateKey: string
+}
+
 export type SupportedCredential = {
   kind: CredentialKind
   factor: CredentialFactor
@@ -26,6 +30,7 @@ export type UserActionChallenge = {
   allowCredentials: {
     key: AllowCredential[]
     webauthn: AllowCredential[]
+    passwordProtectedKey: AllowCredentialWithEncryptedKey[]
   }
   userVerification: UserVerificationRequirement
 }
