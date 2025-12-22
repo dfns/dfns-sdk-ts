@@ -1,6 +1,6 @@
 {
   "name": "@dfns/sdk-browser",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "dependencies": {
     "buffer": "6.0.3"
   }
