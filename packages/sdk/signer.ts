@@ -30,7 +30,7 @@ export type UserActionChallenge = {
   allowCredentials: {
     key: AllowCredential[]
     webauthn: AllowCredential[]
-    passwordProtectedKey: AllowCredentialWithEncryptedKey[]
+    passwordProtectedKey?: AllowCredentialWithEncryptedKey[]
   }
   userVerification: UserVerificationRequirement
 }
