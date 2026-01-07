@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-xrpl",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "peerDependencies": {
     "xrpl": "4.4.3"
   }
