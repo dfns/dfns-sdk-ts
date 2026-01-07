@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-meshsdk",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "peerDependencies": {
     "@meshsdk/common": "^1.9.0-beta.74"
   }

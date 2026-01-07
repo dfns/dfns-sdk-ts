@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-hedera",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "peerDependencies": {
     "@hashgraph/sdk": "^2.70.0"
   }
