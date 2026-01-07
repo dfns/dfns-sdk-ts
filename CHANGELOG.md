@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.5 (2026-01-07)
+
+- Added SDK integration with Concordium, see `@dfns/lib-concordium`
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.8.4 (2025-12-10)
 
 - Updated `DfnsApiClient` to match the latest API changes
