@@ -7,6 +7,21 @@ import * as T from './types'
 export class DelegatedNetworksClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
+  async callFunction(request: T.CallFunctionRequest): Promise<T.CallFunctionResponse> {
+    const path = buildPathAndQuery('/networks/:network/call-function', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createCantonValidatorInit(request: T.CreateCantonValidatorRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/networks/:network/validators', {
       path: request ?? {},
@@ -129,21 +144,6 @@ export class DelegatedNetworksClient {
 
     const response = await simpleFetch(path, {
       method: 'GET',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async readContract(request: T.ReadContractRequest): Promise<T.ReadContractResponse> {
-    const path = buildPathAndQuery('/networks/read-contract', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
       apiOptions: this.apiOptions,
     })
 

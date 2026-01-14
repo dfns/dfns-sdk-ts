@@ -1,3 +1,35 @@
+export type CallFunctionBody = {
+    /** Address of the contract to call */
+    contract: string;
+    /** ABI of the read-only function to invoke */
+    abi: {
+        type: string;
+        name: string;
+        stateMutability: string;
+        inputs: {
+            name: string;
+            type: string;
+            components?: CallFunctionBody | undefined;
+        }[];
+        outputs: {
+            name: string;
+            type: string;
+            components?: CallFunctionBody | undefined;
+        }[];
+    };
+    /** Function call arguments */
+    calldata?: {} | undefined;
+};
+
+export type CallFunctionParams = {
+    /** Network name formatted in kebab case */
+    network: string;
+};
+
+export type CallFunctionResponse = any;
+
+export type CallFunctionRequest = CallFunctionParams & { body: CallFunctionBody }
+
 export type CreateCantonValidatorBody = {
     /** Nickname for this validator. */
     name?: string | undefined;
@@ -166,23 +198,6 @@ export type ListCantonValidatorsResponse = {
 };
 
 export type ListCantonValidatorsRequest = ListCantonValidatorsParams & { query?: ListCantonValidatorsQuery }
-
-export type ReadContractBody = {
-    kind: "Evm";
-    /** Network used for the wallet. */
-    network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Sonic" | "SonicTestnet" | "TempoAndantino" | "Tsc" | "TscTestnet1";
-    /** Address of the contract to call */
-    contract: string;
-    /** Encoded hex string indicating which function in the smart contract to call with which parameters. For more information, see the [encodeFunctionData ethersJS documentation](https://docs.ethers.org/v6/api/abi/#Interface-encodeFunctionData) */
-    data: string;
-};
-
-export type ReadContractResponse = {
-    kind: "Evm";
-    data: string;
-};
-
-export type ReadContractRequest = { body: ReadContractBody }
 
 export type UpdateCantonValidatorBody = {
     /** Nickname for this validator. */
