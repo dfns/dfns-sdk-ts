@@ -330,11 +330,17 @@ export type CreateApprovalDecisionResponse = {
     activity: {
         kind: "Wallets:Sign";
         transferRequest?: {
+            /** Transfer id. */
             id: string;
+            /** The source wallet for this tranfer. */
             walletId: string;
+            /** The blockchain network this transfer is on. */
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
+            /** The user (including Service Accounts) who requested this transfer. */
             requester: {
+                /** The id of the user who requested this transfer. */
                 userId: string;
+                /** The id of the token used to authenticate the user. */
                 tokenId?: string | undefined;
             };
             requestBody: {
@@ -889,26 +895,46 @@ export type CreateApprovalDecisionResponse = {
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
             };
+            /** Additional metadata about the transfered asset. */
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
             };
+            /** Transfer status.
+              
+            | Status | Definition |
+            | --- | --- |
+            | `Pending` | The request is pending approval due to a policy applied to the wallet. |
+            | `Executing` | The request is approved and is in the process of being executed. note this status is only set for a short time between pending and broadcasted. |
+            | `Broadcasted` | The transaction has been successfully written to the mempool. |
+            | `Confirmed` | The transaction has been confirmed on-chain by our indexing pipeline. |
+            | `Failed` | Indicates either system failure to complete the request or the transaction failed on chain. |
+            | `Rejected` | The request has been rejected by a policy approval action. | */
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+            /** The reason for a failed transfer. */
             reason?: string | undefined;
+            /** The blockchain transaction hash for this transfer. */
             txHash?: string | undefined;
+            /** The fee paid for this transfer in minimum denomination. */
             fee?: string | undefined;
             dateRequested: string;
             datePolicyResolved?: string | undefined;
             dateBroadcasted?: string | undefined;
             dateConfirmed?: string | undefined;
+            /** The id of the approval request if this transfer triggered a policy. */
             approvalId?: string | undefined;
+            /** The external id provided at transfer creation time. */
             externalId?: string | undefined;
+            /** The fee sponsor id used to pay for the transfer fees. */
             feeSponsorId?: string | undefined;
         } | undefined;
         transactionRequest?: {
@@ -948,6 +974,12 @@ export type CreateApprovalDecisionResponse = {
                 }[];
                 /** A fee sponsor id to sponsor the transaction fee by another wallet. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
+                kind: "FunctionCall";
+                /** Function call arguments */
+                call: {};
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
@@ -1333,16 +1365,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1373,16 +1411,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1405,16 +1449,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1440,16 +1490,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1472,16 +1528,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1506,16 +1568,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1538,16 +1606,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1570,16 +1644,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1603,16 +1683,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1641,16 +1727,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1677,16 +1769,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1709,16 +1807,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1741,16 +1845,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1773,16 +1883,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1809,16 +1925,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1841,16 +1963,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1873,16 +2001,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1905,16 +2039,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1937,16 +2077,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -1969,16 +2115,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -2001,16 +2153,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -2033,16 +2191,22 @@ export type CreateApprovalDecisionResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -3111,11 +3275,17 @@ export type GetApprovalResponse = {
     activity: {
         kind: "Wallets:Sign";
         transferRequest?: {
+            /** Transfer id. */
             id: string;
+            /** The source wallet for this tranfer. */
             walletId: string;
+            /** The blockchain network this transfer is on. */
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
+            /** The user (including Service Accounts) who requested this transfer. */
             requester: {
+                /** The id of the user who requested this transfer. */
                 userId: string;
+                /** The id of the token used to authenticate the user. */
                 tokenId?: string | undefined;
             };
             requestBody: {
@@ -3670,26 +3840,46 @@ export type GetApprovalResponse = {
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
             };
+            /** Additional metadata about the transfered asset. */
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
             };
+            /** Transfer status.
+              
+            | Status | Definition |
+            | --- | --- |
+            | `Pending` | The request is pending approval due to a policy applied to the wallet. |
+            | `Executing` | The request is approved and is in the process of being executed. note this status is only set for a short time between pending and broadcasted. |
+            | `Broadcasted` | The transaction has been successfully written to the mempool. |
+            | `Confirmed` | The transaction has been confirmed on-chain by our indexing pipeline. |
+            | `Failed` | Indicates either system failure to complete the request or the transaction failed on chain. |
+            | `Rejected` | The request has been rejected by a policy approval action. | */
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+            /** The reason for a failed transfer. */
             reason?: string | undefined;
+            /** The blockchain transaction hash for this transfer. */
             txHash?: string | undefined;
+            /** The fee paid for this transfer in minimum denomination. */
             fee?: string | undefined;
             dateRequested: string;
             datePolicyResolved?: string | undefined;
             dateBroadcasted?: string | undefined;
             dateConfirmed?: string | undefined;
+            /** The id of the approval request if this transfer triggered a policy. */
             approvalId?: string | undefined;
+            /** The external id provided at transfer creation time. */
             externalId?: string | undefined;
+            /** The fee sponsor id used to pay for the transfer fees. */
             feeSponsorId?: string | undefined;
         } | undefined;
         transactionRequest?: {
@@ -3729,6 +3919,12 @@ export type GetApprovalResponse = {
                 }[];
                 /** A fee sponsor id to sponsor the transaction fee by another wallet. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
+                kind: "FunctionCall";
+                /** Function call arguments */
+                call: {};
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
@@ -4114,16 +4310,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4154,16 +4356,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4186,16 +4394,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4221,16 +4435,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4253,16 +4473,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4287,16 +4513,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4319,16 +4551,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4351,16 +4589,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4384,16 +4628,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4422,16 +4672,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4458,16 +4714,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4490,16 +4752,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4522,16 +4790,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4554,16 +4828,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4590,16 +4870,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4622,16 +4908,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4654,16 +4946,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4686,16 +4984,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4718,16 +5022,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4750,16 +5060,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4782,16 +5098,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -4814,16 +5136,22 @@ export type GetApprovalResponse = {
             metadata: {
                 asset: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
                 };
                 fee?: {
                     symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                     decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
                     verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
                     quotes?: {
                         [x: string]: number;
                     } | undefined;
@@ -5944,11 +6272,17 @@ export type ListApprovalsResponse = {
         activity: {
             kind: "Wallets:Sign";
             transferRequest?: {
+                /** Transfer id. */
                 id: string;
+                /** The source wallet for this tranfer. */
                 walletId: string;
+                /** The blockchain network this transfer is on. */
                 network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
+                /** The user (including Service Accounts) who requested this transfer. */
                 requester: {
+                    /** The id of the user who requested this transfer. */
                     userId: string;
+                    /** The id of the token used to authenticate the user. */
                     tokenId?: string | undefined;
                 };
                 requestBody: {
@@ -6503,26 +6837,46 @@ export type ListApprovalsResponse = {
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
                 };
+                /** Additional metadata about the transfered asset. */
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                 };
+                /** Transfer status.
+                  
+                | Status | Definition |
+                | --- | --- |
+                | `Pending` | The request is pending approval due to a policy applied to the wallet. |
+                | `Executing` | The request is approved and is in the process of being executed. note this status is only set for a short time between pending and broadcasted. |
+                | `Broadcasted` | The transaction has been successfully written to the mempool. |
+                | `Confirmed` | The transaction has been confirmed on-chain by our indexing pipeline. |
+                | `Failed` | Indicates either system failure to complete the request or the transaction failed on chain. |
+                | `Rejected` | The request has been rejected by a policy approval action. | */
                 status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+                /** The reason for a failed transfer. */
                 reason?: string | undefined;
+                /** The blockchain transaction hash for this transfer. */
                 txHash?: string | undefined;
+                /** The fee paid for this transfer in minimum denomination. */
                 fee?: string | undefined;
                 dateRequested: string;
                 datePolicyResolved?: string | undefined;
                 dateBroadcasted?: string | undefined;
                 dateConfirmed?: string | undefined;
+                /** The id of the approval request if this transfer triggered a policy. */
                 approvalId?: string | undefined;
+                /** The external id provided at transfer creation time. */
                 externalId?: string | undefined;
+                /** The fee sponsor id used to pay for the transfer fees. */
                 feeSponsorId?: string | undefined;
             } | undefined;
             transactionRequest?: {
@@ -6562,6 +6916,12 @@ export type ListApprovalsResponse = {
                     }[];
                     /** A fee sponsor id to sponsor the transaction fee by another wallet. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId: string;
+                    /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                    externalId?: string | undefined;
+                } | {
+                    kind: "FunctionCall";
+                    /** Function call arguments */
+                    call: {};
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
                 } | {
@@ -6947,16 +7307,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -6987,16 +7353,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7019,16 +7391,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7054,16 +7432,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7086,16 +7470,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7120,16 +7510,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7152,16 +7548,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7184,16 +7586,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7217,16 +7625,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7255,16 +7669,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7291,16 +7711,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7323,16 +7749,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7355,16 +7787,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7387,16 +7825,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7423,16 +7867,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7455,16 +7905,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7487,16 +7943,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7519,16 +7981,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7551,16 +8019,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7583,16 +8057,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7615,16 +8095,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
@@ -7647,16 +8133,22 @@ export type ListApprovalsResponse = {
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;
                     };
                     fee?: {
                         symbol?: string | undefined;
+                        /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
                         decimals?: number | undefined;
+                        /** Whether the asset is verified by DFNS as legitimate. */
                         verified?: boolean | undefined;
+                        /** Corresponding asset price in USD at the time of transfer. */
                         quotes?: {
                             [x: string]: number;
                         } | undefined;

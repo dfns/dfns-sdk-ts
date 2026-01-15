@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-polymesh",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "peerDependencies": {
     "@polkadot/api": "^11.0.0",
     "@polymeshassociation/signing-manager-types": "3.4.0"

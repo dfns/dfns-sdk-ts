@@ -9,6 +9,21 @@ import * as T from './types'
 export class NetworksClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
+  async callFunction(request: T.CallFunctionRequest): Promise<T.CallFunctionResponse> {
+    const path = buildPathAndQuery('/networks/:network/call-function', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createCantonValidator(request: T.CreateCantonValidatorRequest): Promise<T.CreateCantonValidatorResponse> {
     const path = buildPathAndQuery('/networks/:network/validators', {
       path: request ?? {},
@@ -75,21 +90,6 @@ export class NetworksClient {
 
     const response = await simpleFetch(path, {
       method: 'GET',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async readContract(request: T.ReadContractRequest): Promise<T.ReadContractResponse> {
-    const path = buildPathAndQuery('/networks/read-contract', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
       apiOptions: this.apiOptions,
     })
 
