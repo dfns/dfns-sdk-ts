@@ -118,11 +118,14 @@ export type GetFeeSponsorResponse = {
 export type GetFeeSponsorRequest = GetFeeSponsorParams
 
 export type ListFeeSponsorsQuery = {
-    limit?: string | undefined;
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListFeeSponsorsResponse = {
+    /** Current page items. */
     items: {
         /** Fee Sponsor id. */
         id: string;
@@ -138,6 +141,7 @@ export type ListFeeSponsorsResponse = {
         /** Defines whether EndUsers and their delegated wallets can use this Fee Sponsor. */
         allowEndUser?: boolean | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 

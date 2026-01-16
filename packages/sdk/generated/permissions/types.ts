@@ -62,7 +62,7 @@ export type DeleteAssignmentParams = {
 };
 
 export type DeleteAssignmentQuery = {
-    force?: boolean;
+    force?: boolean | undefined;
 };
 
 export type DeleteAssignmentResponse = void | undefined;

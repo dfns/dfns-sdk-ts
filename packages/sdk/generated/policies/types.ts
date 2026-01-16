@@ -232,6 +232,22 @@ export type ArchivePolicyResponse = {
             };
         };
     } | {
+        kind: "GlobalLedgerTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+            riskScoreThreshold: number;
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                skipUnsupportedAsset: boolean;
+                /** skips any errors from GlobalLedger API request */
+                skipGlobalLedgerFailure: boolean;
+            };
+        };
+    } | {
         kind: "TravelRuleTransactionPrescreening";
         configuration: {
             vendor: "Notabene";
@@ -349,7 +365,7 @@ export type CreateApprovalDecisionResponse = {
                 to: string;
                 /** The amount of native tokens to transfer in minimum denomination. */
                 amount: string;
-                /** The memo or destination tag. `Algorand`, `Cosmos`, `Hedera`, `Stellar`, `TON`, `XrpLedger` support `memo`. Not valid for other networks. */
+                /** The memo or destination tag (supported networks only). */
                 memo?: string | undefined;
                 /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -910,7 +926,7 @@ export type CreateApprovalDecisionResponse = {
                 };
             };
             /** Transfer status.
-              
+            
             | Status | Definition |
             | --- | --- |
             | `Pending` | The request is pending approval due to a policy applied to the wallet. |
@@ -938,11 +954,15 @@ export type CreateApprovalDecisionResponse = {
             feeSponsorId?: string | undefined;
         } | undefined;
         transactionRequest?: {
+            /** Transaction id. */
             id: string;
+            /** Wallet id. */
             walletId: string;
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
             requester: {
+                /** User id. */
                 userId: string;
+                /** Token id. */
                 tokenId?: string | undefined;
             };
             requestBody: {
@@ -1020,7 +1040,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
             } | {
                 kind: "CancelTransaction";
-                txHash: string;
+                txHash?: string | undefined;
                 signedTx: string;
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
@@ -1043,10 +1063,14 @@ export type CreateApprovalDecisionResponse = {
             externalId?: string | undefined;
         } | undefined;
         signatureRequest?: {
+            /** Signature id. */
             id: string;
+            /** Key id. */
             keyId: string;
             requester: {
+                /** User id. */
                 userId: string;
+                /** Token id. */
                 tokenId?: string | undefined;
             };
             requestBody: {
@@ -1176,7 +1200,7 @@ export type CreateApprovalDecisionResponse = {
             } | {
                 kind: "SignerPayload";
                 /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-                       
+                
                 Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
                 
                 | Field                | Description                                                                              | Type - Optional      |
@@ -2464,6 +2488,22 @@ export type CreateApprovalDecisionResponse = {
                         };
                     };
                 } | {
+                    kind: "GlobalLedgerTransactionPrescreening";
+                    configuration: {
+                        /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+                        riskScoreThreshold: number;
+                        fallbackBehaviours: {
+                            /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                            skipUnscreenableTransaction: boolean;
+                            /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                            skipUnsupportedNetwork: boolean;
+                            /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                            skipUnsupportedAsset: boolean;
+                            /** skips any errors from GlobalLedger API request */
+                            skipGlobalLedgerFailure: boolean;
+                        };
+                    };
+                } | {
                     kind: "TravelRuleTransactionPrescreening";
                     configuration: {
                         vendor: "Notabene";
@@ -2658,6 +2698,7 @@ export type CreateApprovalDecisionResponse = {
         policyId: string;
         triggered: boolean;
         reason: string;
+        context?: any | undefined;
     }[];
     decisions: {
         userId: string;
@@ -2872,6 +2913,22 @@ export type CreatePolicyBody = {
                 skipUnsupportedNetwork: boolean;
                 skipUnsupportedAsset: boolean;
                 skipChainalysisFailure: boolean;
+            };
+        };
+    } | {
+        kind: "GlobalLedgerTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+            riskScoreThreshold: number;
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                skipUnsupportedAsset: boolean;
+                /** skips any errors from GlobalLedger API request */
+                skipGlobalLedgerFailure: boolean;
             };
         };
     } | {
@@ -3182,6 +3239,22 @@ export type CreatePolicyResponse = {
             };
         };
     } | {
+        kind: "GlobalLedgerTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+            riskScoreThreshold: number;
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                skipUnsupportedAsset: boolean;
+                /** skips any errors from GlobalLedger API request */
+                skipGlobalLedgerFailure: boolean;
+            };
+        };
+    } | {
         kind: "TravelRuleTransactionPrescreening";
         configuration: {
             vendor: "Notabene";
@@ -3294,7 +3367,7 @@ export type GetApprovalResponse = {
                 to: string;
                 /** The amount of native tokens to transfer in minimum denomination. */
                 amount: string;
-                /** The memo or destination tag. `Algorand`, `Cosmos`, `Hedera`, `Stellar`, `TON`, `XrpLedger` support `memo`. Not valid for other networks. */
+                /** The memo or destination tag (supported networks only). */
                 memo?: string | undefined;
                 /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -3855,7 +3928,7 @@ export type GetApprovalResponse = {
                 };
             };
             /** Transfer status.
-              
+            
             | Status | Definition |
             | --- | --- |
             | `Pending` | The request is pending approval due to a policy applied to the wallet. |
@@ -3883,11 +3956,15 @@ export type GetApprovalResponse = {
             feeSponsorId?: string | undefined;
         } | undefined;
         transactionRequest?: {
+            /** Transaction id. */
             id: string;
+            /** Wallet id. */
             walletId: string;
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
             requester: {
+                /** User id. */
                 userId: string;
+                /** Token id. */
                 tokenId?: string | undefined;
             };
             requestBody: {
@@ -3965,7 +4042,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
             } | {
                 kind: "CancelTransaction";
-                txHash: string;
+                txHash?: string | undefined;
                 signedTx: string;
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
@@ -3988,10 +4065,14 @@ export type GetApprovalResponse = {
             externalId?: string | undefined;
         } | undefined;
         signatureRequest?: {
+            /** Signature id. */
             id: string;
+            /** Key id. */
             keyId: string;
             requester: {
+                /** User id. */
                 userId: string;
+                /** Token id. */
                 tokenId?: string | undefined;
             };
             requestBody: {
@@ -4121,7 +4202,7 @@ export type GetApprovalResponse = {
             } | {
                 kind: "SignerPayload";
                 /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-                       
+                
                 Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
                 
                 | Field                | Description                                                                              | Type - Optional      |
@@ -5409,6 +5490,22 @@ export type GetApprovalResponse = {
                         };
                     };
                 } | {
+                    kind: "GlobalLedgerTransactionPrescreening";
+                    configuration: {
+                        /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+                        riskScoreThreshold: number;
+                        fallbackBehaviours: {
+                            /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                            skipUnscreenableTransaction: boolean;
+                            /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                            skipUnsupportedNetwork: boolean;
+                            /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                            skipUnsupportedAsset: boolean;
+                            /** skips any errors from GlobalLedger API request */
+                            skipGlobalLedgerFailure: boolean;
+                        };
+                    };
+                } | {
                     kind: "TravelRuleTransactionPrescreening";
                     configuration: {
                         vendor: "Notabene";
@@ -5603,6 +5700,7 @@ export type GetApprovalResponse = {
         policyId: string;
         triggered: boolean;
         reason: string;
+        context?: any | undefined;
     }[];
     decisions: {
         userId: string;
@@ -5845,6 +5943,22 @@ export type GetPolicyResponse = ({
                 skipUnsupportedNetwork: boolean;
                 skipUnsupportedAsset: boolean;
                 skipChainalysisFailure: boolean;
+            };
+        };
+    } | {
+        kind: "GlobalLedgerTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+            riskScoreThreshold: number;
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                skipUnsupportedAsset: boolean;
+                /** skips any errors from GlobalLedger API request */
+                skipGlobalLedgerFailure: boolean;
             };
         };
     } | {
@@ -6172,6 +6286,22 @@ export type GetPolicyResponse = ({
                     };
                 };
             } | {
+                kind: "GlobalLedgerTransactionPrescreening";
+                configuration: {
+                    /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+                    riskScoreThreshold: number;
+                    fallbackBehaviours: {
+                        /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                        skipUnscreenableTransaction: boolean;
+                        /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                        skipUnsupportedNetwork: boolean;
+                        /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                        skipUnsupportedAsset: boolean;
+                        /** skips any errors from GlobalLedger API request */
+                        skipGlobalLedgerFailure: boolean;
+                    };
+                };
+            } | {
                 kind: "TravelRuleTransactionPrescreening";
                 configuration: {
                     vendor: "Notabene";
@@ -6291,7 +6421,7 @@ export type ListApprovalsResponse = {
                     to: string;
                     /** The amount of native tokens to transfer in minimum denomination. */
                     amount: string;
-                    /** The memo or destination tag. `Algorand`, `Cosmos`, `Hedera`, `Stellar`, `TON`, `XrpLedger` support `memo`. Not valid for other networks. */
+                    /** The memo or destination tag (supported networks only). */
                     memo?: string | undefined;
                     /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -6852,7 +6982,7 @@ export type ListApprovalsResponse = {
                     };
                 };
                 /** Transfer status.
-                  
+                
                 | Status | Definition |
                 | --- | --- |
                 | `Pending` | The request is pending approval due to a policy applied to the wallet. |
@@ -6880,11 +7010,15 @@ export type ListApprovalsResponse = {
                 feeSponsorId?: string | undefined;
             } | undefined;
             transactionRequest?: {
+                /** Transaction id. */
                 id: string;
+                /** Wallet id. */
                 walletId: string;
                 network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
                 requester: {
+                    /** User id. */
                     userId: string;
+                    /** Token id. */
                     tokenId?: string | undefined;
                 };
                 requestBody: {
@@ -6962,7 +7096,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                 } | {
                     kind: "CancelTransaction";
-                    txHash: string;
+                    txHash?: string | undefined;
                     signedTx: string;
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
@@ -6985,10 +7119,14 @@ export type ListApprovalsResponse = {
                 externalId?: string | undefined;
             } | undefined;
             signatureRequest?: {
+                /** Signature id. */
                 id: string;
+                /** Key id. */
                 keyId: string;
                 requester: {
+                    /** User id. */
                     userId: string;
+                    /** Token id. */
                     tokenId?: string | undefined;
                 };
                 requestBody: {
@@ -7118,7 +7256,7 @@ export type ListApprovalsResponse = {
                 } | {
                     kind: "SignerPayload";
                     /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-                           
+                    
                     Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
                     
                     | Field                | Description                                                                              | Type - Optional      |
@@ -8406,6 +8544,22 @@ export type ListApprovalsResponse = {
                             };
                         };
                     } | {
+                        kind: "GlobalLedgerTransactionPrescreening";
+                        configuration: {
+                            /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+                            riskScoreThreshold: number;
+                            fallbackBehaviours: {
+                                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                                skipUnscreenableTransaction: boolean;
+                                /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                                skipUnsupportedNetwork: boolean;
+                                /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                                skipUnsupportedAsset: boolean;
+                                /** skips any errors from GlobalLedger API request */
+                                skipGlobalLedgerFailure: boolean;
+                            };
+                        };
+                    } | {
                         kind: "TravelRuleTransactionPrescreening";
                         configuration: {
                             vendor: "Notabene";
@@ -8600,6 +8754,7 @@ export type ListApprovalsResponse = {
             policyId: string;
             triggered: boolean;
             reason: string;
+            context?: any | undefined;
         }[];
         decisions: {
             userId: string;
@@ -8847,6 +9002,22 @@ export type ListPoliciesResponse = {
                     skipUnsupportedNetwork: boolean;
                     skipUnsupportedAsset: boolean;
                     skipChainalysisFailure: boolean;
+                };
+            };
+        } | {
+            kind: "GlobalLedgerTransactionPrescreening";
+            configuration: {
+                /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+                riskScoreThreshold: number;
+                fallbackBehaviours: {
+                    /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                    skipUnscreenableTransaction: boolean;
+                    /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                    skipUnsupportedNetwork: boolean;
+                    /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                    skipUnsupportedAsset: boolean;
+                    /** skips any errors from GlobalLedger API request */
+                    skipGlobalLedgerFailure: boolean;
                 };
             };
         } | {
@@ -9174,6 +9345,22 @@ export type ListPoliciesResponse = {
                         };
                     };
                 } | {
+                    kind: "GlobalLedgerTransactionPrescreening";
+                    configuration: {
+                        /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+                        riskScoreThreshold: number;
+                        fallbackBehaviours: {
+                            /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                            skipUnscreenableTransaction: boolean;
+                            /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                            skipUnsupportedNetwork: boolean;
+                            /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                            skipUnsupportedAsset: boolean;
+                            /** skips any errors from GlobalLedger API request */
+                            skipGlobalLedgerFailure: boolean;
+                        };
+                    };
+                } | {
                     kind: "TravelRuleTransactionPrescreening";
                     configuration: {
                         vendor: "Notabene";
@@ -9464,6 +9651,22 @@ export type UpdatePolicyBody = {
                 skipUnsupportedNetwork: boolean;
                 skipUnsupportedAsset: boolean;
                 skipChainalysisFailure: boolean;
+            };
+        };
+    } | {
+        kind: "GlobalLedgerTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+            riskScoreThreshold: number;
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                skipUnsupportedAsset: boolean;
+                /** skips any errors from GlobalLedger API request */
+                skipGlobalLedgerFailure: boolean;
             };
         };
     } | {
@@ -9775,6 +9978,22 @@ export type UpdatePolicyResponse = {
                 skipUnsupportedNetwork: boolean;
                 skipUnsupportedAsset: boolean;
                 skipChainalysisFailure: boolean;
+            };
+        };
+    } | {
+        kind: "GlobalLedgerTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
+            riskScoreThreshold: number;
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip transfer requests to a network not supported yet in our GlobalLedger integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip transfer requests of an asset not supported by our GlobalLedger integration */
+                skipUnsupportedAsset: boolean;
+                /** skips any errors from GlobalLedger API request */
+                skipGlobalLedgerFailure: boolean;
             };
         };
     } | {
