@@ -1,35 +1,55 @@
 export type CreateKeyBody = {
+    /** The cryptographic scheme for the key. */
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+    /** The elliptic curve for the key. */
     curve: "ed25519" | "secp256k1" | "stark";
+    /** Nickname for the key. */
     name?: string | undefined;
+    /** Whether this key can be used as a master key for HD derivation. */
     masterKey?: boolean | undefined;
+    /** Options for hierarchical deterministic key derivation. */
     deriveFrom?: {
-        /** Key id. */
+        /** The master key to derive from. */
         keyId: string;
         /** Use this to specify the derivation path of the signing key. One will be auto generated if left blank. */
         path?: string | undefined;
     } | undefined;
+    /** The key store to save the key to. */
     storeId?: string | undefined;
+    /** ID of the end user to delegate this key to. */
     delegateTo?: string | undefined;
+    /** Whether to delay delegation until explicitly triggered. */
     delayDelegation?: boolean | undefined;
 };
 
 export type CreateKeyResponse = {
+    /** Unique identifier for the key. */
     id: string;
+    /** The cryptographic scheme for the key. */
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+    /** The elliptic curve for the key. */
     curve: "ed25519" | "secp256k1" | "stark";
+    /** Hex-encoded public key. */
     publicKey: string;
+    /** Whether this key can be used as a master key for HD derivation. */
     masterKey?: boolean | undefined;
+    /** Derivation info if this key was derived from a master key. */
     derivedFrom?: {
-        /** Key id. */
+        /** The master key this key was derived from. */
         keyId: string;
+        /** The derivation path used. */
         path: string;
     } | undefined;
+    /** Nickname for the key. */
     name?: string | undefined;
+    /** Current status of the key. */
     status: "Active" | "Archived";
+    /** Whether the key is custodial (owned by organization) or non-custodial (delegated to end user). */
     custodial: boolean;
     dateCreated: string;
+    /** Whether this key was imported. */
     imported?: boolean | undefined;
+    /** Whether this key has been exported. */
     exported?: boolean | undefined;
     dateExported?: string | undefined;
     dateDeleted?: string | undefined;
@@ -57,21 +77,33 @@ export type DeleteKeyParams = {
 };
 
 export type DeleteKeyResponse = {
+    /** Unique identifier for the key. */
     id: string;
+    /** The cryptographic scheme for the key. */
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+    /** The elliptic curve for the key. */
     curve: "ed25519" | "secp256k1" | "stark";
+    /** Hex-encoded public key. */
     publicKey: string;
+    /** Whether this key can be used as a master key for HD derivation. */
     masterKey?: boolean | undefined;
+    /** Derivation info if this key was derived from a master key. */
     derivedFrom?: {
-        /** Key id. */
+        /** The master key this key was derived from. */
         keyId: string;
+        /** The derivation path used. */
         path: string;
     } | undefined;
+    /** Nickname for the key. */
     name?: string | undefined;
+    /** Current status of the key. */
     status: "Active" | "Archived";
+    /** Whether the key is custodial (owned by organization) or non-custodial (delegated to end user). */
     custodial: boolean;
     dateCreated: string;
+    /** Whether this key was imported. */
     imported?: boolean | undefined;
+    /** Whether this key has been exported. */
     exported?: boolean | undefined;
     dateExported?: string | undefined;
     dateDeleted?: string | undefined;
@@ -250,7 +282,7 @@ export type GenerateSignatureBody = {
 } | {
     kind: "SignerPayload";
     /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-           
+    
     Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
     
     | Field                | Description                                                                              | Type - Optional      |
@@ -310,14 +342,19 @@ export type GenerateSignatureBody = {
 };
 
 export type GenerateSignatureParams = {
+    /** The key to sign with. */
     keyId: string;
 };
 
 export type GenerateSignatureResponse = {
+    /** Signature id. */
     id: string;
+    /** Key id. */
     keyId: string;
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -447,7 +484,7 @@ export type GenerateSignatureResponse = {
     } | {
         kind: "SignerPayload";
         /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-               
+        
         Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
         
         | Field                | Description                                                                              | Type - Optional      |
@@ -534,36 +571,57 @@ export type GenerateSignatureResponse = {
 export type GenerateSignatureRequest = GenerateSignatureParams & { body: GenerateSignatureBody }
 
 export type GetKeyParams = {
+    /** The key to retrieve. */
     keyId: string;
 };
 
 export type GetKeyResponse = {
+    /** Unique identifier for the key. */
     id: string;
+    /** The cryptographic scheme for the key. */
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+    /** The elliptic curve for the key. */
     curve: "ed25519" | "secp256k1" | "stark";
+    /** Hex-encoded public key. */
     publicKey: string;
+    /** Whether this key can be used as a master key for HD derivation. */
     masterKey?: boolean | undefined;
+    /** Derivation info if this key was derived from a master key. */
     derivedFrom?: {
-        /** Key id. */
+        /** The master key this key was derived from. */
         keyId: string;
+        /** The derivation path used. */
         path: string;
     } | undefined;
+    /** Nickname for the key. */
     name?: string | undefined;
+    /** Current status of the key. */
     status: "Active" | "Archived";
+    /** Whether the key is custodial (owned by organization) or non-custodial (delegated to end user). */
     custodial: boolean;
     dateCreated: string;
+    /** Whether this key was imported. */
     imported?: boolean | undefined;
+    /** Whether this key has been exported. */
     exported?: boolean | undefined;
     dateExported?: string | undefined;
     dateDeleted?: string | undefined;
+    /** Wallets associated with this key. */
     wallets: {
+        /** The wallet id. */
         id: string;
+        /** The network of the wallet. */
         network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     }[];
+    /** Key store details. */
     store: {
+        /** The key store id. */
         id: string;
+        /** The type of key store. */
         kind: "Hsm" | "Mpc";
+        /** The key id within the store. */
         keyId: string;
+        /** The HD derivation path if applicable. */
         derivationPath?: string | undefined;
     };
 };
@@ -571,15 +629,21 @@ export type GetKeyResponse = {
 export type GetKeyRequest = GetKeyParams
 
 export type GetSignatureParams = {
+    /** The key that was used for signing. */
     keyId: string;
+    /** The signature request to retrieve. */
     signatureId: string;
 };
 
 export type GetSignatureResponse = {
+    /** Signature id. */
     id: string;
+    /** Key id. */
     keyId: string;
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -709,7 +773,7 @@ export type GetSignatureResponse = {
     } | {
         kind: "SignerPayload";
         /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-               
+        
         Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
         
         | Field                | Description                                                                              | Type - Optional      |
@@ -809,21 +873,33 @@ export type ImportKeyBody = {
 };
 
 export type ImportKeyResponse = {
+    /** Unique identifier for the key. */
     id: string;
+    /** The cryptographic scheme for the key. */
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+    /** The elliptic curve for the key. */
     curve: "ed25519" | "secp256k1" | "stark";
+    /** Hex-encoded public key. */
     publicKey: string;
+    /** Whether this key can be used as a master key for HD derivation. */
     masterKey?: boolean | undefined;
+    /** Derivation info if this key was derived from a master key. */
     derivedFrom?: {
-        /** Key id. */
+        /** The master key this key was derived from. */
         keyId: string;
+        /** The derivation path used. */
         path: string;
     } | undefined;
+    /** Nickname for the key. */
     name?: string | undefined;
+    /** Current status of the key. */
     status: "Active" | "Archived";
+    /** Whether the key is custodial (owned by organization) or non-custodial (delegated to end user). */
     custodial: boolean;
     dateCreated: string;
+    /** Whether this key was imported. */
     imported?: boolean | undefined;
+    /** Whether this key has been exported. */
     exported?: boolean | undefined;
     dateExported?: string | undefined;
     dateDeleted?: string | undefined;
@@ -832,53 +908,77 @@ export type ImportKeyResponse = {
 export type ImportKeyRequest = { body: ImportKeyBody }
 
 export type ListKeysQuery = {
-    limit?: string | undefined;
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
+    /** Filter by owner id or username. */
     owner?: string | undefined;
 };
 
 export type ListKeysResponse = {
+    /** Current page items. */
     items: {
+        /** Unique identifier for the key. */
         id: string;
+        /** The cryptographic scheme for the key. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+        /** The elliptic curve for the key. */
         curve: "ed25519" | "secp256k1" | "stark";
+        /** Hex-encoded public key. */
         publicKey: string;
+        /** Whether this key can be used as a master key for HD derivation. */
         masterKey?: boolean | undefined;
+        /** Derivation info if this key was derived from a master key. */
         derivedFrom?: {
-            /** Key id. */
+            /** The master key this key was derived from. */
             keyId: string;
+            /** The derivation path used. */
             path: string;
         } | undefined;
+        /** Nickname for the key. */
         name?: string | undefined;
+        /** Current status of the key. */
         status: "Active" | "Archived";
+        /** Whether the key is custodial (owned by organization) or non-custodial (delegated to end user). */
         custodial: boolean;
         dateCreated: string;
+        /** Whether this key was imported. */
         imported?: boolean | undefined;
+        /** Whether this key has been exported. */
         exported?: boolean | undefined;
         dateExported?: string | undefined;
         dateDeleted?: string | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 
 export type ListKeysRequest = { query?: ListKeysQuery }
 
 export type ListSignaturesParams = {
+    /** The key to list signatures for. */
     keyId: string;
 };
 
 export type ListSignaturesQuery = {
-    limit?: string | undefined;
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListSignaturesResponse = {
-    keyId: string;
+    /** Current page items. */
     items: {
+        /** Signature id. */
         id: string;
+        /** Key id. */
         keyId: string;
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: {
@@ -1008,7 +1108,7 @@ export type ListSignaturesResponse = {
         } | {
             kind: "SignerPayload";
             /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-                   
+            
             Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
             
             | Field                | Description                                                                              | Type - Optional      |
@@ -1091,7 +1191,10 @@ export type ListSignaturesResponse = {
         dateConfirmed?: string | undefined;
         externalId?: string | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
+    /** The key these signatures belong to. */
+    keyId: string;
 };
 
 export type ListSignaturesRequest = ListSignaturesParams & { query?: ListSignaturesQuery }
@@ -1105,21 +1208,33 @@ export type UpdateKeyParams = {
 };
 
 export type UpdateKeyResponse = {
+    /** Unique identifier for the key. */
     id: string;
+    /** The cryptographic scheme for the key. */
     scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+    /** The elliptic curve for the key. */
     curve: "ed25519" | "secp256k1" | "stark";
+    /** Hex-encoded public key. */
     publicKey: string;
+    /** Whether this key can be used as a master key for HD derivation. */
     masterKey?: boolean | undefined;
+    /** Derivation info if this key was derived from a master key. */
     derivedFrom?: {
-        /** Key id. */
+        /** The master key this key was derived from. */
         keyId: string;
+        /** The derivation path used. */
         path: string;
     } | undefined;
+    /** Nickname for the key. */
     name?: string | undefined;
+    /** Current status of the key. */
     status: "Active" | "Archived";
+    /** Whether the key is custodial (owned by organization) or non-custodial (delegated to end user). */
     custodial: boolean;
     dateCreated: string;
+    /** Whether this key was imported. */
     imported?: boolean | undefined;
+    /** Whether this key has been exported. */
     exported?: boolean | undefined;
     dateExported?: string | undefined;
     dateDeleted?: string | undefined;

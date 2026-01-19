@@ -1128,7 +1128,7 @@ export type CreateUserBody = {
     /** Value that can be used to correlate the entity with an external system. */
     externalId?: string | undefined;
     /** If set to true, the user will have to authenticate via SSO */
-    isSSORequired?: boolean;
+    isSSORequired?: boolean | undefined;
 };
 
 export type CreateUserResponse = {
@@ -2227,6 +2227,7 @@ export type RegisterEndUserResponse = {
             id: string;
             /** Key scheme. */
             scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+            /** Key curve. */
             curve: "ed25519" | "secp256k1" | "stark";
             /** Hex-encoded value of the public key. */
             publicKey: string;

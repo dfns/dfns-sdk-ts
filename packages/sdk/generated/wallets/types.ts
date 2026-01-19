@@ -55,11 +55,15 @@ export type ActivateWalletParams = {
 };
 
 export type ActivateWalletResponse = {
+    /** Transaction id. */
     id: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -137,7 +141,7 @@ export type ActivateWalletResponse = {
         externalId?: string | undefined;
     } | {
         kind: "CancelTransaction";
-        txHash: string;
+        txHash?: string | undefined;
         signedTx: string;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -227,15 +231,20 @@ export type BroadcastTransactionBody = {
 };
 
 export type BroadcastTransactionParams = {
+    /** Wallet id. */
     walletId: string;
 };
 
 export type BroadcastTransactionResponse = {
+    /** Transaction id. */
     id: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -313,7 +322,7 @@ export type BroadcastTransactionResponse = {
         externalId?: string | undefined;
     } | {
         kind: "CancelTransaction";
-        txHash: string;
+        txHash?: string | undefined;
         signedTx: string;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -346,11 +355,15 @@ export type CancelTransactionParams = {
 };
 
 export type CancelTransactionResponse = {
+    /** Transaction id. */
     id: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -428,7 +441,7 @@ export type CancelTransactionResponse = {
         externalId?: string | undefined;
     } | {
         kind: "CancelTransaction";
-        txHash: string;
+        txHash?: string | undefined;
         signedTx: string;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -461,11 +474,15 @@ export type CancelTransferParams = {
 };
 
 export type CancelTransferResponse = {
+    /** Transaction id. */
     id: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -543,7 +560,7 @@ export type CancelTransferResponse = {
         externalId?: string | undefined;
     } | {
         kind: "CancelTransaction";
-        txHash: string;
+        txHash?: string | undefined;
         signedTx: string;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -585,7 +602,7 @@ export type CreateWalletBody = {
         storeId?: string | undefined;
         /** Use this for hierarchical deterministic key derivation. */
         deriveFrom?: {
-            /** Key id. */
+            /** The master key to derive from. */
             keyId: string;
             /** Use this to specify the derivation path of the signing key. One will be auto generated if left blank. */
             path?: string | undefined;
@@ -616,6 +633,7 @@ export type CreateWalletResponse = {
         id: string;
         /** Key scheme. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+        /** Key curve. */
         curve: "ed25519" | "secp256k1" | "stark";
         /** Hex-encoded value of the public key. */
         publicKey: string;
@@ -813,7 +831,7 @@ export type GenerateSignatureBody = {
 } | {
     kind: "SignerPayload";
     /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-           
+    
     Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
     
     | Field                | Description                                                                              | Type - Optional      |
@@ -873,14 +891,19 @@ export type GenerateSignatureBody = {
 };
 
 export type GenerateSignatureParams = {
+    /** The wallet to sign with. */
     walletId: string;
 };
 
 export type GenerateSignatureResponse = {
+    /** Signature id. */
     id: string;
+    /** Key id. */
     keyId: string;
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -1010,7 +1033,7 @@ export type GenerateSignatureResponse = {
     } | {
         kind: "SignerPayload";
         /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-               
+        
         Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
         
         | Field                | Description                                                                              | Type - Optional      |
@@ -1083,6 +1106,7 @@ export type GenerateSignatureResponse = {
         encoded?: string | undefined;
     }[] | undefined;
     signedData?: string | undefined;
+    /** The network of the wallet. */
     network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     txHash?: string | undefined;
     fee?: string | undefined;
@@ -1092,6 +1116,7 @@ export type GenerateSignatureResponse = {
     dateSigned?: string | undefined;
     dateConfirmed?: string | undefined;
     externalId?: string | undefined;
+    /** The wallet that was used for signing. */
     walletId: string;
 };
 
@@ -1142,15 +1167,21 @@ export type GetOfferResponse = {
 export type GetOfferRequest = GetOfferParams
 
 export type GetSignatureParams = {
+    /** The wallet that was used for signing. */
     walletId: string;
+    /** The signature request to retrieve. */
     signatureId: string;
 };
 
 export type GetSignatureResponse = {
+    /** Signature id. */
     id: string;
+    /** Key id. */
     keyId: string;
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -1280,7 +1311,7 @@ export type GetSignatureResponse = {
     } | {
         kind: "SignerPayload";
         /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-               
+        
         Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
         
         | Field                | Description                                                                              | Type - Optional      |
@@ -1367,16 +1398,22 @@ export type GetSignatureResponse = {
 export type GetSignatureRequest = GetSignatureParams
 
 export type GetTransactionParams = {
+    /** Wallet id. */
     walletId: string;
+    /** Transaction id. */
     transactionId: string;
 };
 
 export type GetTransactionResponse = {
+    /** Transaction id. */
     id: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -1454,7 +1491,7 @@ export type GetTransactionResponse = {
         externalId?: string | undefined;
     } | {
         kind: "CancelTransaction";
-        txHash: string;
+        txHash?: string | undefined;
         signedTx: string;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -1480,7 +1517,9 @@ export type GetTransactionResponse = {
 export type GetTransactionRequest = GetTransactionParams
 
 export type GetTransferParams = {
+    /** Wallet id. */
     walletId: string;
+    /** Transfer id. */
     transferId: string;
 };
 
@@ -1504,7 +1543,7 @@ export type GetTransferResponse = {
         to: string;
         /** The amount of native tokens to transfer in minimum denomination. */
         amount: string;
-        /** The memo or destination tag. `Algorand`, `Cosmos`, `Hedera`, `Stellar`, `TON`, `XrpLedger` support `memo`. Not valid for other networks. */
+        /** The memo or destination tag (supported networks only). */
         memo?: string | undefined;
         /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -2065,7 +2104,7 @@ export type GetTransferResponse = {
         };
     };
     /** Transfer status.
-      
+    
     | Status | Definition |
     | --- | --- |
     | `Pending` | The request is pending approval due to a policy applied to the wallet. |
@@ -2096,6 +2135,7 @@ export type GetTransferResponse = {
 export type GetTransferRequest = GetTransferParams
 
 export type GetWalletParams = {
+    /** The wallet to retrieve. */
     walletId: string;
 };
 
@@ -2112,6 +2152,7 @@ export type GetWalletResponse = {
         id: string;
         /** Key scheme. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+        /** Key curve. */
         curve: "ed25519" | "secp256k1" | "stark";
         /** Hex-encoded value of the public key. */
         publicKey: string;
@@ -3168,6 +3209,7 @@ export type ImportWalletResponse = {
         id: string;
         /** Key scheme. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+        /** Key curve. */
         curve: "ed25519" | "secp256k1" | "stark";
         /** Hex-encoded value of the public key. */
         publicKey: string;
@@ -3249,10 +3291,12 @@ export type ListOffersResponse = {
 export type ListOffersRequest = ListOffersParams & { query?: ListOffersQuery }
 
 export type ListOrgWalletHistoryQuery = {
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
+    paginationToken?: string | undefined;
     startTime: string;
     endTime: string;
-    limit?: string | undefined;
-    paginationToken?: string | undefined;
 };
 
 export type ListOrgWalletHistoryResponse = {
@@ -3280,21 +3324,28 @@ export type ListOrgWalletHistoryResponse = {
 export type ListOrgWalletHistoryRequest = { query?: ListOrgWalletHistoryQuery }
 
 export type ListSignaturesParams = {
+    /** The wallet to list signatures for. */
     walletId: string;
 };
 
 export type ListSignaturesQuery = {
-    limit?: string | undefined;
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListSignaturesResponse = {
-    keyId: string;
+    /** Current page items. */
     items: {
+        /** Signature id. */
         id: string;
+        /** Key id. */
         keyId: string;
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: {
@@ -3424,7 +3475,7 @@ export type ListSignaturesResponse = {
         } | {
             kind: "SignerPayload";
             /** The unsigned Signer Payload formatted as JSON, or as a serialized hex-encoded buffer.
-                   
+            
             Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
             
             | Field                | Description                                                                              | Type - Optional      |
@@ -3507,28 +3558,38 @@ export type ListSignaturesResponse = {
         dateConfirmed?: string | undefined;
         externalId?: string | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
+    /** The underlying key of the wallet. */
+    keyId: string;
 };
 
 export type ListSignaturesRequest = ListSignaturesParams & { query?: ListSignaturesQuery }
 
 export type ListTransactionsParams = {
+    /** Wallet id. */
     walletId: string;
 };
 
 export type ListTransactionsQuery = {
-    limit?: string | undefined;
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListTransactionsResponse = {
-    walletId: string;
+    /** Current page items. */
     items: {
+        /** Transaction id. */
         id: string;
+        /** Wallet id. */
         walletId: string;
         network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: {
@@ -3606,7 +3667,7 @@ export type ListTransactionsResponse = {
             externalId?: string | undefined;
         } | {
             kind: "CancelTransaction";
-            txHash: string;
+            txHash?: string | undefined;
             signedTx: string;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -3628,22 +3689,28 @@ export type ListTransactionsResponse = {
         dateConfirmed?: string | undefined;
         externalId?: string | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
+    /** Wallet id. */
+    walletId: string;
 };
 
 export type ListTransactionsRequest = ListTransactionsParams & { query?: ListTransactionsQuery }
 
 export type ListTransfersParams = {
+    /** Wallet id. */
     walletId: string;
 };
 
 export type ListTransfersQuery = {
-    limit?: string | undefined;
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
 };
 
 export type ListTransfersResponse = {
-    walletId: string;
+    /** Current page items. */
     items: {
         /** Transfer id. */
         id: string;
@@ -3664,7 +3731,7 @@ export type ListTransfersResponse = {
             to: string;
             /** The amount of native tokens to transfer in minimum denomination. */
             amount: string;
-            /** The memo or destination tag. `Algorand`, `Cosmos`, `Hedera`, `Stellar`, `TON`, `XrpLedger` support `memo`. Not valid for other networks. */
+            /** The memo or destination tag (supported networks only). */
             memo?: string | undefined;
             /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -4225,7 +4292,7 @@ export type ListTransfersResponse = {
             };
         };
         /** Transfer status.
-          
+        
         | Status | Definition |
         | --- | --- |
         | `Pending` | The request is pending approval due to a policy applied to the wallet. |
@@ -4252,14 +4319,20 @@ export type ListTransfersResponse = {
         /** The fee sponsor id used to pay for the transfer fees. */
         feeSponsorId?: string | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
+    /** Wallet id. */
+    walletId: string;
 };
 
 export type ListTransfersRequest = ListTransfersParams & { query?: ListTransfersQuery }
 
 export type ListWalletsQuery = {
-    limit?: string | undefined;
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
+    /** Filter by owner id or username. */
     owner?: string | undefined;
     /** @deprecated use owner instead */
     ownerId?: string | undefined;
@@ -4268,6 +4341,7 @@ export type ListWalletsQuery = {
 };
 
 export type ListWalletsResponse = {
+    /** Current page items. */
     items: {
         /** ID of the wallet. */
         id: string;
@@ -4281,6 +4355,7 @@ export type ListWalletsResponse = {
             id: string;
             /** Key scheme. */
             scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+            /** Key curve. */
             curve: "ed25519" | "secp256k1" | "stark";
             /** Hex-encoded value of the public key. */
             publicKey: string;
@@ -4304,6 +4379,7 @@ export type ListWalletsResponse = {
         /** Id of the validator on which the wallet is created for Canton networks */
         validatorId?: string | undefined;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 
@@ -4361,11 +4437,15 @@ export type SpeedUpTransactionParams = {
 };
 
 export type SpeedUpTransactionResponse = {
+    /** Transaction id. */
     id: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -4443,7 +4523,7 @@ export type SpeedUpTransactionResponse = {
         externalId?: string | undefined;
     } | {
         kind: "CancelTransaction";
-        txHash: string;
+        txHash?: string | undefined;
         signedTx: string;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -4476,11 +4556,15 @@ export type SpeedUpTransferParams = {
 };
 
 export type SpeedUpTransferResponse = {
+    /** Transaction id. */
     id: string;
+    /** Wallet id. */
     walletId: string;
     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TempoAndantino" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -4558,7 +4642,7 @@ export type SpeedUpTransferResponse = {
         externalId?: string | undefined;
     } | {
         kind: "CancelTransaction";
-        txHash: string;
+        txHash?: string | undefined;
         signedTx: string;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -4601,7 +4685,7 @@ export type TransferAssetBody = {
     to: string;
     /** The amount of native tokens to transfer in minimum denomination. */
     amount: string;
-    /** The memo or destination tag. `Algorand`, `Cosmos`, `Hedera`, `Stellar`, `TON`, `XrpLedger` support `memo`. Not valid for other networks. */
+    /** The memo or destination tag (supported networks only). */
     memo?: string | undefined;
     /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -5173,7 +5257,7 @@ export type TransferAssetResponse = {
         to: string;
         /** The amount of native tokens to transfer in minimum denomination. */
         amount: string;
-        /** The memo or destination tag. `Algorand`, `Cosmos`, `Hedera`, `Stellar`, `TON`, `XrpLedger` support `memo`. Not valid for other networks. */
+        /** The memo or destination tag (supported networks only). */
         memo?: string | undefined;
         /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -5734,7 +5818,7 @@ export type TransferAssetResponse = {
         };
     };
     /** Transfer status.
-      
+    
     | Status | Definition |
     | --- | --- |
     | `Pending` | The request is pending approval due to a policy applied to the wallet. |
@@ -5799,6 +5883,7 @@ export type UpdateWalletResponse = {
         id: string;
         /** Key scheme. */
         scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+        /** Key curve. */
         curve: "ed25519" | "secp256k1" | "stark";
         /** Hex-encoded value of the public key. */
         publicKey: string;
