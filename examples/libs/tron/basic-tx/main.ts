@@ -1,7 +1,7 @@
 import { DfnsWallet } from '@dfns/lib-tron'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-const TronWeb = require('tronweb')
+import { TronWeb } from 'tronweb'
 
 import * as dotenv from 'dotenv'
 dotenv.config()
