@@ -73,7 +73,7 @@
     "bitcoinjs-lib": "^6.0.0",
     "cosmjs-types": "^0.9.0",
     "ethers": "^6.0.0",
-    "tronweb": "6.0.4",
+    "tronweb": "6.1.1",
     "viem": "^2.0.0",
     "xrpl": "4.4.3"
   },
