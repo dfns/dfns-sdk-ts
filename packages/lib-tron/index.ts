@@ -1,11 +1,8 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 import { SignedTransaction, Transaction } from '@tronweb3/tronwallet-abstract-adapter'
+import { utils } from 'tronweb'
 
-const TronWeb = require('tronweb')
-const bytes = TronWeb.utils.bytes
-const ethersUtils = TronWeb.utils.ethersUtils
-const txUtils = TronWeb.utils.transaction
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -14,8 +11,8 @@ export type DfnsWalletOptions = {
 
 type WalletMetadata = GetWalletResponse
 
-const bufferToHex = (buffer: unknown): string => {
-  return `0x${bytes.byteArray2hexStr(buffer).toLowerCase()}`
+const bufferToHex = (buffer: any): string => {
+  return `0x${utils.bytes.byteArray2hexStr(buffer).toLowerCase()}`
 }
 
 const assertSigned = (res: GenerateSignatureResponse) => {
@@ -62,7 +59,7 @@ export class DfnsWallet {
       walletId: this.metadata.id,
       body: {
         kind: 'Transaction',
-        transaction: bufferToHex(txUtils.txJsonToPb(transaction).serializeBinary()),
+        transaction: bufferToHex(utils.transaction.txJsonToPb(transaction).serializeBinary()),
       },
     })
 
@@ -82,7 +79,7 @@ export class DfnsWallet {
       walletId: this.metadata.id,
       body: {
         kind: 'Message',
-        message: bufferToHex(ethersUtils.toUtf8Bytes(message)),
+        message: bufferToHex(utils.ethersUtils.toUtf8Bytes(message)),
       },
     })
 
