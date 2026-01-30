@@ -235,8 +235,11 @@ export type CreateDepositResponse = {
     exchangeReference?: string | undefined;
     kind: "Withdrawal" | "Deposit";
     walletId: string;
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -728,8 +731,11 @@ export type CreateWithdrawalResponse = {
     exchangeReference?: string | undefined;
     kind: "Withdrawal" | "Deposit";
     walletId: string;
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: {
@@ -1054,12 +1060,19 @@ export type ListAssetWithdrawalNetworksResponse = (({
     kind: "Hts";
     tokenId: string;
 } | {
+    kind: "Iou";
+    currency: string;
+    issuer: string;
+} | {
     kind: "Cip56";
     instrumentId: string;
     instrumentAdmin: string;
 } | {
     kind: "Coin" | "LockedCoin";
     coin: string;
+} | {
+    kind: "Xls33";
+    issuanceId: string;
 } | {
     kind: "Asset";
     assetId: string;

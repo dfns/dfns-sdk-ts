@@ -117,10 +117,11 @@ export type CreateSwapResponse = {
             amount: string;
         };
     } | {};
+    /** The user who initiated the request. */
     requester: {
-        /** User (could be a service account) who requested the resource. */
+        /** User id. */
         userId: string;
-        /** Service Account token or Personal Access token used when requesting the resource. */
+        /** Token id. */
         tokenId?: string | undefined;
     };
 };
@@ -228,10 +229,11 @@ export type CreateSwapQuoteResponse = {
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
     } | {};
+    /** The user who initiated the request. */
     requester: {
-        /** User (could be a service account) who requested the quote. */
+        /** User id. */
         userId: string;
-        /** Service Account token or Personal Access token used when requesting the quote. */
+        /** Token id. */
         tokenId?: string | undefined;
     };
 };
@@ -329,10 +331,11 @@ export type GetSwapResponse = {
             amount: string;
         };
     } | {};
+    /** The user who initiated the request. */
     requester: {
-        /** User (could be a service account) who requested the resource. */
+        /** User id. */
         userId: string;
-        /** Service Account token or Personal Access token used when requesting the resource. */
+        /** Token id. */
         tokenId?: string | undefined;
     };
 };
@@ -418,10 +421,11 @@ export type GetSwapQuoteResponse = {
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
     } | {};
+    /** The user who initiated the request. */
     requester: {
-        /** User (could be a service account) who requested the quote. */
+        /** User id. */
         userId: string;
-        /** Service Account token or Personal Access token used when requesting the quote. */
+        /** Token id. */
         tokenId?: string | undefined;
     };
 };
@@ -523,10 +527,11 @@ export type ListSwapsResponse = {
                 amount: string;
             };
         } | {};
+        /** The user who initiated the request. */
         requester: {
-            /** User (could be a service account) who requested the resource. */
+            /** User id. */
             userId: string;
-            /** Service Account token or Personal Access token used when requesting the resource. */
+            /** Token id. */
             tokenId?: string | undefined;
         };
     }[];

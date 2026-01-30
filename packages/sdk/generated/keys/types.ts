@@ -351,6 +351,7 @@ export type GenerateSignatureResponse = {
     id: string;
     /** Key id. */
     keyId: string;
+    /** The user who initiated the request. */
     requester: {
         /** User id. */
         userId: string;
@@ -640,6 +641,7 @@ export type GetSignatureResponse = {
     id: string;
     /** Key id. */
     keyId: string;
+    /** The user who initiated the request. */
     requester: {
         /** User id. */
         userId: string;
@@ -975,6 +977,7 @@ export type ListSignaturesResponse = {
         id: string;
         /** Key id. */
         keyId: string;
+        /** The user who initiated the request. */
         requester: {
             /** User id. */
             userId: string;
