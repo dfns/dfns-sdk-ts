@@ -135,7 +135,7 @@ export type GetFeesQuery = {
 
 export type GetFeesResponse = {
     kind: "Bitcoin";
-    network: ("Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3") | ("Dogecoin" | "DogecoinTestnet") | ("Litecoin" | "LitecoinTestnet");
+    network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "Litecoin" | "LitecoinTestnet" | "DogecoinTestnet" | "Dogecoin";
     blockNumber: number;
     slow: {
         feeRate: string;

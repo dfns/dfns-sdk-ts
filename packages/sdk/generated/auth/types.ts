@@ -2225,9 +2225,9 @@ export type RegisterEndUserResponse = {
         signingKey: {
             /** Key id. */
             id: string;
-            /** Key scheme. */
+            /** The cryptographic scheme for the key. */
             scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
-            /** Key curve. */
+            /** The elliptic curve for the key. */
             curve: "ed25519" | "secp256k1" | "stark";
             /** Hex-encoded value of the public key. */
             publicKey: string;

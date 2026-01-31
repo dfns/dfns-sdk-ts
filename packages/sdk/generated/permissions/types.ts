@@ -85,6 +85,7 @@ export type GetPermissionResponse = {
 } & {
     pendingChangeRequest?: {
         id: string;
+        /** The user who initiated the change request. */
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -125,6 +126,7 @@ export type ListAssignmentsResponse = {
     } & {
         pendingChangeRequest?: {
             id: string;
+            /** The user who initiated the change request. */
             requester: {
                 userId: string;
                 tokenId?: string | undefined;
@@ -168,6 +170,7 @@ export type ListPermissionsResponse = {
     } & {
         pendingChangeRequest?: {
             id: string;
+            /** The user who initiated the change request. */
             requester: {
                 userId: string;
                 tokenId?: string | undefined;

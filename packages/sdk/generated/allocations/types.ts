@@ -73,10 +73,11 @@ export type CreateAllocationResponse = {
         kind: "Deposit" | "Withdraw";
         /** Status of the allocation action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        /** The user who initiated the request. */
         requester: {
-            /** User (could be a service account) who requested the resource. */
+            /** User id. */
             userId: string;
-            /** Service Account token or Personal Access token used when requesting the resource. */
+            /** Token id. */
             tokenId?: string | undefined;
         };
         /** The full request used for initiating this allocation action. */
@@ -203,10 +204,11 @@ export type CreateAllocationActionResponse = {
         kind: "Deposit" | "Withdraw";
         /** Status of the allocation action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        /** The user who initiated the request. */
         requester: {
-            /** User (could be a service account) who requested the resource. */
+            /** User id. */
             userId: string;
-            /** Service Account token or Personal Access token used when requesting the resource. */
+            /** Token id. */
             tokenId?: string | undefined;
         };
         /** The full request used for initiating this allocation action. */
@@ -314,10 +316,11 @@ export type GetAllocationResponse = {
         kind: "Deposit" | "Withdraw";
         /** Status of the allocation action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        /** The user who initiated the request. */
         requester: {
-            /** User (could be a service account) who requested the resource. */
+            /** User id. */
             userId: string;
-            /** Service Account token or Personal Access token used when requesting the resource. */
+            /** Token id. */
             tokenId?: string | undefined;
         };
         /** The full request used for initiating this allocation action. */
@@ -391,10 +394,11 @@ export type ListAllocationActionsResponse = {
         kind: "Deposit" | "Withdraw";
         /** Status of the allocation action. Once initiated, the status will be InProgress, after processing it will be Completed or Failed. */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        /** The user who initiated the request. */
         requester: {
-            /** User (could be a service account) who requested the resource. */
+            /** User id. */
             userId: string;
-            /** Service Account token or Personal Access token used when requesting the resource. */
+            /** Token id. */
             tokenId?: string | undefined;
         };
         /** The full request used for initiating this allocation action. */

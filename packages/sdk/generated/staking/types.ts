@@ -1,13 +1,4 @@
 export type CreateStakeBody = ({
-    protocol: "Babylon";
-    /** Id of the Dfns wallet making the deposit (`wa-...`). */
-    walletId: string;
-    /** Staking Provider */
-    provider: "Figment";
-    /** Transaction amount denominated in min units */
-    amount: string;
-    duration: number;
-} | {
     protocol: "Ethereum";
     /** Id of the Dfns wallet making the deposit (`wa-...`). */
     walletId: string;
@@ -32,8 +23,11 @@ export type CreateStakeResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -79,8 +73,11 @@ export type CreateStakeResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -128,8 +125,11 @@ export type CreateStakeResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -176,8 +176,11 @@ export type CreateStakeResponse = ({
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
         kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
+        /** The user who initiated the request. */
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: (({
@@ -216,12 +219,6 @@ export type CreateStakeResponse = ({
             kind: "Deposit";
             amount: string;
             lockedIotas?: string[] | undefined;
-        }) | ({
-            protocol: "Babylon";
-            kind: "Unbond";
-        } | {
-            protocol: "Babylon";
-            kind: "Withdraw";
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
@@ -245,12 +242,6 @@ export type CreateStakeActionBody = (({
     kind: "Deposit";
     amount: string;
     lockedIotas?: string[] | undefined;
-}) | ({
-    protocol: "Babylon";
-    kind: "Unbond";
-} | {
-    protocol: "Babylon";
-    kind: "Withdraw";
 }) | {
     protocol: "Ethereum";
     kind: "Withdraw";
@@ -267,8 +258,11 @@ export type CreateStakeActionResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -314,8 +308,11 @@ export type CreateStakeActionResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -363,8 +360,11 @@ export type CreateStakeActionResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -411,8 +411,11 @@ export type CreateStakeActionResponse = ({
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
         kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
+        /** The user who initiated the request. */
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: (({
@@ -451,12 +454,6 @@ export type CreateStakeActionResponse = ({
             kind: "Deposit";
             amount: string;
             lockedIotas?: string[] | undefined;
-        }) | ({
-            protocol: "Babylon";
-            kind: "Unbond";
-        } | {
-            protocol: "Babylon";
-            kind: "Withdraw";
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
@@ -498,8 +495,11 @@ export type GetStakesResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -545,8 +545,11 @@ export type GetStakesResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -594,8 +597,11 @@ export type GetStakesResponse = ({
     provider?: ("Figment") | undefined;
     walletId: string;
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    /** The user who initiated the request. */
     requester: {
+        /** User id. */
         userId: string;
+        /** Token id. */
         tokenId?: string | undefined;
     };
     requestBody: ({
@@ -642,8 +648,11 @@ export type GetStakesResponse = ({
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
         kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
+        /** The user who initiated the request. */
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: (({
@@ -682,12 +691,6 @@ export type GetStakesResponse = ({
             kind: "Deposit";
             amount: string;
             lockedIotas?: string[] | undefined;
-        }) | ({
-            protocol: "Babylon";
-            kind: "Unbond";
-        } | {
-            protocol: "Babylon";
-            kind: "Withdraw";
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
@@ -721,8 +724,11 @@ export type ListStakeActionsResponse = {
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
         kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
+        /** The user who initiated the request. */
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: (({
@@ -761,12 +767,6 @@ export type ListStakeActionsResponse = {
             kind: "Deposit";
             amount: string;
             lockedIotas?: string[] | undefined;
-        }) | ({
-            protocol: "Babylon";
-            kind: "Unbond";
-        } | {
-            protocol: "Babylon";
-            kind: "Withdraw";
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
@@ -795,8 +795,11 @@ export type ListStakesResponse = {
         provider?: ("Figment") | undefined;
         walletId: string;
         status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+        /** The user who initiated the request. */
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: ({
@@ -842,8 +845,11 @@ export type ListStakesResponse = {
         provider?: ("Figment") | undefined;
         walletId: string;
         status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+        /** The user who initiated the request. */
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: ({
@@ -891,8 +897,11 @@ export type ListStakesResponse = {
         provider?: ("Figment") | undefined;
         walletId: string;
         status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+        /** The user who initiated the request. */
         requester: {
+            /** User id. */
             userId: string;
+            /** Token id. */
             tokenId?: string | undefined;
         };
         requestBody: ({
