@@ -2366,6 +2366,8 @@ export type UpdatePersonalAccessTokenRequest = UpdatePersonalAccessTokenParams &
 export type UpdateServiceAccountBody = {
     name?: string | undefined;
     externalId?: string | undefined;
+    permissions?: string[] | undefined;
+    scopes?: string[] | undefined;
 };
 
 export type UpdateServiceAccountParams = {
