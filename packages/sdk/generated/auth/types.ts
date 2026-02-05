@@ -1016,6 +1016,8 @@ export type CreateServiceAccountBody = {
     permissionId?: string | undefined;
     externalId?: string | undefined;
     daysValid?: number | undefined;
+    permissions?: string[] | undefined;
+    scopes?: string[] | undefined;
 };
 
 export type CreateServiceAccountResponse = {
