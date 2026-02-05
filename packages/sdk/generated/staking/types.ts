@@ -172,6 +172,7 @@ export type CreateStakeResponse = ({
     actions: {
         id: string;
         stakeId: string;
+        status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         transactionId?: string | undefined;
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
@@ -407,6 +408,7 @@ export type CreateStakeActionResponse = ({
     actions: {
         id: string;
         stakeId: string;
+        status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         transactionId?: string | undefined;
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
@@ -644,6 +646,7 @@ export type GetStakesResponse = ({
     actions: {
         id: string;
         stakeId: string;
+        status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         transactionId?: string | undefined;
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
@@ -720,6 +723,7 @@ export type ListStakeActionsResponse = {
     items: {
         id: string;
         stakeId: string;
+        status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         transactionId?: string | undefined;
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
