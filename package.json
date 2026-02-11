@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aptos-labs/ts-sdk": "^5.0.0",
-    "@aws-sdk/client-kms": "^3.485.0",
+    "@aws-sdk/client-kms": "^3.987.0",
     "@concordium/id-app-sdk": "0.1.4",
     "@concordium/web-sdk": "12.0.0-alpha.3",
     "@dfns/dfns-key-export-bundler": "0.4.0",
