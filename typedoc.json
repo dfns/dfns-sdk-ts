@@ -13,6 +13,7 @@
     "packages/lib-polkadot",
     "packages/lib-polymesh",
     "packages/lib-solana",
+    "packages/lib-starknet",
     "packages/lib-stellar",
     "packages/lib-sui",
     "packages/lib-taquito",
