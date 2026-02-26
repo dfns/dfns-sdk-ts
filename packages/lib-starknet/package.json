@@ -1,0 +1,7 @@
+{
+  "name": "@dfns/lib-starknet",
+  "version": "0.8.11",
+  "peerDependencies": {
+    "starknet": "9.2.1"
+  }
+}
