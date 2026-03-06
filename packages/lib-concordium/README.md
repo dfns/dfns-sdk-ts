@@ -1,6 +1,6 @@
 # Dfns Wallet for [Concordium](https://concordium.com/)
 
-Dfns wallet integration with Concordium SDK (https://github.com/Concordium/concordium-node-sdk-js), makes working with Concordium as simple and painless as possible. `DfnsWallet` implements methods to interact with the Concordium network using your Dfns managed wallets.
+Dfns wallet integration with [Concordium SDK](https://github.com/Concordium/concordium-node-sdk-js), makes working with Concordium as simple and painless as possible.
 
 The `DfnsWallet` uses `generateSignature` to compute signatures using your Dfns managed wallets, for all the transactions created by your program. Then you need to broadcast these transactions yourself to the corresponding node providers that are either self hosted or by a blockchain provider.
 
@@ -17,14 +17,15 @@ const signer = new AsymmetricKeySigner({
 })
 
 const dfnsClient = new DfnsApiClient({
-  appId: process.env.DFNS_APP_ID!,
+  orgId: process.env.DFNS_ORG_ID!,
   authToken: process.env.DFNS_AUTH_TOKEN!,
   baseUrl: process.env.DFNS_API_URL!,
   signer,
 })
 
-const concordiumWallet = await DfnsWallet.init({
-  walletId: 'your-wallet-id',
+return DfnsWallet.init({
+  walletId,
   dfnsClient,
 })
-```
+
+Go checkout the ../../examples/libs/concordium we have that showcase how you can start developing dapps with Dfns wallets.

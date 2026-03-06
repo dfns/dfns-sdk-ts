@@ -1,13 +1,26 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
-import { ActivateWalletResponse, GetWalletResponse } from '@dfns/sdk/types/wallets'
+import { ActivateWalletResponse, GenerateSignatureResponse, GetWalletResponse } from '@dfns/sdk/types/wallets'
 import {
   AccountAddress,
+  Transaction,
 } from '@concordium/web-sdk'
 import { SerializedCredentialDeploymentDetails } from '@concordium/id-app-sdk'
 
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
+}
+
+const assertSigned = (res: GenerateSignatureResponse) => {
+  if (res.status === 'Failed') {
+    throw new DfnsError(-1, 'signing failed', res)
+  } else if (res.status !== 'Signed') {
+    throw new DfnsError(
+      -1,
+      'cannot complete signing synchronously because this wallet action requires policy approval',
+      res
+    )
+  }
 }
 
 export class DfnsWallet {
@@ -44,7 +57,7 @@ export class DfnsWallet {
 
   public getAccountAddress(): AccountAddress.Type | undefined {
     if (this.status !== 'Active') {
-        throw new DfnsError(-1, 'wallet is not active', { walletId: this.walletId, status: this.status })
+      throw new DfnsError(-1, 'wallet is not active', { walletId: this.walletId, status: this.status })
     }
     return this.address ? AccountAddress.fromBase58(this.address) : undefined
   }
@@ -55,6 +68,39 @@ export class DfnsWallet {
 
   public getStatus(): string {
     return this.status
+  }
+
+  // We return the signature instead of a SignedTransaction to be flexible when it comes
+  // to MultiSig. We can't really know the CredentialId and the KeyId of a given sig,
+  // We let the client handle it.
+  public async signTransaction(transaction: Transaction.Type): Promise<string> {
+    if (this.status !== 'Active') {
+      throw new DfnsError(-1, 'wallet is not active', {
+        walletId: this.walletId,
+        status: this.status,
+      })
+    }
+
+    if (!Transaction.isSignable(transaction)) {
+      throw new DfnsError(-1, 'transaction is not signable', { transaction })
+    }
+
+    const res = await this.dfnsClient.wallets.generateSignature({
+      walletId: this.walletId,
+      body: {
+        kind: 'Transaction',
+        // take care of bigints
+        transaction: JSON.parse(Transaction.toJSONString(transaction)),
+      },
+    })
+
+    assertSigned(res)
+
+    if (!res.signature?.encoded) {
+      throw new DfnsError(-1, 'signature missing from response', res)
+    }
+
+    return res.signature.encoded
   }
 
   public async activate(cred: SerializedCredentialDeploymentDetails): Promise<ActivateWalletResponse> {
