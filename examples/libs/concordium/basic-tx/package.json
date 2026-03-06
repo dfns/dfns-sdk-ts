@@ -1,0 +1,20 @@
+{
+  "name": "concordium-basic-tx",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "dependencies": {
+    "@concordium/web-sdk": "12.0.0-alpha.3",
+    "@dfns/lib-concordium": "file:../../../../packages/lib-concordium",
+    "@dfns/sdk": "file:../../../../packages/sdk",
+    "@dfns/sdk-keysigner": "file:../../../../packages/sdk-keysigner",
+    "@grpc/grpc-js": "1.12.6",
+    "@protobuf-ts/grpc-transport": "2.9.4",
+    "dotenv": "16.1.4"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.1"
+  },
+  "scripts": {
+    "exec": "ts-node main.ts"
+  }
+}
