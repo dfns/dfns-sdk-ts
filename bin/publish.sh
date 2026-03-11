@@ -18,6 +18,7 @@ declare -a packages=(
     "@dfns/lib-polkadot"
     "@dfns/lib-polymesh"
     "@dfns/lib-solana"
+    "@dfns/lib-starknet"
     "@dfns/lib-stellar"
     "@dfns/lib-sui"
     "@dfns/lib-taquito"

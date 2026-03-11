@@ -215,6 +215,7 @@ Integrations with other blockchain platforms to make Dapp development frictionle
 - [polkadot{.js}](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polkadot/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polkadot)
 - [polymesh](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polymesh/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polymesh)
 - [Solana web3.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-solana/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/solana)
+- [Starknet.js](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-starknet/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/starknet)
 - [Stellar sdk](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-stellar/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/stellar)
 - [Tezos Taquito](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-taquito/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/taquito)
 - [TronWeb](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-tron/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/tron)
