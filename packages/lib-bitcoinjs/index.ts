@@ -70,6 +70,10 @@ export class DfnsWallet implements SignerAsync {
     return this.metadata.address
   }
 
+  public get network(): string {
+    return this.metadata.network
+  }
+
   public async sign(hash: Buffer): Promise<Buffer> {
     return this._sign(hash)
   }
