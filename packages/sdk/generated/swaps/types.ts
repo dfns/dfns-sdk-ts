@@ -124,6 +124,8 @@ export type CreateSwapResponse = {
         /** Token id. */
         tokenId?: string | undefined;
     };
+    /** The failure reason, if any. Only present when status is Failed. */
+    failureReason?: string | undefined;
 };
 
 export type CreateSwapRequest = { body: CreateSwapBody }
@@ -338,6 +340,8 @@ export type GetSwapResponse = {
         /** Token id. */
         tokenId?: string | undefined;
     };
+    /** The failure reason, if any. Only present when status is Failed. */
+    failureReason?: string | undefined;
 };
 
 export type GetSwapRequest = GetSwapParams
@@ -534,6 +538,8 @@ export type ListSwapsResponse = {
             /** Token id. */
             tokenId?: string | undefined;
         };
+        /** The failure reason, if any. Only present when status is Failed. */
+        failureReason?: string | undefined;
     }[];
     /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;

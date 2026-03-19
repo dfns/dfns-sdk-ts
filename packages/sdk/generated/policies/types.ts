@@ -26,6 +26,8 @@ export type ArchivePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -56,6 +58,8 @@ export type ArchivePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -90,6 +94,8 @@ export type ArchivePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -124,6 +130,8 @@ export type ArchivePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     };
@@ -156,6 +164,8 @@ export type ArchivePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -267,6 +277,8 @@ export type ArchivePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -1446,6 +1458,8 @@ export type CreateApprovalDecisionResponse = {
                 /** Token id. */
                 tokenId?: string | undefined;
             };
+            /** The failure reason, if any. Only present when status is Failed. */
+            failureReason?: string | undefined;
         } | undefined;
     } | {
         kind: "Wallets:IncomingTransaction";
@@ -2433,6 +2447,8 @@ export type CreateApprovalDecisionResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -2463,6 +2479,8 @@ export type CreateApprovalDecisionResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -2497,6 +2515,8 @@ export type CreateApprovalDecisionResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -2531,6 +2551,8 @@ export type CreateApprovalDecisionResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 };
@@ -2563,6 +2585,8 @@ export type CreateApprovalDecisionResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -2674,6 +2698,8 @@ export type CreateApprovalDecisionResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -2739,6 +2765,7 @@ export type CreateApprovalDecisionResponse = {
     } | {
         kind: "Permissions:Modify";
         changeRequest: {
+            /** ID of the change request. */
             id: string;
             /** The user who initiated the change request. */
             requester: {
@@ -2746,7 +2773,9 @@ export type CreateApprovalDecisionResponse = {
                 tokenId?: string | undefined;
                 appId?: string | undefined;
             };
+            /** Current status of the change request. */
             status: "Applied" | "Failed" | "Pending" | "Rejected";
+            /** ID of the entity being changed. */
             entityId: string;
             dateCreated: string;
             dateResolved?: string | undefined;
@@ -2754,17 +2783,24 @@ export type CreateApprovalDecisionResponse = {
             kind: "Permission";
             operationKind: "Update";
             body: {
+                /** ID of the permission (also referred to as "role" in the dashboard). */
                 id: string;
+                /** Human-readable name of the permission (role). */
                 name: string;
+                /** Current status of the permission. */
                 status: "Active";
+                /** List of API operations this permission grants access to. See [Permissions List](https://docs.dfns.co/core-concepts/roles-and-permissions#list-of-permissions) for available operations. */
                 operations: string[];
+                /** Whether this permission is system-managed and cannot be modified. */
                 isImmutable: boolean;
+                /** Whether this permission has been archived (soft-deleted). */
                 isArchived: boolean;
             };
         };
     } | {
         kind: "Permissions:Assign";
         changeRequest: {
+            /** ID of the change request. */
             id: string;
             /** The user who initiated the change request. */
             requester: {
@@ -2772,7 +2808,9 @@ export type CreateApprovalDecisionResponse = {
                 tokenId?: string | undefined;
                 appId?: string | undefined;
             };
+            /** Current status of the change request. */
             status: "Applied" | "Failed" | "Pending" | "Rejected";
+            /** ID of the entity being changed. */
             entityId: string;
             dateCreated: string;
             dateResolved?: string | undefined;
@@ -2780,9 +2818,13 @@ export type CreateApprovalDecisionResponse = {
             kind: "Assignment";
             operationKind: "Create" | "Delete";
             body: {
+                /** ID of the permission assignment. */
                 id: string;
+                /** ID of the permission (also referred to as "role" in the dashboard). */
                 permissionId: string;
+                /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
                 identityId: string;
+                /** Whether this assignment is system-managed and cannot be modified. */
                 isImmutable: boolean;
             };
         };
@@ -2883,6 +2925,8 @@ export type CreatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -2909,6 +2953,8 @@ export type CreatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -2939,6 +2985,8 @@ export type CreatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -2969,6 +3017,8 @@ export type CreatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     };
@@ -2997,6 +3047,8 @@ export type CreatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -3104,6 +3156,8 @@ export type CreatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -3186,6 +3240,8 @@ export type CreatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -3216,6 +3272,8 @@ export type CreatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -3250,6 +3308,8 @@ export type CreatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -3284,6 +3344,8 @@ export type CreatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     };
@@ -3316,6 +3378,8 @@ export type CreatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -3427,6 +3491,8 @@ export type CreatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -4601,6 +4667,8 @@ export type GetApprovalResponse = {
                 /** Token id. */
                 tokenId?: string | undefined;
             };
+            /** The failure reason, if any. Only present when status is Failed. */
+            failureReason?: string | undefined;
         } | undefined;
     } | {
         kind: "Wallets:IncomingTransaction";
@@ -5588,6 +5656,8 @@ export type GetApprovalResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -5618,6 +5688,8 @@ export type GetApprovalResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -5652,6 +5724,8 @@ export type GetApprovalResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -5686,6 +5760,8 @@ export type GetApprovalResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 };
@@ -5718,6 +5794,8 @@ export type GetApprovalResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -5829,6 +5907,8 @@ export type GetApprovalResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -5894,6 +5974,7 @@ export type GetApprovalResponse = {
     } | {
         kind: "Permissions:Modify";
         changeRequest: {
+            /** ID of the change request. */
             id: string;
             /** The user who initiated the change request. */
             requester: {
@@ -5901,7 +5982,9 @@ export type GetApprovalResponse = {
                 tokenId?: string | undefined;
                 appId?: string | undefined;
             };
+            /** Current status of the change request. */
             status: "Applied" | "Failed" | "Pending" | "Rejected";
+            /** ID of the entity being changed. */
             entityId: string;
             dateCreated: string;
             dateResolved?: string | undefined;
@@ -5909,17 +5992,24 @@ export type GetApprovalResponse = {
             kind: "Permission";
             operationKind: "Update";
             body: {
+                /** ID of the permission (also referred to as "role" in the dashboard). */
                 id: string;
+                /** Human-readable name of the permission (role). */
                 name: string;
+                /** Current status of the permission. */
                 status: "Active";
+                /** List of API operations this permission grants access to. See [Permissions List](https://docs.dfns.co/core-concepts/roles-and-permissions#list-of-permissions) for available operations. */
                 operations: string[];
+                /** Whether this permission is system-managed and cannot be modified. */
                 isImmutable: boolean;
+                /** Whether this permission has been archived (soft-deleted). */
                 isArchived: boolean;
             };
         };
     } | {
         kind: "Permissions:Assign";
         changeRequest: {
+            /** ID of the change request. */
             id: string;
             /** The user who initiated the change request. */
             requester: {
@@ -5927,7 +6017,9 @@ export type GetApprovalResponse = {
                 tokenId?: string | undefined;
                 appId?: string | undefined;
             };
+            /** Current status of the change request. */
             status: "Applied" | "Failed" | "Pending" | "Rejected";
+            /** ID of the entity being changed. */
             entityId: string;
             dateCreated: string;
             dateResolved?: string | undefined;
@@ -5935,9 +6027,13 @@ export type GetApprovalResponse = {
             kind: "Assignment";
             operationKind: "Create" | "Delete";
             body: {
+                /** ID of the permission assignment. */
                 id: string;
+                /** ID of the permission (also referred to as "role" in the dashboard). */
                 permissionId: string;
+                /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
                 identityId: string;
+                /** Whether this assignment is system-managed and cannot be modified. */
                 isImmutable: boolean;
             };
         };
@@ -6046,6 +6142,8 @@ export type GetPolicyResponse = ({
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -6076,6 +6174,8 @@ export type GetPolicyResponse = ({
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -6110,6 +6210,8 @@ export type GetPolicyResponse = ({
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -6144,6 +6246,8 @@ export type GetPolicyResponse = ({
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     };
@@ -6176,6 +6280,8 @@ export type GetPolicyResponse = ({
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -6287,6 +6393,8 @@ export type GetPolicyResponse = ({
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -6387,6 +6495,8 @@ export type GetPolicyResponse = ({
                     };
                     /** Whether the initiator of the activity can participate in the approval. */
                     initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
                 }[];
                 autoRejectTimeout?: (number | undefined) | null;
             } | {
@@ -6417,6 +6527,8 @@ export type GetPolicyResponse = ({
                     };
                     /** Whether the initiator of the activity can participate in the approval. */
                     initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
                 }[];
                 autoRejectTimeout?: (number | undefined) | null;
             } | {
@@ -6451,6 +6563,8 @@ export type GetPolicyResponse = ({
                     };
                     /** Whether the initiator of the activity can participate in the approval. */
                     initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
                 }[];
                 autoRejectTimeout?: (number | undefined) | null;
             } | {
@@ -6485,6 +6599,8 @@ export type GetPolicyResponse = ({
                     };
                     /** Whether the initiator of the activity can participate in the approval. */
                     initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
                 }[];
                 autoRejectTimeout?: (number | undefined) | null;
             };
@@ -6517,6 +6633,8 @@ export type GetPolicyResponse = ({
                     };
                     /** Whether the initiator of the activity can participate in the approval. */
                     initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
                 }[];
                 autoRejectTimeout?: (number | undefined) | null;
             } | {
@@ -6628,6 +6746,8 @@ export type GetPolicyResponse = ({
                     };
                     /** Whether the initiator of the activity can participate in the approval. */
                     initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
                 }[];
                 autoRejectTimeout?: (number | undefined) | null;
             } | {
@@ -7809,6 +7929,8 @@ export type ListApprovalsResponse = {
                     /** Token id. */
                     tokenId?: string | undefined;
                 };
+                /** The failure reason, if any. Only present when status is Failed. */
+                failureReason?: string | undefined;
             } | undefined;
         } | {
             kind: "Wallets:IncomingTransaction";
@@ -8796,6 +8918,8 @@ export type ListApprovalsResponse = {
                             };
                             /** Whether the initiator of the activity can participate in the approval. */
                             initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
                         }[];
                         autoRejectTimeout?: (number | undefined) | null;
                     } | {
@@ -8826,6 +8950,8 @@ export type ListApprovalsResponse = {
                             };
                             /** Whether the initiator of the activity can participate in the approval. */
                             initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
                         }[];
                         autoRejectTimeout?: (number | undefined) | null;
                     } | {
@@ -8860,6 +8986,8 @@ export type ListApprovalsResponse = {
                             };
                             /** Whether the initiator of the activity can participate in the approval. */
                             initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
                         }[];
                         autoRejectTimeout?: (number | undefined) | null;
                     } | {
@@ -8894,6 +9022,8 @@ export type ListApprovalsResponse = {
                             };
                             /** Whether the initiator of the activity can participate in the approval. */
                             initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
                         }[];
                         autoRejectTimeout?: (number | undefined) | null;
                     };
@@ -8926,6 +9056,8 @@ export type ListApprovalsResponse = {
                             };
                             /** Whether the initiator of the activity can participate in the approval. */
                             initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
                         }[];
                         autoRejectTimeout?: (number | undefined) | null;
                     } | {
@@ -9037,6 +9169,8 @@ export type ListApprovalsResponse = {
                             };
                             /** Whether the initiator of the activity can participate in the approval. */
                             initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
                         }[];
                         autoRejectTimeout?: (number | undefined) | null;
                     } | {
@@ -9102,6 +9236,7 @@ export type ListApprovalsResponse = {
         } | {
             kind: "Permissions:Modify";
             changeRequest: {
+                /** ID of the change request. */
                 id: string;
                 /** The user who initiated the change request. */
                 requester: {
@@ -9109,7 +9244,9 @@ export type ListApprovalsResponse = {
                     tokenId?: string | undefined;
                     appId?: string | undefined;
                 };
+                /** Current status of the change request. */
                 status: "Applied" | "Failed" | "Pending" | "Rejected";
+                /** ID of the entity being changed. */
                 entityId: string;
                 dateCreated: string;
                 dateResolved?: string | undefined;
@@ -9117,17 +9254,24 @@ export type ListApprovalsResponse = {
                 kind: "Permission";
                 operationKind: "Update";
                 body: {
+                    /** ID of the permission (also referred to as "role" in the dashboard). */
                     id: string;
+                    /** Human-readable name of the permission (role). */
                     name: string;
+                    /** Current status of the permission. */
                     status: "Active";
+                    /** List of API operations this permission grants access to. See [Permissions List](https://docs.dfns.co/core-concepts/roles-and-permissions#list-of-permissions) for available operations. */
                     operations: string[];
+                    /** Whether this permission is system-managed and cannot be modified. */
                     isImmutable: boolean;
+                    /** Whether this permission has been archived (soft-deleted). */
                     isArchived: boolean;
                 };
             };
         } | {
             kind: "Permissions:Assign";
             changeRequest: {
+                /** ID of the change request. */
                 id: string;
                 /** The user who initiated the change request. */
                 requester: {
@@ -9135,7 +9279,9 @@ export type ListApprovalsResponse = {
                     tokenId?: string | undefined;
                     appId?: string | undefined;
                 };
+                /** Current status of the change request. */
                 status: "Applied" | "Failed" | "Pending" | "Rejected";
+                /** ID of the entity being changed. */
                 entityId: string;
                 dateCreated: string;
                 dateResolved?: string | undefined;
@@ -9143,9 +9289,13 @@ export type ListApprovalsResponse = {
                 kind: "Assignment";
                 operationKind: "Create" | "Delete";
                 body: {
+                    /** ID of the permission assignment. */
                     id: string;
+                    /** ID of the permission (also referred to as "role" in the dashboard). */
                     permissionId: string;
+                    /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
                     identityId: string;
+                    /** Whether this assignment is system-managed and cannot be modified. */
                     isImmutable: boolean;
                 };
             };
@@ -9259,6 +9409,8 @@ export type ListPoliciesResponse = {
                 };
                 /** Whether the initiator of the activity can participate in the approval. */
                 initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
             }[];
             autoRejectTimeout?: (number | undefined) | null;
         } | {
@@ -9289,6 +9441,8 @@ export type ListPoliciesResponse = {
                 };
                 /** Whether the initiator of the activity can participate in the approval. */
                 initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
             }[];
             autoRejectTimeout?: (number | undefined) | null;
         } | {
@@ -9323,6 +9477,8 @@ export type ListPoliciesResponse = {
                 };
                 /** Whether the initiator of the activity can participate in the approval. */
                 initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
             }[];
             autoRejectTimeout?: (number | undefined) | null;
         } | {
@@ -9357,6 +9513,8 @@ export type ListPoliciesResponse = {
                 };
                 /** Whether the initiator of the activity can participate in the approval. */
                 initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
             }[];
             autoRejectTimeout?: (number | undefined) | null;
         };
@@ -9389,6 +9547,8 @@ export type ListPoliciesResponse = {
                 };
                 /** Whether the initiator of the activity can participate in the approval. */
                 initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
             }[];
             autoRejectTimeout?: (number | undefined) | null;
         } | {
@@ -9500,6 +9660,8 @@ export type ListPoliciesResponse = {
                 };
                 /** Whether the initiator of the activity can participate in the approval. */
                 initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
             }[];
             autoRejectTimeout?: (number | undefined) | null;
         } | {
@@ -9600,6 +9762,8 @@ export type ListPoliciesResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -9630,6 +9794,8 @@ export type ListPoliciesResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -9664,6 +9830,8 @@ export type ListPoliciesResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -9698,6 +9866,8 @@ export type ListPoliciesResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 };
@@ -9730,6 +9900,8 @@ export type ListPoliciesResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -9841,6 +10013,8 @@ export type ListPoliciesResponse = {
                         };
                         /** Whether the initiator of the activity can participate in the approval. */
                         initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
                     }[];
                     autoRejectTimeout?: (number | undefined) | null;
                 } | {
@@ -9929,6 +10103,8 @@ export type UpdatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -9955,6 +10131,8 @@ export type UpdatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -9985,6 +10163,8 @@ export type UpdatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -10015,6 +10195,8 @@ export type UpdatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     };
@@ -10043,6 +10225,8 @@ export type UpdatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -10150,6 +10334,8 @@ export type UpdatePolicyBody = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -10236,6 +10422,8 @@ export type UpdatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -10266,6 +10454,8 @@ export type UpdatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -10300,6 +10490,8 @@ export type UpdatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -10334,6 +10526,8 @@ export type UpdatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     };
@@ -10366,6 +10560,8 @@ export type UpdatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {
@@ -10477,6 +10673,8 @@ export type UpdatePolicyResponse = {
             };
             /** Whether the initiator of the activity can participate in the approval. */
             initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
         }[];
         autoRejectTimeout?: (number | undefined) | null;
     } | {

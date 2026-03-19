@@ -121,4 +121,18 @@ export class DelegatedPayoutsClient {
 
     return response.json()
   }
+
+  async listPayouts(request?: T.ListPayoutsRequest): Promise<T.ListPayoutsResponse> {
+    const path = buildPathAndQuery('/payouts', {
+      path: request ?? {},
+      query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
 }

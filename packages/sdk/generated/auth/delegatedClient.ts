@@ -225,7 +225,7 @@ export class DelegatedAuthClient {
   async archiveServiceAccountInit(request: T.ArchiveServiceAccountRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
       path: request ?? {},
-      query: {},
+      query: request.query ?? {},
     })
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
@@ -247,7 +247,7 @@ export class DelegatedAuthClient {
   ): Promise<T.ArchiveServiceAccountResponse> {
     const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
       path: request ?? {},
-      query: {},
+      query: request.query ?? {},
     })
 
     const { userAction } = await BaseAuthApi.signUserActionChallenge(
@@ -850,7 +850,7 @@ export class DelegatedAuthClient {
       {
         userActionHttpMethod: 'PUT',
         userActionHttpPath: path,
-        userActionPayload: JSON.stringify({}),
+        userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
       this.apiOptions
@@ -875,7 +875,7 @@ export class DelegatedAuthClient {
 
     const response = await simpleFetch(path, {
       method: 'PUT',
-      body: {},
+      body: request.body,
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })

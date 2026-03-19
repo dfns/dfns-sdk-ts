@@ -196,7 +196,7 @@ export class DelegatedPermissionsClient {
   async listAssignments(request: T.ListAssignmentsRequest): Promise<T.ListAssignmentsResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
-      query: {},
+      query: request.query ?? {},
     })
 
     const response = await simpleFetch(path, {
