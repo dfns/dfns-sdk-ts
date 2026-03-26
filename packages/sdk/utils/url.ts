@@ -1,6 +1,6 @@
 export const buildPathAndQuery = (
   pattern: string,
-  params: { path: Record<string, any>; query: Record<string, string | number | boolean | undefined> }
+  params: { path: Record<string, any>; query: Record<string, string | number | boolean | string[] | undefined> }
 ): string => {
   let path = pattern
 
@@ -11,8 +11,15 @@ export const buildPathAndQuery = (
   }
 
   const query = Object.entries(params.query)
-    .filter(([_, value]) => !!value)
-    .map(([key, value]) => `${key}=${encodeURIComponent(value!.toString())}`)
+    .flatMap(([key, value]) => {
+      if (Array.isArray(value)) {
+        return value.map((item) => `${key}=${encodeURIComponent(item)}`)
+      } else if (!value) {
+        return []
+      } else {
+        return [`${key}=${encodeURIComponent(value.toString())}`]
+      }
+    })
     .join('&')
 
   return query === '' ? path : `${path}?${query}`

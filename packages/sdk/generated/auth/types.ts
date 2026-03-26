@@ -143,6 +143,11 @@ export type ArchiveServiceAccountParams = {
     serviceAccountId: string;
 };
 
+export type ArchiveServiceAccountQuery = {
+    /** If true, bypasses the policy approver check and deletes immediately. */
+    force?: boolean;
+};
+
 export type ArchiveServiceAccountResponse = {
     userInfo: {
         username: string;
@@ -186,7 +191,7 @@ export type ArchiveServiceAccountResponse = {
     }[];
 };
 
-export type ArchiveServiceAccountRequest = ArchiveServiceAccountParams
+export type ArchiveServiceAccountRequest = ArchiveServiceAccountParams & { query?: ArchiveServiceAccountQuery }
 
 export type ArchiveUserParams = {
     userId: string;
@@ -1368,6 +1373,11 @@ export type DeactivatePersonalAccessTokenResponse = {
 
 export type DeactivatePersonalAccessTokenRequest = DeactivatePersonalAccessTokenParams
 
+export type DeactivateServiceAccountBody = {
+    /** If true, bypasses the policy approver check and deactivates immediately. */
+    force?: boolean;
+};
+
 export type DeactivateServiceAccountParams = {
     serviceAccountId: string;
 };
@@ -1415,7 +1425,7 @@ export type DeactivateServiceAccountResponse = {
     }[];
 };
 
-export type DeactivateServiceAccountRequest = DeactivateServiceAccountParams
+export type DeactivateServiceAccountRequest = DeactivateServiceAccountParams & { body: DeactivateServiceAccountBody }
 
 export type DeactivateUserParams = {
     userId: string;

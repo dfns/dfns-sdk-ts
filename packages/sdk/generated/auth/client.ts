@@ -87,7 +87,7 @@ export class AuthClient {
   async archiveServiceAccount(request: T.ArchiveServiceAccountRequest): Promise<T.ArchiveServiceAccountResponse> {
     const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
       path: request ?? {},
-      query: {},
+      query: request.query ?? {},
     })
 
     const response = await userActionFetch(path, {
@@ -417,7 +417,7 @@ export class AuthClient {
 
     const response = await userActionFetch(path, {
       method: 'PUT',
-      body: {},
+      body: request.body,
       apiOptions: this.apiOptions,
     })
 
