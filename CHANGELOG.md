@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.13 (2026-03-25)
+
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.8.12 (2026-02-26)
 
 - Updated `DfnsApiClient` to match the latest API changes
