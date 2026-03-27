@@ -85,21 +85,23 @@ jobs:
               --include-workspace-root "$VERSION"
           git add */package.json package.json package-lock.json
 
-      # Use Github api which "signs" bot commit
-      - name: Commit version bump
-        uses: qoomon/actions--create-commit@dfef4d264de752be6d6195a4d61a2f3d3262d406 # v1.2.3
-        with:
-          message: release ${{ needs.semantic_release.outputs.new_release_version }} [skip ci]
-          skip-empty: true
-
-      - name: Push version bump
-        run: git push
-
       - uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
         id: app-token
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PK }}
+
+      - name: Commit and push version bump
+        env:
+          VERSION: ${{ needs.semantic_release.outputs.new_release_version }}
+          APP_TOKEN: ${{ steps.app-token.outputs.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: release ${VERSION} [skip ci]"
+          git remote set-url origin https://x-access-token:${APP_TOKEN}@github.com/${REPOSITORY}
+          git push
 
       - name: GitHub release
         uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 # v2.4.1
