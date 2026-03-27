@@ -11,12 +11,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: '0'
 
       - name: install node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
@@ -30,7 +30,7 @@ jobs:
         run: npm run docs
 
       - name: publish docs
-        uses: s0/git-publish-subdir-action@v2.6.0
+        uses: s0/git-publish-subdir-action@92faf786f11dfa44fc366ac3eb274d193ca1af7e # v2.6.0
         env:
           REPO: self
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
