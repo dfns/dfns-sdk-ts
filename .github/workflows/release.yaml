@@ -1,111 +1,29 @@
 name: semantic-release
 
 on:
-  workflow_run:
-    workflows: [build]
-    types: [completed]
-    branches: [m]
+  workflow_dispatch:
 
 jobs:
-  semantic_release:
-    name: Calculate version release
-    runs-on: ubuntu-latest
-    if: github.event.workflow_run.conclusion == 'success'
-    permissions:
-      contents: write
-    outputs:
-      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
-      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
-      new_release_git_tag: ${{ steps.semantic.outputs.new_release_git_tag }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-        with:
-          fetch-depth: 0
-
-      - name: Semantic release
-        id: semantic
-        uses: cycjimmy/semantic-release-action@b12c8f6015dc215fe37bc154d4ad456dd3833c90 # v6.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   release:
     name: Release
-    needs: semantic_release
-    if: needs.semantic_release.outputs.new_release_published == 'true'
     runs-on: ubuntu-latest
     environment:
-      name: m
+      name: npm-publish
       deployment: false
     permissions:
-      contents: write
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
-      - name: Bump packages versions
-        env:
-          VERSION: ${{ needs.semantic_release.outputs.new_release_version }}
-        run: |
-          npm version --no-git-tag-version \
-              --workspace @dfns/lib-algorand \
-              --workspace @dfns/lib-aptos \
-              --workspace @dfns/lib-bitcoinjs \
-              --workspace @dfns/lib-concordium \
-              --workspace @dfns/lib-cosmjs \
-              --workspace @dfns/lib-ethersjs5 \
-              --workspace @dfns/lib-ethersjs6 \
-              --workspace @dfns/lib-hedera \
-              --workspace @dfns/lib-iota \
-              --workspace @dfns/lib-kaspa \
-              --workspace @dfns/lib-meshsdk \
-              --workspace @dfns/lib-near \
-              --workspace @dfns/lib-polkadot \
-              --workspace @dfns/lib-polymesh \
-              --workspace @dfns/lib-solana \
-              --workspace @dfns/lib-stellar \
-              --workspace @dfns/lib-sui \
-              --workspace @dfns/lib-taquito \
-              --workspace @dfns/lib-ton \
-              --workspace @dfns/lib-tron \
-              --workspace @dfns/lib-vechain \
-              --workspace @dfns/lib-viem \
-              --workspace @dfns/lib-xrpl \
-              --workspace @dfns/sdk \
-              --workspace @dfns/sdk-awskmssigner \
-              --workspace @dfns/sdk-browser \
-              --workspace @dfns/sdk-keyexport-utils-nodejs \
-              --workspace @dfns/sdk-keyexport-utils-bundler \
-              --workspace @dfns/sdk-keyimport-utils-nodejs \
-              --workspace @dfns/sdk-keyimport-utils-bundler \
-              --workspace @dfns/sdk-keysigner \
-              --workspace @dfns/sdk-react-native \
-              --include-workspace-root "$VERSION"
-          git add */package.json package.json package-lock.json
-
-      - uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
-        id: app-token
+      - name: Semantic release
+        id: semantic_release
+        uses: cycjimmy/semantic-release-action@b12c8f6015dc215fe37bc154d4ad456dd3833c90 # v6.0.0
         with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.APP_PK }}
-
-      - name: Commit and push version bump
+          extra_plugins: |
+            - @semantic-release/exec
         env:
-          VERSION: ${{ needs.semantic_release.outputs.new_release_version }}
-          APP_TOKEN: ${{ steps.app-token.outputs.token }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: release ${VERSION} [skip ci]"
-          git remote set-url origin https://x-access-token:${APP_TOKEN}@github.com/${REPOSITORY}
-          git push
-
-      - name: GitHub release
-        uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 # v2.4.1
-        with:
-          generate_release_notes: true
-          tag_name: ${{ needs.semantic_release.outputs.new_release_git_tag }}
-          token: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.DFNS_BOT }}
