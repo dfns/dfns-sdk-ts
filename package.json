@@ -4,8 +4,6 @@
   "license": "MIT",
   "scripts": {
     "cb:all": "rimraf dist && nx run-many -t=cb",
-    "version:all": "./bin/version_all.sh",
-    "publish:all": "npm run cb:all && ./bin/publish.sh",
     "docs": "typedoc"
   },
   "dependencies": {
