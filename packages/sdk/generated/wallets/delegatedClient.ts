@@ -7,6 +7,92 @@ import * as T from './types'
 export class DelegatedWalletsClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
+  async abortTransactionInit(request: T.AbortTransactionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/abort', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'PUT',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async abortTransactionComplete(
+    request: T.AbortTransactionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.AbortTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/abort', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'PUT',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async abortTransferInit(request: T.AbortTransferRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/abort', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'PUT',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async abortTransferComplete(
+    request: T.AbortTransferRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.AbortTransferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/abort', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'PUT',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async acceptOfferInit(request: T.AcceptOfferRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId/accept', {
       path: request ?? {},

@@ -1,3 +1,801 @@
+export type AbortTransactionParams = {
+    /** Wallet id. */
+    walletId: string;
+    /** Transaction id. */
+    transactionId: string;
+};
+
+export type AbortTransactionResponse = {
+    /** Transaction id. */
+    id: string;
+    /** Wallet id. */
+    walletId: string;
+    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
+    /** The user who initiated the request. */
+    requester: {
+        /** User id. */
+        userId: string;
+        /** Token id. */
+        tokenId?: string | undefined;
+    };
+    requestBody: {
+        kind: "Transaction";
+        /** The unsigned hex encoded transaction or JSON transactions for compatible networks. */
+        transaction: string | {};
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "Psbt";
+        /** The hex encoded PSBT. */
+        psbt: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "SignDocDirect";
+        signDoc: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "UserOperations";
+        userOperations: {
+            /** The destination address or target contract. */
+            to: string;
+            /** The amount of native tokens to transfer in minimum denomination. */
+            value?: string | undefined;
+            /** ABI encoded function call data in hex format. */
+            data?: string | undefined;
+        }[];
+        /** A fee sponsor id to sponsor the transaction fee by another wallet. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "FunctionCall";
+        /** Function call arguments */
+        call: {};
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "TransferPreapproval";
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "Evm";
+        to?: string | undefined;
+        value?: (string | string) | undefined;
+        data?: string | undefined;
+        /** The current nonce of the signer EOA. */
+        nonce?: (number | string | string) | undefined;
+        gasLimit?: (string | string) | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "Eip1559";
+        to?: string | undefined;
+        value?: (string | string) | undefined;
+        data?: string | undefined;
+        nonce?: (number | string | string) | undefined;
+        gasLimit?: (string | string) | undefined;
+        maxFeePerGas?: (string | string) | undefined;
+        maxPriorityFeePerGas?: (string | string) | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "SettleOffer";
+        txHash: string;
+        decision: "Accept" | "Reject";
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "ActivateAccount";
+        args?: {} | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "CancelTransaction";
+        txHash?: string | undefined;
+        signedTx: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "SpeedUpTransaction";
+        txHash: string;
+        signedTx: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    };
+    status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    reason?: string | undefined;
+    txHash?: string | undefined;
+    fee?: string | undefined;
+    approvalId?: string | undefined;
+    dateRequested: string;
+    datePolicyResolved?: string | undefined;
+    dateBroadcasted?: string | undefined;
+    dateConfirmed?: string | undefined;
+    externalId?: string | undefined;
+};
+
+export type AbortTransactionRequest = AbortTransactionParams
+
+export type AbortTransferParams = {
+    /** Wallet id. */
+    walletId: string;
+    /** Transfer id. */
+    transferId: string;
+};
+
+export type AbortTransferResponse = {
+    /** Transfer id. */
+    id: string;
+    /** The source wallet for this tranfer. */
+    walletId: string;
+    /** The blockchain network this transfer is on. */
+    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "XrpLedger" | "XrpLedgerTestnet";
+    /** The user who initiated the request. */
+    requester: {
+        /** User id. */
+        userId: string;
+        /** Token id. */
+        tokenId?: string | undefined;
+    };
+    requestBody: {
+        kind: "Native";
+        /** The destination address. */
+        to: string;
+        /** The amount of native tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The memo or destination tag (supported networks only). */
+        memo?: (string | "") | undefined;
+        /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        /** Whether to create the destination account on chains that require account creation (e.g., Stellar). Only valid for chains that require the receiver account to exist before transfer. */
+        createDestinationAccount?: boolean | undefined;
+        /** Optional field for Canton, if true it will create a transfer offer. */
+        offer?: boolean | undefined;
+        /** Optional field for Canton, especially useful in the context of offers */
+        expiresAt?: string | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Aip21";
+        /** The asset metadata address.  */
+        metadata: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Asa";
+        /** The token asset id.  */
+        assetId: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The memo or destination tag. */
+        memo?: (string | "") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Asset";
+        /** The token asset id.  */
+        assetId: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Cip56";
+        /** The instrument admin address. */
+        instrumentAdmin: string;
+        /** The instrument id. */
+        instrumentId: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** If true it will create a transfer offer. */
+        offer?: boolean | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Cis2";
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The token address following (https://proposals.concordium.com/CIS/cis-2.html#token-address). */
+        tokenAddress: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Cis7";
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The Cis7 token identifier. */
+        tokenId: string;
+        /** The memo or destination tag. */
+        memo?: (string | "") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Coin";
+        /** The coin identifier. */
+        coin: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Erc20";
+        /** The ERC-20 contract address. */
+        contract: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The priority that determines the fees paid for the transfer. */
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Erc721";
+        /** The ERC-721 contract address. */
+        contract: string;
+        /** The destination address. */
+        to: string;
+        /** The token to transfer. */
+        tokenId: string;
+        /** The priority that determines the fees paid for the transfer. */
+        priority?: ("Slow" | "Standard" | "Fast") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Hip17";
+        /** The token to transfer. */
+        tokenId: string;
+        serialNumber: string;
+        /** The destination address. */
+        to: string;
+        /** The memo or destination tag. */
+        memo?: (string | "") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Hts";
+        /** The token to transfer. */
+        tokenId: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The memo. */
+        memo?: (string | "") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Iou";
+        /** The IOU currency code. */
+        currency: string;
+        /** The IOU issuer address. */
+        issuer: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The memo or destination tag. */
+        memo?: (string | "") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Sep41";
+        /** The asset issuer address. */
+        issuer: string;
+        /** The asset code. */
+        assetCode: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The memo or destination tag. */
+        memo?: (string | "") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Snip2";
+        /** The SNIP-2 (ERC-20-like) contract address. */
+        contract: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Snip3";
+        /** The SNIP-3 (ERC-721) contract address. */
+        contract: string;
+        /** The destination address. */
+        to: string;
+        /** The token to transfer. */
+        tokenId: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Spl" | "Spl2022";
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The mint account address. */
+        mint: string;
+        /** The memo or destination tag. */
+        memo?: (string | "") | undefined;
+        /** If `true`, pay to create the associated token account for the recipient if it doesn't exist. Defaults to `false`. */
+        createDestinationAccount?: boolean | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Tep74";
+        /** The destination address. */
+        to: string;
+        /** The Jetton master contract address. */
+        master: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The memo or destination tag. */
+        memo?: (string | "") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Trc10";
+        /** The token ID. */
+        tokenId: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Trc20";
+        /** The smart contract address. */
+        contract: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Trc721";
+        /** The smart contract address. */
+        contract: string;
+        /** The destination address. */
+        to: string;
+        /** The token to transfer. */
+        tokenId: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    } | {
+        kind: "Xls33";
+        /** The XLS-33 issuance identifier. */
+        issuanceId: string;
+        /** The destination address. */
+        to: string;
+        /** The amount of tokens to transfer in minimum denomination. */
+        amount: string;
+        /** The memo or destination tag. */
+        memo?: (string | "") | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+        externalId?: string | undefined;
+        /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: {
+                [x: string]: any;
+            } | undefined;
+            originator: {
+                [x: string]: any;
+            };
+            beneficiary: {
+                [x: string]: any;
+            };
+        }) | undefined;
+        /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+        feeSponsorId?: string | undefined;
+    };
+    /** Additional metadata about the transfered asset. */
+    metadata: {
+        asset: {
+            symbol?: string | undefined;
+            /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
+            decimals?: number | undefined;
+            /** Whether the asset is verified by DFNS as legitimate. */
+            verified?: boolean | undefined;
+            /** Corresponding asset price in USD at the time of transfer. */
+            quotes?: {
+                [x: string]: number;
+            } | undefined;
+        };
+    };
+    /** Transfer status.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Pending` | The request is pending approval due to a policy applied to the wallet. |
+    | `Executing` | The request is approved and is in the process of being executed. note this status is only set for a short time between pending and broadcasted. |
+    | `Broadcasted` | The transaction has been successfully written to the mempool. |
+    | `Confirmed` | The transaction has been confirmed on-chain by our indexing pipeline. |
+    | `Failed` | Indicates either system failure to complete the request or the transaction failed on chain. |
+    | `Rejected` | The request has been rejected by a policy approval action. | */
+    status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transfer. */
+    reason?: string | undefined;
+    /** The blockchain transaction hash for this transfer. */
+    txHash?: string | undefined;
+    /** The fee paid for this transfer in minimum denomination. */
+    fee?: string | undefined;
+    dateRequested: string;
+    datePolicyResolved?: string | undefined;
+    dateBroadcasted?: string | undefined;
+    dateConfirmed?: string | undefined;
+    /** The id of the approval request if this transfer triggered a policy. */
+    approvalId?: string | undefined;
+    /** The external id provided at transfer creation time. */
+    externalId?: string | undefined;
+    /** The fee sponsor id used to pay for the transfer fees. */
+    feeSponsorId?: string | undefined;
+};
+
+export type AbortTransferRequest = AbortTransferParams
+
 export type AcceptOfferParams = {
     /** Wallet id. */
     walletId: string;
