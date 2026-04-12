@@ -1,0 +1,51 @@
+name: preview-next-version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment:
+      name: npm-publish
+      deployment: false
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: 24
+
+      - name: Install packages
+        run: |
+          npm config set ignore-scripts true
+          npm ci --prefer-offline --no-audit --cache .npm
+
+      - uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        id: app-token
+        with:
+          client-id: ${{ vars.APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PK }}
+
+      - name: Preview release version
+        uses: cycjimmy/semantic-release-action@b12c8f6015dc215fe37bc154d4ad456dd3833c90 # v6.0.0
+        with:
+          dry_run: true
+          extra_plugins: |
+            @semantic-release/exec
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - name: Report next version
+        run: |
+          if [ -n "${NEXT_RELEASE_VERSION:-}" ]; then
+            echo "### Next release version — \`$NEXT_RELEASE_VERSION\`" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### No release will be published" >> "$GITHUB_STEP_SUMMARY"
+          fi

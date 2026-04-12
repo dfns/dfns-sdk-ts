@@ -3,6 +3,7 @@
   "version": "0.8.13",
   "license": "MIT",
   "scripts": {
+    "prepare": "husky",
     "cb:all": "rimraf dist && nx run-many -t=cb",
     "docs": "typedoc"
   },
@@ -37,6 +38,8 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@nx/js": "^16.8.1",
     "@types/elliptic": "^6.4.14",
     "@types/node": "^20.2.5",
@@ -45,6 +48,7 @@
     "esbuild": "^0.25.0",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
+    "husky": "^9.1.7",
     "nx": "^16.8.1",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.1",
