@@ -9,6 +9,36 @@ import * as T from './types'
 export class WalletsClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
+  async abortTransaction(request: T.AbortTransactionRequest): Promise<T.AbortTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/abort', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'PUT',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async abortTransfer(request: T.AbortTransferRequest): Promise<T.AbortTransferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transfers/:transferId/abort', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'PUT',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async acceptOffer(request: T.AcceptOfferRequest): Promise<T.AcceptOfferResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId/accept', {
       path: request ?? {},
