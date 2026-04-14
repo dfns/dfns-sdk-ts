@@ -1,6 +1,6 @@
 export type CreateStakeBody = ({
     protocol: "Ethereum";
-    /** Id of the Dfns wallet making the deposit (`wa-...`). */
+    /** Id of the Dfns wallet making the deposit. */
     walletId: string;
     /** Staking Provider */
     provider: "Figment";
@@ -8,7 +8,7 @@ export type CreateStakeBody = ({
     amount: string;
 } | {
     protocol: "Iota";
-    /** Id of the Dfns wallet making the deposit (`wa-...`). */
+    /** Id of the Dfns wallet making the deposit. */
     walletId: string;
     validator: string;
     /** Transaction amount denominated in min units */
@@ -20,8 +20,21 @@ export type CreateStakeBody = ({
 
 export type CreateStakeResponse = ({
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -32,7 +45,7 @@ export type CreateStakeResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -41,7 +54,7 @@ export type CreateStakeResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -49,7 +62,7 @@ export type CreateStakeResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -70,8 +83,21 @@ export type CreateStakeResponse = ({
     };
 } | {
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -82,7 +108,7 @@ export type CreateStakeResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -91,7 +117,7 @@ export type CreateStakeResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -99,7 +125,7 @@ export type CreateStakeResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -122,8 +148,21 @@ export type CreateStakeResponse = ({
     };
 } | {
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -134,7 +173,7 @@ export type CreateStakeResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -143,7 +182,7 @@ export type CreateStakeResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -151,7 +190,7 @@ export type CreateStakeResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -172,10 +211,30 @@ export type CreateStakeResponse = ({
     actions: {
         id: string;
         stakeId: string;
+        /** Status of the stake action.
+        
+        | Status | Definition |
+        | --- | --- |
+        | `PendingPolicyApproval` | The action is pending approval due to a policy applied to the wallet. |
+        | `InProgress` | The action has been initiated and is being processed. |
+        | `Completed` | The action has been successfully completed. |
+        | `Failed` | The action has failed. Check failureReason for details. |
+        | `Rejected` | The action has been rejected by a policy approval action. | */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        /** Deprecated. */
         transactionId?: string | undefined;
+        /** Deprecated. */
         signatureId?: string | undefined;
+        /** Deprecated. */
         transactionHash?: string | undefined;
+        /** The type of staking action being performed.
+        
+        | Kind | Definition |
+        | --- | --- |
+        | `Stake` | Delegate funds to a validator to begin earning rewards. |
+        | `Unbond` | Initiate the unbonding process to release staked funds (subject to cooldown). |
+        | `Deposit` | Add additional funds to an existing stake position. |
+        | `Withdraw` | Withdraw unbonded funds from the stake position. | */
         kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
         /** The user who initiated the request. */
         requester: {
@@ -186,7 +245,7 @@ export type CreateStakeResponse = ({
         };
         requestBody: (({
             protocol: "Babylon";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -195,7 +254,7 @@ export type CreateStakeResponse = ({
             duration: number;
         } | {
             protocol: "Ethereum";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -203,7 +262,7 @@ export type CreateStakeResponse = ({
             amount: string;
         } | {
             protocol: "Iota";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             validator: string;
             /** Transaction amount denominated in min units */
@@ -256,8 +315,21 @@ export type CreateStakeActionParams = {
 
 export type CreateStakeActionResponse = ({
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -268,7 +340,7 @@ export type CreateStakeActionResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -277,7 +349,7 @@ export type CreateStakeActionResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -285,7 +357,7 @@ export type CreateStakeActionResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -306,8 +378,21 @@ export type CreateStakeActionResponse = ({
     };
 } | {
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -318,7 +403,7 @@ export type CreateStakeActionResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -327,7 +412,7 @@ export type CreateStakeActionResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -335,7 +420,7 @@ export type CreateStakeActionResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -358,8 +443,21 @@ export type CreateStakeActionResponse = ({
     };
 } | {
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -370,7 +468,7 @@ export type CreateStakeActionResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -379,7 +477,7 @@ export type CreateStakeActionResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -387,7 +485,7 @@ export type CreateStakeActionResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -408,10 +506,30 @@ export type CreateStakeActionResponse = ({
     actions: {
         id: string;
         stakeId: string;
+        /** Status of the stake action.
+        
+        | Status | Definition |
+        | --- | --- |
+        | `PendingPolicyApproval` | The action is pending approval due to a policy applied to the wallet. |
+        | `InProgress` | The action has been initiated and is being processed. |
+        | `Completed` | The action has been successfully completed. |
+        | `Failed` | The action has failed. Check failureReason for details. |
+        | `Rejected` | The action has been rejected by a policy approval action. | */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        /** Deprecated. */
         transactionId?: string | undefined;
+        /** Deprecated. */
         signatureId?: string | undefined;
+        /** Deprecated. */
         transactionHash?: string | undefined;
+        /** The type of staking action being performed.
+        
+        | Kind | Definition |
+        | --- | --- |
+        | `Stake` | Delegate funds to a validator to begin earning rewards. |
+        | `Unbond` | Initiate the unbonding process to release staked funds (subject to cooldown). |
+        | `Deposit` | Add additional funds to an existing stake position. |
+        | `Withdraw` | Withdraw unbonded funds from the stake position. | */
         kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
         /** The user who initiated the request. */
         requester: {
@@ -422,7 +540,7 @@ export type CreateStakeActionResponse = ({
         };
         requestBody: (({
             protocol: "Babylon";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -431,7 +549,7 @@ export type CreateStakeActionResponse = ({
             duration: number;
         } | {
             protocol: "Ethereum";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -439,7 +557,7 @@ export type CreateStakeActionResponse = ({
             amount: string;
         } | {
             protocol: "Iota";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             validator: string;
             /** Transaction amount denominated in min units */
@@ -494,8 +612,21 @@ export type GetStakesQuery = {
 
 export type GetStakesResponse = ({
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -506,7 +637,7 @@ export type GetStakesResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -515,7 +646,7 @@ export type GetStakesResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -523,7 +654,7 @@ export type GetStakesResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -544,8 +675,21 @@ export type GetStakesResponse = ({
     };
 } | {
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -556,7 +700,7 @@ export type GetStakesResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -565,7 +709,7 @@ export type GetStakesResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -573,7 +717,7 @@ export type GetStakesResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -596,8 +740,21 @@ export type GetStakesResponse = ({
     };
 } | {
     id: string;
+    /** The staking infrastructure provider used to manage the stake. */
     provider?: ("Figment") | undefined;
+    /** Wallet id. */
     walletId: string;
+    /** Status of the stake position.
+    
+    | Status | Definition |
+    | --- | --- |
+    | `Staking` | The stake is being created and funds are being delegated to the validator. |
+    | `Active` | The stake is active and earning rewards. |
+    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+    | `Withdrawn` | The staked funds have been fully withdrawn. |
+    | `Failed` | The staking operation failed. | */
     status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     /** The user who initiated the request. */
     requester: {
@@ -608,7 +765,7 @@ export type GetStakesResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -617,7 +774,7 @@ export type GetStakesResponse = ({
         duration: number;
     } | {
         protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         /** Staking Provider */
         provider: "Figment";
@@ -625,7 +782,7 @@ export type GetStakesResponse = ({
         amount: string;
     } | {
         protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit (`wa-...`). */
+        /** Id of the Dfns wallet making the deposit. */
         walletId: string;
         validator: string;
         /** Transaction amount denominated in min units */
@@ -646,10 +803,30 @@ export type GetStakesResponse = ({
     actions: {
         id: string;
         stakeId: string;
+        /** Status of the stake action.
+        
+        | Status | Definition |
+        | --- | --- |
+        | `PendingPolicyApproval` | The action is pending approval due to a policy applied to the wallet. |
+        | `InProgress` | The action has been initiated and is being processed. |
+        | `Completed` | The action has been successfully completed. |
+        | `Failed` | The action has failed. Check failureReason for details. |
+        | `Rejected` | The action has been rejected by a policy approval action. | */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        /** Deprecated. */
         transactionId?: string | undefined;
+        /** Deprecated. */
         signatureId?: string | undefined;
+        /** Deprecated. */
         transactionHash?: string | undefined;
+        /** The type of staking action being performed.
+        
+        | Kind | Definition |
+        | --- | --- |
+        | `Stake` | Delegate funds to a validator to begin earning rewards. |
+        | `Unbond` | Initiate the unbonding process to release staked funds (subject to cooldown). |
+        | `Deposit` | Add additional funds to an existing stake position. |
+        | `Withdraw` | Withdraw unbonded funds from the stake position. | */
         kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
         /** The user who initiated the request. */
         requester: {
@@ -660,7 +837,7 @@ export type GetStakesResponse = ({
         };
         requestBody: (({
             protocol: "Babylon";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -669,7 +846,7 @@ export type GetStakesResponse = ({
             duration: number;
         } | {
             protocol: "Ethereum";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -677,7 +854,7 @@ export type GetStakesResponse = ({
             amount: string;
         } | {
             protocol: "Iota";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             validator: string;
             /** Transaction amount denominated in min units */
@@ -720,13 +897,34 @@ export type ListStakeActionsQuery = {
 };
 
 export type ListStakeActionsResponse = {
+    /** Current page items. */
     items: {
         id: string;
         stakeId: string;
+        /** Status of the stake action.
+        
+        | Status | Definition |
+        | --- | --- |
+        | `PendingPolicyApproval` | The action is pending approval due to a policy applied to the wallet. |
+        | `InProgress` | The action has been initiated and is being processed. |
+        | `Completed` | The action has been successfully completed. |
+        | `Failed` | The action has failed. Check failureReason for details. |
+        | `Rejected` | The action has been rejected by a policy approval action. | */
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
+        /** Deprecated. */
         transactionId?: string | undefined;
+        /** Deprecated. */
         signatureId?: string | undefined;
+        /** Deprecated. */
         transactionHash?: string | undefined;
+        /** The type of staking action being performed.
+        
+        | Kind | Definition |
+        | --- | --- |
+        | `Stake` | Delegate funds to a validator to begin earning rewards. |
+        | `Unbond` | Initiate the unbonding process to release staked funds (subject to cooldown). |
+        | `Deposit` | Add additional funds to an existing stake position. |
+        | `Withdraw` | Withdraw unbonded funds from the stake position. | */
         kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
         /** The user who initiated the request. */
         requester: {
@@ -737,7 +935,7 @@ export type ListStakeActionsResponse = {
         };
         requestBody: (({
             protocol: "Babylon";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -746,7 +944,7 @@ export type ListStakeActionsResponse = {
             duration: number;
         } | {
             protocol: "Ethereum";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -754,7 +952,7 @@ export type ListStakeActionsResponse = {
             amount: string;
         } | {
             protocol: "Iota";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             validator: string;
             /** Transaction amount denominated in min units */
@@ -781,6 +979,7 @@ export type ListStakeActionsResponse = {
         failureReason?: string | undefined;
         dateCreated: string;
     }[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 
@@ -794,10 +993,24 @@ export type ListStakesQuery = {
 };
 
 export type ListStakesResponse = {
+    /** Current page items. */
     items: ({
         id: string;
+        /** The staking infrastructure provider used to manage the stake. */
         provider?: ("Figment") | undefined;
+        /** Wallet id. */
         walletId: string;
+        /** Status of the stake position.
+        
+        | Status | Definition |
+        | --- | --- |
+        | `Staking` | The stake is being created and funds are being delegated to the validator. |
+        | `Active` | The stake is active and earning rewards. |
+        | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+        | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+        | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+        | `Withdrawn` | The staked funds have been fully withdrawn. |
+        | `Failed` | The staking operation failed. | */
         status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
         /** The user who initiated the request. */
         requester: {
@@ -808,7 +1021,7 @@ export type ListStakesResponse = {
         };
         requestBody: ({
             protocol: "Babylon";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -817,7 +1030,7 @@ export type ListStakesResponse = {
             duration: number;
         } | {
             protocol: "Ethereum";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -825,7 +1038,7 @@ export type ListStakesResponse = {
             amount: string;
         } | {
             protocol: "Iota";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             validator: string;
             /** Transaction amount denominated in min units */
@@ -846,8 +1059,21 @@ export type ListStakesResponse = {
         };
     } | {
         id: string;
+        /** The staking infrastructure provider used to manage the stake. */
         provider?: ("Figment") | undefined;
+        /** Wallet id. */
         walletId: string;
+        /** Status of the stake position.
+        
+        | Status | Definition |
+        | --- | --- |
+        | `Staking` | The stake is being created and funds are being delegated to the validator. |
+        | `Active` | The stake is active and earning rewards. |
+        | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+        | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+        | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+        | `Withdrawn` | The staked funds have been fully withdrawn. |
+        | `Failed` | The staking operation failed. | */
         status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
         /** The user who initiated the request. */
         requester: {
@@ -858,7 +1084,7 @@ export type ListStakesResponse = {
         };
         requestBody: ({
             protocol: "Babylon";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -867,7 +1093,7 @@ export type ListStakesResponse = {
             duration: number;
         } | {
             protocol: "Ethereum";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -875,7 +1101,7 @@ export type ListStakesResponse = {
             amount: string;
         } | {
             protocol: "Iota";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             validator: string;
             /** Transaction amount denominated in min units */
@@ -898,8 +1124,21 @@ export type ListStakesResponse = {
         };
     } | {
         id: string;
+        /** The staking infrastructure provider used to manage the stake. */
         provider?: ("Figment") | undefined;
+        /** Wallet id. */
         walletId: string;
+        /** Status of the stake position.
+        
+        | Status | Definition |
+        | --- | --- |
+        | `Staking` | The stake is being created and funds are being delegated to the validator. |
+        | `Active` | The stake is active and earning rewards. |
+        | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
+        | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
+        | `Withdrawing` | The staked funds are in the process of being withdrawn. |
+        | `Withdrawn` | The staked funds have been fully withdrawn. |
+        | `Failed` | The staking operation failed. | */
         status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
         /** The user who initiated the request. */
         requester: {
@@ -910,7 +1149,7 @@ export type ListStakesResponse = {
         };
         requestBody: ({
             protocol: "Babylon";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -919,7 +1158,7 @@ export type ListStakesResponse = {
             duration: number;
         } | {
             protocol: "Ethereum";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             /** Staking Provider */
             provider: "Figment";
@@ -927,7 +1166,7 @@ export type ListStakesResponse = {
             amount: string;
         } | {
             protocol: "Iota";
-            /** Id of the Dfns wallet making the deposit (`wa-...`). */
+            /** Id of the Dfns wallet making the deposit. */
             walletId: string;
             validator: string;
             /** Transaction amount denominated in min units */
@@ -945,6 +1184,7 @@ export type ListStakesResponse = {
             };
         } | null;
     })[];
+    /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
 };
 
