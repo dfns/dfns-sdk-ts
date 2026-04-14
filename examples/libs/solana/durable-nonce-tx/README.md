@@ -27,18 +27,16 @@ Copy `.env.example` to a new file `.env` and set the following values,
 
 ## Explanation
 
-To run this program, you will need a Dfns [Solana devnet wallet](https://explorer.solana.com/address/CKMyhhMKzC8ra55ucvj8nWx7bTEFjL1EWM4ssRPBjg16?cluster=devnet). The program will transfer 100 lamports to itself using a durable nonce.
-You should either provide the SOLANA_NONCE_ACCOUNT_ADDRESS, or you will be prompted to create a nonce account for you.
+To run this program, you will need a Dfns [Solana devnet wallet](https://explorer.solana.com/address/CKMyhhMKzC8ra55ucvj8nWx7bTEFjL1EWM4ssRPBjg16?cluster=devnet). The program will transfer 1 lamports using a durable nonce.
 
 ```shell
 > ts-node main.ts
 
-Solana wallet address: 2GDnHHcCRESwyZcKoQZQQ8dK7EdCrdTpgHf3odj9LzcH
-Nonce Account Address:  CDmzMnha9N1i4hj4ZkcyPJLDxAXEsCA6LqujYBHXABj
-Sending 100 lamports to 2GDnHHcCRESwyZcKoQZQQ8dK7EdCrdTpgHf3odj9LzcH with durable nonce
-Old balance for sender: 299475000
-Transaction hash: 4y3HANvEtoZ2QMGyJWHnN8vP7rAemEMmreXqT9R82P7oYXSKinrqiadWMRb728QpT544vtE4zGRntvxvYPPLSVYz
-New balance for sender: 299470000
+Solana wallet address: D1FRN8fYGKsrEj5ZtsHDbksZ6xFbmsDeUNYBn8Xn46nT
+Created nonce account 8r2JtxqNeMX1ZvpK66tL3skFa5DV3DdnsMCufNh1rcEJ
+Current balance: 24288257782
+Transaction signature: 51XzfoY3BzLCtsUCGLYTDv92gT1mgizR4v24FpYZZQRT72tQLU7s6vY4mdH2QJQYUgbWsmhop85JPZgseWJKTJvB
+New balance: 24288252781
 ```
 
-This is the Solana devnet [transaction](https://explorer.solana.com/tx/3FzaPyiZqtAWvYYFoTDiTmdyxKNw6CjhLnvuZtXeV7PvtbxeUSFi9jmV39zvSAbaa4ZYHWBgfpK4nXvrJ1182JRR?cluster=devnet).
+This is the Solana devnet [transaction](https://explorer.solana.com/tx/51XzfoY3BzLCtsUCGLYTDv92gT1mgizR4v24FpYZZQRT72tQLU7s6vY4mdH2QJQYUgbWsmhop85JPZgseWJKTJvB?cluster=devnet).
