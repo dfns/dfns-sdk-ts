@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+tag=${1:-}
+
 npm run cb:all
 
 packages=(
@@ -42,6 +44,6 @@ packages=(
 for packageName in "${packages[@]}"; do
     cd dist/"${packageName}"
     echo "Publishing ${packageName}..."
-    npm publish --workspaces=false
+    npm publish --workspaces=false ${tag:+--tag "$tag"}
     cd - >/dev/null
 done

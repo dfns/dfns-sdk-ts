@@ -1,0 +1,88 @@
+name: manual-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g. 1.0.0, 2.0.0-beta.1)"
+        required: true
+        type: string
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    environment:
+      name: npm-publish
+      deployment: false
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Validate version
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$'; then
+            echo "Error: '$VERSION' is not a valid semver version"
+            exit 1
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        id: app-token
+        with:
+          client-id: ${{ vars.APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PK }}
+
+      - name: Install node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: 24
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install packages
+        run: |
+          npm config set ignore-scripts true
+          npm ci --prefer-offline --no-audit --cache .npm
+
+      - name: Prepare versions
+        run: ./scripts/prepare.sh "$VERSION"
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git
+
+      - name: Commit version changes
+        run: |
+          git add package.json package-lock.json packages/*/package.json
+          git commit -m "chore: release $VERSION [skip ci]"
+
+      - name: Tag and push
+        run: |
+          git tag "$VERSION"
+          git push origin HEAD "$VERSION"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: gh release create "$VERSION" --generate-notes
+
+      - name: Determine npm tag
+        id: npm-tag
+        run: |
+          if echo "$VERSION" | grep -qE '-'; then
+            PRERELEASE_ID=$(echo "$VERSION" | sed 's/^[0-9]*\.[0-9]*\.[0-9]*-//' | sed 's/\..*//')
+            echo "tag=$PRERELEASE_ID" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish to npm
+        run: ./scripts/publish.sh ${{ steps.npm-tag.outputs.tag }}

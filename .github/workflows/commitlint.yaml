@@ -1,0 +1,32 @@
+name: commitlint
+
+on:
+  pull_request:
+    branches:
+      - m
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Install node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: 24
+
+      - name: Install packages
+        run: |
+          npm config set ignore-scripts true
+          npm ci --prefer-offline --no-audit --cache .npm
+
+      - name: Validate PR commits
+        uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # v6.2.1
+        with:
+          configFile: .commitlintrc.yml
