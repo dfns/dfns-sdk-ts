@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-hedera",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-hedera"
+  },
   "peerDependencies": {
     "@hashgraph/sdk": "^2.70.0"
   }

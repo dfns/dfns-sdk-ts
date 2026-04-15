@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-sui",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-sui"
+  },
   "peerDependencies": {
     "@mysten/sui": "^1.0.0"
   }

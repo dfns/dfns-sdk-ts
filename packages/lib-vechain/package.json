@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-vechain",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-vechain"
+  },
   "peerDependencies": {
     "@vechain/sdk-core": "^2.0.5",
     "@vechain/sdk-network": "^2.0.5"

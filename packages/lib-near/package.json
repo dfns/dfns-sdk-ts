@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-near",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-near"
+  },
   "peerDependencies": {
     "near-api-js": "^6.0.0"
   }

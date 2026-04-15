@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-meshsdk",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-meshsdk"
+  },
   "peerDependencies": {
     "@meshsdk/common": "^1.9.0-beta.74"
   }

@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-tron",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-tron"
+  },
   "peerDependencies": {
     "tronweb": "6.1.1"
   }

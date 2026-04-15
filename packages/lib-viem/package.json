@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-viem",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-viem"
+  },
   "peerDependencies": {
     "@noble/curves": "^1.0.0",
     "viem": "^2.0.0"
