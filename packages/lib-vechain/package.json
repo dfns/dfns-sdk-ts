@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-vechain",
-  "version": "0.8.15",
+  "version": "0.8.16",
   "peerDependencies": {
     "@vechain/sdk-core": "^2.0.5",
     "@vechain/sdk-network": "^2.0.5"
