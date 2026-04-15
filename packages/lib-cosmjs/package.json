@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-cosmjs",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-cosmjs"
+  },
   "peerDependencies": {
     "@cosmjs/crypto": "^0.32.0",
     "@cosmjs/encoding": "^0.32.0",

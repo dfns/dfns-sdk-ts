@@ -1,4 +1,9 @@
 {
   "name": "@dfns/sdk",
-  "version": "0.8.16"
+  "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/sdk"
+  }
 }

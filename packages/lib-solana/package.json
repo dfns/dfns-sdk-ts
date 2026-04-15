@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-solana",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-solana"
+  },
   "peerDependencies": {
     "@solana/web3.js": "^1.0.0"
   }

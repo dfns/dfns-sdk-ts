@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-kaspa",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-kaspa"
+  },
   "peerDependencies": {
     "@dfns/kaspa-wasm": "0.14.1"
   }

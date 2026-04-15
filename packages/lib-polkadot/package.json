@@ -1,6 +1,11 @@
 {
   "name": "@dfns/lib-polkadot",
   "version": "0.8.16",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "directory": "packages/lib-polkadot"
+  },
   "peerDependencies": {
     "@polkadot/api": "^11.0.0"
   }
