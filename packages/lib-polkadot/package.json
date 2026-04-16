@@ -3,7 +3,7 @@
   "version": "0.8.17",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dfns/dfns-sdk-ts",
+    "url": "git+https://github.com/dfns/dfns-sdk-ts.git",
     "directory": "packages/lib-polkadot"
   },
   "peerDependencies": {

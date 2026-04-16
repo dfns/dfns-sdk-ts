@@ -12,7 +12,6 @@ jobs:
       deployment: false
     permissions:
       contents: read
-      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -34,3 +33,9 @@ jobs:
             @semantic-release/exec
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - name: Trigger publish workflow
+        if: steps.semantic_release.outputs.new_release_published == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: gh workflow run publish.yaml
