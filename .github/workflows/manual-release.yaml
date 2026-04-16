@@ -17,7 +17,6 @@ jobs:
       deployment: false
     permissions:
       contents: read
-      id-token: write
     steps:
       - name: Validate version
         env:
@@ -84,5 +83,12 @@ jobs:
             echo "tag=$PRERELEASE_ID" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Publish to npm
-        run: ./scripts/publish.sh ${{ steps.npm-tag.outputs.tag }}
+      - name: Trigger publish workflow
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          if [ -n "${{ steps.npm-tag.outputs.tag }}" ]; then
+            gh workflow run publish.yaml -f tag=${{ steps.npm-tag.outputs.tag }}
+          else
+            gh workflow run publish.yaml
+          fi

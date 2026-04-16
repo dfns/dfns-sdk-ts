@@ -1,8 +1,16 @@
-# only to be used if release was sucessful but publishing failed (e.g network error)
-name: recovery-only-publish
+name: publish
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "npm dist-tag for prerelease (e.g. beta, rc). Leave empty for latest."
+        type: string
+        required: false
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -17,20 +25,18 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 1
+          ref: m
 
-      - name: install node
+      - name: Install node
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: 24
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
 
-      - name: install packages
+      - name: Install packages
         run: |
           npm config set ignore-scripts true
           npm ci --prefer-offline --no-audit --cache .npm
 
-      - name: publish packages
-        run: |
-          ./scripts/publish.sh
-
-
+      - name: Publish packages
+        run: ./scripts/publish.sh ${{ inputs.tag }}
