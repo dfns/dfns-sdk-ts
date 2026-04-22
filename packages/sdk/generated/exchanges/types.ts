@@ -1057,6 +1057,9 @@ export type ListAssetWithdrawalNetworksResponse = (({
     kind: "Erc20" | "Snip2" | "Trc20";
     contract: string;
 } | {
+    kind: "Erc7984";
+    contract: string;
+} | {
     kind: "Hts";
     tokenId: string;
 } | {
