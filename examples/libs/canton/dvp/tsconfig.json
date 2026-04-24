@@ -1,0 +1,10 @@
+{
+  "extends": "../../../../tsconfig.base.json",
+  "include": ["main.ts"],
+  "exclude": ["node_modules", "../../../../dist"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./",
+    "ignoreDeprecations": "6.0"
+  }
+}
