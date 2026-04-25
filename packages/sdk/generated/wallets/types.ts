@@ -3664,7 +3664,7 @@ export type GetWalletHistoryResponse = {
         contract: string;
         from: string;
         to: string;
-        value?: string | undefined;
+        value: string;
         fee?: string | undefined;
         /** @deprecated use metadata.asset.symbol instead */
         symbol?: string | undefined;
