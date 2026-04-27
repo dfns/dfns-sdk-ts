@@ -1931,7 +1931,7 @@ export type CreateApprovalDecisionResponse = {
             contract: string;
             from: string;
             to: string;
-            value?: string | undefined;
+            value: string;
             fee?: string | undefined;
             /** @deprecated use metadata.asset.symbol instead */
             symbol?: string | undefined;
@@ -5212,7 +5212,7 @@ export type GetApprovalResponse = {
             contract: string;
             from: string;
             to: string;
-            value?: string | undefined;
+            value: string;
             fee?: string | undefined;
             /** @deprecated use metadata.asset.symbol instead */
             symbol?: string | undefined;
@@ -8546,7 +8546,7 @@ export type ListApprovalsResponse = {
                 contract: string;
                 from: string;
                 to: string;
-                value?: string | undefined;
+                value: string;
                 fee?: string | undefined;
                 /** @deprecated use metadata.asset.symbol instead */
                 symbol?: string | undefined;
