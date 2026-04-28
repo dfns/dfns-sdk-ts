@@ -1532,14 +1532,15 @@ export type GetAuditLogResponse = {
         kind: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey") | null;
         /** Public Key which can be used to verify signature. */
         publicKey: string;
+        /** Cryptographic signature evidence. Null when the action was recorded without a WebAuthn assertion (e.g. system-initiated actions or staff-flow org-owner creations). */
         assertion: {
-            /** Used to verify the signature. */
-            authenticatorData: string;
+            /** Used to verify the signature for Fido2 credentials. Null for Key credentials, which sign clientData directly. */
+            authenticatorData: string | null;
             /** Information, including challenge, which you can use to verify the signature. */
             clientData: string;
-            /** Signature of the clientData and authenticatorData. */
+            /** Signature of the clientData (and authenticatorData for Fido2). */
             signature: string;
-        };
+        } | null;
     };
 };
 
