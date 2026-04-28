@@ -128,7 +128,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use createCredential instead */
   async createUserCredential(request: T.CreateCredentialRequest): Promise<T.CreateCredentialResponse> {
     return this.createCredential(request)
@@ -148,7 +148,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use createCredentialChallenge instead */
   async createUserCredentialChallenge(request: T.CreateCredentialChallengeRequest): Promise<T.CreateCredentialChallengeResponse> {
     return this.createCredentialChallenge(request)
@@ -213,7 +213,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use createDelegatedRecoveryChallenge instead */
   async createDelegatedUserRecovery(request: T.CreateDelegatedRecoveryChallengeRequest): Promise<T.CreateDelegatedRecoveryChallengeResponse> {
     return this.createDelegatedRecoveryChallenge(request)
@@ -233,7 +233,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use createDelegatedRegistrationChallenge instead */
   async createDelegatedUserRegistration(request: T.CreateDelegatedRegistrationChallengeRequest): Promise<T.CreateDelegatedRegistrationChallengeResponse> {
     return this.createDelegatedRegistrationChallenge(request)
@@ -358,7 +358,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use createUserActionChallenge instead */
   async createUserActionSignatureChallenge(request: T.CreateUserActionChallengeRequest): Promise<T.CreateUserActionChallengeResponse> {
     return this.createUserActionChallenge(request)
@@ -453,7 +453,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use delegatedLogin instead */
   async createDelegatedUserLogin(request: T.DelegatedLoginRequest): Promise<T.DelegatedLoginResponse> {
     return this.delegatedLogin(request)
@@ -570,7 +570,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use listCredentials instead */
   async listUserCredentials(): Promise<T.ListCredentialsResponse> {
     return this.listCredentials()
@@ -662,7 +662,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use recover instead */
   async createUserRecovery(request: T.RecoverRequest): Promise<T.RecoverResponse> {
     return this.recover(request)
@@ -682,7 +682,7 @@ export class AuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use register instead */
   async createUserRegistration(request: T.RegisterRequest): Promise<T.RegisterResponse> {
     return this.register(request)
