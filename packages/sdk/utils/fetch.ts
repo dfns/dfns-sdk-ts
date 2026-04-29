@@ -2,11 +2,12 @@ import { fetch as _fetch } from 'cross-fetch'
 
 import { DfnsError, PolicyPendingError } from '../dfnsError'
 import { DfnsBaseApiOptions } from '../types/generic'
+import { assertAuthTokenIsSameOrg } from './authToken'
+import { sha256 } from './sha256'
 
 const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
 
 import { version } from '../package.json'
-import { assertAuthTokenIsSameOrg } from './authToken'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
@@ -14,6 +15,7 @@ export type FetchOptions<T> = {
   method: HttpMethod
   headers?: Record<string, string>
   body?: string | unknown
+  file?: { bytes: Uint8Array; name?: string }
   apiOptions: T
 }
 
@@ -29,7 +31,7 @@ export const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T>
 
 export const jsonSerializer = <T>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
-    if (options.body) {
+    if (options.body && !(options.body instanceof FormData)) {
       options.body = JSON.stringify(options.body)
 
       options.headers = {
@@ -39,6 +41,22 @@ export const jsonSerializer = <T>(fetch: Fetch<T>): Fetch<T> => {
     }
 
     return fetch(resource, options)
+  }
+}
+
+export const formDataSerializer = <T>(fetch: Fetch<T>): Fetch<T> => {
+  return async (resource, options) => {
+    if (!options.file) return fetch(resource, options)
+
+    const { bytes, name } = options.file
+    const fileChecksum = await sha256(bytes)
+    const body = { ...((options.body as Record<string, unknown>) ?? {}), fileChecksum }
+
+    const form = new FormData()
+    form.append('data', JSON.stringify(body))
+    form.append('file', new Blob([bytes as BlobPart]), name)
+
+    return fetch(resource, { ...options, body: form })
   }
 }
 
@@ -83,8 +101,8 @@ export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T
 
     const authorization: Record<string, string> = authToken
       ? {
-        authorization: `Bearer ${authToken}`,
-      }
+          authorization: `Bearer ${authToken}`,
+        }
       : {}
 
     options.headers = {

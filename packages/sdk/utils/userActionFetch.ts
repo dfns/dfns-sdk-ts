@@ -1,6 +1,6 @@
 import { fetch as _fetch } from 'cross-fetch'
 
-import { Fetch, catchPolicyPending, dfnsAuth, errorHandler, fullUrl, jsonSerializer } from './fetch'
+import { Fetch, catchPolicyPending, dfnsAuth, errorHandler, formDataSerializer, fullUrl, jsonSerializer } from './fetch'
 import { BaseAuthApi } from '../baseAuthApi'
 import { DfnsError } from '../dfnsError'
 import { DfnsApiClientOptions } from '../types/generic'
@@ -22,9 +22,16 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
         })
       }
 
+      const body = (options.body instanceof FormData ? options.body.get('data') : options.body) ?? ''
+      if (typeof body !== 'string') {
+        throw new DfnsError(-1, 'unexpected fetch body for user action signing', {
+          details: { type: typeof body },
+        })
+      }
+
       const challenge = await BaseAuthApi.createUserActionChallenge(
         {
-          userActionPayload: <string>options.body ?? '',
+          userActionPayload: body,
           userActionHttpMethod: options.method,
           userActionHttpPath: (<URL>resource).pathname,
           userActionServerKind: (<any>apiOptions)?.userActionServerKind || 'Api',
@@ -53,5 +60,7 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
 }
 
 export const userActionFetch = fullUrl(
-  jsonSerializer(dfnsAuth(userAction(catchPolicyPending(errorHandler(<Fetch<DfnsApiClientOptions>>_fetch)))))
+  formDataSerializer(
+    jsonSerializer(dfnsAuth(userAction(catchPolicyPending(errorHandler(<Fetch<DfnsApiClientOptions>>_fetch)))))
+  )
 )
