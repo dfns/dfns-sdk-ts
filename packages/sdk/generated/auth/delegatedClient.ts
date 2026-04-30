@@ -365,7 +365,7 @@ export class DelegatedAuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use createCredentialChallenge instead */
   async createUserCredentialChallenge(request: T.CreateCredentialChallengeRequest): Promise<T.CreateCredentialChallengeResponse> {
     return this.createCredentialChallenge(request)
@@ -733,7 +733,7 @@ export class DelegatedAuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use createUserActionChallenge instead */
   async createUserActionSignatureChallenge(request: T.CreateUserActionChallengeRequest): Promise<T.CreateUserActionChallengeResponse> {
     return this.createUserActionChallenge(request)
@@ -1080,7 +1080,7 @@ export class DelegatedAuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use listCredentials instead */
   async listUserCredentials(): Promise<T.ListCredentialsResponse> {
     return this.listCredentials()
@@ -1172,7 +1172,7 @@ export class DelegatedAuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use recover instead */
   async createUserRecovery(request: T.RecoverRequest): Promise<T.RecoverResponse> {
     return this.recover(request)
@@ -1192,7 +1192,7 @@ export class DelegatedAuthClient {
 
     return response.json()
   }
-  
+
   /** @deprecated, use register instead */
   async createUserRegistration(request: T.RegisterRequest): Promise<T.RegisterResponse> {
     return this.register(request)
