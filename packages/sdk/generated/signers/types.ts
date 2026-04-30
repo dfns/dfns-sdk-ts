@@ -8,22 +8,7 @@ export type CreateCloneInputParams = {
     storeId: string;
 };
 
-export type CreateCloneInputResponse = {
-    inputJson: {
-        version: 1;
-        type: "fleet-input";
-        org_id: string;
-        fleet_id: string;
-        keystore_id: string;
-        operations: {
-            id: string;
-            type: "clone-registration";
-            ceremony_challenge: string;
-            hsm_source_serial: string;
-            hsm_target_serial: string;
-        }[];
-    };
-};
+export type CreateCloneInputResponse = string;
 
 export type CreateCloneInputRequest = CreateCloneInputParams & { body: CreateCloneInputBody }
 
@@ -39,41 +24,7 @@ export type CreateGenesisInputParams = {
     storeId: string;
 };
 
-export type CreateGenesisInputResponse = {
-    inputJson: {
-        version: 1;
-        type: "fleet-input";
-        org_id: string;
-        fleet_id: string;
-        keystore_id: string;
-        operations: {
-            id: string;
-            type: "genesis-registration";
-            options: {
-                create_test_keys: boolean;
-                seal_factory_key: boolean;
-                key_harvest: {
-                    "ed25519-start": number;
-                    ed25519: number;
-                    "secp256k1-start": number;
-                    secp256k1: number;
-                };
-            };
-            hsm_genesis_serial: string;
-            num_provisioners: number;
-            ceremony_challenge: string;
-            provisioner_labels: string[];
-            transport_key: {
-                crypto_system: string;
-                public_key_hex: string;
-            };
-            policy_key: {
-                crypto_system: string;
-                public_key_hex: string;
-            };
-        }[];
-    };
-};
+export type CreateGenesisInputResponse = string;
 
 export type CreateGenesisInputRequest = CreateGenesisInputParams & { body: CreateGenesisInputBody }
 
