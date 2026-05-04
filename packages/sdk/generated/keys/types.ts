@@ -747,7 +747,7 @@ export type GetKeyResponse = {
         /** The key store id. */
         id: string;
         /** The type of key store. */
-        kind: "Hsm" | "Mpc" | "Nemo";
+        kind: "Hsm" | "Mpc" | "OfflineSigner";
         /** The key id within the store. */
         keyId: string;
         /** The HD derivation path if applicable. */
