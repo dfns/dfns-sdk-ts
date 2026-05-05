@@ -8,22 +8,7 @@ export type CreateCloneInputParams = {
     storeId: string;
 };
 
-export type CreateCloneInputResponse = {
-    inputJson: {
-        version: 1;
-        type: "fleet-input";
-        org_id: string;
-        fleet_id: string;
-        keystore_id: string;
-        operations: {
-            id: string;
-            type: "clone-registration";
-            ceremony_challenge: string;
-            hsm_source_serial: string;
-            hsm_target_serial: string;
-        }[];
-    };
-};
+export type CreateCloneInputResponse = string;
 
 export type CreateCloneInputRequest = CreateCloneInputParams & { body: CreateCloneInputBody }
 
@@ -39,48 +24,42 @@ export type CreateGenesisInputParams = {
     storeId: string;
 };
 
-export type CreateGenesisInputResponse = {
+export type CreateGenesisInputResponse = string;
+
+export type CreateGenesisInputRequest = CreateGenesisInputParams & { body: CreateGenesisInputBody }
+
+export type CreateProofOfControlInputBody = {
+    walletIds: string[];
+};
+
+export type CreateProofOfControlInputParams = {
+    storeId: string;
+};
+
+export type CreateProofOfControlInputResponse = {
     inputJson: {
         version: 1;
-        type: "fleet-input";
+        type: "keystore-input";
         org_id: string;
         fleet_id: string;
         keystore_id: string;
         operations: {
             id: string;
-            type: "genesis-registration";
+            type: "proof-of-control";
             options: {
-                create_test_keys: boolean;
-                seal_factory_key: boolean;
-                key_harvest: {
-                    "ed25519-start": number;
-                    ed25519: number;
-                    "secp256k1-start": number;
-                    secp256k1: number;
-                };
-            };
-            hsm_genesis_serial: string;
-            num_provisioners: number;
-            ceremony_challenge: string;
-            provisioner_labels: string[];
-            transport_key: {
-                crypto_system: string;
-                public_key_hex: string;
-            };
-            policy_key: {
-                crypto_system: string;
-                public_key_hex: string;
+                challenge: string;
+                key_labels: string[];
             };
         }[];
     };
 };
 
-export type CreateGenesisInputRequest = CreateGenesisInputParams & { body: CreateGenesisInputBody }
+export type CreateProofOfControlInputRequest = CreateProofOfControlInputParams & { body: CreateProofOfControlInputBody }
 
 export type ListKeyStoresResponse = {
     items: {
         id: string;
-        kind: "Hsm" | "Mpc" | "Nemo";
+        kind: "Hsm" | "Mpc" | "OfflineSigner";
         name?: string | undefined;
         primary: boolean;
     }[];
@@ -197,4 +176,38 @@ export type SubmitGenesisOutputParams = {
 export type SubmitGenesisOutputResponse = {};
 
 export type SubmitGenesisOutputRequest = SubmitGenesisOutputParams & { body: SubmitGenesisOutputBody }
+
+export type __WireSubmitProofOfControlOutputBody = {
+    fileChecksum: string;
+    outputJson: {
+        type: "keystore-output";
+        version: 1;
+        org_id: string;
+        fleet_id: string;
+        keystore_id: string;
+        outputs: ({
+            id: string;
+            type: "proof-of-control";
+            returns: {
+                [x: string]: {
+                    signer_public_key: string;
+                    prefix: string;
+                    message: string;
+                    exact_bytes_signed: string;
+                    signature: string;
+                };
+            };
+        })[];
+    };
+};
+
+export type SubmitProofOfControlOutputBody = Omit<__WireSubmitProofOfControlOutputBody, 'fileChecksum'>
+
+export type SubmitProofOfControlOutputParams = {
+    storeId: string;
+};
+
+export type SubmitProofOfControlOutputResponse = {};
+
+export type SubmitProofOfControlOutputRequest = SubmitProofOfControlOutputParams & { body: SubmitProofOfControlOutputBody }
 
