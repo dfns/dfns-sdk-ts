@@ -39,6 +39,21 @@ export class SignersClient {
     return response.json()
   }
 
+  async createProofOfControlInput(request: T.CreateProofOfControlInputRequest): Promise<T.CreateProofOfControlInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/proof-of-control/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listKeyStores(): Promise<T.ListKeyStoresResponse> {
     const path = buildPathAndQuery('/key-stores', {
       path: {},
@@ -91,6 +106,25 @@ export class SignersClient {
     file: { bytes: Uint8Array; name?: string }
   ): Promise<T.SubmitGenesisOutputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/genesis/output', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      file,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async submitProofOfControlOutput(
+    request: T.SubmitProofOfControlOutputRequest,
+    file: { bytes: Uint8Array; name?: string }
+  ): Promise<T.SubmitProofOfControlOutputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/proof-of-control/output', {
       path: request ?? {},
       query: {},
     })
