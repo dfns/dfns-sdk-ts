@@ -18,6 +18,7 @@ export type CreateGenesisInputBody = {
     numSecp256k1?: number;
     numEd25519?: number;
     hsmGenesisSerial: string;
+    hsmGenesisFirmwareVersion?: ("2.2" | "2.4") | undefined;
 };
 
 export type CreateGenesisInputParams = {
