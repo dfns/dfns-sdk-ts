@@ -308,6 +308,21 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async cantonLedgerApiProxy(request: T.CantonLedgerApiProxyRequest): Promise<T.CantonLedgerApiProxyResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/canton/ledger-api', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createWalletInit(request: T.CreateWalletRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets', {
       path: request ?? {},
