@@ -39,6 +39,21 @@ export class SignersClient {
     return response.json()
   }
 
+  async createOnchainSignInput(request: T.CreateOnchainSignInputRequest): Promise<T.CreateOnchainSignInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/onchain-sign/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createProofOfControlInput(request: T.CreateProofOfControlInputRequest): Promise<T.CreateProofOfControlInputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/proof-of-control/input', {
       path: request ?? {},
@@ -106,6 +121,25 @@ export class SignersClient {
     file: { bytes: Uint8Array; name?: string }
   ): Promise<T.SubmitGenesisOutputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/genesis/output', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      file,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async submitOnchainSignOutput(
+    request: T.SubmitOnchainSignOutputRequest,
+    file: { bytes: Uint8Array; name?: string }
+  ): Promise<T.SubmitOnchainSignOutputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/onchain-sign/output', {
       path: request ?? {},
       query: {},
     })

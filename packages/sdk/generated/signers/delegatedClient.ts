@@ -93,6 +93,49 @@ export class DelegatedSignersClient {
     return response.json()
   }
 
+  async createOnchainSignInputInit(request: T.CreateOnchainSignInputRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/onchain-sign/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async createOnchainSignInputComplete(
+    request: T.CreateOnchainSignInputRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.CreateOnchainSignInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/onchain-sign/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createProofOfControlInputInit(request: T.CreateProofOfControlInputRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/proof-of-control/input', {
       path: request ?? {},
