@@ -4189,6 +4189,7 @@ export type GetWalletHistoryResponse = {
         to?: string | undefined;
         value: string;
         fee?: string | undefined;
+        memo?: string | undefined;
     } | {
         walletId: string;
         direction: "In" | "Out";

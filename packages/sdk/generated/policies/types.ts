@@ -2382,6 +2382,7 @@ export type CreateApprovalDecisionResponse = {
             to?: string | undefined;
             value: string;
             fee?: string | undefined;
+            memo?: string | undefined;
         } | {
             walletId: string;
             direction: "In" | "Out";
@@ -5719,6 +5720,7 @@ export type GetApprovalResponse = {
             to?: string | undefined;
             value: string;
             fee?: string | undefined;
+            memo?: string | undefined;
         } | {
             walletId: string;
             direction: "In" | "Out";
@@ -9109,6 +9111,7 @@ export type ListApprovalsResponse = {
                 to?: string | undefined;
                 value: string;
                 fee?: string | undefined;
+                memo?: string | undefined;
             } | {
                 walletId: string;
                 direction: "In" | "Out";
