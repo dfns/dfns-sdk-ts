@@ -8,7 +8,7 @@
     "@dfns/sdk-keysigner": "file:../../../../packages/sdk-keysigner",
     "dotenv": "16.1.4",
     "permissionless": "0.1.14",
-    "viem": "2.9.9"
+    "viem": "2.50.4"
   },
   "devDependencies": {
     "ts-node": "10.9.1"
