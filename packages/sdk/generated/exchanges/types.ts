@@ -10,6 +10,8 @@ export type CreateDepositBody = {
     offer?: boolean | undefined;
     /** Optional field for Canton, especially useful in the context of offers */
     expiresAt?: string | undefined;
+    /** Optional Solana-only flag. When `true` the SOL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). Use this for offline-signing flows where the construct → broadcast gap may exceed 90 seconds. The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+    useDurableNonce?: boolean | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
     externalId?: string | undefined;
     /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
@@ -172,6 +174,8 @@ export type CreateDepositBody = {
     mint: string;
     /** If `true`, pay to create the associated token account for the recipient if it doesn't exist. Defaults to `false`. */
     createDestinationAccount?: boolean | undefined;
+    /** Optional. When `true` the SPL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+    useDurableNonce?: boolean | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
     externalId?: string | undefined;
     /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
@@ -254,6 +258,8 @@ export type CreateDepositResponse = {
         offer?: boolean | undefined;
         /** Optional field for Canton, especially useful in the context of offers */
         expiresAt?: string | undefined;
+        /** Optional Solana-only flag. When `true` the SOL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). Use this for offline-signing flows where the construct → broadcast gap may exceed 90 seconds. The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+        useDurableNonce?: boolean | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
         externalId?: string | undefined;
         /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
@@ -416,6 +422,8 @@ export type CreateDepositResponse = {
         mint: string;
         /** If `true`, pay to create the associated token account for the recipient if it doesn't exist. Defaults to `false`. */
         createDestinationAccount?: boolean | undefined;
+        /** Optional. When `true` the SPL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+        useDurableNonce?: boolean | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
         externalId?: string | undefined;
         /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
@@ -506,6 +514,8 @@ export type CreateWithdrawalBody = {
     offer?: boolean | undefined;
     /** Optional field for Canton, especially useful in the context of offers */
     expiresAt?: string | undefined;
+    /** Optional Solana-only flag. When `true` the SOL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). Use this for offline-signing flows where the construct → broadcast gap may exceed 90 seconds. The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+    useDurableNonce?: boolean | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
     externalId?: string | undefined;
     /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
@@ -668,6 +678,8 @@ export type CreateWithdrawalBody = {
     mint: string;
     /** If `true`, pay to create the associated token account for the recipient if it doesn't exist. Defaults to `false`. */
     createDestinationAccount?: boolean | undefined;
+    /** Optional. When `true` the SPL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+    useDurableNonce?: boolean | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
     externalId?: string | undefined;
     /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
@@ -750,6 +762,8 @@ export type CreateWithdrawalResponse = {
         offer?: boolean | undefined;
         /** Optional field for Canton, especially useful in the context of offers */
         expiresAt?: string | undefined;
+        /** Optional Solana-only flag. When `true` the SOL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). Use this for offline-signing flows where the construct → broadcast gap may exceed 90 seconds. The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+        useDurableNonce?: boolean | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
         externalId?: string | undefined;
         /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
@@ -912,6 +926,8 @@ export type CreateWithdrawalResponse = {
         mint: string;
         /** If `true`, pay to create the associated token account for the recipient if it doesn't exist. Defaults to `false`. */
         createDestinationAccount?: boolean | undefined;
+        /** Optional. When `true` the SPL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+        useDurableNonce?: boolean | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
         externalId?: string | undefined;
         /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
@@ -1096,7 +1112,7 @@ export type ListAssetWithdrawalNetworksResponse = (({
     kind: "Tep74";
     master: string;
 }) & {
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
     decimals: number;
 })[];
 
