@@ -1,6 +1,6 @@
 {
   "name": "@dfns/sdk-awskmssigner",
-  "version": "0.8.20",
+  "version": "0.8.21",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dfns/dfns-sdk-ts.git",
