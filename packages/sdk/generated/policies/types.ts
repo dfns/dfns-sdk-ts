@@ -1149,6 +1149,20 @@ export type CreateApprovalDecisionResponse = {
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
+                kind: "AcceptInboundAsset";
+                /** Stellar (G-address) or XRPL (r-address) issuer of the asset. */
+                issuer?: string | undefined;
+                /** Stellar asset code (1–12 ASCII alphanumeric chars). */
+                assetCode?: string | undefined;
+                /** XRPL IOU currency code. */
+                currency?: string | undefined;
+                /** Algorand Standard Asset (ASA) id. */
+                assetId?: string | undefined;
+                /** Hedera token entity id, e.g. "0.0.456858". */
+                tokenId?: string | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
                 kind: "SettleOffer";
                 txHash: string;
                 decision: "Accept" | "Reject";
@@ -4514,6 +4528,20 @@ export type GetApprovalResponse = {
                 count?: number | undefined;
                 /** Priority for the bootstrap fee. Defaults to Standard. */
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
+                kind: "AcceptInboundAsset";
+                /** Stellar (G-address) or XRPL (r-address) issuer of the asset. */
+                issuer?: string | undefined;
+                /** Stellar asset code (1–12 ASCII alphanumeric chars). */
+                assetCode?: string | undefined;
+                /** XRPL IOU currency code. */
+                currency?: string | undefined;
+                /** Algorand Standard Asset (ASA) id. */
+                assetId?: string | undefined;
+                /** Hedera token entity id, e.g. "0.0.456858". */
+                tokenId?: string | undefined;
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
@@ -7935,6 +7963,20 @@ export type ListApprovalsResponse = {
                     count?: number | undefined;
                     /** Priority for the bootstrap fee. Defaults to Standard. */
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                    /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                    externalId?: string | undefined;
+                } | {
+                    kind: "AcceptInboundAsset";
+                    /** Stellar (G-address) or XRPL (r-address) issuer of the asset. */
+                    issuer?: string | undefined;
+                    /** Stellar asset code (1–12 ASCII alphanumeric chars). */
+                    assetCode?: string | undefined;
+                    /** XRPL IOU currency code. */
+                    currency?: string | undefined;
+                    /** Algorand Standard Asset (ASA) id. */
+                    assetId?: string | undefined;
+                    /** Hedera token entity id, e.g. "0.0.456858". */
+                    tokenId?: string | undefined;
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
                 } | {
