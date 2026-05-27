@@ -14,7 +14,7 @@ export const buildPathAndQuery = (
     .flatMap(([key, value]) => {
       if (Array.isArray(value)) {
         return value.map((item) => `${key}=${encodeURIComponent(item)}`)
-      } else if (!value) {
+      } else if (value === undefined) {
         return []
       } else {
         return [`${key}=${encodeURIComponent(value.toString())}`]
