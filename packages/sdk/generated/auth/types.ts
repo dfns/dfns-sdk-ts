@@ -112,6 +112,14 @@ export type ActivateUserResponse = {
 
 export type ActivateUserRequest = ActivateUserParams
 
+export type ArchiveCredentialParams = {
+    credentialUuid: string;
+};
+
+export type ArchiveCredentialResponse = {};
+
+export type ArchiveCredentialRequest = ArchiveCredentialParams
+
 export type ArchivePersonalAccessTokenParams = {
     tokenId: string;
 };
