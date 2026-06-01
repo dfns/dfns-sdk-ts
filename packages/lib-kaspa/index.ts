@@ -9,7 +9,16 @@ export type DfnsWalletOptions = {
 
 type WalletMetadata = GetWalletResponse
 
-export const transactionToSubmitRequest = (transaction: Transaction): any  => {  
+const toSafeNumber = (value: bigint | number, field: string): number => {
+  const normalized = Number(value)
+  if (!Number.isSafeInteger(normalized)) {
+    throw new DfnsError(-1, `${field} exceeds JavaScript safe integer range`, { value: value.toString() })
+  }
+
+  return normalized
+}
+
+export const transactionToSubmitRequest = (transaction: Transaction): any => {
   return {
     transaction: {
       version: transaction.version,
@@ -21,18 +30,18 @@ export const transactionToSubmitRequest = (transaction: Transaction): any  => {
             index: previousOutpoint.index,
           },
           signatureScript: input.signatureScript,
-          sequence: Number(input.sequence),
+          sequence: toSafeNumber(input.sequence, 'sequence'),
           sigOpCount: input.sigOpCount,
         }
       }),
       outputs: transaction.outputs.map((output: TransactionOutput) => ({
-        amount: Number(output.value),
+        amount: toSafeNumber(output.value, 'amount'),
         scriptPublicKey: {
           version: 0,
           scriptPublicKey: output.scriptPublicKey.script,
         },
       })),
-      lockTime: Number(transaction.lock_time),
+      lockTime: toSafeNumber(transaction.lock_time, 'lockTime'),
       subnetworkId: transaction.subnetworkId,
     },
     allowOrphan: true,
@@ -91,7 +100,7 @@ export class DfnsWallet {
   public decodeHexTransaction(tx: string): Transaction {
     return Transaction.deserializeFromJSON(Buffer.from(stripHexPrefix(tx), 'hex').toString())
   }
-  
+
   public encodeTransaction(tx: Transaction): string {
     return Buffer.from(tx.serializeToJSON()).toString('hex')
   }
