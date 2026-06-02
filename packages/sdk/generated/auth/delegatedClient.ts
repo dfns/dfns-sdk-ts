@@ -179,6 +179,49 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async archiveCredentialInit(request: T.ArchiveCredentialRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async archiveCredentialComplete(
+    request: T.ArchiveCredentialRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.ArchiveCredentialResponse> {
+    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async archivePersonalAccessTokenInit(request: T.ArchivePersonalAccessTokenRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/pats/:tokenId', {
       path: request ?? {},
