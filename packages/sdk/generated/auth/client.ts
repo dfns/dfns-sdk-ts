@@ -69,6 +69,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async archiveCredential(request: T.ArchiveCredentialRequest): Promise<T.ArchiveCredentialResponse> {
+    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async archivePersonalAccessToken(request: T.ArchivePersonalAccessTokenRequest): Promise<T.ArchivePersonalAccessTokenResponse> {
     const path = buildPathAndQuery('/auth/pats/:tokenId', {
       path: request ?? {},
