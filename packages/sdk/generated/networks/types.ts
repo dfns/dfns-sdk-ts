@@ -84,10 +84,14 @@ export type CreateCantonValidatorResponse = {
     id: string;
     /** Organization id. */
     orgId: string;
+    /** The Canton network this validator is configured for. */
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
+    /** Nickname for this validator. */
     name?: string | undefined;
+    /** `Shared` if using the Dfns-hosted shared validator, `Custom` if connecting your own validator. */
     kind: "Shared" | "Custom";
     dateCreated: string;
+    /** Party hint used to derive the Canton party id for wallets created under this validator. */
     partyHint: string;
 };
 
@@ -102,10 +106,14 @@ export type DeleteCantonValidatorResponse = {
     id: string;
     /** Organization id. */
     orgId: string;
+    /** The Canton network this validator is configured for. */
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
+    /** Nickname for this validator. */
     name?: string | undefined;
+    /** `Shared` if using the Dfns-hosted shared validator, `Custom` if connecting your own validator. */
     kind: "Shared" | "Custom";
     dateCreated: string;
+    /** Party hint used to derive the Canton party id for wallets created under this validator. */
     partyHint: string;
 };
 
@@ -120,10 +128,14 @@ export type GetCantonValidatorResponse = {
     id: string;
     /** Organization id. */
     orgId: string;
+    /** The Canton network this validator is configured for. */
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
+    /** Nickname for this validator. */
     name?: string | undefined;
+    /** `Shared` if using the Dfns-hosted shared validator, `Custom` if connecting your own validator. */
     kind: "Shared" | "Custom";
     dateCreated: string;
+    /** Party hint used to derive the Canton party id for wallets created under this validator. */
     partyHint: string;
 };
 
@@ -138,15 +150,21 @@ export type GetFeesResponse = {
     network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "Litecoin" | "LitecoinTestnet" | "Dogecoin" | "DogecoinTestnet";
     blockNumber: number;
     slow: {
+        /** Fee rate denominated in satoshis (the lowest denomination) per virtual byte. */
         feeRate: string;
+        /** Target number of blocks within which a transaction at this fee rate is expected to confirm. */
         blockHorizon: number;
     };
     standard: {
+        /** Fee rate denominated in satoshis (the lowest denomination) per virtual byte. */
         feeRate: string;
+        /** Target number of blocks within which a transaction at this fee rate is expected to confirm. */
         blockHorizon: number;
     };
     fast: {
+        /** Fee rate denominated in satoshis (the lowest denomination) per virtual byte. */
         feeRate: string;
+        /** Target number of blocks within which a transaction at this fee rate is expected to confirm. */
         blockHorizon: number;
     };
 } | {
@@ -154,29 +172,39 @@ export type GetFeesResponse = {
     network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
     blockNumber: number;
     slow: {
+        /** Maximum priority fee (tip) per unit of gas, denominated in wei (the lowest denomination). */
         maxPriorityFeePerGas: string;
+        /** Maximum total fee per unit of gas, denominated in wei (the lowest denomination). */
         maxFeePerGas: string;
     };
     standard: {
+        /** Maximum priority fee (tip) per unit of gas, denominated in wei (the lowest denomination). */
         maxPriorityFeePerGas: string;
+        /** Maximum total fee per unit of gas, denominated in wei (the lowest denomination). */
         maxFeePerGas: string;
     };
     fast: {
+        /** Maximum priority fee (tip) per unit of gas, denominated in wei (the lowest denomination). */
         maxPriorityFeePerGas: string;
+        /** Maximum total fee per unit of gas, denominated in wei (the lowest denomination). */
         maxFeePerGas: string;
     };
+    /** Base fee per unit of gas of the latest block, denominated in wei (the lowest denomination). */
     baseFeePerGas: string;
 } | {
     kind: "Solana";
     network: "Solana" | "SolanaDevnet";
     blockNumber: number;
     slow: {
+        /** Price per compute unit, denominated in micro-lamports (the lowest denomination). */
         computeUnitPrice: string;
     };
     standard: {
+        /** Price per compute unit, denominated in micro-lamports (the lowest denomination). */
         computeUnitPrice: string;
     };
     fast: {
+        /** Price per compute unit, denominated in micro-lamports (the lowest denomination). */
         computeUnitPrice: string;
     };
 };
@@ -200,10 +228,14 @@ export type ListCantonValidatorsResponse = {
         id: string;
         /** Organization id. */
         orgId: string;
+        /** The Canton network this validator is configured for. */
         network: "Canton" | "CantonDevnet" | "CantonTestnet";
+        /** Nickname for this validator. */
         name?: string | undefined;
+        /** `Shared` if using the Dfns-hosted shared validator, `Custom` if connecting your own validator. */
         kind: "Shared" | "Custom";
         dateCreated: string;
+        /** Party hint used to derive the Canton party id for wallets created under this validator. */
         partyHint: string;
     }[];
     /** token to use as `paginationToken` to request the next page. */
@@ -260,10 +292,14 @@ export type UpdateCantonValidatorResponse = {
     id: string;
     /** Organization id. */
     orgId: string;
+    /** The Canton network this validator is configured for. */
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
+    /** Nickname for this validator. */
     name?: string | undefined;
+    /** `Shared` if using the Dfns-hosted shared validator, `Custom` if connecting your own validator. */
     kind: "Shared" | "Custom";
     dateCreated: string;
+    /** Party hint used to derive the Canton party id for wallets created under this validator. */
     partyHint: string;
 };
 
