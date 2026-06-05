@@ -80,6 +80,9 @@ export type __WireSubmitCloneOutputBody = {
         fleet_id: string;
         fleet_label: string;
         keystore_id: string;
+        governance?: {
+            [x: string]: unknown;
+        } | undefined;
         outputs: {
             [x: string]: {
                 success: {
@@ -136,6 +139,9 @@ export type __WireSubmitGenesisOutputBody = {
         fleet_id: string;
         fleet_label: string;
         keystore_id: string;
+        governance?: {
+            [x: string]: unknown;
+        } | undefined;
         outputs: {
             [x: string]: {
                 success: {
