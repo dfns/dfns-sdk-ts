@@ -80,6 +80,8 @@ export type __WireSubmitCloneOutputBody = {
         fleet_id: string;
         fleet_label: string;
         keystore_id: string;
+        group_id: string;
+        online_domain: string;
         governance?: {
             [x: string]: unknown;
         } | undefined;
@@ -139,6 +141,8 @@ export type __WireSubmitGenesisOutputBody = {
         fleet_id: string;
         fleet_label: string;
         keystore_id: string;
+        group_id: string;
+        online_domain: string;
         governance?: {
             [x: string]: unknown;
         } | undefined;
