@@ -2268,6 +2268,17 @@ export type GetUserResponse = {
 
 export type GetUserRequest = GetUserParams
 
+export type InviteAccountUserBody = {
+    /** Email address of the existing Account User. */
+    email: string;
+    /** The kind of user being invited. It can only be "`AccountUser`" */
+    kind: "AccountUser";
+};
+
+export type InviteAccountUserResponse = {};
+
+export type InviteAccountUserRequest = { body: InviteAccountUserBody }
+
 export type ListApplicationsResponse = {
     /** Current page items. */
     items: {
