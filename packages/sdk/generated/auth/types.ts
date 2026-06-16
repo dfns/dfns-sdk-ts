@@ -73,7 +73,7 @@ export type ActivateServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -151,7 +151,7 @@ export type ActivateUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -252,7 +252,7 @@ export type ArchiveServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -330,7 +330,7 @@ export type ArchiveUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -1434,7 +1434,7 @@ export type CreateServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -1593,7 +1593,7 @@ export type CreateUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -1879,7 +1879,7 @@ export type DeactivateServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -1957,7 +1957,7 @@ export type DeactivateUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -2165,7 +2165,7 @@ export type GetServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -2243,7 +2243,7 @@ export type GetUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -2267,6 +2267,17 @@ export type GetUserResponse = {
 };
 
 export type GetUserRequest = GetUserParams
+
+export type InviteAccountUserBody = {
+    /** Email address of the existing Account User. */
+    email: string;
+    /** The kind of user being invited. It can only be "`AccountUser`" */
+    kind: "AccountUser";
+};
+
+export type InviteAccountUserResponse = {};
+
+export type InviteAccountUserRequest = { body: InviteAccountUserBody }
 
 export type ListApplicationsResponse = {
     /** Current page items. */
@@ -2422,7 +2433,7 @@ export type ListServiceAccountsResponse = {
             orgId?: string | undefined;
             /** Account id. */
             accountId?: string | undefined;
-            /** Flat list of API operations the user has access to. */
+            /** @deprecated - Flat list of API operations the user has access to. */
             permissions?: string[] | undefined;
             /** Whether the user is active. */
             isActive: boolean;
@@ -2505,7 +2516,7 @@ export type ListUsersResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -3050,7 +3061,7 @@ export type RegisterEndUserBody = {
         credentialName?: string | undefined;
     } | undefined;
     wallets: {
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet nickname. */
         name?: string | undefined;
     }[];
@@ -3083,7 +3094,7 @@ export type RegisterEndUserResponse = {
         /** ID of the wallet. */
         id: string;
         /** Network this wallet is bound to. */
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet address on its corresponding network. */
         address?: string | undefined;
         /** Details about the key underlying the wallet. */
@@ -3291,7 +3302,7 @@ export type UpdateServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -3373,7 +3384,7 @@ export type UpdateUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
