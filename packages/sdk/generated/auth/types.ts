@@ -73,7 +73,7 @@ export type ActivateServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -151,7 +151,7 @@ export type ActivateUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -252,7 +252,7 @@ export type ArchiveServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -330,7 +330,7 @@ export type ArchiveUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -1434,7 +1434,7 @@ export type CreateServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -1593,7 +1593,7 @@ export type CreateUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -1879,7 +1879,7 @@ export type DeactivateServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -1957,7 +1957,7 @@ export type DeactivateUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -2165,7 +2165,7 @@ export type GetServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -2243,7 +2243,7 @@ export type GetUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
@@ -2267,6 +2267,17 @@ export type GetUserResponse = {
 };
 
 export type GetUserRequest = GetUserParams
+
+export type InviteAccountUserBody = {
+    /** Email address of the existing Account User. */
+    email: string;
+    /** The kind of user being invited. It can only be "`AccountUser`" */
+    kind: "AccountUser";
+};
+
+export type InviteAccountUserResponse = {};
+
+export type InviteAccountUserRequest = { body: InviteAccountUserBody }
 
 export type ListApplicationsResponse = {
     /** Current page items. */
@@ -2422,7 +2433,7 @@ export type ListServiceAccountsResponse = {
             orgId?: string | undefined;
             /** Account id. */
             accountId?: string | undefined;
-            /** Flat list of API operations the user has access to. */
+            /** @deprecated - Flat list of API operations the user has access to. */
             permissions?: string[] | undefined;
             /** Whether the user is active. */
             isActive: boolean;
@@ -2505,7 +2516,7 @@ export type ListUsersResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -3291,7 +3302,7 @@ export type UpdateServiceAccountResponse = {
         orgId?: string | undefined;
         /** Account id. */
         accountId?: string | undefined;
-        /** Flat list of API operations the user has access to. */
+        /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
         isActive: boolean;
@@ -3373,7 +3384,7 @@ export type UpdateUserResponse = {
     orgId?: string | undefined;
     /** Account id. */
     accountId?: string | undefined;
-    /** Flat list of API operations the user has access to. */
+    /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
     isActive: boolean;
