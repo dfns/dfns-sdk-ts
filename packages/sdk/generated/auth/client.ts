@@ -544,6 +544,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async inviteAccountUser(request: T.InviteAccountUserRequest): Promise<T.InviteAccountUserResponse> {
+    const path = buildPathAndQuery('/auth/users/invite', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listApplications(): Promise<T.ListApplicationsResponse> {
     const path = buildPathAndQuery('/auth/apps', {
       path: {},
