@@ -1082,6 +1082,49 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async inviteAccountUserInit(request: T.InviteAccountUserRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/users/invite', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async inviteAccountUserComplete(
+    request: T.InviteAccountUserRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.InviteAccountUserResponse> {
+    const path = buildPathAndQuery('/auth/users/invite', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listApplications(): Promise<T.ListApplicationsResponse> {
     const path = buildPathAndQuery('/auth/apps', {
       path: {},
