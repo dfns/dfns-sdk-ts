@@ -474,6 +474,21 @@ export class AuthClient {
     return this.delegatedLogin(request)
   }
 
+  async exchangeAccessToken(request: T.ExchangeAccessTokenRequest): Promise<T.ExchangeAccessTokenResponse> {
+    const path = buildPathAndQuery('/auth/tokens', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getApplication(request: T.GetApplicationRequest): Promise<T.GetApplicationResponse> {
     const path = buildPathAndQuery('/auth/apps/:appId', {
       path: request ?? {},
@@ -538,6 +553,21 @@ export class AuthClient {
 
     const response = await simpleFetch(path, {
       method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async inviteTenantUser(request: T.InviteTenantUserRequest): Promise<T.InviteTenantUserResponse> {
+    const path = buildPathAndQuery('/auth/users/invite', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
       apiOptions: this.apiOptions,
     })
 
