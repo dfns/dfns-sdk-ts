@@ -1,7 +1,22 @@
+export type CreateAddMacUserInputBody = {
+    kind: "AddMacUser";
+    macTargetSerial: string;
+    hsmTargetSerial: string;
+};
+
+export type CreateAddMacUserInputParams = {
+    storeId: string;
+};
+
+export type CreateAddMacUserInputResponse = string;
+
+export type CreateAddMacUserInputRequest = CreateAddMacUserInputParams & { body: CreateAddMacUserInputBody }
+
 export type CreateCloneInputBody = {
     kind: "Clone";
     hsmSourceSerial: string;
     hsmTargetSerial: string;
+    macTargetSerial?: string | undefined;
 };
 
 export type CreateCloneInputParams = {
@@ -18,6 +33,7 @@ export type CreateGenesisInputBody = {
     numSecp256k1: number;
     numEd25519: number;
     hsmGenesisSerial: string;
+    macGenesisSerial?: string | undefined;
     hsmGenesisFirmwareVersion?: ("2.2" | "2.4") | undefined;
 };
 
@@ -70,7 +86,7 @@ export type ListSignersResponse = {
     }[];
 };
 
-export type __WireSubmitCloneOutputBody = {
+export type __WireSubmitAddMacUserOutputBody = {
     fileChecksum: string;
     outputJson: {
         type: "fleet-output";
@@ -80,6 +96,8 @@ export type __WireSubmitCloneOutputBody = {
         fleet_id: string;
         fleet_label: string;
         keystore_id: string;
+        group_id: string;
+        online_domain: string;
         governance?: {
             [x: string]: unknown;
         } | undefined;
@@ -87,7 +105,7 @@ export type __WireSubmitCloneOutputBody = {
             [x: string]: {
                 success: {
                     type: "genesis-registration";
-                    ceremony_mode: string;
+                    ceremony_mode?: string | undefined;
                     hsm_serial: string;
                     hsm_identity_key: string;
                     mac_serial: string;
@@ -105,10 +123,89 @@ export type __WireSubmitCloneOutputBody = {
                     };
                 } | {
                     type: "clone-registration";
-                    ceremony_mode: string;
+                    ceremony_mode?: string | undefined;
                     hsm_target_serial: string;
                     hsm_identity_key: string;
                     mac_target_serial: string;
+                    mac_se_wrap_key_pub_key: string;
+                    hsm_sealed?: unknown | null;
+                } | {
+                    type: "add-mac-user";
+                    ceremony_mode?: string | undefined;
+                    hsm_target_serial: string;
+                    hsm_identity_key: string;
+                    mac_target_serial: string;
+                    mac_username?: string | undefined;
+                    mac_se_wrap_key_pub_key: string;
+                    hsm_sealed?: unknown | null;
+                };
+            };
+        };
+    };
+};
+
+export type SubmitAddMacUserOutputBody = Omit<__WireSubmitAddMacUserOutputBody, 'fileChecksum'>
+
+export type SubmitAddMacUserOutputParams = {
+    storeId: string;
+};
+
+export type SubmitAddMacUserOutputResponse = {
+    message: string;
+};
+
+export type SubmitAddMacUserOutputRequest = SubmitAddMacUserOutputParams & { body: SubmitAddMacUserOutputBody }
+
+export type __WireSubmitCloneOutputBody = {
+    fileChecksum: string;
+    outputJson: {
+        type: "fleet-output";
+        version: 1;
+        status: "success";
+        org_id: string;
+        fleet_id: string;
+        fleet_label: string;
+        keystore_id: string;
+        group_id: string;
+        online_domain: string;
+        governance?: {
+            [x: string]: unknown;
+        } | undefined;
+        outputs: {
+            [x: string]: {
+                success: {
+                    type: "genesis-registration";
+                    ceremony_mode?: string | undefined;
+                    hsm_serial: string;
+                    hsm_identity_key: string;
+                    mac_serial: string;
+                    mac_se_wrap_key_pub_key: string;
+                    provisioners: {
+                        [x: string]: string;
+                    };
+                    hsm_sealed?: unknown | null;
+                    key_harvest: {
+                        "ed25519-start": number;
+                        ed25519: number;
+                        error: string | null;
+                        "secp256k1-start": number;
+                        secp256k1: number;
+                    };
+                } | {
+                    type: "clone-registration";
+                    ceremony_mode?: string | undefined;
+                    hsm_target_serial: string;
+                    hsm_identity_key: string;
+                    mac_target_serial: string;
+                    mac_se_wrap_key_pub_key: string;
+                    hsm_sealed?: unknown | null;
+                } | {
+                    type: "add-mac-user";
+                    ceremony_mode?: string | undefined;
+                    hsm_target_serial: string;
+                    hsm_identity_key: string;
+                    mac_target_serial: string;
+                    mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
                 };
@@ -139,6 +236,8 @@ export type __WireSubmitGenesisOutputBody = {
         fleet_id: string;
         fleet_label: string;
         keystore_id: string;
+        group_id: string;
+        online_domain: string;
         governance?: {
             [x: string]: unknown;
         } | undefined;
@@ -146,7 +245,7 @@ export type __WireSubmitGenesisOutputBody = {
             [x: string]: {
                 success: {
                     type: "genesis-registration";
-                    ceremony_mode: string;
+                    ceremony_mode?: string | undefined;
                     hsm_serial: string;
                     hsm_identity_key: string;
                     mac_serial: string;
@@ -164,10 +263,19 @@ export type __WireSubmitGenesisOutputBody = {
                     };
                 } | {
                     type: "clone-registration";
-                    ceremony_mode: string;
+                    ceremony_mode?: string | undefined;
                     hsm_target_serial: string;
                     hsm_identity_key: string;
                     mac_target_serial: string;
+                    mac_se_wrap_key_pub_key: string;
+                    hsm_sealed?: unknown | null;
+                } | {
+                    type: "add-mac-user";
+                    ceremony_mode?: string | undefined;
+                    hsm_target_serial: string;
+                    hsm_identity_key: string;
+                    mac_target_serial: string;
+                    mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
                 };
