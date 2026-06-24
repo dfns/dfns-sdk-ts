@@ -1,7 +1,22 @@
+export type CreateAddMacUserInputBody = {
+    kind: "AddMacUser";
+    macTargetSerial: string;
+    hsmTargetSerial: string;
+};
+
+export type CreateAddMacUserInputParams = {
+    storeId: string;
+};
+
+export type CreateAddMacUserInputResponse = string;
+
+export type CreateAddMacUserInputRequest = CreateAddMacUserInputParams & { body: CreateAddMacUserInputBody }
+
 export type CreateCloneInputBody = {
     kind: "Clone";
     hsmSourceSerial: string;
     hsmTargetSerial: string;
+    macTargetSerial?: string | undefined;
 };
 
 export type CreateCloneInputParams = {
@@ -18,6 +33,7 @@ export type CreateGenesisInputBody = {
     numSecp256k1: number;
     numEd25519: number;
     hsmGenesisSerial: string;
+    macGenesisSerial?: string | undefined;
     hsmGenesisFirmwareVersion?: ("2.2" | "2.4") | undefined;
 };
 
@@ -80,6 +96,8 @@ export type __WireSubmitCloneOutputBody = {
         fleet_id: string;
         fleet_label: string;
         keystore_id: string;
+        group_id: string;
+        online_domain: string;
         governance?: {
             [x: string]: unknown;
         } | undefined;
@@ -87,7 +105,7 @@ export type __WireSubmitCloneOutputBody = {
             [x: string]: {
                 success: {
                     type: "genesis-registration";
-                    ceremony_mode: string;
+                    ceremony_mode?: string | undefined;
                     hsm_serial: string;
                     hsm_identity_key: string;
                     mac_serial: string;
@@ -105,7 +123,7 @@ export type __WireSubmitCloneOutputBody = {
                     };
                 } | {
                     type: "clone-registration";
-                    ceremony_mode: string;
+                    ceremony_mode?: string | undefined;
                     hsm_target_serial: string;
                     hsm_identity_key: string;
                     mac_target_serial: string;
@@ -139,6 +157,8 @@ export type __WireSubmitGenesisOutputBody = {
         fleet_id: string;
         fleet_label: string;
         keystore_id: string;
+        group_id: string;
+        online_domain: string;
         governance?: {
             [x: string]: unknown;
         } | undefined;
@@ -146,7 +166,7 @@ export type __WireSubmitGenesisOutputBody = {
             [x: string]: {
                 success: {
                     type: "genesis-registration";
-                    ceremony_mode: string;
+                    ceremony_mode?: string | undefined;
                     hsm_serial: string;
                     hsm_identity_key: string;
                     mac_serial: string;
@@ -164,7 +184,7 @@ export type __WireSubmitGenesisOutputBody = {
                     };
                 } | {
                     type: "clone-registration";
-                    ceremony_mode: string;
+                    ceremony_mode?: string | undefined;
                     hsm_target_serial: string;
                     hsm_identity_key: string;
                     mac_target_serial: string;
