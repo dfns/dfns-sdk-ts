@@ -1,0 +1,12 @@
+{
+  "name": "@dfns/lib-movement",
+  "version": "0.8.21",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfns/dfns-sdk-ts.git",
+    "directory": "packages/lib-movement"
+  },
+  "peerDependencies": {
+    "@moveindustries/ts-sdk": "5.1.7"
+  }
+}

@@ -1,6 +1,16 @@
+// Separate from 'lib-aptos' on purpose: 'moveindustries/ts-sdk' is a fork of 'aptos-labs/ts-sdk',
+// so its 'SimpleTransaction' etc. are different classes. 'instanceof' and the types don't match
+// across the two, and the forks keep drifting apart (e.g. Movement's serializer adds methods Aptos
+// doesn't have). Sharing one lib would mean loose typing now and BCS mismatches later, so we pin
+// each lib to a single SDK and let the two chains evolve on their own.
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
-import { AccountAuthenticatorNoAccountAuthenticator, AnyRawTransaction, Deserializer, MultiAgentTransaction, RawTransaction, SignedTransaction, SimpleTransaction, TransactionAuthenticatorFeePayer, TransactionAuthenticatorMultiAgent } from '@aptos-labs/ts-sdk'
+import { AccountAuthenticatorNoAccountAuthenticator, AnyRawTransaction, Deserializer, MultiAgentTransaction, RawTransaction, SignedTransaction, SimpleTransaction, TransactionAuthenticatorFeePayer, TransactionAuthenticatorMultiAgent } from '@moveindustries/ts-sdk'
+
+const movementNetwork = [
+  'Movement',
+  'MovementTestnet'
+]
 
 export const hexToBuffer = (hex: string): Buffer => {
   return Buffer.from(stripHexPrefix(hex), 'hex')
@@ -44,8 +54,8 @@ export class DfnsWallet {
       throw new DfnsError(-1, 'wallet not active', { walletId, status: res.status })
     }
 
-    if (res.network !== 'Aptos' && res.network !== 'AptosTestnet') {
-      throw new DfnsError(-1, 'wallet is not bound to Aptos or AptosTestnet', { walletId, network: res.network })
+    if (!movementNetwork.includes(res.network)) {
+      throw new DfnsError(-1, 'wallet is not bound to a Movement network', { walletId, network: res.network })
     }
 
     return new DfnsWallet(res, options)
