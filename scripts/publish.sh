@@ -44,7 +44,13 @@ packages=(
 
 for packageName in "${packages[@]}"; do
     cd dist/"${packageName}"
-    echo "Publishing ${packageName}..."
-    npm publish --workspaces=false ${tag:+--tag "$tag"}
+    version=$(node -p "require('./package.json').version")
+    if npm view "${packageName}@${version}" version >/dev/null 2>&1; then
+        echo "Skipping ${packageName}@${version} (already published)"
+        cd - >/dev/null
+        continue
+    fi
+    echo "Publishing ${packageName}@${version}..."
+    npm publish --workspaces=false --access public ${tag:+--tag "$tag"}
     cd - >/dev/null
 done
