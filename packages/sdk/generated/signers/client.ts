@@ -9,6 +9,21 @@ import * as T from './types'
 export class SignersClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
+  async createAddMacUserInput(request: T.CreateAddMacUserInputRequest): Promise<T.CreateAddMacUserInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/add-mac-user/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createCloneInput(request: T.CreateCloneInputRequest): Promise<T.CreateCloneInputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/clone/input', {
       path: request ?? {},
@@ -91,6 +106,25 @@ export class SignersClient {
 
     const response = await simpleFetch(path, {
       method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async submitAddMacUserOutput(
+    request: T.SubmitAddMacUserOutputRequest,
+    file: { bytes: Uint8Array; name?: string }
+  ): Promise<T.SubmitAddMacUserOutputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/add-mac-user/output', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      file,
       apiOptions: this.apiOptions,
     })
 
