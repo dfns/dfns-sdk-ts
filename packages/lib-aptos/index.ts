@@ -88,7 +88,7 @@ export class DfnsWallet {
   private prepareTransaction(transaction: RawTransaction | SignedTransaction | AnyRawTransaction): SignedTransaction | RawTransaction {
     if (isSimpleTransaction(transaction)) {
         return this.prepareSimpleTransaction(transaction)
-    } 
+    }
 
     if (isMultiAgentTransaction(transaction)) {
         return this.prepareMultiAgentTransaction(transaction)
@@ -145,9 +145,9 @@ export class DfnsWallet {
 }
 
 const isSimpleTransaction = (transaction: any): transaction is SimpleTransaction => {
-  return transaction instanceof SimpleTransaction
+  return transaction?.rawTransaction !== undefined && transaction?.secondarySignerAddresses === undefined
 }
 
 const isMultiAgentTransaction = (transaction: any): transaction is MultiAgentTransaction =>{
-  return transaction instanceof MultiAgentTransaction
+  return transaction?.rawTransaction !== undefined && Array.isArray(transaction?.secondarySignerAddresses)
 }

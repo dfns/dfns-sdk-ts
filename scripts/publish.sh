@@ -18,6 +18,7 @@ packages=(
     "@dfns/lib-iota"
     "@dfns/lib-kaspa"
     "@dfns/lib-meshsdk"
+    "@dfns/lib-movement"
     "@dfns/lib-near"
     "@dfns/lib-polkadot"
     "@dfns/lib-polymesh"
