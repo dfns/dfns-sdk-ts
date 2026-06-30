@@ -458,6 +458,12 @@ export type CreateCredentialResponse = {
 
 export type CreateCredentialRequest = { body: CreateCredentialBody }
 
+export type CreateUserCredentialBody = CreateCredentialBody
+
+export type CreateUserCredentialResponse = CreateCredentialResponse
+
+export type CreateUserCredentialRequest = CreateCredentialRequest
+
 export type CreateCredentialChallengeBody = {
     kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
 };
@@ -656,6 +662,12 @@ export type CreateCredentialChallengeResponse = {
 };
 
 export type CreateCredentialChallengeRequest = { body: CreateCredentialChallengeBody }
+
+export type CreateUserCredentialChallengeBody = CreateCredentialChallengeBody
+
+export type CreateUserCredentialChallengeResponse = CreateCredentialChallengeResponse
+
+export type CreateUserCredentialChallengeRequest = CreateCredentialChallengeRequest
 
 export type CreateCredentialChallengeWithCodeBody = {
     credentialKind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
@@ -1051,6 +1063,12 @@ export type CreateDelegatedRecoveryChallengeResponse = {
 
 export type CreateDelegatedRecoveryChallengeRequest = { body: CreateDelegatedRecoveryChallengeBody }
 
+export type CreateDelegatedUserRecoveryBody = CreateDelegatedRecoveryChallengeBody
+
+export type CreateDelegatedUserRecoveryResponse = CreateDelegatedRecoveryChallengeResponse
+
+export type CreateDelegatedUserRecoveryRequest = CreateDelegatedRecoveryChallengeRequest
+
 export type CreateDelegatedRegistrationChallengeBody = {
     /** Username/identifier (any unique string accepted, e.g. your internal user ID or email). */
     email: string;
@@ -1122,6 +1140,12 @@ export type CreateDelegatedRegistrationChallengeResponse = {
 };
 
 export type CreateDelegatedRegistrationChallengeRequest = { body: CreateDelegatedRegistrationChallengeBody }
+
+export type CreateDelegatedUserRegistrationBody = CreateDelegatedRegistrationChallengeBody
+
+export type CreateDelegatedUserRegistrationResponse = CreateDelegatedRegistrationChallengeResponse
+
+export type CreateDelegatedUserRegistrationRequest = CreateDelegatedRegistrationChallengeRequest
 
 export type CreateLoginChallengeBody = {
     /** Username/identifier of the user. Optional when the user has at least one discoverable WebAuthn credential. */
@@ -1695,6 +1719,12 @@ export type CreateUserActionChallengeResponse = {
 
 export type CreateUserActionChallengeRequest = { body: CreateUserActionChallengeBody }
 
+export type CreateUserActionSignatureChallengeBody = CreateUserActionChallengeBody
+
+export type CreateUserActionSignatureChallengeResponse = CreateUserActionChallengeResponse
+
+export type CreateUserActionSignatureChallengeRequest = CreateUserActionChallengeRequest
+
 export type CreateUserActionSignatureBody = {
     /** Temporary authentication token returned by the Create Challenge endpoint. */
     challengeIdentifier: string;
@@ -1993,6 +2023,12 @@ export type DelegatedLoginResponse = {
 };
 
 export type DelegatedLoginRequest = { body: DelegatedLoginBody }
+
+export type CreateDelegatedUserLoginBody = DelegatedLoginBody
+
+export type CreateDelegatedUserLoginResponse = DelegatedLoginResponse
+
+export type CreateDelegatedUserLoginRequest = DelegatedLoginRequest
 
 export type ExchangeAccessTokenBody = {
     /** ID of the Organisation or Tenant for which you wish to obtain an access token. */
@@ -2387,6 +2423,8 @@ export type ListCredentialsResponse = {
         origin: string;
     }[];
 };
+
+export type ListUserCredentialsResponse = ListCredentialsResponse
 
 export type ListPersonalAccessTokensResponse = {
     /** Current page items. */
@@ -2824,6 +2862,12 @@ export type RecoverResponse = {
 
 export type RecoverRequest = { body: RecoverBody }
 
+export type CreateUserRecoveryBody = RecoverBody
+
+export type CreateUserRecoveryResponse = RecoverResponse
+
+export type CreateUserRecoveryRequest = RecoverRequest
+
 export type RegisterBody = {
     firstFactorCredential: {
         credentialKind: "Fido2";
@@ -2959,6 +3003,12 @@ export type RegisterResponse = {
 };
 
 export type RegisterRequest = { body: RegisterBody }
+
+export type CreateUserRegistrationBody = RegisterBody
+
+export type CreateUserRegistrationResponse = RegisterResponse
+
+export type CreateUserRegistrationRequest = RegisterRequest
 
 export type RegisterEndUserBody = {
     firstFactorCredential: {
