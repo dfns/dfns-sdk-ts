@@ -1710,6 +1710,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -1756,6 +1757,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -1794,6 +1796,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -1835,6 +1838,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -1873,6 +1877,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -1913,6 +1918,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -1951,6 +1957,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -1989,6 +1996,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2028,6 +2036,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2072,6 +2081,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2114,6 +2124,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2158,6 +2169,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2205,6 +2217,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2250,6 +2263,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2289,6 +2303,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2329,6 +2344,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2369,6 +2385,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2407,6 +2424,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2446,6 +2464,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2488,6 +2507,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2526,6 +2546,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2564,6 +2585,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2602,6 +2624,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2641,6 +2664,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2679,6 +2703,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2717,6 +2742,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -2755,6 +2781,7 @@ export type CreateApprovalDecisionResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5298,6 +5325,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5344,6 +5372,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5382,6 +5411,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5423,6 +5453,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5461,6 +5492,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5501,6 +5533,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5539,6 +5572,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5577,6 +5611,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5616,6 +5651,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5660,6 +5696,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5702,6 +5739,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5746,6 +5784,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5793,6 +5832,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5838,6 +5878,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5877,6 +5918,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5917,6 +5959,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5957,6 +6000,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -5995,6 +6039,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6034,6 +6079,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6076,6 +6122,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6114,6 +6161,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6152,6 +6200,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6190,6 +6239,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6229,6 +6279,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6267,6 +6318,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6305,6 +6357,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -6343,6 +6396,7 @@ export type GetApprovalResponse = {
             txHash: string;
             index?: string | undefined;
             timestamp: string;
+            status: "Included" | "Confirmed";
             metadata: {
                 asset: {
                     symbol?: string | undefined;
@@ -8939,6 +8993,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -8985,6 +9040,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9023,6 +9079,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9064,6 +9121,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9102,6 +9160,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9142,6 +9201,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9180,6 +9240,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9218,6 +9279,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9257,6 +9319,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9301,6 +9364,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9343,6 +9407,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9387,6 +9452,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9434,6 +9500,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9479,6 +9546,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9518,6 +9586,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9558,6 +9627,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9598,6 +9668,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9636,6 +9707,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9675,6 +9747,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9717,6 +9790,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9755,6 +9829,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9793,6 +9868,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9831,6 +9907,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9870,6 +9947,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9908,6 +9986,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9946,6 +10025,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;
@@ -9984,6 +10064,7 @@ export type ListApprovalsResponse = {
                 txHash: string;
                 index?: string | undefined;
                 timestamp: string;
+                status: "Included" | "Confirmed";
                 metadata: {
                     asset: {
                         symbol?: string | undefined;

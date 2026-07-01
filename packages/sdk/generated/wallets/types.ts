@@ -3702,6 +3702,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -3748,6 +3749,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -3786,6 +3788,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -3827,6 +3830,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -3865,6 +3869,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -3905,6 +3910,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -3943,6 +3949,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -3981,6 +3988,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4020,6 +4028,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4064,6 +4073,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4106,6 +4116,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4150,6 +4161,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4197,6 +4209,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4242,6 +4255,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4281,6 +4295,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4321,6 +4336,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4361,6 +4377,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4399,6 +4416,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4438,6 +4456,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4480,6 +4499,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4518,6 +4538,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4556,6 +4577,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4594,6 +4616,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4633,6 +4656,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4671,6 +4695,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4709,6 +4734,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
@@ -4747,6 +4773,7 @@ export type GetWalletHistoryResponse = {
         txHash: string;
         index?: string | undefined;
         timestamp: string;
+        status: "Included" | "Confirmed";
         metadata: {
             asset: {
                 symbol?: string | undefined;
