@@ -66,13 +66,13 @@ export type ActivateServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         /** UUID of the user's primary credential. */
         credentialUuid: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
         /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
@@ -144,13 +144,13 @@ export type ActivateUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     /** UUID of the user's primary credential. */
     credentialUuid: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
@@ -245,13 +245,13 @@ export type ArchiveServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         /** UUID of the user's primary credential. */
         credentialUuid: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
         /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
@@ -323,13 +323,13 @@ export type ArchiveUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     /** UUID of the user's primary credential. */
     credentialUuid: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
@@ -457,12 +457,6 @@ export type CreateCredentialResponse = {
 };
 
 export type CreateCredentialRequest = { body: CreateCredentialBody }
-
-export type CreateUserCredentialBody = CreateCredentialBody
-
-export type CreateUserCredentialResponse = CreateCredentialResponse
-
-export type CreateUserCredentialRequest = CreateCredentialRequest
 
 export type CreateCredentialChallengeBody = {
     kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
@@ -662,12 +656,6 @@ export type CreateCredentialChallengeResponse = {
 };
 
 export type CreateCredentialChallengeRequest = { body: CreateCredentialChallengeBody }
-
-export type CreateUserCredentialChallengeBody = CreateCredentialChallengeBody
-
-export type CreateUserCredentialChallengeResponse = CreateCredentialChallengeResponse
-
-export type CreateUserCredentialChallengeRequest = CreateCredentialChallengeRequest
 
 export type CreateCredentialChallengeWithCodeBody = {
     credentialKind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
@@ -1063,12 +1051,6 @@ export type CreateDelegatedRecoveryChallengeResponse = {
 
 export type CreateDelegatedRecoveryChallengeRequest = { body: CreateDelegatedRecoveryChallengeBody }
 
-export type CreateDelegatedUserRecoveryBody = CreateDelegatedRecoveryChallengeBody
-
-export type CreateDelegatedUserRecoveryResponse = CreateDelegatedRecoveryChallengeResponse
-
-export type CreateDelegatedUserRecoveryRequest = CreateDelegatedRecoveryChallengeRequest
-
 export type CreateDelegatedRegistrationChallengeBody = {
     /** Username/identifier (any unique string accepted, e.g. your internal user ID or email). */
     email: string;
@@ -1141,19 +1123,13 @@ export type CreateDelegatedRegistrationChallengeResponse = {
 
 export type CreateDelegatedRegistrationChallengeRequest = { body: CreateDelegatedRegistrationChallengeBody }
 
-export type CreateDelegatedUserRegistrationBody = CreateDelegatedRegistrationChallengeBody
-
-export type CreateDelegatedUserRegistrationResponse = CreateDelegatedRegistrationChallengeResponse
-
-export type CreateDelegatedUserRegistrationRequest = CreateDelegatedRegistrationChallengeRequest
-
 export type CreateLoginChallengeBody = {
     /** Username/identifier of the user. Optional when the user has at least one discoverable WebAuthn credential. */
     username?: string | undefined;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** One-time login code, required when the user has a credential of kind `PasswordProtectedKey`. */
     loginCode?: string | undefined;
 };
@@ -1281,8 +1257,8 @@ export type CreateRecoveryChallengeBody = {
     verificationCode: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** Identifier of the recovery credential to use. */
     credentialId: string;
 };
@@ -1359,8 +1335,8 @@ export type CreateRecoveryChallengeRequest = { body: CreateRecoveryChallengeBody
 export type CreateRegistrationChallengeBody = {
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** Username/identifier of the user being registered (any unique string accepted, e.g. email). */
     username: string;
     /** One-time registration code sent to the user by email. */
@@ -1451,13 +1427,13 @@ export type CreateServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         /** UUID of the user's primary credential. */
         credentialUuid: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
         /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
@@ -1610,13 +1586,13 @@ export type CreateUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     /** UUID of the user's primary credential. */
     credentialUuid: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
@@ -1718,12 +1694,6 @@ export type CreateUserActionChallengeResponse = {
 };
 
 export type CreateUserActionChallengeRequest = { body: CreateUserActionChallengeBody }
-
-export type CreateUserActionSignatureChallengeBody = CreateUserActionChallengeBody
-
-export type CreateUserActionSignatureChallengeResponse = CreateUserActionChallengeResponse
-
-export type CreateUserActionSignatureChallengeRequest = CreateUserActionChallengeRequest
 
 export type CreateUserActionSignatureBody = {
     /** Temporary authentication token returned by the Create Challenge endpoint. */
@@ -1902,13 +1872,13 @@ export type DeactivateServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         /** UUID of the user's primary credential. */
         credentialUuid: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
         /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
@@ -1980,13 +1950,13 @@ export type DeactivateUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     /** UUID of the user's primary credential. */
     credentialUuid: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
@@ -2023,12 +1993,6 @@ export type DelegatedLoginResponse = {
 };
 
 export type DelegatedLoginRequest = { body: DelegatedLoginBody }
-
-export type CreateDelegatedUserLoginBody = DelegatedLoginBody
-
-export type CreateDelegatedUserLoginResponse = DelegatedLoginResponse
-
-export type CreateDelegatedUserLoginRequest = DelegatedLoginRequest
 
 export type ExchangeAccessTokenBody = {
     /** ID of the Organisation or Tenant for which you wish to obtain an access token. */
@@ -2205,13 +2169,13 @@ export type GetServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         /** UUID of the user's primary credential. */
         credentialUuid: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
         /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
@@ -2283,13 +2247,13 @@ export type GetUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     /** UUID of the user's primary credential. */
     credentialUuid: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */
@@ -2315,16 +2279,16 @@ export type GetUserResponse = {
 
 export type GetUserRequest = GetUserParams
 
-export type InviteTenantUserBody = {
-    /** Email address of the existing Tenant User. */
+export type InviteAccountUserBody = {
+    /** Email address of the existing Account User. */
     email: string;
-    /** The kind of user being invited. It can only be "`TenantUser`" */
-    kind: "TenantUser";
+    /** The kind of user being invited. It can only be "`AccountUser`" */
+    kind: "AccountUser";
 };
 
-export type InviteTenantUserResponse = {};
+export type InviteAccountUserResponse = {};
 
-export type InviteTenantUserRequest = { body: InviteTenantUserBody }
+export type InviteAccountUserRequest = { body: InviteAccountUserBody }
 
 export type ListApplicationsResponse = {
     /** Current page items. */
@@ -2424,8 +2388,6 @@ export type ListCredentialsResponse = {
     }[];
 };
 
-export type ListUserCredentialsResponse = ListCredentialsResponse
-
 export type ListPersonalAccessTokensResponse = {
     /** Current page items. */
     items: {
@@ -2475,13 +2437,13 @@ export type ListServiceAccountsResponse = {
             /** User id. */
             userId: string;
             /** User kind. */
-            kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+            kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
             /** UUID of the user's primary credential. */
             credentialUuid: string;
             /** Organization id. */
             orgId?: string | undefined;
-            /** Tenant id. */
-            tenantId?: string | undefined;
+            /** Account id. */
+            accountId?: string | undefined;
             /** @deprecated - Flat list of API operations the user has access to. */
             permissions?: string[] | undefined;
             /** Whether the user is active. */
@@ -2558,13 +2520,13 @@ export type ListUsersResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         /** UUID of the user's primary credential. */
         credentialUuid: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
         /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
@@ -2855,18 +2817,12 @@ export type RecoverResponse = {
         username: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
     };
 };
 
 export type RecoverRequest = { body: RecoverBody }
-
-export type CreateUserRecoveryBody = RecoverBody
-
-export type CreateUserRecoveryResponse = RecoverResponse
-
-export type CreateUserRecoveryRequest = RecoverRequest
 
 export type RegisterBody = {
     firstFactorCredential: {
@@ -2997,18 +2953,12 @@ export type RegisterResponse = {
         username: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
     };
 };
 
 export type RegisterRequest = { body: RegisterBody }
-
-export type CreateUserRegistrationBody = RegisterBody
-
-export type CreateUserRegistrationResponse = RegisterResponse
-
-export type CreateUserRegistrationRequest = RegisterRequest
 
 export type RegisterEndUserBody = {
     firstFactorCredential: {
@@ -3122,7 +3072,7 @@ export type RegisterEndUserBody = {
         credentialName?: string | undefined;
     } | undefined;
     wallets: {
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet nickname. */
         name?: string | undefined;
     }[];
@@ -3144,8 +3094,8 @@ export type RegisterEndUserResponse = {
         username: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
     };
     authentication: {
         /** Authentication token issued to the user. */
@@ -3155,7 +3105,7 @@ export type RegisterEndUserResponse = {
         /** ID of the wallet. */
         id: string;
         /** Network this wallet is bound to. */
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet address on its corresponding network. */
         address?: string | undefined;
         /** Details about the key underlying the wallet. */
@@ -3197,8 +3147,8 @@ export type ResendRegistrationCodeBody = {
     username: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
 };
 
 export type ResendRegistrationCodeResponse = {
@@ -3213,8 +3163,8 @@ export type SendLoginCodeBody = {
     username: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
 };
 
 export type SendLoginCodeResponse = {
@@ -3229,8 +3179,8 @@ export type SendRecoveryCodeBody = {
     username: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
 };
 
 export type SendRecoveryCodeResponse = {
@@ -3356,13 +3306,13 @@ export type UpdateServiceAccountResponse = {
         /** User id. */
         userId: string;
         /** User kind. */
-        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
         /** UUID of the user's primary credential. */
         credentialUuid: string;
         /** Organization id. */
         orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
+        /** Account id. */
+        accountId?: string | undefined;
         /** @deprecated - Flat list of API operations the user has access to. */
         permissions?: string[] | undefined;
         /** Whether the user is active. */
@@ -3438,13 +3388,13 @@ export type UpdateUserResponse = {
     /** User id. */
     userId: string;
     /** User kind. */
-    kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+    kind: "DfnsStaff" | "AccountUser" | "CustomerEmployee" | "EndUser";
     /** UUID of the user's primary credential. */
     credentialUuid: string;
     /** Organization id. */
     orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
+    /** Account id. */
+    accountId?: string | undefined;
     /** @deprecated - Flat list of API operations the user has access to. */
     permissions?: string[] | undefined;
     /** Whether the user is active. */

@@ -5,8 +5,6 @@ export type CreateAllocationBody = {
     protocol: "0fns";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
     sourceAsset: {
         kind: "Erc20";
         contract: string;
@@ -19,66 +17,6 @@ export type CreateAllocationBody = {
     };
     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
     slippageBps: number;
-} | {
-    /** Wallet id. */
-    walletId: string;
-    protocol: "SkySusds";
-    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-    externalId?: string | undefined;
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
-    /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
-    amount: string;
-} | {
-    /** Wallet id. */
-    walletId: string;
-    protocol: "GauntletUsdcPrime";
-    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-    externalId?: string | undefined;
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
-    /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-    amount: string;
-} | {
-    /** Wallet id. */
-    walletId: string;
-    protocol: "SteakhouseUsdt";
-    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-    externalId?: string | undefined;
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
-    /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
-    amount: string;
-} | {
-    /** Wallet id. */
-    walletId: string;
-    protocol: "GauntletUsdcPrimeBase";
-    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-    externalId?: string | undefined;
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
-    /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-    amount: string;
-} | {
-    /** Wallet id. */
-    walletId: string;
-    protocol: "SteakhouseUsdcBase";
-    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-    externalId?: string | undefined;
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
-    /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-    amount: string;
-} | {
-    /** Wallet id. */
-    walletId: string;
-    protocol: "SentoraPyusdMain";
-    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-    externalId?: string | undefined;
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
-    /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
-    amount: string;
 };
 
 export type CreateAllocationResponse = {
@@ -86,10 +24,8 @@ export type CreateAllocationResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for allocation generation. */
-    protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
+    /** The DeFi protocol used for allocation generation. Currently supports OFNS protocol */
+    protocol: "0fns";
     /** The total amount currently invested in this allocation. */
     amount: ({
         kind: "Native";
@@ -104,7 +40,7 @@ export type CreateAllocationResponse = {
         amount: string;
     }) & {
         metadata: {
-            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
             name?: string | undefined;
             symbol?: string | undefined;
             decimals: number;
@@ -125,7 +61,7 @@ export type CreateAllocationResponse = {
         amount: string;
     }) & {
         metadata: {
-            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
             name?: string | undefined;
             symbol?: string | undefined;
             decimals: number;
@@ -153,7 +89,7 @@ export type CreateAllocationResponse = {
             tokenId?: string | undefined;
         };
         /** The full request used for initiating this allocation action. */
-        requestBody: ({
+        requestBody: {
             /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
@@ -171,21 +107,12 @@ export type CreateAllocationResponse = {
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
         } | {
-            /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
-            kind: "Deposit" | "Withdraw";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
-            amount: string;
-        }) | ({
             /** Wallet id. */
             walletId: string;
             /** Ofns protocol */
             protocol: "0fns";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
@@ -198,67 +125,7 @@ export type CreateAllocationResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SkySusds";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "GauntletUsdcPrime";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SteakhouseUsdt";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "GauntletUsdcPrimeBase";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SteakhouseUsdcBase";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SentoraPyusdMain";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
-            amount: string;
-        });
+        };
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;
         dateCreated: string;
@@ -284,13 +151,6 @@ export type CreateAllocationActionBody = {
     };
     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
     slippageBps: number;
-} | {
-    /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
-    kind: "Deposit" | "Withdraw";
-    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-    externalId?: string | undefined;
-    /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
-    amount: string;
 };
 
 export type CreateAllocationActionParams = {
@@ -303,10 +163,8 @@ export type CreateAllocationActionResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for allocation generation. */
-    protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
+    /** The DeFi protocol used for allocation generation. Currently supports OFNS protocol */
+    protocol: "0fns";
     /** The total amount currently invested in this allocation. */
     amount: ({
         kind: "Native";
@@ -321,7 +179,7 @@ export type CreateAllocationActionResponse = {
         amount: string;
     }) & {
         metadata: {
-            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
             name?: string | undefined;
             symbol?: string | undefined;
             decimals: number;
@@ -342,7 +200,7 @@ export type CreateAllocationActionResponse = {
         amount: string;
     }) & {
         metadata: {
-            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
             name?: string | undefined;
             symbol?: string | undefined;
             decimals: number;
@@ -370,7 +228,7 @@ export type CreateAllocationActionResponse = {
             tokenId?: string | undefined;
         };
         /** The full request used for initiating this allocation action. */
-        requestBody: ({
+        requestBody: {
             /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
@@ -388,21 +246,12 @@ export type CreateAllocationActionResponse = {
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
         } | {
-            /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
-            kind: "Deposit" | "Withdraw";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
-            amount: string;
-        }) | ({
             /** Wallet id. */
             walletId: string;
             /** Ofns protocol */
             protocol: "0fns";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
@@ -415,67 +264,7 @@ export type CreateAllocationActionResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SkySusds";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "GauntletUsdcPrime";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SteakhouseUsdt";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "GauntletUsdcPrimeBase";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SteakhouseUsdcBase";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SentoraPyusdMain";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
-            amount: string;
-        });
+        };
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;
         dateCreated: string;
@@ -494,10 +283,8 @@ export type GetAllocationResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for allocation generation. */
-    protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
-    /** The provider handling this allocation. */
-    provider?: ("M0" | "Yield.xyz") | undefined;
+    /** The DeFi protocol used for allocation generation. Currently supports OFNS protocol */
+    protocol: "0fns";
     /** The total amount currently invested in this allocation. */
     amount: ({
         kind: "Native";
@@ -512,7 +299,7 @@ export type GetAllocationResponse = {
         amount: string;
     }) & {
         metadata: {
-            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
             name?: string | undefined;
             symbol?: string | undefined;
             decimals: number;
@@ -533,7 +320,7 @@ export type GetAllocationResponse = {
         amount: string;
     }) & {
         metadata: {
-            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
             name?: string | undefined;
             symbol?: string | undefined;
             decimals: number;
@@ -561,7 +348,7 @@ export type GetAllocationResponse = {
             tokenId?: string | undefined;
         };
         /** The full request used for initiating this allocation action. */
-        requestBody: ({
+        requestBody: {
             /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
@@ -579,21 +366,12 @@ export type GetAllocationResponse = {
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
         } | {
-            /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
-            kind: "Deposit" | "Withdraw";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
-            amount: string;
-        }) | ({
             /** Wallet id. */
             walletId: string;
             /** Ofns protocol */
             protocol: "0fns";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
@@ -606,67 +384,7 @@ export type GetAllocationResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SkySusds";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "GauntletUsdcPrime";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SteakhouseUsdt";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "GauntletUsdcPrimeBase";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SteakhouseUsdcBase";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SentoraPyusdMain";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
-            amount: string;
-        });
+        };
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;
         dateCreated: string;
@@ -708,7 +426,7 @@ export type ListAllocationActionsResponse = {
             tokenId?: string | undefined;
         };
         /** The full request used for initiating this allocation action. */
-        requestBody: ({
+        requestBody: {
             /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
@@ -726,21 +444,12 @@ export type ListAllocationActionsResponse = {
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
         } | {
-            /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
-            kind: "Deposit" | "Withdraw";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
-            amount: string;
-        }) | ({
             /** Wallet id. */
             walletId: string;
             /** Ofns protocol */
             protocol: "0fns";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
@@ -753,67 +462,7 @@ export type ListAllocationActionsResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SkySusds";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "GauntletUsdcPrime";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SteakhouseUsdt";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "GauntletUsdcPrimeBase";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SteakhouseUsdcBase";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
-            amount: string;
-        } | {
-            /** Wallet id. */
-            walletId: string;
-            protocol: "SentoraPyusdMain";
-            /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
-            externalId?: string | undefined;
-            /** The provider handling this allocation. */
-            provider?: ("M0" | "Yield.xyz") | undefined;
-            /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
-            amount: string;
-        });
+        };
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;
         dateCreated: string;
@@ -838,10 +487,8 @@ export type ListAllocationsResponse = {
         id: string;
         /** Wallet id. */
         walletId: string;
-        /** The DeFi protocol used for allocation generation. */
-        protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
-        /** The provider handling this allocation. */
-        provider?: ("M0" | "Yield.xyz") | undefined;
+        /** The DeFi protocol used for allocation generation. Currently supports OFNS protocol */
+        protocol: "0fns";
         /** The total amount currently invested in this allocation. */
         amount: ({
             kind: "Native";
@@ -856,7 +503,7 @@ export type ListAllocationsResponse = {
             amount: string;
         }) & {
             metadata: {
-                network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+                network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
                 name?: string | undefined;
                 symbol?: string | undefined;
                 decimals: number;
@@ -877,7 +524,7 @@ export type ListAllocationsResponse = {
             amount: string;
         }) & {
             metadata: {
-                network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+                network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
                 name?: string | undefined;
                 symbol?: string | undefined;
                 decimals: number;

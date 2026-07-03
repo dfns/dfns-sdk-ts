@@ -14,14 +14,6 @@ export type CreateStakeBody = ({
     /** Transaction amount denominated in min units */
     amount: string;
     lockedIotas?: string[] | undefined;
-} | {
-    protocol: "Xdc";
-    /** Id of the Dfns wallet making the deposit. */
-    walletId: string;
-    /** Coinbase address of the XDC masternode to register */
-    candidate: string;
-    /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-    amount: string;
 }) & {
     externalId?: string | undefined;
 };
@@ -76,14 +68,6 @@ export type CreateStakeResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -147,14 +131,6 @@ export type CreateStakeResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -220,14 +196,6 @@ export type CreateStakeResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -239,76 +207,6 @@ export type CreateStakeResponse = ({
             withdrawalAddress: string;
         };
     } | null;
-} | {
-    id: string;
-    /** The staking infrastructure provider used to manage the stake. */
-    provider?: ("Figment") | undefined;
-    /** Wallet id. */
-    walletId: string;
-    /** Status of the stake position.
-    
-    | Status | Definition |
-    | --- | --- |
-    | `Staking` | The stake is being created and funds are being delegated to the validator. |
-    | `Active` | The stake is active and earning rewards. |
-    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
-    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
-    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
-    | `Withdrawn` | The staked funds have been fully withdrawn. |
-    | `Failed` | The staking operation failed. | */
-    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
-    /** The user who initiated the request. */
-    requester: {
-        /** User id. */
-        userId: string;
-        /** Token id. */
-        tokenId?: string | undefined;
-    };
-    requestBody: ({
-        protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Staking Provider */
-        provider: "Figment";
-        /** Transaction amount denominated in min units */
-        amount: string;
-        duration: number;
-    } | {
-        protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Staking Provider */
-        provider: "Figment";
-        /** Transaction amount denominated in min units */
-        amount: string;
-    } | {
-        protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        validator: string;
-        /** Transaction amount denominated in min units */
-        amount: string;
-        lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
-    }) & {
-        externalId?: string | undefined;
-    };
-    dateCreated: string;
-    protocol: "Xdc";
-    data: {
-        candidate: string;
-        amount: string;
-        proposeBlockNumber?: string | undefined;
-        withdrawBlockNumber?: string | undefined;
-        withdrawIndex?: string | undefined;
-    };
 }) & {
     actions: {
         id: string;
@@ -370,14 +268,6 @@ export type CreateStakeResponse = ({
             /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
-        } | {
-            protocol: "Xdc";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Coinbase address of the XDC masternode to register */
-            candidate: string;
-            /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-            amount: string;
         }) & {
             externalId?: string | undefined;
         }) | ((({
@@ -392,13 +282,7 @@ export type CreateStakeResponse = ({
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
-        } | ({
-            protocol: "Xdc";
-            kind: "Withdraw";
-        } | {
-            protocol: "Xdc";
-            kind: "Unbond";
-        })) & {
+        }) & {
             externalId?: string | undefined;
         });
         /** The failure reason, if any. Only present when status is Failed. */
@@ -421,13 +305,7 @@ export type CreateStakeActionBody = (({
 }) | {
     protocol: "Ethereum";
     kind: "Withdraw";
-} | ({
-    protocol: "Xdc";
-    kind: "Withdraw";
-} | {
-    protocol: "Xdc";
-    kind: "Unbond";
-})) & {
+}) & {
     externalId?: string | undefined;
 };
 
@@ -485,14 +363,6 @@ export type CreateStakeActionResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -556,14 +426,6 @@ export type CreateStakeActionResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -629,14 +491,6 @@ export type CreateStakeActionResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -648,76 +502,6 @@ export type CreateStakeActionResponse = ({
             withdrawalAddress: string;
         };
     } | null;
-} | {
-    id: string;
-    /** The staking infrastructure provider used to manage the stake. */
-    provider?: ("Figment") | undefined;
-    /** Wallet id. */
-    walletId: string;
-    /** Status of the stake position.
-    
-    | Status | Definition |
-    | --- | --- |
-    | `Staking` | The stake is being created and funds are being delegated to the validator. |
-    | `Active` | The stake is active and earning rewards. |
-    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
-    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
-    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
-    | `Withdrawn` | The staked funds have been fully withdrawn. |
-    | `Failed` | The staking operation failed. | */
-    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
-    /** The user who initiated the request. */
-    requester: {
-        /** User id. */
-        userId: string;
-        /** Token id. */
-        tokenId?: string | undefined;
-    };
-    requestBody: ({
-        protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Staking Provider */
-        provider: "Figment";
-        /** Transaction amount denominated in min units */
-        amount: string;
-        duration: number;
-    } | {
-        protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Staking Provider */
-        provider: "Figment";
-        /** Transaction amount denominated in min units */
-        amount: string;
-    } | {
-        protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        validator: string;
-        /** Transaction amount denominated in min units */
-        amount: string;
-        lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
-    }) & {
-        externalId?: string | undefined;
-    };
-    dateCreated: string;
-    protocol: "Xdc";
-    data: {
-        candidate: string;
-        amount: string;
-        proposeBlockNumber?: string | undefined;
-        withdrawBlockNumber?: string | undefined;
-        withdrawIndex?: string | undefined;
-    };
 }) & {
     actions: {
         id: string;
@@ -779,14 +563,6 @@ export type CreateStakeActionResponse = ({
             /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
-        } | {
-            protocol: "Xdc";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Coinbase address of the XDC masternode to register */
-            candidate: string;
-            /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-            amount: string;
         }) & {
             externalId?: string | undefined;
         }) | ((({
@@ -801,13 +577,7 @@ export type CreateStakeActionResponse = ({
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
-        } | ({
-            protocol: "Xdc";
-            kind: "Withdraw";
-        } | {
-            protocol: "Xdc";
-            kind: "Unbond";
-        })) & {
+        }) & {
             externalId?: string | undefined;
         });
         /** The failure reason, if any. Only present when status is Failed. */
@@ -890,14 +660,6 @@ export type GetStakesResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -961,14 +723,6 @@ export type GetStakesResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -1034,14 +788,6 @@ export type GetStakesResponse = ({
         /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
     }) & {
         externalId?: string | undefined;
     };
@@ -1053,76 +799,6 @@ export type GetStakesResponse = ({
             withdrawalAddress: string;
         };
     } | null;
-} | {
-    id: string;
-    /** The staking infrastructure provider used to manage the stake. */
-    provider?: ("Figment") | undefined;
-    /** Wallet id. */
-    walletId: string;
-    /** Status of the stake position.
-    
-    | Status | Definition |
-    | --- | --- |
-    | `Staking` | The stake is being created and funds are being delegated to the validator. |
-    | `Active` | The stake is active and earning rewards. |
-    | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
-    | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
-    | `Withdrawing` | The staked funds are in the process of being withdrawn. |
-    | `Withdrawn` | The staked funds have been fully withdrawn. |
-    | `Failed` | The staking operation failed. | */
-    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
-    /** The user who initiated the request. */
-    requester: {
-        /** User id. */
-        userId: string;
-        /** Token id. */
-        tokenId?: string | undefined;
-    };
-    requestBody: ({
-        protocol: "Babylon";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Staking Provider */
-        provider: "Figment";
-        /** Transaction amount denominated in min units */
-        amount: string;
-        duration: number;
-    } | {
-        protocol: "Ethereum";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Staking Provider */
-        provider: "Figment";
-        /** Transaction amount denominated in min units */
-        amount: string;
-    } | {
-        protocol: "Iota";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        validator: string;
-        /** Transaction amount denominated in min units */
-        amount: string;
-        lockedIotas?: string[] | undefined;
-    } | {
-        protocol: "Xdc";
-        /** Id of the Dfns wallet making the deposit. */
-        walletId: string;
-        /** Coinbase address of the XDC masternode to register */
-        candidate: string;
-        /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-        amount: string;
-    }) & {
-        externalId?: string | undefined;
-    };
-    dateCreated: string;
-    protocol: "Xdc";
-    data: {
-        candidate: string;
-        amount: string;
-        proposeBlockNumber?: string | undefined;
-        withdrawBlockNumber?: string | undefined;
-        withdrawIndex?: string | undefined;
-    };
 }) & {
     actions: {
         id: string;
@@ -1184,14 +860,6 @@ export type GetStakesResponse = ({
             /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
-        } | {
-            protocol: "Xdc";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Coinbase address of the XDC masternode to register */
-            candidate: string;
-            /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-            amount: string;
         }) & {
             externalId?: string | undefined;
         }) | ((({
@@ -1206,13 +874,7 @@ export type GetStakesResponse = ({
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
-        } | ({
-            protocol: "Xdc";
-            kind: "Withdraw";
-        } | {
-            protocol: "Xdc";
-            kind: "Unbond";
-        })) & {
+        }) & {
             externalId?: string | undefined;
         });
         /** The failure reason, if any. Only present when status is Failed. */
@@ -1296,14 +958,6 @@ export type ListStakeActionsResponse = {
             /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
-        } | {
-            protocol: "Xdc";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Coinbase address of the XDC masternode to register */
-            candidate: string;
-            /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-            amount: string;
         }) & {
             externalId?: string | undefined;
         }) | ((({
@@ -1318,13 +972,7 @@ export type ListStakeActionsResponse = {
         }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
-        } | ({
-            protocol: "Xdc";
-            kind: "Withdraw";
-        } | {
-            protocol: "Xdc";
-            kind: "Unbond";
-        })) & {
+        }) & {
             externalId?: string | undefined;
         });
         /** The failure reason, if any. Only present when status is Failed. */
@@ -1396,14 +1044,6 @@ export type ListStakesResponse = {
             /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
-        } | {
-            protocol: "Xdc";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Coinbase address of the XDC masternode to register */
-            candidate: string;
-            /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-            amount: string;
         }) & {
             externalId?: string | undefined;
         };
@@ -1467,14 +1107,6 @@ export type ListStakesResponse = {
             /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
-        } | {
-            protocol: "Xdc";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Coinbase address of the XDC masternode to register */
-            candidate: string;
-            /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-            amount: string;
         }) & {
             externalId?: string | undefined;
         };
@@ -1540,14 +1172,6 @@ export type ListStakesResponse = {
             /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
-        } | {
-            protocol: "Xdc";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Coinbase address of the XDC masternode to register */
-            candidate: string;
-            /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-            amount: string;
         }) & {
             externalId?: string | undefined;
         };
@@ -1559,76 +1183,6 @@ export type ListStakesResponse = {
                 withdrawalAddress: string;
             };
         } | null;
-    } | {
-        id: string;
-        /** The staking infrastructure provider used to manage the stake. */
-        provider?: ("Figment") | undefined;
-        /** Wallet id. */
-        walletId: string;
-        /** Status of the stake position.
-        
-        | Status | Definition |
-        | --- | --- |
-        | `Staking` | The stake is being created and funds are being delegated to the validator. |
-        | `Active` | The stake is active and earning rewards. |
-        | `Unbonding` | The stake is in the process of being unbonded (cooldown period). |
-        | `Unbond` | The stake has been unbonded and is ready for withdrawal. |
-        | `Withdrawing` | The staked funds are in the process of being withdrawn. |
-        | `Withdrawn` | The staked funds have been fully withdrawn. |
-        | `Failed` | The staking operation failed. | */
-        status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
-        /** The user who initiated the request. */
-        requester: {
-            /** User id. */
-            userId: string;
-            /** Token id. */
-            tokenId?: string | undefined;
-        };
-        requestBody: ({
-            protocol: "Babylon";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Staking Provider */
-            provider: "Figment";
-            /** Transaction amount denominated in min units */
-            amount: string;
-            duration: number;
-        } | {
-            protocol: "Ethereum";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Staking Provider */
-            provider: "Figment";
-            /** Transaction amount denominated in min units */
-            amount: string;
-        } | {
-            protocol: "Iota";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            validator: string;
-            /** Transaction amount denominated in min units */
-            amount: string;
-            lockedIotas?: string[] | undefined;
-        } | {
-            protocol: "Xdc";
-            /** Id of the Dfns wallet making the deposit. */
-            walletId: string;
-            /** Coinbase address of the XDC masternode to register */
-            candidate: string;
-            /** Transaction amount denominated in wei (min 10,000,000 XDC) */
-            amount: string;
-        }) & {
-            externalId?: string | undefined;
-        };
-        dateCreated: string;
-        protocol: "Xdc";
-        data: {
-            candidate: string;
-            amount: string;
-            proposeBlockNumber?: string | undefined;
-            withdrawBlockNumber?: string | undefined;
-            withdrawIndex?: string | undefined;
-        };
     })[];
     /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
