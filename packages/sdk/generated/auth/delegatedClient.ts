@@ -1097,7 +1097,7 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
-  async inviteTenantUserInit(request: T.InviteTenantUserRequest): Promise<UserActionChallengeResponse> {
+  async inviteAccountUserInit(request: T.InviteAccountUserRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/users/invite', {
       path: request ?? {},
       query: {},
@@ -1116,10 +1116,10 @@ export class DelegatedAuthClient {
     return challenge
   }
 
-  async inviteTenantUserComplete(
-    request: T.InviteTenantUserRequest,
+  async inviteAccountUserComplete(
+    request: T.InviteAccountUserRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.InviteTenantUserResponse> {
+  ): Promise<T.InviteAccountUserResponse> {
     const path = buildPathAndQuery('/auth/users/invite', {
       path: request ?? {},
       query: {},
