@@ -559,7 +559,7 @@ export class AuthClient {
     return response.json()
   }
 
-  async inviteTenantUser(request: T.InviteTenantUserRequest): Promise<T.InviteTenantUserResponse> {
+  async inviteAccountUser(request: T.InviteAccountUserRequest): Promise<T.InviteAccountUserResponse> {
     const path = buildPathAndQuery('/auth/users/invite', {
       path: request ?? {},
       query: {},
