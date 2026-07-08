@@ -28,6 +28,38 @@ export type CreatePayoutBody = {
     paymentInstructionsId: string;
     /** Borderless reason/purpose for the payment. */
     paymentPurpose: "salary payment" | "personal remittance" | "rent payment" | "property purchase" | "owned account abroad" | "advertising expenses" | "advisory fees" | "business insurance" | "construction" | "delivery fees" | "education" | "exports" | "donation" | "hotel" | "loan payment" | "maintenance expenses" | "medical expense" | "office expenses" | "royalty fees" | "service charge" | "shares investment" | "tax payment" | "transportation fees" | "travel" | "utility bills" | "other";
+} | {
+    /** The wallet ID to remit funds from. */
+    walletId: string;
+    /** Optional idempotency key to ensure only one payout is created. */
+    externalId?: string | undefined;
+    /** The asset to be paid out. */
+    asset: {
+        kind: "Erc20";
+        /** The amount of the asset to be paid out in minimum denomination. */
+        amount: string;
+        /** The ERC-20 contract address. */
+        contract: string;
+    } | {
+        kind: "Spl" | "Spl2022";
+        /** The amount of the asset to be paid out in minimum denomination. */
+        amount: string;
+        /** The token mint address. */
+        mint: string;
+    };
+    /** ISO-4217 fiat currency code for the payout. */
+    fiatCurrency: string;
+    provider: "CircleMint";
+    /** Where the redeemed fiat goes: 'bank' wires it to a linked bank account; 'balance' holds it in the org's Circle Mint balance. */
+    destination: {
+        type: "bank";
+        /** The Circle Mint bank account id to pay out to (the org links banks on Circle's website). */
+        bankId: string;
+        /** The Circle Mint payout rail. */
+        rail: "wire" | "sepa" | "sepa_instant";
+    } | {
+        type: "balance";
+    };
 };
 
 export type CreatePayoutResponse = {
@@ -114,6 +146,88 @@ export type CreatePayoutResponse = {
         dateDepositConfirmed?: string | undefined;
         datePayoutConfirmed?: string | undefined;
     };
+} | {
+    /** Payout id. */
+    id: string;
+    /** The wallet ID used for the payout. */
+    walletId: string;
+    /** ISO-4217 fiat currency code for the payout. */
+    fiatCurrency: string;
+    /** The asset being paid out, including token descriptor and metadata. */
+    asset: {
+        kind: "Erc20";
+        /** The amount of the asset to be paid out in minimum denomination. */
+        amount: string;
+        /** The ERC-20 contract address. */
+        contract: string;
+        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        metadata?: {
+            /** The display name of the token. */
+            name?: string | undefined;
+            /** The ticker symbol of the token. */
+            symbol?: string | undefined;
+            /** Number of decimals used by the token. */
+            decimals: number;
+            /** Whether the token is verified by DFNS as legitimate. */
+            verified?: boolean | undefined;
+        } | undefined;
+    } | {
+        kind: "Spl" | "Spl2022";
+        /** The amount of the asset to be paid out in minimum denomination. */
+        amount: string;
+        /** The token mint address. */
+        mint: string;
+        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        metadata?: {
+            /** The display name of the token. */
+            name?: string | undefined;
+            /** The ticker symbol of the token. */
+            symbol?: string | undefined;
+            /** Number of decimals used by the token. */
+            decimals: number;
+            /** Whether the token is verified by DFNS as legitimate. */
+            verified?: boolean | undefined;
+        } | undefined;
+    };
+    /** Optional external identifier for idempotency. */
+    externalId?: string | undefined;
+    /** The current status of the payout. */
+    status: "Processing" | "Completed" | "Failed" | "Rejected" | "Expired" | "Canceled";
+    /** The user/token that initiated the payout. */
+    requester: {
+        /** User id. */
+        userId: string;
+        /** Token id. */
+        tokenId?: string | undefined;
+    };
+    dateCreated: string;
+    dateFinalized?: string | undefined;
+    provider: "CircleMint";
+    /** Circle Mint provider-specific payout data. */
+    data: {
+        /** The Circle Mint execution status. */
+        executionStatus: "Initializing" | "AwaitingDeposit" | "DepositConfirmed" | "AwaitingPayout" | "Completed" | "Rejected" | "Failed" | "Expired" | "Canceled";
+        /** Reason for the current status, primarily for failure cases. */
+        statusReason?: string | undefined;
+        /** The Circle Mint bank account id the fiat is paid out to; absent for a balance destination. */
+        bankId?: string | undefined;
+        /** The payout rail; absent for a balance destination. */
+        rail?: ("wire" | "sepa" | "sepa_instant") | undefined;
+        /** Circle payment intent id (the unique per-operation deposit intent). */
+        paymentIntentId?: string | undefined;
+        /** The unique per-operation address the wallet remits USDC/EURC to. */
+        depositAddress?: string | undefined;
+        /** The Dfns transfer id used to send funds to the deposit address. */
+        transferId?: string | undefined;
+        /** The blockchain transaction hash of the deposit transfer. */
+        transactionHash?: string | undefined;
+        /** The id assigned by Circle when the fiat payout is created. */
+        circlePayoutId?: string | undefined;
+        /** Circle tracking reference for the fiat payout. */
+        trackingRef?: string | undefined;
+        dateDepositConfirmed?: string | undefined;
+        datePayoutConfirmed?: string | undefined;
+    };
 };
 
 export type CreatePayoutRequest = { body: CreatePayoutBody }
@@ -175,11 +289,31 @@ export type CreatePayoutQuoteBody = {
     provider: "Borderless";
     /** ISO-3166 Alpha-2 country code for the payout destination. */
     country: string;
+} | {
+    /** The wallet ID to use for determining the network. */
+    walletId: string;
+    /** The asset to be paid out. */
+    asset: {
+        kind: "Erc20";
+        /** The amount of the asset to be paid out in minimum denomination. */
+        amount: string;
+        /** The ERC-20 contract address. */
+        contract: string;
+    } | {
+        kind: "Spl" | "Spl2022";
+        /** The amount of the asset to be paid out in minimum denomination. */
+        amount: string;
+        /** The token mint address. */
+        mint: string;
+    };
+    /** ISO-4217 fiat currency code for the payout quote. */
+    fiatCurrency: string;
+    provider: "CircleMint";
 };
 
 export type CreatePayoutQuoteResponse = {
     /** Payout provider. */
-    provider: "Borderless";
+    provider: "Borderless" | "CircleMint";
     /** The asset being quoted, enriched with network and metadata. */
     asset: {
         kind: "Erc20";
@@ -325,6 +459,88 @@ export type GetPayoutResponse = {
         dateDepositConfirmed?: string | undefined;
         datePayoutConfirmed?: string | undefined;
     };
+} | {
+    /** Payout id. */
+    id: string;
+    /** The wallet ID used for the payout. */
+    walletId: string;
+    /** ISO-4217 fiat currency code for the payout. */
+    fiatCurrency: string;
+    /** The asset being paid out, including token descriptor and metadata. */
+    asset: {
+        kind: "Erc20";
+        /** The amount of the asset to be paid out in minimum denomination. */
+        amount: string;
+        /** The ERC-20 contract address. */
+        contract: string;
+        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        metadata?: {
+            /** The display name of the token. */
+            name?: string | undefined;
+            /** The ticker symbol of the token. */
+            symbol?: string | undefined;
+            /** Number of decimals used by the token. */
+            decimals: number;
+            /** Whether the token is verified by DFNS as legitimate. */
+            verified?: boolean | undefined;
+        } | undefined;
+    } | {
+        kind: "Spl" | "Spl2022";
+        /** The amount of the asset to be paid out in minimum denomination. */
+        amount: string;
+        /** The token mint address. */
+        mint: string;
+        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        metadata?: {
+            /** The display name of the token. */
+            name?: string | undefined;
+            /** The ticker symbol of the token. */
+            symbol?: string | undefined;
+            /** Number of decimals used by the token. */
+            decimals: number;
+            /** Whether the token is verified by DFNS as legitimate. */
+            verified?: boolean | undefined;
+        } | undefined;
+    };
+    /** Optional external identifier for idempotency. */
+    externalId?: string | undefined;
+    /** The current status of the payout. */
+    status: "Processing" | "Completed" | "Failed" | "Rejected" | "Expired" | "Canceled";
+    /** The user/token that initiated the payout. */
+    requester: {
+        /** User id. */
+        userId: string;
+        /** Token id. */
+        tokenId?: string | undefined;
+    };
+    dateCreated: string;
+    dateFinalized?: string | undefined;
+    provider: "CircleMint";
+    /** Circle Mint provider-specific payout data. */
+    data: {
+        /** The Circle Mint execution status. */
+        executionStatus: "Initializing" | "AwaitingDeposit" | "DepositConfirmed" | "AwaitingPayout" | "Completed" | "Rejected" | "Failed" | "Expired" | "Canceled";
+        /** Reason for the current status, primarily for failure cases. */
+        statusReason?: string | undefined;
+        /** The Circle Mint bank account id the fiat is paid out to; absent for a balance destination. */
+        bankId?: string | undefined;
+        /** The payout rail; absent for a balance destination. */
+        rail?: ("wire" | "sepa" | "sepa_instant") | undefined;
+        /** Circle payment intent id (the unique per-operation deposit intent). */
+        paymentIntentId?: string | undefined;
+        /** The unique per-operation address the wallet remits USDC/EURC to. */
+        depositAddress?: string | undefined;
+        /** The Dfns transfer id used to send funds to the deposit address. */
+        transferId?: string | undefined;
+        /** The blockchain transaction hash of the deposit transfer. */
+        transactionHash?: string | undefined;
+        /** The id assigned by Circle when the fiat payout is created. */
+        circlePayoutId?: string | undefined;
+        /** Circle tracking reference for the fiat payout. */
+        trackingRef?: string | undefined;
+        dateDepositConfirmed?: string | undefined;
+        datePayoutConfirmed?: string | undefined;
+    };
 };
 
 export type GetPayoutRequest = GetPayoutParams
@@ -338,6 +554,8 @@ export type ListPayoutsQuery = {
     walletId?: string | undefined;
     /** Filter payouts by status (comma-separated). */
     status?: ("Processing" | "Completed" | "Failed" | "Rejected" | "Expired" | "Canceled")[] | undefined;
+    /** Filter payouts by provider (comma-separated). */
+    provider?: ("Borderless" | "CircleMint")[] | undefined;
 };
 
 export type ListPayoutsResponse = {
@@ -423,6 +641,88 @@ export type ListPayoutsResponse = {
             transferId?: string | undefined;
             /** The blockchain transaction hash once the transfer is confirmed. */
             transactionHash?: string | undefined;
+            dateDepositConfirmed?: string | undefined;
+            datePayoutConfirmed?: string | undefined;
+        };
+    } | {
+        /** Payout id. */
+        id: string;
+        /** The wallet ID used for the payout. */
+        walletId: string;
+        /** ISO-4217 fiat currency code for the payout. */
+        fiatCurrency: string;
+        /** The asset being paid out, including token descriptor and metadata. */
+        asset: {
+            kind: "Erc20";
+            /** The amount of the asset to be paid out in minimum denomination. */
+            amount: string;
+            /** The ERC-20 contract address. */
+            contract: string;
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            metadata?: {
+                /** The display name of the token. */
+                name?: string | undefined;
+                /** The ticker symbol of the token. */
+                symbol?: string | undefined;
+                /** Number of decimals used by the token. */
+                decimals: number;
+                /** Whether the token is verified by DFNS as legitimate. */
+                verified?: boolean | undefined;
+            } | undefined;
+        } | {
+            kind: "Spl" | "Spl2022";
+            /** The amount of the asset to be paid out in minimum denomination. */
+            amount: string;
+            /** The token mint address. */
+            mint: string;
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            metadata?: {
+                /** The display name of the token. */
+                name?: string | undefined;
+                /** The ticker symbol of the token. */
+                symbol?: string | undefined;
+                /** Number of decimals used by the token. */
+                decimals: number;
+                /** Whether the token is verified by DFNS as legitimate. */
+                verified?: boolean | undefined;
+            } | undefined;
+        };
+        /** Optional external identifier for idempotency. */
+        externalId?: string | undefined;
+        /** The current status of the payout. */
+        status: "Processing" | "Completed" | "Failed" | "Rejected" | "Expired" | "Canceled";
+        /** The user/token that initiated the payout. */
+        requester: {
+            /** User id. */
+            userId: string;
+            /** Token id. */
+            tokenId?: string | undefined;
+        };
+        dateCreated: string;
+        dateFinalized?: string | undefined;
+        provider: "CircleMint";
+        /** Circle Mint provider-specific payout data. */
+        data: {
+            /** The Circle Mint execution status. */
+            executionStatus: "Initializing" | "AwaitingDeposit" | "DepositConfirmed" | "AwaitingPayout" | "Completed" | "Rejected" | "Failed" | "Expired" | "Canceled";
+            /** Reason for the current status, primarily for failure cases. */
+            statusReason?: string | undefined;
+            /** The Circle Mint bank account id the fiat is paid out to; absent for a balance destination. */
+            bankId?: string | undefined;
+            /** The payout rail; absent for a balance destination. */
+            rail?: ("wire" | "sepa" | "sepa_instant") | undefined;
+            /** Circle payment intent id (the unique per-operation deposit intent). */
+            paymentIntentId?: string | undefined;
+            /** The unique per-operation address the wallet remits USDC/EURC to. */
+            depositAddress?: string | undefined;
+            /** The Dfns transfer id used to send funds to the deposit address. */
+            transferId?: string | undefined;
+            /** The blockchain transaction hash of the deposit transfer. */
+            transactionHash?: string | undefined;
+            /** The id assigned by Circle when the fiat payout is created. */
+            circlePayoutId?: string | undefined;
+            /** Circle tracking reference for the fiat payout. */
+            trackingRef?: string | undefined;
             dateDepositConfirmed?: string | undefined;
             datePayoutConfirmed?: string | undefined;
         };
