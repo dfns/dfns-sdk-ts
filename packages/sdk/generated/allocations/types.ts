@@ -19,6 +19,8 @@ export type CreateAllocationBody = {
     };
     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
     slippageBps: number;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 } | {
     /** Wallet id. */
     walletId: string;
@@ -29,6 +31,8 @@ export type CreateAllocationBody = {
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
     amount: string;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 } | {
     /** Wallet id. */
     walletId: string;
@@ -39,6 +43,8 @@ export type CreateAllocationBody = {
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
     amount: string;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 } | {
     /** Wallet id. */
     walletId: string;
@@ -49,6 +55,8 @@ export type CreateAllocationBody = {
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
     amount: string;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 } | {
     /** Wallet id. */
     walletId: string;
@@ -59,6 +67,8 @@ export type CreateAllocationBody = {
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
     amount: string;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 } | {
     /** Wallet id. */
     walletId: string;
@@ -69,6 +79,8 @@ export type CreateAllocationBody = {
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
     amount: string;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 } | {
     /** Wallet id. */
     walletId: string;
@@ -79,6 +91,8 @@ export type CreateAllocationBody = {
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
     amount: string;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 };
 
 export type CreateAllocationResponse = {
@@ -170,6 +184,8 @@ export type CreateAllocationResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
@@ -177,6 +193,8 @@ export type CreateAllocationResponse = {
             externalId?: string | undefined;
             /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         }) | ({
             /** Wallet id. */
             walletId: string;
@@ -198,6 +216,8 @@ export type CreateAllocationResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -208,6 +228,8 @@ export type CreateAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -218,6 +240,8 @@ export type CreateAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -228,6 +252,8 @@ export type CreateAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -238,6 +264,8 @@ export type CreateAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -248,6 +276,8 @@ export type CreateAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -258,6 +288,8 @@ export type CreateAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         });
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;
@@ -284,6 +316,8 @@ export type CreateAllocationActionBody = {
     };
     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
     slippageBps: number;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 } | {
     /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
     kind: "Deposit" | "Withdraw";
@@ -291,6 +325,8 @@ export type CreateAllocationActionBody = {
     externalId?: string | undefined;
     /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
     amount: string;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
 };
 
 export type CreateAllocationActionParams = {
@@ -387,6 +423,8 @@ export type CreateAllocationActionResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
@@ -394,6 +432,8 @@ export type CreateAllocationActionResponse = {
             externalId?: string | undefined;
             /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         }) | ({
             /** Wallet id. */
             walletId: string;
@@ -415,6 +455,8 @@ export type CreateAllocationActionResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -425,6 +467,8 @@ export type CreateAllocationActionResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -435,6 +479,8 @@ export type CreateAllocationActionResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -445,6 +491,8 @@ export type CreateAllocationActionResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -455,6 +503,8 @@ export type CreateAllocationActionResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -465,6 +515,8 @@ export type CreateAllocationActionResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -475,6 +527,8 @@ export type CreateAllocationActionResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         });
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;
@@ -578,6 +632,8 @@ export type GetAllocationResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
@@ -585,6 +641,8 @@ export type GetAllocationResponse = {
             externalId?: string | undefined;
             /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         }) | ({
             /** Wallet id. */
             walletId: string;
@@ -606,6 +664,8 @@ export type GetAllocationResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -616,6 +676,8 @@ export type GetAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -626,6 +688,8 @@ export type GetAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -636,6 +700,8 @@ export type GetAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -646,6 +712,8 @@ export type GetAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -656,6 +724,8 @@ export type GetAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -666,6 +736,8 @@ export type GetAllocationResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         });
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;
@@ -725,6 +797,8 @@ export type ListAllocationActionsResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
             kind: "Deposit" | "Withdraw";
@@ -732,6 +806,8 @@ export type ListAllocationActionsResponse = {
             externalId?: string | undefined;
             /** Underlying token amount in smallest unit, e.g. "1000000" = 1 USDC. Applies to both deposits and withdrawals. */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         }) | ({
             /** Wallet id. */
             walletId: string;
@@ -753,6 +829,8 @@ export type ListAllocationActionsResponse = {
             };
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -763,6 +841,8 @@ export type ListAllocationActionsResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -773,6 +853,8 @@ export type ListAllocationActionsResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -783,6 +865,8 @@ export type ListAllocationActionsResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -793,6 +877,8 @@ export type ListAllocationActionsResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -803,6 +889,8 @@ export type ListAllocationActionsResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         } | {
             /** Wallet id. */
             walletId: string;
@@ -813,6 +901,8 @@ export type ListAllocationActionsResponse = {
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
             amount: string;
+            /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
         });
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;

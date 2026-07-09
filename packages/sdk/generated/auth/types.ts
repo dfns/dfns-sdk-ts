@@ -3272,7 +3272,9 @@ export type SsoLoginRequest = { body: SsoLoginBody }
 
 export type SsoLoginInitBody = {
     /** Organization id. */
-    orgId: string;
+    orgId?: string | undefined;
+    /** Tenant id. */
+    tenantId?: string | undefined;
     /** Client Id obtained from the IdP */
     clientId: string;
     /** Redirect URI used for the authentication flow */
