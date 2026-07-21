@@ -35,6 +35,10 @@ export type CreateGenesisInputBody = {
     hsmGenesisSerial: string;
     macGenesisSerial?: string | undefined;
     hsmGenesisFirmwareVersion?: ("2.2" | "2.4") | undefined;
+    /** Development environments only (rejected with a 400 in production). Deep-merged over the generated genesis `options` block: objects merge recursively, any other value (including new fields and type changes) replaces the existing value. */
+    debugOptions?: {
+        [x: string]: unknown;
+    } | undefined;
 };
 
 export type CreateGenesisInputParams = {
@@ -44,6 +48,23 @@ export type CreateGenesisInputParams = {
 export type CreateGenesisInputResponse = string;
 
 export type CreateGenesisInputRequest = CreateGenesisInputParams & { body: CreateGenesisInputBody }
+
+export type CreateKeyHarvestInputBody = {
+    kind: "KeyHarvest";
+    hsmTargetSerial: string;
+    macTargetSerial: string;
+    macTargetUsername: string;
+    numSecp256k1?: number | undefined;
+    numEd25519?: number | undefined;
+};
+
+export type CreateKeyHarvestInputParams = {
+    storeId: string;
+};
+
+export type CreateKeyHarvestInputResponse = string;
+
+export type CreateKeyHarvestInputRequest = CreateKeyHarvestInputParams & { body: CreateKeyHarvestInputBody }
 
 export type CreateOnchainSignInputBody = {};
 
@@ -138,6 +159,17 @@ export type __WireSubmitAddMacUserOutputBody = {
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
+                } | {
+                    type: "key-harvest";
+                    hsm_target_serial: string;
+                    mac_target_serial: string;
+                    mac_target_username: string;
+                    key_harvest: {
+                        secp256k1?: number | undefined;
+                        secp256k1_end?: number | undefined;
+                        ed25519?: number | undefined;
+                        ed25519_end?: number | undefined;
+                    };
                 };
             };
         };
@@ -208,6 +240,17 @@ export type __WireSubmitCloneOutputBody = {
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
+                } | {
+                    type: "key-harvest";
+                    hsm_target_serial: string;
+                    mac_target_serial: string;
+                    mac_target_username: string;
+                    key_harvest: {
+                        secp256k1?: number | undefined;
+                        secp256k1_end?: number | undefined;
+                        ed25519?: number | undefined;
+                        ed25519_end?: number | undefined;
+                    };
                 };
             };
         };
@@ -278,6 +321,17 @@ export type __WireSubmitGenesisOutputBody = {
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
+                } | {
+                    type: "key-harvest";
+                    hsm_target_serial: string;
+                    mac_target_serial: string;
+                    mac_target_username: string;
+                    key_harvest: {
+                        secp256k1?: number | undefined;
+                        secp256k1_end?: number | undefined;
+                        ed25519?: number | undefined;
+                        ed25519_end?: number | undefined;
+                    };
                 };
             };
         };
@@ -295,6 +349,87 @@ export type SubmitGenesisOutputResponse = {
 };
 
 export type SubmitGenesisOutputRequest = SubmitGenesisOutputParams & { body: SubmitGenesisOutputBody }
+
+export type __WireSubmitKeyHarvestOutputBody = {
+    fileChecksum: string;
+    outputJson: {
+        type: "fleet-output";
+        version: 1;
+        status: "success";
+        org_id: string;
+        fleet_id: string;
+        fleet_label: string;
+        keystore_id: string;
+        group_id: string;
+        online_domain: string;
+        governance?: {
+            [x: string]: unknown;
+        } | undefined;
+        outputs: {
+            [x: string]: {
+                success: {
+                    type: "genesis-registration";
+                    ceremony_mode?: string | undefined;
+                    hsm_serial: string;
+                    hsm_identity_key: string;
+                    mac_serial: string;
+                    mac_se_wrap_key_pub_key: string;
+                    provisioners: {
+                        [x: string]: string;
+                    };
+                    hsm_sealed?: unknown | null;
+                    key_harvest: {
+                        "ed25519-start": number;
+                        ed25519: number;
+                        error: string | null;
+                        "secp256k1-start": number;
+                        secp256k1: number;
+                    };
+                } | {
+                    type: "clone-registration";
+                    ceremony_mode?: string | undefined;
+                    hsm_target_serial: string;
+                    hsm_identity_key: string;
+                    mac_target_serial: string;
+                    mac_se_wrap_key_pub_key: string;
+                    hsm_sealed?: unknown | null;
+                } | {
+                    type: "add-mac-user";
+                    ceremony_mode?: string | undefined;
+                    hsm_target_serial: string;
+                    hsm_identity_key: string;
+                    mac_target_serial: string;
+                    mac_username?: string | undefined;
+                    mac_se_wrap_key_pub_key: string;
+                    hsm_sealed?: unknown | null;
+                } | {
+                    type: "key-harvest";
+                    hsm_target_serial: string;
+                    mac_target_serial: string;
+                    mac_target_username: string;
+                    key_harvest: {
+                        secp256k1?: number | undefined;
+                        secp256k1_end?: number | undefined;
+                        ed25519?: number | undefined;
+                        ed25519_end?: number | undefined;
+                    };
+                };
+            };
+        };
+    };
+};
+
+export type SubmitKeyHarvestOutputBody = Omit<__WireSubmitKeyHarvestOutputBody, 'fileChecksum'>
+
+export type SubmitKeyHarvestOutputParams = {
+    storeId: string;
+};
+
+export type SubmitKeyHarvestOutputResponse = {
+    message: string;
+};
+
+export type SubmitKeyHarvestOutputRequest = SubmitKeyHarvestOutputParams & { body: SubmitKeyHarvestOutputBody }
 
 export type __WireSubmitOnchainSignOutputBody = {
     fileChecksum: string;

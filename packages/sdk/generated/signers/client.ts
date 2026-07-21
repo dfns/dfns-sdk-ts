@@ -54,6 +54,21 @@ export class SignersClient {
     return response.json()
   }
 
+  async createKeyHarvestInput(request: T.CreateKeyHarvestInputRequest): Promise<T.CreateKeyHarvestInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/key-harvest/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createOnchainSignInput(request: T.CreateOnchainSignInputRequest): Promise<T.CreateOnchainSignInputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/onchain-sign/input', {
       path: request ?? {},
@@ -155,6 +170,25 @@ export class SignersClient {
     file: { bytes: Uint8Array; name?: string }
   ): Promise<T.SubmitGenesisOutputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/genesis/output', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      file,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async submitKeyHarvestOutput(
+    request: T.SubmitKeyHarvestOutputRequest,
+    file: { bytes: Uint8Array; name?: string }
+  ): Promise<T.SubmitKeyHarvestOutputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/key-harvest/output', {
       path: request ?? {},
       query: {},
     })

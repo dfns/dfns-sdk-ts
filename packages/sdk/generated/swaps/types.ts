@@ -34,6 +34,8 @@ export type CreateSwapBody = {
         mint: string;
         amount: string;
     };
+    /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
     slippageBps: number;
 } | {
@@ -72,6 +74,8 @@ export type CreateSwapBody = {
         mint: string;
         amount: string;
     };
+    /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
     slippageBps: number;
 } | {
@@ -110,6 +114,8 @@ export type CreateSwapBody = {
         mint: string;
         amount: string;
     };
+    /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
     /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
     feeToleranceBps: number;
 };
@@ -129,6 +135,8 @@ export type CreateSwapResponse = {
     status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
     /** Swap provider. */
     provider: "UniswapX" | "UniswapClassic" | "CircleCctp";
+    /** Id of the fee sponsor paying network fees for this swap, if any. */
+    feeSponsorId?: string | undefined;
     /** The source asset for this swap transaction. */
     quotedSourceAsset: ({
         kind: "Native";
@@ -212,6 +220,8 @@ export type CreateSwapResponse = {
             mint: string;
             amount: string;
         };
+        /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+        feeSponsorId?: string | undefined;
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
     } | {
@@ -250,6 +260,8 @@ export type CreateSwapResponse = {
             mint: string;
             amount: string;
         };
+        /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+        feeSponsorId?: string | undefined;
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
     } | {
@@ -288,6 +300,8 @@ export type CreateSwapResponse = {
             mint: string;
             amount: string;
         };
+        /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+        feeSponsorId?: string | undefined;
         /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
         feeToleranceBps: number;
     }) | {};
@@ -592,6 +606,8 @@ export type GetSwapResponse = {
     status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
     /** Swap provider. */
     provider: "UniswapX" | "UniswapClassic" | "CircleCctp";
+    /** Id of the fee sponsor paying network fees for this swap, if any. */
+    feeSponsorId?: string | undefined;
     /** The source asset for this swap transaction. */
     quotedSourceAsset: ({
         kind: "Native";
@@ -675,6 +691,8 @@ export type GetSwapResponse = {
             mint: string;
             amount: string;
         };
+        /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+        feeSponsorId?: string | undefined;
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
     } | {
@@ -713,6 +731,8 @@ export type GetSwapResponse = {
             mint: string;
             amount: string;
         };
+        /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+        feeSponsorId?: string | undefined;
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
     } | {
@@ -751,6 +771,8 @@ export type GetSwapResponse = {
             mint: string;
             amount: string;
         };
+        /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+        feeSponsorId?: string | undefined;
         /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
         feeToleranceBps: number;
     }) | {};
@@ -965,6 +987,8 @@ export type ListSwapsResponse = {
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
         /** Swap provider. */
         provider: "UniswapX" | "UniswapClassic" | "CircleCctp";
+        /** Id of the fee sponsor paying network fees for this swap, if any. */
+        feeSponsorId?: string | undefined;
         /** The source asset for this swap transaction. */
         quotedSourceAsset: ({
             kind: "Native";
@@ -1048,6 +1072,8 @@ export type ListSwapsResponse = {
                 mint: string;
                 amount: string;
             };
+            /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
         } | {
@@ -1086,6 +1112,8 @@ export type ListSwapsResponse = {
                 mint: string;
                 amount: string;
             };
+            /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
             /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
             slippageBps: number;
         } | {
@@ -1124,6 +1152,8 @@ export type ListSwapsResponse = {
                 mint: string;
                 amount: string;
             };
+            /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+            feeSponsorId?: string | undefined;
             /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
             feeToleranceBps: number;
         }) | {};
