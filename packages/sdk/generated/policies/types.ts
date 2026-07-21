@@ -229,7 +229,9 @@ export type ArchivePolicyResponse = {
             addresses: {
                 categoryIds: number[];
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -314,7 +316,9 @@ export type ArchivePolicyResponse = {
                     categoryIds: number[];
                 };
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -1186,6 +1190,8 @@ export type CreateApprovalDecisionResponse = {
                 minFinalityThreshold: number;
                 /** Bind the burn to a durable nonce instead of a recent blockhash. */
                 useDurableNonce?: boolean | undefined;
+                /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+                feeSponsorId?: string | undefined;
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
@@ -1534,6 +1540,8 @@ export type CreateApprovalDecisionResponse = {
             status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
             /** Swap provider. */
             provider: "UniswapX" | "UniswapClassic" | "CircleCctp";
+            /** Id of the fee sponsor paying network fees for this swap, if any. */
+            feeSponsorId?: string | undefined;
             /** The source asset for this swap transaction. */
             quotedSourceAsset: ({
                 kind: "Native";
@@ -1617,6 +1625,8 @@ export type CreateApprovalDecisionResponse = {
                     mint: string;
                     amount: string;
                 };
+                /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                feeSponsorId?: string | undefined;
                 /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
                 slippageBps: number;
             } | {
@@ -1655,6 +1665,8 @@ export type CreateApprovalDecisionResponse = {
                     mint: string;
                     amount: string;
                 };
+                /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                feeSponsorId?: string | undefined;
                 /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
                 slippageBps: number;
             } | {
@@ -1693,6 +1705,8 @@ export type CreateApprovalDecisionResponse = {
                     mint: string;
                     amount: string;
                 };
+                /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                feeSponsorId?: string | undefined;
                 /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
                 feeToleranceBps: number;
             }) | {};
@@ -3105,7 +3119,9 @@ export type CreateApprovalDecisionResponse = {
                         addresses: {
                             categoryIds: number[];
                         };
-                        /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                        /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                        
+                        Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                           
                         This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                         As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -3190,7 +3206,9 @@ export type CreateApprovalDecisionResponse = {
                                 categoryIds: number[];
                             };
                         };
-                        /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                        /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                        
+                        Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                           
                         This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                         As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -3563,7 +3581,9 @@ export type CreatePolicyBody = {
             addresses: {
                 categoryIds: number[];
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -3644,7 +3664,9 @@ export type CreatePolicyBody = {
                     categoryIds: number[];
                 };
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -3898,7 +3920,9 @@ export type CreatePolicyResponse = {
             addresses: {
                 categoryIds: number[];
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -3983,7 +4007,9 @@ export type CreatePolicyResponse = {
                     categoryIds: number[];
                 };
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -4850,6 +4876,8 @@ export type GetApprovalResponse = {
                 minFinalityThreshold: number;
                 /** Bind the burn to a durable nonce instead of a recent blockhash. */
                 useDurableNonce?: boolean | undefined;
+                /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+                feeSponsorId?: string | undefined;
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
@@ -5198,6 +5226,8 @@ export type GetApprovalResponse = {
             status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
             /** Swap provider. */
             provider: "UniswapX" | "UniswapClassic" | "CircleCctp";
+            /** Id of the fee sponsor paying network fees for this swap, if any. */
+            feeSponsorId?: string | undefined;
             /** The source asset for this swap transaction. */
             quotedSourceAsset: ({
                 kind: "Native";
@@ -5281,6 +5311,8 @@ export type GetApprovalResponse = {
                     mint: string;
                     amount: string;
                 };
+                /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                feeSponsorId?: string | undefined;
                 /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
                 slippageBps: number;
             } | {
@@ -5319,6 +5351,8 @@ export type GetApprovalResponse = {
                     mint: string;
                     amount: string;
                 };
+                /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                feeSponsorId?: string | undefined;
                 /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
                 slippageBps: number;
             } | {
@@ -5357,6 +5391,8 @@ export type GetApprovalResponse = {
                     mint: string;
                     amount: string;
                 };
+                /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                feeSponsorId?: string | undefined;
                 /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
                 feeToleranceBps: number;
             }) | {};
@@ -6769,7 +6805,9 @@ export type GetApprovalResponse = {
                         addresses: {
                             categoryIds: number[];
                         };
-                        /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                        /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                        
+                        Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                           
                         This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                         As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -6854,7 +6892,9 @@ export type GetApprovalResponse = {
                                 categoryIds: number[];
                             };
                         };
-                        /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                        /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                        
+                        Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                           
                         This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                         As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -7255,7 +7295,9 @@ export type GetPolicyResponse = ({
             addresses: {
                 categoryIds: number[];
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -7340,7 +7382,9 @@ export type GetPolicyResponse = ({
                     categoryIds: number[];
                 };
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -7608,7 +7652,9 @@ export type GetPolicyResponse = ({
                     addresses: {
                         categoryIds: number[];
                     };
-                    /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                    /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                    
+                    Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                       
                     This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                     As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -7693,7 +7739,9 @@ export type GetPolicyResponse = ({
                             categoryIds: number[];
                         };
                     };
-                    /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                    /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                    
+                    Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                       
                     This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                     As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -8567,6 +8615,8 @@ export type ListApprovalsResponse = {
                     minFinalityThreshold: number;
                     /** Bind the burn to a durable nonce instead of a recent blockhash. */
                     useDurableNonce?: boolean | undefined;
+                    /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+                    feeSponsorId?: string | undefined;
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
                 } | {
@@ -8915,6 +8965,8 @@ export type ListApprovalsResponse = {
                 status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
                 /** Swap provider. */
                 provider: "UniswapX" | "UniswapClassic" | "CircleCctp";
+                /** Id of the fee sponsor paying network fees for this swap, if any. */
+                feeSponsorId?: string | undefined;
                 /** The source asset for this swap transaction. */
                 quotedSourceAsset: ({
                     kind: "Native";
@@ -8998,6 +9050,8 @@ export type ListApprovalsResponse = {
                         mint: string;
                         amount: string;
                     };
+                    /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                    feeSponsorId?: string | undefined;
                     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
                     slippageBps: number;
                 } | {
@@ -9036,6 +9090,8 @@ export type ListApprovalsResponse = {
                         mint: string;
                         amount: string;
                     };
+                    /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                    feeSponsorId?: string | undefined;
                     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
                     slippageBps: number;
                 } | {
@@ -9074,6 +9130,8 @@ export type ListApprovalsResponse = {
                         mint: string;
                         amount: string;
                     };
+                    /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
+                    feeSponsorId?: string | undefined;
                     /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
                     feeToleranceBps: number;
                 }) | {};
@@ -10486,7 +10544,9 @@ export type ListApprovalsResponse = {
                             addresses: {
                                 categoryIds: number[];
                             };
-                            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                            
+                            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                               
                             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -10571,7 +10631,9 @@ export type ListApprovalsResponse = {
                                     categoryIds: number[];
                                 };
                             };
-                            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                            
+                            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                               
                             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -10977,7 +11039,9 @@ export type ListPoliciesResponse = {
                 addresses: {
                     categoryIds: number[];
                 };
-                /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                
+                Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                   
                 This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                 As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -11062,7 +11126,9 @@ export type ListPoliciesResponse = {
                         categoryIds: number[];
                     };
                 };
-                /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                
+                Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                   
                 This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                 As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -11330,7 +11396,9 @@ export type ListPoliciesResponse = {
                         addresses: {
                             categoryIds: number[];
                         };
-                        /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                        /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                        
+                        Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                           
                         This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                         As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -11415,7 +11483,9 @@ export type ListPoliciesResponse = {
                                 categoryIds: number[];
                             };
                         };
-                        /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+                        /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+                        
+                        Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
                           
                         This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
                         As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -11651,7 +11721,9 @@ export type UpdatePolicyBody = {
             addresses: {
                 categoryIds: number[];
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -11732,7 +11804,9 @@ export type UpdatePolicyBody = {
                     categoryIds: number[];
                 };
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -11990,7 +12064,9 @@ export type UpdatePolicyResponse = {
             addresses: {
                 categoryIds: number[];
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */
@@ -12075,7 +12151,9 @@ export type UpdatePolicyResponse = {
                     categoryIds: number[];
                 };
             };
-            /** Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
+            /** **Deprecated** — set `userIdTemplate` on the Chainalysis integration setting instead; when set there, the integration-level template takes precedence over this one.
+            
+            Value sent to Chainalysis as the "user ID". Used by Chainalysis for grouping transaction screenings.
               
             This template can include variables, included in brackets. The following variables are currently supported:  `{wallet.id}` and `{wallet.externalId}`.
             As an example, if you set `userIdTemplate: "dfns:{wallet.id}_{wallet.externalId}"`, when your wallet receives a transaction that gets screened by a Chainalysis policy, the "user ID" sent to Chainalysis will be `dfns:wa-xxx_yyy` (`wa-xxx` being the wallet ID, and `yyy` being the wallet external ID). */

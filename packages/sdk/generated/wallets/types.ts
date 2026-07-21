@@ -120,6 +120,8 @@ export type AbortTransactionResponse = {
         minFinalityThreshold: number;
         /** Bind the burn to a durable nonce instead of a recent blockhash. */
         useDurableNonce?: boolean | undefined;
+        /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+        feeSponsorId?: string | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -1064,6 +1066,8 @@ export type ActivateWalletResponse = {
         minFinalityThreshold: number;
         /** Bind the burn to a durable nonce instead of a recent blockhash. */
         useDurableNonce?: boolean | undefined;
+        /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+        feeSponsorId?: string | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -1318,6 +1322,8 @@ export type BroadcastTransactionResponse = {
         minFinalityThreshold: number;
         /** Bind the burn to a durable nonce instead of a recent blockhash. */
         useDurableNonce?: boolean | undefined;
+        /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+        feeSponsorId?: string | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -1486,6 +1492,8 @@ export type CancelTransactionResponse = {
         minFinalityThreshold: number;
         /** Bind the burn to a durable nonce instead of a recent blockhash. */
         useDurableNonce?: boolean | undefined;
+        /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+        feeSponsorId?: string | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -1654,6 +1662,8 @@ export type CancelTransferResponse = {
         minFinalityThreshold: number;
         /** Bind the burn to a durable nonce instead of a recent blockhash. */
         useDurableNonce?: boolean | undefined;
+        /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+        feeSponsorId?: string | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -2796,6 +2806,8 @@ export type GetTransactionResponse = {
         minFinalityThreshold: number;
         /** Bind the burn to a durable nonce instead of a recent blockhash. */
         useDurableNonce?: boolean | undefined;
+        /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+        feeSponsorId?: string | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -5493,6 +5505,8 @@ export type ListTransactionsResponse = {
             minFinalityThreshold: number;
             /** Bind the burn to a durable nonce instead of a recent blockhash. */
             useDurableNonce?: boolean | undefined;
+            /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+            feeSponsorId?: string | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
         } | {
@@ -6504,6 +6518,8 @@ export type SpeedUpTransactionResponse = {
         minFinalityThreshold: number;
         /** Bind the burn to a durable nonce instead of a recent blockhash. */
         useDurableNonce?: boolean | undefined;
+        /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+        feeSponsorId?: string | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -6672,6 +6688,8 @@ export type SpeedUpTransferResponse = {
         minFinalityThreshold: number;
         /** Bind the burn to a durable nonce instead of a recent blockhash. */
         useDurableNonce?: boolean | undefined;
+        /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
+        feeSponsorId?: string | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
