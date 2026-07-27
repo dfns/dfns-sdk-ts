@@ -110,6 +110,21 @@ export class VaultsClient {
     return response.json()
   }
 
+  async releaseQuarantine(request: T.ReleaseQuarantineRequest): Promise<T.ReleaseQuarantineResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/quarantines/:quarantineId/release', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async tagVault(request: T.TagVaultRequest): Promise<T.TagVaultResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/tags', {
       path: request ?? {},
@@ -118,21 +133,6 @@ export class VaultsClient {
 
     const response = await userActionFetch(path, {
       method: 'PUT',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async unquarantine(request: T.UnquarantineRequest): Promise<T.UnquarantineResponse> {
-    const path = buildPathAndQuery('/vaults/:vaultId/quarantines/:quarantineId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
       body: request.body,
       apiOptions: this.apiOptions,
     })

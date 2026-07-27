@@ -192,6 +192,49 @@ export class DelegatedVaultsClient {
     return response.json()
   }
 
+  async releaseQuarantineInit(request: T.ReleaseQuarantineRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/quarantines/:quarantineId/release', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async releaseQuarantineComplete(
+    request: T.ReleaseQuarantineRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.ReleaseQuarantineResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/quarantines/:quarantineId/release', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async tagVaultInit(request: T.TagVaultRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/tags', {
       path: request ?? {},
@@ -227,49 +270,6 @@ export class DelegatedVaultsClient {
 
     const response = await simpleFetch(path, {
       method: 'PUT',
-      body: request.body,
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async unquarantineInit(request: T.UnquarantineRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/vaults/:vaultId/quarantines/:quarantineId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async unquarantineComplete(
-    request: T.UnquarantineRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.UnquarantineResponse> {
-    const path = buildPathAndQuery('/vaults/:vaultId/quarantines/:quarantineId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
