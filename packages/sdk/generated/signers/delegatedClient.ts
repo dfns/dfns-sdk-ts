@@ -7,6 +7,49 @@ import * as T from './types'
 export class DelegatedSignersClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
+  async cancelFleetOperationInit(request: T.CancelFleetOperationRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/fleet-operations/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async cancelFleetOperationComplete(
+    request: T.CancelFleetOperationRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.CancelFleetOperationResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/fleet-operations/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createAddMacUserInputInit(request: T.CreateAddMacUserInputRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/add-mac-user/input', {
       path: request ?? {},
@@ -31,6 +74,49 @@ export class DelegatedSignersClient {
     signedChallenge: SignUserActionChallengeRequest
   ): Promise<T.CreateAddMacUserInputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/add-mac-user/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async createAddProvisionerInputInit(request: T.CreateAddProvisionerInputRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/add-provisioner/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async createAddProvisionerInputComplete(
+    request: T.CreateAddProvisionerInputRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.CreateAddProvisionerInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/add-provisioner/input', {
       path: request ?? {},
       query: {},
     })

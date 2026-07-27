@@ -1,3 +1,36 @@
+export type CancelFleetOperationBody = {
+    groupId: string;
+    reason?: string | undefined;
+};
+
+export type CancelFleetOperationParams = {
+    storeId: string;
+};
+
+export type CancelFleetOperationResponse = {
+    groupId: string;
+    storeId: string;
+    orgId: string;
+    status: "Initialized" | "InReview" | "Rejected" | "Approved" | "Canceled";
+    createdBy: string;
+    submittedBy: string | null;
+    dateSubmitted: string | null;
+    reviewedBy: string | null;
+    dateReviewed: string | null;
+    canceledBy: string | null;
+    dateCanceled: string | null;
+    reason: string | null;
+    dateCreated: string;
+    operations: {
+        operationId: string;
+        kind: "Genesis" | "Clone" | "AddMacUser" | "KeyHarvest" | "AddProvisioner";
+        status: "Initialized" | "InReview" | "Rejected" | "Approved" | "Canceled";
+        dateCreated: string;
+    }[];
+};
+
+export type CancelFleetOperationRequest = CancelFleetOperationParams & { body: CancelFleetOperationBody }
+
 export type CreateAddMacUserInputBody = {
     kind: "AddMacUser";
     macTargetSerial: string;
@@ -11,6 +44,20 @@ export type CreateAddMacUserInputParams = {
 export type CreateAddMacUserInputResponse = string;
 
 export type CreateAddMacUserInputRequest = CreateAddMacUserInputParams & { body: CreateAddMacUserInputBody }
+
+export type CreateAddProvisionerInputBody = {
+    kind: "AddProvisioner";
+    yubikeySerial: string;
+    hsmTargetSerial: string;
+};
+
+export type CreateAddProvisionerInputParams = {
+    storeId: string;
+};
+
+export type CreateAddProvisionerInputResponse = string;
+
+export type CreateAddProvisionerInputRequest = CreateAddProvisionerInputParams & { body: CreateAddProvisionerInputBody }
 
 export type CreateCloneInputBody = {
     kind: "Clone";
@@ -160,6 +207,12 @@ export type __WireSubmitAddMacUserOutputBody = {
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
                 } | {
+                    type: "add-provisioner";
+                    ceremony_mode?: string | undefined;
+                    provisioner_label: string;
+                    provisioner_public_key_hex: string;
+                    yubikey_serial: string;
+                } | {
                     type: "key-harvest";
                     hsm_target_serial: string;
                     mac_target_serial: string;
@@ -187,6 +240,93 @@ export type SubmitAddMacUserOutputResponse = {
 };
 
 export type SubmitAddMacUserOutputRequest = SubmitAddMacUserOutputParams & { body: SubmitAddMacUserOutputBody }
+
+export type __WireSubmitAddProvisionerOutputBody = {
+    fileChecksum: string;
+    outputJson: {
+        type: "fleet-output";
+        version: 1;
+        status: "success";
+        org_id: string;
+        fleet_id: string;
+        fleet_label: string;
+        keystore_id: string;
+        group_id: string;
+        online_domain: string;
+        governance?: {
+            [x: string]: unknown;
+        } | undefined;
+        outputs: {
+            [x: string]: {
+                success: {
+                    type: "genesis-registration";
+                    ceremony_mode?: string | undefined;
+                    hsm_serial: string;
+                    hsm_identity_key: string;
+                    mac_serial: string;
+                    mac_se_wrap_key_pub_key: string;
+                    provisioners: {
+                        [x: string]: string;
+                    };
+                    hsm_sealed?: unknown | null;
+                    key_harvest: {
+                        "ed25519-start": number;
+                        ed25519: number;
+                        error: string | null;
+                        "secp256k1-start": number;
+                        secp256k1: number;
+                    };
+                } | {
+                    type: "clone-registration";
+                    ceremony_mode?: string | undefined;
+                    hsm_target_serial: string;
+                    hsm_identity_key: string;
+                    mac_target_serial: string;
+                    mac_se_wrap_key_pub_key: string;
+                    hsm_sealed?: unknown | null;
+                } | {
+                    type: "add-mac-user";
+                    ceremony_mode?: string | undefined;
+                    hsm_target_serial: string;
+                    hsm_identity_key: string;
+                    mac_target_serial: string;
+                    mac_username?: string | undefined;
+                    mac_se_wrap_key_pub_key: string;
+                    hsm_sealed?: unknown | null;
+                } | {
+                    type: "add-provisioner";
+                    ceremony_mode?: string | undefined;
+                    provisioner_label: string;
+                    provisioner_public_key_hex: string;
+                    yubikey_serial: string;
+                } | {
+                    type: "key-harvest";
+                    hsm_target_serial: string;
+                    mac_target_serial: string;
+                    mac_target_username: string;
+                    key_harvest: {
+                        secp256k1?: number | undefined;
+                        secp256k1_end?: number | undefined;
+                        ed25519?: number | undefined;
+                        ed25519_end?: number | undefined;
+                    };
+                };
+            };
+        };
+    };
+};
+
+export type SubmitAddProvisionerOutputBody = Omit<__WireSubmitAddProvisionerOutputBody, 'fileChecksum'>
+
+export type SubmitAddProvisionerOutputParams = {
+    storeId: string;
+};
+
+export type SubmitAddProvisionerOutputResponse = {
+    message: string;
+};
+
+export type SubmitAddProvisionerOutputRequest = SubmitAddProvisionerOutputParams & { body: SubmitAddProvisionerOutputBody }
 
 export type __WireSubmitCloneOutputBody = {
     fileChecksum: string;
@@ -240,6 +380,12 @@ export type __WireSubmitCloneOutputBody = {
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
+                } | {
+                    type: "add-provisioner";
+                    ceremony_mode?: string | undefined;
+                    provisioner_label: string;
+                    provisioner_public_key_hex: string;
+                    yubikey_serial: string;
                 } | {
                     type: "key-harvest";
                     hsm_target_serial: string;
@@ -322,6 +468,12 @@ export type __WireSubmitGenesisOutputBody = {
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
                 } | {
+                    type: "add-provisioner";
+                    ceremony_mode?: string | undefined;
+                    provisioner_label: string;
+                    provisioner_public_key_hex: string;
+                    yubikey_serial: string;
+                } | {
                     type: "key-harvest";
                     hsm_target_serial: string;
                     mac_target_serial: string;
@@ -402,6 +554,12 @@ export type __WireSubmitKeyHarvestOutputBody = {
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
                     hsm_sealed?: unknown | null;
+                } | {
+                    type: "add-provisioner";
+                    ceremony_mode?: string | undefined;
+                    provisioner_label: string;
+                    provisioner_public_key_hex: string;
+                    yubikey_serial: string;
                 } | {
                     type: "key-harvest";
                     hsm_target_serial: string;

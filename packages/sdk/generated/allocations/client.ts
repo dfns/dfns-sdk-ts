@@ -53,6 +53,20 @@ export class AllocationsClient {
     return response.json()
   }
 
+  async getAllocationsInfo(): Promise<T.GetAllocationsInfoResponse> {
+    const path = buildPathAndQuery('/allocations/info', {
+      path: {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listAllocationActions(request: T.ListAllocationActionsRequest): Promise<T.ListAllocationActionsResponse> {
     const path = buildPathAndQuery('/allocations/:allocationId/actions', {
       path: request ?? {},
