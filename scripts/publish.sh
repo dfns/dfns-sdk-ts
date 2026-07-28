@@ -43,6 +43,7 @@ packages=(
 )
 
 for packageName in "${packages[@]}"; do
+    cp LICENSE dist/"${packageName}"/LICENSE
     cd dist/"${packageName}"
     version=$(node -p "require('./package.json').version")
     if npm view "${packageName}@${version}" version >/dev/null 2>&1; then
