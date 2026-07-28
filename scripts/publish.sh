@@ -3,6 +3,7 @@
 set -euo pipefail
 
 tag=${1:-}
+license=$(node -p "require('./package.json').license")
 
 npm run cb:all
 
@@ -45,6 +46,7 @@ packages=(
 for packageName in "${packages[@]}"; do
     cp LICENSE dist/"${packageName}"/LICENSE
     cd dist/"${packageName}"
+    npm pkg set "license=${license}" --workspaces=false
     version=$(node -p "require('./package.json').version")
     if npm view "${packageName}@${version}" version >/dev/null 2>&1; then
         echo "Skipping ${packageName}@${version} (already published)"
