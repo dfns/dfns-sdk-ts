@@ -2841,6 +2841,12 @@ export type CreateApprovalDecisionResponse = {
             tos: string[];
             value: string;
             fee?: string | undefined;
+            /** Outbound transfers only: per-recipient outputs of the transaction, change excluded. */
+            outputs?: {
+                index: number;
+                address: string;
+                value: string;
+            }[] | undefined;
         };
     } | {
         kind: "Policies:Modify";
@@ -6494,6 +6500,12 @@ export type GetApprovalResponse = {
             tos: string[];
             value: string;
             fee?: string | undefined;
+            /** Outbound transfers only: per-recipient outputs of the transaction, change excluded. */
+            outputs?: {
+                index: number;
+                address: string;
+                value: string;
+            }[] | undefined;
         };
     } | {
         kind: "Policies:Modify";
@@ -10200,6 +10212,12 @@ export type ListApprovalsResponse = {
                 tos: string[];
                 value: string;
                 fee?: string | undefined;
+                /** Outbound transfers only: per-recipient outputs of the transaction, change excluded. */
+                outputs?: {
+                    index: number;
+                    address: string;
+                    value: string;
+                }[] | undefined;
             };
         } | {
             kind: "Policies:Modify";
