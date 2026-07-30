@@ -4845,6 +4845,12 @@ export type GetWalletHistoryResponse = {
         tos: string[];
         value: string;
         fee?: string | undefined;
+        /** Outbound transfers only: per-recipient outputs of the transaction, change excluded. */
+        outputs?: {
+            index: number;
+            address: string;
+            value: string;
+        }[] | undefined;
     })[];
     /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
