@@ -1,6 +1,6 @@
 {
   "name": "package-based",
-  "version": "0.8.27",
+  "version": "0.8.28",
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
