@@ -40,6 +40,42 @@ export type CreateVaultAddressResponse = {
 
 export type CreateVaultAddressRequest = CreateVaultAddressParams & { body: CreateVaultAddressBody }
 
+export type CreateVaultLockBody = {
+    /** The EVM network the locked asset is on. */
+    network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
+    /** The token identifier of the asset to lock (e.g. `native:eth` or `erc20:0x...`). */
+    tid: string;
+    /** The amount to lock, in minimum denomination. */
+    amount: string;
+    /** A unique id from your system. Unique per vault: it cannot be reused, even after the lock is deleted. */
+    externalId?: string | undefined;
+    /** An optional reason or note for the lock. */
+    reason?: string | undefined;
+};
+
+export type CreateVaultLockParams = {
+    /** Vault id. */
+    vaultId: string;
+};
+
+export type CreateVaultLockResponse = {
+    /** Vault lock id. */
+    id: string;
+    vaultId: string;
+    network: string;
+    tid: string;
+    amount: string;
+    /** The user that created the lock. Only this user can delete it. */
+    owner: string;
+    externalId?: string | undefined;
+    /** The reason or note the lock was created with. */
+    reason?: string | undefined;
+    dateCreated: string;
+    dateDeleted?: string | undefined;
+};
+
+export type CreateVaultLockRequest = CreateVaultLockParams & { body: CreateVaultLockBody }
+
 export type CreateVaultTransferBody = {
     /** The network the transfer is on. */
     network: ("Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia") | ("Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4");
@@ -781,6 +817,31 @@ export type CreateVaultTransferResponse = {
 
 export type CreateVaultTransferRequest = CreateVaultTransferParams & { body: CreateVaultTransferBody }
 
+export type DeleteVaultLockParams = {
+    /** Vault id. */
+    vaultId: string;
+    /** Vault lock id. */
+    lockId: string;
+};
+
+export type DeleteVaultLockResponse = {
+    /** Vault lock id. */
+    id: string;
+    vaultId: string;
+    network: string;
+    tid: string;
+    amount: string;
+    /** The user that created the lock. Only this user can delete it. */
+    owner: string;
+    externalId?: string | undefined;
+    /** The reason or note the lock was created with. */
+    reason?: string | undefined;
+    dateCreated: string;
+    dateDeleted?: string | undefined;
+};
+
+export type DeleteVaultLockRequest = DeleteVaultLockParams
+
 export type GetVaultParams = {
     /** The vault to retrieve. */
     vaultId: string;
@@ -804,6 +865,31 @@ export type GetVaultResponse = {
 };
 
 export type GetVaultRequest = GetVaultParams
+
+export type GetVaultLockParams = {
+    /** Vault id. */
+    vaultId: string;
+    /** The lock to retrieve. */
+    lockId: string;
+};
+
+export type GetVaultLockResponse = {
+    /** Vault lock id. */
+    id: string;
+    vaultId: string;
+    network: string;
+    tid: string;
+    amount: string;
+    /** The user that created the lock. Only this user can delete it. */
+    owner: string;
+    externalId?: string | undefined;
+    /** The reason or note the lock was created with. */
+    reason?: string | undefined;
+    dateCreated: string;
+    dateDeleted?: string | undefined;
+};
+
+export type GetVaultLockRequest = GetVaultLockParams
 
 export type ListVaultAssetsParams = {
     /** Vault id. */
@@ -875,11 +961,49 @@ export type ListVaultBalancesResponse = {
         amount: string;
         transferId?: string | undefined;
         quarantineId?: string | undefined;
+        lockId?: string | undefined;
     }[];
     nextPageToken?: string | undefined;
 };
 
 export type ListVaultBalancesRequest = ListVaultBalancesParams & { query?: ListVaultBalancesQuery }
+
+export type ListVaultLocksParams = {
+    /** Vault id. */
+    vaultId: string;
+};
+
+export type ListVaultLocksQuery = {
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
+    paginationToken?: string | undefined;
+    network?: string | undefined;
+    tid?: string | undefined;
+};
+
+export type ListVaultLocksResponse = {
+    /** Current page items. */
+    items: {
+        /** Vault lock id. */
+        id: string;
+        vaultId: string;
+        network: string;
+        tid: string;
+        amount: string;
+        /** The user that created the lock. Only this user can delete it. */
+        owner: string;
+        externalId?: string | undefined;
+        /** The reason or note the lock was created with. */
+        reason?: string | undefined;
+        dateCreated: string;
+        dateDeleted?: string | undefined;
+    }[];
+    /** token to use as `paginationToken` to request the next page. */
+    nextPageToken?: string | undefined;
+};
+
+export type ListVaultLocksRequest = ListVaultLocksParams & { query?: ListVaultLocksQuery }
 
 export type ListVaultsQuery = {
     /** Maximum number of items to return. */
