@@ -39,6 +39,21 @@ export class VaultsClient {
     return response.json()
   }
 
+  async createVaultLock(request: T.CreateVaultLockRequest): Promise<T.CreateVaultLockResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createVaultTransfer(request: T.CreateVaultTransferRequest): Promise<T.CreateVaultTransferResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/transfers', {
       path: request ?? {},
@@ -54,8 +69,37 @@ export class VaultsClient {
     return response.json()
   }
 
+  async deleteVaultLock(request: T.DeleteVaultLockRequest): Promise<T.DeleteVaultLockResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getVault(request: T.GetVaultRequest): Promise<T.GetVaultResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async getVaultLock(request: T.GetVaultLockRequest): Promise<T.GetVaultLockResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId', {
       path: request ?? {},
       query: {},
     })
@@ -84,6 +128,20 @@ export class VaultsClient {
 
   async listVaultBalances(request: T.ListVaultBalancesRequest): Promise<T.ListVaultBalancesResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/balances', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listVaultLocks(request: T.ListVaultLocksRequest): Promise<T.ListVaultLocksResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks', {
       path: request ?? {},
       query: request.query ?? {},
     })

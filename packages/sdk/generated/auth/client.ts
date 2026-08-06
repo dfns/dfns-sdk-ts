@@ -693,6 +693,36 @@ export class AuthClient {
     return response.json()
   }
 
+  async oidcLogin(request: T.OidcLoginRequest): Promise<T.OidcLoginResponse> {
+    const path = buildPathAndQuery('/auth/login/oidc', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async oidcLoginInit(request: T.OidcLoginInitRequest): Promise<T.OidcLoginInitResponse> {
+    const path = buildPathAndQuery('/auth/login/oidc/init', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async recover(request: T.RecoverRequest): Promise<T.RecoverResponse> {
     const path = buildPathAndQuery('/auth/recover/user', {
       path: request ?? {},
