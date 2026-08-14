@@ -222,19 +222,14 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
-        gasLimit?: string | undefined;
-        gasPrice?: string | undefined;
-        maxFeePerGas?: string | undefined;
-        maxPriorityFeePerGas?: string | undefined;
-        feeRate?: string | undefined;
-        inputs?: {
-            txid: string;
-            vout: number;
-            value: number;
-        }[] | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Erc20";
         /** The ERC-20 contract address. */
@@ -260,13 +255,14 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
-        gasLimit?: string | undefined;
-        gasPrice?: string | undefined;
-        maxFeePerGas?: string | undefined;
-        maxPriorityFeePerGas?: string | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Aip21";
         /** The asset metadata address.  */
@@ -290,6 +286,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -318,6 +316,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -344,6 +344,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -374,6 +376,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -400,6 +404,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -428,6 +434,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -454,6 +462,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -482,6 +492,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -510,6 +522,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -537,6 +551,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -565,6 +581,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -595,6 +613,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -625,6 +645,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -651,6 +673,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -677,6 +701,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -709,9 +735,14 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Tep74";
         /** The destination address. */
@@ -737,6 +768,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -763,6 +796,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -789,6 +824,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -815,6 +852,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -843,6 +882,8 @@ export type AbortTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -1823,9 +1864,13 @@ export type DelegateWalletResponse = {
 export type DelegateWalletRequest = DelegateWalletParams & { body: DelegateWalletBody }
 
 export type ExportWalletBody = {
+    /** The public encryption key the signers should encrypt their key shares to. */
     encryptionKey: string;
+    /** The protocol/curve combinations the client is able to reconstruct the key from. */
     supportedSchemes: {
+        /** An MPC protocol the client supports. */
         protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
+        /** An elliptic curve the client supports. */
         curve: "ed25519" | "secp256k1" | "stark";
     }[];
 };
@@ -1835,8 +1880,11 @@ export type ExportWalletParams = {
 };
 
 export type ExportWalletResponse = {
+    /** Hex-encoded public key of the exported key. */
     publicKey: string;
+    /** The MPC protocol the key shares are for. */
     protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
+    /** The elliptic curve of the exported key. */
     curve: "ed25519" | "secp256k1" | "stark";
     /** The TSS threshold of the wallet private signing key shares */
     minSigners: number;
@@ -2914,19 +2962,14 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
-        gasLimit?: string | undefined;
-        gasPrice?: string | undefined;
-        maxFeePerGas?: string | undefined;
-        maxPriorityFeePerGas?: string | undefined;
-        feeRate?: string | undefined;
-        inputs?: {
-            txid: string;
-            vout: number;
-            value: number;
-        }[] | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Erc20";
         /** The ERC-20 contract address. */
@@ -2952,13 +2995,14 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
-        gasLimit?: string | undefined;
-        gasPrice?: string | undefined;
-        maxFeePerGas?: string | undefined;
-        maxPriorityFeePerGas?: string | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Aip21";
         /** The asset metadata address.  */
@@ -2982,6 +3026,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3010,6 +3056,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3036,6 +3084,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3066,6 +3116,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3092,6 +3144,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3120,6 +3174,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3146,6 +3202,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3174,6 +3232,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3202,6 +3262,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3229,6 +3291,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3257,6 +3321,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3287,6 +3353,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3317,6 +3385,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3343,6 +3413,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3369,6 +3441,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3401,9 +3475,14 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Tep74";
         /** The destination address. */
@@ -3429,6 +3508,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3455,6 +3536,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3481,6 +3564,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3507,6 +3592,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3535,6 +3622,8 @@ export type GetTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -4902,12 +4991,19 @@ export type GetWalletNftsResponse = {
 export type GetWalletNftsRequest = GetWalletNftsParams
 
 export type ImportWalletBody = {
+    /** Nickname for the imported key. */
     name?: string | undefined;
+    /** The elliptic curve of the private key being imported. */
     curve: "ed25519" | "secp256k1" | "stark";
+    /** The MPC protocol the key shares are formatted for. */
     protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
+    /** The TSS threshold: the minimum number of key shares required to sign. */
     minSigners: number;
+    /** One key share per signer, each encrypted to that signer. */
     encryptedKeyShares: {
+        /** ID of the signer this key share is for. */
         signerId: string;
+        /** The key share encrypted to the target signer. */
         encryptedKeyShare: string;
     }[];
     network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
@@ -5598,19 +5694,14 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
-            gasLimit?: string | undefined;
-            gasPrice?: string | undefined;
-            maxFeePerGas?: string | undefined;
-            maxPriorityFeePerGas?: string | undefined;
-            feeRate?: string | undefined;
-            inputs?: {
-                txid: string;
-                vout: number;
-                value: number;
-            }[] | undefined;
+            structured?: {
+                [x: string]: any;
+            } | undefined;
         } | {
             kind: "Erc20";
             /** The ERC-20 contract address. */
@@ -5636,13 +5727,14 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
-            gasLimit?: string | undefined;
-            gasPrice?: string | undefined;
-            maxFeePerGas?: string | undefined;
-            maxPriorityFeePerGas?: string | undefined;
+            structured?: {
+                [x: string]: any;
+            } | undefined;
         } | {
             kind: "Aip21";
             /** The asset metadata address.  */
@@ -5666,6 +5758,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5694,6 +5788,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5720,6 +5816,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5750,6 +5848,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5776,6 +5876,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5804,6 +5906,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5830,6 +5934,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5858,6 +5964,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5886,6 +5994,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5913,6 +6023,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5941,6 +6053,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -5971,6 +6085,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6001,6 +6117,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6027,6 +6145,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6053,6 +6173,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6085,9 +6207,14 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
+            structured?: {
+                [x: string]: any;
+            } | undefined;
         } | {
             kind: "Tep74";
             /** The destination address. */
@@ -6113,6 +6240,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6139,6 +6268,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6165,6 +6296,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6191,6 +6324,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6219,6 +6354,8 @@ export type ListTransfersResponse = {
                 beneficiary: {
                     [x: string]: any;
                 };
+            } | {
+                kind: "Sumsub";
             }) | undefined;
             /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
             feeSponsorId?: string | undefined;
@@ -6766,6 +6903,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -6792,6 +6931,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -6820,6 +6961,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -6846,6 +6989,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -6876,6 +7021,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -6902,6 +7049,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -6930,6 +7079,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -6956,6 +7107,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -6984,6 +7137,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7012,6 +7167,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7040,6 +7197,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7067,6 +7226,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7095,6 +7256,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7125,6 +7288,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7155,6 +7320,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7181,6 +7348,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7207,6 +7376,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7239,6 +7410,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7267,6 +7440,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7293,6 +7468,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7319,6 +7496,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7345,6 +7524,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7373,6 +7554,8 @@ export type TransferAssetBody = {
         beneficiary: {
             [x: string]: any;
         };
+    } | {
+        kind: "Sumsub";
     }) | undefined;
     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
     feeSponsorId?: string | undefined;
@@ -7430,19 +7613,14 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
-        gasLimit?: string | undefined;
-        gasPrice?: string | undefined;
-        maxFeePerGas?: string | undefined;
-        maxPriorityFeePerGas?: string | undefined;
-        feeRate?: string | undefined;
-        inputs?: {
-            txid: string;
-            vout: number;
-            value: number;
-        }[] | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Erc20";
         /** The ERC-20 contract address. */
@@ -7468,13 +7646,14 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
-        gasLimit?: string | undefined;
-        gasPrice?: string | undefined;
-        maxFeePerGas?: string | undefined;
-        maxPriorityFeePerGas?: string | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Aip21";
         /** The asset metadata address.  */
@@ -7498,6 +7677,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7526,6 +7707,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7552,6 +7735,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7582,6 +7767,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7608,6 +7795,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7636,6 +7825,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7662,6 +7853,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7690,6 +7883,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7718,6 +7913,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7745,6 +7942,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7773,6 +7972,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7803,6 +8004,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7833,6 +8036,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7859,6 +8064,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7885,6 +8092,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7917,9 +8126,14 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Tep74";
         /** The destination address. */
@@ -7945,6 +8159,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7971,6 +8187,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -7997,6 +8215,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -8023,6 +8243,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -8051,6 +8273,8 @@ export type TransferAssetResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
