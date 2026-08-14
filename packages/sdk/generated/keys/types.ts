@@ -58,21 +58,26 @@ export type CreateKeyResponse = {
 export type CreateKeyRequest = { body: CreateKeyBody }
 
 export type DelegateKeyBody = {
+    /** ID of the end user to transfer ownership of the key to. */
     delegateTo: string;
 };
 
 export type DelegateKeyParams = {
+    /** The key to delegate. Must have been created with `delayDelegation: true`. */
     keyId: string;
 };
 
 export type DelegateKeyResponse = {
+    /** The delegated key. */
     keyId: string;
+    /** The key status after delegation. */
     status: "Delegated";
 };
 
 export type DelegateKeyRequest = DelegateKeyParams & { body: DelegateKeyBody }
 
 export type DeleteKeyParams = {
+    /** The key to delete. */
     keyId: string;
 };
 
@@ -112,35 +117,47 @@ export type DeleteKeyResponse = {
 export type DeleteKeyRequest = DeleteKeyParams
 
 export type DeriveKeyBody = {
+    /** Hex-encoded domain separation tag used as an input to the derivation. */
     domain: string;
+    /** Hex-encoded seed value to derive from. The seed does not need to be secret. */
     seed: string;
 };
 
 export type DeriveKeyParams = {
+    /** The Diffie-Hellman key to derive from. Must be a key created with `scheme=DH`. */
     keyId: string;
 };
 
 export type DeriveKeyResponse = {
+    /** Hex-encoded derived output. Deterministic for a given key, domain and seed. */
     output: string;
 };
 
 export type DeriveKeyRequest = DeriveKeyParams & { body: DeriveKeyBody }
 
 export type ExportKeyBody = {
+    /** The public encryption key the signers should encrypt their key shares to. */
     encryptionKey: string;
+    /** The protocol/curve combinations the client is able to reconstruct the key from. */
     supportedSchemes: {
+        /** An MPC protocol the client supports. */
         protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
+        /** An elliptic curve the client supports. */
         curve: "ed25519" | "secp256k1" | "stark";
     }[];
 };
 
 export type ExportKeyParams = {
+    /** The key to export. */
     keyId: string;
 };
 
 export type ExportKeyResponse = {
+    /** Hex-encoded public key of the exported key. */
     publicKey: string;
+    /** The MPC protocol the key shares are for. */
     protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
+    /** The elliptic curve of the exported key. */
     curve: "ed25519" | "secp256k1" | "stark";
     /** The TSS threshold of the wallet private signing key shares */
     minSigners: number;
@@ -1062,15 +1079,22 @@ export type GetSignatureResponse = {
 export type GetSignatureRequest = GetSignatureParams
 
 export type ImportKeyBody = {
+    /** Nickname for the imported key. */
     name?: string | undefined;
+    /** The elliptic curve of the private key being imported. */
     curve: "ed25519" | "secp256k1" | "stark";
+    /** The MPC protocol the key shares are formatted for. */
     protocol: ("CGGMP24" | "FROST" | "FROST_BITCOIN" | "GLOW20_DH" | "KU23") | "CGGMP21";
+    /** The TSS threshold: the minimum number of key shares required to sign. */
     minSigners: number;
+    /** One key share per signer, each encrypted to that signer. */
     encryptedKeyShares: {
+        /** ID of the signer this key share is for. */
         signerId: string;
+        /** The key share encrypted to the target signer. */
         encryptedKeyShare: string;
     }[];
-    /** Specify to create an extended master key for HD derivation */
+    /** Specify to create an extended master key for HD derivation. */
     masterKey?: boolean | undefined;
 };
 
@@ -1471,10 +1495,12 @@ export type ListSignaturesResponse = {
 export type ListSignaturesRequest = ListSignaturesParams & { query?: ListSignaturesQuery }
 
 export type UpdateKeyBody = {
+    /** New nickname for the key. Pass `null` to clear the existing name. */
     name: string | null;
 };
 
 export type UpdateKeyParams = {
+    /** The key to update. */
     keyId: string;
 };
 

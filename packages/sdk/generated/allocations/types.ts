@@ -5,7 +5,7 @@ export type CreateAllocationBody = {
     protocol: "0fns";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
-    /** The provider handling this allocation. */
+    /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
     provider?: ("M0" | "Yield.xyz") | undefined;
     sourceAsset: {
         kind: "Erc20";
@@ -27,7 +27,7 @@ export type CreateAllocationBody = {
     protocol: "SkySusds";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
-    /** The provider handling this allocation. */
+    /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
     amount: string;
@@ -39,7 +39,7 @@ export type CreateAllocationBody = {
     protocol: "GauntletUsdcPrime";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
-    /** The provider handling this allocation. */
+    /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
     amount: string;
@@ -51,7 +51,7 @@ export type CreateAllocationBody = {
     protocol: "SteakhouseUsdt";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
-    /** The provider handling this allocation. */
+    /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
     amount: string;
@@ -63,7 +63,7 @@ export type CreateAllocationBody = {
     protocol: "GauntletUsdcPrimeBase";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
-    /** The provider handling this allocation. */
+    /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
     amount: string;
@@ -75,7 +75,7 @@ export type CreateAllocationBody = {
     protocol: "SteakhouseUsdcBase";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
-    /** The provider handling this allocation. */
+    /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
     amount: string;
@@ -87,7 +87,7 @@ export type CreateAllocationBody = {
     protocol: "SentoraPyusdMain";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
-    /** The provider handling this allocation. */
+    /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
     provider?: ("M0" | "Yield.xyz") | undefined;
     /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
     amount: string;
@@ -100,7 +100,7 @@ export type CreateAllocationResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for allocation generation. */
+    /** The DeFi protocol used for allocation generation. See [Create Allocation](https://docs.dfns.co/api-reference/allocations/create-allocation) for each protocol's provider, deposit asset, and network. */
     protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
     /** The provider handling this allocation. */
     provider?: ("M0" | "Yield.xyz") | undefined;
@@ -202,7 +202,7 @@ export type CreateAllocationResponse = {
             protocol: "0fns";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             sourceAsset: {
                 kind: "Erc20";
@@ -224,7 +224,7 @@ export type CreateAllocationResponse = {
             protocol: "SkySusds";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
             amount: string;
@@ -236,7 +236,7 @@ export type CreateAllocationResponse = {
             protocol: "GauntletUsdcPrime";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -248,7 +248,7 @@ export type CreateAllocationResponse = {
             protocol: "SteakhouseUsdt";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
             amount: string;
@@ -260,7 +260,7 @@ export type CreateAllocationResponse = {
             protocol: "GauntletUsdcPrimeBase";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -272,7 +272,7 @@ export type CreateAllocationResponse = {
             protocol: "SteakhouseUsdcBase";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -284,7 +284,7 @@ export type CreateAllocationResponse = {
             protocol: "SentoraPyusdMain";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
             amount: string;
@@ -339,7 +339,7 @@ export type CreateAllocationActionResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for allocation generation. */
+    /** The DeFi protocol used for allocation generation. See [Create Allocation](https://docs.dfns.co/api-reference/allocations/create-allocation) for each protocol's provider, deposit asset, and network. */
     protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
     /** The provider handling this allocation. */
     provider?: ("M0" | "Yield.xyz") | undefined;
@@ -441,7 +441,7 @@ export type CreateAllocationActionResponse = {
             protocol: "0fns";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             sourceAsset: {
                 kind: "Erc20";
@@ -463,7 +463,7 @@ export type CreateAllocationActionResponse = {
             protocol: "SkySusds";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
             amount: string;
@@ -475,7 +475,7 @@ export type CreateAllocationActionResponse = {
             protocol: "GauntletUsdcPrime";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -487,7 +487,7 @@ export type CreateAllocationActionResponse = {
             protocol: "SteakhouseUsdt";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
             amount: string;
@@ -499,7 +499,7 @@ export type CreateAllocationActionResponse = {
             protocol: "GauntletUsdcPrimeBase";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -511,7 +511,7 @@ export type CreateAllocationActionResponse = {
             protocol: "SteakhouseUsdcBase";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -523,7 +523,7 @@ export type CreateAllocationActionResponse = {
             protocol: "SentoraPyusdMain";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
             amount: string;
@@ -548,7 +548,7 @@ export type GetAllocationResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    /** The DeFi protocol used for allocation generation. */
+    /** The DeFi protocol used for allocation generation. See [Create Allocation](https://docs.dfns.co/api-reference/allocations/create-allocation) for each protocol's provider, deposit asset, and network. */
     protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
     /** The provider handling this allocation. */
     provider?: ("M0" | "Yield.xyz") | undefined;
@@ -650,7 +650,7 @@ export type GetAllocationResponse = {
             protocol: "0fns";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             sourceAsset: {
                 kind: "Erc20";
@@ -672,7 +672,7 @@ export type GetAllocationResponse = {
             protocol: "SkySusds";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
             amount: string;
@@ -684,7 +684,7 @@ export type GetAllocationResponse = {
             protocol: "GauntletUsdcPrime";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -696,7 +696,7 @@ export type GetAllocationResponse = {
             protocol: "SteakhouseUsdt";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
             amount: string;
@@ -708,7 +708,7 @@ export type GetAllocationResponse = {
             protocol: "GauntletUsdcPrimeBase";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -720,7 +720,7 @@ export type GetAllocationResponse = {
             protocol: "SteakhouseUsdcBase";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -732,7 +732,7 @@ export type GetAllocationResponse = {
             protocol: "SentoraPyusdMain";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
             amount: string;
@@ -821,7 +821,7 @@ export type ListAllocationActionsResponse = {
             protocol: "0fns";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             sourceAsset: {
                 kind: "Erc20";
@@ -843,7 +843,7 @@ export type ListAllocationActionsResponse = {
             protocol: "SkySusds";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDS amount in smallest unit, e.g. "1000000000000000000" = 1 USDS */
             amount: string;
@@ -855,7 +855,7 @@ export type ListAllocationActionsResponse = {
             protocol: "GauntletUsdcPrime";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -867,7 +867,7 @@ export type ListAllocationActionsResponse = {
             protocol: "SteakhouseUsdt";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDT amount in smallest unit, e.g. "1000000" = 1 USDT */
             amount: string;
@@ -879,7 +879,7 @@ export type ListAllocationActionsResponse = {
             protocol: "GauntletUsdcPrimeBase";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -891,7 +891,7 @@ export type ListAllocationActionsResponse = {
             protocol: "SteakhouseUsdcBase";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** USDC amount in smallest unit, e.g. "1000000" = 1 USDC */
             amount: string;
@@ -903,7 +903,7 @@ export type ListAllocationActionsResponse = {
             protocol: "SentoraPyusdMain";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
-            /** The provider handling this allocation. */
+            /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
             /** PYUSD amount in smallest unit, e.g. "1000000" = 1 PYUSD */
             amount: string;
@@ -934,7 +934,7 @@ export type ListAllocationsResponse = {
         id: string;
         /** Wallet id. */
         walletId: string;
-        /** The DeFi protocol used for allocation generation. */
+        /** The DeFi protocol used for allocation generation. See [Create Allocation](https://docs.dfns.co/api-reference/allocations/create-allocation) for each protocol's provider, deposit asset, and network. */
         protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
         /** The provider handling this allocation. */
         provider?: ("M0" | "Yield.xyz") | undefined;

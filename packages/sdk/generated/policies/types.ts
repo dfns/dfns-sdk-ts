@@ -244,6 +244,26 @@ export type ArchivePolicyResponse = {
             };
         };
     } | {
+        kind: "EllipticTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+            riskScoreThreshold: number;
+            triggeredRules: {
+                /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                ruleIds: string[];
+                /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                categories: string[];
+            };
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip requests on a network not supported yet in our Elliptic integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                skipEllipticFailure: boolean;
+            };
+        };
+    } | {
         kind: "GlobalLedgerTransactionPrescreening";
         configuration: {
             /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -265,6 +285,9 @@ export type ArchivePolicyResponse = {
             vendor: "Notabene";
             autoTriggerTimeoutSeconds: number;
             autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+        } | {
+            vendor: "Sumsub";
+            autoTriggerTimeoutSeconds: number;
         };
     };
     action: {
@@ -343,6 +366,58 @@ export type ArchivePolicyResponse = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Vaults:ReleaseQuarantine";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    } | {
+        kind: "ChainalysisQuarantineScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
 };
 
 export type ArchivePolicyRequest = ArchivePolicyParams
@@ -408,19 +483,14 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
-                gasLimit?: string | undefined;
-                gasPrice?: string | undefined;
-                maxFeePerGas?: string | undefined;
-                maxPriorityFeePerGas?: string | undefined;
-                feeRate?: string | undefined;
-                inputs?: {
-                    txid: string;
-                    vout: number;
-                    value: number;
-                }[] | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
             } | {
                 kind: "Erc20";
                 /** The ERC-20 contract address. */
@@ -446,13 +516,14 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
-                gasLimit?: string | undefined;
-                gasPrice?: string | undefined;
-                maxFeePerGas?: string | undefined;
-                maxPriorityFeePerGas?: string | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
             } | {
                 kind: "Aip21";
                 /** The asset metadata address.  */
@@ -476,6 +547,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -504,6 +577,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -530,6 +605,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -560,6 +637,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -586,6 +665,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -614,6 +695,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -640,6 +723,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -668,6 +753,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -696,6 +783,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -723,6 +812,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -751,6 +842,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -781,6 +874,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -811,6 +906,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -837,6 +934,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -863,6 +962,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -895,9 +996,14 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
             } | {
                 kind: "Tep74";
                 /** The destination address. */
@@ -923,6 +1029,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -949,6 +1057,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -975,6 +1085,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1001,6 +1113,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1029,6 +1143,8 @@ export type CreateApprovalDecisionResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -2849,6 +2965,50 @@ export type CreateApprovalDecisionResponse = {
             }[] | undefined;
         };
     } | {
+        kind: "Vaults:ReleaseQuarantine";
+        /** Request to release quarantined funds into the available balance. Executed immediately unless a policy requires approval, in which case it stays Pending until the approval resolves. */
+        releaseQuarantineRequest: {
+            /** Vault release quarantine request id. */
+            id: string;
+            /** Vault id. */
+            vaultId: string;
+            /** Vault quarantine id. */
+            quarantineId: string;
+            network: string;
+            transactionHash: string;
+            /** KYT screening result recorded for the quarantined deposit, when available. Policies of rule kind `ChainalysisQuarantineScreening` evaluate this stored result when the release is requested. */
+            kytResult?: {
+                provider: "Chainalysis";
+                transferReference: string;
+                /** Grouping key registered with the provider ("userId" in Chainalysis terms). */
+                providerUserId: string;
+                /** Provider-side id of the registered transfer. */
+                externalId: string;
+                alerts: {
+                    level: "Low" | "Medium" | "High" | "Severe";
+                    categoryId: number | null;
+                }[];
+                exposure: {
+                    direct: {
+                        categoryId: number | null;
+                        name: string | null;
+                    };
+                };
+                maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
+            } | undefined;
+            requester: {
+                userId: string;
+            };
+            reason?: string | undefined;
+            /** Set when the request was rejected (policy block or approval denial). */
+            rejectionReason?: string | undefined;
+            /** Vault release quarantine request status. */
+            status: "Pending" | "Executed" | "Rejected";
+            /** Set when the release is pending a policy approval. */
+            approvalId?: string | undefined;
+            dateCreated: string;
+        };
+    } | {
         kind: "Policies:Modify";
         changeRequest: {
             id: string;
@@ -3107,6 +3267,26 @@ export type CreateApprovalDecisionResponse = {
                         };
                     };
                 } | {
+                    kind: "EllipticTransactionPrescreening";
+                    configuration: {
+                        /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+                        riskScoreThreshold: number;
+                        triggeredRules: {
+                            /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                            ruleIds: string[];
+                            /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                            categories: string[];
+                        };
+                        fallbackBehaviours: {
+                            /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                            skipUnscreenableTransaction: boolean;
+                            /** skip requests on a network not supported yet in our Elliptic integration */
+                            skipUnsupportedNetwork: boolean;
+                            /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                            skipEllipticFailure: boolean;
+                        };
+                    };
+                } | {
                     kind: "GlobalLedgerTransactionPrescreening";
                     configuration: {
                         /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -3128,6 +3308,9 @@ export type CreateApprovalDecisionResponse = {
                         vendor: "Notabene";
                         autoTriggerTimeoutSeconds: number;
                         autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+                    } | {
+                        vendor: "Sumsub";
+                        autoTriggerTimeoutSeconds: number;
                     };
                 };
                 action: {
@@ -3202,6 +3385,58 @@ export type CreateApprovalDecisionResponse = {
                         in: string[];
                     } | undefined;
                     walletTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Vaults:ReleaseQuarantine";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
+                } | {
+                    kind: "ChainalysisQuarantineScreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                    };
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {
+                    vaultId?: {
+                        in: string[];
+                    } | undefined;
+                    vaultTags?: {
                         hasAny?: string[] | undefined;
                         hasAll?: string[] | undefined;
                     } | undefined;
@@ -3569,6 +3804,26 @@ export type CreatePolicyBody = {
             };
         };
     } | {
+        kind: "EllipticTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+            riskScoreThreshold: number;
+            triggeredRules: {
+                /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                ruleIds: string[];
+                /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                categories: string[];
+            };
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip requests on a network not supported yet in our Elliptic integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                skipEllipticFailure: boolean;
+            };
+        };
+    } | {
         kind: "GlobalLedgerTransactionPrescreening";
         configuration: {
             /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -3590,6 +3845,9 @@ export type CreatePolicyBody = {
             vendor: "Notabene";
             autoTriggerTimeoutSeconds: number;
             autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+        } | {
+            vendor: "Sumsub";
+            autoTriggerTimeoutSeconds: number;
         };
     };
     action: {
@@ -3660,6 +3918,54 @@ export type CreatePolicyBody = {
             in: string[];
         } | undefined;
         walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    name: string;
+    activityKind: "Vaults:ReleaseQuarantine";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    } | {
+        kind: "ChainalysisQuarantineScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
             hasAny?: string[] | undefined;
             hasAll?: string[] | undefined;
         } | undefined;
@@ -3908,6 +4214,26 @@ export type CreatePolicyResponse = {
             };
         };
     } | {
+        kind: "EllipticTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+            riskScoreThreshold: number;
+            triggeredRules: {
+                /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                ruleIds: string[];
+                /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                categories: string[];
+            };
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip requests on a network not supported yet in our Elliptic integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                skipEllipticFailure: boolean;
+            };
+        };
+    } | {
         kind: "GlobalLedgerTransactionPrescreening";
         configuration: {
             /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -3929,6 +4255,9 @@ export type CreatePolicyResponse = {
             vendor: "Notabene";
             autoTriggerTimeoutSeconds: number;
             autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+        } | {
+            vendor: "Sumsub";
+            autoTriggerTimeoutSeconds: number;
         };
     };
     action: {
@@ -4007,6 +4336,58 @@ export type CreatePolicyResponse = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Vaults:ReleaseQuarantine";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    } | {
+        kind: "ChainalysisQuarantineScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
 };
 
 export type CreatePolicyRequest = { body: CreatePolicyBody }
@@ -4067,19 +4448,14 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
-                gasLimit?: string | undefined;
-                gasPrice?: string | undefined;
-                maxFeePerGas?: string | undefined;
-                maxPriorityFeePerGas?: string | undefined;
-                feeRate?: string | undefined;
-                inputs?: {
-                    txid: string;
-                    vout: number;
-                    value: number;
-                }[] | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
             } | {
                 kind: "Erc20";
                 /** The ERC-20 contract address. */
@@ -4105,13 +4481,14 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
-                gasLimit?: string | undefined;
-                gasPrice?: string | undefined;
-                maxFeePerGas?: string | undefined;
-                maxPriorityFeePerGas?: string | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
             } | {
                 kind: "Aip21";
                 /** The asset metadata address.  */
@@ -4135,6 +4512,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4163,6 +4542,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4189,6 +4570,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4219,6 +4602,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4245,6 +4630,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4273,6 +4660,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4299,6 +4688,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4327,6 +4718,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4355,6 +4748,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4382,6 +4777,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4410,6 +4807,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4440,6 +4839,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4470,6 +4871,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4496,6 +4899,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4522,6 +4927,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4554,9 +4961,14 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
             } | {
                 kind: "Tep74";
                 /** The destination address. */
@@ -4582,6 +4994,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4608,6 +5022,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4634,6 +5050,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4660,6 +5078,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -4688,6 +5108,8 @@ export type GetApprovalResponse = {
                     beneficiary: {
                         [x: string]: any;
                     };
+                } | {
+                    kind: "Sumsub";
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -6508,6 +6930,50 @@ export type GetApprovalResponse = {
             }[] | undefined;
         };
     } | {
+        kind: "Vaults:ReleaseQuarantine";
+        /** Request to release quarantined funds into the available balance. Executed immediately unless a policy requires approval, in which case it stays Pending until the approval resolves. */
+        releaseQuarantineRequest: {
+            /** Vault release quarantine request id. */
+            id: string;
+            /** Vault id. */
+            vaultId: string;
+            /** Vault quarantine id. */
+            quarantineId: string;
+            network: string;
+            transactionHash: string;
+            /** KYT screening result recorded for the quarantined deposit, when available. Policies of rule kind `ChainalysisQuarantineScreening` evaluate this stored result when the release is requested. */
+            kytResult?: {
+                provider: "Chainalysis";
+                transferReference: string;
+                /** Grouping key registered with the provider ("userId" in Chainalysis terms). */
+                providerUserId: string;
+                /** Provider-side id of the registered transfer. */
+                externalId: string;
+                alerts: {
+                    level: "Low" | "Medium" | "High" | "Severe";
+                    categoryId: number | null;
+                }[];
+                exposure: {
+                    direct: {
+                        categoryId: number | null;
+                        name: string | null;
+                    };
+                };
+                maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
+            } | undefined;
+            requester: {
+                userId: string;
+            };
+            reason?: string | undefined;
+            /** Set when the request was rejected (policy block or approval denial). */
+            rejectionReason?: string | undefined;
+            /** Vault release quarantine request status. */
+            status: "Pending" | "Executed" | "Rejected";
+            /** Set when the release is pending a policy approval. */
+            approvalId?: string | undefined;
+            dateCreated: string;
+        };
+    } | {
         kind: "Policies:Modify";
         changeRequest: {
             id: string;
@@ -6766,6 +7232,26 @@ export type GetApprovalResponse = {
                         };
                     };
                 } | {
+                    kind: "EllipticTransactionPrescreening";
+                    configuration: {
+                        /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+                        riskScoreThreshold: number;
+                        triggeredRules: {
+                            /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                            ruleIds: string[];
+                            /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                            categories: string[];
+                        };
+                        fallbackBehaviours: {
+                            /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                            skipUnscreenableTransaction: boolean;
+                            /** skip requests on a network not supported yet in our Elliptic integration */
+                            skipUnsupportedNetwork: boolean;
+                            /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                            skipEllipticFailure: boolean;
+                        };
+                    };
+                } | {
                     kind: "GlobalLedgerTransactionPrescreening";
                     configuration: {
                         /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -6787,6 +7273,9 @@ export type GetApprovalResponse = {
                         vendor: "Notabene";
                         autoTriggerTimeoutSeconds: number;
                         autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+                    } | {
+                        vendor: "Sumsub";
+                        autoTriggerTimeoutSeconds: number;
                     };
                 };
                 action: {
@@ -6861,6 +7350,58 @@ export type GetApprovalResponse = {
                         in: string[];
                     } | undefined;
                     walletTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Vaults:ReleaseQuarantine";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
+                } | {
+                    kind: "ChainalysisQuarantineScreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                    };
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {
+                    vaultId?: {
+                        in: string[];
+                    } | undefined;
+                    vaultTags?: {
                         hasAny?: string[] | undefined;
                         hasAll?: string[] | undefined;
                     } | undefined;
@@ -7256,6 +7797,26 @@ export type GetPolicyResponse = ({
             };
         };
     } | {
+        kind: "EllipticTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+            riskScoreThreshold: number;
+            triggeredRules: {
+                /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                ruleIds: string[];
+                /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                categories: string[];
+            };
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip requests on a network not supported yet in our Elliptic integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                skipEllipticFailure: boolean;
+            };
+        };
+    } | {
         kind: "GlobalLedgerTransactionPrescreening";
         configuration: {
             /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -7277,6 +7838,9 @@ export type GetPolicyResponse = ({
             vendor: "Notabene";
             autoTriggerTimeoutSeconds: number;
             autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+        } | {
+            vendor: "Sumsub";
+            autoTriggerTimeoutSeconds: number;
         };
     };
     action: {
@@ -7351,6 +7915,58 @@ export type GetPolicyResponse = ({
             in: string[];
         } | undefined;
         walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Vaults:ReleaseQuarantine";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    } | {
+        kind: "ChainalysisQuarantineScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
             hasAny?: string[] | undefined;
             hasAll?: string[] | undefined;
         } | undefined;
@@ -7613,6 +8229,26 @@ export type GetPolicyResponse = ({
                     };
                 };
             } | {
+                kind: "EllipticTransactionPrescreening";
+                configuration: {
+                    /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+                    riskScoreThreshold: number;
+                    triggeredRules: {
+                        /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                        ruleIds: string[];
+                        /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                        categories: string[];
+                    };
+                    fallbackBehaviours: {
+                        /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                        skipUnscreenableTransaction: boolean;
+                        /** skip requests on a network not supported yet in our Elliptic integration */
+                        skipUnsupportedNetwork: boolean;
+                        /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                        skipEllipticFailure: boolean;
+                    };
+                };
+            } | {
                 kind: "GlobalLedgerTransactionPrescreening";
                 configuration: {
                     /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -7634,6 +8270,9 @@ export type GetPolicyResponse = ({
                     vendor: "Notabene";
                     autoTriggerTimeoutSeconds: number;
                     autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+                } | {
+                    vendor: "Sumsub";
+                    autoTriggerTimeoutSeconds: number;
                 };
             };
             action: {
@@ -7712,6 +8351,58 @@ export type GetPolicyResponse = ({
                     hasAll?: string[] | undefined;
                 } | undefined;
             } | undefined;
+        } | {
+            id: string;
+            name: string;
+            status: "Active" | "Archived";
+            dateCreated?: string | undefined;
+            dateUpdated?: string | undefined;
+            activityKind: "Vaults:ReleaseQuarantine";
+            rule: {
+                kind: "AlwaysTrigger";
+                configuration?: {} | undefined;
+            } | {
+                kind: "ChainalysisQuarantineScreening";
+                configuration: {
+                    alerts: {
+                        alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                        categoryIds: number[];
+                    };
+                    exposures: {
+                        direct: {
+                            categoryIds: number[];
+                        };
+                    };
+                };
+            };
+            action: {
+                kind: "RequestApproval";
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        userId?: {
+                            in: string[];
+                        } | undefined;
+                    };
+                    /** Whether the initiator of the activity can participate in the approval. */
+                    initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+            } | {
+                kind: "Block";
+            };
+            filters?: {
+                vaultId?: {
+                    in: string[];
+                } | undefined;
+                vaultTags?: {
+                    hasAny?: string[] | undefined;
+                    hasAll?: string[] | undefined;
+                } | undefined;
+            } | undefined;
         };
     } | undefined;
 };
@@ -7779,19 +8470,14 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
-                    gasLimit?: string | undefined;
-                    gasPrice?: string | undefined;
-                    maxFeePerGas?: string | undefined;
-                    maxPriorityFeePerGas?: string | undefined;
-                    feeRate?: string | undefined;
-                    inputs?: {
-                        txid: string;
-                        vout: number;
-                        value: number;
-                    }[] | undefined;
+                    structured?: {
+                        [x: string]: any;
+                    } | undefined;
                 } | {
                     kind: "Erc20";
                     /** The ERC-20 contract address. */
@@ -7817,13 +8503,14 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
-                    gasLimit?: string | undefined;
-                    gasPrice?: string | undefined;
-                    maxFeePerGas?: string | undefined;
-                    maxPriorityFeePerGas?: string | undefined;
+                    structured?: {
+                        [x: string]: any;
+                    } | undefined;
                 } | {
                     kind: "Aip21";
                     /** The asset metadata address.  */
@@ -7847,6 +8534,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -7875,6 +8564,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -7901,6 +8592,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -7931,6 +8624,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -7957,6 +8652,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -7985,6 +8682,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8011,6 +8710,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8039,6 +8740,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8067,6 +8770,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8094,6 +8799,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8122,6 +8829,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8152,6 +8861,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8182,6 +8893,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8208,6 +8921,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8234,6 +8949,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8266,9 +8983,14 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
+                    structured?: {
+                        [x: string]: any;
+                    } | undefined;
                 } | {
                     kind: "Tep74";
                     /** The destination address. */
@@ -8294,6 +9016,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8320,6 +9044,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8346,6 +9072,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8372,6 +9100,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -8400,6 +9130,8 @@ export type ListApprovalsResponse = {
                         beneficiary: {
                             [x: string]: any;
                         };
+                    } | {
+                        kind: "Sumsub";
                     }) | undefined;
                     /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                     feeSponsorId?: string | undefined;
@@ -10220,6 +10952,50 @@ export type ListApprovalsResponse = {
                 }[] | undefined;
             };
         } | {
+            kind: "Vaults:ReleaseQuarantine";
+            /** Request to release quarantined funds into the available balance. Executed immediately unless a policy requires approval, in which case it stays Pending until the approval resolves. */
+            releaseQuarantineRequest: {
+                /** Vault release quarantine request id. */
+                id: string;
+                /** Vault id. */
+                vaultId: string;
+                /** Vault quarantine id. */
+                quarantineId: string;
+                network: string;
+                transactionHash: string;
+                /** KYT screening result recorded for the quarantined deposit, when available. Policies of rule kind `ChainalysisQuarantineScreening` evaluate this stored result when the release is requested. */
+                kytResult?: {
+                    provider: "Chainalysis";
+                    transferReference: string;
+                    /** Grouping key registered with the provider ("userId" in Chainalysis terms). */
+                    providerUserId: string;
+                    /** Provider-side id of the registered transfer. */
+                    externalId: string;
+                    alerts: {
+                        level: "Low" | "Medium" | "High" | "Severe";
+                        categoryId: number | null;
+                    }[];
+                    exposure: {
+                        direct: {
+                            categoryId: number | null;
+                            name: string | null;
+                        };
+                    };
+                    maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
+                } | undefined;
+                requester: {
+                    userId: string;
+                };
+                reason?: string | undefined;
+                /** Set when the request was rejected (policy block or approval denial). */
+                rejectionReason?: string | undefined;
+                /** Vault release quarantine request status. */
+                status: "Pending" | "Executed" | "Rejected";
+                /** Set when the release is pending a policy approval. */
+                approvalId?: string | undefined;
+                dateCreated: string;
+            };
+        } | {
             kind: "Policies:Modify";
             changeRequest: {
                 id: string;
@@ -10478,6 +11254,26 @@ export type ListApprovalsResponse = {
                             };
                         };
                     } | {
+                        kind: "EllipticTransactionPrescreening";
+                        configuration: {
+                            /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+                            riskScoreThreshold: number;
+                            triggeredRules: {
+                                /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                                ruleIds: string[];
+                                /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                                categories: string[];
+                            };
+                            fallbackBehaviours: {
+                                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                                skipUnscreenableTransaction: boolean;
+                                /** skip requests on a network not supported yet in our Elliptic integration */
+                                skipUnsupportedNetwork: boolean;
+                                /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                                skipEllipticFailure: boolean;
+                            };
+                        };
+                    } | {
                         kind: "GlobalLedgerTransactionPrescreening";
                         configuration: {
                             /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -10499,6 +11295,9 @@ export type ListApprovalsResponse = {
                             vendor: "Notabene";
                             autoTriggerTimeoutSeconds: number;
                             autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+                        } | {
+                            vendor: "Sumsub";
+                            autoTriggerTimeoutSeconds: number;
                         };
                     };
                     action: {
@@ -10573,6 +11372,58 @@ export type ListApprovalsResponse = {
                             in: string[];
                         } | undefined;
                         walletTags?: {
+                            hasAny?: string[] | undefined;
+                            hasAll?: string[] | undefined;
+                        } | undefined;
+                    } | undefined;
+                } | {
+                    id: string;
+                    name: string;
+                    status: "Active" | "Archived";
+                    dateCreated?: string | undefined;
+                    dateUpdated?: string | undefined;
+                    activityKind: "Vaults:ReleaseQuarantine";
+                    rule: {
+                        kind: "AlwaysTrigger";
+                        configuration?: {} | undefined;
+                    } | {
+                        kind: "ChainalysisQuarantineScreening";
+                        configuration: {
+                            alerts: {
+                                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                                categoryIds: number[];
+                            };
+                            exposures: {
+                                direct: {
+                                    categoryIds: number[];
+                                };
+                            };
+                        };
+                    };
+                    action: {
+                        kind: "RequestApproval";
+                        approvalGroups: {
+                            name?: string | undefined;
+                            quorum: number;
+                            approvers: {
+                                userId?: {
+                                    in: string[];
+                                } | undefined;
+                            };
+                            /** Whether the initiator of the activity can participate in the approval. */
+                            initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
+                        }[];
+                        autoRejectTimeout?: (number | undefined) | null;
+                    } | {
+                        kind: "Block";
+                    };
+                    filters?: {
+                        vaultId?: {
+                            in: string[];
+                        } | undefined;
+                        vaultTags?: {
                             hasAny?: string[] | undefined;
                             hasAll?: string[] | undefined;
                         } | undefined;
@@ -10973,6 +11824,26 @@ export type ListPoliciesResponse = {
                 };
             };
         } | {
+            kind: "EllipticTransactionPrescreening";
+            configuration: {
+                /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+                riskScoreThreshold: number;
+                triggeredRules: {
+                    /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                    ruleIds: string[];
+                    /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                    categories: string[];
+                };
+                fallbackBehaviours: {
+                    /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                    skipUnscreenableTransaction: boolean;
+                    /** skip requests on a network not supported yet in our Elliptic integration */
+                    skipUnsupportedNetwork: boolean;
+                    /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                    skipEllipticFailure: boolean;
+                };
+            };
+        } | {
             kind: "GlobalLedgerTransactionPrescreening";
             configuration: {
                 /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -10994,6 +11865,9 @@ export type ListPoliciesResponse = {
                 vendor: "Notabene";
                 autoTriggerTimeoutSeconds: number;
                 autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+            } | {
+                vendor: "Sumsub";
+                autoTriggerTimeoutSeconds: number;
             };
         };
         action: {
@@ -11068,6 +11942,58 @@ export type ListPoliciesResponse = {
                 in: string[];
             } | undefined;
             walletTags?: {
+                hasAny?: string[] | undefined;
+                hasAll?: string[] | undefined;
+            } | undefined;
+        } | undefined;
+    } | {
+        id: string;
+        name: string;
+        status: "Active" | "Archived";
+        dateCreated?: string | undefined;
+        dateUpdated?: string | undefined;
+        activityKind: "Vaults:ReleaseQuarantine";
+        rule: {
+            kind: "AlwaysTrigger";
+            configuration?: {} | undefined;
+        } | {
+            kind: "ChainalysisQuarantineScreening";
+            configuration: {
+                alerts: {
+                    alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                    categoryIds: number[];
+                };
+                exposures: {
+                    direct: {
+                        categoryIds: number[];
+                    };
+                };
+            };
+        };
+        action: {
+            kind: "RequestApproval";
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    userId?: {
+                        in: string[];
+                    } | undefined;
+                };
+                /** Whether the initiator of the activity can participate in the approval. */
+                initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+        } | {
+            kind: "Block";
+        };
+        filters?: {
+            vaultId?: {
+                in: string[];
+            } | undefined;
+            vaultTags?: {
                 hasAny?: string[] | undefined;
                 hasAll?: string[] | undefined;
             } | undefined;
@@ -11330,6 +12256,26 @@ export type ListPoliciesResponse = {
                         };
                     };
                 } | {
+                    kind: "EllipticTransactionPrescreening";
+                    configuration: {
+                        /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+                        riskScoreThreshold: number;
+                        triggeredRules: {
+                            /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                            ruleIds: string[];
+                            /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                            categories: string[];
+                        };
+                        fallbackBehaviours: {
+                            /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                            skipUnscreenableTransaction: boolean;
+                            /** skip requests on a network not supported yet in our Elliptic integration */
+                            skipUnsupportedNetwork: boolean;
+                            /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                            skipEllipticFailure: boolean;
+                        };
+                    };
+                } | {
                     kind: "GlobalLedgerTransactionPrescreening";
                     configuration: {
                         /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -11351,6 +12297,9 @@ export type ListPoliciesResponse = {
                         vendor: "Notabene";
                         autoTriggerTimeoutSeconds: number;
                         autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+                    } | {
+                        vendor: "Sumsub";
+                        autoTriggerTimeoutSeconds: number;
                     };
                 };
                 action: {
@@ -11425,6 +12374,58 @@ export type ListPoliciesResponse = {
                         in: string[];
                     } | undefined;
                     walletTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Vaults:ReleaseQuarantine";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
+                } | {
+                    kind: "ChainalysisQuarantineScreening";
+                    configuration: {
+                        alerts: {
+                            alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                            categoryIds: number[];
+                        };
+                        exposures: {
+                            direct: {
+                                categoryIds: number[];
+                            };
+                        };
+                    };
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {
+                    vaultId?: {
+                        in: string[];
+                    } | undefined;
+                    vaultTags?: {
                         hasAny?: string[] | undefined;
                         hasAll?: string[] | undefined;
                     } | undefined;
@@ -11655,6 +12656,26 @@ export type UpdatePolicyBody = {
             };
         };
     } | {
+        kind: "EllipticTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+            riskScoreThreshold: number;
+            triggeredRules: {
+                /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                ruleIds: string[];
+                /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                categories: string[];
+            };
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip requests on a network not supported yet in our Elliptic integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                skipEllipticFailure: boolean;
+            };
+        };
+    } | {
         kind: "GlobalLedgerTransactionPrescreening";
         configuration: {
             /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -11676,6 +12697,9 @@ export type UpdatePolicyBody = {
             vendor: "Notabene";
             autoTriggerTimeoutSeconds: number;
             autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+        } | {
+            vendor: "Sumsub";
+            autoTriggerTimeoutSeconds: number;
         };
     };
     action: {
@@ -11746,6 +12770,54 @@ export type UpdatePolicyBody = {
             in: string[];
         } | undefined;
         walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    name: string;
+    activityKind: "Vaults:ReleaseQuarantine";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    } | {
+        kind: "ChainalysisQuarantineScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
             hasAny?: string[] | undefined;
             hasAll?: string[] | undefined;
         } | undefined;
@@ -11998,6 +13070,26 @@ export type UpdatePolicyResponse = {
             };
         };
     } | {
+        kind: "EllipticTransactionPrescreening";
+        configuration: {
+            /** Risk score threshold (0-10, decimals allowed). The policy triggers if the Elliptic risk score is at or above the threshold. */
+            riskScoreThreshold: number;
+            triggeredRules: {
+                /** IDs of risk rules from your Elliptic risk model. If any of these rules matched the analysis, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                ruleIds: string[];
+                /** Elliptic category names (eg. "Dark Market"), matched case-insensitively. If a matched risk rule involves any of these categories, the policy triggers regardless of the risk score. Leave empty to trigger on the risk score threshold only. */
+                categories: string[];
+            };
+            fallbackBehaviours: {
+                /** skip all wallet requests that cannot be screened (eg. raw signatures) */
+                skipUnscreenableTransaction: boolean;
+                /** skip requests on a network not supported yet in our Elliptic integration */
+                skipUnsupportedNetwork: boolean;
+                /** skip any failure of the Elliptic analysis (timeout, rate limiting, any error) */
+                skipEllipticFailure: boolean;
+            };
+        };
+    } | {
         kind: "GlobalLedgerTransactionPrescreening";
         configuration: {
             /** Risk score threshold (0-100). Policy triggers if address/transaction risk score >= threshold */
@@ -12019,6 +13111,9 @@ export type UpdatePolicyResponse = {
             vendor: "Notabene";
             autoTriggerTimeoutSeconds: number;
             autoClearAfterDeliveredTimeoutSeconds?: number | undefined;
+        } | {
+            vendor: "Sumsub";
+            autoTriggerTimeoutSeconds: number;
         };
     };
     action: {
@@ -12093,6 +13188,58 @@ export type UpdatePolicyResponse = {
             in: string[];
         } | undefined;
         walletTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Vaults:ReleaseQuarantine";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    } | {
+        kind: "ChainalysisQuarantineScreening";
+        configuration: {
+            alerts: {
+                alertLevel: "LOW" | "MEDIUM" | "HIGH" | "SEVERE";
+                categoryIds: number[];
+            };
+            exposures: {
+                direct: {
+                    categoryIds: number[];
+                };
+            };
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
             hasAny?: string[] | undefined;
             hasAll?: string[] | undefined;
         } | undefined;

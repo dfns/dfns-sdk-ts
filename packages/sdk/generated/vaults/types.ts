@@ -24,7 +24,7 @@ export type CreateVaultResponse = {
 export type CreateVaultRequest = { body: CreateVaultBody }
 
 export type CreateVaultAddressBody = {
-    network: ("Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia") | ("Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4");
+    network: "ArbitrumOne" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
 };
 
 export type CreateVaultAddressParams = {
@@ -78,8 +78,8 @@ export type CreateVaultLockRequest = CreateVaultLockParams & { body: CreateVault
 
 export type CreateVaultTransferBody = {
     /** The network the transfer is on. */
-    network: ("Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia") | ("Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4");
-    /** The token identifier of the asset to transfer (e.g. `native:eth` or `native:btc`). */
+    network: "ArbitrumOne" | "ArbitrumSepolia" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
+    /** The token identifier of the asset to transfer (e.g. `native:eth`, `native:btc`, `native:sol`, or `spl:<mint>`). */
     tid: string;
     /** The destination address. */
     to: string;
@@ -141,19 +141,14 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
-        gasLimit?: string | undefined;
-        gasPrice?: string | undefined;
-        maxFeePerGas?: string | undefined;
-        maxPriorityFeePerGas?: string | undefined;
-        feeRate?: string | undefined;
-        inputs?: {
-            txid: string;
-            vout: number;
-            value: number;
-        }[] | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Erc20";
         /** The ERC-20 contract address. */
@@ -179,13 +174,14 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
-        gasLimit?: string | undefined;
-        gasPrice?: string | undefined;
-        maxFeePerGas?: string | undefined;
-        maxPriorityFeePerGas?: string | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Aip21";
         /** The asset metadata address.  */
@@ -209,6 +205,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -237,6 +235,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -263,6 +263,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -293,6 +295,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -319,6 +323,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -347,6 +353,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -373,6 +381,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -401,6 +411,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -429,6 +441,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -456,6 +470,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -484,6 +500,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -514,6 +532,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -544,6 +564,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -570,6 +592,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -596,6 +620,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -628,9 +654,14 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
+        structured?: {
+            [x: string]: any;
+        } | undefined;
     } | {
         kind: "Tep74";
         /** The destination address. */
@@ -656,6 +687,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -682,6 +715,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -708,6 +743,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -734,6 +771,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -762,6 +801,8 @@ export type CreateVaultTransferResponse = {
             beneficiary: {
                 [x: string]: any;
             };
+        } | {
+            kind: "Sumsub";
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -1048,7 +1089,45 @@ export type ReleaseQuarantineParams = {
 };
 
 export type ReleaseQuarantineResponse = {
-    status: "OK";
+    /** Vault release quarantine request id. */
+    id: string;
+    /** Vault id. */
+    vaultId: string;
+    /** Vault quarantine id. */
+    quarantineId: string;
+    network: string;
+    transactionHash: string;
+    /** KYT screening result recorded for the quarantined deposit, when available. Policies of rule kind `ChainalysisQuarantineScreening` evaluate this stored result when the release is requested. */
+    kytResult?: {
+        provider: "Chainalysis";
+        transferReference: string;
+        /** Grouping key registered with the provider ("userId" in Chainalysis terms). */
+        providerUserId: string;
+        /** Provider-side id of the registered transfer. */
+        externalId: string;
+        alerts: {
+            level: "Low" | "Medium" | "High" | "Severe";
+            categoryId: number | null;
+        }[];
+        exposure: {
+            direct: {
+                categoryId: number | null;
+                name: string | null;
+            };
+        };
+        maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
+    } | undefined;
+    requester: {
+        userId: string;
+    };
+    reason?: string | undefined;
+    /** Set when the request was rejected (policy block or approval denial). */
+    rejectionReason?: string | undefined;
+    /** Vault release quarantine request status. */
+    status: "Pending" | "Executed" | "Rejected";
+    /** Set when the release is pending a policy approval. */
+    approvalId?: string | undefined;
+    dateCreated: string;
 };
 
 export type ReleaseQuarantineRequest = ReleaseQuarantineParams & { body: ReleaseQuarantineBody }
