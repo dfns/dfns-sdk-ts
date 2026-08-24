@@ -3279,6 +3279,8 @@ export type RegisterEndUserResponse = {
         tags: string[];
         /** Id of the validator on which the wallet is created for Canton networks */
         validatorId?: string | undefined;
+        /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
+        vaultId?: string | undefined;
     }[];
 };
 
