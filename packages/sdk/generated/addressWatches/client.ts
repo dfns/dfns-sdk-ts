@@ -24,6 +24,21 @@ export class AddressWatchesClient {
     return response.json()
   }
 
+  async deleteAddressWatch(request: T.DeleteAddressWatchRequest): Promise<T.DeleteAddressWatchResponse> {
+    const path = buildPathAndQuery('/address-watches/:addressWatchId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getAddressWatch(request: T.GetAddressWatchRequest): Promise<T.GetAddressWatchResponse> {
     const path = buildPathAndQuery('/address-watches/:addressWatchId', {
       path: request ?? {},

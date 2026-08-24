@@ -59,19 +59,28 @@ export type CreateVaultLockParams = {
 };
 
 export type CreateVaultLockResponse = {
-    /** Vault lock id. */
+    /** Vault lock request id. */
     id: string;
+    /** Vault id. */
     vaultId: string;
     network: string;
     tid: string;
     amount: string;
-    /** The user that created the lock. Only this user can delete it. */
-    owner: string;
     externalId?: string | undefined;
-    /** The reason or note the lock was created with. */
+    /** The reason or note the lock is requested with. */
     reason?: string | undefined;
+    requester: {
+        userId: string;
+    };
+    /** Set when the request was rejected (policy block or approval denial). */
+    rejectionReason?: string | undefined;
+    /** Vault lock request status. */
+    status: "Pending" | "Executed" | "Rejected";
+    /** Set when the lock creation is pending a policy approval. */
+    approvalId?: string | undefined;
+    /** Set when the request was executed and the lock created. */
+    lockId?: string | undefined;
     dateCreated: string;
-    dateDeleted?: string | undefined;
 };
 
 export type CreateVaultLockRequest = CreateVaultLockParams & { body: CreateVaultLockBody }

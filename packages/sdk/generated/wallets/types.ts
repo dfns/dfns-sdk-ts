@@ -1844,6 +1844,8 @@ export type CreateWalletResponse = {
     tags: string[];
     /** Id of the validator on which the wallet is created for Canton networks */
     validatorId?: string | undefined;
+    /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
+    vaultId?: string | undefined;
 };
 
 export type CreateWalletRequest = { body: CreateWalletBody }
@@ -3720,6 +3722,8 @@ export type GetWalletResponse = {
     tags: string[];
     /** Id of the validator on which the wallet is created for Canton networks */
     validatorId?: string | undefined;
+    /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
+    vaultId?: string | undefined;
 };
 
 export type GetWalletRequest = GetWalletParams
@@ -5046,6 +5050,8 @@ export type ImportWalletResponse = {
     tags: string[];
     /** Id of the validator on which the wallet is created for Canton networks */
     validatorId?: string | undefined;
+    /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
+    vaultId?: string | undefined;
 };
 
 export type ImportWalletRequest = { body: ImportWalletBody }
@@ -6467,6 +6473,8 @@ export type ListWalletsResponse = {
         tags: string[];
         /** Id of the validator on which the wallet is created for Canton networks */
         validatorId?: string | undefined;
+        /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
+        vaultId?: string | undefined;
     }[];
     /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
@@ -8388,6 +8396,8 @@ export type UpdateWalletResponse = {
     tags: string[];
     /** Id of the validator on which the wallet is created for Canton networks */
     validatorId?: string | undefined;
+    /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
+    vaultId?: string | undefined;
 };
 
 export type UpdateWalletRequest = UpdateWalletParams & { body: UpdateWalletBody }

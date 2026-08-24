@@ -418,6 +418,45 @@ export type ArchivePolicyResponse = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Vaults:CreateLock";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
 };
 
 export type ArchivePolicyRequest = ArchivePolicyParams
@@ -3009,6 +3048,33 @@ export type CreateApprovalDecisionResponse = {
             dateCreated: string;
         };
     } | {
+        kind: "Vaults:CreateLock";
+        /** Request to lock vault funds. Executed immediately unless a policy requires approval, in which case it stays Pending until the approval resolves. */
+        lockRequest: {
+            /** Vault lock request id. */
+            id: string;
+            /** Vault id. */
+            vaultId: string;
+            network: string;
+            tid: string;
+            amount: string;
+            externalId?: string | undefined;
+            /** The reason or note the lock is requested with. */
+            reason?: string | undefined;
+            requester: {
+                userId: string;
+            };
+            /** Set when the request was rejected (policy block or approval denial). */
+            rejectionReason?: string | undefined;
+            /** Vault lock request status. */
+            status: "Pending" | "Executed" | "Rejected";
+            /** Set when the lock creation is pending a policy approval. */
+            approvalId?: string | undefined;
+            /** Set when the request was executed and the lock created. */
+            lockId?: string | undefined;
+            dateCreated: string;
+        };
+    } | {
         kind: "Policies:Modify";
         changeRequest: {
             id: string;
@@ -3412,6 +3478,45 @@ export type CreateApprovalDecisionResponse = {
                             };
                         };
                     };
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {
+                    vaultId?: {
+                        in: string[];
+                    } | undefined;
+                    vaultTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Vaults:CreateLock";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
                 };
                 action: {
                     kind: "RequestApproval";
@@ -3970,6 +4075,41 @@ export type CreatePolicyBody = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    name: string;
+    activityKind: "Vaults:CreateLock";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
 };
 
 export type CreatePolicyResponse = {
@@ -4359,6 +4499,45 @@ export type CreatePolicyResponse = {
                 };
             };
         };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Vaults:CreateLock";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
     };
     action: {
         kind: "RequestApproval";
@@ -6974,6 +7153,33 @@ export type GetApprovalResponse = {
             dateCreated: string;
         };
     } | {
+        kind: "Vaults:CreateLock";
+        /** Request to lock vault funds. Executed immediately unless a policy requires approval, in which case it stays Pending until the approval resolves. */
+        lockRequest: {
+            /** Vault lock request id. */
+            id: string;
+            /** Vault id. */
+            vaultId: string;
+            network: string;
+            tid: string;
+            amount: string;
+            externalId?: string | undefined;
+            /** The reason or note the lock is requested with. */
+            reason?: string | undefined;
+            requester: {
+                userId: string;
+            };
+            /** Set when the request was rejected (policy block or approval denial). */
+            rejectionReason?: string | undefined;
+            /** Vault lock request status. */
+            status: "Pending" | "Executed" | "Rejected";
+            /** Set when the lock creation is pending a policy approval. */
+            approvalId?: string | undefined;
+            /** Set when the request was executed and the lock created. */
+            lockId?: string | undefined;
+            dateCreated: string;
+        };
+    } | {
         kind: "Policies:Modify";
         changeRequest: {
             id: string;
@@ -7377,6 +7583,45 @@ export type GetApprovalResponse = {
                             };
                         };
                     };
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {
+                    vaultId?: {
+                        in: string[];
+                    } | undefined;
+                    vaultTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Vaults:CreateLock";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
                 };
                 action: {
                     kind: "RequestApproval";
@@ -7971,6 +8216,45 @@ export type GetPolicyResponse = ({
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Vaults:CreateLock";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
 }) & {
     pendingChangeRequest?: {
         id: string;
@@ -8374,6 +8658,45 @@ export type GetPolicyResponse = ({
                         };
                     };
                 };
+            };
+            action: {
+                kind: "RequestApproval";
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        userId?: {
+                            in: string[];
+                        } | undefined;
+                    };
+                    /** Whether the initiator of the activity can participate in the approval. */
+                    initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+            } | {
+                kind: "Block";
+            };
+            filters?: {
+                vaultId?: {
+                    in: string[];
+                } | undefined;
+                vaultTags?: {
+                    hasAny?: string[] | undefined;
+                    hasAll?: string[] | undefined;
+                } | undefined;
+            } | undefined;
+        } | {
+            id: string;
+            name: string;
+            status: "Active" | "Archived";
+            dateCreated?: string | undefined;
+            dateUpdated?: string | undefined;
+            activityKind: "Vaults:CreateLock";
+            rule: {
+                kind: "AlwaysTrigger";
+                configuration?: {} | undefined;
             };
             action: {
                 kind: "RequestApproval";
@@ -10996,6 +11319,33 @@ export type ListApprovalsResponse = {
                 dateCreated: string;
             };
         } | {
+            kind: "Vaults:CreateLock";
+            /** Request to lock vault funds. Executed immediately unless a policy requires approval, in which case it stays Pending until the approval resolves. */
+            lockRequest: {
+                /** Vault lock request id. */
+                id: string;
+                /** Vault id. */
+                vaultId: string;
+                network: string;
+                tid: string;
+                amount: string;
+                externalId?: string | undefined;
+                /** The reason or note the lock is requested with. */
+                reason?: string | undefined;
+                requester: {
+                    userId: string;
+                };
+                /** Set when the request was rejected (policy block or approval denial). */
+                rejectionReason?: string | undefined;
+                /** Vault lock request status. */
+                status: "Pending" | "Executed" | "Rejected";
+                /** Set when the lock creation is pending a policy approval. */
+                approvalId?: string | undefined;
+                /** Set when the request was executed and the lock created. */
+                lockId?: string | undefined;
+                dateCreated: string;
+            };
+        } | {
             kind: "Policies:Modify";
             changeRequest: {
                 id: string;
@@ -11399,6 +11749,45 @@ export type ListApprovalsResponse = {
                                 };
                             };
                         };
+                    };
+                    action: {
+                        kind: "RequestApproval";
+                        approvalGroups: {
+                            name?: string | undefined;
+                            quorum: number;
+                            approvers: {
+                                userId?: {
+                                    in: string[];
+                                } | undefined;
+                            };
+                            /** Whether the initiator of the activity can participate in the approval. */
+                            initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
+                        }[];
+                        autoRejectTimeout?: (number | undefined) | null;
+                    } | {
+                        kind: "Block";
+                    };
+                    filters?: {
+                        vaultId?: {
+                            in: string[];
+                        } | undefined;
+                        vaultTags?: {
+                            hasAny?: string[] | undefined;
+                            hasAll?: string[] | undefined;
+                        } | undefined;
+                    } | undefined;
+                } | {
+                    id: string;
+                    name: string;
+                    status: "Active" | "Archived";
+                    dateCreated?: string | undefined;
+                    dateUpdated?: string | undefined;
+                    activityKind: "Vaults:CreateLock";
+                    rule: {
+                        kind: "AlwaysTrigger";
+                        configuration?: {} | undefined;
                     };
                     action: {
                         kind: "RequestApproval";
@@ -11998,6 +12387,45 @@ export type ListPoliciesResponse = {
                 hasAll?: string[] | undefined;
             } | undefined;
         } | undefined;
+    } | {
+        id: string;
+        name: string;
+        status: "Active" | "Archived";
+        dateCreated?: string | undefined;
+        dateUpdated?: string | undefined;
+        activityKind: "Vaults:CreateLock";
+        rule: {
+            kind: "AlwaysTrigger";
+            configuration?: {} | undefined;
+        };
+        action: {
+            kind: "RequestApproval";
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    userId?: {
+                        in: string[];
+                    } | undefined;
+                };
+                /** Whether the initiator of the activity can participate in the approval. */
+                initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+        } | {
+            kind: "Block";
+        };
+        filters?: {
+            vaultId?: {
+                in: string[];
+            } | undefined;
+            vaultTags?: {
+                hasAny?: string[] | undefined;
+                hasAll?: string[] | undefined;
+            } | undefined;
+        } | undefined;
     }) & {
         pendingChangeRequest?: {
             id: string;
@@ -12430,6 +12858,45 @@ export type ListPoliciesResponse = {
                         hasAll?: string[] | undefined;
                     } | undefined;
                 } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "Vaults:CreateLock";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {
+                    vaultId?: {
+                        in: string[];
+                    } | undefined;
+                    vaultTags?: {
+                        hasAny?: string[] | undefined;
+                        hasAll?: string[] | undefined;
+                    } | undefined;
+                } | undefined;
             };
         } | undefined;
     })[];
@@ -12793,6 +13260,41 @@ export type UpdatePolicyBody = {
                 };
             };
         };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    name: string;
+    activityKind: "Vaults:CreateLock";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
     };
     action: {
         kind: "RequestApproval";
@@ -13215,6 +13717,45 @@ export type UpdatePolicyResponse = {
                 };
             };
         };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {
+        vaultId?: {
+            in: string[];
+        } | undefined;
+        vaultTags?: {
+            hasAny?: string[] | undefined;
+            hasAll?: string[] | undefined;
+        } | undefined;
+    } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Vaults:CreateLock";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
     };
     action: {
         kind: "RequestApproval";
