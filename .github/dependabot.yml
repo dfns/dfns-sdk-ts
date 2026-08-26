@@ -1,0 +1,53 @@
+version: 2
+
+updates:
+  # npm across the repo root (tooling + packages/* workspace) and every example.
+  # Examples now depend on the published @dfns/* packages, so Dependabot can keep
+  # them current and the `examples` workflow verifies each bump.
+  - package-ecosystem: npm
+    directories:
+      - "/"
+      - "/examples/**"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    # Conventional-commit prefixes keep titles short enough for commitlint
+    # (grouped PRs get a single short "bump the <group> group" title instead of
+    # a long multi-package one).
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+    groups:
+      # The @dfns/* packages release in lockstep and peer each other — always bump
+      # them together in one PR to avoid cross-package peer-dependency conflicts.
+      dfns:
+        applies-to: version-updates
+        patterns:
+          - "@dfns/*"
+      # Everything else: consolidate routine minor/patch version bumps into one PR
+      # (majors still come individually so a breaking bump is reviewed on its own).
+      example-and-tooling:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@dfns/*"
+        update-types:
+          - "minor"
+          - "patch"
+      # Consolidate the (otherwise per-package) security advisory bumps into one PR.
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "ci"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
