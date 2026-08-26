@@ -5,7 +5,8 @@
   "scripts": {
     "prepare": "husky",
     "cb:all": "rimraf dist && nx run-many -t=cb",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "test:sdk": "NX_DAEMON=false nx run sdk:cb && node --test packages/sdk/utils/routing.spec.cjs"
   },
   "dependencies": {
     "@aptos-labs/ts-sdk": "^5.0.0",

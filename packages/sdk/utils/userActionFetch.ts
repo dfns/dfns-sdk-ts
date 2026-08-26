@@ -10,7 +10,7 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
     if (options.method !== 'GET') {
       const apiOptions = {
         ...options.apiOptions,
-        baseUrl: (<any>options.apiOptions).baseAuthUrl || options.apiOptions.baseUrl,
+        baseUrl: options.apiOptions.baseAuthUrl || options.apiOptions.baseUrl,
       }
 
       if (!apiOptions.signer) {
@@ -33,8 +33,8 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
         {
           userActionPayload: body,
           userActionHttpMethod: options.method,
-          userActionHttpPath: (<URL>resource).pathname,
-          userActionServerKind: (<any>apiOptions)?.userActionServerKind || 'Api',
+          userActionHttpPath: options.userActionHttpPath ?? (<URL>resource).pathname,
+          userActionServerKind: apiOptions.userActionServerKind ?? 'Api',
         },
         apiOptions
       )

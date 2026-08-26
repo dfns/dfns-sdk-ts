@@ -4,6 +4,7 @@ import { DfnsError, PolicyPendingError } from '../dfnsError'
 import { DfnsBaseApiOptions } from '../types/generic'
 import { assertAuthTokenIsSameOrg } from './authToken'
 import { sha256 } from './sha256'
+import { buildApiUrl, getCanonicalPath } from './url'
 
 const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
 
@@ -17,6 +18,8 @@ export type FetchOptions<T> = {
   body?: string | unknown
   file?: { bytes: Uint8Array; name?: string }
   apiOptions: T
+  /** Canonical API route, excluding any deployment-specific base path. */
+  userActionHttpPath?: string
 }
 
 export type Fetch<T> = (resource: string | URL, options: FetchOptions<T>) => Promise<Response>
@@ -24,8 +27,9 @@ export type Fetch<T> = (resource: string | URL, options: FetchOptions<T>) => Pro
 export const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const baseUrl = options.apiOptions.baseUrl || DEFAULT_DFNS_BASE_URL
-    resource = new URL(resource, baseUrl)
-    return fetch(resource, options)
+    const userActionHttpPath = options.userActionHttpPath ?? getCanonicalPath(resource)
+    resource = buildApiUrl(resource, baseUrl)
+    return fetch(resource, { ...options, userActionHttpPath })
   }
 }
 
