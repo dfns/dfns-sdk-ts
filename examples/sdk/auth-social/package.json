@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@dfns/sdk": "file:../../../packages/sdk",
-    "@dfns/sdk-browser": "file:../../../packages/sdk-browser",
+    "@dfns/sdk": "^0.8.28",
+    "@dfns/sdk-browser": "^0.8.28",
     "@react-oauth/google": "^0.12.1",
     "buffer": "^6.0.3",
     "jwt-decode": "3.1.2",
