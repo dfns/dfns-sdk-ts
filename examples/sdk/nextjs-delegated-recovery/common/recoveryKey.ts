@@ -115,7 +115,7 @@ export const signRecoveryCredentials = async (
     encryptedKey: string
   },
   newCredentials: NewCredentialRegistration
-): Promise<RecoverUserInput> => {
+): Promise<RecoveryKeyAssertion> => {
   return new Promise((resolve, reject) => {
     const recoveryClientData = JSON.stringify({
       type: 'key.get',

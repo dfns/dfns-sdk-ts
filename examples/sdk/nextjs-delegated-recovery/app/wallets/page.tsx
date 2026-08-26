@@ -1,6 +1,6 @@
 'use client'
 
-import { GetWalletResponse as WalletDto } from '@dfns/sdk/types/Wallets'
+import { GetWalletResponse as WalletDto } from '@dfns/sdk/types/wallets'
 import { WebAuthnSigner } from '@dfns/sdk-browser'
 import { useCallback, useEffect, useState } from 'react'
 
