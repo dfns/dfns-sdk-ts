@@ -1,0 +1,18 @@
+{
+  "name": "basic-transfers",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "dependencies": {
+    "@dfns/lib-ethersjs6": "file:../../../../../packages/lib-ethersjs6",
+    "@dfns/sdk": "file:../../../../../packages/sdk",
+    "@dfns/sdk-keysigner": "file:../../../../../packages/sdk-keysigner",
+    "dotenv": "16.1.4",
+    "ethers": "6.9.0"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.1"
+  },
+  "scripts": {
+    "exec": "ts-node src/main.ts"
+  }
+}
