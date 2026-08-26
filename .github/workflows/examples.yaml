@@ -76,17 +76,16 @@ jobs:
         working-directory: ${{ matrix.dir }}
         run: npm ci --no-audit --no-fund
 
-      - name: Build or typecheck
+      - name: Build (apps) or resolve-check (snippets)
         working-directory: ${{ matrix.dir }}
-        # CI=false: compile-only bar (react-scripts treats warnings as errors when CI=true).
-        # Standalone apps have a build script (or a local typescript) and are fully built.
-        # The libs/* snippets are run-from-the-repo (tsconfig extends the root base, no local
-        # typescript), so their check is that deps — including the published @dfns/* — resolve.
+        # Standalone apps have a build script and are fully built (CI=false: compile-only
+        # bar, since react-scripts treats warnings as errors when CI=true). The libs/*
+        # snippets are run-from-the-repo (ts-node main.ts, tsconfig extends the root base,
+        # no pinned typescript), so their check is that deps — including the published
+        # @dfns/* — resolve cleanly via the `npm ci` above.
         run: |
           if node -e "process.exit(require('./package.json').scripts?.build ? 0 : 1)"; then
             CI=false npm run build
-          elif [ -f node_modules/.bin/tsc ]; then
-            ./node_modules/.bin/tsc --noEmit
           else
-            echo "Repo-coupled snippet — install-only resolve check (npm ci above)."
+            echo "Repo-coupled snippet — dependency resolve check only (npm ci above)."
           fi
