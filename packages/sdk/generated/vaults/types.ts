@@ -59,28 +59,19 @@ export type CreateVaultLockParams = {
 };
 
 export type CreateVaultLockResponse = {
-    /** Vault lock request id. */
+    /** Vault lock id. */
     id: string;
-    /** Vault id. */
     vaultId: string;
     network: string;
     tid: string;
     amount: string;
+    /** The user that created the lock. Only this user can delete it. */
+    owner: string;
     externalId?: string | undefined;
-    /** The reason or note the lock is requested with. */
+    /** The reason or note the lock was created with. */
     reason?: string | undefined;
-    requester: {
-        userId: string;
-    };
-    /** Set when the request was rejected (policy block or approval denial). */
-    rejectionReason?: string | undefined;
-    /** Vault lock request status. */
-    status: "Pending" | "Executed" | "Rejected";
-    /** Set when the lock creation is pending a policy approval. */
-    approvalId?: string | undefined;
-    /** Set when the request was executed and the lock created. */
-    lockId?: string | undefined;
     dateCreated: string;
+    dateDeleted?: string | undefined;
 };
 
 export type CreateVaultLockRequest = CreateVaultLockParams & { body: CreateVaultLockBody }
@@ -867,31 +858,6 @@ export type CreateVaultTransferResponse = {
 
 export type CreateVaultTransferRequest = CreateVaultTransferParams & { body: CreateVaultTransferBody }
 
-export type DeleteVaultLockParams = {
-    /** Vault id. */
-    vaultId: string;
-    /** Vault lock id. */
-    lockId: string;
-};
-
-export type DeleteVaultLockResponse = {
-    /** Vault lock id. */
-    id: string;
-    vaultId: string;
-    network: string;
-    tid: string;
-    amount: string;
-    /** The user that created the lock. Only this user can delete it. */
-    owner: string;
-    externalId?: string | undefined;
-    /** The reason or note the lock was created with. */
-    reason?: string | undefined;
-    dateCreated: string;
-    dateDeleted?: string | undefined;
-};
-
-export type DeleteVaultLockRequest = DeleteVaultLockParams
-
 export type GetVaultParams = {
     /** The vault to retrieve. */
     vaultId: string;
@@ -1107,7 +1073,7 @@ export type ReleaseQuarantineResponse = {
     network: string;
     transactionHash: string;
     /** KYT screening result recorded for the quarantined deposit, when available. Policies of rule kind `ChainalysisQuarantineScreening` evaluate this stored result when the release is requested. */
-    kytResult?: {
+    kytResult?: ({
         provider: "Chainalysis";
         transferReference: string;
         /** Grouping key registered with the provider ("userId" in Chainalysis terms). */
@@ -1125,7 +1091,18 @@ export type ReleaseQuarantineResponse = {
             };
         };
         maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
-    } | undefined;
+    } | {
+        provider: "Elliptic";
+        transferReference: string;
+        /** Grouping key registered with the provider ("userId" in Chainalysis terms). */
+        providerUserId: string;
+        /** Provider-side id of the registered transfer. */
+        externalId: string;
+        alerts: {
+            categoryId: string | null;
+        }[];
+        riskScore: number | null;
+    }) | undefined;
     requester: {
         userId: string;
     };
@@ -1140,6 +1117,31 @@ export type ReleaseQuarantineResponse = {
 };
 
 export type ReleaseQuarantineRequest = ReleaseQuarantineParams & { body: ReleaseQuarantineBody }
+
+export type ReleaseVaultLockParams = {
+    /** Vault id. */
+    vaultId: string;
+    /** Vault lock id. */
+    lockId: string;
+};
+
+export type ReleaseVaultLockResponse = {
+    /** Vault lock id. */
+    id: string;
+    vaultId: string;
+    network: string;
+    tid: string;
+    amount: string;
+    /** The user that created the lock. Only this user can delete it. */
+    owner: string;
+    externalId?: string | undefined;
+    /** The reason or note the lock was created with. */
+    reason?: string | undefined;
+    dateCreated: string;
+    dateDeleted?: string | undefined;
+};
+
+export type ReleaseVaultLockRequest = ReleaseVaultLockParams
 
 export type TagVaultBody = {
     tags: string[];

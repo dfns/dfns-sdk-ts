@@ -69,21 +69,6 @@ export class VaultsClient {
     return response.json()
   }
 
-  async deleteVaultLock(request: T.DeleteVaultLockRequest): Promise<T.DeleteVaultLockResponse> {
-    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async getVault(request: T.GetVaultRequest): Promise<T.GetVaultResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId', {
       path: request ?? {},
@@ -177,6 +162,21 @@ export class VaultsClient {
     const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async releaseVaultLock(request: T.ReleaseVaultLockRequest): Promise<T.ReleaseVaultLockResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId/release', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: {},
       apiOptions: this.apiOptions,
     })
 

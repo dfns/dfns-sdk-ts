@@ -183,50 +183,6 @@ export class DelegatedVaultsClient {
     return response.json()
   }
 
-  async deleteVaultLockInit(request: T.DeleteVaultLockRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId', {
-      path: request ?? {},
-      query: {},
-    })
-    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async deleteVaultLockComplete(
-    request: T.DeleteVaultLockRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.DeleteVaultLockResponse> {
-    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async getVault(request: T.GetVaultRequest): Promise<T.GetVaultResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId', {
       path: request ?? {},
@@ -348,6 +304,50 @@ export class DelegatedVaultsClient {
     const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async releaseVaultLockInit(request: T.ReleaseVaultLockRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId/release', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async releaseVaultLockComplete(
+    request: T.ReleaseVaultLockRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.ReleaseVaultLockResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId/release', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: {},
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
