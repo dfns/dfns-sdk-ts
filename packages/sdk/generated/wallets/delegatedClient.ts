@@ -227,6 +227,50 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async bulkCreateWalletsInit(request: T.BulkCreateWalletsRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async bulkCreateWalletsComplete(
+    request: T.BulkCreateWalletsRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.BulkCreateWalletsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async cancelTransactionInit(request: T.CancelTransactionRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/cancel', {
       path: request ?? {},
@@ -506,6 +550,20 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async getBulkWalletJob(request: T.GetBulkWalletJobRequest): Promise<T.GetBulkWalletJobResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create/:jobId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getOffer(request: T.GetOfferRequest): Promise<T.GetOfferResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId', {
       path: request ?? {},
@@ -656,6 +714,34 @@ export class DelegatedWalletsClient {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listBulkWalletJobs(request?: T.ListBulkWalletJobsRequest): Promise<T.ListBulkWalletJobsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create', {
+      path: request ?? {},
+      query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listBulkWalletJobWallets(request: T.ListBulkWalletJobWalletsRequest): Promise<T.ListBulkWalletJobWalletsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create/:jobId/wallets', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
       apiOptions: this.apiOptions,
     })
 

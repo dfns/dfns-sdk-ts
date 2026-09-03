@@ -128,6 +128,8 @@ export type GetPermissionResponse = {
         status: "Applied" | "Failed" | "Pending" | "Rejected";
         /** ID of the entity being changed. */
         entityId: string;
+        /** User action of the change request. */
+        userActionId?: string | undefined;
         dateCreated: string;
         dateResolved?: string | undefined;
         approvalId?: string | undefined;
@@ -191,6 +193,8 @@ export type ListAssignmentsResponse = {
             status: "Applied" | "Failed" | "Pending" | "Rejected";
             /** ID of the entity being changed. */
             entityId: string;
+            /** User action of the change request. */
+            userActionId?: string | undefined;
             dateCreated: string;
             dateResolved?: string | undefined;
             approvalId?: string | undefined;
@@ -252,6 +256,8 @@ export type ListPermissionsResponse = {
             status: "Applied" | "Failed" | "Pending" | "Rejected";
             /** ID of the entity being changed. */
             entityId: string;
+            /** User action of the change request. */
+            userActionId?: string | undefined;
             dateCreated: string;
             dateResolved?: string | undefined;
             approvalId?: string | undefined;
