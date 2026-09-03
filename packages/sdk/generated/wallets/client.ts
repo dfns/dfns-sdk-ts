@@ -84,6 +84,21 @@ export class WalletsClient {
     return response.json()
   }
 
+  async bulkCreateWallets(request: T.BulkCreateWalletsRequest): Promise<T.BulkCreateWalletsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async cancelTransaction(request: T.CancelTransactionRequest): Promise<T.CancelTransactionResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/cancel', {
       path: request ?? {},
@@ -183,6 +198,20 @@ export class WalletsClient {
     const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async getBulkWalletJob(request: T.GetBulkWalletJobRequest): Promise<T.GetBulkWalletJobResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create/:jobId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
       apiOptions: this.apiOptions,
     })
 
@@ -310,6 +339,34 @@ export class WalletsClient {
     const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listBulkWalletJobs(request?: T.ListBulkWalletJobsRequest): Promise<T.ListBulkWalletJobsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create', {
+      path: request ?? {},
+      query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listBulkWalletJobWallets(request: T.ListBulkWalletJobWalletsRequest): Promise<T.ListBulkWalletJobWalletsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create/:jobId/wallets', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
       apiOptions: this.apiOptions,
     })
 
