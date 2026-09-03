@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-cosmjs",
-  "version": "0.8.28",
+  "version": "0.8.29",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dfns/dfns-sdk-ts.git",
