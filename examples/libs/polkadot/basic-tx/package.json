@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@polkadot/api": "10.11.3",
-    "@dfns/lib-polkadot": "file:../../../packages/lib-polkadot",
+    "@polkadot/api": "^11.0.0",
+    "@dfns/lib-polkadot": "^0.8.28",
     "dotenv": "16.1.4"
   },
   "devDependencies": {

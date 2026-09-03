@@ -4,9 +4,9 @@
   "main": "main.ts",
   "dependencies": {
     "@concordium/web-sdk": "12.0.0-alpha.3",
-    "@dfns/lib-concordium": "file:../../../../packages/lib-concordium",
-    "@dfns/sdk": "file:../../../../packages/sdk",
-    "@dfns/sdk-keysigner": "file:../../../../packages/sdk-keysigner",
+    "@dfns/lib-concordium": "^0.8.28",
+    "@dfns/sdk": "^0.8.28",
+    "@dfns/sdk-keysigner": "^0.8.28",
     "@grpc/grpc-js": "1.12.6",
     "@protobuf-ts/grpc-transport": "2.9.4",
     "dotenv": "16.1.4"

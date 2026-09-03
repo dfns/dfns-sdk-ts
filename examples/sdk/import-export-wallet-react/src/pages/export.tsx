@@ -11,7 +11,7 @@ export default function ExportWallet(): JSX.Element {
 
   useEffect(() => {
     dfnsApi()
-      .wallets.listWallets({ query: { limit: '100' } })
+      .wallets.listWallets({ query: { limit: 100 } })
       .then((wallets) => {
         const custodialWallets = wallets.items.filter((wallet) => wallet.custodial).slice(0, 10)
         setWallets(custodialWallets)

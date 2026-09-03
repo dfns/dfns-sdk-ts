@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@dfns/lib-ton": "file:../../../packages/lib-ton",
-    "@dfns/sdk": "file:../../../packages/sdk",
-    "@dfns/sdk-keysigner": "file:../../../packages/sdk-keysigner",
+    "@dfns/lib-ton": "^0.8.28",
+    "@dfns/sdk": "^0.8.28",
+    "@dfns/sdk-keysigner": "^0.8.28",
     "@orbs-network/ton-access": "2.3.3",
     "@ton/ton": "15.1.0",
     "dotenv": "16.1.4"

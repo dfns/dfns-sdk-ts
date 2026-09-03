@@ -1,0 +1,92 @@
+name: examples
+
+on:
+  push:
+    branches:
+      - m
+  pull_request:
+    branches:
+      - m
+
+permissions:
+  contents: read
+
+jobs:
+  # Discover which example directories to build. On a PR, only the examples whose
+  # files changed (keeps Dependabot's per-example PRs cheap); on push to m, all of them.
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      dirs: ${{ steps.set.outputs.dirs }}
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Select example dirs
+        id: set
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+          # Known-excluded examples (pre-existing breakage unrelated to the published SDK; tracked separately):
+          #   libs/viem/zerodev-aa-gasless        — stale @zerodev AA stack + viem pin; needs a code migration.
+          #   sdk/import-export-wallet-react       — webpack "named export 'version'" error from a bundler dep.
+          #   sdk/nextjs-delegated-recovery        — SDK-API drift + module-scope client init crashes `next build`.
+          SKIP=$'examples/libs/viem/zerodev-aa-gasless\nexamples/sdk/import-export-wallet-react\nexamples/sdk/nextjs-delegated-recovery'
+          mapfile -t ALL < <(find examples -name package.json -not -path '*/node_modules/*' -exec dirname {} \; \
+            | sort -u | grep -vxF "$SKIP")
+          sel=()
+          if [ "$EVENT" = "pull_request" ]; then
+            git fetch --no-tags --depth=1 origin "$BASE_REF"
+            CHANGED="$(git diff --name-only "origin/${BASE_REF}...HEAD")"
+            for d in "${ALL[@]}"; do
+              if grep -q "^${d}/" <<< "$CHANGED"; then sel+=("$d"); fi
+            done
+          else
+            sel=("${ALL[@]}")
+          fi
+          if [ "${#sel[@]}" -eq 0 ]; then
+            echo "dirs=[]" >> "$GITHUB_OUTPUT"
+          else
+            dirs="$(printf '%s\n' "${sel[@]}" | jq -R . | jq -cs .)"
+            echo "dirs=${dirs}" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Selected: ${sel[*]:-（none）}"
+
+  build:
+    needs: discover
+    if: needs.discover.outputs.dirs != '[]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        dir: ${{ fromJson(needs.discover.outputs.dirs) }}
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install
+        working-directory: ${{ matrix.dir }}
+        run: npm ci --no-audit --no-fund
+
+      - name: Build (apps) or resolve-check (snippets)
+        working-directory: ${{ matrix.dir }}
+        # Standalone apps have a build script and are fully built (CI=false: compile-only
+        # bar, since react-scripts treats warnings as errors when CI=true). The libs/*
+        # snippets are run-from-the-repo (ts-node main.ts, tsconfig extends the root base,
+        # no pinned typescript), so their check is that deps — including the published
+        # @dfns/* — resolve cleanly via the `npm ci` above.
+        run: |
+          if node -e "process.exit(require('./package.json').scripts?.build ? 0 : 1)"; then
+            CI=false npm run build
+          else
+            echo "Repo-coupled snippet — dependency resolve check only (npm ci above)."
+          fi
