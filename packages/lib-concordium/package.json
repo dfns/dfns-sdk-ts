@@ -7,6 +7,6 @@
     "directory": "packages/lib-concordium"
   },
   "peerDependencies": {
-    "@concordium/web-sdk": "12.0.0-alpha.3"
+    "@concordium/web-sdk": "12.0.2"
   }
 }

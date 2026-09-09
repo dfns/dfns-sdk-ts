@@ -11,7 +11,7 @@
     "@aptos-labs/ts-sdk": "^5.0.0",
     "@aws-sdk/client-kms": "^3.1027.0",
     "@concordium/id-app-sdk": "0.1.4",
-    "@concordium/web-sdk": "12.0.0-alpha.3",
+    "@concordium/web-sdk": "12.0.2",
     "@dfns/dfns-key-export-bundler": "0.4.0",
     "@dfns/dfns-key-export-nodejs": "0.4.0",
     "@dfns/dfns-key-import-bundler": "0.4.0",
