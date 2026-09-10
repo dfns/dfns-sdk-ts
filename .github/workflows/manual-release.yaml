@@ -26,7 +26,7 @@ jobs:
             echo "Error: '$VERSION' is not a valid semver version"
             exit 1
           fi
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -55,10 +55,13 @@ jobs:
         run: ./scripts/prepare.sh "$VERSION"
 
       - name: Configure git
+        env:
+          APP_TOKEN: ${{ steps.app-token.outputs.token }}
+          REPO: ${{ github.repository }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git
+          git remote set-url origin "https://x-access-token:${APP_TOKEN}@github.com/${REPO}.git"
 
       - name: Commit version changes
         run: |
@@ -86,9 +89,10 @@ jobs:
       - name: Trigger publish workflow
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          NPM_TAG: ${{ steps.npm-tag.outputs.tag }}
         run: |
-          if [ -n "${{ steps.npm-tag.outputs.tag }}" ]; then
-            gh workflow run publish.yaml -f tag=${{ steps.npm-tag.outputs.tag }}
+          if [ -n "$NPM_TAG" ]; then
+            gh workflow run publish.yaml -f tag="$NPM_TAG"
           else
             gh workflow run publish.yaml
           fi
