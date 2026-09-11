@@ -183,6 +183,21 @@ export class VaultsClient {
     return response.json()
   }
 
+  async replaceVaultLock(request: T.ReplaceVaultLockRequest): Promise<T.ReplaceVaultLockResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId/replace', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async tagVault(request: T.TagVaultRequest): Promise<T.TagVaultResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/tags', {
       path: request ?? {},
