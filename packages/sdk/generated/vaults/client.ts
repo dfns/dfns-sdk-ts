@@ -213,6 +213,21 @@ export class VaultsClient {
     return response.json()
   }
 
+  async transferVaultLock(request: T.TransferVaultLockRequest): Promise<T.TransferVaultLockResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/locks/:lockId/transfer', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async untagVault(request: T.UntagVaultRequest): Promise<T.UntagVaultResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/tags', {
       path: request ?? {},
