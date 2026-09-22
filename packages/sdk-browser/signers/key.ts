@@ -68,15 +68,19 @@ export class BrowserKeySigner implements CredentialSigner<KeyAssertion>, Credent
     }
   }
 
-  async sign(challenge: UserActionChallenge): Promise<KeyAssertion> {
+  async sign(challenge: Pick<UserActionChallenge, 'challenge' | 'allowCredentials'>): Promise<KeyAssertion> {
     const credId = this.options.credId
     if (credId === undefined || credId === '') {
       throw new DfnsError(-1, 'credId is needed to sign')
     }
-    const allowedCredId = challenge.allowCredentials.key.map((cred) => cred.id)
-    if (!allowedCredId.includes(credId)) {
-      throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredId}`)
+
+    if (challenge.allowCredentials) {
+      const allowedCredId = challenge.allowCredentials.key.map((cred) => cred.id)
+      if (!allowedCredId.includes(credId)) {
+        throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredId}`)
+      }
     }
+
     const clientData = JSON.stringify({
       type: 'key.get',
       challenge: challenge.challenge,
