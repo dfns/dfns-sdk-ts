@@ -4,10 +4,20 @@ import { Fetch, catchPolicyPending, dfnsAuth, errorHandler, formDataSerializer, 
 import { BaseAuthApi } from '../baseAuthApi'
 import { DfnsError } from '../dfnsError'
 import { DfnsApiClientOptions } from '../types/generic'
+import { createFastAuthHeader } from './fastAuth'
 
 const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     if (options.method !== 'GET') {
+      // Multipart uploads use the established challenge flow; Fast Auth only supports JSON.
+      if ((options.fastAuth ?? options.apiOptions.fastAuth) && !(options.body instanceof FormData)) {
+        const userAction = await createFastAuthHeader(resource as URL, options)
+        return fetch(resource, {
+          ...options,
+          headers: { ...options.headers, 'x-dfns-useraction': userAction },
+        })
+      }
+
       const apiOptions = {
         ...options.apiOptions,
         baseUrl: (<any>options.apiOptions).baseAuthUrl || options.apiOptions.baseUrl,

@@ -23,10 +23,31 @@ export class AwsKmsKeySigner implements CredentialSigner<KeyAssertion> {
       throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredId}`)
     }
 
+    return this.signChallenge(challenge.challenge)
+  }
+
+  async signFastAuth(challenge: string): Promise<KeyAssertion> {
+    // The verifier accepts DER ECDSA and PKCS#1 signatures, without RSA-PSS parameters.
+    const algorithms: Partial<Record<SigningAlgorithmSpec, string>> = {
+      ECDSA_SHA_256: 'SHA256',
+      ECDSA_SHA_384: 'SHA384',
+      ECDSA_SHA_512: 'SHA512',
+      RSASSA_PKCS1_V1_5_SHA_256: 'SHA256',
+      RSASSA_PKCS1_V1_5_SHA_384: 'SHA384',
+      RSASSA_PKCS1_V1_5_SHA_512: 'SHA512',
+    }
+    const algorithm = algorithms[this.options.kmsKeyConfig.algorithm]
+    if (!algorithm) throw new DfnsError(-1, 'This KMS signing algorithm is not supported by Fast Auth.')
+    const assertion = await this.signChallenge(challenge)
+    return { ...assertion, credentialAssertion: { ...assertion.credentialAssertion, algorithm } }
+  }
+
+  private async signChallenge(challenge: string): Promise<KeyAssertion> {
+    const { credId } = this.options
     const clientData = Buffer.from(
       JSON.stringify({
         type: 'key.get',
-        challenge: challenge.challenge,
+        challenge,
       })
     )
 

@@ -1,7 +1,6 @@
 import { AgreementsClient } from './generated/agreements'
 import { AllocationsClient } from './generated/allocations'
 import { AuthClient } from './generated/auth'
-import { CredentialSigner } from './signer'
 import { ExchangesClient } from './generated/exchanges'
 import { FeeSponsorsClient } from './generated/feeSponsors'
 import { KeysClient } from './generated/keys'
@@ -14,12 +13,9 @@ import { StakingClient } from './generated/staking'
 import { SwapsClient } from './generated/swaps'
 import { WalletsClient } from './generated/wallets'
 import { WebhooksClient } from './generated/webhooks'
-import { DfnsBaseApiOptions } from './types/generic'
+import { DfnsApiClientOptions } from './types/generic'
 
-export type DfnsApiClientOptions = DfnsBaseApiOptions & {
-  /** Needs to be specified to use any endpoint that required User Action Signing flow */
-  signer?: CredentialSigner
-}
+export type { DfnsApiClientOptions } from './types/generic'
 
 export class DfnsApiClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}

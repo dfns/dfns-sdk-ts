@@ -84,4 +84,6 @@ export type CredentialAssertion = KeyAssertion | Fido2Assertion | PasswordAssert
 
 export interface CredentialSigner<T extends CredentialAssertion = FirstFactorAssertion> {
   sign(challenge: UserActionChallenge): Promise<T>
+  /** Sign an encoded client-generated challenge with an active Key credential. */
+  signFastAuth?(challenge: string): Promise<KeyAssertion>
 }

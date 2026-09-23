@@ -13,17 +13,26 @@ export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
   ) {}
 
   async sign(challenge: UserActionChallenge): Promise<KeyAssertion> {
-    const { credId, privateKey, algorithm } = this.options
+    const { credId } = this.options
 
     const allowedCredId = challenge.allowCredentials.key.map((cred) => cred.id)
     if (!allowedCredId.includes(credId)) {
       throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredId}`)
     }
 
+    return this.signChallenge(challenge.challenge)
+  }
+
+  async signFastAuth(challenge: string): Promise<KeyAssertion> {
+    return this.signChallenge(challenge)
+  }
+
+  private async signChallenge(challenge: string): Promise<KeyAssertion> {
+    const { credId, privateKey, algorithm } = this.options
     const clientData = Buffer.from(
       JSON.stringify({
         type: 'key.get',
-        challenge: challenge.challenge,
+        challenge,
       })
     )
 
@@ -33,6 +42,7 @@ export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
         credId,
         clientData: toBase64Url(clientData),
         signature: toBase64Url(crypto.sign(algorithm || undefined, clientData, privateKey)),
+        ...(algorithm && { algorithm }),
       },
     }
   }

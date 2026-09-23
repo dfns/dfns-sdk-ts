@@ -17,6 +17,8 @@ export type FetchOptions<T> = {
   body?: string | unknown
   file?: { bytes: Uint8Array; name?: string }
   apiOptions: T
+  /** Override the client's Fast Auth setting for a userActionFetch call. */
+  fastAuth?: boolean
 }
 
 export type Fetch<T> = (resource: string | URL, options: FetchOptions<T>) => Promise<Response>

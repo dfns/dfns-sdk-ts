@@ -12,4 +12,6 @@ export type DfnsBaseApiOptions = {
 export type DfnsApiClientOptions = DfnsBaseApiOptions & {
   /** Needs to be specified to use any endpoint that required User Action Signing flow */
   signer?: CredentialSigner
+  /** Use a client-signed challenge for JSON user actions. Requires Fast Auth enabled for the tenant. Defaults to false. */
+  fastAuth?: boolean
 }

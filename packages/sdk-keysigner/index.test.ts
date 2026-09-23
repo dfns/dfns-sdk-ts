@@ -11,9 +11,38 @@ const challengeFor = (credId: string) =>
     allowCredentials: { key: [{ id: credId, type: 'public-key' }], webauthn: [] },
     externalAuthenticationUrl: '',
     supportedCredentialKinds: [],
-  }) as any
+  } as any)
 
 describe('AsymmetricKeySigner', () => {
+  for (const kind of ['ed25519', 'ec', 'rsa'] as const) {
+    it(`signs Fast Auth challenges with a verifiable ${kind} assertion`, async () => {
+      const pair =
+        kind === 'ed25519'
+          ? crypto.generateKeyPairSync('ed25519')
+          : kind === 'ec'
+          ? crypto.generateKeyPairSync('ec', { namedCurve: 'P-256' })
+          : crypto.generateKeyPairSync('rsa', { modulusLength: 2048 })
+      const algorithm = kind === 'ed25519' ? undefined : 'SHA256'
+      const signer = new AsymmetricKeySigner({
+        credId: 'cr-test',
+        privateKey: pair.privateKey.export({ type: 'pkcs8', format: 'pem' }) as string,
+        algorithm,
+      })
+      const assertion = await signer.signFastAuth('encoded-client-challenge')
+      const data = Buffer.from(assertion.credentialAssertion.clientData, 'base64url')
+      assert.deepEqual(JSON.parse(data.toString()), { type: 'key.get', challenge: 'encoded-client-challenge' })
+      assert.equal(assertion.credentialAssertion.algorithm, algorithm)
+      assert.ok(
+        crypto.verify(
+          assertion.credentialAssertion.algorithm ?? null,
+          data,
+          pair.publicKey,
+          Buffer.from(assertion.credentialAssertion.signature, 'base64url')
+        )
+      )
+    })
+  }
+
   it('produces a verifiable Ed25519 key assertion binding the challenge', async () => {
     const { publicKey, privateKey } = crypto.generateKeyPairSync('ed25519')
     const pem = privateKey.export({ type: 'pkcs8', format: 'pem' }) as string

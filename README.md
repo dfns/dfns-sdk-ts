@@ -125,6 +125,46 @@ const wallet = await dfns.wallets.createWallet({
 const { assets } = await dfns.wallets.getWalletAssets({ walletId: wallet.id })
 ```
 
+### Fast Auth (opt-in)
+
+For tenants with Fast Auth enabled, server-side clients can replace the user-action challenge and token requests with a locally signed challenge. A signed JSON write then makes one Dfns API request instead of three. The bearer token is still required.
+
+```ts
+import { DfnsApiClient } from '@dfns/sdk'
+import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
+
+const client = new DfnsApiClient({
+  authToken: process.env.DFNS_AUTH_TOKEN!,
+  signer: new AsymmetricKeySigner({
+    credId: process.env.DFNS_CREDENTIAL_ID!,
+    privateKey: process.env.DFNS_PRIVATE_KEY!,
+    // For RSA/ECDSA keys, set algorithm: 'SHA256'. Omit it for Ed25519.
+  }),
+  fastAuth: true,
+})
+
+await client.wallets.createWallet({ body: { network: 'EthereumSepolia' } })
+```
+
+Fast Auth is disabled by default. It requires a runtime with global Web Crypto support (Node.js 20+), an active Key credential associated with the bearer token, and a signer implementing `signFastAuth(encodedChallenge)`. `AsymmetricKeySigner` and `AwsKmsKeySigner` support it; passkeys, password-protected keys, and delegated signing keep their existing flow. KMS Fast Auth supports ECDSA and RSA PKCS#1 signing algorithms, not RSA-PSS. Leave `fastAuth` disabled for unsupported signers.
+
+The SDK obtains `orgId` or `tenantId` from the bearer token and signs the request's hostname, HTTP method, path/query, exact serialized JSON body hash, timestamp, and a fresh cryptographic nonce. Use the canonical API hostname and path in `baseUrl`; transport aliases that rewrite them require their own signing integration. Keep the client clock synchronized with the server.
+
+Read-only requests are unchanged. Multipart uploads use the established challenge flow even when Fast Auth is enabled. A Fast Auth server error is returned directly, without retrying through the established flow.
+
+For direct `userActionFetch` calls, the per-request flag overrides the client setting:
+
+```ts
+import { userActionFetch } from '@dfns/sdk/utils/userActionFetch'
+
+await userActionFetch('/wallets', {
+  method: 'POST',
+  body: { network: 'EthereumSepolia' },
+  apiOptions: { authToken, signer, fastAuth: true },
+  fastAuth: false, // Use the established flow for this request.
+})
+```
+
 ### `DfnsDelegatedApiClient`
 
 In some configurations, you might want your server to be the one talking to Dfns "on behalf of the user", but till have the user sign all requests (on a web-app, using the WebauthN Credentials he owns). In this case, the `DfnsDelegatedApiClient` can be used on your server.
