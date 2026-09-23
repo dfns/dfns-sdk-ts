@@ -40,7 +40,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyGetRequest = {
       challenge: challenge.challenge,
-      allowCredentials: challenge.allowCredentials.webauthn,
+      allowCredentials: challenge.allowCredentials?.webauthn,
       rpId: this.conf.relyingParty.id,
       userVerification: challenge.userVerification,
       timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
@@ -102,7 +102,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyGetRequest = {
       challenge: challenge.challenge,
-      allowCredentials: challenge.allowCredentials.webauthn,
+      allowCredentials: challenge.allowCredentials?.webauthn,
       rpId: this.conf.relyingParty.id,
       userVerification: 'preferred',
       timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,

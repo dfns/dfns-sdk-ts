@@ -40,7 +40,7 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
     const response = await navigator.credentials.get({
       publicKey: {
         challenge: Buffer.from(challenge.challenge),
-        allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type }) => ({
+        allowCredentials: challenge.allowCredentials?.webauthn.map(({ id, type }) => ({
           id: fromBase64Url(id).buffer as ArrayBuffer,
           type,
         })),

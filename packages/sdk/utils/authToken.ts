@@ -2,7 +2,7 @@ import { fromBase64 } from './base64'
 
 export const JWT_CUSTOM_DATA_CLAIM = 'https://custom/app_metadata'
 
-export const assertAuthTokenIsSameOrg = ({ authToken, orgId }: { authToken: string; orgId: string }) => {
+export const extractTokenScope = ({ authToken }: { authToken: string }): { orgId?: string; tenantId?: string } => {
   const tokenBody = authToken.split('.')?.[1] || ''
   let decoded: any
 
@@ -12,9 +12,10 @@ export const assertAuthTokenIsSameOrg = ({ authToken, orgId }: { authToken: stri
     throw new Error('Provided auth token could not be properly parsed')
   }
 
-  const tokenOrgId = decoded?.[JWT_CUSTOM_DATA_CLAIM]?.['orgId']
+  const tokenData = decoded?.[JWT_CUSTOM_DATA_CLAIM]
 
-  if (tokenOrgId !== orgId) {
-    throw new Error(`Provided auth token is not scoped to org ID ${orgId}`)
-  }
+  const orgId = typeof tokenData?.orgId === 'string' ? tokenData?.orgId : undefined
+  const tenantId = typeof tokenData?.tenantId === 'string' ? tokenData?.tenantId : undefined
+
+  return { orgId, tenantId }
 }
