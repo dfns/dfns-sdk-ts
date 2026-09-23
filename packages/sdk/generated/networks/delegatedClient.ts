@@ -110,10 +110,10 @@ export class DelegatedNetworksClient {
     return response.json()
   }
 
-  async getCantonValidator(request: T.GetCantonValidatorRequest): Promise<T.GetCantonValidatorResponse> {
-    const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
+  async estimateFees(request?: T.EstimateFeesRequest): Promise<T.EstimateFeesResponse> {
+    const path = buildPathAndQuery('/networks/fees', {
       path: request ?? {},
-      query: {},
+      query: request?.query ?? {},
     })
 
     const response = await simpleFetch(path, {
@@ -124,10 +124,15 @@ export class DelegatedNetworksClient {
     return response.json()
   }
 
-  async getFees(request?: T.GetFeesRequest): Promise<T.GetFeesResponse> {
-    const path = buildPathAndQuery('/networks/fees', {
+  /** @deprecated, use estimateFees instead */
+  async getFees(request?: T.EstimateFeesRequest): Promise<T.EstimateFeesResponse> {
+    return this.estimateFees(request)
+  }
+
+  async getCantonValidator(request: T.GetCantonValidatorRequest): Promise<T.GetCantonValidatorResponse> {
+    const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
       path: request ?? {},
-      query: request?.query ?? {},
+      query: {},
     })
 
     const response = await simpleFetch(path, {

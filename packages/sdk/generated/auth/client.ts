@@ -69,66 +69,6 @@ export class AuthClient {
     return response.json()
   }
 
-  async archiveCredential(request: T.ArchiveCredentialRequest): Promise<T.ArchiveCredentialResponse> {
-    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async archivePersonalAccessToken(request: T.ArchivePersonalAccessTokenRequest): Promise<T.ArchivePersonalAccessTokenResponse> {
-    const path = buildPathAndQuery('/auth/pats/:tokenId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async archiveServiceAccount(request: T.ArchiveServiceAccountRequest): Promise<T.ArchiveServiceAccountResponse> {
-    const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
-      path: request ?? {},
-      query: request.query ?? {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async archiveUser(request: T.ArchiveUserRequest): Promise<T.ArchiveUserResponse> {
-    const path = buildPathAndQuery('/auth/users/:userId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async createCredential(request: T.CreateCredentialRequest): Promise<T.CreateCredentialResponse> {
     const path = buildPathAndQuery('/auth/credentials', {
       path: request ?? {},
@@ -472,6 +412,86 @@ export class AuthClient {
   /** @deprecated, use delegatedLogin instead */
   async createDelegatedUserLogin(request: T.DelegatedLoginRequest): Promise<T.DelegatedLoginResponse> {
     return this.delegatedLogin(request)
+  }
+
+  async deleteCredential(request: T.DeleteCredentialRequest): Promise<T.DeleteCredentialResponse> {
+    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use deleteCredential instead */
+  async archiveCredential(request: T.DeleteCredentialRequest): Promise<T.DeleteCredentialResponse> {
+    return this.deleteCredential(request)
+  }
+
+  async deletePersonalAccessToken(request: T.DeletePersonalAccessTokenRequest): Promise<T.DeletePersonalAccessTokenResponse> {
+    const path = buildPathAndQuery('/auth/pats/:tokenId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use deletePersonalAccessToken instead */
+  async archivePersonalAccessToken(request: T.DeletePersonalAccessTokenRequest): Promise<T.DeletePersonalAccessTokenResponse> {
+    return this.deletePersonalAccessToken(request)
+  }
+
+  async deleteServiceAccount(request: T.DeleteServiceAccountRequest): Promise<T.DeleteServiceAccountResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use deleteServiceAccount instead */
+  async archiveServiceAccount(request: T.DeleteServiceAccountRequest): Promise<T.DeleteServiceAccountResponse> {
+    return this.deleteServiceAccount(request)
+  }
+
+  async deleteUser(request: T.DeleteUserRequest): Promise<T.DeleteUserResponse> {
+    const path = buildPathAndQuery('/auth/users/:userId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use deleteUser instead */
+  async archiveUser(request: T.DeleteUserRequest): Promise<T.DeleteUserResponse> {
+    return this.deleteUser(request)
   }
 
   async exchangeAccessToken(request: T.ExchangeAccessTokenRequest): Promise<T.ExchangeAccessTokenResponse> {

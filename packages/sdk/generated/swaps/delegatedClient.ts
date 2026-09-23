@@ -51,21 +51,6 @@ export class DelegatedSwapsClient {
     return response.json()
   }
 
-  async createSwapQuote(request: T.CreateSwapQuoteRequest): Promise<T.CreateSwapQuoteResponse> {
-    const path = buildPathAndQuery('/swaps/quotes', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async getSwap(request: T.GetSwapRequest): Promise<T.GetSwapResponse> {
     const path = buildPathAndQuery('/swaps/:swapId', {
       path: request ?? {},
@@ -106,5 +91,25 @@ export class DelegatedSwapsClient {
     })
 
     return response.json()
+  }
+
+  async requestSwapQuote(request: T.RequestSwapQuoteRequest): Promise<T.RequestSwapQuoteResponse> {
+    const path = buildPathAndQuery('/swaps/quotes', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use requestSwapQuote instead */
+  async createSwapQuote(request: T.RequestSwapQuoteRequest): Promise<T.RequestSwapQuoteResponse> {
+    return this.requestSwapQuote(request)
   }
 }

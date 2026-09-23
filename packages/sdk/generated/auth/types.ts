@@ -176,185 +176,6 @@ export type ActivateUserResponse = {
 
 export type ActivateUserRequest = ActivateUserParams
 
-export type ArchiveCredentialParams = {
-    credentialUuid: string;
-};
-
-export type ArchiveCredentialResponse = {};
-
-export type ArchiveCredentialRequest = ArchiveCredentialParams
-
-export type ArchivePersonalAccessTokenParams = {
-    /** Token id. */
-    tokenId: string;
-};
-
-export type ArchivePersonalAccessTokenResponse = {
-    /** The access token. Only returned at creation time. */
-    accessToken?: string | undefined;
-    dateCreated: string;
-    /** ID of the credential associated with the access token. */
-    credId: string;
-    /** Whether the access token is active. */
-    isActive: boolean;
-    /** Access token kind. */
-    kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
-    /** User id. */
-    linkedUserId: string;
-    /** ID of the application the access token is linked to. */
-    linkedAppId: string;
-    /** Human-readable name of the access token. */
-    name: string;
-    /** Organization id. */
-    orgId: string;
-    /** Permissions (roles) assigned to the access token. */
-    permissionAssignments: {
-        /** Human-readable name of the permission (role). */
-        permissionName: string;
-        /** ID of the permission (also referred to as "role" in the dashboard). */
-        permissionId: string;
-        /** ID of the permission assignment. */
-        assignmentId: string;
-        /** List of API operations granted by this permission. */
-        operations?: string[] | undefined;
-    }[];
-    /** Public key associated with the access token. */
-    publicKey: string;
-    /** Token id. */
-    tokenId: string;
-};
-
-export type ArchivePersonalAccessTokenRequest = ArchivePersonalAccessTokenParams
-
-export type ArchiveServiceAccountParams = {
-    /** ID of the service account. */
-    serviceAccountId: string;
-};
-
-export type ArchiveServiceAccountQuery = {
-    /** If true, bypasses the policy approver check and deletes immediately. */
-    force?: boolean;
-};
-
-export type ArchiveServiceAccountResponse = {
-    userInfo: {
-        /** Username/identifier of the user (any unique string accepted, e.g. your internal user ID or email). */
-        username: string;
-        /** Display name of the user. */
-        name: string;
-        /** User id. */
-        userId: string;
-        /** User kind. */
-        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
-        /** UUID of the user's primary credential. */
-        credentialUuid: string;
-        /** Organization id. */
-        orgId?: string | undefined;
-        /** Tenant id. */
-        tenantId?: string | undefined;
-        /** @deprecated - Flat list of API operations the user has access to. */
-        permissions?: string[] | undefined;
-        /** Whether the user is active. */
-        isActive: boolean;
-        /** Whether the user is a service account. */
-        isServiceAccount: boolean;
-        /** Whether the user has completed registration. */
-        isRegistered: boolean;
-        /** Permissions (roles) assigned to the user. */
-        permissionAssignments: {
-            /** Human-readable name of the permission (role). */
-            permissionName: string;
-            /** ID of the permission (also referred to as "role" in the dashboard). */
-            permissionId: string;
-            /** ID of the permission assignment. */
-            assignmentId: string;
-            /** List of API operations granted by this permission. */
-            operations?: string[] | undefined;
-        }[];
-    };
-    accessTokens: {
-        /** The access token. Only returned at creation time. */
-        accessToken?: string | undefined;
-        dateCreated: string;
-        /** ID of the credential associated with the access token. */
-        credId: string;
-        /** Whether the access token is active. */
-        isActive: boolean;
-        /** Access token kind. */
-        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
-        /** User id. */
-        linkedUserId: string;
-        /** ID of the application the access token is linked to. */
-        linkedAppId: string;
-        /** Human-readable name of the access token. */
-        name: string;
-        /** Organization id. */
-        orgId: string;
-        /** Permissions (roles) assigned to the access token. */
-        permissionAssignments: {
-            /** Human-readable name of the permission (role). */
-            permissionName: string;
-            /** ID of the permission (also referred to as "role" in the dashboard). */
-            permissionId: string;
-            /** ID of the permission assignment. */
-            assignmentId: string;
-            /** List of API operations granted by this permission. */
-            operations?: string[] | undefined;
-        }[];
-        /** Public key associated with the access token. */
-        publicKey: string;
-        /** Token id. */
-        tokenId: string;
-    }[];
-};
-
-export type ArchiveServiceAccountRequest = ArchiveServiceAccountParams & { query?: ArchiveServiceAccountQuery }
-
-export type ArchiveUserParams = {
-    /** User id. */
-    userId: string;
-};
-
-export type ArchiveUserResponse = {
-    /** Username/identifier of the user (any unique string accepted, e.g. your internal user ID or email). */
-    username: string;
-    /** Display name of the user. */
-    name: string;
-    /** User id. */
-    userId: string;
-    /** User kind. */
-    kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
-    /** UUID of the user's primary credential. */
-    credentialUuid: string;
-    /** Organization id. */
-    orgId?: string | undefined;
-    /** Tenant id. */
-    tenantId?: string | undefined;
-    /** @deprecated - Flat list of API operations the user has access to. */
-    permissions?: string[] | undefined;
-    /** Whether the user is active. */
-    isActive: boolean;
-    /** Whether the user is a service account. */
-    isServiceAccount: boolean;
-    /** Whether the user has completed registration. */
-    isRegistered: boolean;
-    /** Whether the user must authenticate via SSO. */
-    isSSORequired: boolean;
-    /** Permissions (roles) assigned to the user. */
-    permissionAssignments: {
-        /** Human-readable name of the permission (role). */
-        permissionName: string;
-        /** ID of the permission (also referred to as "role" in the dashboard). */
-        permissionId: string;
-        /** ID of the permission assignment. */
-        assignmentId: string;
-        /** List of API operations granted by this permission. */
-        operations?: string[] | undefined;
-    }[];
-};
-
-export type ArchiveUserRequest = ArchiveUserParams
-
 export type CreateCredentialBody = {
     credentialKind: "Fido2";
     credentialInfo: {
@@ -2030,6 +1851,211 @@ export type CreateDelegatedUserLoginResponse = DelegatedLoginResponse
 
 export type CreateDelegatedUserLoginRequest = DelegatedLoginRequest
 
+export type DeleteCredentialParams = {
+    credentialUuid: string;
+};
+
+export type DeleteCredentialResponse = {};
+
+export type DeleteCredentialRequest = DeleteCredentialParams
+
+export type ArchiveCredentialParams = DeleteCredentialParams
+
+export type ArchiveCredentialResponse = DeleteCredentialResponse
+
+export type ArchiveCredentialRequest = DeleteCredentialRequest
+
+export type DeletePersonalAccessTokenParams = {
+    /** Token id. */
+    tokenId: string;
+};
+
+export type DeletePersonalAccessTokenResponse = {
+    /** The access token. Only returned at creation time. */
+    accessToken?: string | undefined;
+    dateCreated: string;
+    /** ID of the credential associated with the access token. */
+    credId: string;
+    /** Whether the access token is active. */
+    isActive: boolean;
+    /** Access token kind. */
+    kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
+    /** User id. */
+    linkedUserId: string;
+    /** ID of the application the access token is linked to. */
+    linkedAppId: string;
+    /** Human-readable name of the access token. */
+    name: string;
+    /** Organization id. */
+    orgId: string;
+    /** Permissions (roles) assigned to the access token. */
+    permissionAssignments: {
+        /** Human-readable name of the permission (role). */
+        permissionName: string;
+        /** ID of the permission (also referred to as "role" in the dashboard). */
+        permissionId: string;
+        /** ID of the permission assignment. */
+        assignmentId: string;
+        /** List of API operations granted by this permission. */
+        operations?: string[] | undefined;
+    }[];
+    /** Public key associated with the access token. */
+    publicKey: string;
+    /** Token id. */
+    tokenId: string;
+};
+
+export type DeletePersonalAccessTokenRequest = DeletePersonalAccessTokenParams
+
+export type ArchivePersonalAccessTokenParams = DeletePersonalAccessTokenParams
+
+export type ArchivePersonalAccessTokenResponse = DeletePersonalAccessTokenResponse
+
+export type ArchivePersonalAccessTokenRequest = DeletePersonalAccessTokenRequest
+
+export type DeleteServiceAccountParams = {
+    /** ID of the service account. */
+    serviceAccountId: string;
+};
+
+export type DeleteServiceAccountQuery = {
+    /** If true, bypasses the policy approver check and deletes immediately. */
+    force?: boolean;
+};
+
+export type DeleteServiceAccountResponse = {
+    userInfo: {
+        /** Username/identifier of the user (any unique string accepted, e.g. your internal user ID or email). */
+        username: string;
+        /** Display name of the user. */
+        name: string;
+        /** User id. */
+        userId: string;
+        /** User kind. */
+        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        /** UUID of the user's primary credential. */
+        credentialUuid: string;
+        /** Organization id. */
+        orgId?: string | undefined;
+        /** Tenant id. */
+        tenantId?: string | undefined;
+        /** @deprecated - Flat list of API operations the user has access to. */
+        permissions?: string[] | undefined;
+        /** Whether the user is active. */
+        isActive: boolean;
+        /** Whether the user is a service account. */
+        isServiceAccount: boolean;
+        /** Whether the user has completed registration. */
+        isRegistered: boolean;
+        /** Permissions (roles) assigned to the user. */
+        permissionAssignments: {
+            /** Human-readable name of the permission (role). */
+            permissionName: string;
+            /** ID of the permission (also referred to as "role" in the dashboard). */
+            permissionId: string;
+            /** ID of the permission assignment. */
+            assignmentId: string;
+            /** List of API operations granted by this permission. */
+            operations?: string[] | undefined;
+        }[];
+    };
+    accessTokens: {
+        /** The access token. Only returned at creation time. */
+        accessToken?: string | undefined;
+        dateCreated: string;
+        /** ID of the credential associated with the access token. */
+        credId: string;
+        /** Whether the access token is active. */
+        isActive: boolean;
+        /** Access token kind. */
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
+        /** User id. */
+        linkedUserId: string;
+        /** ID of the application the access token is linked to. */
+        linkedAppId: string;
+        /** Human-readable name of the access token. */
+        name: string;
+        /** Organization id. */
+        orgId: string;
+        /** Permissions (roles) assigned to the access token. */
+        permissionAssignments: {
+            /** Human-readable name of the permission (role). */
+            permissionName: string;
+            /** ID of the permission (also referred to as "role" in the dashboard). */
+            permissionId: string;
+            /** ID of the permission assignment. */
+            assignmentId: string;
+            /** List of API operations granted by this permission. */
+            operations?: string[] | undefined;
+        }[];
+        /** Public key associated with the access token. */
+        publicKey: string;
+        /** Token id. */
+        tokenId: string;
+    }[];
+};
+
+export type DeleteServiceAccountRequest = DeleteServiceAccountParams & { query?: DeleteServiceAccountQuery }
+
+export type ArchiveServiceAccountParams = DeleteServiceAccountParams
+
+export type ArchiveServiceAccountQuery = DeleteServiceAccountQuery
+
+export type ArchiveServiceAccountResponse = DeleteServiceAccountResponse
+
+export type ArchiveServiceAccountRequest = DeleteServiceAccountRequest
+
+export type DeleteUserParams = {
+    /** User id. */
+    userId: string;
+};
+
+export type DeleteUserResponse = {
+    /** Username/identifier of the user (any unique string accepted, e.g. your internal user ID or email). */
+    username: string;
+    /** Display name of the user. */
+    name: string;
+    /** User id. */
+    userId: string;
+    /** User kind. */
+    kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+    /** UUID of the user's primary credential. */
+    credentialUuid: string;
+    /** Organization id. */
+    orgId?: string | undefined;
+    /** Tenant id. */
+    tenantId?: string | undefined;
+    /** @deprecated - Flat list of API operations the user has access to. */
+    permissions?: string[] | undefined;
+    /** Whether the user is active. */
+    isActive: boolean;
+    /** Whether the user is a service account. */
+    isServiceAccount: boolean;
+    /** Whether the user has completed registration. */
+    isRegistered: boolean;
+    /** Whether the user must authenticate via SSO. */
+    isSSORequired: boolean;
+    /** Permissions (roles) assigned to the user. */
+    permissionAssignments: {
+        /** Human-readable name of the permission (role). */
+        permissionName: string;
+        /** ID of the permission (also referred to as "role" in the dashboard). */
+        permissionId: string;
+        /** ID of the permission assignment. */
+        assignmentId: string;
+        /** List of API operations granted by this permission. */
+        operations?: string[] | undefined;
+    }[];
+};
+
+export type DeleteUserRequest = DeleteUserParams
+
+export type ArchiveUserParams = DeleteUserParams
+
+export type ArchiveUserResponse = DeleteUserResponse
+
+export type ArchiveUserRequest = DeleteUserRequest
+
 export type ExchangeAccessTokenBody = {
     /** ID of the Organisation or Tenant for which you wish to obtain an access token. */
     target: string;
@@ -3220,7 +3246,7 @@ export type RegisterEndUserBody = {
         credentialName?: string | undefined;
     } | undefined;
     wallets: {
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet nickname. */
         name?: string | undefined;
     }[];
@@ -3253,7 +3279,7 @@ export type RegisterEndUserResponse = {
         /** ID of the wallet. */
         id: string;
         /** Network this wallet is bound to. */
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet address on its corresponding network. */
         address?: string | undefined;
         /** Details about the key underlying the wallet. */

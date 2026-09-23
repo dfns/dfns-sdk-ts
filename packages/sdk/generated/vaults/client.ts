@@ -97,6 +97,20 @@ export class VaultsClient {
     return response.json()
   }
 
+  async getVaultQuarantine(request: T.GetVaultQuarantineRequest): Promise<T.GetVaultQuarantineResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/quarantines/:quarantineId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listVaultAssets(request: T.ListVaultAssetsRequest): Promise<T.ListVaultAssetsResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/assets', {
       path: request ?? {},
@@ -127,6 +141,20 @@ export class VaultsClient {
 
   async listVaultLocks(request: T.ListVaultLocksRequest): Promise<T.ListVaultLocksResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/locks', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listVaultQuarantines(request: T.ListVaultQuarantinesRequest): Promise<T.ListVaultQuarantinesResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/quarantines', {
       path: request ?? {},
       query: request.query ?? {},
     })

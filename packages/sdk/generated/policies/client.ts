@@ -9,21 +9,6 @@ import * as T from './types'
 export class PoliciesClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
-  async archivePolicy(request: T.ArchivePolicyRequest): Promise<T.ArchivePolicyResponse> {
-    const path = buildPathAndQuery('/v2/policies/:policyId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async createApprovalDecision(request: T.CreateApprovalDecisionRequest): Promise<T.CreateApprovalDecisionResponse> {
     const path = buildPathAndQuery('/v2/policy-approvals/:approvalId/decisions', {
       path: request ?? {},
@@ -52,6 +37,26 @@ export class PoliciesClient {
     })
 
     return response.json()
+  }
+
+  async deletePolicy(request: T.DeletePolicyRequest): Promise<T.DeletePolicyResponse> {
+    const path = buildPathAndQuery('/v2/policies/:policyId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use deletePolicy instead */
+  async archivePolicy(request: T.DeletePolicyRequest): Promise<T.DeletePolicyResponse> {
+    return this.deletePolicy(request)
   }
 
   async getApproval(request: T.GetApprovalRequest): Promise<T.GetApprovalResponse> {

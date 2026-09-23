@@ -183,50 +183,6 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
-  async broadcastTransactionInit(request: T.BroadcastTransactionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
-      path: request ?? {},
-      query: {},
-    })
-    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'POST',
-        userActionHttpPath,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async broadcastTransactionComplete(
-    request: T.BroadcastTransactionRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.BroadcastTransactionResponse> {
-    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async bulkCreateWalletsInit(request: T.BulkCreateWalletsRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets/bulk-create', {
       path: request ?? {},
@@ -869,6 +825,50 @@ export class DelegatedWalletsClient {
     const response = await simpleFetch(path, {
       method: 'PUT',
       body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async signAndBroadcastTransactionInit(request: T.SignAndBroadcastTransactionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async signAndBroadcastTransactionComplete(
+    request: T.SignAndBroadcastTransactionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.SignAndBroadcastTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
