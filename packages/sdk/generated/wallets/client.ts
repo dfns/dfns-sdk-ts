@@ -69,21 +69,6 @@ export class WalletsClient {
     return response.json()
   }
 
-  async broadcastTransaction(request: T.BroadcastTransactionRequest): Promise<T.BroadcastTransactionResponse> {
-    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async bulkCreateWallets(request: T.BulkCreateWalletsRequest): Promise<T.BulkCreateWalletsResponse> {
     const path = buildPathAndQuery('/wallets/bulk-create', {
       path: request ?? {},
@@ -470,6 +455,26 @@ export class WalletsClient {
     })
 
     return response.json()
+  }
+
+  async signAndBroadcastTransaction(request: T.SignAndBroadcastTransactionRequest): Promise<T.SignAndBroadcastTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use signAndBroadcastTransaction instead */
+  async broadcastTransaction(request: T.SignAndBroadcastTransactionRequest): Promise<T.SignAndBroadcastTransactionResponse> {
+    return this.signAndBroadcastTransaction(request)
   }
 
   async speedUpTransaction(request: T.SpeedUpTransactionRequest): Promise<T.SpeedUpTransactionResponse> {

@@ -183,182 +183,6 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
-  async archiveCredentialInit(request: T.ArchiveCredentialRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
-      path: request ?? {},
-      query: {},
-    })
-    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async archiveCredentialComplete(
-    request: T.ArchiveCredentialRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ArchiveCredentialResponse> {
-    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async archivePersonalAccessTokenInit(request: T.ArchivePersonalAccessTokenRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/pats/:tokenId', {
-      path: request ?? {},
-      query: {},
-    })
-    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async archivePersonalAccessTokenComplete(
-    request: T.ArchivePersonalAccessTokenRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ArchivePersonalAccessTokenResponse> {
-    const path = buildPathAndQuery('/auth/pats/:tokenId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async archiveServiceAccountInit(request: T.ArchiveServiceAccountRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
-      path: request ?? {},
-      query: request.query ?? {},
-    })
-    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async archiveServiceAccountComplete(
-    request: T.ArchiveServiceAccountRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ArchiveServiceAccountResponse> {
-    const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
-      path: request ?? {},
-      query: request.query ?? {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async archiveUserInit(request: T.ArchiveUserRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/users/:userId', {
-      path: request ?? {},
-      query: {},
-    })
-    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async archiveUserComplete(
-    request: T.ArchiveUserRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ArchiveUserResponse> {
-    const path = buildPathAndQuery('/auth/users/:userId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async createCredentialInit(request: T.CreateCredentialRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/credentials', {
       path: request ?? {},
@@ -1025,6 +849,182 @@ export class DelegatedAuthClient {
     const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async deleteCredentialInit(request: T.DeleteCredentialRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deleteCredentialComplete(
+    request: T.DeleteCredentialRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeleteCredentialResponse> {
+    const path = buildPathAndQuery('/auth/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async deletePersonalAccessTokenInit(request: T.DeletePersonalAccessTokenRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/pats/:tokenId', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deletePersonalAccessTokenComplete(
+    request: T.DeletePersonalAccessTokenRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeletePersonalAccessTokenResponse> {
+    const path = buildPathAndQuery('/auth/pats/:tokenId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async deleteServiceAccountInit(request: T.DeleteServiceAccountRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deleteServiceAccountComplete(
+    request: T.DeleteServiceAccountRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeleteServiceAccountResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/:serviceAccountId', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async deleteUserInit(request: T.DeleteUserRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/users/:userId', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deleteUserComplete(
+    request: T.DeleteUserRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeleteUserResponse> {
+    const path = buildPathAndQuery('/auth/users/:userId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })

@@ -27,17 +27,17 @@ export type ArchivePermissionResponse = {
 
 export type ArchivePermissionRequest = ArchivePermissionParams & { body: ArchivePermissionBody }
 
-export type CreateAssignmentBody = {
+export type AssignPermissionBody = {
     /** ID of the identity to assign the permission to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
     identityId: string;
 };
 
-export type CreateAssignmentParams = {
+export type AssignPermissionParams = {
     /** ID of the permission (also referred to as "role" in the dashboard). */
     permissionId: string;
 };
 
-export type CreateAssignmentResponse = {
+export type AssignPermissionResponse = {
     /** ID of the permission assignment. */
     id: string;
     /** ID of the permission (also referred to as "role" in the dashboard). */
@@ -50,7 +50,15 @@ export type CreateAssignmentResponse = {
     dateUpdated: string;
 };
 
-export type CreateAssignmentRequest = CreateAssignmentParams & { body: CreateAssignmentBody }
+export type AssignPermissionRequest = AssignPermissionParams & { body: AssignPermissionBody }
+
+export type CreateAssignmentBody = AssignPermissionBody
+
+export type CreateAssignmentParams = AssignPermissionParams
+
+export type CreateAssignmentResponse = AssignPermissionResponse
+
+export type CreateAssignmentRequest = AssignPermissionRequest
 
 export type CreatePermissionBody = {
     /** Human-readable name for the permission (role). */
@@ -77,22 +85,6 @@ export type CreatePermissionResponse = {
 };
 
 export type CreatePermissionRequest = { body: CreatePermissionBody }
-
-export type DeleteAssignmentParams = {
-    /** ID of the permission (also referred to as "role" in the dashboard). */
-    permissionId: string;
-    /** ID of the permission assignment. */
-    assignmentId: string;
-};
-
-export type DeleteAssignmentQuery = {
-    /** If true, bypasses the approval process and revokes immediately. */
-    force?: boolean | undefined;
-};
-
-export type DeleteAssignmentResponse = void | undefined;
-
-export type DeleteAssignmentRequest = DeleteAssignmentParams & { query?: DeleteAssignmentQuery }
 
 export type GetPermissionParams = {
     /** ID of the permission (also referred to as "role" in the dashboard). */
@@ -284,6 +276,30 @@ export type ListPermissionsResponse = {
 };
 
 export type ListPermissionsRequest = { query?: ListPermissionsQuery }
+
+export type RevokePermissionParams = {
+    /** ID of the permission (also referred to as "role" in the dashboard). */
+    permissionId: string;
+    /** ID of the permission assignment. */
+    assignmentId: string;
+};
+
+export type RevokePermissionQuery = {
+    /** If true, bypasses the approval process and revokes immediately. */
+    force?: boolean | undefined;
+};
+
+export type RevokePermissionResponse = void | undefined;
+
+export type RevokePermissionRequest = RevokePermissionParams & { query?: RevokePermissionQuery }
+
+export type DeleteAssignmentParams = RevokePermissionParams
+
+export type DeleteAssignmentQuery = RevokePermissionQuery
+
+export type DeleteAssignmentResponse = RevokePermissionResponse
+
+export type DeleteAssignmentRequest = RevokePermissionRequest
 
 export type UpdatePermissionBody = {
     /** New name for the permission (role). */

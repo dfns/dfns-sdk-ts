@@ -51,7 +51,7 @@ export class DelegatedPermissionsClient {
     return response.json()
   }
 
-  async createAssignmentInit(request: T.CreateAssignmentRequest): Promise<UserActionChallengeResponse> {
+  async assignPermissionInit(request: T.AssignPermissionRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
       query: {},
@@ -71,10 +71,10 @@ export class DelegatedPermissionsClient {
     return challenge
   }
 
-  async createAssignmentComplete(
-    request: T.CreateAssignmentRequest,
+  async assignPermissionComplete(
+    request: T.AssignPermissionRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.CreateAssignmentResponse> {
+  ): Promise<T.AssignPermissionResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
       query: {},
@@ -139,50 +139,6 @@ export class DelegatedPermissionsClient {
     return response.json()
   }
 
-  async deleteAssignmentInit(request: T.DeleteAssignmentRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
-      path: request ?? {},
-      query: request.query ?? {},
-    })
-    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async deleteAssignmentComplete(
-    request: T.DeleteAssignmentRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.DeleteAssignmentResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
-      path: request ?? {},
-      query: request.query ?? {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    
-  }
-
   async getPermission(request: T.GetPermissionRequest): Promise<T.GetPermissionResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId', {
       path: request ?? {},
@@ -223,6 +179,50 @@ export class DelegatedPermissionsClient {
     })
 
     return response.json()
+  }
+
+  async revokePermissionInit(request: T.RevokePermissionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async revokePermissionComplete(
+    request: T.RevokePermissionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.RevokePermissionResponse> {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    
   }
 
   async updatePermissionInit(request: T.UpdatePermissionRequest): Promise<UserActionChallengeResponse> {
