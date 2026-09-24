@@ -9,7 +9,6 @@ You need a `Service Account`: refer to the [developer guide](https://docs.dfns.c
 Copy `.env.example` to a new file `.env` and set the following values,
 
 - `DFNS_API_URL` = `https://api.dfns.io`
-- `DFNS_APP_ID` = Dfns Application ID (grab one in Dfns Dashboard: `Settings` > `Applications`)
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` of your service account
 - `DFNS_PRIVATE_KEY` = the private key of your service account, the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the auth token of your service account, the value should start with `eyJ0...`

@@ -8,7 +8,7 @@ This example demonstrates a SPA interacting directly with the Dfns API through t
 
 Copy `.env.example` to a new file `.env.local` and set the following values,
 
-* `REACT_APP_DFNS_API_URL` = `https://api.dfns.ninja`
+* `REACT_APP_DFNS_API_URL` = `https://api.dfns.io`
 * `REACT_APP_DFNS_ORG_ID` = your Dfns Organisation ID (found in Dashboard > Profile)
 * `REACT_APP_PASSKEY_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
 * `REACT_APP_PASSKEY_RELYING_PARTY_NAME` = A string representing the name of the relying party, aka, your company name (e.g. "Acme"). The user will be presented with that name when creating or using a passkey.
