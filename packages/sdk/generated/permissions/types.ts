@@ -27,17 +27,17 @@ export type ArchivePermissionResponse = {
 
 export type ArchivePermissionRequest = ArchivePermissionParams & { body: ArchivePermissionBody }
 
-export type CreateAssignmentBody = {
+export type AssignPermissionBody = {
     /** ID of the identity to assign the permission to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
     identityId: string;
 };
 
-export type CreateAssignmentParams = {
+export type AssignPermissionParams = {
     /** ID of the permission (also referred to as "role" in the dashboard). */
     permissionId: string;
 };
 
-export type CreateAssignmentResponse = {
+export type AssignPermissionResponse = {
     /** ID of the permission assignment. */
     id: string;
     /** ID of the permission (also referred to as "role" in the dashboard). */
@@ -50,13 +50,21 @@ export type CreateAssignmentResponse = {
     dateUpdated: string;
 };
 
-export type CreateAssignmentRequest = CreateAssignmentParams & { body: CreateAssignmentBody }
+export type AssignPermissionRequest = AssignPermissionParams & { body: AssignPermissionBody }
+
+export type CreateAssignmentBody = AssignPermissionBody
+
+export type CreateAssignmentParams = AssignPermissionParams
+
+export type CreateAssignmentResponse = AssignPermissionResponse
+
+export type CreateAssignmentRequest = AssignPermissionRequest
 
 export type CreatePermissionBody = {
     /** Human-readable name for the permission (role). */
     name: string;
     /** List of API operations this permission grants access to. See [Permissions List](https://docs.dfns.co/core-concepts/roles-and-permissions#list-of-permissions) for available operations. */
-    operations: (("Registry:Addresses:Create" | "Registry:Addresses:Delete" | "Registry:Addresses:Read" | "Registry:Addresses:Update" | "Registry:ContractSchemas:Create" | "Registry:ContractSchemas:Delete" | "Registry:ContractSchemas:Read" | "Auth:Logs:Read" | "Auth:Users:Create" | "Auth:Users:Read" | "Auth:Users:Update" | "Auth:Users:Activate" | "Auth:Users:Deactivate" | "Auth:Users:Delete" | "Auth:ServiceAccounts:Create" | "Auth:ServiceAccounts:Read" | "Auth:ServiceAccounts:Update" | "Auth:ServiceAccounts:Deactivate" | "Auth:ServiceAccounts:Activate" | "Auth:ServiceAccounts:Delete" | "Auth:Pats:Create" | "Auth:Register:Delegated" | "Auth:Login:Delegated" | "Auth:Recover:Delegated" | "Agreements:Acceptance:Create" | "Agreements:Acceptance:Read" | "Events:Read" | "Exchanges:Create" | "Exchanges:Read" | "Exchanges:Delete" | "Exchanges:Deposits:Create" | "Exchanges:Withdrawals:Create" | "FeeSponsors:Create" | "FeeSponsors:Read" | "FeeSponsors:Update" | "FeeSponsors:Delete" | "FeeSponsors:Use" | "Orgs:Read" | "Orgs:Update" | "Orgs:Settings:Read" | "Orgs:Settings:Update" | "Permissions:Archive" | "Permissions:Create" | "Permissions:Read" | "Permissions:Update" | "Permissions:Assign" | "Permissions:Revoke" | "Permissions:Assignments:Read" | "Policies:Archive" | "Policies:Create" | "Policies:Read" | "Policies:Update" | "Policies:Approvals:Read" | "Policies:Approvals:Approve" | "Signers:ListSigners" | "Stakes:Create" | "Stakes:Read" | "Stakes:Update" | "Swaps:Create" | "Swaps:Read" | "Payouts:Create" | "Payouts:Read" | "Payouts:Write" | "Allocations:Create" | "Allocations:Update" | "Allocations:Read" | "Keys:Create" | "Keys:Delete" | "Keys:Read" | "Keys:Update" | "Keys:Reuse" | "Keys:Delegate" | "Keys:Import" | "Keys:Export" | "Keys:Derive" | "Keys:ChildKeys:Create" | "Keys:Signatures:Create" | "Keys:Signatures:Read" | "KeyStores:Read" | "KeyStores:Fleets:Create" | "KeyStores:Fleets:Clone" | "KeyStores:ProofOfControl:Create" | "KeyStores:OnchainSignatures:Create" | "Networks:CantonValidators:Create" | "Networks:CantonValidators:Read" | "Networks:CantonValidators:Update" | "Networks:CantonValidators:Delete" | "Wallets:Create" | "Wallets:Read" | "Wallets:Update" | "Wallets:Tags:Add" | "Wallets:Tags:Delete" | "Wallets:Transactions:Create" | "Wallets:Transactions:Read" | "Wallets:Transactions:Abort" | "Wallets:Transfers:Create" | "Wallets:Transfers:Read" | "Wallets:Transfers:Abort" | "Wallets:Offers:Read" | "Wallets:Offers:Settle" | "Vaults:Create" | "Vaults:Read" | "Vaults:Update" | "Vaults:Tags:Add" | "Vaults:Tags:Delete" | "Webhooks:Create" | "Webhooks:Read" | "Webhooks:Update" | "Webhooks:Delete" | "Webhooks:Ping" | "Webhooks:Events:Read" | "Billing:Read" | "Billing:Write" | "Analytics:Read") | ("Alias:Create" | "Alias:Delete" | "Alias:Read" | "Alias:Update" | "Wallets:GenerateSignature" | "Wallets:BroadcastTransaction" | "Auth:Action:Sign" | "Auth:Apps:Read" | "Auth:Apps:Create" | "Auth:Apps:Update" | "Auth:Creds:Create" | "Auth:Creds:Read" | "Auth:Creds:Update" | "Auth:Creds:Code:Create" | "Auth:Types:Application" | "Auth:Types:Employee" | "Auth:Types:EndUser" | "Auth:Types:Pat" | "Auth:Types:ServiceAccount" | "Internal:Auth:Types:Staff" | "Auth:Users:Delegate" | "PermissionAssignments:Create" | "PermissionAssignments:Read" | "PermissionAssignments:Revoke"))[];
+    operations: (("Auth:Logs:Read" | "Auth:Users:Create" | "Auth:Users:Read" | "Auth:Users:Update" | "Auth:Users:Activate" | "Auth:Users:Deactivate" | "Auth:Users:Delete" | "Auth:UserGroups:Create" | "Auth:UserGroups:Read" | "Auth:UserGroups:Update" | "Auth:UserGroups:Delete" | "Auth:UserGroups:Members:Read" | "Auth:UserGroups:Members:Add" | "Auth:UserGroups:Members:Remove" | "Auth:ServiceAccounts:Create" | "Auth:ServiceAccounts:Read" | "Auth:ServiceAccounts:Update" | "Auth:ServiceAccounts:Activate" | "Auth:ServiceAccounts:Deactivate" | "Auth:ServiceAccounts:Delete" | "Auth:Pats:Create" | "Auth:Delegated:Register" | "Auth:Delegated:Login" | "Auth:Delegated:Recover" | "Agreements:Read" | "Agreements:Accept" | "Exchanges:Create" | "Exchanges:Read" | "Exchanges:Delete" | "Exchanges:Deposits:Create" | "Exchanges:Withdrawals:Create" | "FeeSponsors:Create" | "FeeSponsors:Read" | "FeeSponsors:Update" | "FeeSponsors:Delete" | "FeeSponsors:Use" | "Orgs:Read" | "Orgs:Update" | "Orgs:Settings:Read" | "Orgs:Settings:Update" | "Permissions:Create" | "Permissions:Read" | "Permissions:Update" | "Permissions:Assign" | "Permissions:Revoke" | "Permissions:Delete" | "Permissions:Assignments:Read" | "Policies:Create" | "Policies:Read" | "Policies:Update" | "Policies:Delete" | "Policies:Evaluations:Read" | "Policies:Evaluations:Vote" | "Registry:Addresses:Create" | "Registry:Addresses:Read" | "Registry:Addresses:Update" | "Registry:Addresses:Delete" | "Registry:ContractSchemas:Create" | "Registry:ContractSchemas:Read" | "Registry:ContractSchemas:Delete" | "Stakes:Create" | "Stakes:Read" | "Stakes:Update" | "Swaps:Create" | "Swaps:Read" | "Payouts:Create" | "Payouts:Read" | "Payouts:Update" | "Payins:Create" | "Payins:Read" | "Allocations:Create" | "Allocations:Update" | "Allocations:Read" | "Keys:Create" | "Keys:Read" | "Keys:Update" | "Keys:Reuse" | "Keys:Delegate" | "Keys:Import" | "Keys:Export" | "Keys:Delete" | "Keys:Vrf:Derive" | "Keys:ChildKeys:Create" | "Keys:Signatures:Create" | "Keys:Signatures:Read" | "KeyStores:Read" | "KeyStores:Instructions:Cancel" | "KeyStores:Instructions:Fleets:Create" | "KeyStores:Instructions:Fleets:Clone" | "KeyStores:Instructions:Fleets:Users:Add" | "KeyStores:Instructions:Fleets:Keys:Harvest" | "KeyStores:Instructions:Fleets:Provisioners:Add" | "KeyStores:Instructions:Keys:ProveControl" | "KeyStores:Instructions:Keys:Sign" | "Networks:Canton:Validators:Create" | "Networks:Canton:Validators:Read" | "Networks:Canton:Validators:Update" | "Networks:Canton:Validators:Delete" | "Wallets:Create" | "Wallets:Read" | "Wallets:Update" | "Wallets:Tags:Add" | "Wallets:Tags:Remove" | "Wallets:Transactions:Create" | "Wallets:Transactions:Read" | "Wallets:Transactions:Abort" | "Wallets:Transfers:Create" | "Wallets:Transfers:Read" | "Wallets:Transfers:Abort" | "Wallets:Offers:Read" | "Wallets:Offers:Settle" | "AddressWatches:Create" | "AddressWatches:Read" | "AddressWatches:Delete" | "Vaults:Create" | "Vaults:Read" | "Vaults:Update" | "Vaults:Tags:Add" | "Vaults:Tags:Remove" | "Vaults:Quarantines:Release" | "Vaults:Locks:Create" | "Vaults:Locks:Release" | "Vaults:Locks:Transfer" | "Vaults:Transfers:Create" | "Webhooks:Create" | "Webhooks:Read" | "Webhooks:Update" | "Webhooks:Delete" | "Webhooks:Ping" | "Webhooks:Events:Read" | "Billing:Read" | "Billing:Manage" | "Activities:Read" | "Analytics:Read") | ("Auth:Register:Delegated" | "Auth:Login:Delegated" | "Auth:Recover:Delegated" | "Agreements:Acceptance:Create" | "Agreements:Acceptance:Read" | "Events:Read" | "Permissions:Archive" | "Policies:Archive" | "Policies:Approvals:Read" | "Policies:Approvals:Approve" | "Signers:ListSigners" | "Payouts:Write" | "Keys:Derive" | "Networks:CantonValidators:Create" | "Networks:CantonValidators:Read" | "Networks:CantonValidators:Update" | "Networks:CantonValidators:Delete" | "Wallets:Tags:Delete" | "Vaults:Tags:Delete" | "Vaults:Addresses:Create" | "Vaults:Locks:Delete" | "Billing:Write" | "KeyStores:Fleets:Cancel" | "KeyStores:Fleets:Create" | "KeyStores:Fleets:Clone" | "KeyStores:Fleets:AddMacUser" | "KeyStores:Fleets:AddProvisioner" | "KeyStores:Fleets:KeyHarvest" | "KeyStores:ProofOfControl:Create" | "KeyStores:OnchainSignatures:Create" | "Tenant:Billing:Write" | "Tenant:Settings:Write"))[];
 };
 
 export type CreatePermissionResponse = {
@@ -77,22 +85,6 @@ export type CreatePermissionResponse = {
 };
 
 export type CreatePermissionRequest = { body: CreatePermissionBody }
-
-export type DeleteAssignmentParams = {
-    /** ID of the permission (also referred to as "role" in the dashboard). */
-    permissionId: string;
-    /** ID of the permission assignment. */
-    assignmentId: string;
-};
-
-export type DeleteAssignmentQuery = {
-    /** If true, bypasses the approval process and revokes immediately. */
-    force?: boolean | undefined;
-};
-
-export type DeleteAssignmentResponse = void | undefined;
-
-export type DeleteAssignmentRequest = DeleteAssignmentParams & { query?: DeleteAssignmentQuery }
 
 export type GetPermissionParams = {
     /** ID of the permission (also referred to as "role" in the dashboard). */
@@ -128,6 +120,8 @@ export type GetPermissionResponse = {
         status: "Applied" | "Failed" | "Pending" | "Rejected";
         /** ID of the entity being changed. */
         entityId: string;
+        /** User action of the change request. */
+        userActionId?: string | undefined;
         dateCreated: string;
         dateResolved?: string | undefined;
         approvalId?: string | undefined;
@@ -191,6 +185,8 @@ export type ListAssignmentsResponse = {
             status: "Applied" | "Failed" | "Pending" | "Rejected";
             /** ID of the entity being changed. */
             entityId: string;
+            /** User action of the change request. */
+            userActionId?: string | undefined;
             dateCreated: string;
             dateResolved?: string | undefined;
             approvalId?: string | undefined;
@@ -252,6 +248,8 @@ export type ListPermissionsResponse = {
             status: "Applied" | "Failed" | "Pending" | "Rejected";
             /** ID of the entity being changed. */
             entityId: string;
+            /** User action of the change request. */
+            userActionId?: string | undefined;
             dateCreated: string;
             dateResolved?: string | undefined;
             approvalId?: string | undefined;
@@ -279,11 +277,35 @@ export type ListPermissionsResponse = {
 
 export type ListPermissionsRequest = { query?: ListPermissionsQuery }
 
+export type RevokePermissionParams = {
+    /** ID of the permission (also referred to as "role" in the dashboard). */
+    permissionId: string;
+    /** ID of the permission assignment. */
+    assignmentId: string;
+};
+
+export type RevokePermissionQuery = {
+    /** If true, bypasses the approval process and revokes immediately. */
+    force?: boolean | undefined;
+};
+
+export type RevokePermissionResponse = void | undefined;
+
+export type RevokePermissionRequest = RevokePermissionParams & { query?: RevokePermissionQuery }
+
+export type DeleteAssignmentParams = RevokePermissionParams
+
+export type DeleteAssignmentQuery = RevokePermissionQuery
+
+export type DeleteAssignmentResponse = RevokePermissionResponse
+
+export type DeleteAssignmentRequest = RevokePermissionRequest
+
 export type UpdatePermissionBody = {
     /** New name for the permission (role). */
     name?: string | undefined;
     /** New list of API operations this permission grants access to. See [Permissions List](https://docs.dfns.co/core-concepts/roles-and-permissions#list-of-permissions) for available operations. */
-    operations?: (("Registry:Addresses:Create" | "Registry:Addresses:Delete" | "Registry:Addresses:Read" | "Registry:Addresses:Update" | "Registry:ContractSchemas:Create" | "Registry:ContractSchemas:Delete" | "Registry:ContractSchemas:Read" | "Auth:Logs:Read" | "Auth:Users:Create" | "Auth:Users:Read" | "Auth:Users:Update" | "Auth:Users:Activate" | "Auth:Users:Deactivate" | "Auth:Users:Delete" | "Auth:ServiceAccounts:Create" | "Auth:ServiceAccounts:Read" | "Auth:ServiceAccounts:Update" | "Auth:ServiceAccounts:Deactivate" | "Auth:ServiceAccounts:Activate" | "Auth:ServiceAccounts:Delete" | "Auth:Pats:Create" | "Auth:Register:Delegated" | "Auth:Login:Delegated" | "Auth:Recover:Delegated" | "Agreements:Acceptance:Create" | "Agreements:Acceptance:Read" | "Events:Read" | "Exchanges:Create" | "Exchanges:Read" | "Exchanges:Delete" | "Exchanges:Deposits:Create" | "Exchanges:Withdrawals:Create" | "FeeSponsors:Create" | "FeeSponsors:Read" | "FeeSponsors:Update" | "FeeSponsors:Delete" | "FeeSponsors:Use" | "Orgs:Read" | "Orgs:Update" | "Orgs:Settings:Read" | "Orgs:Settings:Update" | "Permissions:Archive" | "Permissions:Create" | "Permissions:Read" | "Permissions:Update" | "Permissions:Assign" | "Permissions:Revoke" | "Permissions:Assignments:Read" | "Policies:Archive" | "Policies:Create" | "Policies:Read" | "Policies:Update" | "Policies:Approvals:Read" | "Policies:Approvals:Approve" | "Signers:ListSigners" | "Stakes:Create" | "Stakes:Read" | "Stakes:Update" | "Swaps:Create" | "Swaps:Read" | "Payouts:Create" | "Payouts:Read" | "Payouts:Write" | "Allocations:Create" | "Allocations:Update" | "Allocations:Read" | "Keys:Create" | "Keys:Delete" | "Keys:Read" | "Keys:Update" | "Keys:Reuse" | "Keys:Delegate" | "Keys:Import" | "Keys:Export" | "Keys:Derive" | "Keys:ChildKeys:Create" | "Keys:Signatures:Create" | "Keys:Signatures:Read" | "KeyStores:Read" | "KeyStores:Fleets:Create" | "KeyStores:Fleets:Clone" | "KeyStores:ProofOfControl:Create" | "KeyStores:OnchainSignatures:Create" | "Networks:CantonValidators:Create" | "Networks:CantonValidators:Read" | "Networks:CantonValidators:Update" | "Networks:CantonValidators:Delete" | "Wallets:Create" | "Wallets:Read" | "Wallets:Update" | "Wallets:Tags:Add" | "Wallets:Tags:Delete" | "Wallets:Transactions:Create" | "Wallets:Transactions:Read" | "Wallets:Transactions:Abort" | "Wallets:Transfers:Create" | "Wallets:Transfers:Read" | "Wallets:Transfers:Abort" | "Wallets:Offers:Read" | "Wallets:Offers:Settle" | "Vaults:Create" | "Vaults:Read" | "Vaults:Update" | "Vaults:Tags:Add" | "Vaults:Tags:Delete" | "Webhooks:Create" | "Webhooks:Read" | "Webhooks:Update" | "Webhooks:Delete" | "Webhooks:Ping" | "Webhooks:Events:Read" | "Billing:Read" | "Billing:Write" | "Analytics:Read") | ("Alias:Create" | "Alias:Delete" | "Alias:Read" | "Alias:Update" | "Wallets:GenerateSignature" | "Wallets:BroadcastTransaction" | "Auth:Action:Sign" | "Auth:Apps:Read" | "Auth:Apps:Create" | "Auth:Apps:Update" | "Auth:Creds:Create" | "Auth:Creds:Read" | "Auth:Creds:Update" | "Auth:Creds:Code:Create" | "Auth:Types:Application" | "Auth:Types:Employee" | "Auth:Types:EndUser" | "Auth:Types:Pat" | "Auth:Types:ServiceAccount" | "Internal:Auth:Types:Staff" | "Auth:Users:Delegate" | "PermissionAssignments:Create" | "PermissionAssignments:Read" | "PermissionAssignments:Revoke"))[] | undefined;
+    operations?: (("Auth:Logs:Read" | "Auth:Users:Create" | "Auth:Users:Read" | "Auth:Users:Update" | "Auth:Users:Activate" | "Auth:Users:Deactivate" | "Auth:Users:Delete" | "Auth:UserGroups:Create" | "Auth:UserGroups:Read" | "Auth:UserGroups:Update" | "Auth:UserGroups:Delete" | "Auth:UserGroups:Members:Read" | "Auth:UserGroups:Members:Add" | "Auth:UserGroups:Members:Remove" | "Auth:ServiceAccounts:Create" | "Auth:ServiceAccounts:Read" | "Auth:ServiceAccounts:Update" | "Auth:ServiceAccounts:Activate" | "Auth:ServiceAccounts:Deactivate" | "Auth:ServiceAccounts:Delete" | "Auth:Pats:Create" | "Auth:Delegated:Register" | "Auth:Delegated:Login" | "Auth:Delegated:Recover" | "Agreements:Read" | "Agreements:Accept" | "Exchanges:Create" | "Exchanges:Read" | "Exchanges:Delete" | "Exchanges:Deposits:Create" | "Exchanges:Withdrawals:Create" | "FeeSponsors:Create" | "FeeSponsors:Read" | "FeeSponsors:Update" | "FeeSponsors:Delete" | "FeeSponsors:Use" | "Orgs:Read" | "Orgs:Update" | "Orgs:Settings:Read" | "Orgs:Settings:Update" | "Permissions:Create" | "Permissions:Read" | "Permissions:Update" | "Permissions:Assign" | "Permissions:Revoke" | "Permissions:Delete" | "Permissions:Assignments:Read" | "Policies:Create" | "Policies:Read" | "Policies:Update" | "Policies:Delete" | "Policies:Evaluations:Read" | "Policies:Evaluations:Vote" | "Registry:Addresses:Create" | "Registry:Addresses:Read" | "Registry:Addresses:Update" | "Registry:Addresses:Delete" | "Registry:ContractSchemas:Create" | "Registry:ContractSchemas:Read" | "Registry:ContractSchemas:Delete" | "Stakes:Create" | "Stakes:Read" | "Stakes:Update" | "Swaps:Create" | "Swaps:Read" | "Payouts:Create" | "Payouts:Read" | "Payouts:Update" | "Payins:Create" | "Payins:Read" | "Allocations:Create" | "Allocations:Update" | "Allocations:Read" | "Keys:Create" | "Keys:Read" | "Keys:Update" | "Keys:Reuse" | "Keys:Delegate" | "Keys:Import" | "Keys:Export" | "Keys:Delete" | "Keys:Vrf:Derive" | "Keys:ChildKeys:Create" | "Keys:Signatures:Create" | "Keys:Signatures:Read" | "KeyStores:Read" | "KeyStores:Instructions:Cancel" | "KeyStores:Instructions:Fleets:Create" | "KeyStores:Instructions:Fleets:Clone" | "KeyStores:Instructions:Fleets:Users:Add" | "KeyStores:Instructions:Fleets:Keys:Harvest" | "KeyStores:Instructions:Fleets:Provisioners:Add" | "KeyStores:Instructions:Keys:ProveControl" | "KeyStores:Instructions:Keys:Sign" | "Networks:Canton:Validators:Create" | "Networks:Canton:Validators:Read" | "Networks:Canton:Validators:Update" | "Networks:Canton:Validators:Delete" | "Wallets:Create" | "Wallets:Read" | "Wallets:Update" | "Wallets:Tags:Add" | "Wallets:Tags:Remove" | "Wallets:Transactions:Create" | "Wallets:Transactions:Read" | "Wallets:Transactions:Abort" | "Wallets:Transfers:Create" | "Wallets:Transfers:Read" | "Wallets:Transfers:Abort" | "Wallets:Offers:Read" | "Wallets:Offers:Settle" | "AddressWatches:Create" | "AddressWatches:Read" | "AddressWatches:Delete" | "Vaults:Create" | "Vaults:Read" | "Vaults:Update" | "Vaults:Tags:Add" | "Vaults:Tags:Remove" | "Vaults:Quarantines:Release" | "Vaults:Locks:Create" | "Vaults:Locks:Release" | "Vaults:Locks:Transfer" | "Vaults:Transfers:Create" | "Webhooks:Create" | "Webhooks:Read" | "Webhooks:Update" | "Webhooks:Delete" | "Webhooks:Ping" | "Webhooks:Events:Read" | "Billing:Read" | "Billing:Manage" | "Activities:Read" | "Analytics:Read") | ("Auth:Register:Delegated" | "Auth:Login:Delegated" | "Auth:Recover:Delegated" | "Agreements:Acceptance:Create" | "Agreements:Acceptance:Read" | "Events:Read" | "Permissions:Archive" | "Policies:Archive" | "Policies:Approvals:Read" | "Policies:Approvals:Approve" | "Signers:ListSigners" | "Payouts:Write" | "Keys:Derive" | "Networks:CantonValidators:Create" | "Networks:CantonValidators:Read" | "Networks:CantonValidators:Update" | "Networks:CantonValidators:Delete" | "Wallets:Tags:Delete" | "Vaults:Tags:Delete" | "Vaults:Addresses:Create" | "Vaults:Locks:Delete" | "Billing:Write" | "KeyStores:Fleets:Cancel" | "KeyStores:Fleets:Create" | "KeyStores:Fleets:Clone" | "KeyStores:Fleets:AddMacUser" | "KeyStores:Fleets:AddProvisioner" | "KeyStores:Fleets:KeyHarvest" | "KeyStores:ProofOfControl:Create" | "KeyStores:OnchainSignatures:Create" | "Tenant:Billing:Write" | "Tenant:Settings:Write"))[] | undefined;
 };
 
 export type UpdatePermissionParams = {

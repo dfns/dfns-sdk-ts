@@ -211,6 +211,7 @@ Integrations with other blockchain platforms to make Dapp development frictionle
 - [Hedera](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-hedera/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/hedera)
 - [iota](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-iota/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/iota)
 - [kaspa](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-kaspa/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/kaspa)
+- [Movement](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-movement/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/movement)
 - [near](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-near/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/near)
 - [polkadot{.js}](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polkadot/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polkadot)
 - [polymesh](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-polymesh/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/polymesh)

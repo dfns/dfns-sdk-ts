@@ -12,11 +12,12 @@ export class DelegatedPayoutsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -55,11 +56,12 @@ export class DelegatedPayoutsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -93,21 +95,6 @@ export class DelegatedPayoutsClient {
     return response.json()
   }
 
-  async createPayoutQuote(request: T.CreatePayoutQuoteRequest): Promise<T.CreatePayoutQuoteResponse> {
-    const path = buildPathAndQuery('/payouts/quote', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async getPayout(request: T.GetPayoutRequest): Promise<T.GetPayoutResponse> {
     const path = buildPathAndQuery('/payouts/:payoutId', {
       path: request ?? {},
@@ -134,5 +121,25 @@ export class DelegatedPayoutsClient {
     })
 
     return response.json()
+  }
+
+  async requestPayoutQuote(request: T.RequestPayoutQuoteRequest): Promise<T.RequestPayoutQuoteResponse> {
+    const path = buildPathAndQuery('/payouts/quote', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use requestPayoutQuote instead */
+  async createPayoutQuote(request: T.RequestPayoutQuoteRequest): Promise<T.RequestPayoutQuoteResponse> {
+    return this.requestPayoutQuote(request)
   }
 }

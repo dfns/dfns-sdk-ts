@@ -12,11 +12,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -55,11 +56,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -98,11 +100,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -141,11 +144,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -179,16 +183,17 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
-  async broadcastTransactionInit(request: T.BroadcastTransactionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
+  async bulkCreateWalletsInit(request: T.BulkCreateWalletsRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create', {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -198,11 +203,11 @@ export class DelegatedWalletsClient {
     return challenge
   }
 
-  async broadcastTransactionComplete(
-    request: T.BroadcastTransactionRequest,
+  async bulkCreateWalletsComplete(
+    request: T.BulkCreateWalletsRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.BroadcastTransactionResponse> {
-    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
+  ): Promise<T.BulkCreateWalletsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create', {
       path: request ?? {},
       query: {},
     })
@@ -227,11 +232,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -270,11 +276,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -328,11 +335,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -371,11 +379,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -414,11 +423,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -457,11 +467,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -489,6 +500,20 @@ export class DelegatedWalletsClient {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async getBulkWalletJob(request: T.GetBulkWalletJobRequest): Promise<T.GetBulkWalletJobResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create/:jobId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
       apiOptions: this.apiOptions,
     })
 
@@ -612,11 +637,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -644,6 +670,34 @@ export class DelegatedWalletsClient {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listBulkWalletJobs(request?: T.ListBulkWalletJobsRequest): Promise<T.ListBulkWalletJobsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create', {
+      path: request ?? {},
+      query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listBulkWalletJobWallets(request: T.ListBulkWalletJobWalletsRequest): Promise<T.ListBulkWalletJobWalletsResponse> {
+    const path = buildPathAndQuery('/wallets/bulk-create/:jobId/wallets', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
       apiOptions: this.apiOptions,
     })
 
@@ -739,11 +793,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -777,16 +832,61 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async signAndBroadcastTransactionInit(request: T.SignAndBroadcastTransactionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async signAndBroadcastTransactionComplete(
+    request: T.SignAndBroadcastTransactionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.SignAndBroadcastTransactionResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/transactions', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async speedUpTransactionInit(request: T.SpeedUpTransactionRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transactions/:transactionId/speed-up', {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -825,11 +925,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -868,11 +969,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -911,11 +1013,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -954,11 +1057,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'DELETE',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -997,11 +1101,12 @@ export class DelegatedWalletsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },

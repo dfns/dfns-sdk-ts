@@ -1,4 +1,4 @@
-import { CreateWalletRequest } from '@dfns/sdk/types/Wallets'
+import { CreateWalletRequest } from '@dfns/sdk/types/wallets'
 import { NextRequest, NextResponse } from 'next/server'
 import { getDfnsDelegatedClient } from '@/app/api/utils'
 import { DFNS_END_USER_TOKEN_COOKIE } from '@/common/constants'

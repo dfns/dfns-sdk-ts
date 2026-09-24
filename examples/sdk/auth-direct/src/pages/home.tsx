@@ -12,7 +12,7 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     dfnsApi()
-      .wallets.listWallets({ query: { limit: '20' } })
+      .wallets.listWallets({ query: { limit: 20 } })
       .then((wallets) => setWallets(wallets))
   }, [])
 

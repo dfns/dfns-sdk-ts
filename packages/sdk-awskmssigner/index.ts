@@ -3,6 +3,8 @@ import { toBase64Url } from '@dfns/sdk/utils'
 import { KMSClient, KMSClientConfig, SignCommand, SigningAlgorithmSpec } from '@aws-sdk/client-kms'
 
 export class AwsKmsKeySigner implements CredentialSigner<KeyAssertion> {
+  readonly useClientChallenge?: boolean
+
   private client = new KMSClient(this.options.kmsClientConfig)
 
   constructor(
@@ -13,14 +15,20 @@ export class AwsKmsKeySigner implements CredentialSigner<KeyAssertion> {
         id: string
         algorithm: SigningAlgorithmSpec
       }
+      useClientChallenge?: boolean
     }
-  ) {}
+  ) {
+    this.useClientChallenge = options.useClientChallenge
+  }
 
   async sign(challenge: UserActionChallenge): Promise<KeyAssertion> {
     const { credId } = this.options
-    const allowedCredId = challenge.allowCredentials.key.map((cred) => cred.id)
-    if (!allowedCredId.includes(credId)) {
-      throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredId}`)
+
+    if (challenge.allowCredentials) {
+      const allowedCredIds = challenge.allowCredentials.key.map((cred) => cred.id)
+      if (!allowedCredIds.includes(credId)) {
+        throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredIds}`)
+      }
     }
 
     const clientData = Buffer.from(

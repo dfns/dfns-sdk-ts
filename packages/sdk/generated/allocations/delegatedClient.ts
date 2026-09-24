@@ -12,11 +12,12 @@ export class DelegatedAllocationsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -55,11 +56,12 @@ export class DelegatedAllocationsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -96,6 +98,20 @@ export class DelegatedAllocationsClient {
   async getAllocation(request: T.GetAllocationRequest): Promise<T.GetAllocationResponse> {
     const path = buildPathAndQuery('/allocations/:allocationId', {
       path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async getAllocationsInfo(): Promise<T.GetAllocationsInfoResponse> {
+    const path = buildPathAndQuery('/allocations/info', {
+      path: {},
       query: {},
     })
 

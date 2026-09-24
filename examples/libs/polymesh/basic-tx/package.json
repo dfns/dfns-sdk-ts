@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@dfns/lib-polymesh": "file:../../../packages/lib-polymesh",
+    "@dfns/lib-polymesh": "^0.8.28",
     "@polkadot/api": "11.2.1",
     "@polymeshassociation/polymesh-sdk": "27.3.0",
     "@polymeshassociation/signing-manager-types": "3.4.0",

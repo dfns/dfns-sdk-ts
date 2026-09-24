@@ -3,6 +3,7 @@
 set -euo pipefail
 
 tag=${1:-}
+license=$(node -p "require('./package.json').license")
 
 npm run cb:all
 
@@ -18,6 +19,7 @@ packages=(
     "@dfns/lib-iota"
     "@dfns/lib-kaspa"
     "@dfns/lib-meshsdk"
+    "@dfns/lib-movement"
     "@dfns/lib-near"
     "@dfns/lib-polkadot"
     "@dfns/lib-polymesh"
@@ -42,8 +44,16 @@ packages=(
 )
 
 for packageName in "${packages[@]}"; do
+    cp LICENSE dist/"${packageName}"/LICENSE
     cd dist/"${packageName}"
-    echo "Publishing ${packageName}..."
-    npm publish --workspaces=false ${tag:+--tag "$tag"}
+    npm pkg set "license=${license}" --workspaces=false
+    version=$(node -p "require('./package.json').version")
+    if npm view "${packageName}@${version}" version >/dev/null 2>&1; then
+        echo "Skipping ${packageName}@${version} (already published)"
+        cd - >/dev/null
+        continue
+    fi
+    echo "Publishing ${packageName}@${version}..."
+    npm publish --workspaces=false --access public ${tag:+--tag "$tag"}
     cd - >/dev/null
 done

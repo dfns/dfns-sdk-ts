@@ -9,6 +9,51 @@ import * as T from './types'
 export class SignersClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
+  async cancelFleetOperation(request: T.CancelFleetOperationRequest): Promise<T.CancelFleetOperationResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/fleet-operations/cancel', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async createAddMacUserInput(request: T.CreateAddMacUserInputRequest): Promise<T.CreateAddMacUserInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/add-mac-user/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async createAddProvisionerInput(request: T.CreateAddProvisionerInputRequest): Promise<T.CreateAddProvisionerInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/add-provisioner/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createCloneInput(request: T.CreateCloneInputRequest): Promise<T.CreateCloneInputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/clone/input', {
       path: request ?? {},
@@ -26,6 +71,21 @@ export class SignersClient {
 
   async createGenesisInput(request: T.CreateGenesisInputRequest): Promise<T.CreateGenesisInputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/genesis/input', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async createKeyHarvestInput(request: T.CreateKeyHarvestInputRequest): Promise<T.CreateKeyHarvestInputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/key-harvest/input', {
       path: request ?? {},
       query: {},
     })
@@ -97,6 +157,44 @@ export class SignersClient {
     return response.json()
   }
 
+  async submitAddMacUserOutput(
+    request: T.SubmitAddMacUserOutputRequest,
+    file: { bytes: Uint8Array; name?: string }
+  ): Promise<T.SubmitAddMacUserOutputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/add-mac-user/output', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      file,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async submitAddProvisionerOutput(
+    request: T.SubmitAddProvisionerOutputRequest,
+    file: { bytes: Uint8Array; name?: string }
+  ): Promise<T.SubmitAddProvisionerOutputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/add-provisioner/output', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      file,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async submitCloneOutput(
     request: T.SubmitCloneOutputRequest,
     file: { bytes: Uint8Array; name?: string }
@@ -121,6 +219,25 @@ export class SignersClient {
     file: { bytes: Uint8Array; name?: string }
   ): Promise<T.SubmitGenesisOutputResponse> {
     const path = buildPathAndQuery('/key-stores/:storeId/genesis/output', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      file,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async submitKeyHarvestOutput(
+    request: T.SubmitKeyHarvestOutputRequest,
+    file: { bytes: Uint8Array; name?: string }
+  ): Promise<T.SubmitKeyHarvestOutputResponse> {
+    const path = buildPathAndQuery('/key-stores/:storeId/key-harvest/output', {
       path: request ?? {},
       query: {},
     })

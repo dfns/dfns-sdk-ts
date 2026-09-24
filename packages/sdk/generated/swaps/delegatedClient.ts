@@ -12,11 +12,12 @@ export class DelegatedSwapsClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -44,21 +45,6 @@ export class DelegatedSwapsClient {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async createSwapQuote(request: T.CreateSwapQuoteRequest): Promise<T.CreateSwapQuoteResponse> {
-    const path = buildPathAndQuery('/swaps/quotes', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
       apiOptions: this.apiOptions,
     })
 
@@ -105,5 +91,25 @@ export class DelegatedSwapsClient {
     })
 
     return response.json()
+  }
+
+  async requestSwapQuote(request: T.RequestSwapQuoteRequest): Promise<T.RequestSwapQuoteResponse> {
+    const path = buildPathAndQuery('/swaps/quotes', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  /** @deprecated, use requestSwapQuote instead */
+  async createSwapQuote(request: T.RequestSwapQuoteRequest): Promise<T.RequestSwapQuoteResponse> {
+    return this.requestSwapQuote(request)
   }
 }

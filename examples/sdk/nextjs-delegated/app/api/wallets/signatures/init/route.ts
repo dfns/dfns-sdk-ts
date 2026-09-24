@@ -1,4 +1,4 @@
-import { GenerateSignatureBody } from '@dfns/sdk/types/Wallets'
+import { GenerateSignatureBody } from '@dfns/sdk/types/wallets'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { delegatedClient } from '../../../clients'

@@ -9,6 +9,7 @@
     "packages/lib-iota",
     "packages/lib-kaspa",
     "packages/lib-meshsdk",
+    "packages/lib-movement",
     "packages/lib-near",
     "packages/lib-polkadot",
     "packages/lib-polymesh",
