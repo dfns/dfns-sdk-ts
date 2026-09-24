@@ -17,7 +17,7 @@ Go back to the service accounts listing, and the new `Service Account` should be
 
 Copy `.env.example` to a new file `.env` and set the following values,
 
-- `REACT_APP_DFNS_API_URL`: `https://api.dfns.ninja` (test environment) or `https://api.dfns.io` (prod environment)
+- `REACT_APP_DFNS_API_URL`: `https://api.dfns.io` (test environment) or `https://api.dfns.io` (prod environment)
 - `REACT_APP_DFNS_ORG_ID`: your Dfns Organisation ID (found in Dashboard > Profile)
 
 

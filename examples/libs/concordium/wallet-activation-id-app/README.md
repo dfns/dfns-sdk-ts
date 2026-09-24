@@ -21,7 +21,7 @@ Go back to the service accounts listing, and the new `Service Account` should be
 
 Copy `.env.example` to a new file `.env` and set the following values,
 
-- `DFNS_API_URL` = `https://api.dfns.ninja`
+- `DFNS_API_URL` = `https://api.dfns.io`
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
