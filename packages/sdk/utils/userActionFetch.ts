@@ -16,7 +16,7 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
     if (options.method !== 'GET') {
       const apiOptions = {
         ...options.apiOptions,
-        baseUrl: (<any>options.apiOptions).baseAuthUrl || options.apiOptions.baseUrl,
+        baseUrl: options.apiOptions.baseAuthUrl || options.apiOptions.baseUrl,
       }
 
       if (!apiOptions.signer) {
@@ -50,9 +50,9 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
           JSON.stringify({
             timestamp: String(Date.now()),
             nonce: generateClientChallengeNonce(),
-            host: new URL(apiOptions.baseUrl).host,
+            host: new URL(apiOptions.baseUrl ?? url).host,
             method: options.method,
-            path: url.pathname + url.search,
+            path: (options.userActionHttpPath ?? url.pathname) + url.search,
             payloadHash: await sha256(new TextEncoder().encode(body), 'base64url'),
             ...(!!apiOptions.orgId && { orgId: apiOptions.orgId }),
             ...(!!apiOptions.tenantId && { tenantId: apiOptions.tenantId }),
@@ -75,8 +75,8 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
           {
             userActionPayload: body,
             userActionHttpMethod: options.method,
-            userActionHttpPath: url.pathname,
-            userActionServerKind: (<any>apiOptions)?.userActionServerKind || 'Api',
+            userActionHttpPath: options.userActionHttpPath ?? url.pathname,
+            userActionServerKind: apiOptions.userActionServerKind ?? 'Api',
           },
           apiOptions
         )
