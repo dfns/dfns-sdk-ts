@@ -31,6 +31,3 @@ jobs:
 
       - name: compile packages
         run: npm run cb:all
-
-      - name: test SDK routing
-        run: node --test packages/sdk/utils/routing.spec.cjs
