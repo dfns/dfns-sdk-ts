@@ -4,20 +4,27 @@ import { CredentialSigner, KeyAssertion, UserActionChallenge, DfnsError } from '
 import { toBase64Url } from '@dfns/sdk/utils'
 
 export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
+  readonly useClientChallenge?: boolean
+
   constructor(
     private options: {
       credId: string
       privateKey: string
       algorithm?: string
+      useClientChallenge?: boolean
     }
-  ) {}
+  ) {
+    this.useClientChallenge = options.useClientChallenge
+  }
 
-  async sign(challenge: UserActionChallenge): Promise<KeyAssertion> {
+  async sign(challenge: Pick<UserActionChallenge, 'challenge' | 'allowCredentials'>): Promise<KeyAssertion> {
     const { credId, privateKey, algorithm } = this.options
 
-    const allowedCredId = challenge.allowCredentials.key.map((cred) => cred.id)
-    if (!allowedCredId.includes(credId)) {
-      throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredId}`)
+    if (challenge.allowCredentials) {
+      const allowedCredId = challenge.allowCredentials.key.map((cred) => cred.id)
+      if (!allowedCredId.includes(credId)) {
+        throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredId}`)
+      }
     }
 
     const clientData = Buffer.from(

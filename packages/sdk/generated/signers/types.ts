@@ -77,11 +77,12 @@ export type CreateCloneInputRequest = CreateCloneInputParams & { body: CreateClo
 export type CreateGenesisInputBody = {
     kind: "Genesis";
     numProvisioners: number;
+    numOperational: number;
     numSecp256k1: number;
     numEd25519: number;
     hsmGenesisSerial: string;
     macGenesisSerial?: string | undefined;
-    hsmGenesisFirmwareVersion?: ("2.2" | "2.4") | undefined;
+    hsmGenesisFirmwareVersion?: ("2.4") | undefined;
     /** Development environments only (rejected with a 400 in production). Deep-merged over the generated genesis `options` block: objects merge recursively, any other value (including new fields and type changes) replaces the existing value. */
     debugOptions?: {
         [x: string]: unknown;

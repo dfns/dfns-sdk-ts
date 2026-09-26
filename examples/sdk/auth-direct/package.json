@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@dfns/sdk": "file:../../../packages/sdk",
-    "@dfns/sdk-browser": "file:../../../packages/sdk-browser",
+    "@dfns/sdk": "^0.8.28",
+    "@dfns/sdk-browser": "^0.8.28",
     "jwt-decode": "3.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

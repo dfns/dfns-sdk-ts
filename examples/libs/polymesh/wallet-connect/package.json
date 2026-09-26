@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@dfns/lib-polymesh": "file:../../../packages/lib-polymesh",
+    "@dfns/lib-polymesh": "^0.8.28",
     "@polymeshassociation/polymesh-sdk": "27.6.0",
     "@walletconnect/core": "2.20.0",
     "@walletconnect/jsonrpc-utils": "1.0.8",

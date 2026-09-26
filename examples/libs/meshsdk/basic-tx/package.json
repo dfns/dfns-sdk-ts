@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@dfns/lib-meshsdk": "file:../../../packages/lib-meshsdk",
-    "@dfns/sdk": "file:../../../packages/sdk",
-    "@dfns/sdk-keysigner": "file:../../../packages/sdk-keysigner",
+    "@dfns/lib-meshsdk": "^0.8.28",
+    "@dfns/sdk": "^0.8.28",
+    "@dfns/sdk-keysigner": "^0.8.28",
     "@emurgo/cardano-serialization-lib-nodejs": "11.5.0",
     "@meshsdk/core": "1.5.10",
     "dotenv": "16.1.4"

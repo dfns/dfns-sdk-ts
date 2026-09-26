@@ -27,7 +27,7 @@ export type UserActionChallenge = {
   challenge: string
   challengeIdentifier: string
   externalAuthenticationUrl: string
-  allowCredentials: {
+  allowCredentials?: {
     key: AllowCredential[]
     webauthn: AllowCredential[]
     passwordProtectedKey?: AllowCredentialWithEncryptedKey[]
@@ -83,5 +83,6 @@ export type SecondFactorAssertion = KeyAssertion | Fido2Assertion | TotpAssertio
 export type CredentialAssertion = KeyAssertion | Fido2Assertion | PasswordAssertion | TotpAssertion
 
 export interface CredentialSigner<T extends CredentialAssertion = FirstFactorAssertion> {
+  readonly useClientChallenge?: boolean
   sign(challenge: UserActionChallenge): Promise<T>
 }

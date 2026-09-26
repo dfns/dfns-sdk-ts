@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "main.ts",
   "dependencies": {
-    "@aptos-labs/ts-sdk": "^1.33.0",
-    "@dfns/lib-aptos": "file:../../../packages/lib-aptos",
-    "@dfns/sdk": "file:../../../packages/sdk",
-    "@dfns/sdk-keysigner": "file:../../../packages/sdk-keysigner",
+    "@aptos-labs/ts-sdk": "^5.0.0",
+    "@dfns/lib-aptos": "^0.8.28",
+    "@dfns/sdk": "^0.8.28",
+    "@dfns/sdk-keysigner": "^0.8.28",
     "dotenv": "16.1.4"
   },
   "devDependencies": {

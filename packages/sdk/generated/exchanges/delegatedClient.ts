@@ -12,11 +12,12 @@ export class DelegatedExchangesClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -55,11 +56,12 @@ export class DelegatedExchangesClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -98,11 +100,12 @@ export class DelegatedExchangesClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -141,11 +144,12 @@ export class DelegatedExchangesClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'DELETE',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },

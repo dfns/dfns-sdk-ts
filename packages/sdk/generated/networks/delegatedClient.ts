@@ -27,11 +27,12 @@ export class DelegatedNetworksClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -70,11 +71,12 @@ export class DelegatedNetworksClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'DELETE',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
@@ -108,10 +110,10 @@ export class DelegatedNetworksClient {
     return response.json()
   }
 
-  async getCantonValidator(request: T.GetCantonValidatorRequest): Promise<T.GetCantonValidatorResponse> {
-    const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
+  async estimateFees(request?: T.EstimateFeesRequest): Promise<T.EstimateFeesResponse> {
+    const path = buildPathAndQuery('/networks/fees', {
       path: request ?? {},
-      query: {},
+      query: request?.query ?? {},
     })
 
     const response = await simpleFetch(path, {
@@ -122,10 +124,15 @@ export class DelegatedNetworksClient {
     return response.json()
   }
 
-  async getFees(request?: T.GetFeesRequest): Promise<T.GetFeesResponse> {
-    const path = buildPathAndQuery('/networks/fees', {
+  /** @deprecated, use estimateFees instead */
+  async getFees(request?: T.EstimateFeesRequest): Promise<T.EstimateFeesResponse> {
+    return this.estimateFees(request)
+  }
+
+  async getCantonValidator(request: T.GetCantonValidatorRequest): Promise<T.GetCantonValidatorResponse> {
+    const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
       path: request ?? {},
-      query: request?.query ?? {},
+      query: {},
     })
 
     const response = await simpleFetch(path, {
@@ -155,11 +162,12 @@ export class DelegatedNetworksClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },

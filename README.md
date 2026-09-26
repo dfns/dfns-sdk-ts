@@ -125,6 +125,18 @@ const wallet = await dfns.wallets.createWallet({
 const { assets } = await dfns.wallets.getWalletAssets({ walletId: wallet.id })
 ```
 
+#### Deployments behind a path prefix
+
+`baseUrl` may include a gateway path, for example `https://platform.example.com/api`.
+A request to `/wallets` then uses `https://platform.example.com/api/wallets`; a trailing
+slash on the base URL is optional. The gateway must strip the prefix before forwarding
+to the API. Base URLs containing a query string or fragment are rejected.
+
+The SDK signs the canonical API route without the gateway prefix. Client-generated
+challenges retain the route's query string; server-generated challenges use its pathname.
+If server-challenge auth requests use a different base URL, set `baseAuthUrl` to that
+complete URL (including its prefix). It defaults to `baseUrl`.
+
 ### `DfnsDelegatedApiClient`
 
 In some configurations, you might want your server to be the one talking to Dfns "on behalf of the user", but till have the user sign all requests (on a web-app, using the WebauthN Credentials he owns). In this case, the `DfnsDelegatedApiClient` can be used on your server.

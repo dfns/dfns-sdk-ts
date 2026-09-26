@@ -2,7 +2,7 @@ import { fetch as _fetch } from 'cross-fetch'
 
 import { DfnsError, PolicyPendingError } from '../dfnsError'
 import { DfnsBaseApiOptions } from '../types/generic'
-import { assertAuthTokenIsSameOrg } from './authToken'
+import { extractTokenScope } from './authToken'
 import { sha256 } from './sha256'
 import { buildApiUrl, getCanonicalPath } from './url'
 
@@ -97,10 +97,24 @@ export const catchPolicyPending = <T>(fetch: Fetch<T>): Fetch<T> => {
 
 export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
-    const { orgId, authToken } = options.apiOptions
+    const { authToken } = options.apiOptions
 
-    if (authToken && orgId) {
-      assertAuthTokenIsSameOrg({ orgId, authToken })
+    if (authToken) {
+      const tokenScope = extractTokenScope({ authToken })
+
+      // if orgId passed in SDK instantiation, check auth token scope matches
+      if (options.apiOptions.orgId && options.apiOptions.orgId !== tokenScope.orgId) {
+        throw new Error(`Provided auth token is not scoped to org ID ${options.apiOptions.orgId}`)
+      }
+
+      // if tenantId passed in SDK instantiation, check auth token scope matches
+      if (options.apiOptions.tenantId && options.apiOptions.tenantId !== tokenScope.tenantId) {
+        throw new Error(`Provided auth token is not scoped to tenant ID ${options.apiOptions.tenantId}`)
+      }
+
+      // pass these scopes down to other middlewares
+      options.apiOptions.orgId = tokenScope.orgId
+      options.apiOptions.tenantId = tokenScope.tenantId
     }
 
     const authorization: Record<string, string> = authToken

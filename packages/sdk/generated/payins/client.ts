@@ -24,6 +24,21 @@ export class PayinsClient {
     return response.json()
   }
 
+  async createPayinQuote(request: T.CreatePayinQuoteRequest): Promise<T.CreatePayinQuoteResponse> {
+    const path = buildPathAndQuery('/payins/quote', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createPayinRecipient(request: T.CreatePayinRecipientRequest): Promise<T.CreatePayinRecipientResponse> {
     const path = buildPathAndQuery('/payins/recipients', {
       path: request ?? {},
@@ -67,8 +82,36 @@ export class PayinsClient {
     return response.json()
   }
 
+  async listPayinAccounts(request?: T.ListPayinAccountsRequest): Promise<T.ListPayinAccountsResponse> {
+    const path = buildPathAndQuery('/payins/accounts', {
+      path: request ?? {},
+      query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listPayinBalances(request?: T.ListPayinBalancesRequest): Promise<T.ListPayinBalancesResponse> {
     const path = buildPathAndQuery('/payins/balances', {
+      path: request ?? {},
+      query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listPayinOptions(request?: T.ListPayinOptionsRequest): Promise<T.ListPayinOptionsResponse> {
+    const path = buildPathAndQuery('/payins/options', {
       path: request ?? {},
       query: request?.query ?? {},
     })
@@ -89,6 +132,21 @@ export class PayinsClient {
 
     const response = await simpleFetch(path, {
       method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async registerPayinAccountAsset(request: T.RegisterPayinAccountAssetRequest): Promise<T.RegisterPayinAccountAssetResponse> {
+    const path = buildPathAndQuery('/payins/accounts/assets', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
       apiOptions: this.apiOptions,
     })
 

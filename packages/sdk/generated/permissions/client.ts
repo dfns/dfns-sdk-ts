@@ -24,7 +24,7 @@ export class PermissionsClient {
     return response.json()
   }
 
-  async createAssignment(request: T.CreateAssignmentRequest): Promise<T.CreateAssignmentResponse> {
+  async assignPermission(request: T.AssignPermissionRequest): Promise<T.AssignPermissionResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
       path: request ?? {},
       query: {},
@@ -37,6 +37,11 @@ export class PermissionsClient {
     })
 
     return response.json()
+  }
+
+  /** @deprecated, use assignPermission instead */
+  async createAssignment(request: T.AssignPermissionRequest): Promise<T.AssignPermissionResponse> {
+    return this.assignPermission(request)
   }
 
   async createPermission(request: T.CreatePermissionRequest): Promise<T.CreatePermissionResponse> {
@@ -52,21 +57,6 @@ export class PermissionsClient {
     })
 
     return response.json()
-  }
-
-  async deleteAssignment(request: T.DeleteAssignmentRequest): Promise<T.DeleteAssignmentResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
-      path: request ?? {},
-      query: request.query ?? {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    
   }
 
   async getPermission(request: T.GetPermissionRequest): Promise<T.GetPermissionResponse> {
@@ -109,6 +99,26 @@ export class PermissionsClient {
     })
 
     return response.json()
+  }
+
+  async revokePermission(request: T.RevokePermissionRequest): Promise<T.RevokePermissionResponse> {
+    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    
+  }
+
+  /** @deprecated, use revokePermission instead */
+  async deleteAssignment(request: T.RevokePermissionRequest): Promise<T.RevokePermissionResponse> {
+    return this.revokePermission(request)
   }
 
   async updatePermission(request: T.UpdatePermissionRequest): Promise<T.UpdatePermissionResponse> {

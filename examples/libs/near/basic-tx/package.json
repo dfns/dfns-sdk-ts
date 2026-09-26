@@ -4,7 +4,7 @@
   "main": "main.ts",
   "dependencies": {
     "near-api-js": "^6.0.0",
-    "@dfns/lib-near": "file:../../../packages/lib-near",
+    "@dfns/lib-near": "^0.8.28",
     "dotenv": "16.1.4"
   },
   "devDependencies": {

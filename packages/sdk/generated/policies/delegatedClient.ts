@@ -7,59 +7,17 @@ import * as T from './types'
 export class DelegatedPoliciesClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
-  async archivePolicyInit(request: T.ArchivePolicyRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/v2/policies/:policyId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async archivePolicyComplete(
-    request: T.ArchivePolicyRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ArchivePolicyResponse> {
-    const path = buildPathAndQuery('/v2/policies/:policyId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async createApprovalDecisionInit(request: T.CreateApprovalDecisionRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/v2/policy-approvals/:approvalId/decisions', {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -98,11 +56,12 @@ export class DelegatedPoliciesClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
@@ -129,6 +88,50 @@ export class DelegatedPoliciesClient {
     const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async deletePolicyInit(request: T.DeletePolicyRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/v2/policies/:policyId', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deletePolicyComplete(
+    request: T.DeletePolicyRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeletePolicyResponse> {
+    const path = buildPathAndQuery('/v2/policies/:policyId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
@@ -197,11 +200,12 @@ export class DelegatedPoliciesClient {
       path: request ?? {},
       query: {},
     })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
         userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
+        userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
         userActionServerKind: 'Api',
       },
