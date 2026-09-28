@@ -12,6 +12,7 @@ import {
   UserActionChallenge,
 } from './signer'
 import { HttpMethod, simpleFetch } from './utils/fetch'
+import { getCanonicalPath } from './utils/url'
 import { DfnsBaseApiOptions } from './types/generic'
 
 export type CreateUserActionChallengeRequest = {
@@ -94,7 +95,10 @@ export class BaseAuthApi {
   ): Promise<UserActionChallengeResponse> {
     const response = await simpleFetch('/auth/action/init', {
       method: 'POST',
-      body: request,
+      body: {
+        ...request,
+        userActionHttpPath: getCanonicalPath(request.userActionHttpPath),
+      },
       apiOptions: options,
     })
 

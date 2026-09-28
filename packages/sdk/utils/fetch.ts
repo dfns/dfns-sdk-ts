@@ -4,8 +4,9 @@ import { DfnsError, PolicyPendingError } from '../dfnsError'
 import { DfnsBaseApiOptions } from '../types/generic'
 import { extractTokenScope } from './authToken'
 import { sha256 } from './sha256'
+import { buildApiUrl } from './url'
 
-const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
+export const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
 
 import { version } from '../package.json'
 
@@ -24,7 +25,7 @@ export type Fetch<T> = (resource: string | URL, options: FetchOptions<T>) => Pro
 export const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     const baseUrl = options.apiOptions.baseUrl || DEFAULT_DFNS_BASE_URL
-    resource = new URL(resource, baseUrl)
+    resource = buildApiUrl(resource, baseUrl)
     return fetch(resource, options)
   }
 }
@@ -93,7 +94,7 @@ export const catchPolicyPending = <T>(fetch: Fetch<T>): Fetch<T> => {
 
 export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
-    const { orgId, authToken } = options.apiOptions
+    const { authToken } = options.apiOptions
 
     if (authToken) {
       const tokenScope = extractTokenScope({ authToken })

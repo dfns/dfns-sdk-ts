@@ -1,7 +1,7 @@
 import { CredentialSigner } from '../signer'
 
 export type DfnsBaseApiOptions = {
-  /** Only needs to be specified when using another API environment */
+  /** Complete transport base URL. It may include a deployment-specific path prefix. */
   baseUrl?: string
   /** Auth token needs to be specified to use any endpoint that requires authentication */
   authToken?: string
