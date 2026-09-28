@@ -134,8 +134,6 @@ to the API. Base URLs containing a query string or fragment are rejected.
 
 The SDK signs the canonical API route without the gateway prefix. Client-generated
 challenges retain the route's query string; server-generated challenges use its pathname.
-If server-challenge auth requests use a different base URL, set `baseAuthUrl` to that
-complete URL (including its prefix). It defaults to `baseUrl`.
 
 ### `DfnsDelegatedApiClient`
 
