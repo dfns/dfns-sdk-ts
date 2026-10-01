@@ -9,6 +9,21 @@ import * as T from './types'
 export class AllocationsClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
+  async cancel0fnsOrderPlacement(request: T.Cancel0fnsOrderPlacementRequest): Promise<T.Cancel0fnsOrderPlacementResponse> {
+    const path = buildPathAndQuery('/allocations/cancel-0fns-order-placement', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createAllocation(request: T.CreateAllocationRequest): Promise<T.CreateAllocationResponse> {
     const path = buildPathAndQuery('/allocations', {
       path: request ?? {},
@@ -31,6 +46,21 @@ export class AllocationsClient {
     })
 
     const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async createAllocationQuote(request: T.CreateAllocationQuoteRequest): Promise<T.CreateAllocationQuoteResponse> {
+    const path = buildPathAndQuery('/allocations/get-0fns-quote', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,

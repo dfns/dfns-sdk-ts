@@ -1,3 +1,19 @@
+export type Cancel0fnsOrderPlacementBody = {
+    /** The 0fns allocation action whose unfilled OrderBook order placement should be cancelled. */
+    allocationActionId: string;
+    /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
+    externalId?: string | undefined;
+    /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
+    feeSponsorId?: string | undefined;
+};
+
+export type Cancel0fnsOrderPlacementResponse = {
+    /** Id of the broadcast on-chain cancelOrder transaction. */
+    transactionId: string;
+};
+
+export type Cancel0fnsOrderPlacementRequest = { body: Cancel0fnsOrderPlacementBody }
+
 export type CreateAllocationBody = {
     /** Wallet id. */
     walletId: string;
@@ -7,18 +23,18 @@ export type CreateAllocationBody = {
     externalId?: string | undefined;
     /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
     provider?: ("M0" | "Yield.xyz") | undefined;
+    /** Source asset and amount to spend (the stablecoin for a deposit). */
     sourceAsset: {
         kind: "Erc20";
         contract: string;
         amount: string;
     };
+    /** Target asset (0fns) and the minimum amount you will accept. */
     targetAsset: {
         kind: "Erc20";
         contract: string;
         amount: string;
     };
-    /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-    slippageBps: number;
     /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
     feeSponsorId?: string | undefined;
 } | {
@@ -116,6 +132,11 @@ export type CreateAllocationResponse = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     }) & {
         metadata: {
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -136,6 +157,11 @@ export type CreateAllocationResponse = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     }) & {
         metadata: {
@@ -172,18 +198,18 @@ export type CreateAllocationResponse = {
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
+            /** Source asset and amount to spend (stablecoin for Deposit, 0fns for Withdraw). */
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
+            /** Target asset and the minimum amount you will accept (0fns for Deposit, stablecoin for Withdraw). */
             targetAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
-            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-            slippageBps: number;
             /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
             feeSponsorId?: string | undefined;
         } | {
@@ -204,18 +230,18 @@ export type CreateAllocationResponse = {
             externalId?: string | undefined;
             /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
+            /** Source asset and amount to spend (the stablecoin for a deposit). */
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
+            /** Target asset (0fns) and the minimum amount you will accept. */
             targetAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
-            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-            slippageBps: number;
             /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
             feeSponsorId?: string | undefined;
         } | {
@@ -304,18 +330,18 @@ export type CreateAllocationActionBody = {
     kind: "Deposit" | "Withdraw";
     /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
     externalId?: string | undefined;
+    /** Source asset and amount to spend (stablecoin for Deposit, 0fns for Withdraw). */
     sourceAsset: {
         kind: "Erc20";
         contract: string;
         amount: string;
     };
+    /** Target asset and the minimum amount you will accept (0fns for Deposit, stablecoin for Withdraw). */
     targetAsset: {
         kind: "Erc20";
         contract: string;
         amount: string;
     };
-    /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-    slippageBps: number;
     /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
     feeSponsorId?: string | undefined;
 } | {
@@ -355,6 +381,11 @@ export type CreateAllocationActionResponse = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     }) & {
         metadata: {
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -375,6 +406,11 @@ export type CreateAllocationActionResponse = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     }) & {
         metadata: {
@@ -411,18 +447,18 @@ export type CreateAllocationActionResponse = {
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
+            /** Source asset and amount to spend (stablecoin for Deposit, 0fns for Withdraw). */
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
+            /** Target asset and the minimum amount you will accept (0fns for Deposit, stablecoin for Withdraw). */
             targetAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
-            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-            slippageBps: number;
             /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
             feeSponsorId?: string | undefined;
         } | {
@@ -443,18 +479,18 @@ export type CreateAllocationActionResponse = {
             externalId?: string | undefined;
             /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
+            /** Source asset and amount to spend (the stablecoin for a deposit). */
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
+            /** Target asset (0fns) and the minimum amount you will accept. */
             targetAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
-            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-            slippageBps: number;
             /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
             feeSponsorId?: string | undefined;
         } | {
@@ -538,6 +574,88 @@ export type CreateAllocationActionResponse = {
 
 export type CreateAllocationActionRequest = CreateAllocationActionParams & { body: CreateAllocationActionBody }
 
+export type CreateAllocationQuoteBody = {
+    /** Wallet id. */
+    walletId: string;
+    protocol: "0fns";
+    /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
+    kind: "Deposit" | "Withdraw";
+    sourceAsset: {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    };
+    targetAsset: {
+        kind: "Erc20";
+        contract: string;
+    };
+};
+
+export type CreateAllocationQuoteResponse = {
+    /** Wallet id. */
+    walletId: string;
+    /** The DeFi protocol used for allocation generation. See [Create Allocation](https://docs.dfns.co/api-reference/allocations/create-allocation) for each protocol's provider, deposit asset, and network. */
+    protocol: "0fns" | "SkySusds" | "GauntletUsdcPrime" | "SteakhouseUsdt" | "GauntletUsdcPrimeBase" | "SteakhouseUsdcBase" | "SentoraPyusdMain";
+    /** The type of action being performed on the allocation investment: Deposit to add funds or Withdraw to remove funds. */
+    kind: "Deposit" | "Withdraw";
+    sourceAsset: ({
+        kind: "Native";
+        amount: string;
+    } | {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    } | {
+        kind: "Spl";
+        mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
+    }) & {
+        metadata: {
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            name?: string | undefined;
+            symbol?: string | undefined;
+            decimals: number;
+            tid?: string | undefined;
+        };
+    };
+    /** Expected output at current market price. */
+    targetAsset: ({
+        kind: "Native";
+        amount: string;
+    } | {
+        kind: "Erc20";
+        contract: string;
+        amount: string;
+    } | {
+        kind: "Spl";
+        mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
+    }) & {
+        metadata: {
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            name?: string | undefined;
+            symbol?: string | undefined;
+            decimals: number;
+            tid?: string | undefined;
+        };
+    };
+    /** Estimated fill time in seconds. */
+    estFillTime: number;
+    dateCreated: string;
+};
+
+export type CreateAllocationQuoteRequest = { body: CreateAllocationQuoteBody }
+
 export type GetAllocationParams = {
     /** Unique identifier for the allocation investment. */
     allocationId: string;
@@ -564,6 +682,11 @@ export type GetAllocationResponse = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     }) & {
         metadata: {
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -584,6 +707,11 @@ export type GetAllocationResponse = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     }) & {
         metadata: {
@@ -620,18 +748,18 @@ export type GetAllocationResponse = {
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
+            /** Source asset and amount to spend (stablecoin for Deposit, 0fns for Withdraw). */
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
+            /** Target asset and the minimum amount you will accept (0fns for Deposit, stablecoin for Withdraw). */
             targetAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
-            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-            slippageBps: number;
             /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
             feeSponsorId?: string | undefined;
         } | {
@@ -652,18 +780,18 @@ export type GetAllocationResponse = {
             externalId?: string | undefined;
             /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
+            /** Source asset and amount to spend (the stablecoin for a deposit). */
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
+            /** Target asset (0fns) and the minimum amount you will accept. */
             targetAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
-            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-            slippageBps: number;
             /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
             feeSponsorId?: string | undefined;
         } | {
@@ -791,18 +919,18 @@ export type ListAllocationActionsResponse = {
             kind: "Deposit" | "Withdraw";
             /** An optional external identifier provided by the client to ensure idempotency and prevent duplicate operations. */
             externalId?: string | undefined;
+            /** Source asset and amount to spend (stablecoin for Deposit, 0fns for Withdraw). */
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
+            /** Target asset and the minimum amount you will accept (0fns for Deposit, stablecoin for Withdraw). */
             targetAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
-            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-            slippageBps: number;
             /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
             feeSponsorId?: string | undefined;
         } | {
@@ -823,18 +951,18 @@ export type ListAllocationActionsResponse = {
             externalId?: string | undefined;
             /** The provider handling this allocation. `M0` offers the 0fns protocol; `Yield.xyz` offers vault strategies on Ethereum and Base. */
             provider?: ("M0" | "Yield.xyz") | undefined;
+            /** Source asset and amount to spend (the stablecoin for a deposit). */
             sourceAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
+            /** Target asset (0fns) and the minimum amount you will accept. */
             targetAsset: {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
             };
-            /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
-            slippageBps: number;
             /** Id of the fee sponsor that will pay the network fees for this allocation. When set, allocation transactions are broadcast as sponsored user operations. */
             feeSponsorId?: string | undefined;
         } | {
@@ -950,6 +1078,11 @@ export type ListAllocationsResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         }) & {
             metadata: {
                 network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -970,6 +1103,11 @@ export type ListAllocationsResponse = {
         } | {
             kind: "Spl";
             mint: string;
+            amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
             amount: string;
         }) & {
             metadata: {

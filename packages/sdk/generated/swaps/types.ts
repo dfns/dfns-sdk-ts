@@ -20,6 +20,11 @@ export type CreateSwapBody = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     };
     /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
     targetAsset: {
@@ -32,6 +37,11 @@ export type CreateSwapBody = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     };
     /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -60,6 +70,11 @@ export type CreateSwapBody = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     };
     /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
     targetAsset: {
@@ -72,6 +87,11 @@ export type CreateSwapBody = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     };
     /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -100,6 +120,11 @@ export type CreateSwapBody = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     };
     /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
     targetAsset: {
@@ -112,6 +137,11 @@ export type CreateSwapBody = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     };
     /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -149,6 +179,11 @@ export type CreateSwapResponse = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     }) & {
         metadata: {
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -169,6 +204,11 @@ export type CreateSwapResponse = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     }) & {
         metadata: {
@@ -206,6 +246,11 @@ export type CreateSwapResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
         targetAsset: {
@@ -218,6 +263,11 @@ export type CreateSwapResponse = {
         } | {
             kind: "Spl";
             mint: string;
+            amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
             amount: string;
         };
         /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -246,6 +296,11 @@ export type CreateSwapResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
         targetAsset: {
@@ -258,6 +313,11 @@ export type CreateSwapResponse = {
         } | {
             kind: "Spl";
             mint: string;
+            amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
             amount: string;
         };
         /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -286,6 +346,11 @@ export type CreateSwapResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
         targetAsset: {
@@ -298,6 +363,11 @@ export type CreateSwapResponse = {
         } | {
             kind: "Spl";
             mint: string;
+            amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
             amount: string;
         };
         /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -314,7 +384,7 @@ export type CreateSwapResponse = {
     };
     /** The failure reason, if any. Only present when status is Failed. */
     failureReason?: string | undefined;
-    /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`. Undefined for providers without intermediate sub-states. */
+    /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `approving-source`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`, `claiming-destination`. Undefined for providers without intermediate sub-states. */
     protocolStatus?: string | undefined;
 };
 
@@ -354,6 +424,11 @@ export type GetSwapResponse = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     }) & {
         metadata: {
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -374,6 +449,11 @@ export type GetSwapResponse = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     }) & {
         metadata: {
@@ -411,6 +491,11 @@ export type GetSwapResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
         targetAsset: {
@@ -423,6 +508,11 @@ export type GetSwapResponse = {
         } | {
             kind: "Spl";
             mint: string;
+            amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
             amount: string;
         };
         /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -451,6 +541,11 @@ export type GetSwapResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
         targetAsset: {
@@ -463,6 +558,11 @@ export type GetSwapResponse = {
         } | {
             kind: "Spl";
             mint: string;
+            amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
             amount: string;
         };
         /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -491,6 +591,11 @@ export type GetSwapResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
         targetAsset: {
@@ -503,6 +608,11 @@ export type GetSwapResponse = {
         } | {
             kind: "Spl";
             mint: string;
+            amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
             amount: string;
         };
         /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -519,7 +629,7 @@ export type GetSwapResponse = {
     };
     /** The failure reason, if any. Only present when status is Failed. */
     failureReason?: string | undefined;
-    /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`. Undefined for providers without intermediate sub-states. */
+    /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `approving-source`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`, `claiming-destination`. Undefined for providers without intermediate sub-states. */
     protocolStatus?: string | undefined;
 };
 
@@ -551,6 +661,11 @@ export type GetSwapQuoteResponse = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     }) & {
         metadata: {
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -571,6 +686,11 @@ export type GetSwapQuoteResponse = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     }) & {
         metadata: {
@@ -606,6 +726,11 @@ export type GetSwapQuoteResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
         targetAsset: {
@@ -616,6 +741,10 @@ export type GetSwapQuoteResponse = {
         } | {
             kind: "Spl";
             mint: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
         };
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
@@ -637,6 +766,11 @@ export type GetSwapQuoteResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
         targetAsset: {
@@ -647,6 +781,10 @@ export type GetSwapQuoteResponse = {
         } | {
             kind: "Spl";
             mint: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
         };
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
@@ -668,6 +806,11 @@ export type GetSwapQuoteResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
         targetAsset: {
@@ -678,6 +821,10 @@ export type GetSwapQuoteResponse = {
         } | {
             kind: "Spl";
             mint: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
         };
         /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
         feeToleranceBps: number;
@@ -735,6 +882,11 @@ export type ListSwapsResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         }) & {
             metadata: {
                 network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -755,6 +907,11 @@ export type ListSwapsResponse = {
         } | {
             kind: "Spl";
             mint: string;
+            amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
             amount: string;
         }) & {
             metadata: {
@@ -792,6 +949,11 @@ export type ListSwapsResponse = {
                 kind: "Spl";
                 mint: string;
                 amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
+                amount: string;
             };
             /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
             targetAsset: {
@@ -804,6 +966,11 @@ export type ListSwapsResponse = {
             } | {
                 kind: "Spl";
                 mint: string;
+                amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
                 amount: string;
             };
             /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -832,6 +999,11 @@ export type ListSwapsResponse = {
                 kind: "Spl";
                 mint: string;
                 amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
+                amount: string;
             };
             /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
             targetAsset: {
@@ -844,6 +1016,11 @@ export type ListSwapsResponse = {
             } | {
                 kind: "Spl";
                 mint: string;
+                amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
                 amount: string;
             };
             /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -872,6 +1049,11 @@ export type ListSwapsResponse = {
                 kind: "Spl";
                 mint: string;
                 amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
+                amount: string;
             };
             /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
             targetAsset: {
@@ -884,6 +1066,11 @@ export type ListSwapsResponse = {
             } | {
                 kind: "Spl";
                 mint: string;
+                amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
                 amount: string;
             };
             /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -900,7 +1087,7 @@ export type ListSwapsResponse = {
         };
         /** The failure reason, if any. Only present when status is Failed. */
         failureReason?: string | undefined;
-        /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`. Undefined for providers without intermediate sub-states. */
+        /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `approving-source`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`, `claiming-destination`. Undefined for providers without intermediate sub-states. */
         protocolStatus?: string | undefined;
     }[];
     /** token to use as `paginationToken` to request the next page. */
@@ -927,6 +1114,11 @@ export type RequestSwapQuoteBody = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     };
     /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
     targetAsset: {
@@ -937,6 +1129,10 @@ export type RequestSwapQuoteBody = {
     } | {
         kind: "Spl";
         mint: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
     };
     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
     slippageBps: number;
@@ -958,6 +1154,11 @@ export type RequestSwapQuoteBody = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     };
     /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
     targetAsset: {
@@ -968,6 +1169,10 @@ export type RequestSwapQuoteBody = {
     } | {
         kind: "Spl";
         mint: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
     };
     /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
     slippageBps: number;
@@ -989,6 +1194,11 @@ export type RequestSwapQuoteBody = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     };
     /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
     targetAsset: {
@@ -999,6 +1209,10 @@ export type RequestSwapQuoteBody = {
     } | {
         kind: "Spl";
         mint: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
     };
     /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
     feeToleranceBps: number;
@@ -1029,6 +1243,11 @@ export type RequestSwapQuoteResponse = {
         kind: "Spl";
         mint: string;
         amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
+        amount: string;
     }) & {
         metadata: {
             network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -1049,6 +1268,11 @@ export type RequestSwapQuoteResponse = {
     } | {
         kind: "Spl";
         mint: string;
+        amount: string;
+    } | {
+        kind: "Sep41";
+        issuer: string;
+        assetCode: string;
         amount: string;
     }) & {
         metadata: {
@@ -1084,6 +1308,11 @@ export type RequestSwapQuoteResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
         targetAsset: {
@@ -1094,6 +1323,10 @@ export type RequestSwapQuoteResponse = {
         } | {
             kind: "Spl";
             mint: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
         };
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
@@ -1115,6 +1348,11 @@ export type RequestSwapQuoteResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
         targetAsset: {
@@ -1125,6 +1363,10 @@ export type RequestSwapQuoteResponse = {
         } | {
             kind: "Spl";
             mint: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
         };
         /** The slippage tolerance for this trade in [basis point](https://en.wikipedia.org/wiki/Basis_point) (BPS). Slippage tolerance defines the maximum price difference you're willing to accept during a trade from the estimated quote, ensuring you still receive at least a minimum number of tokens if the price shifts. One basis point equals one-hundredth of a percentage point, or 0.01%. */
         slippageBps: number;
@@ -1146,6 +1388,11 @@ export type RequestSwapQuoteResponse = {
             kind: "Spl";
             mint: string;
             amount: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+            amount: string;
         };
         /** The target asset that will be received with the Swap transaction, follows the same structure as sourceAsset, but doesn't include the amount. */
         targetAsset: {
@@ -1156,6 +1403,10 @@ export type RequestSwapQuoteResponse = {
         } | {
             kind: "Spl";
             mint: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
         };
         /** The maximum fee you will accept for this CCTP transfer, in [basis points](https://en.wikipedia.org/wiki/Basis_point) (BPS) of the amount. CCTP is burn-and-mint with no price slippage; this caps the bridge/forwarding fee — which varies with chain congestion and Fast vs Standard speed — so the burn does not revert if the fee rises. One basis point equals 0.01%. */
         feeToleranceBps: number;

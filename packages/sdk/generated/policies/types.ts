@@ -895,6 +895,42 @@ export type CreateApprovalDecisionResponse = {
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
+                kind: "StellarCctpApprove";
+                /** USDC SEP-41 issuer (G… account). */
+                issuer: string;
+                /** USDC asset code. */
+                assetCode: string;
+                /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+                amount: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
+                kind: "StellarCctpBurn";
+                /** USDC SEP-41 issuer (G… account). */
+                issuer: string;
+                /** USDC asset code. */
+                assetCode: string;
+                /** USDC amount to burn, in Stellar-local 7-decimal units. */
+                amount: string;
+                /** CCTP destination domain. */
+                destinationDomain: number;
+                /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+                mintRecipient: string;
+                /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+                maxFee: string;
+                /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+                minFinalityThreshold: number;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
+                kind: "StellarCctpClaim";
+                /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+                message: string;
+                /** Circle's attestation over the message, hex-encoded. */
+                attestation: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
                 kind: "SettleOffer";
                 txHash: string;
                 decision: "Accept" | "Reject";
@@ -1254,6 +1290,11 @@ export type CreateApprovalDecisionResponse = {
                 kind: "Spl";
                 mint: string;
                 amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
+                amount: string;
             }) & {
                 metadata: {
                     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -1274,6 +1315,11 @@ export type CreateApprovalDecisionResponse = {
             } | {
                 kind: "Spl";
                 mint: string;
+                amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
                 amount: string;
             }) & {
                 metadata: {
@@ -1311,6 +1357,11 @@ export type CreateApprovalDecisionResponse = {
                     kind: "Spl";
                     mint: string;
                     amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
+                    amount: string;
                 };
                 /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetAsset: {
@@ -1323,6 +1374,11 @@ export type CreateApprovalDecisionResponse = {
                 } | {
                     kind: "Spl";
                     mint: string;
+                    amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
                     amount: string;
                 };
                 /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -1351,6 +1407,11 @@ export type CreateApprovalDecisionResponse = {
                     kind: "Spl";
                     mint: string;
                     amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
+                    amount: string;
                 };
                 /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetAsset: {
@@ -1363,6 +1424,11 @@ export type CreateApprovalDecisionResponse = {
                 } | {
                     kind: "Spl";
                     mint: string;
+                    amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
                     amount: string;
                 };
                 /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -1391,6 +1457,11 @@ export type CreateApprovalDecisionResponse = {
                     kind: "Spl";
                     mint: string;
                     amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
+                    amount: string;
                 };
                 /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetAsset: {
@@ -1403,6 +1474,11 @@ export type CreateApprovalDecisionResponse = {
                 } | {
                     kind: "Spl";
                     mint: string;
+                    amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
                     amount: string;
                 };
                 /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -1419,7 +1495,7 @@ export type CreateApprovalDecisionResponse = {
             };
             /** The failure reason, if any. Only present when status is Failed. */
             failureReason?: string | undefined;
-            /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`. Undefined for providers without intermediate sub-states. */
+            /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `approving-source`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`, `claiming-destination`. Undefined for providers without intermediate sub-states. */
             protocolStatus?: string | undefined;
         } | undefined;
     } | {
@@ -3181,6 +3257,39 @@ export type CreateApprovalDecisionResponse = {
                         hasAll?: string[] | undefined;
                     } | undefined;
                 } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "UserAction";
+                rule: {
+                    kind: "UserAction";
+                    configuration: {
+                        userActionKinds: string[];
+                    };
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {} | undefined;
             };
         };
     } | {
@@ -3306,6 +3415,18 @@ export type CreateApprovalDecisionResponse = {
                 network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
                 address: string;
                 schema?: any;
+            };
+        };
+    } | {
+        kind: "UserAction";
+        userAction: {
+            id: string;
+            kind: string;
+            action: {
+                host: string;
+                method: string;
+                path: string;
+                body?: unknown;
             };
         };
     };
@@ -3797,6 +3918,35 @@ export type CreatePolicyBody = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    name: string;
+    activityKind: "UserAction";
+    rule: {
+        kind: "UserAction";
+        configuration: {
+            userActionKinds: string[];
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
 };
 
 export type CreatePolicyResponse = {
@@ -4306,6 +4456,39 @@ export type CreatePolicyResponse = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "UserAction";
+    rule: {
+        kind: "UserAction";
+        configuration: {
+            userActionKinds: string[];
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
 };
 
 export type CreatePolicyRequest = { body: CreatePolicyBody }
@@ -4821,6 +5004,39 @@ export type DeletePolicyResponse = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "UserAction";
+    rule: {
+        kind: "UserAction";
+        configuration: {
+            userActionKinds: string[];
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
 };
 
 export type DeletePolicyRequest = DeletePolicyParams
@@ -5723,6 +5939,42 @@ export type GetApprovalResponse = {
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
+                kind: "StellarCctpApprove";
+                /** USDC SEP-41 issuer (G… account). */
+                issuer: string;
+                /** USDC asset code. */
+                assetCode: string;
+                /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+                amount: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
+                kind: "StellarCctpBurn";
+                /** USDC SEP-41 issuer (G… account). */
+                issuer: string;
+                /** USDC asset code. */
+                assetCode: string;
+                /** USDC amount to burn, in Stellar-local 7-decimal units. */
+                amount: string;
+                /** CCTP destination domain. */
+                destinationDomain: number;
+                /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+                mintRecipient: string;
+                /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+                maxFee: string;
+                /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+                minFinalityThreshold: number;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
+                kind: "StellarCctpClaim";
+                /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+                message: string;
+                /** Circle's attestation over the message, hex-encoded. */
+                attestation: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                externalId?: string | undefined;
+            } | {
                 kind: "SettleOffer";
                 txHash: string;
                 decision: "Accept" | "Reject";
@@ -6082,6 +6334,11 @@ export type GetApprovalResponse = {
                 kind: "Spl";
                 mint: string;
                 amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
+                amount: string;
             }) & {
                 metadata: {
                     network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -6102,6 +6359,11 @@ export type GetApprovalResponse = {
             } | {
                 kind: "Spl";
                 mint: string;
+                amount: string;
+            } | {
+                kind: "Sep41";
+                issuer: string;
+                assetCode: string;
                 amount: string;
             }) & {
                 metadata: {
@@ -6139,6 +6401,11 @@ export type GetApprovalResponse = {
                     kind: "Spl";
                     mint: string;
                     amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
+                    amount: string;
                 };
                 /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetAsset: {
@@ -6151,6 +6418,11 @@ export type GetApprovalResponse = {
                 } | {
                     kind: "Spl";
                     mint: string;
+                    amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
                     amount: string;
                 };
                 /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -6179,6 +6451,11 @@ export type GetApprovalResponse = {
                     kind: "Spl";
                     mint: string;
                     amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
+                    amount: string;
                 };
                 /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetAsset: {
@@ -6191,6 +6468,11 @@ export type GetApprovalResponse = {
                 } | {
                     kind: "Spl";
                     mint: string;
+                    amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
                     amount: string;
                 };
                 /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -6219,6 +6501,11 @@ export type GetApprovalResponse = {
                     kind: "Spl";
                     mint: string;
                     amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
+                    amount: string;
                 };
                 /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                 targetAsset: {
@@ -6231,6 +6518,11 @@ export type GetApprovalResponse = {
                 } | {
                     kind: "Spl";
                     mint: string;
+                    amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
                     amount: string;
                 };
                 /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -6247,7 +6539,7 @@ export type GetApprovalResponse = {
             };
             /** The failure reason, if any. Only present when status is Failed. */
             failureReason?: string | undefined;
-            /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`. Undefined for providers without intermediate sub-states. */
+            /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `approving-source`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`, `claiming-destination`. Undefined for providers without intermediate sub-states. */
             protocolStatus?: string | undefined;
         } | undefined;
     } | {
@@ -8009,6 +8301,39 @@ export type GetApprovalResponse = {
                         hasAll?: string[] | undefined;
                     } | undefined;
                 } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "UserAction";
+                rule: {
+                    kind: "UserAction";
+                    configuration: {
+                        userActionKinds: string[];
+                    };
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {} | undefined;
             };
         };
     } | {
@@ -8134,6 +8459,18 @@ export type GetApprovalResponse = {
                 network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
                 address: string;
                 schema?: any;
+            };
+        };
+    } | {
+        kind: "UserAction";
+        userAction: {
+            id: string;
+            kind: string;
+            action: {
+                host: string;
+                method: string;
+                path: string;
+                body?: unknown;
             };
         };
     };
@@ -8669,6 +9006,39 @@ export type GetPolicyResponse = ({
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "UserAction";
+    rule: {
+        kind: "UserAction";
+        configuration: {
+            userActionKinds: string[];
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
 }) & {
     pendingChangeRequest?: {
         id: string;
@@ -9192,6 +9562,39 @@ export type GetPolicyResponse = ({
                     hasAll?: string[] | undefined;
                 } | undefined;
             } | undefined;
+        } | {
+            id: string;
+            name: string;
+            status: "Active" | "Archived";
+            dateCreated?: string | undefined;
+            dateUpdated?: string | undefined;
+            activityKind: "UserAction";
+            rule: {
+                kind: "UserAction";
+                configuration: {
+                    userActionKinds: string[];
+                };
+            };
+            action: {
+                kind: "RequestApproval";
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        userId?: {
+                            in: string[];
+                        } | undefined;
+                    };
+                    /** Whether the initiator of the activity can participate in the approval. */
+                    initiatorCanApprove?: boolean | undefined;
+                    /** Whether service accounts can participate in the approval for this group. */
+                    serviceAccountsCanApprove?: boolean | undefined;
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+            } | {
+                kind: "Block";
+            };
+            filters?: {} | undefined;
         };
     } | undefined;
 };
@@ -10096,6 +10499,42 @@ export type ListApprovalsResponse = {
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
                 } | {
+                    kind: "StellarCctpApprove";
+                    /** USDC SEP-41 issuer (G… account). */
+                    issuer: string;
+                    /** USDC asset code. */
+                    assetCode: string;
+                    /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+                    amount: string;
+                    /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                    externalId?: string | undefined;
+                } | {
+                    kind: "StellarCctpBurn";
+                    /** USDC SEP-41 issuer (G… account). */
+                    issuer: string;
+                    /** USDC asset code. */
+                    assetCode: string;
+                    /** USDC amount to burn, in Stellar-local 7-decimal units. */
+                    amount: string;
+                    /** CCTP destination domain. */
+                    destinationDomain: number;
+                    /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+                    mintRecipient: string;
+                    /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+                    maxFee: string;
+                    /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+                    minFinalityThreshold: number;
+                    /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                    externalId?: string | undefined;
+                } | {
+                    kind: "StellarCctpClaim";
+                    /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+                    message: string;
+                    /** Circle's attestation over the message, hex-encoded. */
+                    attestation: string;
+                    /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+                    externalId?: string | undefined;
+                } | {
                     kind: "SettleOffer";
                     txHash: string;
                     decision: "Accept" | "Reject";
@@ -10455,6 +10894,11 @@ export type ListApprovalsResponse = {
                     kind: "Spl";
                     mint: string;
                     amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
+                    amount: string;
                 }) & {
                     metadata: {
                         network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
@@ -10475,6 +10919,11 @@ export type ListApprovalsResponse = {
                 } | {
                     kind: "Spl";
                     mint: string;
+                    amount: string;
+                } | {
+                    kind: "Sep41";
+                    issuer: string;
+                    assetCode: string;
                     amount: string;
                 }) & {
                     metadata: {
@@ -10512,6 +10961,11 @@ export type ListApprovalsResponse = {
                         kind: "Spl";
                         mint: string;
                         amount: string;
+                    } | {
+                        kind: "Sep41";
+                        issuer: string;
+                        assetCode: string;
+                        amount: string;
                     };
                     /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                     targetAsset: {
@@ -10524,6 +10978,11 @@ export type ListApprovalsResponse = {
                     } | {
                         kind: "Spl";
                         mint: string;
+                        amount: string;
+                    } | {
+                        kind: "Sep41";
+                        issuer: string;
+                        assetCode: string;
                         amount: string;
                     };
                     /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -10552,6 +11011,11 @@ export type ListApprovalsResponse = {
                         kind: "Spl";
                         mint: string;
                         amount: string;
+                    } | {
+                        kind: "Sep41";
+                        issuer: string;
+                        assetCode: string;
+                        amount: string;
                     };
                     /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                     targetAsset: {
@@ -10564,6 +11028,11 @@ export type ListApprovalsResponse = {
                     } | {
                         kind: "Spl";
                         mint: string;
+                        amount: string;
+                    } | {
+                        kind: "Sep41";
+                        issuer: string;
+                        assetCode: string;
                         amount: string;
                     };
                     /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -10592,6 +11061,11 @@ export type ListApprovalsResponse = {
                         kind: "Spl";
                         mint: string;
                         amount: string;
+                    } | {
+                        kind: "Sep41";
+                        issuer: string;
+                        assetCode: string;
+                        amount: string;
                     };
                     /** The target asset that will be received with the Swap transaction. Used for attesting that the swap is being created with the same parameters as the quote. */
                     targetAsset: {
@@ -10604,6 +11078,11 @@ export type ListApprovalsResponse = {
                     } | {
                         kind: "Spl";
                         mint: string;
+                        amount: string;
+                    } | {
+                        kind: "Sep41";
+                        issuer: string;
+                        assetCode: string;
                         amount: string;
                     };
                     /** Id of the fee sponsor that will pay the network fees for this swap. When set, the swap transactions are broadcast as sponsored user operations. */
@@ -10620,7 +11099,7 @@ export type ListApprovalsResponse = {
                 };
                 /** The failure reason, if any. Only present when status is Failed. */
                 failureReason?: string | undefined;
-                /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`. Undefined for providers without intermediate sub-states. */
+                /** Provider-specific intermediate state, only set while `status` is InProgress. Values are opaque strings — clients map them to progress bars, labels or icons as needed. For CCTP one of: `signing-permit`, `approving-source`, `burning-source`, `awaiting-source-finality`, `awaiting-attestation`, `awaiting-forwarder`, `claiming-destination`. Undefined for providers without intermediate sub-states. */
                 protocolStatus?: string | undefined;
             } | undefined;
         } | {
@@ -12382,6 +12861,39 @@ export type ListApprovalsResponse = {
                             hasAll?: string[] | undefined;
                         } | undefined;
                     } | undefined;
+                } | {
+                    id: string;
+                    name: string;
+                    status: "Active" | "Archived";
+                    dateCreated?: string | undefined;
+                    dateUpdated?: string | undefined;
+                    activityKind: "UserAction";
+                    rule: {
+                        kind: "UserAction";
+                        configuration: {
+                            userActionKinds: string[];
+                        };
+                    };
+                    action: {
+                        kind: "RequestApproval";
+                        approvalGroups: {
+                            name?: string | undefined;
+                            quorum: number;
+                            approvers: {
+                                userId?: {
+                                    in: string[];
+                                } | undefined;
+                            };
+                            /** Whether the initiator of the activity can participate in the approval. */
+                            initiatorCanApprove?: boolean | undefined;
+                            /** Whether service accounts can participate in the approval for this group. */
+                            serviceAccountsCanApprove?: boolean | undefined;
+                        }[];
+                        autoRejectTimeout?: (number | undefined) | null;
+                    } | {
+                        kind: "Block";
+                    };
+                    filters?: {} | undefined;
                 };
             };
         } | {
@@ -12507,6 +13019,18 @@ export type ListApprovalsResponse = {
                     network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
                     address: string;
                     schema?: any;
+                };
+            };
+        } | {
+            kind: "UserAction";
+            userAction: {
+                id: string;
+                kind: string;
+                action: {
+                    host: string;
+                    method: string;
+                    path: string;
+                    body?: unknown;
                 };
             };
         };
@@ -13048,6 +13572,39 @@ export type ListPoliciesResponse = {
                 hasAll?: string[] | undefined;
             } | undefined;
         } | undefined;
+    } | {
+        id: string;
+        name: string;
+        status: "Active" | "Archived";
+        dateCreated?: string | undefined;
+        dateUpdated?: string | undefined;
+        activityKind: "UserAction";
+        rule: {
+            kind: "UserAction";
+            configuration: {
+                userActionKinds: string[];
+            };
+        };
+        action: {
+            kind: "RequestApproval";
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    userId?: {
+                        in: string[];
+                    } | undefined;
+                };
+                /** Whether the initiator of the activity can participate in the approval. */
+                initiatorCanApprove?: boolean | undefined;
+                /** Whether service accounts can participate in the approval for this group. */
+                serviceAccountsCanApprove?: boolean | undefined;
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+        } | {
+            kind: "Block";
+        };
+        filters?: {} | undefined;
     }) & {
         pendingChangeRequest?: {
             id: string;
@@ -13571,6 +14128,39 @@ export type ListPoliciesResponse = {
                         hasAll?: string[] | undefined;
                     } | undefined;
                 } | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
+                activityKind: "UserAction";
+                rule: {
+                    kind: "UserAction";
+                    configuration: {
+                        userActionKinds: string[];
+                    };
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                        /** Whether the initiator of the activity can participate in the approval. */
+                        initiatorCanApprove?: boolean | undefined;
+                        /** Whether service accounts can participate in the approval for this group. */
+                        serviceAccountsCanApprove?: boolean | undefined;
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {} | undefined;
             };
         } | undefined;
     })[];
@@ -14046,6 +14636,35 @@ export type UpdatePolicyBody = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    name: string;
+    activityKind: "UserAction";
+    rule: {
+        kind: "UserAction";
+        configuration: {
+            userActionKinds: string[];
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
 };
 
 export type UpdatePolicyParams = {
@@ -14559,6 +15178,39 @@ export type UpdatePolicyResponse = {
             hasAll?: string[] | undefined;
         } | undefined;
     } | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "UserAction";
+    rule: {
+        kind: "UserAction";
+        configuration: {
+            userActionKinds: string[];
+        };
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+            /** Whether the initiator of the activity can participate in the approval. */
+            initiatorCanApprove?: boolean | undefined;
+            /** Whether service accounts can participate in the approval for this group. */
+            serviceAccountsCanApprove?: boolean | undefined;
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
 };
 
 export type UpdatePolicyRequest = UpdatePolicyParams & { body: UpdatePolicyBody }
