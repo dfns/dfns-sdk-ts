@@ -3309,8 +3309,15 @@ export type RegisterEndUserResponse = {
         externalId?: string | undefined;
         /** List of tags. */
         tags: string[];
-        /** Id of the validator on which the wallet is created for Canton networks */
+        /** @deprecated use `networkInfo.validatorId` instead. */
         validatorId?: string | undefined;
+        /** Additional chain-dependent information about the wallet. Only returned by Get Wallet. */
+        networkInfo?: {
+            /** Confirmed Solana durable-nonce accounts owned by this wallet. */
+            nonceAccounts?: string[] | undefined;
+            /** Id of the validator on which the wallet is created for Canton networks. */
+            validatorId?: string | undefined;
+        } | undefined;
         /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
         vaultId?: string | undefined;
     }[];

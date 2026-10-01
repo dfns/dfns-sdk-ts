@@ -7,6 +7,50 @@ import * as T from './types'
 export class DelegatedAllocationsClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
+  async cancel0fnsOrderPlacementInit(request: T.Cancel0fnsOrderPlacementRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/allocations/cancel-0fns-order-placement', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async cancel0fnsOrderPlacementComplete(
+    request: T.Cancel0fnsOrderPlacementRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.Cancel0fnsOrderPlacementResponse> {
+    const path = buildPathAndQuery('/allocations/cancel-0fns-order-placement', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createAllocationInit(request: T.CreateAllocationRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/allocations', {
       path: request ?? {},
@@ -89,6 +133,21 @@ export class DelegatedAllocationsClient {
       method: 'POST',
       body: request.body,
       headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async createAllocationQuote(request: T.CreateAllocationQuoteRequest): Promise<T.CreateAllocationQuoteResponse> {
+    const path = buildPathAndQuery('/allocations/get-0fns-quote', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
       apiOptions: this.apiOptions,
     })
 

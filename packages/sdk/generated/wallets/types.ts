@@ -125,6 +125,42 @@ export type AbortTransactionResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
+        kind: "StellarCctpApprove";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpBurn";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** USDC amount to burn, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** CCTP destination domain. */
+        destinationDomain: number;
+        /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+        mintRecipient: string;
+        /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+        maxFee: string;
+        /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+        minFinalityThreshold: number;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpClaim";
+        /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+        message: string;
+        /** Circle's attestation over the message, hex-encoded. */
+        attestation: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
         kind: "SettleOffer";
         txHash: string;
         decision: "Accept" | "Reject";
@@ -1120,6 +1156,42 @@ export type ActivateWalletResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
+        kind: "StellarCctpApprove";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpBurn";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** USDC amount to burn, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** CCTP destination domain. */
+        destinationDomain: number;
+        /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+        mintRecipient: string;
+        /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+        maxFee: string;
+        /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+        minFinalityThreshold: number;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpClaim";
+        /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+        message: string;
+        /** Circle's attestation over the message, hex-encoded. */
+        attestation: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
         kind: "SettleOffer";
         txHash: string;
         decision: "Accept" | "Reject";
@@ -1312,6 +1384,42 @@ export type CancelTransactionResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
+        kind: "StellarCctpApprove";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpBurn";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** USDC amount to burn, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** CCTP destination domain. */
+        destinationDomain: number;
+        /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+        mintRecipient: string;
+        /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+        maxFee: string;
+        /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+        minFinalityThreshold: number;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpClaim";
+        /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+        message: string;
+        /** Circle's attestation over the message, hex-encoded. */
+        attestation: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
         kind: "SettleOffer";
         txHash: string;
         decision: "Accept" | "Reject";
@@ -1482,6 +1590,42 @@ export type CancelTransferResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
+        kind: "StellarCctpApprove";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpBurn";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** USDC amount to burn, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** CCTP destination domain. */
+        destinationDomain: number;
+        /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+        mintRecipient: string;
+        /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+        maxFee: string;
+        /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+        minFinalityThreshold: number;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpClaim";
+        /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+        message: string;
+        /** Circle's attestation over the message, hex-encoded. */
+        attestation: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
         kind: "SettleOffer";
         txHash: string;
         decision: "Accept" | "Reject";
@@ -1610,8 +1754,15 @@ export type CreateWalletResponse = {
     externalId?: string | undefined;
     /** List of tags. */
     tags: string[];
-    /** Id of the validator on which the wallet is created for Canton networks */
+    /** @deprecated use `networkInfo.validatorId` instead. */
     validatorId?: string | undefined;
+    /** Additional chain-dependent information about the wallet. Only returned by Get Wallet. */
+    networkInfo?: {
+        /** Confirmed Solana durable-nonce accounts owned by this wallet. */
+        nonceAccounts?: string[] | undefined;
+        /** Id of the validator on which the wallet is created for Canton networks. */
+        validatorId?: string | undefined;
+    } | undefined;
     /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
     vaultId?: string | undefined;
 };
@@ -2677,6 +2828,42 @@ export type GetTransactionResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
+        kind: "StellarCctpApprove";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpBurn";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** USDC amount to burn, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** CCTP destination domain. */
+        destinationDomain: number;
+        /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+        mintRecipient: string;
+        /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+        maxFee: string;
+        /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+        minFinalityThreshold: number;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpClaim";
+        /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+        message: string;
+        /** Circle's attestation over the message, hex-encoded. */
+        attestation: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
         kind: "SettleOffer";
         txHash: string;
         decision: "Accept" | "Reject";
@@ -3532,8 +3719,15 @@ export type GetWalletResponse = {
     externalId?: string | undefined;
     /** List of tags. */
     tags: string[];
-    /** Id of the validator on which the wallet is created for Canton networks */
+    /** @deprecated use `networkInfo.validatorId` instead. */
     validatorId?: string | undefined;
+    /** Additional chain-dependent information about the wallet. Only returned by Get Wallet. */
+    networkInfo?: {
+        /** Confirmed Solana durable-nonce accounts owned by this wallet. */
+        nonceAccounts?: string[] | undefined;
+        /** Id of the validator on which the wallet is created for Canton networks. */
+        validatorId?: string | undefined;
+    } | undefined;
     /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
     vaultId?: string | undefined;
 };
@@ -4863,8 +5057,15 @@ export type ImportWalletResponse = {
     externalId?: string | undefined;
     /** List of tags. */
     tags: string[];
-    /** Id of the validator on which the wallet is created for Canton networks */
+    /** @deprecated use `networkInfo.validatorId` instead. */
     validatorId?: string | undefined;
+    /** Additional chain-dependent information about the wallet. Only returned by Get Wallet. */
+    networkInfo?: {
+        /** Confirmed Solana durable-nonce accounts owned by this wallet. */
+        nonceAccounts?: string[] | undefined;
+        /** Id of the validator on which the wallet is created for Canton networks. */
+        validatorId?: string | undefined;
+    } | undefined;
     /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
     vaultId?: string | undefined;
 };
@@ -4970,8 +5171,15 @@ export type ListBulkWalletJobWalletsResponse = {
         externalId?: string | undefined;
         /** List of tags. */
         tags: string[];
-        /** Id of the validator on which the wallet is created for Canton networks */
+        /** @deprecated use `networkInfo.validatorId` instead. */
         validatorId?: string | undefined;
+        /** Additional chain-dependent information about the wallet. Only returned by Get Wallet. */
+        networkInfo?: {
+            /** Confirmed Solana durable-nonce accounts owned by this wallet. */
+            nonceAccounts?: string[] | undefined;
+            /** Id of the validator on which the wallet is created for Canton networks. */
+            validatorId?: string | undefined;
+        } | undefined;
         /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
         vaultId?: string | undefined;
     }[];
@@ -5513,6 +5721,42 @@ export type ListTransactionsResponse = {
             useDurableNonce?: boolean | undefined;
             /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
             feeSponsorId?: string | undefined;
+            /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+            externalId?: string | undefined;
+        } | {
+            kind: "StellarCctpApprove";
+            /** USDC SEP-41 issuer (G… account). */
+            issuer: string;
+            /** USDC asset code. */
+            assetCode: string;
+            /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+            amount: string;
+            /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+            externalId?: string | undefined;
+        } | {
+            kind: "StellarCctpBurn";
+            /** USDC SEP-41 issuer (G… account). */
+            issuer: string;
+            /** USDC asset code. */
+            assetCode: string;
+            /** USDC amount to burn, in Stellar-local 7-decimal units. */
+            amount: string;
+            /** CCTP destination domain. */
+            destinationDomain: number;
+            /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+            mintRecipient: string;
+            /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+            maxFee: string;
+            /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+            minFinalityThreshold: number;
+            /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+            externalId?: string | undefined;
+        } | {
+            kind: "StellarCctpClaim";
+            /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+            message: string;
+            /** Circle's attestation over the message, hex-encoded. */
+            attestation: string;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
         } | {
@@ -6398,8 +6642,15 @@ export type ListWalletsResponse = {
         externalId?: string | undefined;
         /** List of tags. */
         tags: string[];
-        /** Id of the validator on which the wallet is created for Canton networks */
+        /** @deprecated use `networkInfo.validatorId` instead. */
         validatorId?: string | undefined;
+        /** Additional chain-dependent information about the wallet. Only returned by Get Wallet. */
+        networkInfo?: {
+            /** Confirmed Solana durable-nonce accounts owned by this wallet. */
+            nonceAccounts?: string[] | undefined;
+            /** Id of the validator on which the wallet is created for Canton networks. */
+            validatorId?: string | undefined;
+        } | undefined;
         /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
         vaultId?: string | undefined;
     }[];
@@ -6666,6 +6917,42 @@ export type SignAndBroadcastTransactionResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
+        kind: "StellarCctpApprove";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpBurn";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** USDC amount to burn, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** CCTP destination domain. */
+        destinationDomain: number;
+        /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+        mintRecipient: string;
+        /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+        maxFee: string;
+        /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+        minFinalityThreshold: number;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpClaim";
+        /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+        message: string;
+        /** Circle's attestation over the message, hex-encoded. */
+        attestation: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
         kind: "SettleOffer";
         txHash: string;
         decision: "Accept" | "Reject";
@@ -6844,6 +7131,42 @@ export type SpeedUpTransactionResponse = {
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
+        kind: "StellarCctpApprove";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpBurn";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** USDC amount to burn, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** CCTP destination domain. */
+        destinationDomain: number;
+        /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+        mintRecipient: string;
+        /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+        maxFee: string;
+        /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+        minFinalityThreshold: number;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpClaim";
+        /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+        message: string;
+        /** Circle's attestation over the message, hex-encoded. */
+        attestation: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
         kind: "SettleOffer";
         txHash: string;
         decision: "Accept" | "Reject";
@@ -7011,6 +7334,42 @@ export type SpeedUpTransferResponse = {
         useDurableNonce?: boolean | undefined;
         /** Fee sponsor that pays the burn network fee and the ephemeral event-account rent. */
         feeSponsorId?: string | undefined;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpApprove";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** Allowance for the CCTP TokenMessengerMinter, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpBurn";
+        /** USDC SEP-41 issuer (G… account). */
+        issuer: string;
+        /** USDC asset code. */
+        assetCode: string;
+        /** USDC amount to burn, in Stellar-local 7-decimal units. */
+        amount: string;
+        /** CCTP destination domain. */
+        destinationDomain: number;
+        /** Destination recipient as a bytes32 0x-hex value (EVM address left-padded). */
+        mintRecipient: string;
+        /** Max fee Circle may deduct from the burn, in 7-decimal units. */
+        maxFee: string;
+        /** CCTP min finality threshold (2000 Standard; Stellar has no Fast tier). */
+        minFinalityThreshold: number;
+        /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
+        externalId?: string | undefined;
+    } | {
+        kind: "StellarCctpClaim";
+        /** The attested CCTP message, hex-encoded (from Circle IRIS). */
+        message: string;
+        /** Circle's attestation over the message, hex-encoded. */
+        attestation: string;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -8589,8 +8948,15 @@ export type UpdateWalletResponse = {
     externalId?: string | undefined;
     /** List of tags. */
     tags: string[];
-    /** Id of the validator on which the wallet is created for Canton networks */
+    /** @deprecated use `networkInfo.validatorId` instead. */
     validatorId?: string | undefined;
+    /** Additional chain-dependent information about the wallet. Only returned by Get Wallet. */
+    networkInfo?: {
+        /** Confirmed Solana durable-nonce accounts owned by this wallet. */
+        nonceAccounts?: string[] | undefined;
+        /** Id of the validator on which the wallet is created for Canton networks. */
+        validatorId?: string | undefined;
+    } | undefined;
     /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
     vaultId?: string | undefined;
 };
