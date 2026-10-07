@@ -1,6 +1,6 @@
 import * as crypto from 'node:crypto'
 
-import { CredentialSigner, KeyAssertion, UserActionChallenge, DfnsError } from '@dfns/sdk'
+import { CredentialSigner, KeyAssertion, DfnsError } from '@dfns/sdk'
 import { toBase64Url } from '@dfns/sdk/utils'
 
 export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
@@ -17,20 +17,20 @@ export class AsymmetricKeySigner implements CredentialSigner<KeyAssertion> {
     this.useClientChallenge = options.useClientChallenge
   }
 
-  async sign(challenge: Pick<UserActionChallenge, 'challenge' | 'allowCredentials'>): Promise<KeyAssertion> {
+  async sign(options: { challenge: string; allowCredentials?: { key?: { id: string }[] } }): Promise<KeyAssertion> {
     const { credId, privateKey, algorithm } = this.options
 
-    if (challenge.allowCredentials) {
-      const allowedCredId = challenge.allowCredentials.key.map((cred) => cred.id)
-      if (!allowedCredId.includes(credId)) {
-        throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredId}`)
+    if (options.allowCredentials) {
+      const allowedIds = options.allowCredentials.key?.map((cred) => cred.id) ?? []
+      if (!allowedIds.includes(credId)) {
+        throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedIds.join(', ')}`)
       }
     }
 
     const clientData = Buffer.from(
       JSON.stringify({
         type: 'key.get',
-        challenge: challenge.challenge,
+        challenge: options.challenge,
       })
     )
 

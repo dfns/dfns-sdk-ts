@@ -1,4 +1,4 @@
-import { CreateCredentialChallengeResponse, CreateRegistrationChallengeResponse } from './generated/auth/types'
+import { CreateRegistrationChallengeResponse } from './generated/auth/types'
 
 export type AuthenticatorAttachment = 'platform' | 'cross-platform'
 
@@ -64,5 +64,12 @@ export type CredentialAttestation =
   | RecoveryKeyAttestation
 
 export interface CredentialStore<T extends CredentialAttestation = FirstFactorAttestation> {
-  create(challenge: CreateRegistrationChallengeResponse | CreateCredentialChallengeResponse): Promise<T>
+  create(options: {
+    challenge: string
+    pubKeyCredParams: { alg: number; type: string }[]
+    user: { displayName: string; id: string; name: string }
+    attestation: AttestationConveyancePreference
+    excludeCredentials: { id: string; type: string }[]
+    authenticatorSelection?: unknown
+  }): Promise<T>
 }

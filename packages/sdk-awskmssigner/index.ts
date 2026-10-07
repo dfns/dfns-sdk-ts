@@ -1,4 +1,4 @@
-import { CredentialSigner, DfnsError, KeyAssertion, UserActionChallenge } from '@dfns/sdk'
+import { CredentialSigner, DfnsError, KeyAssertion } from '@dfns/sdk'
 import { toBase64Url } from '@dfns/sdk/utils'
 import { KMSClient, KMSClientConfig, SignCommand, SigningAlgorithmSpec } from '@aws-sdk/client-kms'
 
@@ -21,20 +21,20 @@ export class AwsKmsKeySigner implements CredentialSigner<KeyAssertion> {
     this.useClientChallenge = options.useClientChallenge
   }
 
-  async sign(challenge: UserActionChallenge): Promise<KeyAssertion> {
+  async sign(options: { challenge: string; allowCredentials?: { key?: { id: string }[] } }): Promise<KeyAssertion> {
     const { credId } = this.options
 
-    if (challenge.allowCredentials) {
-      const allowedCredIds = challenge.allowCredentials.key.map((cred) => cred.id)
-      if (!allowedCredIds.includes(credId)) {
-        throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedCredIds}`)
+    if (options.allowCredentials) {
+      const allowedIds = options.allowCredentials.key?.map((cred) => cred.id) ?? []
+      if (!allowedIds.includes(credId)) {
+        throw new DfnsError(-1, `${credId} does not match allowed credentials: ${allowedIds.join(', ')}`)
       }
     }
 
     const clientData = Buffer.from(
       JSON.stringify({
         type: 'key.get',
-        challenge: challenge.challenge,
+        challenge: options.challenge,
       })
     )
 

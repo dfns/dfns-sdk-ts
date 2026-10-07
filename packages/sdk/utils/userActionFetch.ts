@@ -14,6 +14,7 @@ import { BaseAuthApi } from '../baseAuthApi'
 import { DfnsError } from '../dfnsError'
 import { DfnsApiClientOptions } from '../types/generic'
 import { sha256 } from './sha256'
+import { getCanonicalPath, getCanonicalPathAndQuery } from './url'
 import { generateClientChallengeNonce } from './nonce'
 import { toBase64Url } from './base64'
 import { UserActionChallenge } from '../signer'
@@ -22,8 +23,6 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
   return async (resource, options) => {
     if (options.method !== 'GET') {
       const apiOptions = options.apiOptions
-      // Sign the canonical resource before fullUrl adds the deployment prefix.
-      const url = new URL(resource, new URL('/', apiOptions.baseUrl || DEFAULT_DFNS_BASE_URL))
 
       if (!apiOptions.signer) {
         throw new DfnsError(-1, 'A "signer" needs to be passed to Dfns client.', {
@@ -56,9 +55,9 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
           JSON.stringify({
             timestamp: String(Date.now()),
             nonce: generateClientChallengeNonce(),
-            host: url.hostname,
+            host: new URL(apiOptions.baseUrl || DEFAULT_DFNS_BASE_URL).hostname,
             method: options.method,
-            path: url.pathname + url.search,
+            path: getCanonicalPathAndQuery(resource),
             payloadHash: await sha256(new TextEncoder().encode(body), 'base64url'),
             ...(!!apiOptions.orgId && { orgId: apiOptions.orgId }),
             ...(!!apiOptions.tenantId && { tenantId: apiOptions.tenantId }),
@@ -81,8 +80,7 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
           {
             userActionPayload: body,
             userActionHttpMethod: options.method,
-            userActionHttpPath: url.pathname,
-            userActionServerKind: 'Api',
+            userActionHttpPath: getCanonicalPath(resource),
           },
           apiOptions
         )
@@ -109,5 +107,5 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
 }
 
 export const userActionFetch = formDataSerializer(
-  jsonSerializer(dfnsAuth(userAction(fullUrl(catchPolicyPending(errorHandler(<Fetch<DfnsApiClientOptions>>_fetch))))))
+  jsonSerializer(dfnsAuth(userAction(catchPolicyPending(errorHandler(fullUrl(<Fetch<DfnsApiClientOptions>>_fetch))))))
 )
