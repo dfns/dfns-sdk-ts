@@ -56,7 +56,7 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
           JSON.stringify({
             timestamp: String(Date.now()),
             nonce: generateClientChallengeNonce(),
-            host: url.host,
+            host: url.hostname,
             method: options.method,
             path: url.pathname + url.search,
             payloadHash: await sha256(new TextEncoder().encode(body), 'base64url'),
