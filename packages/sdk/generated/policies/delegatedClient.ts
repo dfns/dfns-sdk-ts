@@ -19,7 +19,6 @@ export class DelegatedPoliciesClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -63,7 +62,6 @@ export class DelegatedPoliciesClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -107,7 +105,6 @@ export class DelegatedPoliciesClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -167,6 +164,20 @@ export class DelegatedPoliciesClient {
     return response.json()
   }
 
+  async getSumsubTravelRulePublicKey(): Promise<T.GetSumsubTravelRulePublicKeyResponse> {
+    const path = buildPathAndQuery('/v2/policies/travel-rule/sumsub/public-key', {
+      path: {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listApprovals(request?: T.ListApprovalsRequest): Promise<T.ListApprovalsResponse> {
     const path = buildPathAndQuery('/v2/policy-approvals', {
       path: request ?? {},
@@ -207,7 +218,6 @@ export class DelegatedPoliciesClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )

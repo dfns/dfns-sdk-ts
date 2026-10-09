@@ -87,6 +87,20 @@ export class PoliciesClient {
     return response.json()
   }
 
+  async getSumsubTravelRulePublicKey(): Promise<T.GetSumsubTravelRulePublicKeyResponse> {
+    const path = buildPathAndQuery('/v2/policies/travel-rule/sumsub/public-key', {
+      path: {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listApprovals(request?: T.ListApprovalsRequest): Promise<T.ListApprovalsResponse> {
     const path = buildPathAndQuery('/v2/policy-approvals', {
       path: request ?? {},

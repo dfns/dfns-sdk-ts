@@ -34,7 +34,6 @@ export class DelegatedNetworksClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -78,7 +77,6 @@ export class DelegatedNetworksClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -157,6 +155,49 @@ export class DelegatedNetworksClient {
     return response.json()
   }
 
+  async reindexTransactionInit(request: T.ReindexTransactionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/networks/:network/transactions/reindex', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async reindexTransactionComplete(
+    request: T.ReindexTransactionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.ReindexTransactionResponse> {
+    const path = buildPathAndQuery('/networks/:network/transactions/reindex', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async updateCantonValidatorInit(request: T.UpdateCantonValidatorRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
       path: request ?? {},
@@ -169,7 +210,6 @@ export class DelegatedNetworksClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )

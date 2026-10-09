@@ -24,7 +24,7 @@ export type CreateVaultResponse = {
 export type CreateVaultRequest = { body: CreateVaultBody }
 
 export type CreateVaultAddressBody = {
-    network: "ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
+    network: "ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
 };
 
 export type CreateVaultAddressParams = {
@@ -42,7 +42,7 @@ export type CreateVaultAddressRequest = CreateVaultAddressParams & { body: Creat
 
 export type CreateVaultLockBody = {
     /** The EVM network the locked asset is on. */
-    network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
+    network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
     /** The token identifier of the asset to lock (e.g. `native:eth` or `erc20:0x...`). */
     tid: string;
     /** The amount to lock, in minimum denomination. */
@@ -90,7 +90,7 @@ export type CreateVaultLockRequest = CreateVaultLockParams & { body: CreateVault
 
 export type CreateVaultTransferBody = {
     /** The network the transfer is on. */
-    network: "ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
+    network: "ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
     /** The token identifier of the asset to transfer (e.g. `native:eth`, `native:btc`, `native:sol`, or `spl:<mint>`). */
     tid: string;
     /** The destination address. */
@@ -112,7 +112,7 @@ export type CreateVaultTransferResponse = {
     /** The source wallet for this tranfer. */
     walletId: string;
     /** The blockchain network this transfer is on. */
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -1060,6 +1060,954 @@ export type ListVaultBalancesResponse = {
 
 export type ListVaultBalancesRequest = ListVaultBalancesParams & { query?: ListVaultBalancesQuery }
 
+export type ListVaultHistoryParams = {
+    /** Vault id. */
+    vaultId: string;
+};
+
+export type ListVaultHistoryQuery = {
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
+    paginationToken?: string | undefined;
+    /** Only items on these networks. Repeat the parameter to pass several. */
+    network?: (("ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia") | ("ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia")[]) | undefined;
+    /** Only items moving these assets, by token identifier. Repeat the parameter to pass several. Combine with `network`, as a token identifier can exist on several networks. */
+    tid?: (string | string[]) | undefined;
+    /** Only items of these kinds. Repeat the parameter to pass several. */
+    kind?: (("IncomingTransfer" | "OutgoingTransfer" | "LockCreated" | "LockDeleted") | ("IncomingTransfer" | "OutgoingTransfer" | "LockCreated" | "LockDeleted")[]) | undefined;
+};
+
+export type ListVaultHistoryResponse = {
+    /** Current page items. */
+    items: ({
+        /** The ledger event that opened this item. */
+        id: string;
+        /** Vault id. */
+        vaultId: string;
+        /** The vault wallet the item is on. */
+        walletId: string;
+        timestamp: string;
+        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        /** The token identifier of the asset moved (e.g. `native:eth`, `erc20:0x...`). */
+        tid: string;
+        /** The amount moved, in minimum denomination: deposited for incoming transfers, sent for outgoing transfers, locked or unlocked for lock kinds. */
+        amount: string;
+        kind: "IncomingTransfer";
+        /** `Quarantined` until a release is requested, `PendingPolicyApproval` while the release awaits policy approval, `Released` once the funds are available. */
+        status: "Quarantined" | "PendingPolicyApproval" | "Released";
+        /** Vault quarantine object: an incoming deposit held out of the available balance until released. */
+        quarantine: {
+            /** Vault quarantine id. */
+            id: string;
+            vaultId: string;
+            network: string;
+            /** The transaction that deposited the quarantined funds. */
+            transactionHash: string;
+            /** KYT screening result recorded for the quarantined deposit, when available. Policies of rule kind `ChainalysisQuarantineScreening` evaluate this stored result when the release is requested. */
+            kytResult?: ({
+                provider: "Chainalysis";
+                transferReference: string;
+                /** Grouping key registered with the provider ("userId" in Chainalysis terms). */
+                providerUserId: string;
+                /** Provider-side id of the registered transfer. */
+                externalId: string;
+                alerts: {
+                    level: "Low" | "Medium" | "High" | "Severe";
+                    categoryId: number | null;
+                }[];
+                exposure: {
+                    direct: {
+                        categoryId: number | null;
+                        name: string | null;
+                    };
+                };
+                maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
+            } | {
+                provider: "Elliptic";
+                transferReference: string;
+                /** Grouping key registered with the provider ("userId" in Chainalysis terms). */
+                providerUserId: string;
+                /** Provider-side id of the registered transfer. */
+                externalId: string;
+                alerts: {
+                    categoryId: string | null;
+                }[];
+                riskScore: number | null;
+            }) | undefined;
+            /** Set when the quarantined funds have been released into the available balance. */
+            dateReleased?: string | undefined;
+            dateCreated: string;
+        };
+        incomingTransfer: {
+            txHash: string;
+            index?: string | undefined;
+            /** The addresses the funds came from. Empty when the on-chain transfer could not be resolved. */
+            senders: string[];
+            asset?: {
+                symbol?: string | undefined;
+                /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
+                decimals?: number | undefined;
+                /** Whether the asset is verified by DFNS as legitimate. */
+                verified?: boolean | undefined;
+                /** Corresponding asset price in USD at the time of transfer. */
+                quotes?: {
+                    [x: string]: number;
+                } | undefined;
+            } | undefined;
+        };
+    } | {
+        /** The ledger event that opened this item. */
+        id: string;
+        /** Vault id. */
+        vaultId: string;
+        /** The vault wallet the item is on. */
+        walletId: string;
+        timestamp: string;
+        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        /** The token identifier of the asset moved (e.g. `native:eth`, `erc20:0x...`). */
+        tid: string;
+        /** The amount moved, in minimum denomination: deposited for incoming transfers, sent for outgoing transfers, locked or unlocked for lock kinds. */
+        amount: string;
+        kind: "OutgoingTransfer";
+        /** `PendingPolicyApproval` while the transfer awaits policy approval, `InProgress` while it is being executed or awaits on-chain confirmation, then the settled outcome of the transfer. */
+        status: "PendingPolicyApproval" | "InProgress" | "Confirmed" | "Failed" | "Rejected";
+        transferRequest: {
+            /** Transfer id. */
+            id: string;
+            /** The source wallet for this tranfer. */
+            walletId: string;
+            /** The blockchain network this transfer is on. */
+            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            /** The user who initiated the request. */
+            requester: {
+                /** User id. */
+                userId: string;
+                /** Token id. */
+                tokenId?: string | undefined;
+            };
+            requestBody: {
+                kind: "Native";
+                /** The destination address. */
+                to: string;
+                /** The amount of native tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The memo or destination tag (supported networks only). */
+                memo?: (string | "") | undefined;
+                /** The priority that determines the fees paid for the transfer. All EVM compatible networks and Bitcoin support `priority`. Not supported for other networks. It uses the [estimate fees](https://docs.dfns.co/api-reference/networks/estimate-fees) API to calculate the transfer fees. When not specified, defaults to `Standard` priority. */
+                priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                /** Whether to create the destination account on chains that require account creation (e.g., Stellar). Only valid for chains that require the receiver account to exist before transfer. */
+                createDestinationAccount?: boolean | undefined;
+                /** Optional field for Canton, if true it will create a transfer offer. */
+                offer?: boolean | undefined;
+                /** Optional field for Canton, especially useful in the context of offers */
+                expiresAt?: string | undefined;
+                /** Optional Solana-only flag. When `true` the SOL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). Use this for offline-signing flows where the construct → broadcast gap may exceed 90 seconds. The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+                useDurableNonce?: boolean | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
+            } | {
+                kind: "Erc20";
+                /** The ERC-20 contract address. */
+                contract: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The priority that determines the fees paid for the transfer. */
+                priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
+            } | {
+                kind: "Aip21";
+                /** The asset metadata address.  */
+                metadata: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Asa";
+                /** The token asset id.  */
+                assetId: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The memo or destination tag. */
+                memo?: (string | "") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Asset";
+                /** The token asset id.  */
+                assetId: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Cip56";
+                /** The instrument admin address. */
+                instrumentAdmin: string;
+                /** The instrument id. */
+                instrumentId: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The memo, recorded as the transfer reason on the ledger. */
+                memo?: (string | "") | undefined;
+                /** If true it will create a transfer offer. */
+                offer?: boolean | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Cis2";
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The token address following (https://proposals.concordium.com/CIS/cis-2.html#token-address). */
+                tokenAddress: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Cis7";
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The Cis7 token identifier. */
+                tokenId: string;
+                /** The memo or destination tag. */
+                memo?: (string | "") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Coin";
+                /** The coin identifier. */
+                coin: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Erc721";
+                /** The ERC-721 contract address. */
+                contract: string;
+                /** The destination address. */
+                to: string;
+                /** The token to transfer. */
+                tokenId: string;
+                /** The priority that determines the fees paid for the transfer. */
+                priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Erc7984";
+                /** The ERC-7984 confidential token contract address. */
+                contract: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The priority that determines the fees paid for the transfer. */
+                priority?: ("Slow" | "Standard" | "Fast") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Hip17";
+                /** The token to transfer. */
+                tokenId: string;
+                serialNumber: string;
+                /** The destination address. */
+                to: string;
+                /** The memo or destination tag. */
+                memo?: (string | "") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Hts";
+                /** The token to transfer. */
+                tokenId: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The memo. */
+                memo?: (string | "") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Iou";
+                /** The IOU currency code. */
+                currency: string;
+                /** The IOU issuer address. */
+                issuer: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The memo or destination tag. */
+                memo?: (string | "") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Sep41";
+                /** The asset issuer address. */
+                issuer: string;
+                /** The asset code. */
+                assetCode: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The memo or destination tag. */
+                memo?: (string | "") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Snip2";
+                /** The SNIP-2 (ERC-20-like) contract address. */
+                contract: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Snip3";
+                /** The SNIP-3 (ERC-721) contract address. */
+                contract: string;
+                /** The destination address. */
+                to: string;
+                /** The token to transfer. */
+                tokenId: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Spl" | "Spl2022";
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The mint account address. */
+                mint: string;
+                /** The memo or destination tag. */
+                memo?: (string | "") | undefined;
+                /** If `true`, pay to create the associated token account for the recipient if it doesn't exist. Defaults to `false`. */
+                createDestinationAccount?: boolean | undefined;
+                /** Optional. When `true` the SPL transfer is built as a durable-nonce transaction using one of the wallet's nonce accounts (picked server-side). The wallet's nonce account pool must be pre-populated via `POST /wallets/{id}/transactions` with `kind: CreateSolanaNonceAccounts`. */
+                useDurableNonce?: boolean | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+                structured?: {
+                    [x: string]: any;
+                } | undefined;
+            } | {
+                kind: "Tep74";
+                /** The destination address. */
+                to: string;
+                /** The Jetton master contract address. */
+                master: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The memo or destination tag. */
+                memo?: (string | "") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Trc10";
+                /** The token ID. */
+                tokenId: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Trc20";
+                /** The smart contract address. */
+                contract: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Trc721";
+                /** The smart contract address. */
+                contract: string;
+                /** The destination address. */
+                to: string;
+                /** The token to transfer. */
+                tokenId: string;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            } | {
+                kind: "Xls33";
+                /** The XLS-33 issuance identifier. */
+                issuanceId: string;
+                /** The destination address. */
+                to: string;
+                /** The amount of tokens to transfer in minimum denomination. */
+                amount: string;
+                /** The memo or destination tag. */
+                memo?: (string | "") | undefined;
+                /** A unique ID from your system. It can be leveraged to be used as an idempotency key. (read more [here](https://docs.dfns.co/api-reference/idempotency)) */
+                externalId?: string | undefined;
+                /** A travel rule payload to associate with the transfer. (read more [here](https://docs.dfns.co/features/travel-rule)) */
+                travelRule?: ({
+                    kind: "Notabene";
+                    beneficiaryVASPdid?: string | undefined;
+                    beneficiaryProof?: {
+                        [x: string]: any;
+                    } | undefined;
+                    originator: {
+                        [x: string]: any;
+                    };
+                    beneficiary: {
+                        [x: string]: any;
+                    };
+                } | {
+                    kind: "Sumsub";
+                }) | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
+                feeSponsorId?: string | undefined;
+            };
+            /** Additional metadata about the transfered asset. */
+            metadata: {
+                asset: {
+                    symbol?: string | undefined;
+                    /** Number of decimals used by the asset, see [this guide](https://docs.dfns.co/guides/developers/displaying-balances) for more details. */
+                    decimals?: number | undefined;
+                    /** Whether the asset is verified by DFNS as legitimate. */
+                    verified?: boolean | undefined;
+                    /** Corresponding asset price in USD at the time of transfer. */
+                    quotes?: {
+                        [x: string]: number;
+                    } | undefined;
+                };
+            };
+            /** Transfer status.
+            
+            | Status | Definition |
+            | --- | --- |
+            | `Pending` | The request is pending approval due to a policy applied to the wallet. |
+            | `Executing` | The request is approved and is in the process of being executed. note this status is only set for a short time between pending and broadcasted. |
+            | `Broadcasted` | The transaction has been successfully written to the mempool. |
+            | `Confirmed` | The transaction has been confirmed on-chain by our indexing pipeline. |
+            | `Failed` | Indicates either system failure to complete the request or the transaction failed on chain. |
+            | `Rejected` | The request has been rejected by a policy approval action. | */
+            status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+            /** The reason for a failed transfer. */
+            reason?: string | undefined;
+            /** The blockchain transaction hash for this transfer. */
+            txHash?: string | undefined;
+            /** The fee paid for this transfer in minimum denomination. */
+            fee?: string | undefined;
+            dateRequested: string;
+            datePolicyResolved?: string | undefined;
+            dateBroadcasted?: string | undefined;
+            dateConfirmed?: string | undefined;
+            /** The id of the approval request if this transfer triggered a policy. */
+            approvalId?: string | undefined;
+            /** The external id provided at transfer creation time. */
+            externalId?: string | undefined;
+            /** The fee sponsor id used to pay for the transfer fees. */
+            feeSponsorId?: string | undefined;
+            /** The id of the replacement transaction (cancel or speed-up) issued for this transfer. */
+            replacementId?: string | undefined;
+            /** Structured representation of the data used to construct the signature (e.g. nonce, gas parameters). Shape is blockchain specific. */
+            details?: {
+                [x: string]: unknown;
+            } | undefined;
+        };
+        /** Set when the transfer sends locked funds: the lock they come from. */
+        lock?: {
+            /** Vault lock id. */
+            id: string;
+            vaultId: string;
+            network: string;
+            tid: string;
+            amount: string;
+            /** The user that created the lock. Only this user can update or delete it. */
+            owner: string;
+            externalId?: string | undefined;
+            /** The reason or note the lock was created with. */
+            reason?: string | undefined;
+            /** The address the locked funds are sent to on transfer. Set at creation and inherited on update. */
+            beneficiary?: string | undefined;
+            /** Set when the owner transferred the lock: the outgoing transfer sending `transferAmount` of the locked funds to the beneficiary. The funds stay locked until that transfer is confirmed, which deletes the lock. Cleared if the transfer fails, so the lock can be transferred again. */
+            transferId?: string | undefined;
+            /** Set with `transferId`: the amount being sent to the beneficiary, in minimum denomination. The remainder of the locked amount returns to the available balance when the lock is deleted. */
+            transferAmount?: string | undefined;
+            /** Set when this lock was created by an update: the lock it replaces. */
+            replacesLockId?: string | undefined;
+            /** Set when this lock was released by an update: the lock that replaced it. */
+            replacedByLockId?: string | undefined;
+            dateCreated: string;
+            dateDeleted?: string | undefined;
+        } | undefined;
+    } | {
+        /** The ledger event that opened this item. */
+        id: string;
+        /** Vault id. */
+        vaultId: string;
+        /** The vault wallet the item is on. */
+        walletId: string;
+        timestamp: string;
+        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        /** The token identifier of the asset moved (e.g. `native:eth`, `erc20:0x...`). */
+        tid: string;
+        /** The amount moved, in minimum denomination: deposited for incoming transfers, sent for outgoing transfers, locked or unlocked for lock kinds. */
+        amount: string;
+        kind: "LockCreated" | "LockDeleted";
+        /** Vault lock object: funds manually locked for off-chain settlement or escrow. The owner can release them back to the vault or transfer them to the beneficiary. */
+        lock: {
+            /** Vault lock id. */
+            id: string;
+            vaultId: string;
+            network: string;
+            tid: string;
+            amount: string;
+            /** The user that created the lock. Only this user can update or delete it. */
+            owner: string;
+            externalId?: string | undefined;
+            /** The reason or note the lock was created with. */
+            reason?: string | undefined;
+            /** The address the locked funds are sent to on transfer. Set at creation and inherited on update. */
+            beneficiary?: string | undefined;
+            /** Set when the owner transferred the lock: the outgoing transfer sending `transferAmount` of the locked funds to the beneficiary. The funds stay locked until that transfer is confirmed, which deletes the lock. Cleared if the transfer fails, so the lock can be transferred again. */
+            transferId?: string | undefined;
+            /** Set with `transferId`: the amount being sent to the beneficiary, in minimum denomination. The remainder of the locked amount returns to the available balance when the lock is deleted. */
+            transferAmount?: string | undefined;
+            /** Set when this lock was created by an update: the lock it replaces. */
+            replacesLockId?: string | undefined;
+            /** Set when this lock was released by an update: the lock that replaced it. */
+            replacedByLockId?: string | undefined;
+            dateCreated: string;
+            dateDeleted?: string | undefined;
+        };
+    })[];
+    /** token to use as `paginationToken` to request the next page. */
+    nextPageToken?: string | undefined;
+};
+
+export type ListVaultHistoryRequest = ListVaultHistoryParams & { query?: ListVaultHistoryQuery }
+
 export type ListVaultLocksParams = {
     /** Vault id. */
     vaultId: string;
@@ -1375,7 +2323,7 @@ export type TransferVaultLockResponse = {
     /** The source wallet for this tranfer. */
     walletId: string;
     /** The blockchain network this transfer is on. */
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
     /** The user who initiated the request. */
     requester: {
         /** User id. */
