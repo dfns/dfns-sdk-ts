@@ -19,7 +19,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -63,7 +62,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -107,7 +105,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -151,7 +148,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -253,6 +249,20 @@ export class DelegatedVaultsClient {
     return response.json()
   }
 
+  async listVaultHistory(request: T.ListVaultHistoryRequest): Promise<T.ListVaultHistoryResponse> {
+    const path = buildPathAndQuery('/vaults/:vaultId/history', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listVaultLocks(request: T.ListVaultLocksRequest): Promise<T.ListVaultLocksResponse> {
     const path = buildPathAndQuery('/vaults/:vaultId/locks', {
       path: request ?? {},
@@ -307,7 +317,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -351,7 +360,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -395,7 +403,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -439,7 +446,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -483,7 +489,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -527,7 +532,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -571,7 +575,6 @@ export class DelegatedVaultsClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )

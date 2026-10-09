@@ -19,7 +19,6 @@ export class DelegatedKeysClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -63,7 +62,6 @@ export class DelegatedKeysClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -107,7 +105,6 @@ export class DelegatedKeysClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -151,7 +148,6 @@ export class DelegatedKeysClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -195,7 +191,6 @@ export class DelegatedKeysClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -239,7 +234,6 @@ export class DelegatedKeysClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -311,7 +305,6 @@ export class DelegatedKeysClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -383,7 +376,6 @@ export class DelegatedKeysClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )

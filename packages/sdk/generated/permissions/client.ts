@@ -59,6 +59,21 @@ export class PermissionsClient {
     return response.json()
   }
 
+  async deletePermission(request: T.DeletePermissionRequest): Promise<T.DeletePermissionResponse> {
+    const path = buildPathAndQuery('/permissions/:permissionId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getPermission(request: T.GetPermissionRequest): Promise<T.GetPermissionResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId', {
       path: request ?? {},

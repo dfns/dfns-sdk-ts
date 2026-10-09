@@ -19,7 +19,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -63,7 +62,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -107,7 +105,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -151,7 +148,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -195,7 +191,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -274,7 +269,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -333,7 +327,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -377,7 +370,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -436,7 +428,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -510,7 +501,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -569,7 +559,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -648,7 +637,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -692,7 +680,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -736,7 +723,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -780,7 +766,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -824,7 +809,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -868,7 +852,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -912,7 +895,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -956,7 +938,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -1000,7 +981,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -1129,7 +1109,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -1467,7 +1446,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -1511,7 +1489,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -1555,7 +1532,6 @@ export class DelegatedAuthClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )

@@ -33,7 +33,6 @@ export class DelegatedAgreementsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )

@@ -19,7 +19,6 @@ export class DelegatedFeeSponsorsClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -63,7 +62,6 @@ export class DelegatedFeeSponsorsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -107,7 +105,6 @@ export class DelegatedFeeSponsorsClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -151,7 +148,6 @@ export class DelegatedFeeSponsorsClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )

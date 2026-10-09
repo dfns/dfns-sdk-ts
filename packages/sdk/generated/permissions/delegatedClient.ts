@@ -19,7 +19,6 @@ export class DelegatedPermissionsClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -63,7 +62,6 @@ export class DelegatedPermissionsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -107,7 +105,6 @@ export class DelegatedPermissionsClient {
         userActionHttpMethod: 'POST',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -132,6 +129,49 @@ export class DelegatedPermissionsClient {
     const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async deletePermissionInit(request: T.DeletePermissionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/permissions/:permissionId', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deletePermissionComplete(
+    request: T.DeletePermissionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeletePermissionResponse> {
+    const path = buildPathAndQuery('/permissions/:permissionId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
@@ -193,7 +233,6 @@ export class DelegatedPermissionsClient {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
         userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )
@@ -237,7 +276,6 @@ export class DelegatedPermissionsClient {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
         userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
       },
       this.apiOptions
     )

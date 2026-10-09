@@ -101,6 +101,21 @@ export class NetworksClient {
     return response.json()
   }
 
+  async reindexTransaction(request: T.ReindexTransactionRequest): Promise<T.ReindexTransactionResponse> {
+    const path = buildPathAndQuery('/networks/:network/transactions/reindex', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async updateCantonValidator(request: T.UpdateCantonValidatorRequest): Promise<T.UpdateCantonValidatorResponse> {
     const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
       path: request ?? {},
