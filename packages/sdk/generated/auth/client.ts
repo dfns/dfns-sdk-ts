@@ -269,6 +269,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async createServiceAccountCredential(request: T.CreateServiceAccountCredentialRequest): Promise<T.CreateServiceAccountCredentialResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/credentials', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createSocialRegistrationChallenge(request: T.CreateSocialRegistrationChallengeRequest): Promise<T.CreateSocialRegistrationChallengeResponse> {
     const path = buildPathAndQuery('/auth/registration/social', {
       path: request ?? {},
@@ -472,6 +487,21 @@ export class AuthClient {
   /** @deprecated, use deleteServiceAccount instead */
   async archiveServiceAccount(request: T.DeleteServiceAccountRequest): Promise<T.DeleteServiceAccountResponse> {
     return this.deleteServiceAccount(request)
+  }
+
+  async deleteServiceAccountCredential(request: T.DeleteServiceAccountCredentialRequest): Promise<T.DeleteServiceAccountCredentialResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
   }
 
   async deleteUser(request: T.DeleteUserRequest): Promise<T.DeleteUserResponse> {
@@ -715,6 +745,21 @@ export class AuthClient {
 
   async oidcLogin(request: T.OidcLoginRequest): Promise<T.OidcLoginResponse> {
     const path = buildPathAndQuery('/auth/login/oidc', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async oidcLoginCredentials(request: T.OidcLoginCredentialsRequest): Promise<T.OidcLoginCredentialsResponse> {
+    const path = buildPathAndQuery('/auth/login/oidc/credentials', {
       path: request ?? {},
       query: {},
     })
