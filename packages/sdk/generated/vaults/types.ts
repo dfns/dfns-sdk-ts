@@ -155,6 +155,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -188,6 +200,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -219,6 +243,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -249,6 +285,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -277,6 +325,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -311,6 +371,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -339,6 +411,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -369,6 +453,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -397,6 +493,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -427,6 +535,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -457,6 +577,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -486,6 +618,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -516,6 +660,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -548,6 +704,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -580,6 +748,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -608,6 +788,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -636,6 +828,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -670,6 +874,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -703,6 +919,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -731,6 +959,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -759,6 +999,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -787,6 +1039,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -817,6 +1081,18 @@ export type CreateVaultTransferResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -1221,6 +1497,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1254,6 +1542,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1285,6 +1585,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1315,6 +1627,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1343,6 +1667,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1377,6 +1713,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1405,6 +1753,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1435,6 +1795,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1463,6 +1835,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1493,6 +1877,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1523,6 +1919,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1552,6 +1960,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1582,6 +2002,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1614,6 +2046,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1646,6 +2090,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1674,6 +2130,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1702,6 +2170,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1736,6 +2216,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1769,6 +2261,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1797,6 +2301,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1825,6 +2341,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1853,6 +2381,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -1883,6 +2423,18 @@ export type ListVaultHistoryResponse = {
                     };
                 } | {
                     kind: "Sumsub";
+                    ivms101: {
+                        /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                        version: "IVMS101.2023";
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        data: string;
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        filledFields: string[];
+                    };
+                    /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryVaspId?: string | undefined;
+                    /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+                    beneficiaryWalletType?: "unhosted" | undefined;
                 }) | undefined;
                 /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
                 feeSponsorId?: string | undefined;
@@ -2366,6 +2918,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2399,6 +2963,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2430,6 +3006,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2460,6 +3048,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2488,6 +3088,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2522,6 +3134,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2550,6 +3174,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2580,6 +3216,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2608,6 +3256,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2638,6 +3298,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2668,6 +3340,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2697,6 +3381,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2727,6 +3423,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2759,6 +3467,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2791,6 +3511,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2819,6 +3551,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2847,6 +3591,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2881,6 +3637,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2914,6 +3682,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2942,6 +3722,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2970,6 +3762,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -2998,6 +3802,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;
@@ -3028,6 +3844,18 @@ export type TransferVaultLockResponse = {
             };
         } | {
             kind: "Sumsub";
+            ivms101: {
+                /** IVMS101 payload version. Must be `IVMS101.2023`. */
+                version: "IVMS101.2023";
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                data: string;
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                filledFields: string[];
+            };
+            /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryVaspId?: string | undefined;
+            /** Set to `unhosted` for a transfer to a self-custody wallet, which skips VASP attribution. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
+            beneficiaryWalletType?: "unhosted" | undefined;
         }) | undefined;
         /** Id of the fee sponsor that will be used to pay for your transfer fees, it might not be available for all blockchains. (read more [here](https://docs.dfns.co/features/fee-sponsors)) */
         feeSponsorId?: string | undefined;

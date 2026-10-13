@@ -532,6 +532,49 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async createServiceAccountCredentialInit(request: T.CreateServiceAccountCredentialRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/credentials', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async createServiceAccountCredentialComplete(
+    request: T.CreateServiceAccountCredentialRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.CreateServiceAccountCredentialResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/credentials', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createSocialRegistrationChallenge(request: T.CreateSocialRegistrationChallengeRequest): Promise<T.CreateSocialRegistrationChallengeResponse> {
     const path = buildPathAndQuery('/auth/registration/social', {
       path: request ?? {},
@@ -969,6 +1012,49 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async deleteServiceAccountCredentialInit(request: T.DeleteServiceAccountCredentialRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deleteServiceAccountCredentialComplete(
+    request: T.DeleteServiceAccountCredentialRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeleteServiceAccountCredentialResponse> {
+    const path = buildPathAndQuery('/auth/service-accounts/credentials/:credentialUuid', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async deleteUserInit(request: T.DeleteUserRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/users/:userId', {
       path: request ?? {},
@@ -1261,6 +1347,21 @@ export class DelegatedAuthClient {
 
   async oidcLogin(request: T.OidcLoginRequest): Promise<T.OidcLoginResponse> {
     const path = buildPathAndQuery('/auth/login/oidc', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async oidcLoginCredentials(request: T.OidcLoginCredentialsRequest): Promise<T.OidcLoginCredentialsResponse> {
+    const path = buildPathAndQuery('/auth/login/oidc/credentials', {
       path: request ?? {},
       query: {},
     })
