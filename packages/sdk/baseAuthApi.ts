@@ -19,7 +19,7 @@ export type CreateUserActionChallengeRequest = {
   userActionPayload: string
   userActionHttpMethod: HttpMethod
   userActionHttpPath: string
-  userActionServerKind: 'Api'
+  userActionServerKind?: 'Api'
 }
 
 export type UserActionChallengeResponse = UserActionChallenge
