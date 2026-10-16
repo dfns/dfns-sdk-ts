@@ -3044,7 +3044,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3076,7 +3081,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3112,7 +3122,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3148,7 +3163,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3182,7 +3202,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3333,7 +3358,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3439,7 +3469,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3478,7 +3513,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3517,7 +3557,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3558,7 +3603,12 @@ export type CreateApprovalDecisionResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -3747,7 +3797,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -3775,7 +3830,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -3807,7 +3867,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -3839,7 +3904,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -3869,7 +3939,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4016,7 +4091,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4114,7 +4194,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4149,7 +4234,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4184,7 +4274,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4221,7 +4316,12 @@ export type CreatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4255,7 +4355,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4287,7 +4392,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4323,7 +4433,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4359,7 +4474,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4393,7 +4513,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4544,7 +4669,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4650,7 +4780,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4689,7 +4824,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4728,7 +4868,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4769,7 +4914,12 @@ export type CreatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4809,7 +4959,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4841,7 +4996,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4877,7 +5037,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4913,7 +5078,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -4947,7 +5117,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -5098,7 +5273,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -5204,7 +5384,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -5243,7 +5428,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -5282,7 +5472,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -5323,7 +5518,12 @@ export type DeletePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -8388,7 +8588,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8420,7 +8625,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8456,7 +8666,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8492,7 +8707,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8526,7 +8746,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8677,7 +8902,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8783,7 +9013,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8822,7 +9057,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8861,7 +9101,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -8902,7 +9147,12 @@ export type GetApprovalResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -9099,7 +9349,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9131,7 +9386,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9167,7 +9427,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9203,7 +9468,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9237,7 +9507,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9388,7 +9663,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9494,7 +9774,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9533,7 +9818,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9572,7 +9862,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9613,7 +9908,12 @@ export type GetPolicyResponse = ({
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -9661,7 +9961,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -9693,7 +9998,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -9729,7 +10039,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -9765,7 +10080,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -9799,7 +10119,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -9950,7 +10275,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -10056,7 +10386,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -10095,7 +10430,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -10134,7 +10474,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -10175,7 +10520,12 @@ export type GetPolicyResponse = ({
                     name?: string | undefined;
                     quorum: number;
                     approvers: {
+                        /** Users and service accounts who may approve. */
                         userId?: {
+                            in: string[];
+                        } | undefined;
+                        /** User groups whose members may approve. */
+                        userGroupId?: {
                             in: string[];
                         } | undefined;
                     };
@@ -13250,7 +13600,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13282,7 +13637,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13318,7 +13678,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13354,7 +13719,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13388,7 +13758,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13539,7 +13914,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13645,7 +14025,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13684,7 +14069,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13723,7 +14113,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13764,7 +14159,12 @@ export type ListApprovalsResponse = {
                             name?: string | undefined;
                             quorum: number;
                             approvers: {
+                                /** Users and service accounts who may approve. */
                                 userId?: {
+                                    in: string[];
+                                } | undefined;
+                                /** User groups whose members may approve. */
+                                userGroupId?: {
                                     in: string[];
                                 } | undefined;
                             };
@@ -13967,7 +14367,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -13999,7 +14404,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14035,7 +14445,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14071,7 +14486,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14105,7 +14525,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14256,7 +14681,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14362,7 +14792,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14401,7 +14836,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14440,7 +14880,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14481,7 +14926,12 @@ export type ListPoliciesResponse = {
                 name?: string | undefined;
                 quorum: number;
                 approvers: {
+                    /** Users and service accounts who may approve. */
                     userId?: {
+                        in: string[];
+                    } | undefined;
+                    /** User groups whose members may approve. */
+                    userGroupId?: {
                         in: string[];
                     } | undefined;
                 };
@@ -14529,7 +14979,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -14561,7 +15016,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -14597,7 +15057,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -14633,7 +15098,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -14667,7 +15137,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -14818,7 +15293,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -14924,7 +15404,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -14963,7 +15448,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -15002,7 +15492,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -15043,7 +15538,12 @@ export type ListPoliciesResponse = {
                         name?: string | undefined;
                         quorum: number;
                         approvers: {
+                            /** Users and service accounts who may approve. */
                             userId?: {
+                                in: string[];
+                            } | undefined;
+                            /** User groups whose members may approve. */
+                            userGroupId?: {
                                 in: string[];
                             } | undefined;
                         };
@@ -15079,7 +15579,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15107,7 +15612,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15139,7 +15649,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15171,7 +15686,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15201,7 +15721,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15348,7 +15873,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15446,7 +15976,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15481,7 +16016,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15516,7 +16056,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15553,7 +16098,12 @@ export type UpdatePolicyBody = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15591,7 +16141,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15623,7 +16178,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15659,7 +16219,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15695,7 +16260,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15729,7 +16299,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15880,7 +16455,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -15986,7 +16566,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -16025,7 +16610,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -16064,7 +16654,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
@@ -16105,7 +16700,12 @@ export type UpdatePolicyResponse = {
             name?: string | undefined;
             quorum: number;
             approvers: {
+                /** Users and service accounts who may approve. */
                 userId?: {
+                    in: string[];
+                } | undefined;
+                /** User groups whose members may approve. */
+                userGroupId?: {
                     in: string[];
                 } | undefined;
             };
