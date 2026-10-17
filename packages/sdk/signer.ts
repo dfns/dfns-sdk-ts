@@ -84,5 +84,13 @@ export type CredentialAssertion = KeyAssertion | Fido2Assertion | PasswordAssert
 
 export interface CredentialSigner<T extends CredentialAssertion = FirstFactorAssertion> {
   readonly useClientChallenge?: boolean
-  sign(challenge: UserActionChallenge): Promise<T>
+  sign(options: {
+    challenge: string
+    allowCredentials?: {
+      key?: AllowCredential[]
+      webauthn?: AllowCredential[]
+      passwordProtectedKey?: AllowCredentialWithEncryptedKey[]
+    }
+    userVerification?: UserVerificationRequirement
+  }): Promise<T>
 }

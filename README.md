@@ -29,14 +29,12 @@ All state-changing requests made to Dfns API need to be cryptographically signed
 
 This request signature is a cryptographic proof that you and only you are making the request. Without it, the request would raise an Unauthorized error.
 
-Credentials can be one of two kinds (_check our API docs [Credential section](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details_): WebauthN Credentials or Key Credentials. WebauthN credentials only work in the browser. Key credentials can work in the browser (BrowserKeySigner) or in node (AsymmetricKeySigner).
+Credentials can be one of two kinds (_check our API docs [Credential section](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details_): WebauthN Credentials or Key Credentials. WebauthN credentials only work in the browser. Key credentials are server-side only (`AsymmetricKeySigner`).
 The classes below support each one, their responsibility is to sign a challenge:
 
-#### Browser Signers
+#### Browser Signer
 
-The SDK exposed in `@dfns/sdk-browser` implements two classes: `WebAuthnSigner` and `BrowserKeySigner`.
-`WebAuthnSigner` is highly recommended as it is the most secure option. The private key never leaves the authenticator and is never available to the browser.
-`BrowserKeySigner` is disouraged as the private key lives in the browser memory. The developer needs to come up with a secure way to load and use the private key while still keeping it secure.
+The SDK exposed in `@dfns/sdk-browser` implements `WebAuthnSigner`.
 
 ##### `WebAuthnSigner`
 
@@ -46,24 +44,6 @@ The SDK exposed in `@dfns/sdk-browser` implements two classes: `WebAuthnSigner` 
 import { WebAuthnSigner } from '@dfns/sdk-browser'
 
 const webauthn = new WebAuthnSigner({ relyingParty: { id: 'acme.com', name: 'Acme' } })
-```
-
-##### `BrowserKeySigner`
-
-`BrowserKeySigner` implements `CredentialSigner` and `CredentialStore`. It **needs to be used client-side** (on a browser, in a web-app)
-
-```ts
-import { BrowserKeySigner } from '@dfns/sdk-browser'
-
-const browserKey = new BrowserKeySigner({
-  keyPair: keyPair, // This is the keyPair object of type [CryptoKeyPair](https://developer.mozilla.org/en-US/docs/Web/API/CryptoKeyPair). This key should be protected and loaded securely in the browser.
-})
-
-// Create the attestation object to register the credential
-const attestation = await browserKey.create(challenge)
-
-// Create the assertion object to sign a request with the credential
-const assertion = await browserKey.sign(challenge)
 ```
 
 #### React Native Signer
@@ -78,7 +58,7 @@ const passkeys = new PasskeysSigner()
 
 #### `AsymmetricKeySigner`
 
-`AsymmetricKeySigner` in `@dfns/sdk-keysigner` package, implements `CredentialSigner`. It **needs to be used server-side**. It could be used client-side, but we don't recommend it. In a browser, use `BrowserKeySigner`. Any key-based crypto signing should be handled in a service worker.
+`AsymmetricKeySigner` in `@dfns/sdk-keysigner` package, implements `CredentialSigner`. It **needs to be used server-side only** — a key sitting in browser memory is unsafe. In a browser, use `WebAuthnSigner`.
 
 ```ts
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
