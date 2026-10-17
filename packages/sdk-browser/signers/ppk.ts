@@ -92,7 +92,7 @@ export class PasswordProtectedKeySigner {
     const handle = spawnWorker()
     try {
       const salt = await deriveSaltFromUsername(this.keyData.username)
-      await handle.unlock(this.keyData.credId, this.keyData.wrappedKey, password, salt)
+      await handle.unlock({ credId: this.keyData.credId, wrappedKey: this.keyData.wrappedKey, password, salt })
       if (this.handle) {
         // Another unlock won the race during our handle.unlock() await. Terminate our worker
         // rather than orphan it — overwriting this.handle would drop the winner's reference and
@@ -252,5 +252,8 @@ export class PasswordProtectedKeyRing implements CredentialSigner<KeyAssertion> 
   }
 }
 
-const sameIds = (a: readonly string[], b: readonly string[]): boolean =>
-  a.length === b.length && a.every((id, i) => id === b[i])
+const sameIds = (a: readonly string[], b: readonly string[]): boolean => {
+  if (a.length !== b.length) return false
+  const seen = new Set(a)
+  return b.every((id) => seen.has(id))
+}

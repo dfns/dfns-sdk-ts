@@ -24,18 +24,12 @@ export class IsolatedKeyHandle {
     }
   }
 
-  create(opts: { password?: string; salt?: Uint8Array<ArrayBuffer> } = {}) {
-    return this.postMessage<Extract<IsolatedKeyResponse, { kind: 'created' }>>({ kind: 'create', ...opts })
+  create(args: { password?: string; salt?: Uint8Array<ArrayBuffer> } = {}) {
+    return this.postMessage<Extract<IsolatedKeyResponse, { kind: 'created' }>>({ kind: 'create', ...args })
   }
 
-  unlock(credId: string, wrappedKey: string, password: string, salt: Uint8Array<ArrayBuffer>) {
-    return this.postMessage<Extract<IsolatedKeyResponse, { kind: 'unlocked' }>>({
-      kind: 'unlock',
-      credId,
-      password,
-      salt,
-      wrappedKey,
-    })
+  unlock(args: { credId: string; wrappedKey: string; password: string; salt: Uint8Array<ArrayBuffer> }) {
+    return this.postMessage<Extract<IsolatedKeyResponse, { kind: 'unlocked' }>>({ kind: 'unlock', ...args })
   }
 
   sign(message: string) {

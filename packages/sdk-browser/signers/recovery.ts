@@ -13,15 +13,15 @@ export type RecoveryKeyAttestation = Omit<
 
 export type RecoveryKeyAssertion = RecoverBody['recovery']
 
-const RECOVERY_KEY_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+const RECOVERY_CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
 
-export const randomRecoveryKey = (): string => {
+export const randomRecoveryCode = (): string => {
   const uuid1 = crypto.randomUUID().replace(/-/g, '')
   const uuid2 = crypto.randomUUID().replace(/-/g, '')
   let out = ''
   for (let i = 0; i < uuid1.length; ++i) {
     const idx = parseInt(uuid1[i], 16) + (parseInt(uuid2[i]) < 8 ? 0 : 16)
-    out += RECOVERY_KEY_ALPHABET[idx]
+    out += RECOVERY_CODE_ALPHABET[idx]
   }
   return `D1-${out.substring(0, 6)}-${out.substring(6, 11)}-${out.substring(11, 16)}-${out.substring(
     16,
@@ -53,13 +53,13 @@ export class RecoveryKeySigner {
     options: { challenge: string }
   ): Promise<{
     attestation: RecoveryKeyAttestation
-    recoveryKey: string
+    recoveryCode: string
   }> {
     const handle = spawnWorker()
     try {
-      const recoveryKey = randomRecoveryKey()
+      const recoveryCode = randomRecoveryCode()
       const salt = await deriveSaltFromUsername(username)
-      const { publicKey, credId, wrappedKey } = await handle.create({ password: recoveryKey, salt })
+      const { publicKey, credId, wrappedKey } = await handle.create({ password: recoveryCode, salt })
       if (!wrappedKey) {
         throw namedError(
           'InvalidArgument',
@@ -93,7 +93,7 @@ export class RecoveryKeySigner {
           },
           encryptedPrivateKey: wrappedKey,
         },
-        recoveryKey,
+        recoveryCode,
       }
     } finally {
       await handle.close()
@@ -109,7 +109,7 @@ export class RecoveryKeySigner {
     const handle = spawnWorker()
     try {
       const salt = await deriveSaltFromUsername(username)
-      await handle.unlock(credId, wrappedKey, recoveryCode, salt)
+      await handle.unlock({ credId, wrappedKey, password: recoveryCode, salt })
       const { signature } = await handle.sign(clientData)
       return {
         kind: 'RecoveryKey',

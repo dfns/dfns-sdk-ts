@@ -6,5 +6,5 @@ export {
   PromptCallback,
   PromptResult,
 } from './signers/ppk'
-export { RecoveryKeyAssertion, RecoveryKeyAttestation, RecoveryKeySigner, randomRecoveryKey } from './signers/recovery'
+export { RecoveryKeyAssertion, RecoveryKeyAttestation, RecoveryKeySigner, randomRecoveryCode } from './signers/recovery'
 export { SessionKeyAttestation, SessionKeySigner } from './signers/session'
