@@ -252,5 +252,8 @@ export class PasswordProtectedKeyRing implements CredentialSigner<KeyAssertion> 
   }
 }
 
-const sameIds = (a: readonly string[], b: readonly string[]): boolean =>
-  a.length === b.length && a.every((id, i) => id === b[i])
+const sameIds = (a: readonly string[], b: readonly string[]): boolean => {
+  if (a.length !== b.length) return false
+  const seen = new Set(a)
+  return b.every((id) => seen.has(id))
+}
