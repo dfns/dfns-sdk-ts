@@ -1,14 +1,7 @@
-import {
-  CredentialSigner,
-  CredentialStore,
-  DfnsError,
-  Fido2Assertion,
-  Fido2Attestation,
-  UserActionChallenge,
-} from '@dfns/sdk'
-import { CreateCredentialChallengeResponse, CreateRegistrationChallengeResponse } from '@dfns/sdk/generated/auth'
-import { fromBase64Url, toBase64Url } from '@dfns/sdk/utils'
 import { Buffer } from 'buffer'
+
+import { CredentialSigner, CredentialStore, DfnsError, Fido2Assertion, Fido2Attestation } from '@dfns/sdk'
+import { fromBase64Url, toBase64Url } from '@dfns/sdk/utils'
 
 export const DEFAULT_WAIT_TIMEOUT = 60000
 
@@ -36,16 +29,20 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
     }
   }
 
-  async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
+  async sign(options: {
+    challenge: string
+    allowCredentials?: { webauthn?: { id: string; type: PublicKeyCredentialType }[] }
+    userVerification?: UserVerificationRequirement
+  }): Promise<Fido2Assertion> {
     const response = await navigator.credentials.get({
       publicKey: {
-        challenge: Buffer.from(challenge.challenge),
-        allowCredentials: challenge.allowCredentials?.webauthn.map(({ id, type }) => ({
+        challenge: Buffer.from(options.challenge),
+        allowCredentials: options.allowCredentials?.webauthn?.map(({ id, type }) => ({
           id: fromBase64Url(id).buffer as ArrayBuffer,
           type,
         })),
         rpId: this.conf.relyingParty.id,
-        userVerification: challenge.userVerification,
+        userVerification: options.userVerification,
         timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
       },
     })
@@ -69,30 +66,33 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
     }
   }
 
-  async create(
-    challenge: CreateRegistrationChallengeResponse | (CreateCredentialChallengeResponse & { kind: 'Fido2' })
-  ): Promise<Fido2Attestation> {
-    const options: CredentialCreationOptions = {
+  async create(options: {
+    challenge: string
+    pubKeyCredParams: PublicKeyCredentialParameters[]
+    user: { displayName: string; id: string; name: string }
+    attestation: AttestationConveyancePreference
+    excludeCredentials: { id: string; type: PublicKeyCredentialType }[]
+    authenticatorSelection?: AuthenticatorSelectionCriteria
+  }): Promise<Fido2Attestation> {
+    const response = await navigator.credentials.create({
       publicKey: {
-        challenge: Buffer.from(challenge.challenge),
-        pubKeyCredParams: challenge.pubKeyCredParams,
+        challenge: Buffer.from(options.challenge),
+        pubKeyCredParams: options.pubKeyCredParams,
         rp: this.conf.relyingParty,
         user: {
-          displayName: challenge.user.displayName,
-          id: Buffer.from(challenge.user.id),
-          name: challenge.user.name,
+          displayName: options.user.displayName,
+          id: Buffer.from(options.user.id),
+          name: options.user.name,
         },
-        attestation: challenge.attestation,
-        excludeCredentials: challenge.excludeCredentials.map(({ id, type }) => ({
+        attestation: options.attestation,
+        excludeCredentials: options.excludeCredentials.map(({ id, type }) => ({
           id: fromBase64Url(id).buffer as ArrayBuffer,
           type,
         })),
-        authenticatorSelection: challenge.authenticatorSelection,
+        authenticatorSelection: options.authenticatorSelection,
         timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
       },
-    }
-
-    const response = await navigator.credentials.create(options)
+    })
 
     if (response === null) {
       throw new DfnsError(-1, `Failed to create and sign with WebAuthn credential`)

@@ -1,30 +1,35 @@
+// Sentinel origin for resolving relative resource paths. Any resolved URL whose origin stays this
+// value is a valid relative path; anything else means the caller handed us an absolute URL, which
+// we reject — the SDK must only ever talk to the configured deployment baseUrl.
 const URL_RESOLUTION_BASE = 'https://dfns.invalid'
 
-export const getCanonicalPath = (resource: string | URL): string => {
-  return resource instanceof URL ? resource.pathname : new URL(resource, URL_RESOLUTION_BASE).pathname
+export const getCanonicalPath = (resource: string): string => new URL(resource, URL_RESOLUTION_BASE).pathname
+
+// Server-challenge signs the pathname only; client-challenge covers the full request line and so
+// needs the query string too — swapping `?dryRun=true` on an otherwise-identical request must
+// invalidate the signature.
+export const getCanonicalPathAndQuery = (resource: string): string => {
+  const url = new URL(resource, URL_RESOLUTION_BASE)
+  return url.pathname + url.search
 }
 
-export const buildApiUrl = (resource: string | URL, baseUrl: string): URL => {
+export const buildFullUrl = (resource: string, baseUrl: string): URL => {
   const base = new URL(baseUrl)
 
   if (base.search || base.hash) {
     throw new Error('baseUrl must not contain a query string or fragment')
   }
 
-  if (resource instanceof URL) {
-    return new URL(resource)
-  }
-
-  const resolvedResource = new URL(resource, URL_RESOLUTION_BASE)
-  if (resolvedResource.origin !== URL_RESOLUTION_BASE) {
-    return resolvedResource
+  const { origin, pathname, search, hash } = new URL(resource, URL_RESOLUTION_BASE)
+  if (origin !== URL_RESOLUTION_BASE) {
+    throw new Error('resource must be a canonical Dfns API path (e.g. "/wallets"), not an absolute URL')
   }
 
   const basePath = base.pathname.replace(/\/+$/, '')
-  const resourcePath = resolvedResource.pathname.replace(/^\/+/, '')
+  const resourcePath = pathname.replace(/^\/+/, '')
   base.pathname = `${basePath}/${resourcePath}`
-  base.search = resolvedResource.search
-  base.hash = resolvedResource.hash
+  base.search = search
+  base.hash = hash
 
   return base
 }
