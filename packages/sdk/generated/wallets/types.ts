@@ -10,7 +10,7 @@ export type AbortTransactionResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -185,7 +185,10 @@ export type AbortTransactionResponse = {
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transaction. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -217,7 +220,7 @@ export type AbortTransferResponse = {
     /** The source wallet for this tranfer. */
     walletId: string;
     /** The blockchain network this transfer is on. */
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -263,9 +266,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -308,9 +311,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -351,9 +354,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -393,9 +396,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -433,9 +436,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -479,9 +482,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -519,9 +522,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -561,9 +564,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -601,9 +604,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -643,9 +646,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -685,9 +688,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -726,9 +729,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -768,9 +771,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -812,9 +815,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -856,9 +859,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -896,9 +899,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -936,9 +939,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -982,9 +985,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1027,9 +1030,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1067,9 +1070,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1107,9 +1110,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1147,9 +1150,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1189,9 +1192,9 @@ export type AbortTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1229,6 +1232,8 @@ export type AbortTransferResponse = {
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
     /** The reason for a failed transfer. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     /** The blockchain transaction hash for this transfer. */
     txHash?: string | undefined;
     /** The fee paid for this transfer in minimum denomination. */
@@ -1267,7 +1272,7 @@ export type AcceptOfferResponse = {
     orgId: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     kind: "Native" | "Aip21" | "Asa" | "Coin" | "Cip56" | "Erc20" | "Erc721" | "Erc7984" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Snip2" | "Snip3" | "Tep74" | "Trc10" | "Trc20" | "Trc721" | "Cis7" | "Cis2" | "Iou" | "Xls33";
     metadata: {
         asset: {
@@ -1317,7 +1322,7 @@ export type ActivateWalletResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -1492,7 +1497,10 @@ export type ActivateWalletResponse = {
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transaction. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -1545,7 +1553,7 @@ export type CancelTransactionResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -1720,7 +1728,10 @@ export type CancelTransactionResponse = {
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transaction. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -1751,7 +1762,7 @@ export type CancelTransferResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -1926,7 +1937,10 @@ export type CancelTransferResponse = {
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transaction. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -1965,7 +1979,7 @@ export type CantonLedgerApiProxyRequest = CantonLedgerApiProxyParams & { body: C
 
 export type CreateWalletBody = {
     /** Network used for the wallet. */
-    network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+    network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     /** Wallet nickname. */
     name?: string | undefined;
     /** Options for the wallet's underlying key */
@@ -2000,7 +2014,7 @@ export type CreateWalletResponse = {
     /** ID of the wallet. */
     id: string;
     /** Network this wallet is bound to. */
-    network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+    network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     /** Wallet address on its corresponding network. */
     address?: string | undefined;
     /** Details about the key underlying the wallet. */
@@ -2104,7 +2118,7 @@ export type GenerateSignatureBody = {
     hash: string;
     /** Required when signing with a Schnorr key. Specify the merkle root for tweaking the signing key, or the empty string "" to tweak with the default merkle root. */
     taprootMerkleRoot?: string | undefined;
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2112,7 +2126,7 @@ export type GenerateSignatureBody = {
     kind: "Message";
     /** An arbitrary hex encoded message. */
     message: string;
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2120,7 +2134,7 @@ export type GenerateSignatureBody = {
     kind: "Transaction";
     /** The unsigned hex-encoded transaction or JSON object for compatible networks */
     transaction: string | {};
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2128,7 +2142,7 @@ export type GenerateSignatureBody = {
     kind: "Eip191";
     /** Hex-encoded message. */
     message: string;
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2158,7 +2172,7 @@ export type GenerateSignatureBody = {
     message: {
         [x: string]: unknown;
     };
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2170,7 +2184,7 @@ export type GenerateSignatureBody = {
     nonce: number;
     /** Chain ID. */
     chainId: number;
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2200,7 +2214,7 @@ export type GenerateSignatureBody = {
     message: {
         [x: string]: unknown;
     };
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2208,7 +2222,7 @@ export type GenerateSignatureBody = {
     kind: "Psbt";
     /** The hex encoded PSBT. */
     psbt: string;
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2218,7 +2232,7 @@ export type GenerateSignatureBody = {
     message: string;
     /** Defaults to Simple if not present. The formatted signature is returned in the `signedData` field in the response. */
     format?: ("Simple" | "Full") | undefined;
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2226,7 +2240,7 @@ export type GenerateSignatureBody = {
     kind: "SignDocDirect";
     /** The hex encoded `SignDoc` Protobuf. */
     signDoc: string;
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2275,7 +2289,7 @@ export type GenerateSignatureBody = {
     ```
      */
     payload: string | {};
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2286,7 +2300,7 @@ export type GenerateSignatureBody = {
     /** Allows an application to ask the user to sign some extra data but NOT put it inside the COSE structure (only as part of the data to sign). */
     externalAad?: string | undefined;
     context: "Signature1";
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
@@ -2315,7 +2329,7 @@ export type GenerateSignatureResponse = {
         hash: string;
         /** Required when signing with a Schnorr key. Specify the merkle root for tweaking the signing key, or the empty string "" to tweak with the default merkle root. */
         taprootMerkleRoot?: string | undefined;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2323,7 +2337,7 @@ export type GenerateSignatureResponse = {
         kind: "Message";
         /** An arbitrary hex encoded message. */
         message: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2331,7 +2345,7 @@ export type GenerateSignatureResponse = {
         kind: "Transaction";
         /** The unsigned hex-encoded transaction or JSON object for compatible networks */
         transaction: string | {};
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2339,7 +2353,7 @@ export type GenerateSignatureResponse = {
         kind: "Eip191";
         /** Hex-encoded message. */
         message: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2369,7 +2383,7 @@ export type GenerateSignatureResponse = {
         message: {
             [x: string]: unknown;
         };
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2381,7 +2395,7 @@ export type GenerateSignatureResponse = {
         nonce: number;
         /** Chain ID. */
         chainId: number;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2411,7 +2425,7 @@ export type GenerateSignatureResponse = {
         message: {
             [x: string]: unknown;
         };
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2419,7 +2433,7 @@ export type GenerateSignatureResponse = {
         kind: "Psbt";
         /** The hex encoded PSBT. */
         psbt: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2429,7 +2443,7 @@ export type GenerateSignatureResponse = {
         message: string;
         /** Defaults to Simple if not present. The formatted signature is returned in the `signedData` field in the response. */
         format?: ("Simple" | "Full") | undefined;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2437,7 +2451,7 @@ export type GenerateSignatureResponse = {
         kind: "SignDocDirect";
         /** The hex encoded `SignDoc` Protobuf. */
         signDoc: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2486,7 +2500,7 @@ export type GenerateSignatureResponse = {
         ```
          */
         payload: string | {};
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2497,7 +2511,7 @@ export type GenerateSignatureResponse = {
         /** Allows an application to ask the user to sign some extra data but NOT put it inside the COSE structure (only as part of the data to sign). */
         externalAad?: string | undefined;
         context: "Signature1";
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2538,14 +2552,18 @@ export type GenerateSignatureResponse = {
         };
         signatures: {
             [x: string]: {
+                /** The `r` component of the signature, hex encoded. */
                 r: string;
+                /** The `s` component of the signature, hex encoded. */
                 s: string;
+                /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
                 recid?: number | undefined;
+                /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
                 encoded?: string | undefined;
             };
         };
         transactionReference: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2553,7 +2571,7 @@ export type GenerateSignatureResponse = {
         kind: "StellarFeeBumpTransaction";
         innerTransaction: string;
         transactionReference: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2561,20 +2579,28 @@ export type GenerateSignatureResponse = {
     status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
     reason?: string | undefined;
     signature?: {
+        /** The `r` component of the signature, hex encoded. */
         r: string;
+        /** The `s` component of the signature, hex encoded. */
         s: string;
+        /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
         recid?: number | undefined;
+        /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
         encoded?: string | undefined;
     } | undefined;
     signatures?: {
+        /** The `r` component of the signature, hex encoded. */
         r: string;
+        /** The `s` component of the signature, hex encoded. */
         s: string;
+        /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
         recid?: number | undefined;
+        /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
         encoded?: string | undefined;
     }[] | undefined;
     signedData?: string | undefined;
     /** The network of the wallet. */
-    network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+    network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -2606,7 +2632,7 @@ export type GetBulkWalletJobResponse = {
     /** Bulk wallet creation job status. */
     status: "Pending" | "InProgress" | "Completed" | "PartiallyCompleted" | "Failed";
     /** Network the wallets are created on. */
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** Name prefix shared by every wallet in the batch; wallet at index N is named `${namePrefix}${N}`. */
     namePrefix: string;
     /** List of tags. */
@@ -2649,7 +2675,7 @@ export type GetOfferResponse = {
     orgId: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     kind: "Native" | "Aip21" | "Asa" | "Coin" | "Cip56" | "Erc20" | "Erc721" | "Erc7984" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Snip2" | "Snip3" | "Tep74" | "Trc10" | "Trc20" | "Trc721" | "Cis7" | "Cis2" | "Iou" | "Xls33";
     metadata: {
         asset: {
@@ -2704,7 +2730,7 @@ export type GetSignatureResponse = {
         hash: string;
         /** Required when signing with a Schnorr key. Specify the merkle root for tweaking the signing key, or the empty string "" to tweak with the default merkle root. */
         taprootMerkleRoot?: string | undefined;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2712,7 +2738,7 @@ export type GetSignatureResponse = {
         kind: "Message";
         /** An arbitrary hex encoded message. */
         message: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2720,7 +2746,7 @@ export type GetSignatureResponse = {
         kind: "Transaction";
         /** The unsigned hex-encoded transaction or JSON object for compatible networks */
         transaction: string | {};
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2728,7 +2754,7 @@ export type GetSignatureResponse = {
         kind: "Eip191";
         /** Hex-encoded message. */
         message: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2758,7 +2784,7 @@ export type GetSignatureResponse = {
         message: {
             [x: string]: unknown;
         };
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2770,7 +2796,7 @@ export type GetSignatureResponse = {
         nonce: number;
         /** Chain ID. */
         chainId: number;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2800,7 +2826,7 @@ export type GetSignatureResponse = {
         message: {
             [x: string]: unknown;
         };
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2808,7 +2834,7 @@ export type GetSignatureResponse = {
         kind: "Psbt";
         /** The hex encoded PSBT. */
         psbt: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2818,7 +2844,7 @@ export type GetSignatureResponse = {
         message: string;
         /** Defaults to Simple if not present. The formatted signature is returned in the `signedData` field in the response. */
         format?: ("Simple" | "Full") | undefined;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2826,7 +2852,7 @@ export type GetSignatureResponse = {
         kind: "SignDocDirect";
         /** The hex encoded `SignDoc` Protobuf. */
         signDoc: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2875,7 +2901,7 @@ export type GetSignatureResponse = {
         ```
          */
         payload: string | {};
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2886,7 +2912,7 @@ export type GetSignatureResponse = {
         /** Allows an application to ask the user to sign some extra data but NOT put it inside the COSE structure (only as part of the data to sign). */
         externalAad?: string | undefined;
         context: "Signature1";
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2927,14 +2953,18 @@ export type GetSignatureResponse = {
         };
         signatures: {
             [x: string]: {
+                /** The `r` component of the signature, hex encoded. */
                 r: string;
+                /** The `s` component of the signature, hex encoded. */
                 s: string;
+                /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
                 recid?: number | undefined;
+                /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
                 encoded?: string | undefined;
             };
         };
         transactionReference: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2942,7 +2972,7 @@ export type GetSignatureResponse = {
         kind: "StellarFeeBumpTransaction";
         innerTransaction: string;
         transactionReference: string;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
@@ -2950,19 +2980,27 @@ export type GetSignatureResponse = {
     status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
     reason?: string | undefined;
     signature?: {
+        /** The `r` component of the signature, hex encoded. */
         r: string;
+        /** The `s` component of the signature, hex encoded. */
         s: string;
+        /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
         recid?: number | undefined;
+        /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
         encoded?: string | undefined;
     } | undefined;
     signatures?: {
+        /** The `r` component of the signature, hex encoded. */
         r: string;
+        /** The `s` component of the signature, hex encoded. */
         s: string;
+        /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
         recid?: number | undefined;
+        /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
         encoded?: string | undefined;
     }[] | undefined;
     signedData?: string | undefined;
-    network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+    network?: string | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -2991,7 +3029,7 @@ export type GetTransactionResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -3166,7 +3204,10 @@ export type GetTransactionResponse = {
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transaction. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -3198,7 +3239,7 @@ export type GetTransferResponse = {
     /** The source wallet for this tranfer. */
     walletId: string;
     /** The blockchain network this transfer is on. */
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -3244,9 +3285,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3289,9 +3330,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3332,9 +3373,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3374,9 +3415,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3414,9 +3455,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3460,9 +3501,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3500,9 +3541,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3542,9 +3583,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3582,9 +3623,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3624,9 +3665,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3666,9 +3707,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3707,9 +3748,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3749,9 +3790,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3793,9 +3834,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3837,9 +3878,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3877,9 +3918,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3917,9 +3958,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3963,9 +4004,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -4008,9 +4049,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -4048,9 +4089,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -4088,9 +4129,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -4128,9 +4169,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -4170,9 +4211,9 @@ export type GetTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -4210,6 +4251,8 @@ export type GetTransferResponse = {
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
     /** The reason for a failed transfer. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     /** The blockchain transaction hash for this transfer. */
     txHash?: string | undefined;
     /** The fee paid for this transfer in minimum denomination. */
@@ -4243,7 +4286,7 @@ export type GetWalletResponse = {
     /** ID of the wallet. */
     id: string;
     /** Network this wallet is bound to. */
-    network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+    network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     /** Wallet address on its corresponding network. */
     address?: string | undefined;
     /** Details about the key underlying the wallet. */
@@ -4301,7 +4344,7 @@ export type GetWalletAssetsQuery = {
 
 export type GetWalletAssetsResponse = {
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     assets: (({
         kind: "Native";
     } | {
@@ -4395,7 +4438,7 @@ export type GetWalletHistoryResponse = {
     items: ({
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4442,7 +4485,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4481,7 +4524,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4523,7 +4566,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4562,7 +4605,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4603,7 +4646,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4642,7 +4685,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4681,7 +4724,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4721,7 +4764,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4766,7 +4809,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4809,7 +4852,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4854,7 +4897,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4902,7 +4945,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4948,7 +4991,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -4988,7 +5031,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5029,7 +5072,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5070,7 +5113,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5109,7 +5152,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5149,7 +5192,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5192,7 +5235,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5231,7 +5274,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5270,7 +5313,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5309,7 +5352,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5349,7 +5392,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5388,7 +5431,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5427,7 +5470,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5466,7 +5509,7 @@ export type GetWalletHistoryResponse = {
     } | {
         walletId: string;
         direction: "In" | "Out";
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         blockNumber: number;
         txHash: string;
         index?: string | undefined;
@@ -5514,7 +5557,7 @@ export type GetWalletHistoryResponse = {
     nextPageToken?: string | undefined;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
 };
 
 export type GetWalletHistoryRequest = GetWalletHistoryParams & { query?: GetWalletHistoryQuery }
@@ -5525,7 +5568,7 @@ export type GetWalletNftsParams = {
 
 export type GetWalletNftsResponse = {
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     nfts: ({
         kind: "Asa";
         /** The NFT id. */
@@ -5575,7 +5618,7 @@ export type ImportWalletBody = {
         /** The key share encrypted to the target signer. */
         encryptedKeyShare: string;
     }[];
-    network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+    network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     externalId?: string | undefined;
 };
 
@@ -5583,7 +5626,7 @@ export type ImportWalletResponse = {
     /** ID of the wallet. */
     id: string;
     /** Network this wallet is bound to. */
-    network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+    network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     /** Wallet address on its corresponding network. */
     address?: string | undefined;
     /** Details about the key underlying the wallet. */
@@ -5649,7 +5692,7 @@ export type ListBulkWalletJobsResponse = {
         /** Bulk wallet creation job status. */
         status: "Pending" | "InProgress" | "Completed" | "PartiallyCompleted" | "Failed";
         /** Network the wallets are created on. */
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         /** Name prefix shared by every wallet in the batch; wallet at index N is named `${namePrefix}${N}`. */
         namePrefix: string;
         /** List of tags. */
@@ -5699,7 +5742,7 @@ export type ListBulkWalletJobWalletsResponse = {
         /** ID of the wallet. */
         id: string;
         /** Network this wallet is bound to. */
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet address on its corresponding network. */
         address?: string | undefined;
         /** Details about the key underlying the wallet. */
@@ -5770,7 +5813,7 @@ export type ListOffersResponse = {
         orgId: string;
         /** Wallet id. */
         walletId: string;
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         kind: "Native" | "Aip21" | "Asa" | "Coin" | "Cip56" | "Erc20" | "Erc721" | "Erc7984" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Snip2" | "Snip3" | "Tep74" | "Trc10" | "Trc20" | "Trc721" | "Cis7" | "Cis2" | "Iou" | "Xls33";
         metadata: {
             asset: {
@@ -5870,7 +5913,7 @@ export type ListSignaturesResponse = {
             hash: string;
             /** Required when signing with a Schnorr key. Specify the merkle root for tweaking the signing key, or the empty string "" to tweak with the default merkle root. */
             taprootMerkleRoot?: string | undefined;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5878,7 +5921,7 @@ export type ListSignaturesResponse = {
             kind: "Message";
             /** An arbitrary hex encoded message. */
             message: string;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5886,7 +5929,7 @@ export type ListSignaturesResponse = {
             kind: "Transaction";
             /** The unsigned hex-encoded transaction or JSON object for compatible networks */
             transaction: string | {};
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5894,7 +5937,7 @@ export type ListSignaturesResponse = {
             kind: "Eip191";
             /** Hex-encoded message. */
             message: string;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5924,7 +5967,7 @@ export type ListSignaturesResponse = {
             message: {
                 [x: string]: unknown;
             };
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5936,7 +5979,7 @@ export type ListSignaturesResponse = {
             nonce: number;
             /** Chain ID. */
             chainId: number;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5966,7 +6009,7 @@ export type ListSignaturesResponse = {
             message: {
                 [x: string]: unknown;
             };
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5974,7 +6017,7 @@ export type ListSignaturesResponse = {
             kind: "Psbt";
             /** The hex encoded PSBT. */
             psbt: string;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5984,7 +6027,7 @@ export type ListSignaturesResponse = {
             message: string;
             /** Defaults to Simple if not present. The formatted signature is returned in the `signedData` field in the response. */
             format?: ("Simple" | "Full") | undefined;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -5992,7 +6035,7 @@ export type ListSignaturesResponse = {
             kind: "SignDocDirect";
             /** The hex encoded `SignDoc` Protobuf. */
             signDoc: string;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -6041,7 +6084,7 @@ export type ListSignaturesResponse = {
             ```
              */
             payload: string | {};
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -6052,7 +6095,7 @@ export type ListSignaturesResponse = {
             /** Allows an application to ask the user to sign some extra data but NOT put it inside the COSE structure (only as part of the data to sign). */
             externalAad?: string | undefined;
             context: "Signature1";
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -6093,14 +6136,18 @@ export type ListSignaturesResponse = {
             };
             signatures: {
                 [x: string]: {
+                    /** The `r` component of the signature, hex encoded. */
                     r: string;
+                    /** The `s` component of the signature, hex encoded. */
                     s: string;
+                    /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
                     recid?: number | undefined;
+                    /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
                     encoded?: string | undefined;
                 };
             };
             transactionReference: string;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -6108,7 +6155,7 @@ export type ListSignaturesResponse = {
             kind: "StellarFeeBumpTransaction";
             innerTransaction: string;
             transactionReference: string;
-            network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+            network?: string | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Concordium" | "Cosmos" | "Evm" | "Hedera" | "Icp" | "Iota" | "Kaspa" | "Near" | "Polymesh" | "Solana" | "Starknet" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
@@ -6116,19 +6163,27 @@ export type ListSignaturesResponse = {
         status: "Pending" | "Executing" | "Signed" | "Confirmed" | "Failed" | "Rejected";
         reason?: string | undefined;
         signature?: {
+            /** The `r` component of the signature, hex encoded. */
             r: string;
+            /** The `s` component of the signature, hex encoded. */
             s: string;
+            /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
             recid?: number | undefined;
+            /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
             encoded?: string | undefined;
         } | undefined;
         signatures?: {
+            /** The `r` component of the signature, hex encoded. */
             r: string;
+            /** The `s` component of the signature, hex encoded. */
             s: string;
+            /** The recovery id, returned for ECDSA signatures on networks that need it to recover the signing public key. */
             recid?: number | undefined;
+            /** The signature already serialized in the format the target network expects, hex encoded and ready to use directly. For EdDSA (Ed25519) networks such as Solana this is the raw 64-byte `r || s` concatenation, where `r` and `s` are each a fixed 32 bytes. It is not ASN.1/DER encoded, so no DER parsing or re-padding of the components is needed. */
             encoded?: string | undefined;
         }[] | undefined;
         signedData?: string | undefined;
-        network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
+        network?: string | undefined;
         txHash?: string | undefined;
         fee?: string | undefined;
         approvalId?: string | undefined;
@@ -6169,7 +6224,7 @@ export type ListTransactionsResponse = {
         id: string;
         /** Wallet id. */
         walletId: string;
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         /** The user who initiated the request. */
         requester: {
             /** User id. */
@@ -6344,7 +6399,10 @@ export type ListTransactionsResponse = {
             externalId?: string | undefined;
         };
         status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+        /** The reason for a failed transaction. */
         reason?: string | undefined;
+        /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+        debugTrace?: unknown | undefined;
         txHash?: string | undefined;
         fee?: string | undefined;
         approvalId?: string | undefined;
@@ -6388,7 +6446,7 @@ export type ListTransfersResponse = {
         /** The source wallet for this tranfer. */
         walletId: string;
         /** The blockchain network this transfer is on. */
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         /** The user who initiated the request. */
         requester: {
             /** User id. */
@@ -6434,9 +6492,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6479,9 +6537,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6522,9 +6580,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6564,9 +6622,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6604,9 +6662,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6650,9 +6708,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6690,9 +6748,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6732,9 +6790,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6772,9 +6830,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6814,9 +6872,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6856,9 +6914,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6897,9 +6955,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6939,9 +6997,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -6983,9 +7041,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7027,9 +7085,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7067,9 +7125,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7107,9 +7165,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7153,9 +7211,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7198,9 +7256,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7238,9 +7296,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7278,9 +7336,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7318,9 +7376,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7360,9 +7418,9 @@ export type ListTransfersResponse = {
                 ivms101: {
                     /** IVMS101 payload version. Must be `IVMS101.2023`. */
                     version: "IVMS101.2023";
-                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                    /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                     data: string;
-                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                    /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                     filledFields: string[];
                 };
                 /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -7400,6 +7458,8 @@ export type ListTransfersResponse = {
         status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
         /** The reason for a failed transfer. */
         reason?: string | undefined;
+        /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+        debugTrace?: unknown | undefined;
         /** The blockchain transaction hash for this transfer. */
         txHash?: string | undefined;
         /** The fee paid for this transfer in minimum denomination. */
@@ -7448,7 +7508,7 @@ export type ListWalletsResponse = {
         /** ID of the wallet. */
         id: string;
         /** Network this wallet is bound to. */
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet address on its corresponding network. */
         address?: string | undefined;
         /** Details about the key underlying the wallet. */
@@ -7512,7 +7572,7 @@ export type RejectOfferResponse = {
     orgId: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     kind: "Native" | "Aip21" | "Asa" | "Coin" | "Cip56" | "Erc20" | "Erc721" | "Erc7984" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Snip2" | "Snip3" | "Tep74" | "Trc10" | "Trc20" | "Trc721" | "Cis7" | "Cis2" | "Iou" | "Xls33";
     metadata: {
         asset: {
@@ -7640,7 +7700,7 @@ export type SignAndBroadcastTransactionResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -7815,7 +7875,10 @@ export type SignAndBroadcastTransactionResponse = {
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transaction. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -7854,7 +7917,7 @@ export type SpeedUpTransactionResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -8029,7 +8092,10 @@ export type SpeedUpTransactionResponse = {
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transaction. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -8060,7 +8126,7 @@ export type SpeedUpTransferResponse = {
     id: string;
     /** Wallet id. */
     walletId: string;
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -8235,7 +8301,10 @@ export type SpeedUpTransferResponse = {
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
+    /** The reason for a failed transaction. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     txHash?: string | undefined;
     fee?: string | undefined;
     approvalId?: string | undefined;
@@ -8304,9 +8373,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8344,9 +8413,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8386,9 +8455,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8426,9 +8495,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8472,9 +8541,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8512,9 +8581,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8554,9 +8623,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8594,9 +8663,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8636,9 +8705,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8678,9 +8747,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8720,9 +8789,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8761,9 +8830,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8803,9 +8872,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8847,9 +8916,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8891,9 +8960,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8931,9 +9000,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -8971,9 +9040,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9017,9 +9086,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9059,9 +9128,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9099,9 +9168,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9139,9 +9208,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9179,9 +9248,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9221,9 +9290,9 @@ export type TransferAssetBody = {
         ivms101: {
             /** IVMS101 payload version. Must be `IVMS101.2023`. */
             version: "IVMS101.2023";
-            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+            /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
             data: string;
-            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+            /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
             filledFields: string[];
         };
         /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9246,7 +9315,7 @@ export type TransferAssetResponse = {
     /** The source wallet for this tranfer. */
     walletId: string;
     /** The blockchain network this transfer is on. */
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -9292,9 +9361,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9337,9 +9406,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9380,9 +9449,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9422,9 +9491,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9462,9 +9531,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9508,9 +9577,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9548,9 +9617,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9590,9 +9659,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9630,9 +9699,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9672,9 +9741,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9714,9 +9783,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9755,9 +9824,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9797,9 +9866,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9841,9 +9910,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9885,9 +9954,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9925,9 +9994,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -9965,9 +10034,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -10011,9 +10080,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -10056,9 +10125,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -10096,9 +10165,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -10136,9 +10205,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -10176,9 +10245,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -10218,9 +10287,9 @@ export type TransferAssetResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -10258,6 +10327,8 @@ export type TransferAssetResponse = {
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
     /** The reason for a failed transfer. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     /** The blockchain transaction hash for this transfer. */
     txHash?: string | undefined;
     /** The fee paid for this transfer in minimum denomination. */
@@ -10308,7 +10379,7 @@ export type UpdateWalletResponse = {
     /** ID of the wallet. */
     id: string;
     /** Network this wallet is bound to. */
-    network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+    network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
     /** Wallet address on its corresponding network. */
     address?: string | undefined;
     /** Details about the key underlying the wallet. */
