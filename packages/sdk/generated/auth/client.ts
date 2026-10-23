@@ -69,6 +69,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async addUserGroupMembers(request: T.AddUserGroupMembersRequest): Promise<T.AddUserGroupMembersResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId/members', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createCredential(request: T.CreateCredentialRequest): Promise<T.CreateCredentialResponse> {
     const path = buildPathAndQuery('/auth/credentials', {
       path: request ?? {},
@@ -349,6 +364,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async createUserGroup(request: T.CreateUserGroupRequest): Promise<T.CreateUserGroupResponse> {
+    const path = buildPathAndQuery('/auth/user-groups', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async deactivateCredential(request: T.DeactivateCredentialRequest): Promise<T.DeactivateCredentialResponse> {
     const path = buildPathAndQuery('/auth/credentials/deactivate', {
       path: request ?? {},
@@ -402,7 +432,7 @@ export class AuthClient {
 
     const response = await userActionFetch(path, {
       method: 'PUT',
-      body: {},
+      body: request.body,
       apiOptions: this.apiOptions,
     })
 
@@ -524,6 +554,21 @@ export class AuthClient {
     return this.deleteUser(request)
   }
 
+  async deleteUserGroup(request: T.DeleteUserGroupRequest): Promise<T.DeleteUserGroupResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async exchangeAccessToken(request: T.ExchangeAccessTokenRequest): Promise<T.ExchangeAccessTokenResponse> {
     const path = buildPathAndQuery('/auth/tokens', {
       path: request ?? {},
@@ -597,6 +642,20 @@ export class AuthClient {
 
   async getUser(request: T.GetUserRequest): Promise<T.GetUserResponse> {
     const path = buildPathAndQuery('/auth/users/:userId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async getUserGroup(request: T.GetUserGroupRequest): Promise<T.GetUserGroupResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId', {
       path: request ?? {},
       query: {},
     })
@@ -689,6 +748,34 @@ export class AuthClient {
     const path = buildPathAndQuery('/auth/service-accounts', {
       path: {},
       query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listUserGroupMembers(request: T.ListUserGroupMembersRequest): Promise<T.ListUserGroupMembersResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId/members', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listUserGroups(request?: T.ListUserGroupsRequest): Promise<T.ListUserGroupsResponse> {
+    const path = buildPathAndQuery('/auth/user-groups', {
+      path: request ?? {},
+      query: request?.query ?? {},
     })
 
     const response = await simpleFetch(path, {
@@ -843,6 +930,21 @@ export class AuthClient {
     return response.json()
   }
 
+  async removeUserGroupMembers(request: T.RemoveUserGroupMembersRequest): Promise<T.RemoveUserGroupMembersResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId/members', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async resendRegistrationCode(request: T.ResendRegistrationCodeRequest): Promise<T.ResendRegistrationCodeResponse> {
     const path = buildPathAndQuery('/auth/registration/code', {
       path: request ?? {},
@@ -965,6 +1067,21 @@ export class AuthClient {
 
   async updateUser(request: T.UpdateUserRequest): Promise<T.UpdateUserResponse> {
     const path = buildPathAndQuery('/auth/users/:userId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'PUT',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async updateUserGroup(request: T.UpdateUserGroupRequest): Promise<T.UpdateUserGroupResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId', {
       path: request ?? {},
       query: {},
     })

@@ -24,7 +24,7 @@ export type CreateVaultResponse = {
 export type CreateVaultRequest = { body: CreateVaultBody }
 
 export type CreateVaultAddressBody = {
-    network: "ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
+    network: "ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "HyperEvm" | "HyperEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
 };
 
 export type CreateVaultAddressParams = {
@@ -42,7 +42,7 @@ export type CreateVaultAddressRequest = CreateVaultAddressParams & { body: Creat
 
 export type CreateVaultLockBody = {
     /** The EVM network the locked asset is on. */
-    network: "Adi" | "AdiTestnet" | "AdiTestnetAb" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiPacific1" | "SeiAtlantic2" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
+    network: string;
     /** The token identifier of the asset to lock (e.g. `native:eth` or `erc20:0x...`). */
     tid: string;
     /** The amount to lock, in minimum denomination. */
@@ -90,7 +90,7 @@ export type CreateVaultLockRequest = CreateVaultLockParams & { body: CreateVault
 
 export type CreateVaultTransferBody = {
     /** The network the transfer is on. */
-    network: "ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
+    network: "ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "HyperEvm" | "HyperEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia";
     /** The token identifier of the asset to transfer (e.g. `native:eth`, `native:btc`, `native:sol`, or `spl:<mint>`). */
     tid: string;
     /** The destination address. */
@@ -112,7 +112,7 @@ export type CreateVaultTransferResponse = {
     /** The source wallet for this tranfer. */
     walletId: string;
     /** The blockchain network this transfer is on. */
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -158,9 +158,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -203,9 +203,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -246,9 +246,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -288,9 +288,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -328,9 +328,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -374,9 +374,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -414,9 +414,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -456,9 +456,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -496,9 +496,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -538,9 +538,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -580,9 +580,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -621,9 +621,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -663,9 +663,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -707,9 +707,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -751,9 +751,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -791,9 +791,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -831,9 +831,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -877,9 +877,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -922,9 +922,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -962,9 +962,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1002,9 +1002,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1042,9 +1042,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1084,9 +1084,9 @@ export type CreateVaultTransferResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1124,6 +1124,8 @@ export type CreateVaultTransferResponse = {
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
     /** The reason for a failed transfer. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     /** The blockchain transaction hash for this transfer. */
     txHash?: string | undefined;
     /** The fee paid for this transfer in minimum denomination. */
@@ -1347,7 +1349,7 @@ export type ListVaultHistoryQuery = {
     /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
     paginationToken?: string | undefined;
     /** Only items on these networks. Repeat the parameter to pass several. */
-    network?: (("ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia") | ("ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia")[]) | undefined;
+    network?: (("ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "HyperEvm" | "HyperEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia") | ("ArbitrumOne" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "Base" | "BaseSepolia" | "Berachain" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet4" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloSepolia" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumSepolia" | "EthereumHoodi" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "HyperEvm" | "HyperEvmTestnet" | "Ink" | "InkSepolia" | "Monad" | "MonadTestnet" | "Optimism" | "OptimismSepolia" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Tempo" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia")[]) | undefined;
     /** Only items moving these assets, by token identifier. Repeat the parameter to pass several. Combine with `network`, as a token identifier can exist on several networks. */
     tid?: (string | string[]) | undefined;
     /** Only items of these kinds. Repeat the parameter to pass several. */
@@ -1364,7 +1366,7 @@ export type ListVaultHistoryResponse = {
         /** The vault wallet the item is on. */
         walletId: string;
         timestamp: string;
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         /** The token identifier of the asset moved (e.g. `native:eth`, `erc20:0x...`). */
         tid: string;
         /** The amount moved, in minimum denomination: deposited for incoming transfers, sent for outgoing transfers, locked or unlocked for lock kinds. */
@@ -1440,7 +1442,7 @@ export type ListVaultHistoryResponse = {
         /** The vault wallet the item is on. */
         walletId: string;
         timestamp: string;
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         /** The token identifier of the asset moved (e.g. `native:eth`, `erc20:0x...`). */
         tid: string;
         /** The amount moved, in minimum denomination: deposited for incoming transfers, sent for outgoing transfers, locked or unlocked for lock kinds. */
@@ -1454,7 +1456,7 @@ export type ListVaultHistoryResponse = {
             /** The source wallet for this tranfer. */
             walletId: string;
             /** The blockchain network this transfer is on. */
-            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+            network: string;
             /** The user who initiated the request. */
             requester: {
                 /** User id. */
@@ -1500,9 +1502,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1545,9 +1547,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1588,9 +1590,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1630,9 +1632,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1670,9 +1672,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1716,9 +1718,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1756,9 +1758,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1798,9 +1800,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1838,9 +1840,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1880,9 +1882,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1922,9 +1924,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -1963,9 +1965,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2005,9 +2007,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2049,9 +2051,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2093,9 +2095,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2133,9 +2135,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2173,9 +2175,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2219,9 +2221,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2264,9 +2266,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2304,9 +2306,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2344,9 +2346,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2384,9 +2386,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2426,9 +2428,9 @@ export type ListVaultHistoryResponse = {
                     ivms101: {
                         /** IVMS101 payload version. Must be `IVMS101.2023`. */
                         version: "IVMS101.2023";
-                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                        /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                         data: string;
-                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                        /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                         filledFields: string[];
                     };
                     /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2466,6 +2468,8 @@ export type ListVaultHistoryResponse = {
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
             /** The reason for a failed transfer. */
             reason?: string | undefined;
+            /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+            debugTrace?: unknown | undefined;
             /** The blockchain transaction hash for this transfer. */
             txHash?: string | undefined;
             /** The fee paid for this transfer in minimum denomination. */
@@ -2521,7 +2525,7 @@ export type ListVaultHistoryResponse = {
         /** The vault wallet the item is on. */
         walletId: string;
         timestamp: string;
-        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+        network: string;
         /** The token identifier of the asset moved (e.g. `native:eth`, `erc20:0x...`). */
         tid: string;
         /** The amount moved, in minimum denomination: deposited for incoming transfers, sent for outgoing transfers, locked or unlocked for lock kinds. */
@@ -2875,7 +2879,7 @@ export type TransferVaultLockResponse = {
     /** The source wallet for this tranfer. */
     walletId: string;
     /** The blockchain network this transfer is on. */
-    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet";
+    network: string;
     /** The user who initiated the request. */
     requester: {
         /** User id. */
@@ -2921,9 +2925,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -2966,9 +2970,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3009,9 +3013,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3051,9 +3055,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3091,9 +3095,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3137,9 +3141,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3177,9 +3181,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3219,9 +3223,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3259,9 +3263,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3301,9 +3305,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3343,9 +3347,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3384,9 +3388,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3426,9 +3430,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3470,9 +3474,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3514,9 +3518,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3554,9 +3558,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3594,9 +3598,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3640,9 +3644,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3685,9 +3689,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3725,9 +3729,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3765,9 +3769,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3805,9 +3809,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3847,9 +3851,9 @@ export type TransferVaultLockResponse = {
             ivms101: {
                 /** IVMS101 payload version. Must be `IVMS101.2023`. */
                 version: "IVMS101.2023";
-                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. */
+                /** Originator and beneficiary IVMS101 data, JWS-signed then JWE-encrypted (compact serialization) with the Sumsub public key. Retrieve the key from the Sumsub travel rule public key endpoint. Dfns never decrypts this value. The cleartext payload must use the IVMS 101.2023 field names (`Originator.originatorPerson[]`, `Beneficiary.beneficiaryPerson[]`, `naturalPersonNameIdentifierType`) and include `payloadMetadata: { "payloadVersion": "101.2023" }`; without it Sumsub parses the payload as IVMS 101.2020 and silently ignores the 2023 field names. */
                 data: string;
-                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPersons[].naturalPerson.name`. */
+                /** IVMS101 field paths present in `data`, e.g. `Originator.originatorPerson[].naturalPerson.name.nameIdentifier[].primaryIdentifier` and `payloadMetadata.payloadVersion`. */
                 filledFields: string[];
             };
             /** Sumsub id of the beneficiary VASP, for a transfer to a hosted (custodial) wallet. Set exactly one of `beneficiaryVaspId` or `beneficiaryWalletType`. */
@@ -3887,6 +3891,8 @@ export type TransferVaultLockResponse = {
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
     /** The reason for a failed transfer. */
     reason?: string | undefined;
+    /** Raw blockchain node diagnostics, when available. Omitted when the diagnostic or response size limit is exceeded. */
+    debugTrace?: unknown | undefined;
     /** The blockchain transaction hash for this transfer. */
     txHash?: string | undefined;
     /** The fee paid for this transfer in minimum denomination. */

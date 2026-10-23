@@ -179,6 +179,49 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async addUserGroupMembersInit(request: T.AddUserGroupMembersRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId/members', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async addUserGroupMembersComplete(
+    request: T.AddUserGroupMembersRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.AddUserGroupMembersResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId/members', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async createCredentialInit(request: T.CreateCredentialRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/credentials', {
       path: request ?? {},
@@ -668,6 +711,49 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async createUserGroupInit(request: T.CreateUserGroupRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/user-groups', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async createUserGroupComplete(
+    request: T.CreateUserGroupRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.CreateUserGroupResponse> {
+    const path = buildPathAndQuery('/auth/user-groups', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async deactivateCredentialInit(request: T.DeactivateCredentialRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/credentials/deactivate', {
       path: request ?? {},
@@ -808,7 +894,7 @@ export class DelegatedAuthClient {
       {
         userActionHttpMethod: 'PUT',
         userActionHttpPath,
-        userActionPayload: JSON.stringify({}),
+        userActionPayload: JSON.stringify(request.body),
       },
       this.apiOptions
     )
@@ -832,7 +918,7 @@ export class DelegatedAuthClient {
 
     const response = await simpleFetch(path, {
       method: 'PUT',
-      body: {},
+      body: request.body,
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
@@ -1098,6 +1184,49 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async deleteUserGroupInit(request: T.DeleteUserGroupRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify({}),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deleteUserGroupComplete(
+    request: T.DeleteUserGroupRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeleteUserGroupResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async exchangeAccessToken(request: T.ExchangeAccessTokenRequest): Promise<T.ExchangeAccessTokenResponse> {
     const path = buildPathAndQuery('/auth/tokens', {
       path: request ?? {},
@@ -1171,6 +1300,20 @@ export class DelegatedAuthClient {
 
   async getUser(request: T.GetUserRequest): Promise<T.GetUserResponse> {
     const path = buildPathAndQuery('/auth/users/:userId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async getUserGroup(request: T.GetUserGroupRequest): Promise<T.GetUserGroupResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId', {
       path: request ?? {},
       query: {},
     })
@@ -1291,6 +1434,34 @@ export class DelegatedAuthClient {
     const path = buildPathAndQuery('/auth/service-accounts', {
       path: {},
       query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listUserGroupMembers(request: T.ListUserGroupMembersRequest): Promise<T.ListUserGroupMembersResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId/members', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listUserGroups(request?: T.ListUserGroupsRequest): Promise<T.ListUserGroupsResponse> {
+    const path = buildPathAndQuery('/auth/user-groups', {
+      path: request ?? {},
+      query: request?.query ?? {},
     })
 
     const response = await simpleFetch(path, {
@@ -1439,6 +1610,49 @@ export class DelegatedAuthClient {
     const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async removeUserGroupMembersInit(request: T.RemoveUserGroupMembersRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId/members', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async removeUserGroupMembersComplete(
+    request: T.RemoveUserGroupMembersRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.RemoveUserGroupMembersResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId/members', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
 
@@ -1645,6 +1859,49 @@ export class DelegatedAuthClient {
     signedChallenge: SignUserActionChallengeRequest
   ): Promise<T.UpdateUserResponse> {
     const path = buildPathAndQuery('/auth/users/:userId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'PUT',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async updateUserGroupInit(request: T.UpdateUserGroupRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId', {
+      path: request ?? {},
+      query: {},
+    })
+    const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'PUT',
+        userActionHttpPath,
+        userActionPayload: JSON.stringify(request.body),
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async updateUserGroupComplete(
+    request: T.UpdateUserGroupRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.UpdateUserGroupResponse> {
+    const path = buildPathAndQuery('/auth/user-groups/:userGroupId', {
       path: request ?? {},
       query: {},
     })

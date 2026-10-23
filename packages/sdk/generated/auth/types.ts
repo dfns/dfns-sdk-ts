@@ -180,6 +180,20 @@ export type ActivateUserResponse = {
 
 export type ActivateUserRequest = ActivateUserParams
 
+export type AddUserGroupMembersBody = {
+    /** Users to add. Users already in the group are left unchanged. */
+    userIds: string[];
+};
+
+export type AddUserGroupMembersParams = {
+    /** User group id. */
+    userGroupId: string;
+};
+
+export type AddUserGroupMembersResponse = {};
+
+export type AddUserGroupMembersRequest = AddUserGroupMembersParams & { body: AddUserGroupMembersBody }
+
 export type CreateCredentialBody = {
     credentialKind: "Fido2";
     credentialInfo: {
@@ -758,7 +772,7 @@ export type CreateCredentialChallengeWithCodeResponse = {
 export type CreateCredentialChallengeWithCodeRequest = { body: CreateCredentialChallengeWithCodeBody }
 
 export type CreateCredentialCodeBody = {
-    /** Code expiration, as an ISO-8601 datetime string or a unix timestamp */
+    /** Code expiration, as an ISO-8601 datetime string, or a unix timestamp */
     expiration: string | number;
 };
 
@@ -959,8 +973,8 @@ export type CreateDelegatedUserRecoveryRequest = CreateDelegatedRecoveryChalleng
 export type CreateDelegatedRegistrationChallengeBody = {
     /** Username/identifier (any unique string accepted, e.g. your internal user ID or email). */
     email: string;
-    /** Must be `EndUser`. */
-    kind: "EndUser";
+    /** Can be `CustomerEmployee` or `EndUser`. */
+    kind: "CustomerEmployee" | "EndUser";
     /** Optional external identifier for the user, used for cross-referencing with your own systems. */
     externalId?: string | undefined;
 };
@@ -1244,9 +1258,9 @@ export type CreateRecoveryChallengeResponse = {
 export type CreateRecoveryChallengeRequest = { body: CreateRecoveryChallengeBody }
 
 export type CreateRegistrationChallengeBody = {
-    /** Organization id. */
+    /** Organization id. Provide exactly one of `orgId` or `tenantId`, never both. */
     orgId?: string | undefined;
-    /** Tenant id. */
+    /** Tenant id. Provide exactly one of `orgId` or `tenantId`, never both. */
     tenantId?: string | undefined;
     /** Username/identifier of the user being registered (any unique string accepted, e.g. email). */
     username: string;
@@ -1512,17 +1526,16 @@ export type CreateSocialRegistrationChallengeResponse = {
 export type CreateSocialRegistrationChallengeRequest = { body: CreateSocialRegistrationChallengeBody }
 
 export type CreateUserBody = {
-    /** The email address of the new user. */
+    /** For `CustomerEmployee` kind, it needs to be the email address of the new user. For `EndUser` kind, it can be a username/identifier (any unique string accepted, e.g. your internal user ID or email). */
     email: string;
-    /** The kind of user being created.
-          In this endpoint it can only be "`CustomerEmployee`" (creating an "`EndUser`" is done through the [Delegated Registration](https://docs.dfns.co/api-reference/auth/registration-flows#delegated-users-registration-flow) endpoint) */
-    kind: "CustomerEmployee" | "DfnsStaff";
-    /** Optional public key in PEM format associated with the user. */
-    publicKey?: string | undefined;
+    /** The kind of user being created. It can be "`CustomerEmployee`" or "`EndUser`". */
+    kind: "DfnsStaff" | "CustomerEmployee" | "EndUser";
     /** Value that can be used to correlate the entity with an external system. */
     externalId?: string | undefined;
-    /** If set to true, the user will have to authenticate via SSO */
+    /** Defaults to `false`. If set to `true`, the user will have to authenticate via SSO. Can only be set to `true` for kind: `CustomerEmployee`. */
     isSSORequired?: boolean | undefined;
+    /** Controls the kind of registration flow this user will go through. Can be "Direct" or "Delegated". More details in endpoint description. */
+    registration?: ("Direct" | "Delegated") | undefined;
 };
 
 export type CreateUserResponse = {
@@ -1754,6 +1767,32 @@ export type CreateUserActionSignatureResponse = {
 
 export type CreateUserActionSignatureRequest = { body: CreateUserActionSignatureBody }
 
+export type CreateUserGroupBody = {
+    /** Name of the group. Unique within the org or tenant, ignoring case. A deleted group frees its name for reuse. */
+    name: string;
+    /** Description of the group. */
+    description?: string | undefined;
+};
+
+export type CreateUserGroupResponse = {
+    /** User group id. */
+    id: string;
+    /** Organization id. */
+    orgId?: string | undefined;
+    /** Tenant id. */
+    tenantId?: string | undefined;
+    /** Name of the group. */
+    name: string;
+    /** Description of the group. */
+    description?: string | undefined;
+    /** Number of members. */
+    memberCount: number;
+    dateCreated: string;
+    dateUpdated: string;
+};
+
+export type CreateUserGroupRequest = { body: CreateUserGroupBody }
+
 export type DeactivateCredentialBody = {
     /** UUID of the credential to deactivate. */
     credentialUuid: string;
@@ -1894,6 +1933,11 @@ export type DeactivateServiceAccountResponse = {
 
 export type DeactivateServiceAccountRequest = DeactivateServiceAccountParams & { body: DeactivateServiceAccountBody }
 
+export type DeactivateUserBody = {
+    /** If true, deactivates the user even when they are the last admin, a policy names them as an approver, or a policy needs them to reach a quorum, so a compromised last admin can be cut off. The org can be left with no active admin, and with policies that can no longer reach their quorum. */
+    force?: boolean;
+};
+
 export type DeactivateUserParams = {
     /** User id. */
     userId: string;
@@ -1939,7 +1983,7 @@ export type DeactivateUserResponse = {
     }[];
 };
 
-export type DeactivateUserRequest = DeactivateUserParams
+export type DeactivateUserRequest = DeactivateUserParams & { body: DeactivateUserBody }
 
 export type DelegatedLoginBody = {
     /** Username/identifier of the user to log in. */
@@ -2184,6 +2228,15 @@ export type ArchiveUserParams = DeleteUserParams
 export type ArchiveUserResponse = DeleteUserResponse
 
 export type ArchiveUserRequest = DeleteUserRequest
+
+export type DeleteUserGroupParams = {
+    /** User group id. */
+    userGroupId: string;
+};
+
+export type DeleteUserGroupResponse = {};
+
+export type DeleteUserGroupRequest = DeleteUserGroupParams
 
 export type ExchangeAccessTokenBody = {
     /** ID of the Organisation or Tenant for which you wish to obtain an access token. */
@@ -2480,6 +2533,30 @@ export type GetUserResponse = {
 
 export type GetUserRequest = GetUserParams
 
+export type GetUserGroupParams = {
+    /** User group id. */
+    userGroupId: string;
+};
+
+export type GetUserGroupResponse = {
+    /** User group id. */
+    id: string;
+    /** Organization id. */
+    orgId?: string | undefined;
+    /** Tenant id. */
+    tenantId?: string | undefined;
+    /** Name of the group. */
+    name: string;
+    /** Description of the group. */
+    description?: string | undefined;
+    /** Number of members. */
+    memberCount: number;
+    dateCreated: string;
+    dateUpdated: string;
+};
+
+export type GetUserGroupRequest = GetUserGroupParams
+
 export type InviteTenantUserBody = {
     /** Email address of the existing Tenant User. */
     email: string;
@@ -2705,6 +2782,72 @@ export type ListServiceAccountsResponse = {
         }[];
     }[];
 };
+
+export type ListUserGroupMembersParams = {
+    /** User group id. */
+    userGroupId: string;
+};
+
+export type ListUserGroupMembersQuery = {
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
+    paginationToken?: string | undefined;
+};
+
+export type ListUserGroupMembersResponse = {
+    /** Current page items. */
+    items: {
+        /** User id. */
+        userId: string;
+        /** Username/identifier of the member. */
+        username: string;
+        /** User kind. */
+        kind: "DfnsStaff" | "TenantUser" | "CustomerEmployee" | "EndUser";
+        /** Whether the member is an active user. */
+        isActive: boolean;
+        /** Whether the member has been archived. Archived members hold no permissions. */
+        isArchived: boolean;
+        /** Whether the member is a service account. */
+        isServiceAccount: boolean;
+        dateAdded: string;
+    }[];
+    /** token to use as `paginationToken` to request the next page. */
+    nextPageToken?: string | undefined;
+};
+
+export type ListUserGroupMembersRequest = ListUserGroupMembersParams & { query?: ListUserGroupMembersQuery }
+
+export type ListUserGroupsQuery = {
+    /** Maximum number of items to return. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
+    paginationToken?: string | undefined;
+};
+
+export type ListUserGroupsResponse = {
+    /** Current page items. */
+    items: {
+        /** User group id. */
+        id: string;
+        /** Organization id. */
+        orgId?: string | undefined;
+        /** Tenant id. */
+        tenantId?: string | undefined;
+        /** Name of the group. */
+        name: string;
+        /** Description of the group. */
+        description?: string | undefined;
+        /** Number of members. */
+        memberCount: number;
+        dateCreated: string;
+        dateUpdated: string;
+    }[];
+    /** token to use as `paginationToken` to request the next page. */
+    nextPageToken?: string | undefined;
+};
+
+export type ListUserGroupsRequest = { query?: ListUserGroupsQuery }
 
 export type ListUsersQuery = {
     /** Maximum number of items to return. */
@@ -3519,7 +3662,7 @@ export type RegisterEndUserBody = {
         credentialName?: string | undefined;
     } | undefined;
     wallets: {
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet nickname. */
         name?: string | undefined;
     }[];
@@ -3561,7 +3704,7 @@ export type RegisterEndUserResponse = {
         /** ID of the wallet. */
         id: string;
         /** Network this wallet is bound to. */
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "Arc" | "ArcTestnet" | "Areum" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "AdiTestnetAb" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "BesuTestnet" | "BesuTestnet2" | "BesuTestnet3" | "BesuTestnet4" | "BesuTestnet5" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinTestnet4" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Concordium" | "ConcordiumTestnet" | "Celo" | "CeloAlfajores" | "CeloSepolia" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumClassic" | "EthereumClassicMordor" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "FlowEvm" | "FlowEvmTestnet" | "IconTestnet" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "KusamaAssetHub" | "Litecoin" | "LitecoinTestnet" | "Monad" | "MonadTestnet" | "Movement" | "MovementTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plasma" | "PlasmaTestnet" | "Plume" | "PlumeSepolia" | "Paseo" | "PaseoAssetHub" | "Polkadot" | "PolkadotAssetHub" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "Rayls" | "RaylsTestnet" | "Robinhood" | "RobinhoodSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Starknet" | "StarknetSepolia" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "TezosShadownet" | "Tempo" | "TempoAndantino" | "TempoModerato" | "Tsc" | "TscTestnet1" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "WestendAssetHub" | "Xdc" | "XdcApothem" | "XLayer" | "XLayerSepolia" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         /** Wallet address on its corresponding network. */
         address?: string | undefined;
         /** Details about the key underlying the wallet. */
@@ -3608,6 +3751,20 @@ export type RegisterEndUserResponse = {
 };
 
 export type RegisterEndUserRequest = { body: RegisterEndUserBody }
+
+export type RemoveUserGroupMembersBody = {
+    /** Users to remove. Users not in the group are left unchanged. */
+    userIds: string[];
+};
+
+export type RemoveUserGroupMembersParams = {
+    /** User group id. */
+    userGroupId: string;
+};
+
+export type RemoveUserGroupMembersResponse = {};
+
+export type RemoveUserGroupMembersRequest = RemoveUserGroupMembersParams & { body: RemoveUserGroupMembersBody }
 
 export type ResendRegistrationCodeBody = {
     /** Username/identifier of the user (any unique string accepted, e.g. your internal user ID or email). */
@@ -3910,4 +4067,35 @@ export type UpdateUserResponse = {
 };
 
 export type UpdateUserRequest = UpdateUserParams & { body: UpdateUserBody }
+
+export type UpdateUserGroupBody = {
+    /** Name of the group. Unique within the org or tenant, ignoring case. A deleted group frees its name for reuse. */
+    name?: string | undefined;
+    /** Description of the group. Null removes it. */
+    description?: (string | null) | undefined;
+};
+
+export type UpdateUserGroupParams = {
+    /** User group id. */
+    userGroupId: string;
+};
+
+export type UpdateUserGroupResponse = {
+    /** User group id. */
+    id: string;
+    /** Organization id. */
+    orgId?: string | undefined;
+    /** Tenant id. */
+    tenantId?: string | undefined;
+    /** Name of the group. */
+    name: string;
+    /** Description of the group. */
+    description?: string | undefined;
+    /** Number of members. */
+    memberCount: number;
+    dateCreated: string;
+    dateUpdated: string;
+};
+
+export type UpdateUserGroupRequest = UpdateUserGroupParams & { body: UpdateUserGroupBody }
 

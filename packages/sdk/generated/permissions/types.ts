@@ -28,7 +28,7 @@ export type ArchivePermissionResponse = {
 export type ArchivePermissionRequest = ArchivePermissionParams & { body: ArchivePermissionBody }
 
 export type AssignPermissionBody = {
-    /** ID of the identity to assign the permission to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
+    /** ID of the identity to assign the permission to. Can be a user ID, a service account ID, a personal access token (PAT) ID, or a user group ID. A permission assigned to a user group applies to every member of the group. */
     identityId: string;
 };
 
@@ -42,7 +42,7 @@ export type AssignPermissionResponse = {
     id: string;
     /** ID of the permission (also referred to as "role" in the dashboard). */
     permissionId: string;
-    /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
+    /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, a personal access token (PAT) ID, or a user group ID. */
     identityId: string;
     /** Whether this assignment is system-managed and cannot be modified. */
     isImmutable: boolean;
@@ -174,7 +174,7 @@ export type ListAssignmentsResponse = {
         id: string;
         /** ID of the permission (also referred to as "role" in the dashboard). */
         permissionId: string;
-        /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
+        /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, a personal access token (PAT) ID, or a user group ID. */
         identityId: string;
         /** Whether this assignment is system-managed and cannot be modified. */
         isImmutable: boolean;
@@ -206,7 +206,7 @@ export type ListAssignmentsResponse = {
                 id: string;
                 /** ID of the permission (also referred to as "role" in the dashboard). */
                 permissionId: string;
-                /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, or a personal access token (PAT) ID. */
+                /** ID of the identity the permission is assigned to. Can be a user ID, a service account ID, a personal access token (PAT) ID, or a user group ID. */
                 identityId: string;
                 /** Whether this assignment is system-managed and cannot be modified. */
                 isImmutable: boolean;
