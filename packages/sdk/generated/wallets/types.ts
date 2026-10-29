@@ -1520,9 +1520,9 @@ export type ActivateWalletResponse = {
 export type ActivateWalletRequest = ActivateWalletParams & { body: ActivateWalletBody }
 
 export type BulkCreateWalletsBody = {
-    /** Network the wallets will be created on. */
-    network: "Ethereum" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "Bsc" | "BscTestnet" | "Base" | "BaseSepolia" | "ArbitrumOne" | "ArbitrumSepolia" | "Optimism" | "OptimismSepolia" | "Tron" | "TronNile" | "Solana" | "SolanaDevnet";
-    /** Number of wallets to create in the batch (1 to 1000000). */
+    /** Networks the wallets will be created on, all sharing an address format (e.g. EVM networks). Each address in the batch gets one wallet per network. */
+    networks: ("Adi" | "ArbitrumOne" | "Arc" | "Areum" | "AvalancheC" | "Base" | "Bob" | "Bsc" | "Berachain" | "Besu" | "Besu2" | "Besu3" | "Besu4" | "Besu5" | "Besu6" | "Celo" | "Codex" | "Ethereum" | "EthereumClassic" | "FantomOpera" | "FlareC" | "FlowEvm" | "HyperEvm" | "Ink" | "Monad" | "Optimism" | "Plasma" | "Plume" | "Polygon" | "Race" | "Rayls" | "Robinhood" | "SeiPacific1" | "Sonic" | "Tempo" | "Tsc" | "Xdc" | "XLayer" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "BscTestnet" | "BaseSepolia" | "ArbitrumSepolia" | "OptimismSepolia" | "Tron" | "TronNile" | "Solana" | "SolanaDevnet" | "Bitcoin")[];
+    /** Number of addresses to create in the batch (1 to 1000000), each with one wallet per network. */
     count: number;
     /** Required name prefix shared by every wallet in the batch; wallet at index N is named `${name}${N}`. */
     name: string;
@@ -2631,8 +2631,8 @@ export type GetBulkWalletJobResponse = {
     orgId: string;
     /** Bulk wallet creation job status. */
     status: "Pending" | "InProgress" | "Completed" | "PartiallyCompleted" | "Failed";
-    /** Network the wallets are created on. */
-    network: string;
+    /** Networks the wallets are created on, one wallet per address each. */
+    networks: string[];
     /** Name prefix shared by every wallet in the batch; wallet at index N is named `${namePrefix}${N}`. */
     namePrefix: string;
     /** List of tags. */
@@ -5691,8 +5691,8 @@ export type ListBulkWalletJobsResponse = {
         orgId: string;
         /** Bulk wallet creation job status. */
         status: "Pending" | "InProgress" | "Completed" | "PartiallyCompleted" | "Failed";
-        /** Network the wallets are created on. */
-        network: string;
+        /** Networks the wallets are created on, one wallet per address each. */
+        networks: string[];
         /** Name prefix shared by every wallet in the batch; wallet at index N is named `${namePrefix}${N}`. */
         namePrefix: string;
         /** List of tags. */
@@ -7601,6 +7601,241 @@ export type RejectOfferResponse = {
 };
 
 export type RejectOfferRequest = RejectOfferParams
+
+export type SearchWalletsBody = {
+    /** Text to search for. A wallet id, address, external id, transaction hash or vault id resolves to its wallets. Any other text matches wallet names: an exact name first, then names starting with the text, then looser matches such as a word inside a name or a typo. */
+    q?: string | undefined;
+    /** Result order. Omitted, results are ranked by relevance when q is set, by the filtered token balance with an asset filter, and newest first otherwise. assetBalance requires an asset filter, and an asset filter accepts no other sort. */
+    sort?: {
+        field: "name" | "dateCreated" | "assetBalance";
+        direction: "asc" | "desc";
+    } | undefined;
+    /** Maximum number of wallets to return, up to 500. Defaults to 50. */
+    limit?: number | undefined;
+    /** Opaque token used to retrieve the next page. Returned as `nextPageToken` from the previous request. */
+    paginationToken?: string | undefined;
+    /** Inline each wallet's assets: 'native' returns its native asset only, 'verified' adds its verified tokens. Omit to return none. */
+    includeAssets?: ("native" | "verified") | undefined;
+    /** How widely to match. 'broad' (the default when omitted) matches identifiers and names, and also looks inside names and tolerates typos. 'precise' matches identifiers and names only: an exact id, an exact name, or the start of a name. It skips the fuzzy work, so it is markedly faster on a large org, but it is not a guarantee against the time limit: a search that also carries several filters can still exceed it. */
+    matching?: ("precise" | "broad") | undefined;
+    filters?: {
+        /** Matches wallets on any of these networks. */
+        networks?: string[] | undefined;
+        /** Matches wallets in any of these statuses. Archived wallets are left out unless this list includes Archived. */
+        statuses?: ("Active" | "Inactive" | "Archived")[] | undefined;
+        /** Matches custodial wallets when true, and wallets that are not custodial when false. */
+        custodial?: boolean | undefined;
+        /** Scope results to wallets controlled by these key stores. */
+        storeIds?: string[] | undefined;
+        /** 'include' (default) keeps vault-controlled wallets. 'exclude' drops them from browse and text-search results, but an exact identifier still resolves: pasting a wallet id, address, transaction hash or vault id returns the wallet even when it belongs to a vault. */
+        vaultWallets?: ("exclude" | "include") | undefined;
+        /** Tag filter: set exactly one of hasAny or hasAll. Tags match exactly and are case sensitive. */
+        tags?: {
+            /** Matches wallets carrying at least one of these tags. */
+            hasAny?: string[] | undefined;
+            /** Matches wallets carrying every one of these tags. */
+            hasAll?: string[] | undefined;
+        } | undefined;
+        /** Matches wallets holding a positive balance of the token. Results are ranked by that balance, or by relevance when q is set. */
+        asset?: {
+            /** Token symbol to filter by across networks, case insensitive, e.g. "USDC". Set either symbol or token. Resolves to verified tokens unless scope is "all". */
+            symbol?: string | undefined;
+            /** An exact token identified by its network and tid. Set either token or symbol. If filters.networks is also set, it must include this network. Reserved for future use: token selectors currently return HTTP 400 with details.kind UnsupportedAssetSelector. */
+            token?: {
+                network: string;
+                /** Canonical token identifier including its kind prefix, e.g. erc20:<contract>, spl:<mint>, hts:<token-id>, or native:eth. */
+                tid: string;
+            } | undefined;
+            /** Optional balance bounds. Set min, max, or both. */
+            balance?: {
+                /** Inclusive lower bound, in whole token units: "100" is 100 USDC, not its smallest unit. Fractional allowed. */
+                min?: string | undefined;
+                /** Inclusive upper bound, in whole token units. Fractional allowed. */
+                max?: string | undefined;
+            } | undefined;
+            /** "verified" (default) matches staff-verified tokens only. "all" widens to every token with the symbol — unverified balances are self-reported and may be spam. */
+            scope?: ("verified" | "all") | undefined;
+        } | undefined;
+    } | undefined;
+};
+
+export type SearchWalletsResponse = {
+    items: {
+        wallet: {
+            /** ID of the wallet. */
+            id: string;
+            /** Network this wallet is bound to. */
+            network: string | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+            /** Wallet address on its corresponding network. */
+            address?: string | undefined;
+            /** Details about the key underlying the wallet. */
+            signingKey: {
+                /** Key id. */
+                id: string;
+                /** The cryptographic scheme for the key. */
+                scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
+                /** The elliptic curve for the key. */
+                curve: "ed25519" | "secp256k1" | "stark";
+                /** Hex-encoded value of the public key. */
+                publicKey: string;
+                /** The end user ID the key (and wallet) is delegated to. */
+                delegatedTo?: string | undefined;
+                /** ID of the key store the signing key lives in (see [List Key Stores](https://docs.dfns.co/api-reference/key-stores/list-key-stores)). Use it to tell wallets apart by custody setup, for instance to scope a policy to one store with the `keyStoreId` policy filter. */
+                storeId?: string | undefined;
+            };
+            /** Wallet status. */
+            status: "Active" | "Inactive" | "Archived";
+            /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was created. */
+            dateCreated: string;
+            /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was deleted. */
+            dateDeleted?: string | undefined;
+            /** Wallet nickname. */
+            name?: string | undefined;
+            /** Whether the wallet is owned by an end user (non-custodial), or by your organization (custodial). */
+            custodial: boolean;
+            /** User-defined value that can be used to correlate the entity with an external system. */
+            externalId?: string | undefined;
+            /** List of tags. */
+            tags: string[];
+            /** @deprecated use `networkInfo.validatorId` instead. */
+            validatorId?: string | undefined;
+            /** Additional chain-dependent information about the wallet. Only returned by Get Wallet. */
+            networkInfo?: {
+                /** Confirmed Solana durable-nonce accounts owned by this wallet. */
+                nonceAccounts?: string[] | undefined;
+                /** Id of the validator on which the wallet is created for Canton networks. */
+                validatorId?: string | undefined;
+            } | undefined;
+            /** The vault controlling this wallet, absent for ordinary wallets. A vault wallet is read-only, its funds move through the vault endpoints, and it carries its vault name and tags as its own. */
+            vaultId?: string | undefined;
+        };
+        /** The asset that matched/ranked this wallet when filters.asset is set. This is always the filtered token, even if it is unverified (and not included in assets). */
+        matchedAsset?: (({
+            kind: "Native";
+        } | {
+            kind: "Aip21";
+            metadata: string;
+        } | {
+            kind: "Asa";
+            assetId: string;
+        } | {
+            kind: "Cis2";
+            tokenAddress: string;
+        } | {
+            kind: "Erc20" | "Snip2" | "Trc20";
+            contract: string;
+        } | {
+            kind: "Erc7984";
+            contract: string;
+        } | {
+            kind: "Hts";
+            tokenId: string;
+        } | {
+            kind: "Iou";
+            currency: string;
+            issuer: string;
+        } | {
+            kind: "Cip56";
+            instrumentId: string;
+            instrumentAdmin: string;
+        } | {
+            kind: "Coin" | "LockedCoin";
+            coin: string;
+        } | {
+            kind: "Xls33";
+            issuanceId: string;
+        } | {
+            kind: "Asset";
+            assetId: string;
+        } | {
+            kind: "Cis7";
+            tokenId: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+        } | {
+            kind: "Trc10";
+            tokenId: string;
+        } | {
+            kind: "Spl" | "Spl2022";
+            mint: string;
+        } | {
+            kind: "Tep74";
+            master: string;
+        }) & {
+            symbol?: string | undefined;
+            decimals: number;
+            verified?: boolean | undefined;
+            balance: string;
+        }) | undefined;
+        /** Inline assets for the wallet, populated by setting 'includeAssets' to 'native' or 'verified'. The native asset is always included (even at a zero balance); among tokens, only verified ones with a positive balance appear — unverified tokens are never listed. Please contact us to get your token verified if you want it to appear in this list. */
+        assets?: (({
+            kind: "Native";
+        } | {
+            kind: "Aip21";
+            metadata: string;
+        } | {
+            kind: "Asa";
+            assetId: string;
+        } | {
+            kind: "Cis2";
+            tokenAddress: string;
+        } | {
+            kind: "Erc20" | "Snip2" | "Trc20";
+            contract: string;
+        } | {
+            kind: "Erc7984";
+            contract: string;
+        } | {
+            kind: "Hts";
+            tokenId: string;
+        } | {
+            kind: "Iou";
+            currency: string;
+            issuer: string;
+        } | {
+            kind: "Cip56";
+            instrumentId: string;
+            instrumentAdmin: string;
+        } | {
+            kind: "Coin" | "LockedCoin";
+            coin: string;
+        } | {
+            kind: "Xls33";
+            issuanceId: string;
+        } | {
+            kind: "Asset";
+            assetId: string;
+        } | {
+            kind: "Cis7";
+            tokenId: string;
+        } | {
+            kind: "Sep41";
+            issuer: string;
+            assetCode: string;
+        } | {
+            kind: "Trc10";
+            tokenId: string;
+        } | {
+            kind: "Spl" | "Spl2022";
+            mint: string;
+        } | {
+            kind: "Tep74";
+            master: string;
+        }) & {
+            symbol?: string | undefined;
+            decimals: number;
+            verified?: boolean | undefined;
+            balance: string;
+        })[] | undefined;
+    }[];
+    nextPageToken?: string | undefined;
+    /** Present only as 'capped', and only when an internal cap decided what this search could reach. The results are a subset of the matches and paging will end before the real end of the match set. Do not read them as the closest matches: depending on which branch answered, the cap keeps either the alphabetically first matches or an arbitrary sample of them. Absent means the page is complete. Narrow the search with a longer term or one more filter to get an exact answer. */
+    partial?: ("capped") | undefined;
+};
+
+export type SearchWalletsRequest = { body: SearchWalletsBody }
 
 export type SignAndBroadcastTransactionBody = {
     kind: "Transaction";

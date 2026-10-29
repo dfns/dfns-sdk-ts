@@ -224,7 +224,7 @@ export class DelegatedPermissionsClient {
   async revokePermissionInit(request: T.RevokePermissionRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
-      query: request.query ?? {},
+      query: {},
     })
     const userActionHttpPath = new URL(path, 'https://dfns.invalid').pathname
 
@@ -232,7 +232,7 @@ export class DelegatedPermissionsClient {
       {
         userActionHttpMethod: 'DELETE',
         userActionHttpPath,
-        userActionPayload: JSON.stringify({}),
+        userActionPayload: JSON.stringify(request.body),
       },
       this.apiOptions
     )
@@ -246,7 +246,7 @@ export class DelegatedPermissionsClient {
   ): Promise<T.RevokePermissionResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
-      query: request.query ?? {},
+      query: {},
     })
 
     const { userAction } = await BaseAuthApi.signUserActionChallenge(
@@ -256,7 +256,7 @@ export class DelegatedPermissionsClient {
 
     const response = await simpleFetch(path, {
       method: 'DELETE',
-      body: {},
+      body: request.body,
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })

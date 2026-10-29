@@ -819,6 +819,21 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async searchWallets(request: T.SearchWalletsRequest): Promise<T.SearchWalletsResponse> {
+    const path = buildPathAndQuery('/wallets/search', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async signAndBroadcastTransactionInit(request: T.SignAndBroadcastTransactionRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transactions', {
       path: request ?? {},

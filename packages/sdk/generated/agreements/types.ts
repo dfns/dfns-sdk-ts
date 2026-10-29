@@ -1,3 +1,16 @@
+export type GetLatestAgreementsResponse = {
+    latestAgreements: {
+        /** ID of the agreement. */
+        id: string;
+        /** URL where the full agreement document can be viewed. */
+        agreementUrl?: string | undefined;
+        /** Details of the agreement. */
+        details: string;
+        /** Type of the agreement. */
+        agreementType: "PrivacyPolicy" | "TermsAndConditions" | "UniswapTermsOfService" | "UniswapPrivacyPolicy";
+    }[];
+};
+
 export type GetLatestUnacceptedAgreementQuery = {
     /** Type of agreement to look up. */
     agreementType: "PrivacyPolicy" | "TermsAndConditions" | "UniswapTermsOfService" | "UniswapPrivacyPolicy";

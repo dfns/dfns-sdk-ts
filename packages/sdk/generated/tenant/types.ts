@@ -130,6 +130,8 @@ export type GetOrgResponse = {
         name: string;
         status: "Active" | "Suspended" | "Archived";
         dateCreated: string;
+        dateSuspended?: string | undefined;
+        dateArchived?: string | undefined;
     };
 };
 
@@ -226,6 +228,8 @@ export type ListOrgsResponse = {
         name: string;
         status: "Active" | "Suspended" | "Archived";
         dateCreated: string;
+        dateSuspended?: string | undefined;
+        dateArchived?: string | undefined;
     }[];
     /** token to use as `paginationToken` to request the next page. */
     nextPageToken?: string | undefined;
@@ -408,6 +412,8 @@ export type UpdateOrgResponse = {
         name: string;
         status: "Active" | "Suspended" | "Archived";
         dateCreated: string;
+        dateSuspended?: string | undefined;
+        dateArchived?: string | undefined;
     };
 };
 

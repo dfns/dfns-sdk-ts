@@ -15725,6 +15725,35 @@ export type ListPoliciesResponse = {
 
 export type ListPoliciesRequest = { query?: ListPoliciesQuery }
 
+export type LookupSumsubTravelRuleVaspBody = {
+    /** The network the address lives on, e.g. `Ethereum`. */
+    network: string;
+    /** The counterparty (beneficiary) wallet address to attribute. */
+    walletAddress: string;
+};
+
+export type LookupSumsubTravelRuleVaspResponse = {
+    /** Sumsub could not attribute the address to a VASP. */
+    found: false;
+} | {
+    /** A VASP controls the address. */
+    found: true;
+    /** Sumsub id of the VASP. Pass it as `travelRule.beneficiaryVaspId` on the transfer. */
+    vaspId: string;
+    /** Name of the VASP as registered in the Sumsub VASP directory. */
+    name?: string | undefined;
+    /** Official website of the VASP. */
+    url?: string | undefined;
+    /** Business types of the VASP, as reported by Sumsub. */
+    types: string[];
+    /** Risk indicators attached to the VASP, as reported by Sumsub. Empty when none. */
+    riskTags: string[];
+    /** Which Sumsub data source attributed the address. */
+    source?: string | undefined;
+};
+
+export type LookupSumsubTravelRuleVaspRequest = { body: LookupSumsubTravelRuleVaspBody }
+
 export type UpdatePolicyBody = {
     name: string;
     activityKind: "Registry:Addresses:Modify";
