@@ -119,12 +119,12 @@ export class PermissionsClient {
   async revokePermission(request: T.RevokePermissionRequest): Promise<T.RevokePermissionResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
-      query: request.query ?? {},
+      query: {},
     })
 
     const response = await userActionFetch(path, {
       method: 'DELETE',
-      body: {},
+      body: request.body,
       apiOptions: this.apiOptions,
     })
 

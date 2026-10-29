@@ -286,6 +286,11 @@ export type ListPermissionsResponse = {
 
 export type ListPermissionsRequest = { query?: ListPermissionsQuery }
 
+export type RevokePermissionBody = {
+    /** If true, revokes without checking that the org keeps an admin or that policy approvers keep their vote. */
+    force?: boolean | undefined;
+} | undefined;
+
 export type RevokePermissionParams = {
     /** ID of the permission (also referred to as "role" in the dashboard). */
     permissionId: string;
@@ -293,18 +298,13 @@ export type RevokePermissionParams = {
     assignmentId: string;
 };
 
-export type RevokePermissionQuery = {
-    /** If true, bypasses the approval process and revokes immediately. */
-    force?: boolean | undefined;
-};
-
 export type RevokePermissionResponse = void | undefined;
 
-export type RevokePermissionRequest = RevokePermissionParams & { query?: RevokePermissionQuery }
+export type RevokePermissionRequest = RevokePermissionParams & { body?: RevokePermissionBody }
+
+export type DeleteAssignmentBody = RevokePermissionBody
 
 export type DeleteAssignmentParams = RevokePermissionParams
-
-export type DeleteAssignmentQuery = RevokePermissionQuery
 
 export type DeleteAssignmentResponse = RevokePermissionResponse
 

@@ -129,6 +129,21 @@ export class PoliciesClient {
     return response.json()
   }
 
+  async lookupSumsubTravelRuleVasp(request: T.LookupSumsubTravelRuleVaspRequest): Promise<T.LookupSumsubTravelRuleVaspResponse> {
+    const path = buildPathAndQuery('/v2/policies/travel-rule/sumsub/vasp-lookup', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async updatePolicy(request: T.UpdatePolicyRequest): Promise<T.UpdatePolicyResponse> {
     const path = buildPathAndQuery('/v2/policies/:policyId', {
       path: request ?? {},

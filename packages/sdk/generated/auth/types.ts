@@ -3030,7 +3030,7 @@ export type LogoutResponse = {
     message: string;
 };
 
-export type LogoutRequest = { body: LogoutBody }
+export type LogoutRequest = { body?: LogoutBody }
 
 export type OidcLoginBody = {
     /** Authorization code obtained from the IdP */

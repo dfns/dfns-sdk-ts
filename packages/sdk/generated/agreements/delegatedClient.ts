@@ -7,6 +7,20 @@ import * as T from './types'
 export class DelegatedAgreementsClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
+  async getLatestAgreements(): Promise<T.GetLatestAgreementsResponse> {
+    const path = buildPathAndQuery('/dashboard/agreements/latest', {
+      path: {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getLatestUnacceptedAgreement(request?: T.GetLatestUnacceptedAgreementRequest): Promise<T.GetLatestUnacceptedAgreementResponse> {
     const path = buildPathAndQuery('/agreements/latest-unaccepted', {
       path: request ?? {},
