@@ -13,7 +13,7 @@
     "@dfns/lib-ethersjs6": "^0.8.28",
     "@dfns/sdk": "^0.8.28",
     "@dfns/sdk-keysigner": "^0.8.28",
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^7.0.0",
     "@openzeppelin/contracts": "^5.0.2",
     "dotenv": "16.1.4",
     "ethers": "^6.9.0",
