@@ -1335,7 +1335,7 @@ export type CreateServiceAccountBody = {
     /** Human-readable name of the Service Account. */
     name: string;
     publicKey: string;
-    /** ID of the permission (also referred to as "role" in the dashboard). */
+    /** @deprecated Ignored. Assign permissions after creation via POST /permissions/{permissionId}/assignments. */
     permissionId?: string | undefined;
     /** Value that can be used to correlate the entity with an external system. */
     externalId?: string | undefined;
