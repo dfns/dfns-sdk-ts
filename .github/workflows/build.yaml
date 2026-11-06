@@ -31,3 +31,6 @@ jobs:
 
       - name: compile packages
         run: npm run cb:all
+
+      - name: test Near adapter
+        run: npx --no -- nx run lib-near:test
