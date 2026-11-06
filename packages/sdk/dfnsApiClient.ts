@@ -1,4 +1,3 @@
-import { AgreementsClient } from './generated/agreements'
 import { AllocationsClient } from './generated/allocations'
 import { AuthClient } from './generated/auth'
 import { CredentialSigner } from './signer'
@@ -23,10 +22,6 @@ export type DfnsApiClientOptions = DfnsBaseApiOptions & {
 
 export class DfnsApiClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
-
-  public get agreements() {
-    return new AgreementsClient(this.apiOptions)
-  }
 
   public get allocations() {
     return new AllocationsClient(this.apiOptions)
