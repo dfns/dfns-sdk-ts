@@ -11,6 +11,23 @@ type PasskeyGetRequest = {
   allowCredentials?: { id: string; type: string }[]
 }
 
+type PasskeyGlobals = {
+  __dfnsPasskeyGets?: PasskeyGetRequest[]
+  __dfnsPasskeyError?: { error: string; message: string }
+}
+
+const challenge = {
+  challenge: 'challenge-1',
+  challengeIdentifier: 'ch-1',
+  externalAuthenticationUrl: '',
+  supportedCredentialKinds: [],
+  userVerification: 'required' as const,
+  allowCredentials: {
+    webauthn: [{ id: 'wa-1', type: 'public-key' as const }],
+    key: [{ id: 'key-1', type: 'public-key' as const }],
+  },
+}
+
 type AndroidSigner = {
   sign(challenge: {
     challenge: string
@@ -30,6 +47,7 @@ const stubs: Record<string, string> = {
   'react-native-passkey': `
 export const Passkey = {
   async get(request) {
+    if (globalThis.__dfnsPasskeyError) throw globalThis.__dfnsPasskeyError
     globalThis.__dfnsPasskeyGets.push(request)
     return {
       id: 'cred-signed',
@@ -45,10 +63,11 @@ export const Passkey = {
 `,
   '@dfns/sdk': `
 export class DfnsError extends Error {
-  constructor(httpStatus, message) {
+  constructor(httpStatus, message, context) {
     super(message)
     this.name = 'DfnsError'
     this.httpStatus = httpStatus
+    this.context = context
   }
 }
 `,
@@ -91,25 +110,36 @@ const loadAndroidSigner = async (): Promise<AndroidSigner> => {
 describe('AndroidPasskeys.sign', () => {
   it('forwards webauthn and key credentials to Passkey.get', async () => {
     const gets: PasskeyGetRequest[] = []
-    ;(globalThis as { __dfnsPasskeyGets?: PasskeyGetRequest[] }).__dfnsPasskeyGets = gets
+    const globals = globalThis as PasskeyGlobals
+    globals.__dfnsPasskeyGets = gets
+    globals.__dfnsPasskeyError = undefined
 
     const signer = await loadAndroidSigner()
-    await signer.sign({
-      challenge: 'challenge-1',
-      challengeIdentifier: 'ch-1',
-      externalAuthenticationUrl: '',
-      supportedCredentialKinds: [],
-      userVerification: 'required',
-      allowCredentials: {
-        webauthn: [{ id: 'wa-1', type: 'public-key' }],
-        key: [{ id: 'key-1', type: 'public-key' }],
-      },
-    })
+    await signer.sign(challenge)
 
     assert.equal(gets.length, 1)
     assert.deepEqual(gets[0].allowCredentials, [
       { id: 'wa-1', type: 'public-key' },
       { id: 'key-1', type: 'public-key' },
     ])
+  })
+
+  it('throws DfnsError when the user cancels Passkey.get', async () => {
+    const globals = globalThis as PasskeyGlobals
+    globals.__dfnsPasskeyGets = []
+    globals.__dfnsPasskeyError = {
+      error: 'UserCancelled',
+      message: 'The user cancelled the request.',
+    }
+
+    const signer = await loadAndroidSigner()
+    await assert.rejects(signer.sign(challenge), (err: unknown) => {
+      const failure = err as { name?: string; message?: string; httpStatus?: number; context?: unknown }
+      assert.equal(failure.name, 'DfnsError')
+      assert.equal(failure.message, 'The user cancelled the request.')
+      assert.equal(failure.httpStatus, -1)
+      assert.deepEqual(failure.context, { error: 'UserCancelled' })
+      return true
+    })
   })
 })
