@@ -13,6 +13,12 @@ import { Passkey, PasskeyCreateRequest, PasskeyGetRequest, PasskeyGetResult } fr
 
 export const DEFAULT_WAIT_TIMEOUT = 60000
 
+const passkeyAllowCredentials = (allowCredentials: UserActionChallenge['allowCredentials']) => {
+  if (!allowCredentials) return undefined
+
+  return [...allowCredentials.webauthn, ...allowCredentials.key].map(({ type, id }) => ({ type, id }))
+}
+
 export type PasskeysSignerConf = {
   /**
    * The relying party identifies your application to users, when users create/use passkeys. (Read more [here](https://www.w3.org/TR/webauthn-2/#relying-party)).
@@ -40,7 +46,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyGetRequest = {
       challenge: challenge.challenge,
-      allowCredentials: challenge.allowCredentials?.webauthn,
+      allowCredentials: passkeyAllowCredentials(challenge.allowCredentials),
       rpId: this.conf.relyingParty.id,
       userVerification: challenge.userVerification,
       timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
@@ -102,7 +108,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyGetRequest = {
       challenge: challenge.challenge,
-      allowCredentials: challenge.allowCredentials?.webauthn,
+      allowCredentials: passkeyAllowCredentials(challenge.allowCredentials),
       rpId: this.conf.relyingParty.id,
       userVerification: 'preferred',
       timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
