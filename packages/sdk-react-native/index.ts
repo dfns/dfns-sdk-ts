@@ -16,7 +16,7 @@ export const DEFAULT_WAIT_TIMEOUT = 60000
 const passkeyAllowCredentials = (allowCredentials: UserActionChallenge['allowCredentials']) => {
   if (!allowCredentials) return undefined
 
-  return [...allowCredentials.webauthn, ...allowCredentials.key].map(({ type, id }) => ({ type, id }))
+  return allowCredentials.webauthn.map(({ type, id }) => ({ type, id }))
 }
 
 const isPasskeyError = (err: unknown): err is { error: string; message: string } => {

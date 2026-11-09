@@ -108,7 +108,7 @@ const loadAndroidSigner = async (): Promise<AndroidSigner> => {
 }
 
 describe('AndroidPasskeys.sign', () => {
-  it('forwards webauthn and key credentials to Passkey.get', async () => {
+  it('forwards webauthn credentials and leaves key credentials out', async () => {
     const gets: PasskeyGetRequest[] = []
     const globals = globalThis as PasskeyGlobals
     globals.__dfnsPasskeyGets = gets
@@ -118,10 +118,7 @@ describe('AndroidPasskeys.sign', () => {
     await signer.sign(challenge)
 
     assert.equal(gets.length, 1)
-    assert.deepEqual(gets[0].allowCredentials, [
-      { id: 'wa-1', type: 'public-key' },
-      { id: 'key-1', type: 'public-key' },
-    ])
+    assert.deepEqual(gets[0].allowCredentials, [{ id: 'wa-1', type: 'public-key' }])
   })
 
   it('throws DfnsError when the user cancels Passkey.get', async () => {
