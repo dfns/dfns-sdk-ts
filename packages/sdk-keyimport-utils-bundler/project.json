@@ -11,5 +11,6 @@
         "updateBuildableProjectDepsInPackageJson": true
       }
     }
-  }
+  },
+  "name": "sdk-keyimport-utils-bundler"
 }

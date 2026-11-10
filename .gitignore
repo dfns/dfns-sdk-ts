@@ -5,3 +5,5 @@
 /tmp
 /docs
 .DS_Store
+
+.claude/worktrees

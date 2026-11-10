@@ -11,5 +11,6 @@
         "updateBuildableProjectDepsInPackageJson": true
       }
     }
-  }
+  },
+  "name": "sdk-keyexport-utils-nodejs"
 }
