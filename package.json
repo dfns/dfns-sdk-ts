@@ -83,8 +83,9 @@
     "packages/*"
   ],
   "overrides": {
+    "axios": "1.21.1",
     "tronweb": {
-      "axios": "1.12.0"
+      "axios": "1.21.1"
     },
     "external-editor": {
       "tmp": "0.2.4"
