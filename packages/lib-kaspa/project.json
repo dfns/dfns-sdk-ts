@@ -10,5 +10,6 @@
         "updateBuildableProjectDepsInPackageJson": true
       }
     }
-  }
+  },
+  "name": "lib-kaspa"
 }

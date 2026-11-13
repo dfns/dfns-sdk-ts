@@ -1,17 +1,10 @@
 {
-  "extends": "nx/presets/npm.json",
-  "npmScope": "dfns",
-  "affected": {
-    "defaultBase": "m"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": []
-      }
+  "pluginsConfig": {
+    "@nrwl/js": {
+      "analyzeSourceFiles": true
     }
   },
+  "extends": "nx/presets/npm.json",
   "namedInputs": {
     "sharedGlobals": ["{workspaceRoot}/tsconfig.base.json"],
     "default": ["sharedGlobals", "{projectRoot}/**/*"],
@@ -22,9 +15,6 @@
       "dependsOn": ["^cb"]
     }
   },
-  "pluginsConfig": {
-    "@nrwl/js": {
-      "analyzeSourceFiles": true
-    }
-  }
+  "useInferencePlugins": false,
+  "defaultBase": "m"
 }
