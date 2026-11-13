@@ -148,9 +148,13 @@ export type GetAddressWatchAssetsResponse = {
         kind: "Tep74";
         master: string;
     }) & {
+        /** Ticker symbol of the asset, such as ETH or USDC, when it has one. */
         symbol?: string | undefined;
+        /** Number of decimals of the asset: balance divided by 10^decimals is the amount in whole units. */
         decimals: number;
+        /** Whether DFNS verified this token. Unverified tokens can be spam. See [Token verification](https://docs.dfns.co/guides/verify-tokens). */
         verified?: boolean | undefined;
+        /** Balance in the asset's smallest unit, as a string. */
         balance: string;
         /** Current market price of the asset, keyed by fiat currency (e.g. USD). Sourced from DFNS market data. */
         quotes?: {

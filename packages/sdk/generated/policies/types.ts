@@ -1150,6 +1150,10 @@ export type CreateApprovalDecisionResponse = {
                 assetId?: string | undefined;
                 /** Hedera token entity id, e.g. "0.0.456858". */
                 tokenId?: string | undefined;
+                /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+                instrumentAdmin?: string | undefined;
+                /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+                instrumentIds?: string[] | undefined;
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
@@ -4347,7 +4351,7 @@ export type CreatePolicyBody = {
         kind: "UserAction";
         configuration: {
             /** The user actions this rule applies to. The rule triggers on any of them. */
-            userActionKinds: string[];
+            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
         };
     };
     action: {
@@ -6754,6 +6758,10 @@ export type GetApprovalResponse = {
                 assetId?: string | undefined;
                 /** Hedera token entity id, e.g. "0.0.456858". */
                 tokenId?: string | undefined;
+                /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+                instrumentAdmin?: string | undefined;
+                /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+                instrumentIds?: string[] | undefined;
                 /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                 externalId?: string | undefined;
             } | {
@@ -11816,6 +11824,10 @@ export type ListApprovalsResponse = {
                     assetId?: string | undefined;
                     /** Hedera token entity id, e.g. "0.0.456858". */
                     tokenId?: string | undefined;
+                    /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+                    instrumentAdmin?: string | undefined;
+                    /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+                    instrumentIds?: string[] | undefined;
                     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
                     externalId?: string | undefined;
                 } | {
@@ -16288,7 +16300,7 @@ export type UpdatePolicyBody = {
         kind: "UserAction";
         configuration: {
             /** The user actions this rule applies to. The rule triggers on any of them. */
-            userActionKinds: string[];
+            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
         };
     };
     action: {
