@@ -8,7 +8,7 @@ import {
 } from '@vechain/sdk-network'
 
 import { Address, Hex, Transaction } from '@vechain/sdk-core';
-import { ec } from 'elliptic'
+import { uncompressedSecp256k1 } from './publicKey'
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -56,8 +56,7 @@ export class DfnsWallet extends VeChainAbstractSigner {
       throw new DfnsError(-1, 'key curve is not secp256k1', { walletId, curve })
     }
 
-    const publicKey = new ec('secp256k1').keyFromPublic(res.signingKey.publicKey, 'hex')
-    const ad = Address.ofPublicKey(Buffer.from(publicKey.getPublic(false, 'array'))).toString()
+    const ad = Address.ofPublicKey(Buffer.from(uncompressedSecp256k1(res.signingKey.publicKey))).toString()
     return new DfnsWallet(ad, dfnsClient, walletId, provider)
   }
 
