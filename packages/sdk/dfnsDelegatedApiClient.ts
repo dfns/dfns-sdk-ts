@@ -1,4 +1,3 @@
-import { DelegatedAgreementsClient } from './generated/agreements'
 import { DelegatedAllocationsClient } from './generated/allocations'
 import { DelegatedAuthClient } from './generated/auth'
 import { DelegatedExchangesClient } from './generated/exchanges'
@@ -19,10 +18,6 @@ export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions
 
 export class DfnsDelegatedApiClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
-
-  public get agreements() {
-    return new DelegatedAgreementsClient(this.apiOptions)
-  }
 
   public get allocations() {
     return new DelegatedAllocationsClient(this.apiOptions)
