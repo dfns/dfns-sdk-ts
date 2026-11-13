@@ -102,6 +102,10 @@ export type AbortTransactionResponse = {
         assetId?: string | undefined;
         /** Hedera token entity id, e.g. "0.0.456858". */
         tokenId?: string | undefined;
+        /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+        instrumentAdmin?: string | undefined;
+        /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+        instrumentIds?: string[] | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -1310,6 +1314,8 @@ export type ActivateWalletBody = {} | {
 } | {
     /** Id of the validator on which the wallet is created for Canton networks */
     validatorId: string;
+    /** Party hint used as the prefix of the Canton party id (`partyHint::fingerprint`). If omitted, an 8 character hint is derived from the wallet public key. */
+    partyHint?: string | undefined;
 };
 
 export type ActivateWalletParams = {
@@ -1414,6 +1420,10 @@ export type ActivateWalletResponse = {
         assetId?: string | undefined;
         /** Hedera token entity id, e.g. "0.0.456858". */
         tokenId?: string | undefined;
+        /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+        instrumentAdmin?: string | undefined;
+        /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+        instrumentIds?: string[] | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -1645,6 +1655,10 @@ export type CancelTransactionResponse = {
         assetId?: string | undefined;
         /** Hedera token entity id, e.g. "0.0.456858". */
         tokenId?: string | undefined;
+        /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+        instrumentAdmin?: string | undefined;
+        /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+        instrumentIds?: string[] | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -1854,6 +1868,10 @@ export type CancelTransferResponse = {
         assetId?: string | undefined;
         /** Hedera token entity id, e.g. "0.0.456858". */
         tokenId?: string | undefined;
+        /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+        instrumentAdmin?: string | undefined;
+        /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+        instrumentIds?: string[] | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -3121,6 +3139,10 @@ export type GetTransactionResponse = {
         assetId?: string | undefined;
         /** Hedera token entity id, e.g. "0.0.456858". */
         tokenId?: string | undefined;
+        /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+        instrumentAdmin?: string | undefined;
+        /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+        instrumentIds?: string[] | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -4399,9 +4421,13 @@ export type GetWalletAssetsResponse = {
         kind: "Tep74";
         master: string;
     }) & {
+        /** Ticker symbol of the asset, such as ETH or USDC, when it has one. */
         symbol?: string | undefined;
+        /** Number of decimals of the asset: balance divided by 10^decimals is the amount in whole units. */
         decimals: number;
+        /** Whether DFNS verified this token. Unverified tokens can be spam. See [Token verification](https://docs.dfns.co/guides/verify-tokens). */
         verified?: boolean | undefined;
+        /** Balance in the asset's smallest unit, as a string. */
         balance: string;
         /** Current market price of the asset, keyed by fiat currency (e.g. USD). Sourced from DFNS market data. */
         quotes?: {
@@ -6316,6 +6342,10 @@ export type ListTransactionsResponse = {
             assetId?: string | undefined;
             /** Hedera token entity id, e.g. "0.0.456858". */
             tokenId?: string | undefined;
+            /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+            instrumentAdmin?: string | undefined;
+            /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+            instrumentIds?: string[] | undefined;
             /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
             externalId?: string | undefined;
         } | {
@@ -7607,7 +7637,9 @@ export type SearchWalletsBody = {
     q?: string | undefined;
     /** Result order. Omitted, results are ranked by relevance when q is set, by the filtered token balance with an asset filter, and newest first otherwise. assetBalance requires an asset filter, and an asset filter accepts no other sort. */
     sort?: {
+        /** What to order by: 'name' (the wallet name), 'dateCreated' (when the wallet was created), or 'assetBalance' (the balance of the token in filters.asset, which requires that filter). */
         field: "name" | "dateCreated" | "assetBalance";
+        /** 'asc' for ascending, 'desc' for descending. */
         direction: "asc" | "desc";
     } | undefined;
     /** Maximum number of wallets to return, up to 500. Defaults to 50. */
@@ -7618,6 +7650,7 @@ export type SearchWalletsBody = {
     includeAssets?: ("native" | "verified") | undefined;
     /** How widely to match. 'broad' (the default when omitted) matches identifiers and names, and also looks inside names and tolerates typos. 'precise' matches identifiers and names only: an exact id, an exact name, or the start of a name. It skips the fuzzy work, so it is markedly faster on a large org, but it is not a guarantee against the time limit: a search that also carries several filters can still exceed it. */
     matching?: ("precise" | "broad") | undefined;
+    /** Narrows the results. A wallet is returned only if it matches every filter set here. */
     filters?: {
         /** Matches wallets on any of these networks. */
         networks?: string[] | undefined;
@@ -7660,6 +7693,7 @@ export type SearchWalletsBody = {
 };
 
 export type SearchWalletsResponse = {
+    /** The matches on this page, in result order. */
     items: {
         wallet: {
             /** ID of the wallet. */
@@ -7764,9 +7798,13 @@ export type SearchWalletsResponse = {
             kind: "Tep74";
             master: string;
         }) & {
+            /** Ticker symbol of the asset, such as ETH or USDC, when it has one. */
             symbol?: string | undefined;
+            /** Number of decimals of the asset: balance divided by 10^decimals is the amount in whole units. */
             decimals: number;
+            /** Whether DFNS verified this token. Unverified tokens can be spam. See [Token verification](https://docs.dfns.co/guides/verify-tokens). */
             verified?: boolean | undefined;
+            /** Balance in the asset's smallest unit, as a string. */
             balance: string;
         }) | undefined;
         /** Inline assets for the wallet, populated by setting 'includeAssets' to 'native' or 'verified'. The native asset is always included (even at a zero balance); among tokens, only verified ones with a positive balance appear — unverified tokens are never listed. Please contact us to get your token verified if you want it to appear in this list. */
@@ -7824,12 +7862,17 @@ export type SearchWalletsResponse = {
             kind: "Tep74";
             master: string;
         }) & {
+            /** Ticker symbol of the asset, such as ETH or USDC, when it has one. */
             symbol?: string | undefined;
+            /** Number of decimals of the asset: balance divided by 10^decimals is the amount in whole units. */
             decimals: number;
+            /** Whether DFNS verified this token. Unverified tokens can be spam. See [Token verification](https://docs.dfns.co/guides/verify-tokens). */
             verified?: boolean | undefined;
+            /** Balance in the asset's smallest unit, as a string. */
             balance: string;
         })[] | undefined;
     }[];
+    /** Present when more results exist. Send it as paginationToken, with the rest of the request unchanged, to get the next page. */
     nextPageToken?: string | undefined;
     /** Present only as 'capped', and only when an internal cap decided what this search could reach. The results are a subset of the matches and paging will end before the real end of the match set. Do not read them as the closest matches: depending on which branch answered, the cap keeps either the alphabetically first matches or an arbitrary sample of them. Absent means the page is complete. Narrow the search with a longer term or one more filter to get an exact answer. */
     partial?: ("capped") | undefined;
@@ -7921,6 +7964,10 @@ export type SignAndBroadcastTransactionBody = {
     assetId?: string | undefined;
     /** Hedera token entity id, e.g. "0.0.456858". */
     tokenId?: string | undefined;
+    /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+    instrumentAdmin?: string | undefined;
+    /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+    instrumentIds?: string[] | undefined;
     /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
     externalId?: string | undefined;
 };
@@ -8027,6 +8074,10 @@ export type SignAndBroadcastTransactionResponse = {
         assetId?: string | undefined;
         /** Hedera token entity id, e.g. "0.0.456858". */
         tokenId?: string | undefined;
+        /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+        instrumentAdmin?: string | undefined;
+        /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+        instrumentIds?: string[] | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -8244,6 +8295,10 @@ export type SpeedUpTransactionResponse = {
         assetId?: string | undefined;
         /** Hedera token entity id, e.g. "0.0.456858". */
         tokenId?: string | undefined;
+        /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+        instrumentAdmin?: string | undefined;
+        /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+        instrumentIds?: string[] | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
@@ -8453,6 +8508,10 @@ export type SpeedUpTransferResponse = {
         assetId?: string | undefined;
         /** Hedera token entity id, e.g. "0.0.456858". */
         tokenId?: string | undefined;
+        /** Canton only. The instrument admin of the tokens to pre-approve: the Canton Coin admin, or a token issuer on the Digital Asset Utility registry. Omit it to pre-approve Canton Coin. */
+        instrumentAdmin?: string | undefined;
+        /** Canton only. The instrument ids of `instrumentAdmin` to pre-approve, up to 10. Empty or omitted pre-approves every instrument of a Utility registry admin. */
+        instrumentIds?: string[] | undefined;
         /** A unique ID from your system. It can be leveraged to be used as an idempotency key (read more [here](https://docs.dfns.co/api-reference/idempotency)). */
         externalId?: string | undefined;
     } | {
