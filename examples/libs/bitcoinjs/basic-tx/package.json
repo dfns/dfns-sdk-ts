@@ -8,7 +8,7 @@
     "@dfns/sdk-keysigner": "^0.8.28",
     "axios": "^1.5.1",
     "dotenv": "16.1.4",
-    "bitcoinjs-lib": "6.1.5"
+    "bitcoinjs-lib": "6.1.10"
   },
   "devDependencies": {
     "ts-node": "10.9.1"
