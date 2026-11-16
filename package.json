@@ -66,7 +66,7 @@
     "@polkadot/api": "^11.0.0",
     "@polymeshassociation/signing-manager-types": "3.4.0",
     "@solana/web3.js": "^1.0.0",
-    "@stellar/stellar-sdk": "^11.0.0",
+    "@stellar/stellar-sdk": "17.3.0",
     "@taquito/taquito": "^17.0.0",
     "@ton/ton": "^15.0.0",
     "@vechain/sdk-core": "^2.0.5",
