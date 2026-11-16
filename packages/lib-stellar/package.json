@@ -7,6 +7,6 @@
     "directory": "packages/lib-stellar"
   },
   "peerDependencies": {
-    "@stellar/stellar-sdk": "^11.0.0"
+    "@stellar/stellar-sdk": "^17.0.0"
   }
 }
