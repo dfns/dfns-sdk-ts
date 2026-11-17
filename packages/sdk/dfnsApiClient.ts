@@ -1,3 +1,4 @@
+import { AddressWatchesClient } from './generated/addressWatches'
 import { AllocationsClient } from './generated/allocations'
 import { AuthClient } from './generated/auth'
 import { CredentialSigner } from './signer'
@@ -5,12 +6,15 @@ import { ExchangesClient } from './generated/exchanges'
 import { FeeSponsorsClient } from './generated/feeSponsors'
 import { KeysClient } from './generated/keys'
 import { NetworksClient } from './generated/networks'
+import { PayinsClient } from './generated/payins'
 import { PayoutsClient } from './generated/payouts'
 import { PermissionsClient } from './generated/permissions'
 import { PoliciesClient } from './generated/policies'
 import { SignersClient } from './generated/signers'
 import { StakingClient } from './generated/staking'
 import { SwapsClient } from './generated/swaps'
+import { TenantClient } from './generated/tenant'
+import { VaultsClient } from './generated/vaults'
 import { WalletsClient } from './generated/wallets'
 import { WebhooksClient } from './generated/webhooks'
 import { DfnsBaseApiOptions } from './types/generic'
@@ -22,6 +26,10 @@ export type DfnsApiClientOptions = DfnsBaseApiOptions & {
 
 export class DfnsApiClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
+
+  public get addressWatches() {
+    return new AddressWatchesClient(this.apiOptions)
+  }
 
   public get allocations() {
     return new AllocationsClient(this.apiOptions)
@@ -47,6 +55,10 @@ export class DfnsApiClient {
     return new NetworksClient(this.apiOptions)
   }
 
+  public get payins() {
+    return new PayinsClient(this.apiOptions)
+  }
+
   public get payouts() {
     return new PayoutsClient(this.apiOptions)
   }
@@ -69,6 +81,14 @@ export class DfnsApiClient {
 
   public get swaps() {
     return new SwapsClient(this.apiOptions)
+  }
+
+  public get tenant() {
+    return new TenantClient(this.apiOptions)
+  }
+
+  public get vaults() {
+    return new VaultsClient(this.apiOptions)
   }
 
   public get wallets() {

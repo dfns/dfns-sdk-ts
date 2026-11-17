@@ -1,15 +1,19 @@
+import { DelegatedAddressWatchesClient } from './generated/addressWatches'
 import { DelegatedAllocationsClient } from './generated/allocations'
 import { DelegatedAuthClient } from './generated/auth'
 import { DelegatedExchangesClient } from './generated/exchanges'
 import { DelegatedFeeSponsorsClient } from './generated/feeSponsors'
 import { DelegatedKeysClient } from './generated/keys'
 import { DelegatedNetworksClient } from './generated/networks'
+import { DelegatedPayinsClient } from './generated/payins'
 import { DelegatedPayoutsClient } from './generated/payouts'
 import { DelegatedPermissionsClient } from './generated/permissions'
 import { DelegatedPoliciesClient } from './generated/policies'
 import { DelegatedSignersClient } from './generated/signers'
 import { DelegatedStakingClient } from './generated/staking'
 import { DelegatedSwapsClient } from './generated/swaps'
+import { DelegatedTenantClient } from './generated/tenant'
+import { DelegatedVaultsClient } from './generated/vaults'
 import { DelegatedWalletsClient } from './generated/wallets'
 import { DelegatedWebhooksClient } from './generated/webhooks'
 import { DfnsBaseApiOptions } from './types/generic'
@@ -18,6 +22,10 @@ export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions
 
 export class DfnsDelegatedApiClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
+
+  public get addressWatches() {
+    return new DelegatedAddressWatchesClient(this.apiOptions)
+  }
 
   public get allocations() {
     return new DelegatedAllocationsClient(this.apiOptions)
@@ -43,6 +51,10 @@ export class DfnsDelegatedApiClient {
     return new DelegatedNetworksClient(this.apiOptions)
   }
 
+  public get payins() {
+    return new DelegatedPayinsClient(this.apiOptions)
+  }
+
   public get payouts() {
     return new DelegatedPayoutsClient(this.apiOptions)
   }
@@ -65,6 +77,14 @@ export class DfnsDelegatedApiClient {
 
   public get signers() {
     return new DelegatedSignersClient(this.apiOptions)
+  }
+
+  public get tenant() {
+    return new DelegatedTenantClient(this.apiOptions)
+  }
+
+  public get vaults() {
+    return new DelegatedVaultsClient(this.apiOptions)
   }
 
   public get wallets() {
