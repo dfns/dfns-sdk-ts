@@ -3777,7 +3777,7 @@ export type CreateApprovalDecisionResponse = {
                 description?: string | undefined;
                 network: string;
                 address: string;
-                schema?: any;
+                schema?: any | undefined;
             };
         };
     } | {
@@ -3792,7 +3792,7 @@ export type CreateApprovalDecisionResponse = {
                 params?: {
                     [x: string]: string;
                 } | undefined;
-                body?: unknown;
+                body?: unknown | undefined;
             };
         };
     };
@@ -4351,7 +4351,7 @@ export type CreatePolicyBody = {
         kind: "UserAction";
         configuration: {
             /** The user actions this rule applies to. The rule triggers on any of them. */
-            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
+            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "CreateToken" | "RegisterTokenIdentity" | "MintToken" | "BurnToken" | "PauseToken" | "UnpauseToken" | "FreezeTokenAccount" | "ForceTransferToken" | "CreateTokenOrder" | "CreateTokenNav" | "SettleTokenOrder" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
         };
     };
     action: {
@@ -9385,7 +9385,7 @@ export type GetApprovalResponse = {
                 description?: string | undefined;
                 network: string;
                 address: string;
-                schema?: any;
+                schema?: any | undefined;
             };
         };
     } | {
@@ -9400,7 +9400,7 @@ export type GetApprovalResponse = {
                 params?: {
                     [x: string]: string;
                 } | undefined;
-                body?: unknown;
+                body?: unknown | undefined;
             };
         };
     };
@@ -14451,7 +14451,7 @@ export type ListApprovalsResponse = {
                     description?: string | undefined;
                     network: string;
                     address: string;
-                    schema?: any;
+                    schema?: any | undefined;
                 };
             };
         } | {
@@ -14466,7 +14466,7 @@ export type ListApprovalsResponse = {
                     params?: {
                         [x: string]: string;
                     } | undefined;
-                    body?: unknown;
+                    body?: unknown | undefined;
                 };
             };
         };
@@ -16300,7 +16300,7 @@ export type UpdatePolicyBody = {
         kind: "UserAction";
         configuration: {
             /** The user actions this rule applies to. The rule triggers on any of them. */
-            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
+            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "CreateToken" | "RegisterTokenIdentity" | "MintToken" | "BurnToken" | "PauseToken" | "UnpauseToken" | "FreezeTokenAccount" | "ForceTransferToken" | "CreateTokenOrder" | "CreateTokenNav" | "SettleTokenOrder" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
         };
     };
     action: {
