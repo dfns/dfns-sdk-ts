@@ -79,6 +79,12 @@ export class DfnsDelegatedApiClient {
     return new DelegatedSignersClient(this.apiOptions)
   }
 
+  /**
+   * Tenant-level endpoints: orgs, tenant users, user groups and tenant permissions.
+   *
+   * Only a tenant user can call them, with a tenant-scoped auth token. A tenant user gets one
+   * with `auth.exchangeAccessToken`. All other modules need a token scoped to an org.
+   */
   public get tenant() {
     return new DelegatedTenantClient(this.apiOptions)
   }
