@@ -48,7 +48,7 @@ export class DfnsWallet implements Signer {
     const publicKeyBytes = Buffer.from(this.metadata.signingKey.publicKey, 'hex')
     return new PublicKey({
       keyType: KeyType.ED25519,
-      data: hexToBuffer(this.metadata.address!),
+      data: publicKeyBytes,
     })
   }
 

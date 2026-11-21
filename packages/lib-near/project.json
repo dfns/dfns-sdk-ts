@@ -1,5 +1,15 @@
 {
   "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "esbuild packages/lib-near/index.test.ts --bundle --platform=node --format=cjs --packages=external --alias:@dfns/sdk=./packages/sdk/index.ts --outfile=tmp/lib-near.test.cjs",
+          "node --test tmp/lib-near.test.cjs"
+        ],
+        "parallel": false
+      }
+    },
     "cb": {
       "executor": "@nx/js:tsc",
       "options": {
