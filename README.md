@@ -155,6 +155,38 @@ const challenge = await dfnsDelegated.wallets.createWalletInit(payload)
 const wallet = await dfnsDelegated.wallets.createWalletComplete(payload, signedChallenge)
 ```
 
+### `DfnsTenantApiClient`
+
+A tenant user can act at two levels, each with its own auth token:
+
+- **Tenant level** (orgs, tenant users, user groups, tenant permissions): needs a token scoped to the tenant. Use `DfnsTenantApiClient`.
+- **Inside an org** (wallets, policies, ...): needs a token scoped to that org. Use `DfnsApiClient`.
+
+`DfnsTenantApiClient` holds the `tenant` endpoints, and `auth` for the auth endpoints that accept a tenant-scoped token (user action signing, credentials, token exchange, logout). Its constructor throws if the token is scoped to an org. `forOrg(orgId)` exchanges the token and returns a `DfnsApiClient` for that org.
+
+```ts
+import { DfnsTenantApiClient } from '@dfns/sdk'
+
+const tenantClient = new DfnsTenantApiClient({
+  baseUrl: 'https://api.dfns.io',
+  authToken: tenantToken, // a tenant user token, scoped to the tenant
+  signer,
+})
+
+// create an org
+const { org } = await tenantClient.tenant.createOrg({
+  body: { name: 'Treasury', keyStores: [{ id: keyStoreId }] },
+})
+
+// work inside that org
+const orgClient = await tenantClient.forOrg(org.id)
+const wallet = await orgClient.wallets.createWallet({ body: { network: 'EthereumSepolia' } })
+```
+
+To go the other way, from an org-scoped token, call `apiClient.auth.exchangeAccessToken({ body: { target: tenantId } })` and pass the returned token to `DfnsTenantApiClient`.
+
+`DfnsDelegatedTenantApiClient` is the delegated version (see [`DfnsDelegatedApiClient`](#dfnsdelegatedapiclient)). Its `forOrg(orgId)` returns a `DfnsDelegatedApiClient`.
+
 ### `DfnsAuthenticator`
 
 In a client-side app, if you want a Dfns User to be able to login with Dfns (and get an auth token back), you might wanna use `DfnsAuthenticator`:
