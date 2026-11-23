@@ -10,7 +10,7 @@ export type DfnsTenantApiClientOptions = DfnsApiClientOptions
  *
  * It holds the tenant endpoints (orgs, tenant users, user groups and tenant permissions) and the
  * auth endpoints that accept a tenant-scoped token (user action signing, credentials, token exchange, logout).
- * To work inside an org, use `forOrg(orgId)`: it returns a `DfnsApiClient` with a token scoped to that org.
+ * To work inside an org, use `getOrgClient(orgId)`: it returns a `DfnsApiClient` with a token scoped to that org.
  */
 export class DfnsTenantApiClient {
   constructor(private apiOptions: DfnsTenantApiClientOptions) {
@@ -26,7 +26,7 @@ export class DfnsTenantApiClient {
   }
 
   /** Exchanges the tenant-scoped token for one scoped to `orgId`, and returns a `DfnsApiClient` for that org. */
-  async forOrg(orgId: string): Promise<DfnsApiClient> {
+  async getOrgClient(orgId: string): Promise<DfnsApiClient> {
     const { token } = await this.auth.exchangeAccessToken({ body: { target: orgId } })
     const { tenantId: _tenantId, ...options } = this.apiOptions
     return new DfnsApiClient({ ...options, orgId, authToken: token })

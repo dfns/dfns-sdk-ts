@@ -23,7 +23,7 @@ export class DfnsDelegatedTenantApiClient {
   }
 
   /** Exchanges the tenant-scoped token for one scoped to `orgId`, and returns a `DfnsDelegatedApiClient` for that org. */
-  async forOrg(orgId: string): Promise<DfnsDelegatedApiClient> {
+  async getOrgClient(orgId: string): Promise<DfnsDelegatedApiClient> {
     const { token } = await this.auth.exchangeAccessToken({ body: { target: orgId } })
     const { tenantId: _tenantId, ...options } = this.apiOptions
     return new DfnsDelegatedApiClient({ ...options, orgId, authToken: token })

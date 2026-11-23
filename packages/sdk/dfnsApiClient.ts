@@ -17,6 +17,7 @@ import { VaultsClient } from './generated/vaults'
 import { WalletsClient } from './generated/wallets'
 import { WebhooksClient } from './generated/webhooks'
 import { DfnsBaseApiOptions } from './types/generic'
+import { DfnsTenantApiClient } from './dfnsTenantApiClient'
 
 export type DfnsApiClientOptions = DfnsBaseApiOptions & {
   /** Needs to be specified to use any endpoint that required User Action Signing flow */
@@ -92,5 +93,15 @@ export class DfnsApiClient {
 
   public get webhooks() {
     return new WebhooksClient(this.apiOptions)
+  }
+
+  /**
+   * Exchanges the org-scoped token for one scoped to `tenantId`, and returns a `DfnsTenantApiClient`.
+   * Only a tenant user can exchange tokens. An org token does not carry the tenant ID, so pass it in.
+   */
+  async getTenantClient(tenantId: string): Promise<DfnsTenantApiClient> {
+    const { token } = await this.auth.exchangeAccessToken({ body: { target: tenantId } })
+    const { orgId: _orgId, ...options } = this.apiOptions
+    return new DfnsTenantApiClient({ ...options, tenantId, authToken: token })
   }
 }

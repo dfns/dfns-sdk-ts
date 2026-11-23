@@ -16,6 +16,7 @@ import { DelegatedVaultsClient } from './generated/vaults'
 import { DelegatedWalletsClient } from './generated/wallets'
 import { DelegatedWebhooksClient } from './generated/webhooks'
 import { DfnsBaseApiOptions } from './types/generic'
+import { DfnsDelegatedTenantApiClient } from './dfnsDelegatedTenantApiClient'
 
 export type DfnsDelegatedApiClientOptions = DfnsBaseApiOptions
 
@@ -88,5 +89,15 @@ export class DfnsDelegatedApiClient {
 
   public get webhooks() {
     return new DelegatedWebhooksClient(this.apiOptions)
+  }
+
+  /**
+   * Exchanges the org-scoped token for one scoped to `tenantId`, and returns a `DfnsDelegatedTenantApiClient`.
+   * Only a tenant user can exchange tokens. An org token does not carry the tenant ID, so pass it in.
+   */
+  async getTenantClient(tenantId: string): Promise<DfnsDelegatedTenantApiClient> {
+    const { token } = await this.auth.exchangeAccessToken({ body: { target: tenantId } })
+    const { orgId: _orgId, ...options } = this.apiOptions
+    return new DfnsDelegatedTenantApiClient({ ...options, tenantId, authToken: token })
   }
 }
