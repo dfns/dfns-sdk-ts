@@ -1231,16 +1231,19 @@ export type GetVaultQuarantineResponse = {
         providerUserId: string;
         /** Provider-side id of the registered transfer. */
         externalId: string;
+        /** Alerts raised by the screening. Empty when nothing was flagged. */
         alerts: {
             level: "Low" | "Medium" | "High" | "Severe";
             categoryId: number | null;
         }[];
         exposure: {
+            /** Category of the direct counterparty. */
             direct: {
                 categoryId: number | null;
                 name: string | null;
             };
         };
+        /** Highest alert level. Null without alerts. */
         maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
     } | {
         provider: "Elliptic";
@@ -1249,9 +1252,11 @@ export type GetVaultQuarantineResponse = {
         providerUserId: string;
         /** Provider-side id of the registered transfer. */
         externalId: string;
+        /** One alert per fired risk rule, with the rule's category id (an Elliptic UUID). */
         alerts: {
             categoryId: string | null;
         }[];
+        /** Elliptic's native 0-10 risk score, untranslated. Null when the analysis returned no risk data. */
         riskScore: number | null;
     }) | undefined;
     /** Set when the quarantined funds have been released into the available balance. */
@@ -1390,16 +1395,19 @@ export type ListVaultHistoryResponse = {
                 providerUserId: string;
                 /** Provider-side id of the registered transfer. */
                 externalId: string;
+                /** Alerts raised by the screening. Empty when nothing was flagged. */
                 alerts: {
                     level: "Low" | "Medium" | "High" | "Severe";
                     categoryId: number | null;
                 }[];
                 exposure: {
+                    /** Category of the direct counterparty. */
                     direct: {
                         categoryId: number | null;
                         name: string | null;
                     };
                 };
+                /** Highest alert level. Null without alerts. */
                 maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
             } | {
                 provider: "Elliptic";
@@ -1408,9 +1416,11 @@ export type ListVaultHistoryResponse = {
                 providerUserId: string;
                 /** Provider-side id of the registered transfer. */
                 externalId: string;
+                /** One alert per fired risk rule, with the rule's category id (an Elliptic UUID). */
                 alerts: {
                     categoryId: string | null;
                 }[];
+                /** Elliptic's native 0-10 risk score, untranslated. Null when the analysis returned no risk data. */
                 riskScore: number | null;
             }) | undefined;
             /** Set when the quarantined funds have been released into the available balance. */
@@ -2641,16 +2651,19 @@ export type ListVaultQuarantinesResponse = {
             providerUserId: string;
             /** Provider-side id of the registered transfer. */
             externalId: string;
+            /** Alerts raised by the screening. Empty when nothing was flagged. */
             alerts: {
                 level: "Low" | "Medium" | "High" | "Severe";
                 categoryId: number | null;
             }[];
             exposure: {
+                /** Category of the direct counterparty. */
                 direct: {
                     categoryId: number | null;
                     name: string | null;
                 };
             };
+            /** Highest alert level. Null without alerts. */
             maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
         } | {
             provider: "Elliptic";
@@ -2659,9 +2672,11 @@ export type ListVaultQuarantinesResponse = {
             providerUserId: string;
             /** Provider-side id of the registered transfer. */
             externalId: string;
+            /** One alert per fired risk rule, with the rule's category id (an Elliptic UUID). */
             alerts: {
                 categoryId: string | null;
             }[];
+            /** Elliptic's native 0-10 risk score, untranslated. Null when the analysis returned no risk data. */
             riskScore: number | null;
         }) | undefined;
         /** Set when the quarantined funds have been released into the available balance. */
@@ -2733,16 +2748,19 @@ export type ReleaseQuarantineResponse = {
         providerUserId: string;
         /** Provider-side id of the registered transfer. */
         externalId: string;
+        /** Alerts raised by the screening. Empty when nothing was flagged. */
         alerts: {
             level: "Low" | "Medium" | "High" | "Severe";
             categoryId: number | null;
         }[];
         exposure: {
+            /** Category of the direct counterparty. */
             direct: {
                 categoryId: number | null;
                 name: string | null;
             };
         };
+        /** Highest alert level. Null without alerts. */
         maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
     } | {
         provider: "Elliptic";
@@ -2751,9 +2769,11 @@ export type ReleaseQuarantineResponse = {
         providerUserId: string;
         /** Provider-side id of the registered transfer. */
         externalId: string;
+        /** One alert per fired risk rule, with the rule's category id (an Elliptic UUID). */
         alerts: {
             categoryId: string | null;
         }[];
+        /** Elliptic's native 0-10 risk score, untranslated. Null when the analysis returned no risk data. */
         riskScore: number | null;
     }) | undefined;
     requester: {
