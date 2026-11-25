@@ -2935,16 +2935,19 @@ export type CreateApprovalDecisionResponse = {
                 providerUserId: string;
                 /** Provider-side id of the registered transfer. */
                 externalId: string;
+                /** Alerts raised by the screening. Empty when nothing was flagged. */
                 alerts: {
                     level: "Low" | "Medium" | "High" | "Severe";
                     categoryId: number | null;
                 }[];
                 exposure: {
+                    /** Category of the direct counterparty. */
                     direct: {
                         categoryId: number | null;
                         name: string | null;
                     };
                 };
+                /** Highest alert level. Null without alerts. */
                 maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
             } | {
                 provider: "Elliptic";
@@ -2953,9 +2956,11 @@ export type CreateApprovalDecisionResponse = {
                 providerUserId: string;
                 /** Provider-side id of the registered transfer. */
                 externalId: string;
+                /** One alert per fired risk rule, with the rule's category id (an Elliptic UUID). */
                 alerts: {
                     categoryId: string | null;
                 }[];
+                /** Elliptic's native 0-10 risk score, untranslated. Null when the analysis returned no risk data. */
                 riskScore: number | null;
             }) | undefined;
             requester: {
@@ -3777,7 +3782,7 @@ export type CreateApprovalDecisionResponse = {
                 description?: string | undefined;
                 network: string;
                 address: string;
-                schema?: any;
+                schema?: any | undefined;
             };
         };
     } | {
@@ -3792,7 +3797,7 @@ export type CreateApprovalDecisionResponse = {
                 params?: {
                     [x: string]: string;
                 } | undefined;
-                body?: unknown;
+                body?: unknown | undefined;
             };
         };
     };
@@ -4351,7 +4356,7 @@ export type CreatePolicyBody = {
         kind: "UserAction";
         configuration: {
             /** The user actions this rule applies to. The rule triggers on any of them. */
-            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
+            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "CreateToken" | "RegisterTokenIdentity" | "MintToken" | "BurnToken" | "PauseToken" | "UnpauseToken" | "FreezeTokenAccount" | "ForceTransferToken" | "AddTokenAgent" | "RemoveTokenAgent" | "PayTokenDividend" | "CreateTokenOrder" | "CreateTokenNav" | "SettleTokenOrder" | "CancelTokenOrder" | "CreateCustodianTransfer" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
         };
     };
     action: {
@@ -8543,16 +8548,19 @@ export type GetApprovalResponse = {
                 providerUserId: string;
                 /** Provider-side id of the registered transfer. */
                 externalId: string;
+                /** Alerts raised by the screening. Empty when nothing was flagged. */
                 alerts: {
                     level: "Low" | "Medium" | "High" | "Severe";
                     categoryId: number | null;
                 }[];
                 exposure: {
+                    /** Category of the direct counterparty. */
                     direct: {
                         categoryId: number | null;
                         name: string | null;
                     };
                 };
+                /** Highest alert level. Null without alerts. */
                 maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
             } | {
                 provider: "Elliptic";
@@ -8561,9 +8569,11 @@ export type GetApprovalResponse = {
                 providerUserId: string;
                 /** Provider-side id of the registered transfer. */
                 externalId: string;
+                /** One alert per fired risk rule, with the rule's category id (an Elliptic UUID). */
                 alerts: {
                     categoryId: string | null;
                 }[];
+                /** Elliptic's native 0-10 risk score, untranslated. Null when the analysis returned no risk data. */
                 riskScore: number | null;
             }) | undefined;
             requester: {
@@ -9385,7 +9395,7 @@ export type GetApprovalResponse = {
                 description?: string | undefined;
                 network: string;
                 address: string;
-                schema?: any;
+                schema?: any | undefined;
             };
         };
     } | {
@@ -9400,7 +9410,7 @@ export type GetApprovalResponse = {
                 params?: {
                     [x: string]: string;
                 } | undefined;
-                body?: unknown;
+                body?: unknown | undefined;
             };
         };
     };
@@ -13609,16 +13619,19 @@ export type ListApprovalsResponse = {
                     providerUserId: string;
                     /** Provider-side id of the registered transfer. */
                     externalId: string;
+                    /** Alerts raised by the screening. Empty when nothing was flagged. */
                     alerts: {
                         level: "Low" | "Medium" | "High" | "Severe";
                         categoryId: number | null;
                     }[];
                     exposure: {
+                        /** Category of the direct counterparty. */
                         direct: {
                             categoryId: number | null;
                             name: string | null;
                         };
                     };
+                    /** Highest alert level. Null without alerts. */
                     maxAlertLevel: ("Low" | "Medium" | "High" | "Severe") | null;
                 } | {
                     provider: "Elliptic";
@@ -13627,9 +13640,11 @@ export type ListApprovalsResponse = {
                     providerUserId: string;
                     /** Provider-side id of the registered transfer. */
                     externalId: string;
+                    /** One alert per fired risk rule, with the rule's category id (an Elliptic UUID). */
                     alerts: {
                         categoryId: string | null;
                     }[];
+                    /** Elliptic's native 0-10 risk score, untranslated. Null when the analysis returned no risk data. */
                     riskScore: number | null;
                 }) | undefined;
                 requester: {
@@ -14451,7 +14466,7 @@ export type ListApprovalsResponse = {
                     description?: string | undefined;
                     network: string;
                     address: string;
-                    schema?: any;
+                    schema?: any | undefined;
                 };
             };
         } | {
@@ -14466,7 +14481,7 @@ export type ListApprovalsResponse = {
                     params?: {
                         [x: string]: string;
                     } | undefined;
-                    body?: unknown;
+                    body?: unknown | undefined;
                 };
             };
         };
@@ -16300,7 +16315,7 @@ export type UpdatePolicyBody = {
         kind: "UserAction";
         configuration: {
             /** The user actions this rule applies to. The rule triggers on any of them. */
-            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
+            userActionKinds: ("TagWallet" | "UntagWallet" | "CreateVerifiedAsset" | "DeleteVerifiedAsset" | "CreateToken" | "RegisterTokenIdentity" | "MintToken" | "BurnToken" | "PauseToken" | "UnpauseToken" | "FreezeTokenAccount" | "ForceTransferToken" | "AddTokenAgent" | "RemoveTokenAgent" | "PayTokenDividend" | "CreateTokenOrder" | "CreateTokenNav" | "SettleTokenOrder" | "CancelTokenOrder" | "CreateCustodianTransfer" | "AddUserGroupMembers" | "RemoveUserGroupMembers" | "UpdateUserGroup" | "DeleteUserGroup" | "CreatePermission" | "UpdatePermission" | "DeletePermission" | "AssignPermission" | "RevokePermission" | "CreatePolicy" | "UpdatePolicy" | "DeletePolicy")[];
         };
     };
     action: {

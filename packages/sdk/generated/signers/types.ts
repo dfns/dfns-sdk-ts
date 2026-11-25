@@ -182,7 +182,7 @@ export type __WireSubmitAddMacUserOutputBody = {
                     provisioners: {
                         [x: string]: string;
                     };
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                     key_harvest: {
                         "ed25519-start": number;
                         ed25519: number;
@@ -197,7 +197,7 @@ export type __WireSubmitAddMacUserOutputBody = {
                     hsm_identity_key: string;
                     mac_target_serial: string;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-mac-user";
                     ceremony_mode?: string | undefined;
@@ -206,7 +206,7 @@ export type __WireSubmitAddMacUserOutputBody = {
                     mac_target_serial: string;
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-provisioner";
                     ceremony_mode?: string | undefined;
@@ -269,7 +269,7 @@ export type __WireSubmitAddProvisionerOutputBody = {
                     provisioners: {
                         [x: string]: string;
                     };
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                     key_harvest: {
                         "ed25519-start": number;
                         ed25519: number;
@@ -284,7 +284,7 @@ export type __WireSubmitAddProvisionerOutputBody = {
                     hsm_identity_key: string;
                     mac_target_serial: string;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-mac-user";
                     ceremony_mode?: string | undefined;
@@ -293,7 +293,7 @@ export type __WireSubmitAddProvisionerOutputBody = {
                     mac_target_serial: string;
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-provisioner";
                     ceremony_mode?: string | undefined;
@@ -356,7 +356,7 @@ export type __WireSubmitCloneOutputBody = {
                     provisioners: {
                         [x: string]: string;
                     };
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                     key_harvest: {
                         "ed25519-start": number;
                         ed25519: number;
@@ -371,7 +371,7 @@ export type __WireSubmitCloneOutputBody = {
                     hsm_identity_key: string;
                     mac_target_serial: string;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-mac-user";
                     ceremony_mode?: string | undefined;
@@ -380,7 +380,7 @@ export type __WireSubmitCloneOutputBody = {
                     mac_target_serial: string;
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-provisioner";
                     ceremony_mode?: string | undefined;
@@ -443,7 +443,7 @@ export type __WireSubmitGenesisOutputBody = {
                     provisioners: {
                         [x: string]: string;
                     };
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                     key_harvest: {
                         "ed25519-start": number;
                         ed25519: number;
@@ -458,7 +458,7 @@ export type __WireSubmitGenesisOutputBody = {
                     hsm_identity_key: string;
                     mac_target_serial: string;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-mac-user";
                     ceremony_mode?: string | undefined;
@@ -467,7 +467,7 @@ export type __WireSubmitGenesisOutputBody = {
                     mac_target_serial: string;
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-provisioner";
                     ceremony_mode?: string | undefined;
@@ -530,7 +530,7 @@ export type __WireSubmitKeyHarvestOutputBody = {
                     provisioners: {
                         [x: string]: string;
                     };
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                     key_harvest: {
                         "ed25519-start": number;
                         ed25519: number;
@@ -545,7 +545,7 @@ export type __WireSubmitKeyHarvestOutputBody = {
                     hsm_identity_key: string;
                     mac_target_serial: string;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-mac-user";
                     ceremony_mode?: string | undefined;
@@ -554,7 +554,7 @@ export type __WireSubmitKeyHarvestOutputBody = {
                     mac_target_serial: string;
                     mac_username?: string | undefined;
                     mac_se_wrap_key_pub_key: string;
-                    hsm_sealed?: unknown | null;
+                    hsm_sealed?: (unknown | null) | undefined;
                 } | {
                     type: "add-provisioner";
                     ceremony_mode?: string | undefined;

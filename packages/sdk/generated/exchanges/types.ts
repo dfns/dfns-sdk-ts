@@ -704,14 +704,20 @@ export type CreateExchangeBody = {
     name?: string | undefined;
     kind: "Binance" | "Kraken" | "CoinbaseApp" | "CoinbasePrime";
     readConfiguration: {
+        /** API key of the exchange, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
         publicApiKey: string;
+        /** API secret, or private key, of the exchange, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
         privateApiKey: string;
+        /** API passphrase of the exchange, if any, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
         password?: string | undefined;
         otp?: string | undefined;
     };
     writeConfiguration: {
+        /** API key of the exchange, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
         publicApiKey: string;
+        /** API secret, or private key, of the exchange, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
         privateApiKey: string;
+        /** API passphrase of the exchange, if any, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
         password?: string | undefined;
         otp?: string | undefined;
     };

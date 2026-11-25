@@ -52,7 +52,7 @@ export type CreateCantonValidatorBody = {
             audience: string;
             /** The client id from your auth provider for this application. */
             clientId: string;
-            /** The client secret from your auth provider for this application. */
+            /** The client secret from your auth provider for this application, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
             clientSecret: string;
         };
     };
@@ -70,7 +70,7 @@ export type CreateCantonValidatorBody = {
             audience: string;
             /** The client id from your auth provider for this application. */
             clientId: string;
-            /** The client secret from your auth provider for this application. */
+            /** The client secret from your auth provider for this application, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
             clientSecret: string;
         };
     };
@@ -282,7 +282,7 @@ export type UpdateCantonValidatorBody = {
             audience: string;
             /** The client id from your auth provider for this application. */
             clientId: string;
-            /** The client secret from your auth provider for this application. */
+            /** The client secret from your auth provider for this application, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
             clientSecret: string;
         };
     } | undefined;
@@ -299,7 +299,7 @@ export type UpdateCantonValidatorBody = {
             audience: string;
             /** The client id from your auth provider for this application. */
             clientId: string;
-            /** The client secret from your auth provider for this application. */
+            /** The client secret from your auth provider for this application, encrypted. It must not be sent in cleartext, but be sealed first (cf secrets ingestion). */
             clientSecret: string;
         };
     } | undefined;
