@@ -155,6 +155,67 @@ const challenge = await dfnsDelegated.wallets.createWalletInit(payload)
 const wallet = await dfnsDelegated.wallets.createWalletComplete(payload, signedChallenge)
 ```
 
+### `DfnsTenantApiClient`
+
+A tenant user can act at two levels, each with its own auth token:
+
+- **Tenant level** (orgs, tenant users, user groups, tenant permissions): needs a token scoped to the tenant. Use `DfnsTenantApiClient`.
+- **Inside an org** (wallets, policies, ...): needs a token scoped to that org. Use `DfnsApiClient`.
+
+`DfnsTenantApiClient` groups the tenant endpoints by service, like `DfnsApiClient` groups its modules:
+
+| Getter        | Endpoints             | Example                                                  |
+| ------------- | --------------------- | -------------------------------------------------------- |
+| `orgs`        | `/tenant/orgs`        | `tenantClient.orgs.createOrg(...)`                       |
+| `users`       | `/tenant/users`       | `tenantClient.users.listTenantUsers()`                   |
+| `userGroups`  | `/tenant/user-groups` | `tenantClient.userGroups.addTenantUserGroupMembers(...)` |
+| `permissions` | `/tenant/permissions` | `tenantClient.permissions.assignTenantPermission(...)`   |
+
+It also has `auth`, for the auth endpoints that accept a tenant-scoped token (user action signing, credentials, token exchange, logout). Its constructor throws if the token is scoped to an org.
+
+A tenant user can switch between the two levels. Both helpers exchange the token with `POST /auth/tokens` and return a new client:
+
+- `tenantClient.getOrgClient(orgId)` returns a `DfnsApiClient` for that org.
+- `apiClient.getTenantClient(tenantId)` returns a `DfnsTenantApiClient`. An org token does not carry the tenant ID, so you pass it in.
+
+Tenant level to org:
+
+```ts
+import { DfnsTenantApiClient } from '@dfns/sdk'
+
+const tenantClient = new DfnsTenantApiClient({
+  baseUrl: 'https://api.dfns.io',
+  authToken: tenantToken, // a tenant user token, scoped to the tenant
+  signer,
+})
+
+// create an org
+const { org } = await tenantClient.orgs.createOrg({
+  body: { name: 'Treasury', keyStores: [{ id: keyStoreId }] },
+})
+
+// work inside that org
+const orgClient = await tenantClient.getOrgClient(org.id)
+const wallet = await orgClient.wallets.createWallet({ body: { network: 'EthereumSepolia' } })
+```
+
+Org to tenant level:
+
+```ts
+import { DfnsApiClient } from '@dfns/sdk'
+
+const apiClient = new DfnsApiClient({
+  baseUrl: 'https://api.dfns.io',
+  authToken: orgToken, // a tenant user token, scoped to an org
+  signer,
+})
+
+const tenantClient = await apiClient.getTenantClient(tenantId)
+const { items: orgs } = await tenantClient.orgs.listOrgs()
+```
+
+`DfnsDelegatedTenantApiClient` is the delegated version (see [`DfnsDelegatedApiClient`](#dfnsdelegatedapiclient)). Its `getOrgClient(orgId)` returns a `DfnsDelegatedApiClient`, and `DfnsDelegatedApiClient.getTenantClient(tenantId)` returns a `DfnsDelegatedTenantApiClient`.
+
 ### `DfnsAuthenticator`
 
 In a client-side app, if you want a Dfns User to be able to login with Dfns (and get an auth token back), you might wanna use `DfnsAuthenticator`:
