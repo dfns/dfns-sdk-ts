@@ -162,7 +162,16 @@ A tenant user can act at two levels, each with its own auth token:
 - **Tenant level** (orgs, tenant users, user groups, tenant permissions): needs a token scoped to the tenant. Use `DfnsTenantApiClient`.
 - **Inside an org** (wallets, policies, ...): needs a token scoped to that org. Use `DfnsApiClient`.
 
-`DfnsTenantApiClient` holds the `tenant` endpoints, and `auth` for the auth endpoints that accept a tenant-scoped token (user action signing, credentials, token exchange, logout). Its constructor throws if the token is scoped to an org.
+`DfnsTenantApiClient` groups the tenant endpoints by service, like `DfnsApiClient` groups its modules:
+
+| Getter        | Endpoints             | Example                                                  |
+| ------------- | --------------------- | -------------------------------------------------------- |
+| `orgs`        | `/tenant/orgs`        | `tenantClient.orgs.createOrg(...)`                       |
+| `users`       | `/tenant/users`       | `tenantClient.users.listTenantUsers()`                   |
+| `userGroups`  | `/tenant/user-groups` | `tenantClient.userGroups.addTenantUserGroupMembers(...)` |
+| `permissions` | `/tenant/permissions` | `tenantClient.permissions.assignTenantPermission(...)`   |
+
+It also has `auth`, for the auth endpoints that accept a tenant-scoped token (user action signing, credentials, token exchange, logout). Its constructor throws if the token is scoped to an org.
 
 A tenant user can switch between the two levels. Both helpers exchange the token with `POST /auth/tokens` and return a new client:
 
@@ -181,7 +190,7 @@ const tenantClient = new DfnsTenantApiClient({
 })
 
 // create an org
-const { org } = await tenantClient.tenant.createOrg({
+const { org } = await tenantClient.orgs.createOrg({
   body: { name: 'Treasury', keyStores: [{ id: keyStoreId }] },
 })
 
@@ -202,7 +211,7 @@ const apiClient = new DfnsApiClient({
 })
 
 const tenantClient = await apiClient.getTenantClient(tenantId)
-const { items: orgs } = await tenantClient.tenant.listOrgs()
+const { items: orgs } = await tenantClient.orgs.listOrgs()
 ```
 
 `DfnsDelegatedTenantApiClient` is the delegated version (see [`DfnsDelegatedApiClient`](#dfnsdelegatedapiclient)). Its `getOrgClient(orgId)` returns a `DfnsDelegatedApiClient`, and `DfnsDelegatedApiClient.getTenantClient(tenantId)` returns a `DfnsDelegatedTenantApiClient`.

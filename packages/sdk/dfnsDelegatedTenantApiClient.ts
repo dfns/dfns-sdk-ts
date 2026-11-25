@@ -1,6 +1,12 @@
 import { DfnsDelegatedApiClient, DfnsDelegatedApiClientOptions } from './dfnsDelegatedApiClient'
 import { DelegatedAuthClient } from './generated/auth'
 import { DelegatedTenantClient } from './generated/tenant'
+import {
+  DelegatedTenantOrgsClient,
+  DelegatedTenantPermissionsClient,
+  DelegatedTenantUserGroupsClient,
+  DelegatedTenantUsersClient,
+} from './tenantServices'
 import { assertTenantScopedToken } from './utils/authToken'
 
 export type DfnsDelegatedTenantApiClientOptions = DfnsDelegatedApiClientOptions
@@ -18,7 +24,19 @@ export class DfnsDelegatedTenantApiClient {
     return new DelegatedAuthClient(this.apiOptions)
   }
 
-  public get tenant() {
+  public get orgs(): DelegatedTenantOrgsClient {
+    return new DelegatedTenantClient(this.apiOptions)
+  }
+
+  public get permissions(): DelegatedTenantPermissionsClient {
+    return new DelegatedTenantClient(this.apiOptions)
+  }
+
+  public get userGroups(): DelegatedTenantUserGroupsClient {
+    return new DelegatedTenantClient(this.apiOptions)
+  }
+
+  public get users(): DelegatedTenantUsersClient {
     return new DelegatedTenantClient(this.apiOptions)
   }
 
