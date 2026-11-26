@@ -6,6 +6,9 @@
     "url": "git+https://github.com/dfns/dfns-sdk-ts.git",
     "directory": "packages/lib-vechain"
   },
+  "dependencies": {
+    "@noble/curves": "^1.9.3"
+  },
   "peerDependencies": {
     "@vechain/sdk-core": "^2.0.5",
     "@vechain/sdk-network": "^2.0.5"
